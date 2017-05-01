@@ -1,0 +1,3 @@
+# Script-Dotfiles
+- postinstall
+- dotfiles
