@@ -22,8 +22,8 @@
 
 # Global properties
 command=/usr/share/i3blocks/$BLOCK_NAME
-separator_block_width=8
-markup=none5
+separator_block_width=15
+markup=none
 separator=false
 align=center
 
@@ -32,14 +32,10 @@ instance=spotify
 interval=1
 signal=10
 label= 
-# # label=
 color=#4848484
-# color=#8BC34A
-# color=#2aa198
 
 [volume]
-label=
-## label=(VOL)
+# label=
 instance=Master
 #instance=PCM
 interval=1
@@ -58,23 +54,19 @@ signal=10
 ## label=
 
 [battery]
-# # label=⚡
-label= 
-## label=(BAT)
+# label= , ⚡
 instance=0
 interval=30
 
 [temperature]
-label=
+# label=
 interval=10
 
 [load_average]
 interval=1
-label=  
-## label= 
-# # label=(LA)
+# label=  
 
 [time]
-label=
+# label=
 command=date '+%H:%M'
 interval=10
