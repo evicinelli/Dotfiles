@@ -1,7 +1,7 @@
 {
-	"color_scheme": "Packages/Colorsublime - Themes/Gruvbox-N.tmTheme",
-	"font_face": "Source Code Pro",
-	"font_size": 11,
+	"color_scheme": "Packages/Colorsublime - Themes/Github.tmTheme",
+	"font_face": "Inconsolata",
+	"font_size": 14,
 	"highlight_line": true,
 	"ignored_packages":
 	[
