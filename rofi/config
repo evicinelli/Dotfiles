@@ -1,9 +1,9 @@
 rofi.font: Inconsolata 13
 rofi.separator-style: none
-rofi.padding: 130
+rofi.padding: 20 
 rofi.width: 70
-rofi.fullscreen: true
-rofi.bw: 0
+! rofi.fullscreen: true
+rofi.bw: 2
 rofi.eh: 1
 rofi.fixed-num-lines: true
 rofi.lines: 5
