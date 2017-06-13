@@ -33,12 +33,12 @@ set $workspace8 "8: 8 "
 set $workspace9 "9: 9 "
 set $workspace10  "10: 0 "
 
-set $barBackground #282828
-set $unfocused #282828
-set $text #fbf1c7
-set $urgent #cc241d
-set $focused #504945
-set $barAccent #83a598
+# set $barBackground #282828
+# set $unfocused #282828
+# set $text #fbf1c7
+# set $urgent #cc241d
+# set $focused #504945
+# set $barAccent #83a598
 
 
 #-------------------------------------------------------------------------------
@@ -119,10 +119,10 @@ bindsym $mod+$Right focus right
 
 bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/.wall/unsplash.sh"
 #                       border      		background 		text    	 indicator
-client.focused          $focused		$focused		$text	 	 $base0F
-client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
-client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
-client.urgent		$urgent			$urgent			$text 		 $base0F
+# client.focused          $focused		$focused		$text	 	 $base0F
+# client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
+# client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
+# client.urgent		$urgent			$urgent			$text 		 $base0F
 
 bar {
 
@@ -131,20 +131,20 @@ bar {
 #	height 32
 #	tray_output none
 	status_command i3blocks -c /home/ema/.config/i3/i3blocksrc
-	font pango: Source Code Pro, FontAwesome 12
+	font pango: Inconsolata, FontAwesome 13
 	strip_workspace_numbers yes
 
-	colors {
-		separator $text
-		background $barBackground
-		statusline $text
-		#			border        	background    	  text
-		focused_workspace  $barAccent 		$barAccent	$barBackground
-		active_workspace   $barAccent 	 	$barAccent	$barBackground
-		inactive_workspace $barBackground	$barBackground	$text
-		urgent_workspace   $urgent		$urgent		$barBackground
+	# colors {
+	# 	separator $text
+	# 	background $barBackground
+	# 	statusline $text
+	# 	#			border        	background    	  text
+	# 	focused_workspace  $barAccent 		$barAccent	$barBackground
+	# 	active_workspace   $barAccent 	 	$barAccent	$barBackground
+	# 	inactive_workspace $barBackground	$barBackground	$text
+	# 	urgent_workspace   $urgent		$urgent		$barBackground
 
-	}
+	# }
 
 }
 
@@ -233,7 +233,7 @@ mode "resize" {
 #--------------------------------------------------------------------------------
 # 7.AUTOSTART APPLICATIONS
 #--------------------------------------------------------------------------------
-exec --no-startup-id compton -f
+# exec --no-startup-id compton -f
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id dropbox start
