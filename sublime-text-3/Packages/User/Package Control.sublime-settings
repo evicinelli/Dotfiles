@@ -1,0 +1,16 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"BracketHighlighter",
+		"Colorsublime",
+		"Highlighter",
+		"Icon Fonts",
+		"Package Control",
+		"Predawn",
+		"SideBarEnhancements"
+	]
+}

@@ -1,0 +1,13 @@
+rofi.font: Source Code Pro 11
+rofi.separator-style: none
+rofi.padding: 130
+rofi.width: 70
+rofi.fullscreen: true
+rofi.bw: 0
+rofi.eh: 1
+rofi.fixed-num-lines: true
+rofi.lines: 5
+rofi.columns: 1
+rofi.fake-transparency: true
+
+#include "/usr/local/share/rofi/themes/gruvbox-dark-hard.theme"

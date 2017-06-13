@@ -1,0 +1,242 @@
+###################
+# I3 CONFIG FILE  #
+###################
+
+# -1. VARS
+#  0. INITIAL SETTINGS
+#  1. WORKSPACES
+#  2. CONTAINERS
+#  3. THEMING
+#  4. CLASSES
+#  5. APP-SPECIFIC BINDINGS
+#  6. MODES
+#  7. AUTOSTART
+#-------------------------------------------------------------------------------
+
+#
+# -1.SETTING VARS
+#-------------------------------------------------------------------------------
+
+set $Up Up
+set $Left Left
+set $Right Right
+set $Down Down
+
+set $workspace1 "1: 1 "
+set $workspace2 "2: 2 "
+set $workspace3 "3: 3 "
+set $workspace4 "4: 4 "
+set $workspace5 "5: 5 "
+set $workspace6 "6: 6 "
+set $workspace7 "7: 7 "
+set $workspace8 "8: 8 "
+set $workspace9 "9: 9 "
+set $workspace10  "10: 0 "
+
+set $barBackground #282828
+set $unfocused #282828
+set $text #fbf1c7
+set $urgent #cc241d
+set $focused #504945
+set $barAccent #83a598
+
+
+#-------------------------------------------------------------------------------
+# 0.INITIAL SETTINGS
+#-------------------------------------------------------------------------------
+set $mod Mod4
+floating_modifier $mod
+bindsym $mod+q kill
+bindsym --whole-window $mod+Shift+button1 kill
+popup_during_fullscreen smart
+bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
+font pango: Cantarell 10
+
+for_window [class = ".*"] border normal 1
+# new_window normal 1
+# new_float normal 1
+# workspace_layout tabbed
+# gaps inner 5
+# gaps outer 5
+
+#-------------------------------------------------------------------------------
+# 1.WORKSPACES
+#-------------------------------------------------------------------------------
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+BackSpace workspace prev_on_output
+bindsym $mod+Return workspace next_on_output
+bindsym $mod+Shift+BackSpace move container to workspace prev_on_output
+bindsym $mod+Shift+Return move container to workspace next_on_output
+bindsym $mod+Shift+Tab move container to workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
+workspace_auto_back_and_forth yes
+
+
+#-------------------------------------------------------------------------------
+# 2.CONTAINERS
+#-------------------------------------------------------------------------------
+bindsym $mod+w layout toggle all
+bindsym $mod+v split h
+bindsym $mod+h split v
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+t floating toggle
+bindsym $mod+Shift+b bar mode toggle
+bindsym $mod+Shift+$Left move left
+bindsym $mod+Shift+$Down move down
+bindsym $mod+Shift+$Up move up
+bindsym $mod+Shift+$Right move right
+bindsym $mod+$Left focus left
+bindsym $mod+$Down focus down
+bindsym $mod+$Up focus up
+bindsym $mod+$Right focus right
+
+
+
+#-----------------------------------------------------------------------------
+# 3.THEMING
+#-----------------------------------------------------------------------------
+
+bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/.wall/unsplash.sh"
+#                       border      		background 		text    	 indicator
+client.focused          $focused		$focused		$text	 	 $base0F
+client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
+client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
+client.urgent		$urgent			$urgent			$text 		 $base0F
+
+bar {
+
+	i3bar_command i3bar
+	position top
+#	height 32
+#	tray_output none
+	status_command i3blocks -c /home/ema/.config/i3/i3blocksrc
+	font pango: Source Code Pro, FontAwesome 12
+	strip_workspace_numbers yes
+
+	colors {
+		separator $text
+		background $barBackground
+		statusline $text
+		#			border        	background    	  text
+		focused_workspace  $barAccent 		$barAccent	$barBackground
+		active_workspace   $barAccent 	 	$barAccent	$barBackground
+		inactive_workspace $barBackground	$barBackground	$text
+		urgent_workspace   $urgent		$urgent		$barBackground
+
+	}
+
+}
+
+#-------------------------------------------------------------------------------
+# 4.CLASSES AND WINDOW-SPECIFIC SETTINGS
+#-------------------------------------------------------------------------------
+assign [class = "Google-chrome" instance="google-chrome"] $workspace1
+assign [class = "X-terminal-emulator"] $workspace2
+assign [class = "Telegram"] $workspace9
+assign [class = "Whatsie"] $workspace9
+for_window [class = "Spotify"] move to workspace $workspace10
+for_window [class = "Pavucontrol"] floating enable
+for_window [class = "X-terminal-emulator"] border none
+for_window [class = "model.Main"] floating enable
+
+#-------------------------------------------------------------------------------
+# 5. APP-SPECIFIC BINDINGS
+#-------------------------------------------------------------------------------
+bindsym Shift+space exec --no-startup-id "rofi -combi-modi window,drun -modi combi -show combi"
+bindsym Mod1+F2 exec --no-startup-id "rofi -show run"
+bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home -not -path "/home/ema/.*" | rofi -threads 0 -dmenu -i -p "> ")"
+bindsym $mod+a exec --no-startup-id pavucontrol
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym --release Print exec --no-startup-id gnome-screenshot -aic
+
+
+#-------------------------------------------------------------------------------
+# 6.MODES
+#-------------------------------------------------------------------------------
+
+set $brightness "Brightness Up - Down"
+bindsym $mod+Shift+l mode $brightness
+mode $brightness{
+
+    bindsym r exec --no-startup-id redshift-gtk -O 4500, mode "default"
+    bindsym ctrl+r exec --no-startup-id redshift-gtk -O 3500, mode "default"
+    bindsym Shift+r exec --no-startup-id redshift-gtk -O 2000, mode "default"
+    bindsym n exec --no-startup-id redshift-gtk -x, mode "default"
+    bindsym b exec --no-startup-id redshift-gtk -O 10000, mode "default"
+    bindsym ctrl+Shift+r exec --no-startup-id redshift-gtk -O 1000, mode "default"
+
+	# bindsym Up exec --no-startup-id xbacklight -inc 5
+	# bindsym Down exec --no-startup-id xbacklight -dec 5
+
+	# bindsym Shift+Up exec --no-startup-id xbacklight -inc 20
+	# bindsym Shift+Down exec --no-startup-id xbacklight -dec 20
+
+	# bindsym ctrl+Up exec --no-startup-id xbacklight -inc 1
+	# bindsym ctrl+Down exec --no-startup-id xbacklight -dec 1
+
+	bindsym Escape mode "default"
+}
+
+set $sysmenu "Exit - Halt - Reboot - Susped - Lock"
+bindsym $mod+Delete mode $sysmenu
+mode $sysmenu {
+	bindsym r         restart
+	bindsym e         exec --no-startup-id "i3-nagbar -t warning -m 'Logout?' -b 'S' 'i3-msg exit'"
+	bindsym h         exec --no-startup-id shutdown -P now
+	bindsym b         exec --no-startup-id shutdown -r now
+	bindsym s         exec --no-startup-id "systemctl suspend; mode \\"default\\""
+	#bindsym l        exec --no-startup-id /home/ema/Scaricati/i3lock/lock -p; mode "default"
+	bindsym l         exec --no-startup-id i3lock; mode "default"
+
+	bindsym Return    mode "default"
+	bindsym Escape    mode "default"
+}
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+	bindsym $Left resize shrink width 2 px or 2 ppt
+	bindsym $Down resize shrink height 2 px or 2 ppt
+	bindsym $Up resize grow height 2 px or 2 ppt
+	bindsym $Right resize grow width 2 px or 2 ppt
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+
+#--------------------------------------------------------------------------------
+# 7.AUTOSTART APPLICATIONS
+#--------------------------------------------------------------------------------
+exec --no-startup-id compton -f
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xfce4-volumed
+exec --no-startup-id dropbox start
+exec --no-startup-id indicator-cpufreq
+exec --no-startup-id nm-applet
+exec_always --no-startup-id feh --bg-fill /home/ema/img

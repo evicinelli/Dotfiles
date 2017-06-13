@@ -1,0 +1,80 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# # label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+command=/usr/share/i3blocks/$BLOCK_NAME
+separator_block_width=8
+markup=none5
+separator=false
+align=center
+
+[mediaplayer]
+instance=spotify
+interval=1
+signal=10
+label= 
+# # label=
+color=#4848484
+# color=#8BC34A
+# color=#2aa198
+
+[volume]
+label=
+## label=(VOL)
+instance=Master
+#instance=PCM
+interval=1
+signal=10
+
+
+
+#[bandwidth]
+## label=
+#instance= enp2s0
+#interval=5
+
+#[wifi]
+#instance=wlp3s0
+#interval=10
+## label=
+
+[battery]
+# # label=⚡
+label= 
+## label=(BAT)
+instance=0
+interval=30
+
+[temperature]
+label=
+interval=10
+
+[load_average]
+interval=1
+label=  
+## label= 
+# # label=(LA)
+
+[time]
+label=
+command=date '+%H:%M'
+interval=10

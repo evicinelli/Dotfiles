@@ -1,0 +1,1843 @@
+{
+	"folder_history":
+	[
+		"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA",
+		"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src",
+		"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/views",
+		"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/model",
+		"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller",
+		"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/assets",
+		"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.git",
+		"/home/ema/Dropbox/GioconeProgrammazione"
+	],
+	"last_version": 3126,
+	"last_window_id": 38,
+	"log_indexing": false,
+	"settings":
+	{
+		"new_window_height": 0.0,
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"norma",
+						"normal_color"
+					],
+					[
+						"bar",
+						"barBackground"
+					],
+					[
+						"vett",
+						"vettStanze"
+					],
+					[
+						"sta",
+						"stampaCollegamenti"
+					],
+					[
+						"controlla",
+						"controllaAvail2"
+					],
+					[
+						"passal",
+						"passaLivSucc"
+					],
+					[
+						"tm",
+						"tmpDirA"
+					],
+					[
+						"tmpD",
+						"tmpDirDa"
+					],
+					[
+						"p",
+						"ptr_coll"
+					],
+					[
+						"ge",
+						"getNStanze"
+					],
+					[
+						"get",
+						"getStanza"
+					],
+					[
+						"mak",
+						"maxLink"
+					],
+					[
+						"mL",
+						"maxLink"
+					],
+					[
+						"getS",
+						"getNStanze"
+					]
+				]
+			},
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 151.0,
+				"last_filter": "shell",
+				"selected_items":
+				[
+					[
+						"shell",
+						"Set Syntax: Shell Script (Bash)"
+					],
+					[
+						"color ",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"install pa",
+						"Package Control: Install Package"
+					],
+					[
+						"commen",
+						"Toggle Comment"
+					],
+					[
+						"BLOCK COM",
+						"Toggle Block Comment"
+					],
+					[
+						"REINDE",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"indent",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"comme",
+						"Toggle Comment"
+					],
+					[
+						"comment\t\t\t",
+						"Toggle Comment"
+					],
+					[
+						"block",
+						"Toggle Block Comment"
+					],
+					[
+						"blo",
+						"Toggle Block Comment"
+					],
+					[
+						"comment\t",
+						"Toggle Comment"
+					],
+					[
+						"word",
+						"Word Wrap: Toggle"
+					],
+					[
+						"markdo",
+						"Set Syntax: Markdown"
+					],
+					[
+						"comment",
+						"Toggle Comment"
+					],
+					[
+						"toggle side",
+						"View: Toggle Side Bar"
+					],
+					[
+						"preferen",
+						"Preferences: Settings"
+					],
+					[
+						"install ",
+						"Package Control: Install Package"
+					],
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"sidebar",
+						"View: Toggle Open Files in Side Bar"
+					],
+					[
+						"settings",
+						"Preferences: Settings"
+					],
+					[
+						"install pack",
+						"Package Control: Install Package"
+					],
+					[
+						"color install",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"menu",
+						"View: Toggle Menu"
+					],
+					[
+						"color",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"color insta",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"meni",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"comm",
+						"Toggle Block Comment"
+					],
+					[
+						"block com",
+						"Toggle Block Comment"
+					],
+					[
+						"colro",
+						"Colorsublime: Browse Themes"
+					],
+					[
+						"commn",
+						"Toggle Block Comment"
+					],
+					[
+						"tabs",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"shel",
+						"Set Syntax: Shell Script (Bash)"
+					],
+					[
+						"settin",
+						"Preferences: Settings"
+					],
+					[
+						"java",
+						"Set Syntax: Java"
+					],
+					[
+						"synta",
+						"Set Syntax: YAML"
+					],
+					[
+						"color ins",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"wrap",
+						"Word Wrap: Toggle"
+					],
+					[
+						"colors",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"colorsub",
+						"Colorsublime: Browse Themes"
+					],
+					[
+						"coloru",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"snippet tr",
+						"Snippet: throw"
+					],
+					[
+						"men",
+						"View: Toggle Menu"
+					],
+					[
+						"install pac",
+						"Package Control: Install Package"
+					],
+					[
+						"REINDENT",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"reindent",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"reinden",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"tab",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"reind",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"ind tabs",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"reinde",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"in tabs",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"rein",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"inden tab",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"commnt",
+						"Toggle Block Comment"
+					],
+					[
+						"b comm",
+						"Toggle Block Comment"
+					],
+					[
+						"bcomme",
+						"Toggle Block Comment"
+					],
+					[
+						"",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"blo comm",
+						"Toggle Block Comment"
+					],
+					[
+						"setting",
+						"Preferences: Settings"
+					],
+					[
+						"SIDEBAR",
+						"View: Toggle Open Files in Side Bar"
+					],
+					[
+						"settins",
+						"Preferences: Settings"
+					]
+				],
+				"width": 464.0
+			},
+			"console":
+			{
+				"height": 0.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/home/ema/Dropbox/Dev/Script/PostInstall/config/fish_prompt.fish",
+				"/home/ema/.config/terminator/config",
+				"/home/ema/.Xresources",
+				"/home/ema/.config/i3/config",
+				"/home/ema/.config/rofi/config",
+				"/home/ema/.wall/unsplash.sh",
+				"/etc/xdg/dunst/dunstrc",
+				"/usr/share/i3blocks/mediaplayer",
+				"/home/ema/.config/i3/i3blocksrc",
+				"/usr/share/i3blocks/mediaplayuer",
+				"/home/ema/.Xres",
+				"/home/ema/Dropbox/GioconeProgrammazione/Collegamento.cpp",
+				"/home/ema/Scrivania/Prova.md",
+				"/home/ema/img",
+				"/home/ema/Dropbox/Dev/Script/unsplash.sh",
+				"/home/ema/.config/argos/load_average",
+				"/home/ema/.config/argos/temperature",
+				"/home/ema/img.jpg",
+				"/home/ema/.wall/getImg.sh",
+				"/home/ema/.wall/img.jpg",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/WelcomeWindowController.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/Utils.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/Scenes.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/QSortViewController.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/QSortDrawer.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/Palette.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.git/FETCH_HEAD",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.git/HEAD",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.git/COMMIT_EDITMSG",
+				"/etc/rc.local",
+				"/home/ema/.config/fish/functions/fish_prompt.fish",
+				"/home/ema/.config/fish/config.fish",
+				"/home/ema/.config/argos/mediaplayer",
+				"/home/ema/.config/gtk-3.0/settings.ini",
+				"/etc/pulse/default.pa",
+				"/home/ema/gedit",
+				"/var/lib/gdm3/.config/pulse/client.conf",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/model/Algoritmo.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/model/Input.java",
+				"/home/ema/Scaricati/Apps/rofi-1.3.1/rofi-mlocate.sh",
+				"/home/ema/.config/fish/functions/day.fish",
+				"/home/ema/.config/fish/functions/night.fish",
+				"/home/ema/)",
+				"/usr/share/fish/functions/alias.fish",
+				"/tmp/test.txt",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/README.md",
+				"/home/ema/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+				"/home/ema/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+				"/usr/share/i3blocks/battery",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.classpath",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.project",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.settings/org.eclipse.jdt.core.prefs",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.prefs",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/bin/views/WelcomeView.fxml",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/doc/script.js",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/views/WelcomeView.fxml",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.gitignore",
+				"/home/ema/Dropbox/GioconeProgrammazione/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/main.c",
+				"/home/ema/Dropbox/GioconeProgrammazione/GeneratoreLivelli.cpp",
+				"/home/ema/Scaricati/Apps/IntelliJ IDE/jre/jre/lib/amd64/libfontmanager.so",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/views/QSortView.fxml",
+				"/home/ema/Dropbox/GioconeProgrammazione/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Stanza.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Livello.hpp",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/home/ema/.config/i3/config",
+				"/home/ema/Dropbox/GioconeProgrammazione/Collegamento.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/README.md",
+				"/home/ema/Scrivania/EWorkspace/FX/src/Main.java",
+				"/home/ema/Scrivania/EWorkspace/FX/src/MyController.java",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Livello.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Collegamento.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Stanza.cpp",
+				"/home/ema/Scrivania/EWorkspace/ALGA/src/quick_sort/Input.java",
+				"/home/ema/Scrivania/EWorkspace/ALGA/src/quick_sort/Algoritmo.java",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Collegamento.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/main.cpp",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/quick_sort/Ordinamento.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/quick_sort/Input.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/quick_sort/Algoritmo.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA (copia)/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA (copia)/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Collegamento.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Collegamento.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Livello.cpp",
+				"/home/ema/.cache/.fr-eOLWx8/dwm-6.1/dwm.c",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/out.txt",
+				"/home/ema/Dropbox/GioconeProgrammazione/RANDOM BELLIIIIII/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Stanza.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Collegamento.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Livello.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Collegamento.hpp",
+				"/home/ema/.bashrc",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Livello.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Stanza.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione (copia)/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione (copia)/Livello.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione (copia)/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione (copia)/GeneratoreLivelli.hpp"
+			],
+			"find":
+			{
+				"height": 36.0
+			},
+			"find_in_files":
+			{
+				"height": 93.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": true,
+				"find_history":
+				[
+					"time",
+					"Cantarell",
+					"*",
+					"label",
+					"#",
+					"$$\\",
+					"}}}$$$\n",
+					"exec_alwa",
+					"/home/ema/.wall/unsplash.sh",
+					"mod+d",
+					"Inconsolata",
+					"orange",
+					"validateInput",
+					"Monospace",
+					"color",
+					"4c7899",
+					"285577",
+					"-",
+					"rand",
+					"$inactive",
+					"inactive",
+					"accent",
+					"#set_from_resource",
+					"#",
+					"canc",
+					"wall",
+					"top",
+					"creaLivello",
+					"crea",
+					"l1",
+					"l2",
+					"getStanza",
+					"crea",
+					"passaggio",
+					"*/",
+					"/**",
+					"$wall",
+					"terminal",
+					"lock",
+					"#",
+					".*enti",
+					".*mento",
+					"prompt",
+					"tocompare",
+					"rofi",
+					"shift+space",
+					"checkoth",
+					"iniziali",
+					"->",
+					" -> ",
+					"->",
+					"printf",
+					"fuzzy",
+					" -matching fuzzy",
+					"-matching fuzzy",
+					"fuzzy",
+					" -matching fuzzy",
+					"-matching fuzzy",
+					"maxLiv",
+					"---",
+					"printf(\"",
+					"(\"---\\",
+					"printf",
+					"tmLink",
+					"printf",
+					"    ++(this->link);\n",
+					" ++(this->link); ",
+					")",
+					";\n",
+					"tmpAdA",
+					"tmpAdDa",
+					"do {",
+					"do",
+					"stampaCollegamenti",
+					";",
+					"link",
+					"\"",
+					" ",
+					"l",
+					"{",
+					";",
+					"alt",
+					"el.",
+					"collegamenti",
+					"ptr_coll",
+					"prt_coll",
+					"link(",
+					"link",
+					"cout",
+					"\\t",
+					";",
+					"lock",
+					"Monospace",
+					"i",
+					"speak",
+					"espeak",
+					"000000",
+					"cc241d",
+					"282828",
+					"1d2021",
+					"Terminus",
+					"font"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 88.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"menu_visible": false,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"output.unsaved_changes":
+			{
+				"height": 124.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 172.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"genera",
+						"GeneratoreLivelli.hpp"
+					]
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": false,
+			"side_bar_width": 254.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 0.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"norma",
+						"normal_color"
+					],
+					[
+						"bar",
+						"barBackground"
+					],
+					[
+						"vett",
+						"vettStanze"
+					],
+					[
+						"sta",
+						"stampaCollegamenti"
+					],
+					[
+						"controlla",
+						"controllaAvail2"
+					],
+					[
+						"passal",
+						"passaLivSucc"
+					],
+					[
+						"tm",
+						"tmpDirA"
+					],
+					[
+						"tmpD",
+						"tmpDirDa"
+					],
+					[
+						"p",
+						"ptr_coll"
+					],
+					[
+						"ge",
+						"getNStanze"
+					],
+					[
+						"get",
+						"getStanza"
+					],
+					[
+						"mak",
+						"maxLink"
+					],
+					[
+						"mL",
+						"maxLink"
+					],
+					[
+						"getS",
+						"getNStanze"
+					]
+				]
+			},
+			"buffers":
+			[
+				{
+					"file": "/home/ema/.config/rofi/config",
+					"settings":
+					{
+						"buffer_size": 285,
+						"encoding": "UTF-8",
+						"line_ending": "Unix"
+					}
+				},
+				{
+					"file": "/home/ema/.config/i3/config",
+					"settings":
+					{
+						"buffer_size": 8841,
+						"encoding": "UTF-8",
+						"line_ending": "Unix"
+					}
+				},
+				{
+					"contents": "[global]\n    font = Source Code Pro 14\n    \n    # Allow a small subset of html markup:\n    #   <b>bold</b>\n    #   <i>italic</i>\n    #   <s>strikethrough</s>\n    #   <u>underline</u>\n    # \n    # For a complete reference see\n    # <http://developer.gnome.org/pango/stable/PangoMarkupFormat.html>.\n    # If markup is not allowed, those tags will be stripped out of the\n    # message.\n    allow_markup = yes\n    \n    # The format of the message.  Possible variables are:\n    #   %a  appname\n    #   %s  summary\n    #   %b  body\n    #   %i  iconname (including its path)\n    #   %I  iconname (without its path)\n    #   %p  progress value if set ([  0%] to [100%]) or nothing\n    # Markup is allowed\n    format = \"<b>%s</b>\\n%b\"\n    \n    # Sort messages by urgency.\n    sort = yes\n    \n    # Show how many messages are currently hidden (because of geometry).\n    indicate_hidden = yes\n    \n    # Alignment of message text.\n    # Possible values are \"left\", \"center\" and \"right\".\n    alignment = left\n    \n    # The frequency with wich text that is longer than the notification\n    # window allows bounces back and forth.\n    # This option conflicts with \"word_wrap\".\n    # Set to 0 to disable.\n    bounce_freq = 0\n    \n    # Show age of message if message is older than show_age_threshold\n    # seconds.\n    # Set to -1 to disable.\n    show_age_threshold = 60\n    \n    # Split notifications into multiple lines if they don't fit into\n    # geometry.\n    word_wrap = yes\n    \n    # Ignore newlines '\\n' in notifications.\n    ignore_newline = no\n    \n    \n    # The geometry of the window:\n    #   [{width}]x{height}[+/-{x}+/-{y}]\n    # The geometry of the message window.\n    # The height is measured in number of notifications everything else\n    # in pixels.  If the width is omitted but the height is given\n    # (\"-geometry x2\"), the message window expands over the whole screen\n    # (dmenu-like).  If width is 0, the window expands to the longest\n    # message displayed.  A positive x is measured from the left, a\n    # negative from the right side of the screen.  Y is measured from\n    # the top and down respectevly.\n    # The width can be negative.  In this case the actual width is the\n    # screen width minus the width defined in within the geometry option.\n    geometry = \"300x5-30+30\"\n    \n    # Shrink window if it's smaller than the width.  Will be ignored if\n    # width is 0.\n    shrink = no\n    \n    # The transparency of the window.  Range: [0; 100].\n    # This option will only work if a compositing windowmanager is\n    # present (e.g. xcompmgr, compiz, etc.).\n    transparency = 0\n    \n    # Don't remove messages, if the user is idle (no mouse or keyboard input)\n    # for longer than idle_threshold seconds.\n    # Set to 0 to disable.\n    idle_threshold = 120\n    \n    # Which monitor should the notifications be displayed on.\n    monitor = 0\n    \n    # Display notification on focused monitor.  Possible modes are:\n    #   mouse: follow mouse pointer\n    #   keyboard: follow window with keyboard focus\n    #   none: don't follow anything\n    # \n    # \"keyboard\" needs a windowmanager that exports the\n    # _NET_ACTIVE_WINDOW property.\n    # This should be the case for almost all modern windowmanagers.\n    # \n    # If this option is set to mouse or keyboard, the monitor option\n    # will be ignored.\n    follow = mouse\n    \n    # Should a notification popped up from history be sticky or timeout\n    # as if it would normally do.\n    sticky_history = yes\n    \n    # Maximum amount of notifications kept in history\n    history_length = 20\n    \n    # Display indicators for URLs (U) and actions (A).\n    show_indicators = yes\n    \n    # The height of a single line.  If the height is smaller than the\n    # font height, it will get raised to the font height.\n    # This adds empty space above and under the text.\n    line_height = 0\n    \n    # Draw a line of \"separatpr_height\" pixel height between two\n    # notifications.\n    # Set to 0 to disable.\n    separator_height = 2\n    \n    # Padding between text and separator.\n    padding = 8\n    \n    # Horizontal padding.\n    horizontal_padding = 8\n    \n    # Define a color for the separator.\n    # possible values are:\n    #  * auto: dunst tries to find a color fitting to the background;\n    #  * foreground: use the same color as the foreground;\n    #  * frame: use the same color as the frame;\n    #  * anything else will be interpreted as a X color.\n    separator_color = frame\n    \n    # Print a notification on startup.\n    # This is mainly for error detection, since dbus (re-)starts dunst\n    # automatically after a crash.\n    startup_notification = false\n    \n    # dmenu path.\n    dmenu = /usr/bin/dmenu -p dunst:\n    \n    # Browser for opening urls in context menu.\n    browser = /usr/bin/firefox -new-tab\n\n    # Align icons left/right/off\n    icon_position = off\n\n    # Paths to default icons.\n    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/\n\n# [frame]\n#     width = 3\n#     color = \"#aaaaaa\"\n\n[shortcuts]\n\n    # Shortcuts are specified as [modifier+][modifier+]...key\n    # Available modifiers are \"ctrl\", \"mod1\" (the alt-key), \"mod2\",\n    # \"mod3\" and \"mod4\" (windows-key).\n    # Xev might be helpful to find names for keys.\n    \n    # Close notification.\n    close = ctrl+space\n    \n    # Close all notifications.\n    close_all = ctrl+shift+space\n    \n    # Redisplay last message(s).\n    # On the US keyboard layout \"grave\" is normally above TAB and left\n    # of \"1\".\n    history = ctrl+grave\n    \n    # Context menu.\n    context = ctrl+shift+period\n\n[urgency_low]\n    # IMPORTANT: colors have to be defined in quotation marks.\n    # Otherwise the \"#\" and following would be interpreted as a comment.\n    background = \"#282828\"\n    foreground = \"#888888\"\n    timeout = 10\n\n[urgency_normal]\n    background = \"#504945\"\n    foreground = \"#ffffff\"\n    timeout = 10\n\n[urgency_critical]\n    background = \"#CC241D\"\n    foreground = \"#ffffff\"\n    timeout = 0\n\n\n# Every section that isn't one of the above is interpreted as a rules to\n# override settings for certain messages.\n# Messages can be matched by \"appname\", \"summary\", \"body\", \"icon\", \"category\",\n# \"msg_urgency\" and you can override the \"timeout\", \"urgency\", \"foreground\",\n# \"background\", \"new_icon\" and \"format\".\n# Shell-like globbing will get expanded.\n#\n# SCRIPTING\n# You can specify a script that gets run when the rule matches by\n# setting the \"script\" option.\n# The script will be called as follows:\n#   script appname summary body icon urgency\n# where urgency can be \"LOW\", \"NORMAL\" or \"CRITICAL\".\n# \n# NOTE: if you don't want a notification to be displayed, set the format\n# to \"\".\n# NOTE: It might be helpful to run dunst -print in a terminal in order\n# to find fitting options for rules.\n\n#[espeak]\n#    summary = \"*\"\n#    script = dunst_espeak.sh\n\n#[script-test]\n#    summary = \"*script*\"\n#    script = dunst_test.sh\n\n#[ignore]\n#    # This notification will not be displayed\n#    summary = \"foobar\"\n#    format = \"\"\n\n#[signed_on]\n#    appname = Pidgin\n#    summary = \"*signed on*\"\n#    urgency = low\n#\n#[signed_off]\n#    appname = Pidgin\n#    summary = *signed off*\n#    urgency = low\n#\n#[says]\n#    appname = Pidgin\n#    summary = *says*\n#    urgency = critical\n#\n#[twitter]\n#    appname = Pidgin\n#    summary = *twitter.com*\n#    urgency = normal\n#\n# vim: ft=cfg\n",
+					"file": "/home/ema/Dotfiles/dunstrc",
+					"file_size": 7366,
+					"file_write_time": 131414776739035851,
+					"settings":
+					{
+						"buffer_size": 7366,
+						"line_ending": "Unix"
+					}
+				},
+				{
+					"file": "/home/ema/.config/user-dirs.locale",
+					"settings":
+					{
+						"buffer_size": 5,
+						"line_ending": "Unix"
+					}
+				},
+				{
+					"file": "/home/ema/Dotfiles/i3/config",
+					"settings":
+					{
+						"buffer_size": 8841,
+						"encoding": "UTF-8",
+						"line_ending": "Unix"
+					}
+				}
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 111.0,
+				"last_filter": "comm",
+				"selected_items":
+				[
+					[
+						"comm",
+						"Toggle Block Comment"
+					],
+					[
+						"comme\t",
+						"Toggle Comment"
+					],
+					[
+						"shell",
+						"Set Syntax: Shell Script (Bash)"
+					],
+					[
+						"block",
+						"Toggle Block Comment"
+					],
+					[
+						"latex",
+						"Set Syntax: LaTeX"
+					],
+					[
+						"java",
+						"Set Syntax: Java"
+					],
+					[
+						"color ",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"install pa",
+						"Package Control: Install Package"
+					],
+					[
+						"commen",
+						"Toggle Comment"
+					],
+					[
+						"BLOCK COM",
+						"Toggle Block Comment"
+					],
+					[
+						"REINDE",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"indent",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"comme",
+						"Toggle Comment"
+					],
+					[
+						"comment\t\t\t",
+						"Toggle Comment"
+					],
+					[
+						"blo",
+						"Toggle Block Comment"
+					],
+					[
+						"comment\t",
+						"Toggle Comment"
+					],
+					[
+						"word",
+						"Word Wrap: Toggle"
+					],
+					[
+						"markdo",
+						"Set Syntax: Markdown"
+					],
+					[
+						"comment",
+						"Toggle Comment"
+					],
+					[
+						"toggle side",
+						"View: Toggle Side Bar"
+					],
+					[
+						"preferen",
+						"Preferences: Settings"
+					],
+					[
+						"install ",
+						"Package Control: Install Package"
+					],
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"sidebar",
+						"View: Toggle Open Files in Side Bar"
+					],
+					[
+						"settings",
+						"Preferences: Settings"
+					],
+					[
+						"install pack",
+						"Package Control: Install Package"
+					],
+					[
+						"color install",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"menu",
+						"View: Toggle Menu"
+					],
+					[
+						"color",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"color insta",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"meni",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"block com",
+						"Toggle Block Comment"
+					],
+					[
+						"colro",
+						"Colorsublime: Browse Themes"
+					],
+					[
+						"commn",
+						"Toggle Block Comment"
+					],
+					[
+						"tabs",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"shel",
+						"Set Syntax: Shell Script (Bash)"
+					],
+					[
+						"settin",
+						"Preferences: Settings"
+					],
+					[
+						"synta",
+						"Set Syntax: YAML"
+					],
+					[
+						"color ins",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"wrap",
+						"Word Wrap: Toggle"
+					],
+					[
+						"colors",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"colorsub",
+						"Colorsublime: Browse Themes"
+					],
+					[
+						"coloru",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"snippet tr",
+						"Snippet: throw"
+					],
+					[
+						"men",
+						"View: Toggle Menu"
+					],
+					[
+						"install pac",
+						"Package Control: Install Package"
+					],
+					[
+						"REINDENT",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"reindent",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"reinden",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"tab",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"reind",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"ind tabs",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"reinde",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"in tabs",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"rein",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"inden tab",
+						"Indentation: Convert to Tabs"
+					],
+					[
+						"commnt",
+						"Toggle Block Comment"
+					],
+					[
+						"b comm",
+						"Toggle Block Comment"
+					],
+					[
+						"bcomme",
+						"Toggle Block Comment"
+					],
+					[
+						"",
+						"Indentation: Reindent Lines"
+					],
+					[
+						"blo comm",
+						"Toggle Block Comment"
+					],
+					[
+						"setting",
+						"Preferences: Settings"
+					],
+					[
+						"SIDEBAR",
+						"View: Toggle Open Files in Side Bar"
+					],
+					[
+						"settins",
+						"Preferences: Settings"
+					]
+				],
+				"width": 464.0
+			},
+			"console":
+			{
+				"height": 0.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"expanded_folders":
+			[
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/bin",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/assets",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/model",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/views"
+			],
+			"file_history":
+			[
+				"/usr/local/share/rofi/themes/gruvbox-dark-hard.theme",
+				"/home/ema/.config/i3/i3blocksrc",
+				"/usr/local/share/rofi/themes/gruvbox-light-hard.theme",
+				"/home/ema/.wall/unsplash.sh",
+				"/home/ema/.Xresources",
+				"/home/ema/.config/i3/config",
+				"/home/ema/Scrivania/Veicolo ibrido.latex",
+				"/home/ema/Dropbox/Dev/Script/PostInstall/config/fish_prompt.fish",
+				"/home/ema/.config/terminator/config",
+				"/home/ema/.config/rofi/config",
+				"/etc/xdg/dunst/dunstrc",
+				"/usr/share/i3blocks/mediaplayer",
+				"/usr/share/i3blocks/mediaplayuer",
+				"/home/ema/.Xres",
+				"/home/ema/Dropbox/GioconeProgrammazione/Collegamento.cpp",
+				"/home/ema/Scrivania/Prova.md",
+				"/home/ema/img",
+				"/home/ema/Dropbox/Dev/Script/unsplash.sh",
+				"/home/ema/.config/argos/load_average",
+				"/home/ema/.config/argos/temperature",
+				"/home/ema/img.jpg",
+				"/home/ema/.wall/getImg.sh",
+				"/home/ema/.wall/img.jpg",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/WelcomeWindowController.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/Utils.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/Scenes.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/QSortViewController.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/QSortDrawer.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/controller/Palette.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.git/FETCH_HEAD",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.git/HEAD",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.git/COMMIT_EDITMSG",
+				"/etc/rc.local",
+				"/home/ema/.config/fish/functions/fish_prompt.fish",
+				"/home/ema/.config/fish/config.fish",
+				"/home/ema/.config/argos/mediaplayer",
+				"/home/ema/.config/gtk-3.0/settings.ini",
+				"/etc/pulse/default.pa",
+				"/home/ema/gedit",
+				"/var/lib/gdm3/.config/pulse/client.conf",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/model/Algoritmo.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/model/Input.java",
+				"/home/ema/Scaricati/Apps/rofi-1.3.1/rofi-mlocate.sh",
+				"/home/ema/.config/fish/functions/day.fish",
+				"/home/ema/.config/fish/functions/night.fish",
+				"/home/ema/)",
+				"/usr/share/fish/functions/alias.fish",
+				"/tmp/test.txt",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/README.md",
+				"/home/ema/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+				"/home/ema/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+				"/usr/share/i3blocks/battery",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.classpath",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.project",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.settings/org.eclipse.jdt.core.prefs",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.prefs",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/bin/views/WelcomeView.fxml",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/doc/script.js",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/views/WelcomeView.fxml",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/.gitignore",
+				"/home/ema/Dropbox/GioconeProgrammazione/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/main.c",
+				"/home/ema/Dropbox/GioconeProgrammazione/GeneratoreLivelli.cpp",
+				"/home/ema/Scaricati/Apps/IntelliJ IDE/jre/jre/lib/amd64/libfontmanager.so",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/views/QSortView.fxml",
+				"/home/ema/Dropbox/GioconeProgrammazione/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Stanza.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Livello.hpp",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/home/ema/.config/i3/config",
+				"/home/ema/Dropbox/GioconeProgrammazione/Collegamento.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/README.md",
+				"/home/ema/Scrivania/EWorkspace/FX/src/Main.java",
+				"/home/ema/Scrivania/EWorkspace/FX/src/MyController.java",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Livello.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Collegamento.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Stanza.cpp",
+				"/home/ema/Scrivania/EWorkspace/ALGA/src/quick_sort/Input.java",
+				"/home/ema/Scrivania/EWorkspace/ALGA/src/quick_sort/Algoritmo.java",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Collegamento.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/Speriamo che funzioni perchè mi sono rotta/main.cpp",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/quick_sort/Ordinamento.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/quick_sort/Input.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA/src/quick_sort/Algoritmo.java",
+				"/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA (copia)/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA (copia)/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Collegamento.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Collegamento.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Livello.cpp",
+				"/home/ema/.cache/.fr-eOLWx8/dwm-6.1/dwm.c",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/PROBABILMENTE FUNZIONA/out.txt",
+				"/home/ema/Dropbox/GioconeProgrammazione/RANDOM BELLIIIIII/Makefile",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Stanza.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Collegamento.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Livello.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/nuovooooooooooooooooooo/Collegamento.hpp",
+				"/home/ema/.bashrc",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Stanza.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Livello.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GestoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GeneratoreLivelli.hpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Stanza.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/main.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/Livello.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GeneratoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione/wsdj (copia)/GestoreLivelli.cpp",
+				"/home/ema/Dropbox/GioconeProgrammazione (copia)/Stanza.hpp"
+			],
+			"find":
+			{
+				"height": 35.0
+			},
+			"find_in_files":
+			{
+				"height": 93.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": true,
+				"find_history":
+				[
+					"label",
+					"time",
+					"Cantarell",
+					"*",
+					"label",
+					"#",
+					"$$\\",
+					"}}}$$$\n",
+					"exec_alwa",
+					"/home/ema/.wall/unsplash.sh",
+					"mod+d",
+					"Inconsolata",
+					"orange",
+					"validateInput",
+					"Monospace",
+					"color",
+					"4c7899",
+					"285577",
+					"-",
+					"rand",
+					"$inactive",
+					"inactive",
+					"accent",
+					"#set_from_resource",
+					"#",
+					"canc",
+					"wall",
+					"top",
+					"creaLivello",
+					"crea",
+					"l1",
+					"l2",
+					"getStanza",
+					"crea",
+					"passaggio",
+					"*/",
+					"/**",
+					"$wall",
+					"terminal",
+					"lock",
+					"#",
+					".*enti",
+					".*mento",
+					"prompt",
+					"tocompare",
+					"rofi",
+					"shift+space",
+					"checkoth",
+					"iniziali",
+					"->",
+					" -> ",
+					"->",
+					"printf",
+					"fuzzy",
+					" -matching fuzzy",
+					"-matching fuzzy",
+					"fuzzy",
+					" -matching fuzzy",
+					"-matching fuzzy",
+					"maxLiv",
+					"---",
+					"printf(\"",
+					"(\"---\\",
+					"printf",
+					"tmLink",
+					"printf",
+					"    ++(this->link);\n",
+					" ++(this->link); ",
+					")",
+					";\n",
+					"tmpAdA",
+					"tmpAdDa",
+					"do {",
+					"do",
+					"stampaCollegamenti",
+					";",
+					"link",
+					"\"",
+					" ",
+					"l",
+					"{",
+					";",
+					"alt",
+					"el.",
+					"collegamenti",
+					"ptr_coll",
+					"prt_coll",
+					"link(",
+					"link",
+					"cout",
+					"\\t",
+					";",
+					"lock",
+					"Monospace",
+					"i",
+					"speak",
+					"espeak",
+					"000000",
+					"cc241d",
+					"282828",
+					"1d2021",
+					"Terminus",
+					"font"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"folders":
+			[
+				{
+					"path": "/home/ema/Dropbox/Uni/ANNO 1/Algoritmi/ALGA"
+				}
+			],
+			"groups":
+			[
+				{
+					"selected": 1,
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"file": "/home/ema/.config/rofi/config",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 285,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										174,
+										174
+									]
+								],
+								"settings":
+								{
+									"bracket_highlighter.busy": false,
+									"bracket_highlighter.locations":
+									{
+										"close":
+										{
+										},
+										"icon":
+										{
+										},
+										"open":
+										{
+										},
+										"unmatched":
+										{
+										}
+									},
+									"bracket_highlighter.regions":
+									[
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content"
+									],
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 4,
+							"type": "text"
+						},
+						{
+							"buffer": 1,
+							"file": "/home/ema/.config/i3/config",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 8841,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										8841,
+										8841
+									]
+								],
+								"settings":
+								{
+									"bracket_highlighter.busy": false,
+									"bracket_highlighter.locations":
+									{
+										"close":
+										{
+										},
+										"icon":
+										{
+										},
+										"open":
+										{
+										},
+										"unmatched":
+										{
+										}
+									},
+									"bracket_highlighter.regions":
+									[
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content"
+									],
+									"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
+								},
+								"translation.x": 0.0,
+								"translation.y": 4180.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"type": "text"
+						},
+						{
+							"buffer": 2,
+							"file": "/home/ema/Dotfiles/dunstrc",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 7366,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										38,
+										38
+									]
+								],
+								"settings":
+								{
+									"bracket_highlighter.busy": false,
+									"bracket_highlighter.locations":
+									{
+										"close":
+										{
+										},
+										"icon":
+										{
+										},
+										"open":
+										{
+										},
+										"unmatched":
+										{
+										}
+									},
+									"bracket_highlighter.regions":
+									[
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content"
+									],
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 2,
+							"type": "text"
+						},
+						{
+							"buffer": 3,
+							"file": "/home/ema/.config/user-dirs.locale",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 5,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										0,
+										0
+									]
+								],
+								"settings":
+								{
+									"bracket_highlighter.busy": false,
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 1,
+							"type": "text"
+						},
+						{
+							"buffer": 4,
+							"file": "/home/ema/Dotfiles/i3/config",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 8841,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										8841,
+										8841
+									]
+								],
+								"settings":
+								{
+									"bracket_highlighter.busy": false,
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 7619.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 3,
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 88.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": false,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"output.unsaved_changes":
+			{
+				"height": 124.0
+			},
+			"pinned_build_system": "",
+			"position": "0,1,0,0,0,0,0,0,0,1366,768",
+			"project": "",
+			"replace":
+			{
+				"height": 172.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"genera",
+						"GeneratoreLivelli.hpp"
+					]
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 0,
+			"settings":
+			{
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": false,
+			"side_bar_width": 254.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			},
+			"window_id": 30,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}

@@ -1,0 +1,67 @@
+[global_config]
+  enabled_plugins = InactivityWatch, CustomCommandsMenu, APTURLHandler, LaunchpadBugURLHandler
+  title_font = Fira Mono 11
+  title_use_system_font = False
+[keybindings]
+  new_window = <Primary>n
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    audible_bell = True
+    background_color = "#1e1e1e"
+    background_image = None
+    copy_on_selection = True
+    cursor_color = "#bbbbbb"
+    cursor_shape = ibeam
+    font = Source Code Pro 12
+    foreground_color = "#e6d4a3"
+    icon_bell = False
+    palette = "#161819:#f73028:#aab01e:#f7b125:#719586:#c77089:#7db669:#faefbb:#7f7061:#be0f17:#868715:#cc881a:#377375:#a04b73:#578e57:#e6d4a3"
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+    urgent_bell = True
+    use_system_font = False
+  [[old]]
+    allow_bold = False
+    audible_bell = True
+    background_color = "#1e1e1e"
+    background_image = None
+    copy_on_selection = True
+    cursor_blink = False
+    cursor_shape = ibeam
+    font = Inconsolata for Powerline Medium 13.7001953125
+    foreground_color = "#e6d4a3"
+    icon_bell = False
+    palette = "#073642:#268bd2:#859900:#b58900:#2aa198:#d33682:#dc322f:#eee8d5:#002b36:#dc322f:#586e75:#657b83:#657b83:#6c71c4:#93a1a1:#fdf6e3"
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+    urgent_bell = True
+    use_system_font = False
+    visible_bell = True
+  [[tango]]
+    allow_bold = False
+    audible_bell = True
+    background_image = None
+    copy_on_selection = True
+    cursor_blink = False
+    cursor_color = "#bbbbbb"
+    cursor_shape = ibeam
+    font = Terminus Italic 12
+    foreground_color = "#ffffff"
+    icon_bell = False
+    palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+    urgent_bell = True
+    use_system_font = False
