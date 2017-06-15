@@ -47,6 +47,7 @@ set $workspace10  "10: 0 "
 set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
+workspace_layout tabbed
 bindsym --whole-window $mod+Shift+button1 kill
 popup_during_fullscreen smart
 bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
@@ -55,7 +56,6 @@ font pango: Cantarell 10
 for_window [class = ".*"] border normal 1
 # new_window normal 1
 # new_float normal 1
-# workspace_layout tabbed
 # gaps inner 5
 # gaps outer 5
 
@@ -187,7 +187,7 @@ mode $sysmenu {
 	bindsym h         exec --no-startup-id shutdown -P now
 	bindsym b         exec --no-startup-id shutdown -r now
 	bindsym s         exec --no-startup-id "systemctl suspend; mode \\"default\\""
-	#bindsym l        exec --no-startup-id /home/ema/Scaricati/i3lock/lock -p; mode "default"
+	# bindsym l        exec --no-startup-id /home/ema/Scaricati/i3lock/lock -p; mode "default"
 	bindsym l         exec --no-startup-id i3lock; mode "default"
 
 	bindsym Return    mode "default"
@@ -210,7 +210,7 @@ mode "resize" {
 #--------------------------------------------------------------------------------
 # 7.AUTOSTART APPLICATIONS
 #--------------------------------------------------------------------------------
-exec --no-startup-id compton -f
+# exec --no-startup-id compton -f
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id dropbox start
