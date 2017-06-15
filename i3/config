@@ -165,7 +165,7 @@ for_window [class = "model.Main"] floating enable
 #-------------------------------------------------------------------------------
 bindsym Shift+space exec --no-startup-id "rofi -combi-modi window,drun -modi combi -show combi"
 bindsym Mod1+F2 exec --no-startup-id "rofi -show run"
-bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home -not -path "/home/ema/.*" | rofi -threads 0 -dmenu -i -p "> ")"
+bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home /media/ema -not -path "/home/ema/.*" | rofi -threads 0 -dmenu -i -p "> ")"
 bindsym $mod+a exec --no-startup-id pavucontrol
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
@@ -178,29 +178,6 @@ bindsym --release Print exec --no-startup-id gnome-screenshot -aic
 #-------------------------------------------------------------------------------
 # 6.MODES
 #-------------------------------------------------------------------------------
-
-set $brightness "Brightness Up - Down"
-bindsym $mod+Shift+l mode $brightness
-mode $brightness{
-
-    bindsym r exec --no-startup-id redshift-gtk -O 4500, mode "default"
-    bindsym ctrl+r exec --no-startup-id redshift-gtk -O 3500, mode "default"
-    bindsym Shift+r exec --no-startup-id redshift-gtk -O 2000, mode "default"
-    bindsym n exec --no-startup-id redshift-gtk -x, mode "default"
-    bindsym b exec --no-startup-id redshift-gtk -O 10000, mode "default"
-    bindsym ctrl+Shift+r exec --no-startup-id redshift-gtk -O 1000, mode "default"
-
-	# bindsym Up exec --no-startup-id xbacklight -inc 5
-	# bindsym Down exec --no-startup-id xbacklight -dec 5
-
-	# bindsym Shift+Up exec --no-startup-id xbacklight -inc 20
-	# bindsym Shift+Down exec --no-startup-id xbacklight -dec 20
-
-	# bindsym ctrl+Up exec --no-startup-id xbacklight -inc 1
-	# bindsym ctrl+Down exec --no-startup-id xbacklight -dec 1
-
-	bindsym Escape mode "default"
-}
 
 set $sysmenu "Exit - Halt - Reboot - Susped - Lock"
 bindsym $mod+Delete mode $sysmenu
@@ -233,7 +210,7 @@ mode "resize" {
 #--------------------------------------------------------------------------------
 # 7.AUTOSTART APPLICATIONS
 #--------------------------------------------------------------------------------
-# exec --no-startup-id compton -f
+exec --no-startup-id compton -f
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id dropbox start
