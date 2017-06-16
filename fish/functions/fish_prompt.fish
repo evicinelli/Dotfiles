@@ -12,13 +12,12 @@ function fish_prompt
     set cwd (prompt_pwd)
   end
 
- # set -l fish     "⋊>"
-  set -l fish     "> "
-  set -l ahead    "↑"
-  set -l behind   "↓"
-  set -l diverged "⥄ "
-  set -l dirty    "⨯"
-  set -l none     "◦"
+  set -l fish     "➜ " 
+  set -l ahead    "↑ "
+  set -l behind   "↓ "
+  set -l diverged "⇕ "
+  set -l dirty    "⨯ "
+  set -l none     "◦ "
 
   set -l normal_color     (set_color normal)
   set -l success_color    (set_color $fish_pager_color_progress ^/dev/null; or set_color cyan)
@@ -26,8 +25,9 @@ function fish_prompt
   set -l directory_color  (set_color $fish_color_quote ^/dev/null; or set_color brown)
   set -l repository_color (set_color $fish_color_cwd ^/dev/null; or set_color green)
   set -l user_color       (set_color purple)
+  set -l pc_color	  (set_color yellow)
 
-  echo -n -s -e $user_color (whoami) $normal_color " in"
+  echo -n -s -e $user_color (whoami) $normal_color " at " $pc_color (hostname) $normal_color " in"
   if git_is_repo
     if test "$theme_short_path" = 'yes'
       set root_folder (command git rev-parse --show-toplevel ^/dev/null)
