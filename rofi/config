@@ -1,13 +1,21 @@
-rofi.font: Inconsolata 13
+rofi.font: Source Code Pro 11
 rofi.separator-style: none
 rofi.padding: 20 
 rofi.width: 70
-! rofi.fullscreen: true
 rofi.bw: 2
 rofi.eh: 1
 rofi.fixed-num-lines: true
 rofi.lines: 5
 rofi.columns: 1
 rofi.fake-transparency: true
+! ----------------------------------
+! Enable the extended coloring options
+rofi.color-enabled: true
 
-#include "/usr/local/share//rofi/themes//gruvbox-dark-hard.theme"
+!                  bg       border   separator
+rofi.color-window: #1d2021, #83A598, #a89984
+
+!                  bg       fg       bg-alt   hl-bg    hl-fg
+rofi.color-normal: #1d2021, #ebdbb2, #282828, #504945, #fbf1c7
+rofi.color-active: #d79921, #1d2021, #d79921, #fabd2f, #1d2021
+rofi.color-urgent: #cc241d, #1d2021, #cc241d, #fb4934, #1d2021
