@@ -47,7 +47,7 @@ set $barAccent #83a598
 set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
-workspace_layout tabbed
+# workspace_layout tabbed
 bindsym --whole-window $mod+Shift+button1 kill
 popup_during_fullscreen smart
 bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
