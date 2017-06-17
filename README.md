@@ -7,3 +7,4 @@
 + Launcher: https://github.com/DaveDavenport/rofi
 + Clipboard manager: https://github.com/erebe/greenclip
 + Playerctl: https://github.com/acrisci/playerctl
++ Bonus: Infinality, redshift-gtk
