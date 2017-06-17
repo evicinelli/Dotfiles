@@ -163,12 +163,11 @@ for_window [class = "model.Main"] floating enable
 #-------------------------------------------------------------------------------
 # 5. APP-SPECIFIC BINDINGS
 #-------------------------------------------------------------------------------
-bindsym Shift+space exec --no-startup-id "rofi -combi-modi window,drun -modi combi -show combi"
+bindsym Shift+space exec --no-startup-id "rofi -show drun"
+bindsym Mod1+Tab exec --no-startup-id "rofi -show window"
 bindsym Mod1+F2 exec --no-startup-id "rofi -show run"
 bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home /media/ema -not -path "/home/ema/.*" | rofi -threads 0 -dmenu -i -p "> ")"
-bindsym $mod+a exec --no-startup-id pavucontrol
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym Mod1+C exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -178,7 +177,6 @@ bindsym --release Print exec --no-startup-id gnome-screenshot -aic
 #-------------------------------------------------------------------------------
 # 6.MODES
 #-------------------------------------------------------------------------------
-
 set $sysmenu "Exit - Halt - Reboot - Susped - Lock"
 bindsym $mod+Delete mode $sysmenu
 mode $sysmenu {
@@ -213,7 +211,8 @@ mode "resize" {
 exec --no-startup-id compton -f
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
-exec --no-startup-id dropbox start
 exec --no-startup-id indicator-cpufreq
 exec --no-startup-id nm-applet
+exec --no-startup-id greenclip daemon
 exec_always --no-startup-id feh --bg-fill /home/ema/img
+#exec --no-startup-id dropbox start
