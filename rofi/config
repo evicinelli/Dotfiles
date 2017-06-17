@@ -2,7 +2,7 @@ rofi.font: Source Code Pro 11
 rofi.separator-style: none
 rofi.padding: 20 
 rofi.width: 70
-rofi.bw: 2
+rofi.bw: 3
 rofi.eh: 1
 rofi.fixed-num-lines: true
 rofi.lines: 5
