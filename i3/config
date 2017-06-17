@@ -33,12 +33,12 @@ set $workspace8 "8: 8 "
 set $workspace9 "9: 9 "
 set $workspace10  "10: 0 "
 
-# set $barBackground #282828
-# set $unfocused #282828
-# set $text #fbf1c7
-# set $urgent #cc241d
-# set $focused #504945
-# set $barAccent #83a598
+set $barBackground #282828
+set $unfocused #282828
+set $text #fbf1c7
+set $urgent #cc241d
+set $focused #504945
+set $barAccent #83a598
 
 
 #-------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ workspace_layout tabbed
 bindsym --whole-window $mod+Shift+button1 kill
 popup_during_fullscreen smart
 bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-font pango: Cantarell 9
+font pango: Source Sans Pro 9
 
 for_window [class = ".*"] border normal 1
 # new_window normal 1
@@ -119,10 +119,10 @@ bindsym $mod+$Right focus right
 
 bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/.wall/unsplash.sh"
 #                       border      		background 		text    	 indicator
-# client.focused          $focused		$focused		$text	 	 $base0F
-# client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
-# client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
-# client.urgent		$urgent			$urgent			$text 		 $base0F
+client.focused          $focused		$focused		$text	 	 $base0F
+client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
+client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
+client.urgent		$urgent			$urgent			$text 		 $base0F
 
 bar {
 
@@ -131,20 +131,20 @@ bar {
 #	height 32
 #	tray_output none
 	status_command i3blocks -c /home/ema/.config/i3/i3blocksrc
-	font pango: Inconsolata, FontAwesome 13
+	font pango: Source Code Pro, FontAwesome 11
 	strip_workspace_numbers yes
 
-	# colors {
-	# 	separator $text
-	# 	background $barBackground
-	# 	statusline $text
-	# 	#			border        	background    	  text
-	# 	focused_workspace  $barAccent 		$barAccent	$barBackground
-	# 	active_workspace   $barAccent 	 	$barAccent	$barBackground
-	# 	inactive_workspace $barBackground	$barBackground	$text
-	# 	urgent_workspace   $urgent		$urgent		$barBackground
+	colors {
+		separator $text
+		background $barBackground
+		statusline $text
+		#			border        	background    	  text
+		focused_workspace  $barAccent 		$barAccent	$barBackground
+		active_workspace   $barAccent 	 	$barAccent	$barBackground
+		inactive_workspace $barBackground	$barBackground	$text
+		urgent_workspace   $urgent		$urgent		$barBackground
 
-	# }
+	}
 
 }
 

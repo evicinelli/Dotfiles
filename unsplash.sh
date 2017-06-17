@@ -13,7 +13,7 @@
 
 rm img
 notify-send "Prendo lo sfondo da unsplash"
-wget -O img "https://source.unsplash.com/collection/162468"
+wget -O img "https://source.unsplash.com/collection/890836"
 notify-send "Fatto :)"
 gsettings set org.gnome.desktop.background picture-uri file:///$(pwd)/img
 gsettings set org.gnome.desktop.screensaver picture-uri file:///$(pwd)/img

@@ -10,4 +10,4 @@ rofi.lines: 5
 rofi.columns: 1
 rofi.fake-transparency: true
 
-!#include "/usr/local/share//rofi/themes//Arc.theme"
+#include "/usr/local/share//rofi/themes//gruvbox-dark-hard.theme"
