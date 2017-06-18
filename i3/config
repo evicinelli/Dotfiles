@@ -143,7 +143,7 @@
 	bindsym Shift+space exec --no-startup-id "rofi -show drun"
 	bindsym Mod1+Tab exec --no-startup-id "rofi -show window"
 	bindsym Mod1+F2 exec --no-startup-id "rofi -show run"
-	bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home /media/ema -not -path "/home/ema/.*" | rofi -threads 0 -dmenu -i -p "> ")"
+	bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home /media/ema -not -path "/home/ema/.*" | rofi -threads 0 -dmenu -i -p "find:")"
 	bindsym Mod1+Insert exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 	bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 	bindsym XF86AudioNext exec --no-startup-id playerctl next
