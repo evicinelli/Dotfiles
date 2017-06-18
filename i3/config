@@ -185,8 +185,7 @@ mode $sysmenu {
 	bindsym h         exec --no-startup-id shutdown -P now
 	bindsym b         exec --no-startup-id shutdown -r now
 	bindsym s         exec --no-startup-id "systemctl suspend; mode \\"default\\""
-	# bindsym l        exec --no-startup-id /home/ema/Scaricati/i3lock/lock -p; mode "default"
-	bindsym l         exec --no-startup-id i3lock; mode "default"
+	bindsym l         exec --no-startup-id  bash $HOME/Scaricati/Apps/i3lock-fancy/lock --pixelate; mode "default"
 
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
