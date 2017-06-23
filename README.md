@@ -1,5 +1,5 @@
 # Dotfiles
-![screen/empty.jpg]()
+![](screen/empty.jpg)
 
 + Window manager: i3wm.org
 + Gtk theme: https://github.com/system76/pop-gtk-theme
