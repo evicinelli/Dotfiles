@@ -79,11 +79,11 @@
 
 # CONTAINERS {{{
 	bindsym $mod+w layout toggle
-	bindsym $mod+- split h
-	bindsym $mod+\ split v
+	bindsym $mod+backslash split h
+	bindsym $mod+minus split v
 	bindsym $mod+f fullscreen
-	bindsym $mod+Shift+minus move scratchpad
-	bindsym $mod+minus scratchpad show
+	bindsym $mod+Shift+s move scratchpad
+	bindsym $mod+s scratchpad show
 	bindsym $mod+t floating toggle
 	bindsym $mod+Shift+b bar mode toggle
 	bindsym $mod+Shift+$Left move left
@@ -159,7 +159,7 @@
 		bindsym e         exec --no-startup-id "i3-nagbar -t warning -m 'Logout?' -b 'S' 'i3-msg exit'"
 		bindsym h         exec --no-startup-id shutdown -P now
 		bindsym b         exec --no-startup-id shutdown -r now
-		bindsym s         exec --no-startup-id "systemctl suspend; mode \\"default\\""
+		bindsym s         exec --no-startup-id "bash $HOME/Scaricati/Apps/i3lock-fancy/lock --pixelate; systemctl suspend;
 		bindsym l         exec --no-startup-id  bash $HOME/Scaricati/Apps/i3lock-fancy/lock --pixelate; mode "default"
 
 		bindsym Return    mode "default"

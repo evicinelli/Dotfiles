@@ -1,0 +1,20 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"BracketHighlighter",
+		"Colorsublime",
+		"DistractionFreeWindow",
+		"Highlighter",
+		"Icon Fonts",
+		"Package Control",
+		"Predawn",
+		"SideBarEnhancements",
+		"Theme - Afterglow",
+		"Theme - Broceanic",
+		"VIM Navigation"
+	]
+}

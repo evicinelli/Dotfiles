@@ -7,7 +7,6 @@
 # https://source.unsplash.com/featured/?{KEYWORD},{KEYWORD}
 # https://source.unsplash.com/1600x900/{?SEARCH,TERM}
 # https://source.unsplash.com/{PHOTO ID}/1600x900
-#
 # https://source.unsplash.com/ -- API documentation
 
 
@@ -20,7 +19,5 @@ gsettings set org.gnome.desktop.screensaver picture-uri file:///$(pwd)/img
 feh --bg-fill $(pwd)/img
 
 
-#
-#
 # wget -O img "https://source.unsplash.com/collection/149064/1600x900"
 # wget -O img "https://source.unsplash.com/1600x900/?nature,water"
