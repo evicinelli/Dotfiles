@@ -1,3 +1,3 @@
 function transfer
-	curl --progress-bar --upload-file $argv https://transfer.sh/$argv
+	curl -H "Max-Downloads: 3" -H "Max-Days: 1" --progress-bar --upload-file $argv https://transfer.sh/$argv
 end
