@@ -1,7 +1,7 @@
 # I3 CONFIG FILE  #
 
 
-#SETTING VARS {{{
+# SETTING VARS {{{
 
 	set $Up k
 	set $Left h
