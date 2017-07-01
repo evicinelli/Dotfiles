@@ -5,3 +5,7 @@ set -q XDG_DATA_HOME
 
 # Load Oh My Fish configuration.
 source $OMF_PATH/init.fish
+
+# Setting gvim as editor
+export EDITOR='gvim'
+export VISUAL='gvim'
