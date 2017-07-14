@@ -10,4 +10,4 @@
 + Clipboard manager: https://github.com/erebe/greenclip
 + Playerctl: https://github.com/acrisci/playerctl
 + Lockscreen: https://github.com/meskarune/i3lock-fancy
-+ Bonus: Infinality, redshift-gtk
++ Bonus: Infinality, redshift-gtk, transfer.sh, qrencode (transfer from pc to phone)
