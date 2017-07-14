@@ -12,7 +12,8 @@ function fish_prompt
     set cwd (prompt_pwd)
   end
 
-  set -l fish     "➜ " 
+#  set -l fish     "➜ "
+  set -l fish "> "
   set -l ahead    "↑ "
   set -l behind   "↓ "
   set -l diverged "⇕ "
@@ -23,8 +24,8 @@ function fish_prompt
   set -l success_color    (set_color green)
   set -l error_color      (set_color red --bold)
   set -l directory_color  (set_color blue)
-  set -l repository_color (set_color cyan)
-  set -l user_color       (set_color purple)
+  set -l repository_color (set_color purple)
+  set -l user_color       (set_color cyan)
   set -l pc_color	  (set_color yellow)
 
   echo -n -s -e $user_color (whoami) $normal_color " at " $pc_color (hostname) $normal_color " in"

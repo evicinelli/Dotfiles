@@ -66,3 +66,4 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document=meld.des
 application/x-shellscript=gvim.desktop;sublime-text.desktop;
 text/css=sublime-text.desktop;
 text/markdown=gvim.desktop;
+application/pdf=zathura.desktop;

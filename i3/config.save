@@ -151,6 +151,7 @@
 	bindsym XF86AudioNext exec --no-startup-id playerctl next
 	bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 	bindsym --release Print exec --no-startup-id gnome-screenshot -aic
+	bindsym $Mod+k exec /opt/google/chrome/google-chrome --profile-directory=Default --app-id=jijnmpkkfkjaihbhffejemnpbbglahim
 # }}}
 
 # MODES {{{
