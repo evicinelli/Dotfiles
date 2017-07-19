@@ -82,8 +82,8 @@
 	bindsym $mod+backslash split h
 	bindsym $mod+minus split v
 	bindsym $mod+f fullscreen
-	bindsym $mod+Shift+Down move scratchpad
-	bindsym $mod+Down scratchpad show
+	bindsym $mod+Shift+s move scratchpad
+	bindsym $mod+s scratchpad show
 	bindsym $mod+t floating toggle
 	bindsym $mod+Shift+b bar mode toggle
 	bindsym $mod+Shift+$Left move left
