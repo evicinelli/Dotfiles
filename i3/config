@@ -98,7 +98,7 @@
 
 # THEMING {{{
 
-	bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/.wall/unsplash.sh"
+	bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/Dotfiles/unsplash.sh"
 	#                       border      		background 		text    	 indicator
 	client.focused          $focused		$focused		$text	 	 $base0F
 	client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
@@ -139,6 +139,8 @@
 	for_window [class = "model.Main"] floating enable
 	for_window [class = "Google-chrome" instance = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"] floating enable
 	for_window [class = "Google-chrome" instance = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"] border none
+	for_window [class = "feh"] floating toggle
+	for_window [class = "feh"] border none
 # }}}
 
 # APP-SPECIFIC BINDINGS {{{
