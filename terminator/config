@@ -1,6 +1,6 @@
 [global_config]
   enabled_plugins = InactivityWatch, CustomCommandsMenu, APTURLHandler, LaunchpadBugURLHandler
-  title_font = Source Code Pro 12
+  title_font = Inconsolata 13
   title_use_system_font = False
 [keybindings]
   new_window = <Primary>n
@@ -19,7 +19,7 @@
     allow_bold = False
     copy_on_selection = True
     cursor_shape = ibeam
-    font = Source Code Pro 12
+    font = Inconsolata 13
     icon_bell = False
     scrollback_infinite = True
     scrollbar_position = hidden

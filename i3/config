@@ -32,13 +32,13 @@
 	set $mod Mod4
 	floating_modifier $mod
 	bindsym $mod+q kill
-	# workspace_layout tabbed
+#	workspace_layout tabbed
 	bindsym --whole-window $mod+Shift+button1 kill
 	popup_during_fullscreen smart
 	bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-	font pango: Source Sans Pro 9
-
-	for_window [class = ".*"] border normal 1
+	font pango: Inconsolata 9
+#	for_window [class = ".*"] border normal 1
+#	for_window [class = "Synapse"] border none
 	# new_window normal 1
 	# new_float normal 1
 	# gaps inner 5
@@ -100,10 +100,10 @@
 
 	bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/Dotfiles/unsplash.sh"
 	#                       border      		background 		text    	 indicator
-	client.focused          $focused		$focused		$text	 	 $base0F
-	client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
-	client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
-	client.urgent		$urgent			$urgent			$text 		 $base0F
+#	client.focused          $focused		$focused		$text	 	 $base0F
+#	client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
+#	client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
+#	client.urgent		$urgent			$urgent			$text 		 $base0F
 
 	bar {
 
@@ -115,17 +115,17 @@
 		font pango: Source Code Pro, FontAwesome 11
 		strip_workspace_numbers yes
 
-		colors {
-			separator $text
-			background $barBackground
-			statusline $text
-			#			border        	background    	  text
-			focused_workspace  $barAccent 		$barAccent	$barBackground
-			active_workspace   $barAccent 	 	$barAccent	$barBackground
-			inactive_workspace $barBackground	$barBackground	$text
-			urgent_workspace   $urgent		$urgent		$barBackground
-
-		}
+#		colors {
+#			separator $text
+#			background $barBackground
+#			statusline $text
+#			#			border        	background    	  text
+#			focused_workspace  $barAccent 		$barAccent	$barBackground
+#			active_workspace   $barAccent 	 	$barAccent	$barBackground
+#			inactive_workspace $barBackground	$barBackground	$text
+#			urgent_workspace   $urgent		$urgent		$barBackground
+#
+#		}
 
 	}
 # }}}
@@ -144,11 +144,13 @@
 # }}}
 
 # APP-SPECIFIC BINDINGS {{{
-	bindsym Shift+space exec --no-startup-id "rofi -show drun"
-	bindsym Mod1+Tab exec --no-startup-id "rofi -show window"
+	bindsym Shift+space exec --no-startup-id "rofi -combi-modi window,drun -show combi"
+	#bindsym Shift+space exec --no-startup-id "rofi -show drun"
+	#bindsym Mod1+Tab exec --no-startup-id "rofi -show window"
 	bindsym Mod1+F2 exec --no-startup-id "rofi -show run"
-	bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home /media/ema -not -path "/home/ema/.*" -not -path "/home/ema/Scaricati/App*" | rofi -threads 0 -dmenu -i -p "find:")"
+	bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home/$(whoami) /media/$(whoami) -not -path "/home/$(whoami)/.*" -not -path "/home/$(whoami)/Scaricati/App*" | rofi -threads 0 -dmenu -i -p "find:")"
 	bindsym Mod1+Insert exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
+#	bindsym Shift+space exec --no-startup-id synapse
 	bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 	bindsym XF86AudioNext exec --no-startup-id playerctl next
 	bindsym XF86AudioPrev exec --no-startup-id playerctl previous

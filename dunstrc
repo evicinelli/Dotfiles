@@ -1,5 +1,5 @@
 [global]
-    font = Source Code Pro 10
+    font = Inconsolata 12
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -24,7 +24,7 @@
     format = "<b>%a - %s</b>\n%b"
     
     # Sort messages by urgency.
-    sort = yes
+    sort = no
     
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -148,8 +148,8 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
  [frame]
-    width = 3
-    color = "#83A598"
+   width = 3
+   color = "#222222"
 
 [shortcuts]
 
@@ -175,18 +175,18 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#282828"
+    background = "#000000"
     foreground = "#888888"
     timeout = 10
 
 [urgency_normal]
-    background = "#282828"
-    foreground = "#ebdbb2"
+    background = "#222222"
+    foreground = "#ffffff"
     timeout = 10
 
 [urgency_critical]
-    background = "#CC241D"
-    foreground = "#ebdbb2"
+    background = "#900000"
+    foreground = "#ffffff"
     timeout = 0
 
 
