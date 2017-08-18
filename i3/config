@@ -36,7 +36,7 @@
 	bindsym --whole-window $mod+Shift+button1 kill
 	popup_during_fullscreen smart
 	bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-	font pango: Inconsolata 9
+	font pango: Sans 9
 #	for_window [class = ".*"] border normal 1
 #	for_window [class = "Synapse"] border none
 	# new_window normal 1
@@ -144,13 +144,14 @@
 # }}}
 
 # APP-SPECIFIC BINDINGS {{{
-	bindsym Shift+space exec --no-startup-id "rofi -combi-modi window,drun -show combi"
-	#bindsym Shift+space exec --no-startup-id "rofi -show drun"
-	#bindsym Mod1+Tab exec --no-startup-id "rofi -show window"
-	bindsym Mod1+F2 exec --no-startup-id "rofi -show run"
-	bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home/$(whoami) /media/$(whoami) -not -path "/home/$(whoami)/.*" -not -path "/home/$(whoami)/Scaricati/App*" | rofi -threads 0 -dmenu -i -p "find:")"
-	bindsym Mod1+Insert exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
-#	bindsym Shift+space exec --no-startup-id synapse
+	# bindsym Shift+space exec --no-startup-id "rofi -combi-modi window,drun -show combi"
+	# bindsym Shift+space exec --no-startup-id "rofi -show drun"
+	# bindsym Mod1+Tab exec --no-startup-id "rofi -show window"
+	# bindsym Mod1+F2 exec --no-startup-id "rofi -show run"
+	# bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home/$(whoami) /media/$(whoami) -not -path "/home/$(whoami)/.*" -not -path "/home/$(whoami)/Scaricati/App*" | rofi -threads 0 -dmenu -i -p "find:")"
+	# bindsym Mod1+Insert exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
+	# bindsym Shift+space exec --no-startup-id synapse
+	bindsym Shift+space exec --no-startup-id bash /home/ema/Dotfiles/rofi/bangs.sh
 	bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 	bindsym XF86AudioNext exec --no-startup-id playerctl next
 	bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -165,8 +166,8 @@
 		bindsym e         exec --no-startup-id "i3-nagbar -t warning -m 'Logout?' -b 'S' 'i3-msg exit'"
 		bindsym h         exec --no-startup-id shutdown -P now
 		bindsym b         exec --no-startup-id shutdown -r now
-		bindsym s         exec --no-startup-id "bash $HOME/Scaricati/Apps/i3lock-fancy/lock --pixelate; systemctl suspend;
-		bindsym l         exec --no-startup-id  bash $HOME/Scaricati/Apps/i3lock-fancy/lock --pixelate; mode "default"
+		bindsym s         exec --no-startup-id systemctl suspend;
+		bindsym l         exec --no-startup-id i3lock 
 
 		bindsym Return    mode "default"
 		bindsym Escape    mode "default"
