@@ -8,50 +8,39 @@
 #       saves us the trouble of binding multiple hotkeys for each script,
 #       when we can just use one hotkey for everything.
 
-declare -A LABELS
-declare -A COMMANDS
-
+# FUNZIONAMENTO
+# Con l'opzione autoselect di rofi lo si rende praticamente uguale al sistema
+# di parole chiave con cui lavora alfred per mac: 
+# + ap - applicazioni
+# + f  - file
+# + bi - binari                                                                          declare -A LABELS
+# + wi - finestre aperte                                                                 declare -A COMMANDS
+# + we - ricerca sul web (con duckduckgo + bangs si cerca in praticamente qualsiasi sito)
 ###
 # List of defined 'bangs'
 
 # launch programs
-COMMANDS["apps"]="rofi -combi-modi window,drun -show combi"
+COMMANDS["apps"]="rofi -show drun"
 LABELS["apps"]=""
 
 # find files
-COMMANDS["file"]="/home/ema/Dotfiles/rofi/file.sh"
+COMMANDS["file"]="/home/$(whoami)/Dotfiles/rofi/file.sh"
 LABELS["file"]=""
 
 # open custom web searches
-COMMANDS["web"]="~/Dotfiles/rofi/web.sh"
+COMMANDS["web"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
 LABELS["web"]=""
 
 # clipboard manager
-COMMANDS["clipboard"]="/home/ema/Dotfiles/rofi/clipboard.sh"
+COMMANDS["clipboard"]="/home/$(whoami)/Dotfiles/rofi/clipboard.sh"
 LABELS["clipboard"]=""
 
 # bins
 COMMANDS["bin"]="rofi -show run"
 LABELS["bin"]=""
 
-
-# show clipboard history
-# source: https://bitbucket.org/pandozer/rofi-clipboard-manager/overview
-# COMMANDS["clipboard"]='rofi -modi "clipboard:~/.bin/rofi-clipboard-manager/mclip.py menu" -show clipboard && ~/.bin/rofi-clipboard-manager/mclip.py paste'
-# LABELS["clipboard"]=""
-
-# references --------------------------
-# COMMANDS[";sr2"]="chromium 'wikipedia.org/search-redirect.php?search=\" \${input}\""
-# LABELS[";sr2"]=""
-
-# COMMANDS[";piratebay"]="chromium --disk-cache-dir=/tmp/cache http://thepiratebay.org/search/\" \${input}\""
-# LABELS[";piratebay"]=""
-
-# COMMANDS[".bin"]="spacefm -r '/home/dka/bin'"
-# LABELS[".bin"]=".bin"
-
-# COMMANDS["#screenshot"]='/home/dka/bin/screenshot-scripts/myscreenshot.sh'
-# LABELS["#screenshot"]="screenshot"
+COMMANDS["window"]="rofi -show window"
+LABELS["window"]=""
 
 ################################################################################
 # do not edit below
@@ -74,7 +63,7 @@ function print_menu()
 function start()
 {
     # print_menu | rofi -dmenu -p "?=>" 
-    print_menu | sort | rofi -dmenu -i -p "> " -lines 5 
+    print_menu | sort | rofi -dmenu -i -p "➜  " -auto-select -matching fuzzy
 
 }
 

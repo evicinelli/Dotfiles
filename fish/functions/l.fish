@@ -1,3 +1,3 @@
 function l
-	colorls -1 -sd $argv;
+	colorls -sd $argv;
 end

@@ -109,10 +109,10 @@
 
 		i3bar_command i3bar
 		position top
-	#	height 32
-	#	tray_output none
+		# height 32
+		# tray_output none
 		status_command i3blocks -c /home/ema/.config/i3/i3blocksrc
-		font pango: Source Code Pro, FontAwesome 11
+		font pango:Inconsolata, FontAwesome 13
 		strip_workspace_numbers yes
 
 #		colors {
@@ -151,7 +151,7 @@
 	# bindsym Control+space exec --no-startup-id xdg-open "$(find /tmp /home/$(whoami) /media/$(whoami) -not -path "/home/$(whoami)/.*" -not -path "/home/$(whoami)/Scaricati/App*" | rofi -threads 0 -dmenu -i -p "find:")"
 	# bindsym Mod1+Insert exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
 	# bindsym Shift+space exec --no-startup-id synapse
-	bindsym Shift+space exec --no-startup-id bash /home/ema/Dotfiles/rofi/bangs.sh
+	bindsym Shift+space exec --no-startup-id bash /home/ema/Dotfiles/rofi/winston.sh
 	bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 	bindsym XF86AudioNext exec --no-startup-id playerctl next
 	bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -193,6 +193,7 @@
 	exec --no-startup-id indicator-cpufreq
 	exec --no-startup-id nm-applet
 	exec --no-startup-id greenclip daemon
+	exec --no-startup-id syndaemon -d -t -R -i 1
 	exec_always --no-startup-id feh --bg-fill /home/ema/img
 	#exec --no-startup-id dropbox start
 # }}}
