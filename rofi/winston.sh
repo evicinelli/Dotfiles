@@ -13,12 +13,14 @@
 # di parole chiave con cui lavora alfred per mac: 
 # + ap - applicazioni
 # + f  - file
-# + bi - binari                                                                          declare -A LABELS
-# + wi - finestre aperte                                                                 declare -A COMMANDS
+# + bi - binari                                                                          
+# + wi - finestre aperte                                                                 
 # + we - ricerca sul web (con duckduckgo + bangs si cerca in praticamente qualsiasi sito)
 ###
-# List of defined 'bangs'
 
+declare -A LABELS
+declare -A COMMANDS
+# List of defined 'bangs'
 # launch programs
 COMMANDS["apps"]="rofi -show drun"
 LABELS["apps"]=""
