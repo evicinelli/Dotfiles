@@ -3,6 +3,7 @@
 # https://source.unsplash.com/user/{USERNAME}/likes/{SIZE}
 # https://source.unsplash.com/collection/{COLLECTION ID}/{SIZE}
 # https://source.unsplash.com/category/{CATEGORY}/?{SEARCH,TERM}
+# https://source.unsplash.com/?{KEYWORD}
 # https://source.unsplash.com/daily|weekly
 # https://source.unsplash.com/featured/?{KEYWORD},{KEYWORD}
 # https://source.unsplash.com/1600x900/{?SEARCH,TERM}
@@ -13,7 +14,7 @@
 rm img
 notify-send "Prendo lo sfondo da unsplash"
 #wget -O img "https://source.unsplash.com/collection/890836"
- wget -O img "https://source.unsplash.com/collection/168102"
+wget -O img "https://source.unsplash.com/collection/825815"
 notify-send "Fatto :)"
 gsettings set org.gnome.desktop.background picture-uri file:///$(pwd)/img
 gsettings set org.gnome.desktop.screensaver picture-uri file:///$(pwd)/img
