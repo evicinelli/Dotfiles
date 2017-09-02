@@ -65,7 +65,7 @@ function print_menu()
 function start()
 {
     # print_menu | rofi -dmenu -p "?=>" 
-    print_menu | sort | rofi -dmenu -i -p "➜  " -auto-select -matching fuzzy -lines 6
+    print_menu | sort | rofi -dmenu -i -p "" -auto-select -matching fuzzy -lines 6
 
 }
 
