@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Install roba essential  
-apt install git wget i3 i3lock vim gvim lxappearance arandr zip unzip xfce4-power-manager xfce4-volumed compton redshift-gtk rofi dunst
+apt install git wget i3 i3lock vim gvim lxappearance arandr zip unzip xfce4-power-manager xfce4-volumed compton redshift-gtk dmenu dunst
 
 # Install more stuff
 apt install fonts-inconsolata
