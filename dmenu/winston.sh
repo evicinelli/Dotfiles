@@ -4,25 +4,12 @@
 # editby: gotbletu (https://www.youtube.com/user/gotbletu)
 
 # demo: https://www.youtube.com/watch?v=kxJClZIXSnM
-# info: this is a script to launch other rofi scripts,
-#       saves us the trouble of binding multiple hotkeys for each script,
-#       when we can just use one hotkey for everything.
-
-# FUNZIONAMENTO
-# Con l'opzione autoselect di rofi lo si rende praticamente uguale al sistema
-# di parole chiave con cui lavora alfred per mac: 
-# + ap - applicazioni
-# + f  - file
-# + bi - binari                                                                          
-# + wi - finestre aperte                                                                 
-# + we - ricerca sul web (con duckduckgo + bangs si cerca in praticamente qualsiasi sito)
-###
 
 declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["Apps"]="i3-dmenu-desktop -dmenu=\"dmenu -i -p \"Apps\" -fn \"Inconsolata\"\""
+COMMANDS["Apps"]="i3-dmenu-desktop -dmenu="dmenu -i -p "Apps" -fn "Inconsolata-13"""
 LABELS["Apps"]=""
 
 # find files
@@ -34,39 +21,28 @@ COMMANDS["Web"]="/home/$(whoami)/Dotfiles/dmenu/web.sh"
 LABELS["Web"]=""
 
 # clipboard manager
-COMMANDS["Clipboard"]="bash /home/$(whoami)/Dotfiles/clipmenu/clipmenu -i -p "Clipboard" -fn "Inconsolata""
+COMMANDS["Clipboard"]="bash /home/$(whoami)/Dotfiles/dmenu/clipmenu/clipmenu -i -p "Clipboard" -fn "Inconsolata""
 LABELS["Clipboard"]=""
 
 # bins
-COMMANDS["bin"]="dmenu -"
-LABELS["bin"]=""
-
-#COMMANDS["Window"]="rofi -show window"
-#LABELS["Window"]=""
+COMMANDS["Bin"]="dmenu_run -fn "Inconsolata-13""
+LABELS["Bin"]=""
 
 ################################################################################
 # do not edit below
 ################################################################################
-##
-# Generate menu
-##
+
 function print_menu()
 {
     for key in ${!LABELS[@]}
     do
-  echo "$key    ${LABELS}"
-     #   echo "$key    ${LABELS[$key]}"
-     # my top version just shows the first field in labels row, not two words side by side
+    echo "$key    ${LABELS}"
     done
 }
-##
-# Show rofi.
-##
+
 function start()
 {
-    # print_menu | rofi -dmenu -p "?=>" 
-    print_menu | sort | dmenu -i -p "Winston" -fn "Inconsolata::20" 
-
+    print_menu | dmenu -i -p "Winston" -fn "Inconsolata-13" 
 }
 
 

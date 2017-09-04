@@ -24,9 +24,6 @@
 	set $mod Mod4
 	floating_modifier $mod
 	bindsym $mod+q kill
-#	workspace_layout tabbed
-	bindsym --whole-window $mod+Shift+button1 kill
-	popup_during_fullscreen smart
 	bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
 	font pango: Inconsolata 9
 # }}}
@@ -84,7 +81,7 @@
 		i3bar_command i3bar
 		position top
 		status_command i3blocks -c /home/ema/.config/i3/i3blocksrc
-		font pango:Inconsolata, FontAwesome 13
+		font pango:Inconsolata 12
 		strip_workspace_numbers yes
 	}
 # }}}
@@ -141,7 +138,7 @@
 	exec --no-startup-id xfce4-volumed
 	exec --no-startup-id indicator-cpufreq
 	exec --no-startup-id nm-applet
-	exec --no-startup-id bash /home/$(whoami)/Dotfiles/clipmenu/clipmenud 
+	exec --no-startup-id bash /home/$(whoami)/Dotfiles/dmenu/clipmenu/clipmenud 
 	exec --no-startup-id syndaemon -d -t -R -i 1
 	exec_always --no-startup-id feh --bg-fill /home/ema/img
 # }}}

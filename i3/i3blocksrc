@@ -22,7 +22,7 @@
 
 # Global properties
 command=/usr/share/i3blocks/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=10
 markup=none
 separator=false
 align=center
@@ -31,42 +31,23 @@ align=center
 instance=spotify
 interval=1
 signal=10
-label= 
 color=#4848484
 
 [volume]
-# label=
 instance=Master
-#instance=PCM
 interval=1
 signal=10
 
-
-
-#[bandwidth]
-## label=
-#instance= enp2s0
-#interval=5
-
-#[wifi]
-#instance=wlp3s0
-#interval=10
-## label=
-
 [battery]
-# label= , ⚡
 instance=0
 interval=30
 
 [temperature]
-# label=
 interval=10
 
 [load_average]
 interval=1
-# label=  
 
 [time]
-# label=
 command=date '+%H:%M'
 interval=10
