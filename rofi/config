@@ -1,6 +1,5 @@
-rofi.font: Inconsolata 15
-rofi.lines: 10
+rofi.font: Inconsolata 13
 rofi.hide-scrollbar: true
 rofi.separator-style: none
-rofi.width: 80
-!rofi.auto-select: true
+!rofi.width: 80
+rofi.threads: 0

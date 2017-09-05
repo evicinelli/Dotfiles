@@ -1,6 +1,6 @@
 #!/bin/bash
 
-: "${CM_LAUNCHER=dmenu}"
+: "${CM_LAUNCHER=rofi}"
 : "${TMPDIR=/tmp}"
 
 major_version=3
@@ -34,9 +34,7 @@ fi
 # whether `-l` is also in "$@", because the way that dmenu works allows a later
 # argument to override an earlier one. That is, if the user passes in `-l`, our
 # one will be ignored.
-chosen_line=$(tac "$cache_file" | awk '!seen[$0]++' | "$CM_LAUNCHER" -l 8 "$@")
-
-[[ $chosen_line ]] || exit 1
+chosen_line=$(tac "$cache_file" | awk '!seen[$0]++' | "$CM_LAUNCHER" "$@") [[ $chosen_line ]] || exit 1
 
 file=$cache_dir/$(cksum <<< "$chosen_line")
 

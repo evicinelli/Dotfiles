@@ -138,7 +138,7 @@
 	exec --no-startup-id xfce4-volumed
 	exec --no-startup-id indicator-cpufreq
 	exec --no-startup-id nm-applet
-	exec --no-startup-id bash /home/$(whoami)/Dotfiles/dmenu/clipmenu/clipmenud 
+	exec --no-startup-id greenclip daemon 
 	exec --no-startup-id syndaemon -d -t -R -i 1
 	exec_always --no-startup-id feh --bg-fill /home/ema/img
 # }}}
