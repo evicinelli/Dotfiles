@@ -1,6 +1,6 @@
 # Dotfiles
 
-+ Wm: i3
-+ Dmenu
-+ Clipmenu
-+ Font: Sans + Inconsolata
++ i3wm
++ Rofi
++ Greenclip 4 rofi
++ Inconsolata
