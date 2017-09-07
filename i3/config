@@ -25,7 +25,7 @@
 	floating_modifier $mod
 	bindsym $mod+q kill
 	bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-	font pango: Inconsolata 9
+	font pango: Overpass 9
 # }}}
 
 # WORKSPACES {{{
