@@ -1,13 +1,11 @@
-# I3 CONFIG FILE  #
+# I3 CONFIG FILE (v. 4.11) #
 
 
 # SETTING VARS {{{
-
 	set $Up k
 	set $Left h
 	set $Right l
 	set $Down j
-
 	set $workspace1 "1: 1 "
 	set $workspace2 "2: 2 "
 	set $workspace3 "3: 3 "
@@ -25,7 +23,7 @@
 	floating_modifier $mod
 	bindsym $mod+q kill
 	bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-	font pango: Overpass 9
+	font pango: Inconsolata 9
 # }}}
 
 # WORKSPACES {{{
@@ -52,7 +50,6 @@
 	bindsym $mod+Shift+Tab move container to workspace back_and_forth
 	bindsym $mod+Tab workspace back_and_forth
 	workspace_auto_back_and_forth yes
-
 # }}}
 
 # CONTAINERS {{{
@@ -72,13 +69,13 @@
 	bindsym $mod+$Down focus down
 	bindsym $mod+$Up focus up
 	bindsym $mod+$Right focus right
+	bindsym $mod+a focus parent
+	bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-
 	bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/Dotfiles/unsplash.sh"
 	bar {
-		i3bar_command i3bar
 		position top
 		status_command i3blocks -c /home/ema/.config/i3/i3blocksrc
 		font pango:Inconsolata 12
@@ -87,14 +84,9 @@
 # }}}
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS {{{
+	assign [class = "Google-chrome"] $workspace1
 	assign [class = "Telegram"] $workspace9
-	assign [class = "Whatsie"] $workspace9
 	for_window [class = "Spotify"] move to workspace $workspace10
-	for_window [class = "Pavucontrol"] floating enable
-	for_window [class = "X-terminal-emulator"] border none
-	for_window [class = "model.Main"] floating enable
-	for_window [class = "Google-chrome" instance = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"] floating enable
-	for_window [class = "Google-chrome" instance = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"] border none
 	for_window [class = "feh"] floating toggle
 	for_window [class = "feh"] border none
 # }}}
@@ -120,7 +112,6 @@
 		bindsym Return    mode "default"
 		bindsym Escape    mode "default"
 	}
-
 	bindsym $mod+r mode "resize"
 	mode "resize" {
 		bindsym $Left resize shrink width 2 px or 2 ppt
@@ -139,6 +130,5 @@
 	exec --no-startup-id indicator-cpufreq
 	exec --no-startup-id nm-applet
 	exec --no-startup-id greenclip daemon 
-	exec --no-startup-id syndaemon -d -t -R -i 1
 	exec_always --no-startup-id feh --bg-fill /home/ema/img
 # }}}

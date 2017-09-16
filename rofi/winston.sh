@@ -22,7 +22,7 @@ declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["apps"]="rofi -show drun"
+COMMANDS["apps"]="rofi -combi-modi window,drun -show combi"
 LABELS["apps"]=""
 
 # find files
@@ -41,8 +41,8 @@ LABELS["clipboard"]=""
 COMMANDS["bin"]="rofi -show run"
 LABELS["bin"]=""
 
-COMMANDS["window"]="rofi -show window"
-LABELS["window"]=""
+#COMMANDS["window"]="rofi -show window"
+##LABELS["window"]=""
 
 ################################################################################
 # do not edit below
