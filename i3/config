@@ -1,5 +1,4 @@
-# I3 CONFIG FILE (v. 4.11) #
-
+# i3 config file (v4)
 
 # SETTING VARS {{{
 	set $Up k
@@ -23,9 +22,8 @@
 	floating_modifier $mod
 	bindsym $mod+q kill
 	bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-	font pango: Inconsolata 9
+	font pango: Sans 9
 # }}}
-
 # WORKSPACES {{{
 	bindsym $mod+1 workspace $workspace1
 	bindsym $mod+2 workspace $workspace2
@@ -119,6 +117,15 @@
 		bindsym $Up resize grow height 2 px or 2 ppt
 		bindsym $Right resize grow width 2 px or 2 ppt
 		bindsym Return mode "default"
+		bindsym Escape mode "default"
+	}
+	set $monitor "Edpi1 - Hdmi1 - Clonato - Destra"
+	bindsym $mod+m mode $monitor
+	mode $monitor {
+		bindsym E exec --no-startup-id /home/ema/Dotfiles/layout/internal.sh; mode "default"
+		bindsym H exec --no-startup-id /home/ema/Dotfiles/layout/hdmi-1.sh; mode "default"
+		bindsym C exec --no-startup-id /home/ema/Dotfiles/layout/clonato.sh; mode "default"
+		bindsym D exec --no-startup-id /home/ema/Dotfiles/layout/destra.sh; mode "default"
 		bindsym Escape mode "default"
 	}
 # }}}
