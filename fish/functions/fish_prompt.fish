@@ -14,7 +14,7 @@ function fish_prompt
 
 #  set -l fish     "➜ "
 #  set -l fish "> "
-  set -l fish "\$ "
+  set -l fish ">> "
   set -l ahead    "↑ "
   set -l behind   "↓ "
   set -l diverged "⇕ "
@@ -28,7 +28,10 @@ function fish_prompt
   set -l repository_color (set_color purple)
   set -l user_color       (set_color cyan)
   set -l pc_color	  (set_color yellow)
-
+  if test (whoami) = "root"
+	  set -l user_color (set_color red --bold)
+	  echo $user_color
+  end
   echo -n -s -e "\n" $user_color (whoami) $normal_color " at " $pc_color (hostname) $normal_color " in"
   if git_is_repo
     if test "$theme_short_path" = 'yes'
@@ -54,7 +57,7 @@ function fish_prompt
 
   echo -n -s -e "\n "
     if test $last_command_status -eq 0
-    echo -n -s $success_color $fish $normal_color
+    echo -n -s $success_color$fish $normal_color
   else
     echo -n -s $error_color $fish $normal_color
   end

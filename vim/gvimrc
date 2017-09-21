@@ -1,0 +1,40 @@
+" General
+set number		" Show line numbers
+set nowrap		" Wrap lines
+"set showbreak=+++	" Wrap-broken line prefix
+set textwidth=100	" Line wrap (number of cols)
+set showmatch		" Highlight matching brace
+set path+=**		" Per ricerca ricorsiva di qualsiasi cartella con :find
+set wildmenu
+set nobackup
+set nowritebackup
+set noswapfile
+set ruler
+set list listchars=trail:·,tab:▸\ ,eol:¬
+set autoread
+set shortmess +=I
+set hlsearch		" Highlight all search results
+set smartcase		" Enable smart-case search
+set ignorecase		" Always case-insensitive
+set incsearch		" Searches for strings incrementally
+set autoindent		" Auto-indent new lines
+set shiftwidth=8	" Number of auto-indent spaces
+set smartindent		" Enable smart-indent
+set smarttab		" Enable smart-tabs
+set undolevels=1000	" Number of undo levels
+set backspace=indent,eol,start	" Backspace behaviour
+set guifont=Inconsolata\ 13
+set fillchars+=vert:\$
+syntax enable
+set background=light
+colorscheme solarized
+set ruler
+set hidden
+set number
+let &colorcolumn="80"
+execute pathogen#infect()
+set guioptions-=m  	"remove menu bar
+set guioptions-=T  	"remove toolbar
+set guioptions-=r  	"remove right-hand scroll bar
+set guioptions-=L  	"remove left-hand scroll bar
+set lines=999 columns=992
