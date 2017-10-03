@@ -5,16 +5,22 @@
 	set $Left h
 	set $Right l
 	set $Down j
-	set $workspace1 "1: 1 "
-	set $workspace2 "2: 2 "
-	set $workspace3 "3: 3 "
-	set $workspace4 "4: 4 "
-	set $workspace5 "5: 5 "
-	set $workspace6 "6: 6 "
-	set $workspace7 "7: 7 "
-	set $workspace8 "8: 8 "
-	set $workspace9 "9: 9 "
-	set $workspace10  "10: 0 "
+#	set $Up Up
+#	set $Left Left
+#	set $Right Right
+#	set $Down Down
+
+
+	set $workspace1 "1:1"
+	set $workspace2 "2:2"
+	set $workspace3 "3:3"
+	set $workspace4 "4:4"
+	set $workspace5 "5:5"
+	set $workspace6 "6:6"
+	set $workspace7 "7:7"
+	set $workspace8 "8:8"
+	set $workspace9 "9:9"
+	set $workspace10  "10:0"
 # }}}
 
 # INITIAL SETTINGS {{{
@@ -22,7 +28,7 @@
 	floating_modifier $mod
 	bindsym $mod+q kill
 	bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-	font pango: Cantarell 9
+	font pango: Inconsolata 9
 # }}}
 # WORKSPACES {{{
 	bindsym $mod+1 workspace $workspace1

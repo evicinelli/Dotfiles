@@ -1,11 +1,13 @@
 {
 	"color_scheme": "Packages/Color Scheme - Default/Solarized (Light).tmTheme",
 	"font_face": "Inconsolata",
-	"font_size": 12,
+	"font_size": 13,
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
+		"Markdown"
 	],
-	"tab_size": 8
+	"tab_size": 8,
+	"theme": "Default.sublime-theme"
 }
