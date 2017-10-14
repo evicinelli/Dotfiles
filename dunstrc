@@ -226,9 +226,9 @@
 #    # This notification will not be displayed
     appname = "*fce*"
     format = ""
-[ignore2]
-    appname = "NetworkManager"
-    format = ""
+#[ignore2]
+#    appname = "NetworkManager"
+#    format = ""
 #[signed_on]
 #    appname = Pidgin
 #    summary = "*signed on*"

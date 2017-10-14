@@ -22,24 +22,24 @@ declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["Apps"]="rofi -combi-modi window,drun -show combi -matching fuzzy"
-LABELS["Apps"]=""
+COMMANDS["apps"]="rofi -combi-modi window,drun -show combi -matching fuzzy"
+LABELS["apps"]=""
 
 # find files
-COMMANDS["File"]="/home/$(whoami)/Dotfiles/rofi/file.sh"
-LABELS["File"]=""
+COMMANDS["file"]="/home/$(whoami)/Dotfiles/rofi/file.sh"
+LABELS["file"]=""
 
 # open custom web searches
-COMMANDS["Web"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
-LABELS["Web"]=""
+COMMANDS["web"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
+LABELS["web"]=""
 
 # clipboard manager
-COMMANDS["Clipboard"]="/home/$(whoami)/Dotfiles/rofi/clipboard.sh"
-LABELS["Clipboard"]=""
+COMMANDS["clipboard"]="/home/$(whoami)/Dotfiles/rofi/clipboard.sh"
+LABELS["clipboard"]=""
 
 # bins
-COMMANDS["Bin"]="rofi -show run"
-LABELS["Bin"]=""
+COMMANDS["bin"]="rofi -show run"
+LABELS["bin"]=""
 
 #COMMANDS["window"]="rofi -show window"
 ##LABELS["window"]=""
