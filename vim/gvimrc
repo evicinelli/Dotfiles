@@ -27,7 +27,7 @@ set guifont=Inconsolata\ 13
 set fillchars+=vert:\$
 syntax enable
 set background=light
-colorscheme solarized
+colorscheme solarized 
 set ruler
 set hidden
 set number

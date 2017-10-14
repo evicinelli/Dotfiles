@@ -22,24 +22,24 @@ declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["apps"]="rofi -combi-modi window,drun -show combi"
-LABELS["apps"]=""
+COMMANDS["Apps"]="rofi -combi-modi window,drun -show combi -matching fuzzy"
+LABELS["Apps"]=""
 
 # find files
-COMMANDS["file"]="/home/$(whoami)/Dotfiles/rofi/file.sh"
-LABELS["file"]=""
+COMMANDS["File"]="/home/$(whoami)/Dotfiles/rofi/file.sh"
+LABELS["File"]=""
 
 # open custom web searches
-COMMANDS["web"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
-LABELS["web"]=""
+COMMANDS["Web"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
+LABELS["Web"]=""
 
 # clipboard manager
-COMMANDS["clipboard"]="/home/$(whoami)/Dotfiles/rofi/clipboard.sh"
-LABELS["clipboard"]=""
+COMMANDS["Clipboard"]="/home/$(whoami)/Dotfiles/rofi/clipboard.sh"
+LABELS["Clipboard"]=""
 
 # bins
-COMMANDS["bin"]="rofi -show run"
-LABELS["bin"]=""
+COMMANDS["Bin"]="rofi -show run"
+LABELS["Bin"]=""
 
 #COMMANDS["window"]="rofi -show window"
 ##LABELS["window"]=""
@@ -66,6 +66,7 @@ function start()
 {
     # print_menu | rofi -dmenu -p "?=>" 
     print_menu | sort | rofi -dmenu -i -p "" -auto-select -matching fuzzy
+#    print_menu | sort | dmenu -i -p "Winston" -fn "Inconsolata-14" 
 
 }
 
