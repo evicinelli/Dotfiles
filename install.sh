@@ -1,20 +1,17 @@
 #! /bin/bash
 
 # Install roba essential  
-apt install git wget i3 i3lock vim gvim lxappearance arandr zip unzip xfce4-power-manager xfce4-volumed compton redshift-gtk dunst
+apt install git wget i3 i3lock vim vim-gtk3 lxappearance arandr zip unzip xfce4-power-manager xfce4-volumed compton redshift-gtk dunst
 
 # Install more stuff
 apt install fonts-inconsolata
 
 # Install greenclip: the clipboard manager
-# -- Not very urgente
 
 # Install playerctl
-# -- Not very urgente
 
-# Cloning Dotfiles
+# Setting up Dotfiles
 cd $HOME
-git clone https://github.com/evicinelli/Dotfiles.git
 ln -sfn i3 $HOME/.config/i3
 ln -sfn fish $HOME/.config/fish
 ln -sfn rofi $HOME/.config/rofi
