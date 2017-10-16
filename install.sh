@@ -1,10 +1,10 @@
 #! /bin/bash
 
 # Install roba essential  
-apt install git wget i3 i3lock vim vim-gtk3 lxappearance arandr zip unzip xfce4-power-manager xfce4-volumed compton redshift-gtk dunst
+sudo apt install git wget i3 i3lock vim vim-gtk3 lxappearance arandr zip unzip xfce4-power-manager xfce4-volumed compton redshift-gtk dunst
 
 # Install more stuff
-apt install fonts-inconsolata
+sudo apt install fonts-inconsolata
 
 # Install greenclip: the clipboard manager
 
