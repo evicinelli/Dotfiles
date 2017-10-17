@@ -12,13 +12,13 @@ sudo apt install fonts-inconsolata
 
 # Setting up Dotfiles
 cd $HOME
-ln -sfn i3 $HOME/.config/i3
-ln -sfn fish $HOME/.config/fish
-ln -sfn rofi $HOME/.config/rofi
-ln -sfn terminator $HOME/.config/terminator
-ln -sfn sublime-text $HOME/.config/sublime-text-3
-ln -sfn compton.conf $HOME/.compton.conf
-ln -sfn vim/gvim $HOME/.gvim
-ln -sfn vim/vim $HOME/.vim
-ln -sf vim/gvimrc $HOME/.gvimrc
-sudo ln -sf dunstrc /etc/xdg/dunst/dunstrc
+ln -sfn $HOME/.config/i3 ./i3
+ln -sfn $HOME/.config/fish ./fish
+ln -sfn $HOME/.config/rofi ./rofi
+ln -sfn $HOME/.config/terminator -/terminator
+ln -sfn $HOME/.config/sublime-text-3 ./sublime-text-3
+ln -sfn $HOME/.compton.conf ./compton
+ln -sfn $HOME/.gvim ./vim/gvim
+ln -sfn $HOME/.vim ./vim/vim
+ln -sf $HOME/.gvimrc ./vim/gvimrc
+sudo ln -sf /etc/xdg/dunst/dunstrc ./dunstrc
