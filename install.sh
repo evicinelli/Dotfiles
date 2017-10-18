@@ -1,4 +1,4 @@
-sudo apt install fish i3 rofi terminator vim vim-gtk3 fonts-inconsolata
+sudo apt install fish i3 rofi terminator vim vim-gtk3 fonts-inconsolata compton dunst
 
 ln -sf $HOME/Dotfiles/i3 $HOME/.config/i3
 ln -sf $HOME/Dotfiles/terminator $HOME/.config/terminator
