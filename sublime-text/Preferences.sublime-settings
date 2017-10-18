@@ -5,7 +5,20 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
+		"BracketHighlighter",
+		"Colorsublime",
+		"DistractionFreeWindow",
+		"Highlighter",
+		"Icon Fonts",
 		"Markdown",
+		"MarkdownEditing",
+		"Predawn",
+		"SideBarEnhancements",
+		"Solarized Toggle",
+		"Theme - Afterglow",
+		"Theme - Broceanic",
+		"Theme - Solarized Flat",
+		"VIM Navigation",
 		"Vintage"
 	],
 	"tab_size": 8,

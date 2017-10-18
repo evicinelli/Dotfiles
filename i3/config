@@ -78,10 +78,10 @@
 # }}}
 
 # THEMING {{{
-	bindsym $mod+Shift+d exec --no-startup-id "sh /home/ema/Dotfiles/unsplash.sh"
+	bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/unsplash.sh"
 	bar {
 		position top
-		status_command i3blocks -c /home/ema/.config/i3/i3blocksrc
+		status_command i3blocks -c $HOME/.config/i3/i3blocksrc
 		font pango:Inconsolata 12
 		strip_workspace_numbers yes
 	}
@@ -96,7 +96,7 @@
 # }}}
 
 # APP-SPECIFIC BINDINGS {{{
-	bindsym Shift+space exec --no-startup-id bash /home/ema/Dotfiles/rofi/winston.sh
+	bindsym Shift+space exec --no-startup-id bash $HOME/Dotfiles/rofi/winston.sh
 	bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 	bindsym XF86AudioNext exec --no-startup-id playerctl next
 	bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -128,10 +128,10 @@
 	set $monitor "Edpi1 - Hdmi1 - Clonato - Destra"
 	bindsym $mod+m mode $monitor
 	mode $monitor {
-		bindsym E exec --no-startup-id /home/ema/Dotfiles/layout/internal.sh; mode "default"
-		bindsym H exec --no-startup-id /home/ema/Dotfiles/layout/hdmi-1.sh; mode "default"
-		bindsym C exec --no-startup-id /home/ema/Dotfiles/layout/clonato.sh; mode "default"
-		bindsym D exec --no-startup-id /home/ema/Dotfiles/layout/destra.sh; mode "default"
+		bindsym E exec --no-startup-id $HOME/Dotfiles/layout/internal.sh; mode "default"
+		bindsym H exec --no-startup-id $HOME/Dotfiles/layout/hdmi-1.sh; mode "default"
+		bindsym C exec --no-startup-id $HOME/Dotfiles/layout/clonato.sh; mode "default"
+		bindsym D exec --no-startup-id $HOME/Dotfiles/layout/destra.sh; mode "default"
 		bindsym Escape mode "default"
 	}
 # }}}
@@ -143,5 +143,5 @@
 	exec --no-startup-id indicator-cpufreq
 	exec --no-startup-id nm-applet
 	exec --no-startup-id greenclip daemon 
-	exec_always --no-startup-id feh --bg-fill /home/ema/img
+	exec_always --no-startup-id feh --bg-fill $HOME/img
 # }}}
