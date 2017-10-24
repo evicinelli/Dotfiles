@@ -2,19 +2,6 @@
 	"bootstrapped": true,
 	"in_process_packages":
 	[
-		"BracketHighlighter",
-		"Colorsublime",
-		"DistractionFreeWindow",
-		"Highlighter",
-		"Icon Fonts",
-		"MarkdownEditing",
-		"Predawn",
-		"SideBarEnhancements",
-		"Solarized Toggle",
-		"Theme - Afterglow",
-		"Theme - Broceanic",
-		"Theme - Solarized Flat",
-		"VIM Navigation"
 	],
 	"installed_packages":
 	[

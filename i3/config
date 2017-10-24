@@ -1,14 +1,14 @@
 # i3 config file (v4)
 
 # SETTING VARS {{{
-	set $Up k
-	set $Left h
-	set $Right l
-	set $Down j
-#	set $Up Up
-#	set $Left Left
-#	set $Right Right
-#	set $Down Down
+#	set $Up k
+#	set $Left h
+#	set $Right l
+#	set $Down j
+	set $Up Up
+	set $Left Left
+	set $Right Right
+	set $Down Down
 
 
 	set $workspace1 "1:I"
@@ -109,8 +109,8 @@
 	mode $sysmenu {
 		bindsym r         restart
 		bindsym e         exec --no-startup-id "i3-nagbar -t warning -m 'Logout?' -b 'S' 'i3-msg exit'"
-		bindsym h         exec --no-startup-id shutdown -P now
-		bindsym b         exec --no-startup-id shutdown -r now
+		bindsym h         exec --no-startup-id systemctl poweroff
+		bindsym b         exec --no-startup-id systemctl reboot
 		bindsym s         exec --no-startup-id systemctl suspend;
 		bindsym l         exec --no-startup-id i3lock 
 		bindsym Return    mode "default"

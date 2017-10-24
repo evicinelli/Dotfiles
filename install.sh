@@ -22,7 +22,8 @@ sudo apt remove gedit
 # Installo le cose
 sudo apt update
 sudo apt install fish i3 i3blocks rofi terminator vim vim-gtk3 fonts-inconsolata compton arandr dunst \
-spotify-client sublime-text lxappearance xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw  
+spotify-client sublime-text lxappearance xfce4-power-manager pavucontrol build-essential curl
+redshift-gtk vlc zip ufw tree nautilus-dropbox vim-addon-manager
 
 # Oh my fish
 cd $HOME/Scaricati
@@ -48,5 +49,5 @@ ln -sf $HOME/Dotfiles/vim/gvimrc $HOME/.gvimrc
 ln -sf $HOME/Dotfiles/compton.conf $HOME/.compton.conf
 mkdir $HOME/.config/dunst
 sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
-ln -sf $HOME/Dotfiles/mimeapps.list $HOME/.config/mimeapp.list
+ln -sf $HOME/Dotfiles/mimeapps.cache $HOME/.local/share/applications/mimeinfo.cache
 echo "Fatto"

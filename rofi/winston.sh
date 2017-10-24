@@ -22,7 +22,7 @@ declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["apps"]="rofi -combi-modi window,drun -show combi -matching fuzzy"
+COMMANDS["apps"]="rofi -combi-modi window,drun -show combi"
 LABELS["apps"]=""
 
 # find files

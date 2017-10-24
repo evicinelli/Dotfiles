@@ -1,3 +1,3 @@
 function poke
-	ping -a 8.8.8.8 $argv;
+	ping  8.8.8.8 $argv;
 end

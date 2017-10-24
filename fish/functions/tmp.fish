@@ -1,3 +1,3 @@
 function tmp
-	cd /tmp; l $argv;
+	cd /tmp; tree $argv;
 end
