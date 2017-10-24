@@ -9,3 +9,6 @@ source $OMF_PATH/init.fish
 # Setting gvim as editor
 export EDITOR='gvim'
 export VISUAL='gvim'
+
+# Fish vi key bindings
+# fish_vi_key_bindings

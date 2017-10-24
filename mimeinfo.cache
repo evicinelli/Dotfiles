@@ -499,6 +499,7 @@ text/x-tex=gvim.desktop;vim.desktop;
 text/x-vcard=thunderbird.desktop;evolution.desktop;
 text/xml=firefox-esr.desktop;
 text/markdown=gvim.desktop
+text/x-python=gvim.desktop
 video/3gp=org.gnome.Totem.desktop;vlc.desktop;
 video/3gpp=org.gnome.Totem.desktop;vlc.desktop;
 video/3gpp2=org.gnome.Totem.desktop;vlc.desktop;
