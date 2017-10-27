@@ -1,5 +1,5 @@
 # web
-/home/vic/Scaricati/Apps/Firefox\ Developer\ v57/firefox/firefox https://duckduckgo.com/?q="$(rofi -dmenu -p "Web ")"
+firefox-esr https://duckduckgo.com/?q="$(rofi -dmenu -p "Web ")"
 i3 [class = "Firefox"] focus
 
 # 
