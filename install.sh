@@ -1,3 +1,7 @@
+# Configuriamo git
+git config --global user.email "emanuele.vicinelli@gmail.com"
+git config --global user.name "Emanuele Vicinelli"
+
 # Installo i pacchettini deb tattici
 sudo apt install dirmngr
 cd /tmp
