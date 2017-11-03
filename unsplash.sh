@@ -1,3 +1,6 @@
+# 
+#	get wallpaper randomly from unsplash
+#
 # https://source.unsplash.com/random/{SIZE}
 # https://source.unsplash.com/user/{USERNAME}/{SIZE}
 # https://source.unsplash.com/user/{USERNAME}/likes/{SIZE}
@@ -13,7 +16,7 @@
 
 rm img
 notify-send "Prendo lo sfondo da unsplash"
-wget -O img "https://source.unsplash.com/collection/568015/"
+wget -O img "https://source.unsplash.com/1600x900/?ocean"
 notify-send "Fatto :)"
 gsettings set org.gnome.desktop.background picture-uri file:///$(pwd)/img
 gsettings set org.gnome.desktop.screensaver picture-uri file:///$(pwd)/img

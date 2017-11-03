@@ -171,6 +171,15 @@
 			},
 			"buffers":
 			[
+				{
+					"contents": "q",
+					"settings":
+					{
+						"buffer_size": 1,
+						"line_ending": "Unix",
+						"name": "q"
+					}
+				}
 			],
 			"build_system": "",
 			"build_system_choices":
@@ -244,8 +253,9 @@
 			},
 			"file_history":
 			[
-				"/home/vic/Dotfiles/fish/functions/fish_prompt.fish",
+				"/home/vic/Documenti/Reti/17_11_03.md",
 				"/home/vic/Dotfiles/mimeinfo.cache",
+				"/home/vic/Dotfiles/fish/functions/fish_prompt.fish",
 				"/home/vic/Codice/dijkstra.cpp",
 				"/usr/share/applications/mimeinfo.cache",
 				"/home/vic/.config/user-dirs.locale",
@@ -292,8 +302,38 @@
 			"groups":
 			[
 				{
+					"selected": 0,
 					"sheets":
 					[
+						{
+							"buffer": 0,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 1,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										1,
+										1
+									]
+								],
+								"settings":
+								{
+									"auto_name": "q",
+									"bracket_highlighter.busy": false,
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"type": "text"
+						}
 					]
 				}
 			],
@@ -333,7 +373,7 @@
 				"height": 0.0
 			},
 			"pinned_build_system": "",
-			"position": "0,0,0,0,0,683,41,1362,766,1366,768",
+			"position": "0,0,0,0,0,0,41,1362,766,1366,768",
 			"project": "",
 			"replace":
 			{

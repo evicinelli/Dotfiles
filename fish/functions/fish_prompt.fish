@@ -8,7 +8,7 @@ else
 	set cwd (prompt_pwd)
 	end
 #  set -l fish     "➜ "
-set -l fish " "
+set -l fish "~> "
 set -l ahead    "↑ "
 set -l behind   "↓ "
 set -l diverged "⇕ "
@@ -48,8 +48,8 @@ end
 echo -n -s -e "\n "
 
 if test $last_command_status -eq 0
-	echo -n -s $viMode $success_color $fish $normal_color
+	echo -n -s $success_color $fish $normal_color
 else 
-	echo -n -s $viMode $error_color $fish $normal_color
+	echo -n -s $error_color $fish $normal_color
 end
 end

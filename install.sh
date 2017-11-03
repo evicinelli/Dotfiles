@@ -1,3 +1,4 @@
+## Script di post installazione e configurazione 
 # Configuriamo git
 git config --global user.email "emanuele.vicinelli@gmail.com"
 git config --global user.name "Emanuele Vicinelli"
@@ -10,7 +11,6 @@ sudo dpkg -i libssl.deb
 wget -O playerctl5.deb "https://github.com/acrisci/playerctl/releases/download/v0.5.0/playerctl-0.5.0_amd64.deb"
 sudo dpkg -i playerctl5.deb
 
-# Spotify
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 
@@ -27,7 +27,7 @@ sudo apt remove gedit
 sudo apt update
 sudo apt install fish i3 i3blocks rofi terminator vim vim-gtk3 fonts-inconsolata compton arandr dunst \
 spotify-client sublime-text lxappearance xfce4-power-manager pavucontrol build-essential curl\
-redshift-gtk vlc zip ufw tree nautilus-dropbox vim-addon-manager
+redshift-gtk vlc zip ufw tree nautilus-dropbox chromium
 
 # Oh my fish
 cd $HOME/Scaricati
