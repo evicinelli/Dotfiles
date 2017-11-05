@@ -34,6 +34,10 @@ cd $HOME/Scaricati
 curl -L https://get.oh-my.fish > install
 fish install --path=~/.local/share/omf --config=~/.config/omf
 
+# Vim Plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 # Aggiorno e pulisco tutto
 sudo apt upgrade
 sudo apt dist-upgrade
@@ -42,16 +46,14 @@ sudo apt autoremove
 sudo apt autoclean
 
 # Collego i dotfiles
+mkdir $HOME/.config/dunst
 ln -sf $HOME/Dotfiles/i3 $HOME/.config/i3
 ln -sf $HOME/Dotfiles/terminator $HOME/.config/terminator
 ln -sf $HOME/Dotfiles/fish $HOME/.config/fish
 ln -sf $HOME/Dotfiles/rofi $HOME/.config/rofi
 ln -sf $HOME/Dotfiles/sublime-text $HOME/.config/sublime-text-3
-ln -sf $HOME/Dotfiles/vim/gvim $HOME/.gvim
-ln -sf $HOME/Dotfiles/vim/vim $HOME/.vim
-ln -sf $HOME/Dotfiles/vim/gvimrc $HOME/.gvimrc
+ln -sf $HOME/Dotfiles/vim/vimrc $HOME/.vimrc
 ln -sf $HOME/Dotfiles/compton.conf $HOME/.compton.conf
-mkdir $HOME/.config/dunst
-sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
 ln -sf $HOME/Dotfiles/mimeapps.cache $HOME/.local/share/applications/mimeinfo.cache
+sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
 echo "Fatto"

@@ -3,7 +3,7 @@ call plug#begin()
 Plug 'tpope/vim-sensible'		" Sensible default
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }	" Nerdtree
 Plug 'morhetz/gruvbox'			" Colorscheme
-Plug 'junegunn/goyo.vim'		" Goyo - distraction free writing
+Plug 'junegunn/goyo.vim', { 'on':  'Goyo' } " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'		" Git diff aside line numbers
 Plug 'itchyny/lightline.vim'		" Tabline
 Plug 'mhinz/vim-startify'		" Vim-startify
@@ -14,13 +14,14 @@ call plug#end()
 syntax enable			" Enable syntax hilighting
 filetype plugin on		" Filetype plugin
 filetype plugin indent on
-set number relativenumber	" Line numbers are relative to current linw
+set number relativenumber	" Line numbers are relative to current line
 set path+=**			" Recursive file search
 set wildmenu			" Tab autocompletion
 set list listchars=trail:·,tab:\ \ ,eol:\ 	" How vim displays special chars
 set fillchars+=vert:\|		" Vertical separator char
 set autoread			" Autoreload file if modifiead from external command
 set shortmess+=I		" No greetings
+set autochdir			" Automatically update current working directory
 set hlsearch			" Hilight all search results
 set smartcase			" Smart-case search
 set ignorecase			" Case-insensitive
@@ -29,17 +30,20 @@ set autoindent			" Auto-indent
 set smartindent			" Smart indent
 set smarttab			" Smart tabs
 set shiftwidth=4		" Auto indent spaces
-set t_Co=256			" 256 color terminal support
-set linespace=1			" Line spacing
-set showtabline=2		" Always show tab
-set noshowmode
+set foldlevel=4			" After 4 indentation everything is folded
+if has("termguicolors")
+    set termguicolors		" 256 color terminal support
+endif
+set linespace=2			" Line spacing
+set showtabline=2		" Always show tabs
+set noshowmode			" Nothing under statusline
 
 
 " Appearance
+colorscheme gruvbox
+set guifont=Source\ Code\ Pro\ 11
 if has('gui_running')
-    colorscheme gruvbox
     set background=dark
-    set guifont=Inconsolata\ 13
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar
     set guioptions-=r	"remove right-hand scroll bar
@@ -58,25 +62,26 @@ else
     let g:lightline = {
 	\ 'enable' : { 'statusline':0 },
 	\ }
+    set background=light
 endif
 
 " Plugin settings
 let g:gitgutter_realtime=0
 let anyfold_activate=1
-set foldlevel=1
 let g:startify_custom_header=[]
 
 " Custom shortcut
 noremap <C-l> gt<CR>
 noremap <C-h> gT<CR>
-noremap <C-n> :NERDTreeToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR><C-w>w
 noremap <C-g> :Goyo<CR>
 
 inoremap { {<CR>}<Esc>ko
 inoremap [ []<Esc>i
 inoremap ( ()<Esc>i
+inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
 inoremap ` ``<Esc>i
 
 " Custom commands
-command Focus :Goyo|:NERDTreeToggle
+command Focus :Goyo|:NERDTreeToggle .

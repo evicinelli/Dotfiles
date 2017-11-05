@@ -65,7 +65,7 @@ function print_menu()
 function start()
 {
     # print_menu | rofi -dmenu -p "?=>" 
-    print_menu | sort | rofi -dmenu -i -p "" -auto-select -matching fuzzy
+    print_menu | sort | rofi -dmenu -i -p "~> " -auto-select -matching fuzzy
 #    print_menu | sort | dmenu -i -p "Winston" -fn "Inconsolata-14" 
 
 }

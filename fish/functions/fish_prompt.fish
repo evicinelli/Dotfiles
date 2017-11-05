@@ -7,7 +7,6 @@ if test "$theme_short_path" = 'yes'
 else
 	set cwd (prompt_pwd)
 	end
-#  set -l fish     "➜ "
 set -l fish "~> "
 set -l ahead    "↑ "
 set -l behind   "↓ "
@@ -15,7 +14,7 @@ set -l diverged "⇕ "
 set -l dirty    "⨯ "
 set -l none     "◦ "
 set -l normal_color     (set_color normal)
-set -l success_color    (set_color green)
+set -l fish_color    (set_color green)
 set -l error_color      (set_color red --bold)
 set -l directory_color  (set_color blue)
 set -l repository_color (set_color purple)
@@ -48,7 +47,7 @@ end
 echo -n -s -e "\n "
 
 if test $last_command_status -eq 0
-	echo -n -s $success_color $fish $normal_color
+    echo -n -s $fish_color $fish $normal_color
 else 
 	echo -n -s $error_color $fish $normal_color
 end
