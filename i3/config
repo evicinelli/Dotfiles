@@ -48,7 +48,7 @@ bindsym $mod+Tab workspace back_and_forth
 workspace_auto_back_and_forth yes
 
 # CONTAINERS -----------------------------------------------------------------------------
-bindsym $mod+w layout toggle
+bindsym $mod+w laout toggle 
 bindsym $mod+backslash split h
 bindsym $mod+minus split v
 bindsym $mod+f fullscreen
@@ -114,7 +114,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
 bindsym --release Print exec --no-startup-id gnome-screenshot -aic
 
 # MODES----------------------------------------------------------------------------------
-set $sysmenu "Exit - Halt - Reboot - Susped - Lock"
+set $sysmenu "Exit - Halt - Reboot - Suspend - Lock"
 bindsym $mod+Delete mode $sysmenu
 mode $sysmenu {
     bindsym r         restart
@@ -138,10 +138,10 @@ mode "resize" {
 set $monitor "Edpi1 - Hdmi1 - Clonato - Destra"
 bindsym $mod+m mode $monitor
 mode $monitor {
-    bindsym E exec --no-startup-id $HOME/Dotfiles/layout/internal.sh; mode "default"
-	bindsym H exec --no-startup-id $HOME/Dotfiles/layout/hdmi-1.sh; mode "default"
-	bindsym C exec --no-startup-id $HOME/Dotfiles/layout/clonato.sh; mode "default"
-	bindsym D exec --no-startup-id $HOME/Dotfiles/layout/destra.sh; mode "default"
+    bindsym E exec --no-startup-id $HOME/Dotfiles/script/internal.sh; mode "default"
+	bindsym H exec --no-startup-id $HOME/Dotfiles/script/hdmi-1.sh; mode "default"
+	bindsym C exec --no-startup-id $HOME/Dotfiles/script/clonato.sh; mode "default"
+	bindsym D exec --no-startup-id $HOME/Dotfiles/script/destra.sh; mode "default"
 	bindsym Escape mode "default"
 }
 
