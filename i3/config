@@ -79,7 +79,7 @@ client.focused          $focused		$focused		$text	 	 $base0F
 client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
 client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
 client.urgent		$urgent			$urgent			$text 		 $base0F
-bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/unsplash.sh"
+bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
