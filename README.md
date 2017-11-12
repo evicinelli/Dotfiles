@@ -3,5 +3,5 @@
 + i3wm
 + Rofi
 + Greenclip 4 rofi
-+ Inconsolata
-+ Solarized
++ Fira family (Sans and Mono) 
++ Gruvbox

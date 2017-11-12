@@ -1,3 +1,3 @@
 function nmr
-	sudo service NetworkManager restart $argv;
+	sudo service network-manager restart $argv;
 end

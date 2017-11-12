@@ -1,27 +1,27 @@
 " Vim-plug
 call plug#begin()
-Plug 'tpope/vim-sensible'		" Sensible default
+Plug 'tpope/vim-sensible'				" Sensible default
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }	" Nerdtree
-Plug 'morhetz/gruvbox'			" Colorscheme
-Plug 'junegunn/goyo.vim', { 'on':  'Goyo' } " Goyo - distraction free writing
-Plug 'airblade/vim-gitgutter'		" Git diff aside line numbers
-Plug 'itchyny/lightline.vim'		" Tabline
-Plug 'mhinz/vim-startify'		" Vim-startify
-Plug 'pseewald/vim-anyfold'		" Autofolding 
+Plug 'morhetz/gruvbox'					" Colorscheme
+Plug 'junegunn/goyo.vim', { 'on':  'Goyo' } 		" Goyo - distraction free writing
+Plug 'airblade/vim-gitgutter'				" Git diff aside line numbers
+Plug 'itchyny/lightline.vim'				" Tabline
+Plug 'mhinz/vim-startify'				" Vim-startify
+Plug 'pseewald/vim-anyfold'				" Autofolding
+Plug 'tpope/vim-surround'				" Surrounding motions on steroid
 call plug#end()
 
 " General Settings
 syntax enable			" Enable syntax hilighting
 filetype plugin on		" Filetype plugin
-filetype plugin indent on
+filetype plugin indent on	" Specific indentation rules for files
 set number relativenumber	" Line numbers are relative to current line
-set path+=**			" Recursive file search
-set wildmenu			" Tab autocompletion
-set list listchars=trail:·,tab:\ \ ,eol:\ 	" How vim displays special chars
+set path^=**			" Recursive file search starting from current dir
+set wildmenu			" Tab autocompletion in menu
 set fillchars+=vert:\|		" Vertical separator char
+set list listchars=tab:→\ ,trail:·,precedes:←,extends:→,eol:↲
 set autoread			" Autoreload file if modifiead from external command
 set shortmess+=I		" No greetings
-set autochdir			" Automatically update current working directory
 set hlsearch			" Hilight all search results
 set smartcase			" Smart-case search
 set ignorecase			" Case-insensitive
@@ -31,17 +31,18 @@ set smartindent			" Smart indent
 set smarttab			" Smart tabs
 set shiftwidth=4		" Auto indent spaces
 set foldlevel=4			" After 4 indentation everything is folded
+set linespace=5			" Line spacing
+set showtabline=2		" Always show tabline
+set noshowmode			" Nothing under statusline
+set linebreak			" break long lines at word
+set colorcolumn=+1		" Hilight column where the 81/th char lives
 if has("termguicolors")
     set termguicolors		" 256 color terminal support
 endif
-set linespace=2			" Line spacing
-set showtabline=2		" Always show tabs
-set noshowmode			" Nothing under statusline
-
 
 " Appearance
 colorscheme gruvbox
-set guifont=Source\ Code\ Pro\ 11
+set guifont=Fira\ Mono\ 11
 if has('gui_running')
     set background=dark
     set guioptions-=m	"remove menu bar
@@ -49,39 +50,37 @@ if has('gui_running')
     set guioptions-=r	"remove right-hand scroll bar
     set guioptions-=L	"remove left-hand scroll bar
     set guioptions-=e
-    set guiheadroom=0
     let g:lightline = {
-	\ 'colorscheme': 'gruvbox',
-        \ 'active': {
-        \	'right': [ [ 'lineinfo' ],
-        \              [ 'percent' ],
-        \              [  'filetype', 'charvaluehex' ] ]
-        \ }, 
-    \ }
+		\ 'colorscheme': 'gruvbox',
+		\ 'active': {
+		\	'right': [ [ 'lineinfo' ],
+		\              [ 'percent' ],
+		\              [  'filetype', 'charvaluehex' ] ]
+		\ }, 
+		\ }
 else
     let g:lightline = {
-	\ 'enable' : { 'statusline':0 },
-	\ }
+		\ 'enable' : { 'statusline':0 },
+		\ }
     set background=light
 endif
 
 " Plugin settings
-let g:gitgutter_realtime=0
 let anyfold_activate=1
 let g:startify_custom_header=[]
+let loaded_netrwPlugin = 1	" No netrw if a directory is open
 
 " Custom shortcut
 noremap <C-l> gt<CR>
 noremap <C-h> gT<CR>
-noremap <C-n> :NERDTreeToggle<CR><C-w>w
+noremap <C-n> :NERDTreeToggle %:p:h<CR><C-w>w
 noremap <C-g> :Goyo<CR>
-
+noremap <C-b> :b 
+noremap , :
+noremap ; :!
 inoremap { {<CR>}<Esc>ko
 inoremap [ []<Esc>i
 inoremap ( ()<Esc>i
 inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
 inoremap ` ``<Esc>i
-
-" Custom commands
-command Focus :Goyo|:NERDTreeToggle .

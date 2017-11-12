@@ -54,9 +54,9 @@ function print_menu()
 {
     for key in ${!LABELS[@]}
     do
-  echo "$key    ${LABELS}"
-     #   echo "$key    ${LABELS[$key]}"
-     # my top version just shows the first field in labels row, not two words side by side
+	echo "$key    ${LABELS}"
+	#   echo "$key    ${LABELS[$key]}"
+	# my top version just shows the first field in labels row, not two words side by side
     done
 }
 ##
@@ -64,10 +64,7 @@ function print_menu()
 ##
 function start()
 {
-    # print_menu | rofi -dmenu -p "?=>" 
     print_menu | sort | rofi -dmenu -i -p "~> " -auto-select -matching fuzzy
-#    print_menu | sort | dmenu -i -p "Winston" -fn "Inconsolata-14" 
-
 }
 
 
@@ -95,7 +92,7 @@ then
     eval echo "Executing: ${COMMANDS[$choice]}"
     eval ${COMMANDS[$choice]}
 else
- eval  $choice | rofi
- # prefer my above so I can use this same script to also launch apps like geany or leafpad etc (DK) 
- #   echo "Unknown command: ${choice}" | rofi -dmenu -p "error"
+    eval  $choice | rofi
+    # prefer my above so I can use this same script to also launch apps like geany or leafpad etc (DK) 
+    #   echo "Unknown command: ${choice}" | rofi -dmenu -p "error"
 fi

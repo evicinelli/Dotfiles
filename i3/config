@@ -20,7 +20,7 @@ set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
 bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-font pango: Source Sans Pro 9
+font pango: Fira Sans 8
 
 # WORKSPACES ----------------------------------------------------------------------------
 bindsym $mod+1 workspace $workspace1
@@ -48,7 +48,7 @@ bindsym $mod+Tab workspace back_and_forth
 workspace_auto_back_and_forth yes
 
 # CONTAINERS -----------------------------------------------------------------------------
-bindsym $mod+w laout toggle 
+bindsym $mod+w layout toggle 
 bindsym $mod+backslash split h
 bindsym $mod+minus split v
 bindsym $mod+f fullscreen
@@ -83,7 +83,7 @@ bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango:Source Code Pro 10
+	font pango:Fira Mono 10
 	strip_workspace_numbers yes
 	colors {
 	    separator $text
