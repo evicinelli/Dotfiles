@@ -5,21 +5,20 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }	" Nerdtree
 Plug 'morhetz/gruvbox'					" Colorscheme
 Plug 'junegunn/goyo.vim', { 'on':  'Goyo' } 		" Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'				" Git diff aside line numbers
-Plug 'itchyny/lightline.vim'				" Tabline
 Plug 'mhinz/vim-startify'				" Vim-startify
-Plug 'pseewald/vim-anyfold'				" Autofolding
+Plug 'pseewald/vim-anyfold'				" Folding triggered by indentation
 Plug 'tpope/vim-surround'				" Surrounding motions on steroid
 call plug#end()
 
 " General Settings
 syntax enable			" Enable syntax hilighting
 filetype plugin on		" Filetype plugin
-filetype plugin indent on	" Specific indentation rules for files
+filetype plugin indent on	" Specific indentation rules depending on file type 
 set number relativenumber	" Line numbers are relative to current line
 set path^=**			" Recursive file search starting from current dir
 set wildmenu			" Tab autocompletion in menu
 set fillchars+=vert:\|		" Vertical separator char
-set list listchars=tab:→\ ,trail:·,precedes:←,extends:→,eol:↲
+set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set autoread			" Autoreload file if modifiead from external command
 set shortmess+=I		" No greetings
 set hlsearch			" Hilight all search results
@@ -30,11 +29,11 @@ set autoindent			" Auto-indent
 set smartindent			" Smart indent
 set smarttab			" Smart tabs
 set shiftwidth=4		" Auto indent spaces
-set foldlevel=4			" After 4 indentation everything is folded
+set foldlevel=0			" After 4 indentation everything is folded
 set linespace=5			" Line spacing
-set showtabline=2		" Always show tabline
 set noshowmode			" Nothing under statusline
-set linebreak			" break long lines at word
+set linebreak			" Break long lines at word
+set hidden			" Switching buffer without writing
 set colorcolumn=+1		" Hilight column where the 81/th char lives
 if has("termguicolors")
     set termguicolors		" 256 color terminal support
@@ -42,38 +41,31 @@ endif
 
 " Appearance
 colorscheme gruvbox
-set guifont=Fira\ Mono\ 11
+set guifont=Source\ Code\ Pro\ 11
 if has('gui_running')
-    set background=dark
+    set background=light
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar
     set guioptions-=r	"remove right-hand scroll bar
     set guioptions-=L	"remove left-hand scroll bar
     set guioptions-=e
-    let g:lightline = {
-		\ 'colorscheme': 'gruvbox',
-		\ 'active': {
-		\	'right': [ [ 'lineinfo' ],
-		\              [ 'percent' ],
-		\              [  'filetype', 'charvaluehex' ] ]
-		\ }, 
-		\ }
 else
-    let g:lightline = {
-		\ 'enable' : { 'statusline':0 },
-		\ }
-    set background=light
+    set background=dark
 endif
 
 " Plugin settings
-let anyfold_activate=1
-let g:startify_custom_header=[]
+let anyfold_activate = 1
+let anyfold_fold_comments = 1
+let g:startify_custom_header = []
 let loaded_netrwPlugin = 1	" No netrw if a directory is open
+
+" Statusline
+:set statusline=%=%n\ ·\ %F\ %m%r%h%w\ ·\ %Y\ ·\ %l:%v/%L\ ·\ %p%% 
 
 " Custom shortcut
 noremap <C-l> gt<CR>
 noremap <C-h> gT<CR>
-noremap <C-n> :NERDTreeToggle %:p:h<CR><C-w>w
+noremap <C-n> :NERDTreeToggle %:p:h<CR>
 noremap <C-g> :Goyo<CR>
 noremap <C-b> :b 
 noremap , :
