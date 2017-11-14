@@ -20,7 +20,6 @@ set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
 bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
-font pango: Source Sans 8
 
 # WORKSPACES
 bindsym $mod+1 workspace $workspace1
@@ -68,6 +67,7 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # THEMING
+font pango: Source Sans Pro 9
 set $barBackground #282828
 set $unfocused #282828
 set $text #fbf1c7
