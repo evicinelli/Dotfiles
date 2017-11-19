@@ -41,7 +41,7 @@ endif
 
 " Appearance
 colorscheme gruvbox
-set guifont=Source\ Code\ Pro\ 11
+set guifont=Fira\ Mono\ 11
 if has('gui_running')
     set background=light
     set guioptions-=m	"remove menu bar

@@ -6,10 +6,12 @@ set -q XDG_DATA_HOME
 # Load Oh My Fish configuration.
 source $OMF_PATH/init.fish
 
-# Setting gvim as editor
+# Global variables
 export EDITOR='gvim'
 export VISUAL='gvim'
 export DOTFILES='/home/vic/Dotfiles'
+export UNI="/home/vic/Documenti/AppuntiUni"
+export OC="/home/vic/ownCloud"
 
 # Fish vi key bindings
 fish_vi_key_bindings

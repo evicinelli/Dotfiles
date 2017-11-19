@@ -67,7 +67,7 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # THEMING
-font pango: Source Sans Pro 9
+font pango: Fira Mono 8
 set $barBackground #282828
 set $unfocused #282828
 set $text #fbf1c7
@@ -83,7 +83,7 @@ bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango: Source Code Pro 10
+	font pango: Fira Mono 10
 	strip_workspace_numbers yes
 	colors {
 	    separator $text
@@ -146,10 +146,12 @@ mode $monitor {
 }
 
 # AUTOSTART APPLICATIONS
-exec --no-startup-id compton -f
+exec --no-startup-id compton -b
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id indicator-cpufreq
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon 
 exec_always --no-startup-id feh --bg-fill $HOME/img
+# Pronti per quando saremo operativi
+# exec --no-startup-id owncloud
