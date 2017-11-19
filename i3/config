@@ -67,7 +67,7 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # THEMING
-font pango: Fira Mono 8
+font pango: Source Sans Pro 9
 set $barBackground #282828
 set $unfocused #282828
 set $text #fbf1c7
@@ -83,7 +83,7 @@ bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango: Fira Mono 10
+	font pango: Source Code Pro 10
 	strip_workspace_numbers yes
 	colors {
 	    separator $text
@@ -117,18 +117,18 @@ bindsym --release Print exec --no-startup-id gnome-screenshot -aic
 set $sysmenu "Exit - Halt - Reboot - Suspend - Lock"
 bindsym $mod+Delete mode $sysmenu
 mode $sysmenu {
-    bindsym r         restart
+        bindsym r         restart
 	bindsym e         exec --no-startup-id "i3-nagbar -t warning -m 'Logout?' -b 'S' 'i3-msg exit'"
 	bindsym h         exec --no-startup-id systemctl poweroff
 	bindsym b         exec --no-startup-id systemctl reboot
 	bindsym s         exec --no-startup-id systemctl suspend;
-    bindsym l         exec --no-startup-id i3lock 
+	bindsym l         exec --no-startup-id ~/Dotfiles/script/lock.sh -p
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
 }
 bindsym $mod+r mode "resize"
 mode "resize" {
-    bindsym $Left resize shrink width 2 px or 2 ppt
+        bindsym $Left resize shrink width 2 px or 2 ppt
 	bindsym $Down resize shrink height 2 px or 2 ppt
 	bindsym $Up resize grow height 2 px or 2 ppt
 	bindsym $Right resize grow width 2 px or 2 ppt
@@ -153,5 +153,4 @@ exec --no-startup-id indicator-cpufreq
 exec --no-startup-id nm-applet
 exec --no-startup-id greenclip daemon 
 exec_always --no-startup-id feh --bg-fill $HOME/img
-# Pronti per quando saremo operativi
-# exec --no-startup-id owncloud
+exec --no-startup-id owncloud

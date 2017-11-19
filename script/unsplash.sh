@@ -12,7 +12,7 @@
 # https://source.unsplash.com/1600x900/{?SEARCH,TERM}
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # https://source.unsplash.com/ -- API documentation
-TAIL="collection/890836"
+TAIL="collection/155011"
 rm img
 notify-send "Prendo lo sfondo da unsplash"
 echo https://source.unplash.com/$TAIL
