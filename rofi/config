@@ -1,4 +1,4 @@
-rofi.font: Source Code Pro 11 
+rofi.font: Fira Code 11 
 rofi.hide-scrollbar: true
 rofi.separator-style: none
 rofi.lines: 5

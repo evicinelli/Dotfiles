@@ -7,7 +7,7 @@ if test "$theme_short_path" = 'yes'
 else
 	set cwd (prompt_pwd)
 	end
-set -l fish "~> "
+set -l fish "-> "
 set -l ahead    "↑ "
 set -l behind   "↓ "
 set -l diverged "⇕ "

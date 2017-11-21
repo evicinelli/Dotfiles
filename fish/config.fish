@@ -7,11 +7,12 @@ set -q XDG_DATA_HOME
 source $OMF_PATH/init.fish
 
 # Global variables
-export EDITOR='gvim'
+export EDITOR='vim'
 export VISUAL='gvim'
-export DOTFILES='/home/vic/Dotfiles'
+export DOTS='/home/vic/Dotfiles'
 export UNI="/home/vic/Documenti/AppuntiUni"
 export OC="/home/vic/ownCloud"
+export PWS="/home/vic/ownCloud/Archivio/Password-store"
 
 # Fish vi key bindings
 fish_vi_key_bindings

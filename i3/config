@@ -67,7 +67,7 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # THEMING
-font pango: Source Sans Pro 9
+font pango: Fira Sans 9
 set $barBackground #282828
 set $unfocused #282828
 set $text #fbf1c7
@@ -83,7 +83,7 @@ bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango: Source Code Pro 10
+	font pango: Fira Code 10
 	strip_workspace_numbers yes
 	colors {
 	    separator $text
