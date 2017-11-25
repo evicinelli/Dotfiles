@@ -4,16 +4,16 @@ set $Up k
 set $Left h
 set $Right l
 set $Down j
-set $workspace1 "1:I"
-set $workspace2 "2:II"
-set $workspace3 "3:III"
-set $workspace4 "4:IV"
-set $workspace5 "5:V"
-set $workspace6 "6:VI"
-set $workspace7 "7:VII"
-set $workspace8 "8:VIII"
-set $workspace9 "9:IX"
-set $workspace10  "10:X"
+set $workspace1 "1:1"
+set $workspace2 "2:2"
+set $workspace3 "3:3"
+set $workspace4 "4:4"
+set $workspace5 "5:5"
+set $workspace6 "6:6"
+set $workspace7 "7:7"
+set $workspace8 "8:8"
+set $workspace9 "9:9"
+set $workspace10  "10:10"
 
 # INITIAL SETTINGS
 set $mod Mod4
@@ -83,7 +83,7 @@ bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango: Fira Code 10
+	font pango: Inconsolata 12
 	strip_workspace_numbers yes
 	colors {
 	    separator $text

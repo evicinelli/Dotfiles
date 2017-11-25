@@ -25,9 +25,9 @@ sudo apt remove gedit
 
 # Installo le cose
 sudo apt update
-sudo apt install fish i3 i3blocks rofi terminator vim vim-gtk3 fonts-inconsolata compton arandr dunst \
+sudo apt install i3 i3blocks rofi vim vim-gtk3 terminator fish fonts-inconsolata compton arandr dunst \
 spotify-client sublime-text lxappearance xfce4-power-manager pavucontrol build-essential curl\
-redshift-gtk vlc zip ufw tree nautilus-dropbox chromium xbacklight pass xclip
+redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync
 
 # Oh my fish
 cd $HOME/Scaricati

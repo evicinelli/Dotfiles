@@ -28,9 +28,9 @@ set incsearch			" Incremental search
 set autoindent			" Auto-indent
 set smartindent			" Smart indent
 set smarttab			" Smart tabs
-set shiftwidth=4		" Auto indent spaces
+set shiftwidth=2		" Auto indent spaces
 set foldlevel=0			" After 4 indentation everything is folded
-set linespace=5			" Line spacing
+set linespace=3			" Line spacing
 set noshowmode			" Nothing under statusline
 set linebreak			" Break long lines at word
 set hidden			" Switching buffer without writing
@@ -41,14 +41,14 @@ endif
 
 " Appearance
 colorscheme gruvbox
-set guifont=Fira\ Code\ 11
+set guifont=Inconsolata\ 12
 if has('gui_running')
     set background=light
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar
     set guioptions-=r	"remove right-hand scroll bar
     set guioptions-=L	"remove left-hand scroll bar
-    set guioptions-=e
+    set guioptions-=b
 else
     set background=dark
 endif

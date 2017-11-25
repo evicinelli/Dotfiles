@@ -1,5 +1,5 @@
 [global]
-    font = Fira Code 11
+    font = Inconsolata 12
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -136,8 +136,9 @@
     startup_notification = false
     
     # dmenu path.
-    dmenu = /usr/bin/dmenu -p dunst:
-    
+    # dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = /usr/bin/rofi -dmenu -p -i  dunst
+
     # Browser for opening urls in context menu.
     browser = /usr/bin/firefox -new-tab
 
@@ -169,7 +170,7 @@
     history = mod4+n
     
     # Context menu.
-    context = ctrl+shift+n
+    context = mod4+shift+space
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
