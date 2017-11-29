@@ -56,4 +56,5 @@ ln -sf $HOME/Dotfiles/vim/vimrc $HOME/.vimrc
 ln -sf $HOME/Dotfiles/compton.conf $HOME/.compton.conf
 ln -sf $HOME/Dotfiles/mimeapps.cache $HOME/.local/share/applications/mimeinfo.cache
 sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
+
 echo "Fatto"
