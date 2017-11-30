@@ -2,7 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'				" Sensible default
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }	" Nerdtree
-Plug 'morhetz/gruvbox'					" Colorscheme
+Plug 'chriskempson/base16-vim'				" Colorscheme
 Plug 'junegunn/goyo.vim', { 'on':  'Goyo' } 		" Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'				" Git diff aside line numbers
 Plug 'mhinz/vim-startify'				" Vim-startify
@@ -40,17 +40,16 @@ if has("termguicolors")
 endif
 
 " Appearance
-colorscheme gruvbox
-set guifont=Inconsolata\ 12
+set guifont=Source\ Code\ Pro\ 11
 if has('gui_running')
-    set background=light
+    colorscheme base16-solarized-light
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar
     set guioptions-=r	"remove right-hand scroll bar
     set guioptions-=L	"remove left-hand scroll bar
     set guioptions-=b
 else
-    set background=dark
+    colorscheme base16-solarized-dark
 endif
 
 " Plugin settings
