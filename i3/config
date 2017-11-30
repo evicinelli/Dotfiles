@@ -67,7 +67,7 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # THEMING
-font pango: Source Code Pro 9
+font pango:  Cantarell 9
 # set $barBackground #282828
 # set $unfocused #282828
 # set $text #fbf1c7
