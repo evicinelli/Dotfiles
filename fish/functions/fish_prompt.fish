@@ -7,12 +7,12 @@ if test "$theme_short_path" = 'yes'
 else
 	set cwd (prompt_pwd)
 	end
-set -l fish " \$ "
-set -l ahead    "↑ "
-set -l behind   "↓ "
-set -l diverged "⇕ "
-set -l dirty    "⨯ "
-set -l none     "◦ "
+set -l fish " ~> "
+set -l ahead    "( ↑ )"
+set -l behind   "( ↓ )"
+set -l diverged "( ⇕ )"
+set -l dirty    "( ⨯ )"
+set -l none     "( ◦ ) "
 set -l normal_color     (set_color normal)
 set -l fish_color    (set_color green)
 set -l error_color      (set_color red --bold)

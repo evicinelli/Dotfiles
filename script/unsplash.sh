@@ -12,7 +12,7 @@
 # https://source.unsplash.com/1600x900/{?SEARCH,TERM}
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # https://source.unsplash.com/ -- API documentation
-COLLECTION_NUMBER="1149487"
+COLLECTION_NUMBER="497"
 rm img
 notify-send "Prendo lo sfondo da unsplash"
 wget -O img "https://source.unsplash.com/collection/$COLLECTION_NUMBER"

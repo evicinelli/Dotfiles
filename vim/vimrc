@@ -2,7 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'				" Sensible default
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }	" Nerdtree
-Plug 'chriskempson/base16-vim'				" Colorscheme
+Plug 'ewilazarus/preto'					" Colorscheme
 Plug 'junegunn/goyo.vim', { 'on':  'Goyo' } 		" Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'				" Git diff aside line numbers
 Plug 'mhinz/vim-startify'				" Vim-startify
@@ -28,7 +28,7 @@ set incsearch			" Incremental search
 set autoindent			" Auto-indent
 set smartindent			" Smart indent
 set smarttab			" Smart tabs
-set shiftwidth=2		" Auto indent spaces
+set shiftwidth=4		" Auto indent spaces
 set foldlevel=0			" After 4 indentation everything is folded
 set linespace=3			" Line spacing
 set noshowmode			" Nothing under statusline
@@ -40,14 +40,15 @@ if has("termguicolors")
 endif
 
 " Appearance
-colorscheme base16-ashes
-set guifont=Source\ Code\ Pro\ 12
+colorscheme preto
+set guifont=Inconsolata\ 13 
 if has('gui_running')
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar
     set guioptions-=r	"remove right-hand scroll bar
     set guioptions-=L	"remove left-hand scroll bar
     set guioptions-=b
+    set guioptions-=e
 else
 endif
 
@@ -74,4 +75,4 @@ inoremap ( ()<Esc>i
 inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
 inoremap ` ``<Esc>i
-inoremap <C-Backspace> <Esc>db<Del>a
+inoremap <C-Backspace> <Esc>db<Del>i

@@ -27,7 +27,7 @@ sudo apt remove gedit
 sudo apt update
 sudo apt install i3 i3blocks rofi vim vim-gtk3 terminator fish fonts-inconsolata compton arandr dunst \
 spotify-client sublime-text lxappearance xfce4-power-manager pavucontrol build-essential curl\
-redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync
+redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client
 
 # Oh my fish
 cd $HOME/Scaricati
@@ -56,5 +56,8 @@ ln -sf $HOME/Dotfiles/vim/vimrc $HOME/.vimrc
 ln -sf $HOME/Dotfiles/compton.conf $HOME/.compton.conf
 ln -sf $HOME/Dotfiles/mimeapps.cache $HOME/.local/share/applications/mimeinfo.cache
 sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
+
+# Vim plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "Fatto"

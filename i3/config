@@ -19,6 +19,7 @@ set $workspace10  "10:10"
 set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
+bindsym --release button2 kill
 bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
 
 # WORKSPACES
@@ -67,34 +68,13 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # THEMING
-font pango:  Cantarell 9
-# set $barBackground #282828
-# set $unfocused #282828
-# set $text #fbf1c7
-# set $urgent #cc241d
-# set $focused #504945
-# set $barAccent #83a598
-#          		border      		background 		text    	 indicator
-# client.focused          $focused		$focused		$text	 	 $base0F
-# client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
-# client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
-# client.urgent		$urgent			$urgent			$text 		 $base0F
+font pango:  Inconsolata 10
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
-	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango: Source Code Pro 11
-	strip_workspace_numbers yes
-#	colors {
-#	    separator $text
-#		background $barBackground
-#		statusline $text
-##		border			background		text
-#		focused_workspace	$barAccent 		$barAccent		$barBackground
-#		active_workspace	$barAccent 	 	$barAccent		$barBackground
-#		inactive_workspace 	$barBackground		$barBackground		$text
-#		urgent_workspace   	$urgent			$urgent			$barBackground
-#	}
+    status_command i3blocks -c $HOME/.config/i3/i3blocksrc
+    font pango:Inconsolata 12
+    strip_workspace_numbers yes
 }
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS

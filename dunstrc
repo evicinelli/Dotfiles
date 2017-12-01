@@ -1,5 +1,5 @@
 [global]
-    font = Source Code Pro 11
+    font = Inconsolata 12
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -150,7 +150,7 @@
 
  [frame]
     width = 3
-    color = "#83A598"
+    color = "#aaaaaa"
 [shortcuts]
 
     # Shortcuts are specified as [modifier+][modifier+]...key
@@ -171,22 +171,27 @@
     
     # Context menu.
     context = mod4+shift+space
+
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#282828"
+    background = "#222222"
     foreground = "#888888"
     timeout = 10
+    # Icon for notifications with low urgency, uncomment to enable
+    #icon = /path/to/icon
 
 [urgency_normal]
-    background = "#282828"
-    foreground = "#ebdbb2"
+    background = "#285577"
+    foreground = "#ffffff"
     timeout = 10
+    # Icon for notifications with normal urgency, uncomment to enable
+    #icon = /path/to/icon
 
 [urgency_critical]
-    background = "#CC241D"
-    foreground = "#ebdbb2"
-    timeout = 0
+    background = "#900000"
+    foreground = "#ffffff"
+    timeout = 0 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 # Messages can be matched by "appname", "summary", "body", "icon", "category",
