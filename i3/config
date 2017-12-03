@@ -20,7 +20,7 @@ set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
 bindsym --release button2 kill
-bindsym Control+Mod1+t exec --no-startup-id i3-sensible-terminal
+bindsym Control+Mod1+t exec --no-startup-id urxvt
 
 # WORKSPACES
 bindsym $mod+1 workspace $workspace1
@@ -68,21 +68,39 @@ bindsym $mod+a focus parent
 bindsym $mod+shift+a focus child
 
 # THEMING
-font pango:  Inconsolata 10
+font pango:Source Sans Pro 8
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
+set $barBackground #282828
+set $unfocused #282828
+set $text #fbf1c7
+set $urgent #cc241d
+set $focused #504945
+set $barAccent #83a598
+#          		border      		background 		text    	 indicator
+client.focused          $focused		$focused		$text	 	 $base0F
+client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
+client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
+client.urgent $urgent $urgent $text $base0F
 bar {
     position top
     status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-    font pango:Inconsolata 12
+    font pango:Source Code Pro 11
     strip_workspace_numbers yes
+    colors {
+		separator $text
+		    background $barBackground
+		    statusline $text
+#		border			background		text
+		    focused_workspace	$barAccent 		$barAccent		$barBackground
+		    active_workspace	$barAccent 	 	$barAccent		$barBackground
+		    inactive_workspace 	$barBackground		$barBackground		$text
+		    urgent_workspace   	$urgent			$urgent			$barBackground
+    }
 }
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS
-assign [class = "Google-chrome"] $workspace1
 assign [class = "Telegram"] $workspace9
 for_window [class = "Spotify"] move to workspace $workspace10
-for_window [class = "feh"] floating toggle
-for_window [class = "feh"] border none
 
 # APP-SPECIFIC BINDINGS
 bindsym Shift+space exec --no-startup-id bash $HOME/Dotfiles/rofi/winston.sh

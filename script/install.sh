@@ -59,5 +59,6 @@ sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
 
 # Vim plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+sudo update-alternatives --config x-terminal-emulator
 
 echo "Fatto"

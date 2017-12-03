@@ -1,2 +1,11 @@
-rofi.font: Inconsolata 13
+rofi.font:Source Code Pro 13
+rofi.hide-scrollbar: true
+rofi.separator-style: none
 rofi.threads: 0
+!                  bg       border   separator
+rofi.color-window: #f2e5bc, #7c6f64, #7c6f64
+
+!                  bg       fg       bg-alt   hl-bg    hl-fg
+rofi.color-normal: #f2e5bc, #3c3836, #ebdbb2, #d5c4a1, #282828
+rofi.color-active: #b57614, #f2e5bc, #b57614, #d79921, #f2e5bc
+rofi.color-urgent: #cc241d, #f2e5bc, #cc241d, #fb4934, #f2e5bc
