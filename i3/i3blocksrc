@@ -22,9 +22,9 @@
 
 # Global properties
 command=/usr/share/i3blocks/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=20
 markup=none
-separator=false
+separator="-"
 align=center
 
 [mediaplayer]
@@ -49,5 +49,5 @@ interval=10
 interval=1
 
 [time]
-command=date '+%H:%M'
+command=date '+%a %d %H:%M'
 interval=10

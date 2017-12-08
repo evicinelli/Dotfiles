@@ -1,3 +1,3 @@
-function edit
+function gi
 	gvim $argv;
 end
