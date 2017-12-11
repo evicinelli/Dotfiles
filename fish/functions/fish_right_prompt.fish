@@ -13,4 +13,4 @@ function fish_right_prompt
 # echo -n 'V '
 # end 
 # set_color normal 
-# end
+ end

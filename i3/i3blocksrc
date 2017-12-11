@@ -49,5 +49,5 @@ interval=10
 interval=1
 
 [time]
-command=date '+%a %d %H:%M'
+command=date '+%a %d %H:%M |'
 interval=10
