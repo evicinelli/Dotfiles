@@ -22,9 +22,11 @@
 
 # Global properties
 command=/usr/share/i3blocks/$BLOCK_NAME
-separator_block_width=20
+separator_block_width=5
 markup=none
-separator="-"
+# full_text=·
+full_text=|
+separator=false
 align=center
 
 [mediaplayer]
@@ -33,21 +35,30 @@ interval=1
 signal=10
 color=#4848484
 
+[separator]
+
 [volume]
 instance=Master
 interval=1
 signal=10
 
+[separator]
+
 [battery]
 instance=0
 interval=30
 
-[temperature]
-interval=10
 
-[load_average]
-interval=1
+#[temperature]
+#interval=10
+
+#[load_average]
+#interval=1
+
+[separator]
 
 [time]
-command=date '+%a %d %H:%M |'
+command=date '+%a %d %H:%M'
 interval=10
+
+[separator]

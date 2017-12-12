@@ -37,12 +37,13 @@ set colorcolumn=+1		" Hilight column where the 81/th char lives
 "}}}
 
 " Appearance {{{
-set linespace=4			" Line spacing
+set cursorline			" Highlight current line
+set linespace=7			" Line spacing
 set fillchars+=vert:\|		" Vertical separator char
 set shortmess+=I		" No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
+set guifont=Inconsolata\ 12
 colorscheme gruvbox		" Colorscheme 
-set guifont=Source\ Code\ Pro\ 11
 if has("termguicolors")
     set termguicolors		" 256 color terminal support
 endif
@@ -84,3 +85,4 @@ inoremap " ""<Esc>i
 inoremap ` ``<Esc>i
 inoremap <C-Backspace> <Esc>db<Del>i
 " }}}
+
