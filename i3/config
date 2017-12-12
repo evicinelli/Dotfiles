@@ -88,7 +88,7 @@ client.urgent 		$urgent			$urgent 		$text 		 $base0F
 bar {
     position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango:Inconsolata 12
+	font pango:Source Code Pro 10.5
 	strip_workspace_numbers yes
 	colors {
 		separator $text

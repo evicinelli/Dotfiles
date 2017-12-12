@@ -19,10 +19,8 @@ filetype plugin indent on	" Specific indentation rules depending on file type
 set number relativenumber	" Line numbers are relative to current line
 set path^=**			" Recursive file search starting from current dir
 set wildmenu			" Tab autocompletion in menu
-set fillchars+=vert:\|		" Vertical separator char
-set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
+set wildignorecase		" Ignore case when autocomplete
 set autoread			" Autoreload file if modifiead from external command
-set shortmess+=I		" No greetings
 set hlsearch			" Hilight all search results
 set smartcase			" Smart-case search
 set ignorecase			" Case-insensitive
@@ -31,21 +29,23 @@ set autoindent			" Auto-indent
 set smartindent			" Smart indent
 set smarttab			" Smart tabs
 set shiftwidth=4		" Auto indent spaces
-"set foldlevel=0			" Everything is folded at a 0-level indentation
 set foldmethod=marker		" Fold what's inside {{{ }}} block
-set linespace=5			" Line spacing
 set noshowmode			" Nothing under statusline
 set linebreak			" Break long lines at spaces, not in the middle of a word
-set hidden			" Switching buffer without writing
+set hidden			" Allow to switch buffer without saving it
 set colorcolumn=+1		" Hilight column where the 81/th char lives
-if has("termguicolors")
-    set termguicolors		" 256 color terminal support
-endif
 "}}}
 
 " Appearance {{{
-colorscheme gruvbox 
-set guifont=Inconsolata\ 13
+set linespace=4			" Line spacing
+set fillchars+=vert:\|		" Vertical separator char
+set shortmess+=I		" No greetings
+set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
+colorscheme gruvbox		" Colorscheme 
+set guifont=Source\ Code\ Pro\ 11
+if has("termguicolors")
+    set termguicolors		" 256 color terminal support
+endif
 if has('gui_running')
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar
