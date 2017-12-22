@@ -25,14 +25,15 @@ sudo apt remove gedit
 
 # Installo le cose
 sudo apt update
-sudo apt install i3 i3blocks rofi vim vim-gtk3 terminator fish fonts-inconsolata compton arandr dunst \
+sudo apt install i3 i3blocks rofi vim vim-gtk3 terminator\ # fish 
+fonts-inconsolata compton arandr dunst \
 spotify-client sublime-text lxappearance xfce4-power-manager pavucontrol build-essential curl\
-redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gnome-sushi gufw
+redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gnome-sushi gufw ranger
 
 # Oh my fish
-cd $HOME/Scaricati
-curl -L https://get.oh-my.fish > install
-fish install --path=~/.local/share/omf --config=~/.config/omf
+# cd $HOME/Scaricati
+# curl -L https://get.oh-my.fish > install
+# fish install --path=~/.local/share/omf --config=~/.config/omf
 
 # Vim Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -49,16 +50,13 @@ sudo apt autoclean
 mkdir $HOME/.config/dunst
 ln -sf $HOME/Dotfiles/i3 $HOME/.config/i3
 ln -sf $HOME/Dotfiles/terminator $HOME/.config/terminator
-ln -sf $HOME/Dotfiles/fish $HOME/.config/fish
+# ln -sf $HOME/Dotfiles/fish $HOME/.config/fish
+ln -sf $HOME/Dotfiles/bashrc $HOME/.bashrc
 ln -sf $HOME/Dotfiles/rofi $HOME/.config/rofi
 ln -sf $HOME/Dotfiles/sublime-text $HOME/.config/sublime-text-3
 ln -sf $HOME/Dotfiles/vim/vimrc $HOME/.vimrc
 ln -sf $HOME/Dotfiles/compton.conf $HOME/.compton.conf
 ln -sf $HOME/Dotfiles/mimeapps.cache $HOME/.local/share/applications/mimeinfo.cache
 sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
-
-# Vim plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-sudo update-alternatives --config x-terminal-emulator
 
 echo "Fatto"
