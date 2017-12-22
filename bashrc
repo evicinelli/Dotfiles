@@ -120,7 +120,7 @@ set -o vi
 
 # VARS
 export EDITOR=vim
-export VISUAL=gvim
+#export VISUAL=gvim
 export DOTS='/home/vic/Dotfiles'
 export UNI="/home/vic/Documenti/AppuntiUni"
 export UNR="/home/vic/Documenti/AppuntiUni/Reti/Vic"
@@ -155,3 +155,4 @@ dirfind() {
 }
 source /usr/share/bash-completion/completions/pass
 bind TAB:menu-complete
+bind Control-l:clear-screen
