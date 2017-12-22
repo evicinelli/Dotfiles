@@ -11,12 +11,11 @@ export EDITOR='vim'
 export VISUAL='gvim'
 export DOTS='/home/vic/Dotfiles'
 export UNI="/home/vic/Documenti/AppuntiUni"
-export UNIR="/home/vic/Documenti/AppuntiUni/Reti/Vic"
-export UNIS="/home/vic/Documenti/AppuntiUni/SO/Vic"
+export UNR="/home/vic/Documenti/AppuntiUni/Reti/Vic"
+export UNS="/home/vic/Documenti/AppuntiUni/SO/Vic"
 export OC="/home/vic/ownCloud"
 export PWS="/home/vic/ownCloud/Archivio/Password-store"
 export TODO="/home/vic/ownCloud/todo.txt"
-export TODO_FILE="/home/vic/ownCloud/todo.txt"
-
+export DONE="/home/vic/ownCloud/done.txt"
 # Fish vi key bindings
 fish_vi_key_bindings

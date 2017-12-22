@@ -27,7 +27,7 @@ sudo apt remove gedit
 sudo apt update
 sudo apt install i3 i3blocks rofi vim vim-gtk3 terminator fish fonts-inconsolata compton arandr dunst \
 spotify-client sublime-text lxappearance xfce4-power-manager pavucontrol build-essential curl\
-redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gnome-sushi
+redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gnome-sushi gufw
 
 # Oh my fish
 cd $HOME/Scaricati

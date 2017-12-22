@@ -1,5 +1,4 @@
 [global_config]
-  always_on_top = True
   borderless = True
   enabled_plugins = InactivityWatch, CustomCommandsMenu, APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
