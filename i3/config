@@ -17,6 +17,7 @@ set $workspace10  "10:10"
 # }}}
 
 # INITIAL SETTINGS {{{
+# workspace_layout tabbed
 set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
