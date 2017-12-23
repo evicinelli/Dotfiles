@@ -10,7 +10,7 @@ Plug 'tpope/vim-surround'				" Surrounding motions on steroid
 Plug 'sheerun/vim-polyglot'				" A collection of language pack 
 Plug 'freitass/todo.txt-vim'				" Todo.txt support
 Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}	" Tagbar
-Plug 'mileszs/ack.vim'					" Vim Ack Vim Ack
+Plug 'mileszs/ack.vim'					" Vim Ack
 call plug#end()
 "}}}
 "
