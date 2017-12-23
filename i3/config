@@ -86,7 +86,7 @@ client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
 client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
 client.urgent 		$urgent			$urgent 		$text 		 $base0F
 bar {
-#        position top
+        position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
 	font pango:Inconsolata 12
 	strip_workspace_numbers yes
