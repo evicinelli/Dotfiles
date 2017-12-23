@@ -15,34 +15,30 @@
 # + f  - file
 # + bi - binari                                                                          
 # + wi - finestre aperte                                                                 
-# + we - ricerca sul web (con duckduckgo + bangs si cerca in praticamente qualsiasi sito)
+# + we - ricerca sul www (con duckduckgo + bangs si cerca in praticamente qualsiasi sito)
 ###
 
 declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["apps"]="rofi -combi-modi window,drun -show combi"
+COMMANDS["apps"]="rofi -show drun"
 LABELS["apps"]=""
 
 # find files
-COMMANDS["file"]="/home/$(whoami)/Dotfiles/rofi/file.sh"
+COMMANDS["file"]="/home/$(whoami)/Dotfiles/bin/script/file.sh"
 LABELS["file"]=""
 
-# open custom web searches
-COMMANDS["web"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
-LABELS["web"]=""
-
-# clipboard manager
-COMMANDS["clipboard"]="/home/$(whoami)/Dotfiles/rofi/clipboard.sh"
-LABELS["clipboard"]=""
+# open custom www searches
+COMMANDS["www"]="/home/$(whoami)/Dotfiles/bin/script/web.sh"
+LABELS["www"]=""
 
 # bins
 COMMANDS["bin"]="rofi -show run"
 LABELS["bin"]=""
 
-#COMMANDS["window"]="rofi -show window"
-##LABELS["window"]=""
+COMMANDS["win"]="rofi -show window"
+LABELS["win"]=""
 
 ################################################################################
 # do not edit below

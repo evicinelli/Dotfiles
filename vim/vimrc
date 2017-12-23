@@ -10,6 +10,7 @@ Plug 'tpope/vim-surround'				" Surrounding motions on steroid
 Plug 'sheerun/vim-polyglot'				" A collection of language pack 
 Plug 'freitass/todo.txt-vim'				" Todo.txt support
 Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}	" Tagbar
+Plug 'mileszs/ack.vim'					" Vim Ack Vim Ack
 call plug#end()
 "}}}
 "
@@ -39,7 +40,7 @@ set shell=/bin/bash		" Which shell to use
 
 " Appearance {{{
 set cursorline			" Highlight current line
-set linespace=7			" Line spacing
+set linespace=3			" Line spacing
 set fillchars+=vert:\|		" Vertical separator char
 set shortmess+=I		" No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
@@ -65,7 +66,10 @@ endif
 let anyfold_activate = 1
 let anyfold_fold_comments = 1
 let g:startify_custom_header = []
-let loaded_netrwPlugin = 1	" No netrw if a directory is open
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 0
+let NERDTreeChDirMode = 0
+"let loaded_netrwPlugin = 1	" No netrw if a directory is open
 " }}}
 
 " Statusline {{{
@@ -84,6 +88,7 @@ inoremap [ []<Esc>i
 inoremap ( ()<Esc>i
 inoremap " ""<Esc>i
 inoremap ` ``<Esc>i
+inoremap <Tab><Tab> <C-n>
 inoremap <C-Backspace> <Esc>diwa
 " }}}
 

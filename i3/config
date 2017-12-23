@@ -17,7 +17,6 @@ set $workspace10  "10:10"
 # }}}
 
 # INITIAL SETTINGS {{{
-# workspace_layout tabbed
 set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
@@ -74,7 +73,7 @@ bindsym $mod+shift+a focus child
 
 # THEMING {{{
 font pango:Source Sans Pro 8
-bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
+bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
 set $barBackground #282828
 set $unfocused #282828
 set $text #fbf1c7
@@ -87,7 +86,7 @@ client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
 client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
 client.urgent 		$urgent			$urgent 		$text 		 $base0F
 bar {
-        position top
+#        position top
 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
 	font pango:Inconsolata 12
 	strip_workspace_numbers yes
@@ -110,7 +109,7 @@ for_window [class = "Spotify"] move to workspace $workspace10
 # }}}
 
 # APP-SPECIFIC BINDINGS {{{
-bindsym Shift+space exec --no-startup-id bash $HOME/Dotfiles/rofi/winston.sh
+bindsym Shift+space exec --no-startup-id bash $HOME/Dotfiles/bin/script/winston.sh
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -127,8 +126,8 @@ mode $sysmenu {
 	bindsym e         exec --no-startup-id i3-nagbar -t warning -m 'Logout?' -b 'S' 'i3-msg exit' 
 	bindsym h         exec --no-startup-id systemctl poweroff
 	bindsym b         exec --no-startup-id systemctl reboot
-	bindsym s         exec --no-startup-id ~/Dotfiles/script/lock.sh -p && systemctl suspend;
-	bindsym l         exec --no-startup-id ~/Dotfiles/script/lock.sh -p
+	bindsym s         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p && systemctl suspend;
+	bindsym l         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p
 #	bindsym l         exec --no-startup-id i3lock
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
@@ -145,10 +144,10 @@ mode "resize" {
 set $monitor "Edpi1 - Hdmi1 - Clonato - Destra"
 bindsym $mod+m mode $monitor
 mode $monitor {
-	bindsym e exec --no-startup-id $HOME/Dotfiles/script/internal.sh; mode "default"
-	bindsym h exec --no-startup-id $HOME/Dotfiles/script/hdmi-1.sh; mode "default"
-	bindsym c exec --no-startup-id $HOME/Dotfiles/script/clonato.sh; mode "default"
-	bindsym d exec --no-startup-id $HOME/Dotfiles/script/destra.sh; mode "default"
+	bindsym e exec --no-startup-id $HOME/Dotfiles/bin/internal.sh; mode "default"
+	bindsym h exec --no-startup-id $HOME/Dotfiles/bin/hdmi-1.sh; mode "default"
+	bindsym c exec --no-startup-id $HOME/Dotfiles/bin/clonato.sh; mode "default"
+	bindsym d exec --no-startup-id $HOME/Dotfiles/bin/destra.sh; mode "default"
 	bindsym Escape mode "default"
 }
 # }}}

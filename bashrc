@@ -127,8 +127,8 @@ export UNR="/home/vic/Documenti/AppuntiUni/Reti/Vic"
 export UNS="/home/vic/Documenti/AppuntiUni/SO/Vic"
 export OC="/home/vic/ownCloud"
 export PWS="/home/vic/ownCloud/Archivio/Password-store"
-export TODO="/home/vic/ownCloud/todo.txt"
-export DONE="/home/vic/ownCloud/done.txt"
+export TD="/home/vic/ownCloud/todo.txt"
+export DN="/home/vic/ownCloud/done.txt"
 
 # Prompt
 ps1_hostname() {
@@ -142,16 +142,22 @@ PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\]:\[\e[0m\] "
 
 # Alias
 alias gi="gvim"
-alias o="xdg-open"
+alias open="xdg-open"
 alias t="tree . -L 1"
 alias tt="tree . -L 2"
 alias ttt="tree . -L 3"
+
 #Funzioni
 ffind() {
-    find $1 -type f -name $2
+    find $1 -type f -name $2 2> /dev/null
 }
+
 dirfind() {
-    find $1 -type d -name $2
+    find $1 -type d -name $2 2> /dev/null
+}
+
+todo-add(){
+    echo $1 >> $TD
 }
 source /usr/share/bash-completion/completions/pass
 bind TAB:menu-complete

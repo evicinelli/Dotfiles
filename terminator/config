@@ -1,5 +1,4 @@
 [global_config]
-  borderless = True
   enabled_plugins = InactivityWatch, CustomCommandsMenu, APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
   tab_position = bottom
