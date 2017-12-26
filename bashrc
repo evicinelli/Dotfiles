@@ -73,34 +73,13 @@ case "$TERM" in
 	;;
 esac
 
-# enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
-alias lr='ls -R'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -115,20 +94,25 @@ fi
 # }}}
 
 # Mia robina {{{
+
 # Vim keys
 set -o vi
+bind TAB:menu-complete
+bind Control-l:clear-screen
 
 # VARS
 export EDITOR=vim
-#export VISUAL=gvim
-export DOTS='/home/vic/Dotfiles'
+export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/Documenti/AppuntiUni"
 export UNR="/home/vic/Documenti/AppuntiUni/Reti/Vic"
 export UNS="/home/vic/Documenti/AppuntiUni/SO/Vic"
 export OC="/home/vic/ownCloud"
-export PWS="/home/vic/ownCloud/Archivio/Password-store"
+export PW="/home/vic/ownCloud/Archivio/Password-store"
 export TD="/home/vic/ownCloud/todo.txt"
 export DN="/home/vic/ownCloud/done.txt"
+source $DF/bash_alias
+
+source $DF/bash_functions
 
 # Prompt
 ps1_hostname() {
@@ -138,16 +122,11 @@ ps1_hostname() {
 	echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host "
     fi
 }
+
 PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\]:\[\e[0m\] "
 
-# Alias
-alias gi="gvim"
-alias open="xdg-open"
-alias t="tree . -L 1"
-alias tt="tree . -L 2"
-alias ttt="tree . -L 3"
 
-#Funzioni
+# Funzioni
 ffind() {
     find $1 -type f -name $2 2> /dev/null
 }
@@ -157,8 +136,24 @@ dirfind() {
 }
 
 todo-add(){
-    echo $1 >> $TD
+    echo "$1 @background">> $TD
 }
+
+# Sourcing external files
 source /usr/share/bash-completion/completions/pass
-bind TAB:menu-complete
-bind Control-l:clear-screen
+
+# Alias definitions.
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias l='pwd;ls --group-directories-first -l -h'
+alias gi="gvim"
+alias o="xdg-open"
+alias t="tree . -L 1"
+alias tt="tree . -L 2"
+alias ttt="tree . -L 3"
+alias h="man"
+alias p="bash /home/vic/Dotfiles/bin/fpass"

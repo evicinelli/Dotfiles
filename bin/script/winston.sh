@@ -11,11 +11,11 @@
 # FUNZIONAMENTO
 # Con l'opzione autoselect di rofi lo si rende praticamente uguale al sistema
 # di parole chiave con cui lavora alfred per mac: 
-# + ap - applicazioni
-# + f  - file
-# + bi - binari                                                                          
-# + wi - finestre aperte                                                                 
-# + we - ricerca sul www (con duckduckgo + bangs si cerca in praticamente qualsiasi sito)
+# - a  - applicazioni
+# - f  - file
+# - b  - binari                                                                          
+# - wi - finestre aperte                                                                 
+# w - ww - ricerca sul www (con duckduckgo + bangs si cerca in praticamente qualsiasi sito)
 ###
 
 declare -A LABELS
