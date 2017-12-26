@@ -3,7 +3,7 @@
 FILTER="s:${PW}::;s:.gpg::"
 IFS=$'\n'
 
-PWS=($(find $PW -type f -name "*$1*.gpg" | sed -e $FILTER ))
+PWS=($(find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER ))
 PWN=${#PWS[*]}
 
 if [[ $PWN -ne 1 ]];
