@@ -9,21 +9,6 @@ export TD="/home/vic/ownCloud/todo.txt"
 export DN="/home/vic/ownCloud/done.txt"
 
 alias ls='ls --color=auto'
-alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias l='pwd;ls --group-directories-first -l -h'
-alias gi="gvim"
-alias o="xdg-open"
-alias t="tree . -L 1"
-alias tt="tree . -L 2"
-alias ttt="tree . -L 3"
-alias h="man"
-alias pfind="bash /home/vic/Dotfiles/bin/pfind"
-alias p="pass"
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'

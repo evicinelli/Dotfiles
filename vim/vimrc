@@ -87,6 +87,7 @@ noremap <C-n> :NERDTreeToggle<CR>
 noremap <C-g> :Goyo<CR>
 noremap <F1> nop
 noremap Q :q!
+noremap <leader>so :!xdg-open "%" <CR>
 inoremap { {}<Esc>i
 inoremap [ []<Esc>i
 inoremap ( ()<Esc>i
@@ -94,4 +95,11 @@ inoremap " ""<Esc>i
 inoremap ` ``<Esc>i
 inoremap <F1> <Esc>
 inoremap <C-Backspace> <C-w>
+" }}}
+
+" Autogroups {{{
+augroup nonvim
+    au!
+    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &ft=&ft | redraw!
+augroup end
 " }}}

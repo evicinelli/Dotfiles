@@ -49,6 +49,8 @@ fi
 set -o vi
 bind TAB:menu-complete
 bind Control-l:clear-screen
+
+# Shell options
 shopt -s autocd
 shopt -s cdspell
 shopt -s dirspell
