@@ -66,7 +66,7 @@ endif
 " Plugin settings {{{
 let anyfold_activate = 1
 let anyfold_fold_comments = 1
-let g:startify_custom_header = [    system("motivation")]
+let g:startify_custom_header = [system("motivation")]
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let NERDTreeChDirMode = 0
