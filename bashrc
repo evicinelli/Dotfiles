@@ -82,3 +82,8 @@ PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\]:\[\e[0m\] "
 
 # Sourcing external files
 source /usr/share/bash-completion/completions/pass
+
+# Motivational quote
+# echo -ne "\n\n"
+# echo -ne "\t\t\t\t\t $(motivation)"
+# echo -ne "\n\n"

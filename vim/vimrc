@@ -1,4 +1,4 @@
-" Vim-plug {{{
+﻿" Vim-plug {{{
 call plug#begin()
 Plug 'tpope/vim-sensible'				" Sensible default
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'}" Nerdtree
@@ -11,6 +11,7 @@ Plug 'sheerun/vim-polyglot'				" A collection of language pack
 Plug 'freitass/todo.txt-vim'				" Todo.txt support
 Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}	" Tagbar
 Plug 'mileszs/ack.vim'					" Vim Ack
+Plug 'mtth/scratch.vim'					" Scratch buffer made easy
 call plug#end()
 "}}}
 "
@@ -36,8 +37,6 @@ set linebreak			" Break long lines at spaces, not in the middle of a word
 set hidden			" Allow to switch buffer without saving it
 set colorcolumn=+1		" Hilight column where the 81/th char lives
 set shell=/bin/bash\ -i		" Which shell to use
-""set shellcmdflag="-ic"		" Interactively run bash, so it knows about what's inside bashrc
-""set shell=/bin/bash\ --rcfile\ ~/.bash_profile
 "}}}
 
 " Appearance {{{
@@ -67,7 +66,7 @@ endif
 " Plugin settings {{{
 let anyfold_activate = 1
 let anyfold_fold_comments = 1
-let g:startify_custom_header = []
+let g:startify_custom_header = [    system("motivation")]
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let NERDTreeChDirMode = 0
@@ -87,7 +86,10 @@ noremap <C-n> :NERDTreeToggle<CR>
 noremap <C-g> :Goyo<CR>
 noremap <F1> nop
 noremap Q :q!
+noremap H ^
+noremap L g_
 noremap <leader>so :!xdg-open "%" <CR>
+noremap <leader>a :Ack
 inoremap { {}<Esc>i
 inoremap [ []<Esc>i
 inoremap ( ()<Esc>i
