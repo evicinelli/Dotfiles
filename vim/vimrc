@@ -70,7 +70,8 @@ let g:startify_custom_header = [system("motivation")]
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let NERDTreeChDirMode = 0
-"let loaded_netrwPlugin = 1	" No netrw if a directory is open
+let g:goyo_height = 50
+let g:goyo_width = 130
 " }}}
 
 " Statusline {{{

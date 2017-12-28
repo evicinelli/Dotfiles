@@ -1,10 +1,12 @@
 [global_config]
+  broadcast_default = off
   enabled_plugins = InactivityWatch, CustomCommandsMenu, APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
   tab_position = bottom
   title_font = Inconsolata Medium 12
   title_use_system_font = False
 [keybindings]
+  help = <Shift><Alt><Super>Menu
   new_window = <Primary><Shift>n
 [layouts]
   [[default]]
