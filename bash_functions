@@ -7,18 +7,32 @@ dirfind() {
 }
 
 todo-add(){
-echo "$(date +%F\ %H:%M) $1  due:$(date +%F) +background">> $TD
+    if [[ $# -gt 0 ]]; then
+	echo "$1 +background" >> $TD
+    else 
+	echo "Nope, dammi qualcosa da fare!"
+    fi
 }
 
 todo-ls() {
-if [[ $# -gt 0 ]];
-then
-    grep "due:$1" $TD
-else
-    grep "due:$(date +%F)" $TD
-fi
+#    echo -ne "\n"
+    if [[ $# -gt 0 ]];
+    then
+	grep -Gi "$1" $TD
+#	grep "due:*$1" $TD
+    else
+	grep "due:$(date +%F)" $TD
+    fi
+#    echo -ne "\n"
 }
 
+recent () {
+    find $OC -type f -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec echo {} \;
+}
+
+edit-recent () {
+    find $OC -type f -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim {} \+
+}
 motivation() {
     QUOTES=(
     "Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better. -Samuel Beckett "
@@ -28,7 +42,6 @@ motivation() {
     "Strive not to be a success, but rather to be of value. -Albert Einstein"
     "You miss 100% of the shots you don't take. -Wayne Gretzky"
     "People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents. -Andrew Carnegie"
-    "Design is not just what it looks like and feels like. Design is how it works. -Steve Jobs"
     "Only those who dare to fail greatly can ever achieve greatly. -Robert F. Kennedy"
     "All our dreams can come true, if we have the courage to pursue them. -Walt Disney "
     "Success consists of going from failure to failure without loss of enthusiasm. -Winston Churchill"

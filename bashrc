@@ -26,6 +26,13 @@ case "$TERM" in
 	;;
 esac
 
+# Do we need color?
+case "$TERM" in
+    xterm-*color) color_prompt=yes;;
+
+    *) color_prompt=no;;
+esac
+
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
@@ -73,13 +80,13 @@ source ~/Dotfiles/bash_functions
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
-    if [[ "$host" != "pelican" || "$user" != "vic" ]]; then
-	echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host "
-    fi
 }
 
-PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\]:\[\e[0m\] "
-
+if [ "$color_prompt" = "yes" ]; then
+    PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\]:\[\e[0m\] "
+else
+    PS1="$(ps1_hostname)\W: "
+fi
 # Sourcing external files
 source /usr/share/bash-completion/completions/pass
 
