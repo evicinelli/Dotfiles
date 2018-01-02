@@ -1,12 +1,15 @@
 export EDITOR=vim
 export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/Documenti/AppuntiUni"
-export UNR="/home/vic/Documenti/AppuntiUni/Reti/Vic"
-export UNS="/home/vic/Documenti/AppuntiUni/SO/Vic"
 export OC="/home/vic/ownCloud"
 export PW="/home/vic/ownCloud/Archivio/Password-store"
 export TD="/home/vic/ownCloud/todo.txt"
 export DN="/home/vic/ownCloud/done.txt"
+export DOC="/home/vic/ownCloud/Documenti/"
+export DWN="/home/vic/Scaricati/"
+export NOTES="/home/vic/ownCloud/Notes/"
+export WS="/home/vic/ownCloud/Workspace/"
+export MEDIA="/home/vic/ownCloud/Media/"
 
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'

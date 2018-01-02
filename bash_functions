@@ -31,8 +31,9 @@ recent () {
 }
 
 edit-recent () {
-    find $OC -type f -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim {} \+
+    find $OC -type f -regex ".*\.\(md\|txt\)" -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim -p {} \+
 }
+
 motivation() {
     QUOTES=(
     "Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better. -Samuel Beckett "
@@ -55,6 +56,7 @@ motivation() {
     "Believe you can and you’re halfway there. –Theodore Roosevelt"
     "Everything you’ve ever wanted is on the other side of fear. –George Addair"
     "You take your life in your own hands, and what happens? A terrible thing, no one to blame –Erica Jong"
+    "Whether you think you can or you think you can’t, you’re right. –Henry Ford"
     )
 
     I=${QUOTES["RANDOM%${#QUOTES[@]}"]}

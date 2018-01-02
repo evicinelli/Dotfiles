@@ -26,7 +26,7 @@ case "$TERM" in
 	;;
 esac
 
-# Do we need color?
+# Do we want color?
 case "$TERM" in
     xterm-*color) color_prompt=yes;;
 
