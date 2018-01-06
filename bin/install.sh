@@ -16,7 +16,7 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB31
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 
 # Rimuovo le cose non necessarie
-sudo apt remove gedit
+# sudo apt remove gedit
 
 # Installo le cose
 sudo apt update
@@ -24,6 +24,11 @@ sudo apt install i3 i3blocks rofi vim vim-gtk3 terminator fonts-inconsolata comp
 
 # Vim Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Modifichine ai file di configurazione in giro
+sudo tee -a /usr/share/bash-completion/completions/pass << EOF
+complete -o filenames -o nospace -F _pass p
+EOF
 
 # Aggiorno e pulisco tutto
 sudo apt upgrade
@@ -34,13 +39,13 @@ sudo apt autoclean
 
 # Collego i dotfiles
 mkdir $HOME/.config/dunst
-ln -sf $HOME/Dotfiles/i3 $HOME/.config/i3
-ln -sf $HOME/Dotfiles/terminator $HOME/.config/terminator
-ln -sf $HOME/Dotfiles/bashrc $HOME/.bashrc
-ln -sf $HOME/Dotfiles/rofi $HOME/.config/rofi
-ln -sf $HOME/Dotfiles/vim/vimrc $HOME/.vimrc
-ln -sf $HOME/Dotfiles/compton.conf $HOME/.compton.conf
-ln -sf $HOME/Dotfiles/mimeapps.cache $HOME/.local/share/applications/mimeinfo.cache
-sudo ln -sf $HOME/Dotfiles/dunstrc $HOME/.config/dunst/dunstrc
+cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/i3
+cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/terminator
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/bashrc
+cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/rofi
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/vim/vimrc
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/compton.conf
+cd $HOME/.local/share/applications/ ; ln -sf $HOME/Dotfiles/mimeinfo.cache
+cd $HOME/.config/dunst/             ; ln -sf $HOME/Dotfiles/dunstrc
 
 echo "Fatto, fai meglio a controllare però"

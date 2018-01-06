@@ -19,9 +19,8 @@ todo-ls() {
     if [[ $# -gt 0 ]];
     then
 	grep -Gi "$1" $TD
-#	grep "due:*$1" $TD
     else
-	grep "due:$(date +%F)" $TD
+	cat $TD | sort | grep "due:$(date +%F)"
     fi
 #    echo -ne "\n"
 }
@@ -48,15 +47,20 @@ motivation() {
     "Success consists of going from failure to failure without loss of enthusiasm. -Winston Churchill"
     "The start is what stops most people. -Don Shula"
     "Genius: one percent inspiration and 99 percent perspiration -Thomas Edison"
-    "The best time to plant a tree was 20 years ago. The second best time is now. –Chinese Proverb"
-    "I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed. –Michael Jordan"
-    "If you hear a voice within you say “you cannot paint,” then by all means paint and that voice will be silenced. –Vincent Van Gogh"
-    "I attribute my success to this: I never gave or took any excuse. –Florence Nightingale"
-    "People often say that motivation doesn’t last. Well, neither does bathing.  That’s why we recommend it daily. –Zig Ziglar"
-    "Believe you can and you’re halfway there. –Theodore Roosevelt"
-    "Everything you’ve ever wanted is on the other side of fear. –George Addair"
-    "You take your life in your own hands, and what happens? A terrible thing, no one to blame –Erica Jong"
-    "Whether you think you can or you think you can’t, you’re right. –Henry Ford"
+    "The best time to plant a tree was 20 years ago. The second best time is now. -Chinese Proverb"
+    "I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed. -Michael Jordan"
+    "If you hear a voice within you say “you cannot paint,” then by all means paint and that voice will be silenced. -Vincent Van Gogh"
+    "I attribute my success to this: I never gave or took any excuse. -Florence Nightingale"
+    "People often say that motivation doesn’t last. Well, neither does bathing.  That’s why we recommend it daily. -Zig Ziglar"
+    "Believe you can and you’re halfway there. -Theodore Roosevelt"
+    "Everything you’ve ever wanted is on the other side of fear. -George Addair"
+    "You take your life in your own hands, and what happens? A terrible thing, no one to blame -Erica Jong"
+    "Whether you think you can or you think you can’t, you’re right. -Henry Ford"
+    "If the wind will not serve, take to the oars. -Latin Proverb"
+    "Fall seven times and stand up eight. -Japanese Proverb"
+    "Start where you are. Use what you have. Do what you can. -Arthur Ashe"
+    "When I stand before God at the end of my life, I would hope that I would not have a single bit of talent left and could say, I used everything you gave me. -Erma Bombeck"
+    "The only person you are destined to become is the person you decide to be. -Ralph Waldo Emerson"
     )
 
     I=${QUOTES["RANDOM%${#QUOTES[@]}"]}

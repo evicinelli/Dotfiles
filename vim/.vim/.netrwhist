@@ -1,5 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/vic/Documenti/AppuntiUni/Algoritmi/Vic'
-let g:netrw_dirhist_2='/home/vic/ownCloud'
-let g:netrw_dirhist_3='/home/vic/Dotfiles/vim/.vim'
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/vic/Documenti/AppuntiUni/Ottimizzazione/Simo'
+let g:netrw_dirhist_2='/home/vic/Documenti/AppuntiUni/Ottimizzazione'
+let g:netrw_dirhist_3='/home/vic/Documenti/AppuntiUni'
+let g:netrw_dirhist_4='/home/vic/Documenti'
+let g:netrw_dirhist_5='/home/vic'
+let g:netrw_dirhist_6='/home'
+let g:netrw_dirhist_7='/'
+let g:netrw_dirhist_8='/home/vic/Documenti/AppuntiUni/Ottimizzazione/Simo/slidesEtDispense/esami'
+let g:netrw_dirhist_9='/home/vic/Documenti/AppuntiUni/Algoritmi/Vic'

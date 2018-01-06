@@ -1,17 +1,18 @@
 ﻿" Vim-plug {{{
 call plug#begin()
-Plug 'tpope/vim-sensible'				" Sensible default
-Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'}" Nerdtree
-Plug 'morhetz/gruvbox'					" Colorscheme
-Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'} 		" Goyo - distraction free writing
-Plug 'airblade/vim-gitgutter'				" Git diff aside line numbers
-Plug 'mhinz/vim-startify'				" Vim-startify
-Plug 'tpope/vim-surround'				" Surrounding motions on steroid
-Plug 'sheerun/vim-polyglot'				" A collection of language pack 
-Plug 'freitass/todo.txt-vim'				" Todo.txt support
-Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}	" Tagbar
-Plug 'mileszs/ack.vim'					" Vim Ack
-Plug 'mtth/scratch.vim'					" Scratch buffer made easy
+Plug 'tpope/vim-sensible'                                " Sensible default
+Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
+Plug 'morhetz/gruvbox'                                   " Colorscheme
+Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
+Plug 'airblade/vim-gitgutter'                            " Git diff aside line numbers
+Plug 'mhinz/vim-startify'                                " Vim-startify
+Plug 'tpope/vim-surround'                                " Surrounding motions on steroid
+Plug 'sheerun/vim-polyglot'                              " A collection of language pack
+Plug 'freitass/todo.txt-vim'                             " Todo.txt support
+Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
+Plug 'mileszs/ack.vim'                                   " Vim Ack
+Plug 'mtth/scratch.vim'                                  " Scratch buffer made easy
+Plug 'godlygeek/tabular'                                 " Tabularize
 call plug#end()
 "}}}
 "
@@ -91,6 +92,7 @@ noremap <F1> nop
 noremap Q :q!
 noremap H ^
 noremap L g_
+noremap Y y$
 noremap <leader>so :!xdg-open "%" <CR>
 noremap <leader>a :Ack
 noremap <F8> :se spell!<CR>
@@ -125,4 +127,15 @@ augroup nonvim
     au!
     au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &ft=&ft | redraw!
 augroup end
+" }}}
+
+" Functions {{{
+function! s:DiffWithSaved()
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
 " }}}

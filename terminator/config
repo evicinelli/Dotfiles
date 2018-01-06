@@ -6,6 +6,7 @@
   title_font = Inconsolata Medium 12
   title_use_system_font = False
 [keybindings]
+  group_all = <Primary><Alt>g
   help = <Shift><Alt><Super>Menu
   new_window = <Primary><Shift>n
 [layouts]
