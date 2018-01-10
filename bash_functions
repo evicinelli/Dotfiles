@@ -15,14 +15,15 @@ todo-add(){
 }
 
 todo-ls() {
-#    echo -ne "\n"
-    if [[ $# -gt 0 ]];
-    then
-	grep -Gi "$1" $TD
+    if [[ $# -gt 0 ]]; then
+	if date -d "$1" > /dev/null 2>&1; then
+	    grep -Gi "$(date +%F --date="$1")" $TD
+	else
+	    grep -Gi "$1" $TD
+	fi
     else
 	cat $TD | sort | grep "due:$(date +%F)"
     fi
-#    echo -ne "\n"
 }
 
 recent () {
@@ -30,7 +31,29 @@ recent () {
 }
 
 edit-recent () {
-    find $OC -type f -regex ".*\.\(md\|txt\)" -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim -p {} \+
+    find $OC -type f -regex ".*\.\(md\|txt\)" -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim "{}" \+
+}
+
+clean-swp () {
+    find $HOME -name "*.swp" -ok rm "{}" \;
+    find $HOME -name "*.swo" -ok rm "{}" \;
+}
+
+transfer() {
+    if [ $# -eq 0 ]; then
+	echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
+	return 1;
+    fi
+    tmpfile=$( mktemp -t transferXXX );
+    if tty -s; then
+	basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
+	curl -H "Max-Downloads: 3" -H "Max-Days: 2" --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
+    else curl -H "Max-Downloads: 3" -H "Max-Days: 2" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
+    fi;
+    cat $tmpfile | xclip -selection c;
+    cat $tmpfile;
+    echo -e "\n"
+    rm -f $tmpfile;
 }
 
 motivation() {
@@ -62,8 +85,6 @@ motivation() {
     "When I stand before God at the end of my life, I would hope that I would not have a single bit of talent left and could say, I used everything you gave me. -Erma Bombeck"
     "The only person you are destined to become is the person you decide to be. -Ralph Waldo Emerson"
     )
-
     I=${QUOTES["RANDOM%${#QUOTES[@]}"]}
     echo -ne "   $I\n"
 }
-

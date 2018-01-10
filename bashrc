@@ -28,7 +28,7 @@ esac
 
 # Do we want color?
 case "$TERM" in
-    xterm-*color) color_prompt=yes;;
+    xterm-*color|rxvt-unicode-256color) color_prompt=yes;;
 
     *) color_prompt=no;;
 esac

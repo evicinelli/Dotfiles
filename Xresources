@@ -13,7 +13,7 @@ URxvt*iso14755        : false
 URxvt*iso14755_52     : false
 URxvt.perl-ext-common : dault,matcher
 URxvt.url-launcher    : /usr/bin/xdg-open
-URxvt*urlLauncher     : /usr/bin/chromium
+URxvt*urlLauncher     : /home/vic/Scaricati/Apps/Firefox\ Dev/firefox
 URxvt.matcher.button: 1
 
 ! Colorscheme
