@@ -8,7 +8,7 @@ dirfind() {
 
 todo-add(){
     if [[ $# -gt 0 ]]; then
-	echo "$1 +background" >> $TD
+	echo "$*" "+background" >> $TD
     else 
 	echo "Nope, dammi qualcosa da fare!"
     fi
@@ -16,14 +16,39 @@ todo-add(){
 
 todo-ls() {
     if [[ $# -gt 0 ]]; then
-	if date -d "$1" > /dev/null 2>&1; then
-	    grep -Gi "$(date +%F --date="$1")" $TD
+	if date -d "$*" > /dev/null 2>&1; then
+	    grep -Gi "$(date +%F --date="$*")" $TD
 	else
 	    grep -Gi "$1" $TD
 	fi
     else
-	cat $TD | sort | grep "due:$(date +%F)"
+	cat $TD | grep "due:$(date +%F)"
     fi
+}
+
+todo-done () {
+# echo "$*"
+# FILE="t.txt"
+# echo $FILE
+if [[ $# -gt 0 ]]; then
+    ENTRIES_NO=$(sed -n "/$*/p" $TD | grep -c "")
+    ENTRY=$(sed -n "/$*/p" $TD)
+    # echo $ENTRIES
+    # echo $ENTRIES_NO
+    if [[ $ENTRIES_NO -eq 1 ]]; then
+	# Marchiamo quell'entry come completata nel file
+	echo -e "Marco come completato: "$ENTRY
+	sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
+    else 
+	echo -e "Più di un match, specifica meglio cosa vuoi marcare come compleato"
+	echo -e $ENTRY
+    fi
+else
+   echo "Scrivi cosa vuoi che venga marcato come fatto, testina!" 
+fi
+
+# Trovare un modo più carino per farlo
+rm /home/vic/ownCloud/todo.txtn
 }
 
 recent () {

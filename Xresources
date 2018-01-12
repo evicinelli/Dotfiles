@@ -1,7 +1,5 @@
-URxvt*depth           : 256
+URxvt*depth           : 32
 URxvt*buffered        : true
-URxvt*shading         : 30
-URxvt*fading          : 10%
 URxvt*internalBorder  : 20
 URxvt*scrollBar       : false
 URxvt*pointerBlank    : true
@@ -15,31 +13,56 @@ URxvt.perl-ext-common : dault,matcher
 URxvt.url-launcher    : /usr/bin/xdg-open
 URxvt*urlLauncher     : /home/vic/Scaricati/Apps/Firefox\ Dev/firefox
 URxvt.matcher.button: 1
-
+URxvt*foreground      : #aaaaaa
+URxvt*background : #000000
 ! Colorscheme
-*background: #282828
-*foreground: #ebdbb2
-! Black + DarkGrey
-*color0:  #282828
-*color8:  #928374
-! DarkRed + Red
-*color1:  #cc241d
-*color9:  #fb4934
-! DarkGreen + Green
-*color2:  #98971a
-*color10: #b8bb26
-! DarkYellow + Yellow
-*color3:  #d79921
-*color11: #fabd2f
-! DarkBlue + Blue
-*color4:  #458588
-*color12: #83a598
-! DarkMagenta + Magenta
-*color5:  #b16286
-*color13: #d3869b
-! DarkCyan + Cyan
-*color6:  #689d6a
-*color14: #8ec07c
-! LightGrey + White
-*color7:  #a89984
-*color15: #ebdbb2
+!black
+*color0 :            #222222
+*color8 :            #454545
+!red
+*color1 :            #B22222
+*color9 :            #FA8072
+!green
+*color2 :            #556B2F
+*color10:            #779A3E
+!yellow
+*color3 :            #B8860B
+*color11:            #DAA520
+!blue
+*color4 :            #4682B4
+*color12:            #6495ED
+!magenta
+*color5 :            #9932CC
+*color13:            #DA70D6
+!cyan
+*color6 :            #87CEEB
+*color14:            #B0E0E6
+!white
+*color7 :            #C0C0C0
+*color15: #FFFFFF
+! *background: #282828
+! *foreground: #ebdbb2
+! ! Black + DarkGrey
+! *color0:  #282828
+! *color8:  #928374
+! ! DarkRed + Red
+! *color1:  #cc241d
+! *color9:  #fb4934
+! ! DarkGreen + Green
+! *color2:  #98971a
+! *color10: #b8bb26
+! ! DarkYellow + Yellow
+! *color3:  #d79921
+! *color11: #fabd2f
+! ! DarkBlue + Blue
+! *color4:  #458588
+! *color12: #83a598
+! ! DarkMagenta + Magenta
+! *color5:  #b16286
+! *color13: #d3869b
+! ! DarkCyan + Cyan
+! *color6:  #689d6a
+! *color14: #8ec07c
+! ! LightGrey + White
+! *color7:  #a89984
+! *color15: #ebdbb2

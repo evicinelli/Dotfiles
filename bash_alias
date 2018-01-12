@@ -11,25 +11,32 @@ export NOTES="/home/vic/ownCloud/Notes/"
 export WS="/home/vic/ownCloud/Workspace/"
 export MEDIA="/home/vic/ownCloud/Media/"
 
+# Colori
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+# Troppo lunghi da scrivere
 alias l='pwd;ls --group-directories-first -l -h'
 alias gi="gvim"
 alias o="xdg-open"
 alias t="tree . -L 1"
 alias tt="tree . -L 2"
 alias ttt="tree . -L 3"
+alias firefox="/home/vic/Scaricati/Apps/Firefox\ Dev/firefox"
+alias count="grep -c \"\""
 alias h="man"
 alias pfind="bash /home/vic/Dotfiles/bin/pfind"
 alias p="pass"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
-alias remindme="bash /home/vic/Dotfiles/bin/remindme.sh"
 alias please="sudo "
+
+# Todo
 alias ta="todo-add"
 alias tl="todo-ls"
+alias td="todo-done"
 alias te="vi $TD"
-alias firefox="/home/vic/Scaricati/Apps/Firefox\ Dev/firefox"
+alias remindme="bash /home/vic/Dotfiles/bin/remindme.sh"

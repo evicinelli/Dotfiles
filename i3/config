@@ -75,7 +75,7 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Inconsolata 9
+font pango:Source Sans Pro 8
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
 set $barBackground #282828
 set $unfocused #282828
