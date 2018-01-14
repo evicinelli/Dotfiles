@@ -1,3 +1,5 @@
+# Bash function di cui si fa il source fa .bashrc
+# Molte cose potrebbero essere scritte in un modo un filino migliore
 ffind() {
     find $1 -type f -iwholename "*$2*" 2> /dev/null
 }
@@ -27,9 +29,6 @@ todo-ls() {
 }
 
 todo-done () {
-# echo "$*"
-# FILE="t.txt"
-# echo $FILE
 if [[ $# -gt 0 ]]; then
     ENTRIES_NO=$(sed -n "/$*/p" $TD | grep -c "")
     ENTRY=$(sed -n "/$*/p" $TD)
@@ -41,14 +40,18 @@ if [[ $# -gt 0 ]]; then
 	sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
     else 
 	echo -e "Più di un match, specifica meglio cosa vuoi marcare come compleato"
-	echo -e $ENTRY
+	# Trovare un modo più carino per fare pure questo
+	grep "$*" $TD
     fi
 else
    echo "Scrivi cosa vuoi che venga marcato come fatto, testina!" 
 fi
 
 # Trovare un modo più carino per farlo
-rm /home/vic/ownCloud/todo.txtn
+if [ -w /home/vic/ownCloud/todo.txtn ]; then
+    rm /home/vic/ownCloud/todo.txtn
+fi
+
 }
 
 recent () {

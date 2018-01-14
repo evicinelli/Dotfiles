@@ -1,6 +1,6 @@
 URxvt*depth           : 32
 URxvt*buffered        : true
-URxvt*internalBorder  : 20
+!URxvt*internalBorder  : 20
 URxvt*scrollBar       : false
 URxvt*pointerBlank    : true
 URxvt*font            : xft:Inconsolata:size=12
