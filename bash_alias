@@ -12,15 +12,19 @@ export WS="/home/vic/ownCloud/Workspace/"
 export MEDIA="/home/vic/ownCloud/Media/"
 
 # Colori
-alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+if [[ $color_prompt == "yes" ]]; then 
+    alias ls='ls --color=auto --group-directories-first -h -X'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+else
+    alias ls='ls --group-directories-first -h -X'
+fi
 
 # Troppo lunghi da scrivere
-alias l='pwd;ls --group-directories-first -l -h'
+alias l='pwd;ls --group-directories-first -l -h -X'
 alias gi="gvim"
 alias o="xdg-open"
 alias t="tree . -L 1"
@@ -33,6 +37,8 @@ alias pfind="bash /home/vic/Dotfiles/bin/pfind"
 alias p="pass"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
 alias please="sudo "
+alias bashr="source ~/.bashrc"
+alias ssh-serverino="pass -c Casa/serverino-user && ssh user@192.168.1.197"
 
 # Git
 alias g="git"

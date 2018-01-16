@@ -10,8 +10,12 @@ dirfind() {
 
 todo-add(){
     if [[ $# -gt 0 ]]; then
-	echo "$*" "+background" >> $TD
-    else 
+	if [[ "$*" == "" ]]; then
+	    echo >> $TD
+	else
+	    echo "$*" "+background" >> $TD
+	fi
+    else
 	echo "Nope, dammi qualcosa da fare!"
     fi
 }
@@ -39,9 +43,13 @@ if [[ $# -gt 0 ]]; then
 	echo -e "Marco come completato: "$ENTRY
 	sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
     else 
-	echo -e "Più di un match, specifica meglio cosa vuoi marcare come compleato"
 	# Trovare un modo più carino per fare pure questo
-	grep "$*" $TD
+	if [[ $ENTRIES_NO -gt 1 ]]; then
+	    echo -e "Più di un match, specifica meglio cosa vuoi marcare come compleato"
+	    grep "$*" $TD
+	else
+	    echo -e "Nada de nada, mi sa che hai scritto male"
+	fi
     fi
 else
    echo "Scrivi cosa vuoi che venga marcato come fatto, testina!" 

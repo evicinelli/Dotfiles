@@ -20,7 +20,7 @@ call plug#end()
 syntax enable			" Enable syntax Highlighting
 filetype plugin on		" Filetype plugin
 filetype plugin indent on	" Specific indentation rules depending on file type 
-set number relativenumber	" Line numbers are relative to current line
+set relativenumber		" Line numbers are relative to current line
 set path^=**			" Recursive file search starting from current dir
 set wildmenu			" Tab autocompletion in menu
 set wildignorecase		" Ignore case when autocomplete
@@ -51,9 +51,6 @@ set shortmess+=I		" No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set guifont=Inconsolata\ 12
 colorscheme gruvbox		" Colorscheme 
-if has("termguicolors")
-    set termguicolors		" 256 color terminal support
-endif
 if has('gui_running')
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar
@@ -84,7 +81,7 @@ set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
 
 " }}}
 
-" Custom mappings {{{
+" Custom mappings and abbreviations {{{
 noremap <C-l> gt<CR>
 noremap <C-h> gT<CR>
 noremap <C-n> :NERDTreeToggle<CR>
@@ -98,6 +95,7 @@ noremap <leader>so :!xdg-open "%" <CR>
 noremap <leader>a :Ack 
 noremap <F8> :se spell!<CR>
 noremap viz [zjV]zk
+noremap <BS> -
 inoremap { {}<Left>
 inoremap [ []<Left>
 inoremap ( ()<Left>
@@ -105,6 +103,8 @@ inoremap " ""<Left>
 inoremap ` ``<Left>
 inoremap <F1> <Esc>
 inoremap <C-Backspace> <C-w>
+
+cabbrev f find
 " }}}
 
 " Extended text Objects (thanks to Conner McDaniel) {{{
