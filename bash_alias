@@ -1,17 +1,19 @@
+# Variables {{{
 export EDITOR=vim
-export DF='/home/vic/Dotfiles'
+export DOTS='/home/vic/Dotfiles'
 export UNI="/home/vic/Documenti/AppuntiUni"
 export OC="/home/vic/ownCloud"
 export PW="/home/vic/ownCloud/Archivio/Password-store"
 export TD="/home/vic/ownCloud/todo.txt"
 export DN="/home/vic/ownCloud/done.txt"
-export DOCS="/home/vic/ownCloud/Documenti/"
-export DOWNLOAD="/home/vic/Scaricati/"
+export DOCUMENTS="/home/vic/ownCloud/Documenti/"
+export DOWNLOADS="/home/vic/Scaricati/"
 export NOTES="/home/vic/ownCloud/Notes/"
 export WS="/home/vic/ownCloud/Workspace/"
 export MEDIA="/home/vic/ownCloud/Media/"
+# }}}
 
-# Colori
+# Colori {{{
 if [[ $color_prompt == "yes" ]]; then 
     alias ls='ls --color=auto --group-directories-first -h -X'
     alias dir='dir --color=auto'
@@ -22,8 +24,9 @@ if [[ $color_prompt == "yes" ]]; then
 else
     alias ls='ls --group-directories-first -h -X'
 fi
+# }}}
 
-# Troppo lunghi da scrivere
+# Troppo lunghi da scrivere {{{
 alias l='pwd;ls --group-directories-first -l -h -X'
 alias gi="gvim"
 alias o="xdg-open"
@@ -39,8 +42,9 @@ alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
 alias please="sudo "
 alias bashr="source ~/.bashrc"
 alias ssh-serverino="pass -c Casa/serverino-user && ssh user@192.168.1.197"
+# }}}
 
-# Git
+# Git {{{
 alias g="git"
 alias gs="git status"
 alias gd="git diff"
@@ -51,10 +55,12 @@ alias gpu="git push"
 alias gpll="git pull"
 alias gpl="git pull"
 alias glog="git log --graph --oneline"
+# }}}
 
-# Todo
+# Todo {{{
 alias ta="todo-add"
 alias tl="todo-ls"
 alias td="todo-done"
 alias te="vi $TD"
 alias remindme="bash /home/vic/Dotfiles/bin/remindme.sh"
+# }}}

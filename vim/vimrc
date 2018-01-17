@@ -2,7 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                                " Sensible default
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
-Plug 'morhetz/gruvbox'                                   " Colorscheme
+Plug 'chriskempson/base16-vim'                           " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                            " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                                " Vim-startify
@@ -50,7 +50,7 @@ set fillchars+=vert:\|		" Vertical separator char
 set shortmess+=I		" No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set guifont=Inconsolata\ 12
-colorscheme gruvbox		" Colorscheme 
+colorscheme base16-3024		" Colorscheme 
 if has('gui_running')
     set guioptions-=m	"remove menu bar
     set guioptions-=T	"remove toolbar

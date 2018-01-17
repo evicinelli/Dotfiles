@@ -22,7 +22,7 @@ set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
 bindsym --whole-window $mod+button2 kill
-bindsym Control+Mod1+t exec --no-startup-id terminator
+bindsym Control+Mod1+t exec --no-startup-id urxvt
 # }}}
 
 # WORKSPACES {{{
@@ -75,34 +75,34 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Source Sans Pro 8
+font pango:Sans 8
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
-set $barBackground #282828
-set $unfocused #282828
-set $text #fbf1c7
-set $urgent #cc241d
-set $focused #504945
-set $barAccent #83a598
-#          		border      		background 		text    	 indicator
-client.focused          $focused		$focused		$text	 	 $base0F
-client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
-client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
-client.urgent 		$urgent			$urgent 		$text 		 $base0F
-bar {
-#        position top
-	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-	font pango:Inconsolata 12
-	strip_workspace_numbers yes
-	colors {
-		separator $text
-		background $barBackground
-		statusline $text
-#		border			background		text
-		focused_workspace	$barAccent 		$barAccent		$barBackground
-		active_workspace	$barAccent 	 	$barAccent		$barBackground
-		inactive_workspace 	$barBackground		$barBackground		$text
-		urgent_workspace   	$urgent			$urgent			$barBackground
-	}
+# set $barBackground #282828
+# set $unfocused #282828
+# set $text #fbf1c7
+# set $urgent #cc241d
+# set $focused #504945
+# set $barAccent #83a598
+# #          		border      		background 		text    	 indicator
+# client.focused          $focused		$focused		$text	 	 $base0F
+# client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
+# client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
+# client.urgent 		$urgent			$urgent 		$text 		 $base0F
+ bar {
+# #        position top
+ 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
+ 	font pango:Inconsolata 12
+ 	strip_workspace_numbers yes
+# 	colors {
+# 		separator $text
+# 		background $barBackground
+# 		statusline $text
+# #		border			background		text
+# 		focused_workspace	$barAccent 		$barAccent		$barBackground
+# 		active_workspace	$barAccent 	 	$barAccent		$barBackground
+# 		inactive_workspace 	$barBackground		$barBackground		$text
+# 		urgent_workspace   	$urgent			$urgent			$barBackground
+# 	}
 }
 # }}}
 
@@ -130,8 +130,8 @@ mode $sysmenu {
 	bindsym h         exec --no-startup-id systemctl poweroff
 	bindsym b         exec --no-startup-id systemctl reboot
 	bindsym s         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p && systemctl suspend;
-	bindsym l         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p
-#	bindsym l         exec --no-startup-id i3lock
+#	bindsym l         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p
+	bindsym l         exec --no-startup-id i3lock
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
 }
