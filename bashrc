@@ -87,10 +87,7 @@ if [ "$color_prompt" = "yes" ]; then
 else
     PS1="$(ps1_hostname)\W: "
 fi
+
 # Sourcing external files
 source /usr/share/bash-completion/completions/pass
-
-# Motivational quote
-# echo -ne "\n\n"
-# echo -ne "\t\t\t\t\t $(motivation)"
-# echo -ne "\n\n"
+[[ -r .bashrc_local ]] && source .bashrc_local

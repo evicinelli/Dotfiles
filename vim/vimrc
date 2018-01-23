@@ -124,6 +124,11 @@ cabbrev f find
 " }}}
 
 " Autogroups {{{
+augroup text
+     au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=markdown
+     au BufNewFile,BufRead,BufWrite todo.txt setl ft=todo
+     au BufNewFile,BufRead,BufWrite done.txt setl ft=todo
+augroup end
 augroup nonvim
     au!
     au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &ft=&ft | redraw!

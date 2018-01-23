@@ -1,5 +1,4 @@
-# Bash function di cui si fa il source fa .bashrc
-# Molte cose potrebbero essere scritte in un modo un filino migliore
+# Find wrapper {{{
 ffind() {
     find $1 -type f -iwholename "*$2*" 2> /dev/null
 }
@@ -8,6 +7,21 @@ dirfind() {
     find $1 -type d -iwholename "*$2**" 2> /dev/null
 }
 
+recent () {
+    find $OC -type f -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec echo {} \;
+}
+
+edit-recent () {
+    find $OC -type f -regex ".*\.\(md\|txt\)" -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim "{}" \+
+}
+
+clean-swp () {
+    find $HOME -name "*.swp" -ok rm "{}" \;
+    find $HOME -name "*.swo" -ok rm "{}" \;
+}
+# }}}
+
+# Todo {{{
 todo-add(){
     if [[ $# -gt 0 ]]; then
 	if [[ "$*" == "" ]]; then
@@ -62,19 +76,16 @@ fi
 
 }
 
-recent () {
-    find $OC -type f -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec echo {} \;
+function todo-list-at () {
+    grep -o "@.[a-z]*" $TD | sort | uniq
 }
 
-edit-recent () {
-    find $OC -type f -regex ".*\.\(md\|txt\)" -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim "{}" \+
+function todo-list-projects () {
+    grep -o "\+.[a-z]*" $TD | sort | uniq
 }
+# }}}
 
-clean-swp () {
-    find $HOME -name "*.swp" -ok rm "{}" \;
-    find $HOME -name "*.swo" -ok rm "{}" \;
-}
-
+# Utility {{{
 transfer() {
     if [ $# -eq 0 ]; then
 	echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
@@ -92,6 +103,16 @@ transfer() {
     rm -f $tmpfile;
 }
 
+function count () {
+    if [[ $# -eq 1 ]]; then 
+	grep -c "$1"
+    else
+	grep -c ".*"
+    fi
+}
+# }}}
+
+# Motivation {{{
 motivation() {
     QUOTES=(
     "Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better. -Samuel Beckett "
@@ -124,3 +145,4 @@ motivation() {
     I=${QUOTES["RANDOM%${#QUOTES[@]}"]}
     echo -ne "   $I\n"
 }
+# }}}

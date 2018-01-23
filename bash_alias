@@ -1,7 +1,7 @@
 # Variables {{{
 export EDITOR=vim
 export DOTS='/home/vic/Dotfiles'
-export UNI="/home/vic/Documenti/AppuntiUni"
+export UNI="/home/vic/ownCloud/Uni/"
 export OC="/home/vic/ownCloud"
 export PW="/home/vic/ownCloud/Archivio/Password-store"
 export TD="/home/vic/ownCloud/todo.txt"
@@ -15,14 +15,14 @@ export MEDIA="/home/vic/ownCloud/Media/"
 
 # Colori {{{
 if [[ $color_prompt == "yes" ]]; then 
-    alias ls='ls --color=auto --group-directories-first -h -X'
+    alias ls='ls --color=auto --group-directories-first -h'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 else
-    alias ls='ls --group-directories-first -h -X'
+    alias ls='ls --group-directories-first -h'
 fi
 # }}}
 
@@ -34,7 +34,6 @@ alias t="tree . -L 1"
 alias tt="tree . -L 2"
 alias ttt="tree . -L 3"
 alias firefox="/home/vic/Scaricati/Apps/Firefox\ Dev/firefox"
-alias count="grep -c \"\""
 alias h="man"
 alias pfind="bash /home/vic/Dotfiles/bin/pfind"
 alias p="pass"
@@ -42,6 +41,7 @@ alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
 alias please="sudo "
 alias bashr="source ~/.bashrc"
 alias ssh-serverino="pass -c Casa/serverino-user && ssh user@192.168.1.197"
+alias pandoc="pandoc --latex-engine=lualatex -H ~/Modelli/settings.tex"
 # }}}
 
 # Git {{{
@@ -52,7 +52,6 @@ alias gr="git remove"
 alias ga="git add"
 alias gc="git commit -m"
 alias gpu="git push"
-alias gpll="git pull"
 alias gpl="git pull"
 alias glog="git log --graph --oneline"
 # }}}
