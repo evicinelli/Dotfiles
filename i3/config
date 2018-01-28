@@ -21,9 +21,9 @@ set $workspace10  "10:10"
 set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
-bindsym $mod+BackSpace kill
 bindsym --whole-window $mod+button2 kill
-bindsym $mod+Return  exec --no-startup-id urxvt
+bindsym Mod1+Control+t  exec --no-startup-id urxvt
+workspace_layout tabbed
 # }}}
 
 # WORKSPACES {{{
@@ -50,6 +50,8 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 bindsym $mod+Shift+Tab move container to workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
 workspace_auto_back_and_forth yes
+bindsym $mod+Return workspace next_on_output
+bindsym $mod+BackSpace workspace prev_on_output
 # }}}
 
 # CONTAINERS {{{
@@ -74,34 +76,34 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Sans 8
+font pango:Source Sans Pro 9
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
-# set $barBackground #282828
-# set $unfocused #282828
-# set $text #fbf1c7
-# set $urgent #cc241d
-# set $focused #504945
-# set $barAccent #83a598
-# #          		border      		background 		text    	 indicator
-# client.focused          $focused		$focused		$text	 	 $base0F
-# client.focused_inactive $unfocused   		$unfocused		$text	 	 $base0F
-# client.unfocused        $unfocused		$unfocused	     	$text		 $base0F
-# client.urgent 		$urgent			$urgent 		$text 		 $base0F
+set_from_resource $pdark background #282828
+set_from_resource $dark background #282828
+set_from_resource $text foreground #fbf1c7
+set_from_resource $urgent color9 #cc241d
+set_from_resource $clear color8 #504945
+set_from_resource $accent color6 #83a598
+#          		        border  bg 		text  indicator
+client.focused          $clear  $clear  $text $base0F
+client.focused_inactive $dark   $dark   $text $base0F
+client.unfocused        $dark   $dark   $text $base0F
+client.urgent           $urgent $urgent $text $base0F
  bar {
-# #        position top
- 	status_command i3blocks -c $HOME/.config/i3/i3blocksrc
- 	font pango:Inconsolata 12
- 	strip_workspace_numbers yes
-# 	colors {
-# 		separator $text
-# 		background $barBackground
-# 		statusline $text
-# #		border			background		text
-# 		focused_workspace	$barAccent 		$barAccent		$barBackground
-# 		active_workspace	$barAccent 	 	$barAccent		$barBackground
-# 		inactive_workspace 	$barBackground		$barBackground		$text
-# 		urgent_workspace   	$urgent			$urgent			$barBackground
-# 	}
+#        position top
+  status_command i3blocks -c $HOME/.config/i3/i3blocksrc
+  font pango:Inconsolata 12
+  strip_workspace_numbers yes
+	colors {
+		separator $text
+		background $pdark
+		statusline $text
+#		                   border  bg	   text
+		focused_workspace  $accent $accent $pdark
+		active_workspace   $accent $accent $pdark
+		inactive_workspace $pdark  $pdark  $text
+		urgent_workspace   $urgent $urgent $pdark
+	}
 }
 # }}}
 
@@ -160,4 +162,5 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/img
 exec --no-startup-id owncloud
+exec --no-startup-id xmodmap ~/.Xmodmap
 # }}}

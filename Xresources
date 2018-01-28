@@ -1,120 +1,39 @@
 ! Urxvt settings {{{
-URxvt*depth           : 32
-URxvt*buffered        : true
-!URxvt*internalBorder  : 20
-URxvt*scrollBar       : false
-URxvt*pointerBlank    : true
-URxvt*font            : xft:Inconsolata:size=12
-URxvt*perl-ext-common : default,matcher
-URxvt*matcher.button  : 1
-URxvt*termName        : rxvt-unicode-256color
-URxvt*iso14755        : false
-URxvt*iso14755_52     : false
-URxvt.perl-ext-common : dault,matcher
-URxvt.url-launcher    : /usr/bin/xdg-open
-URxvt*urlLauncher     : /home/vic/Scaricati/Apps/Firefox\ Dev/firefox
-URxvt.matcher.button: 1
+URxvt*depth                        : 32
+URxvt*buffered                     : true
+URxvt*internalBorder               : 5
+URxvt*scrollBar                    : false
+URxvt*pointerBlank                 : true
+URxvt*font                         : xft:Inconsolata:size=12
+URxvt*perl-ext-common              : default,matcher,resize-font
+URxvt*matcher.button               : 1
+URxvt*termName                     : rxvt-unicode-256color
+URxvt*iso14755                     : false
+URxvt*iso14755_52                  : false
+URxvt.perl-ext-common              : dault,matcher
+URxvt.url-launcher                 : /usr/bin/xdg-open
+URxvt*urlLauncher                  : /home/vic/Scaricati/Apps/Firefox\ Dev/firefox
+URxvt.matcher.button               : 1
+URxvt.resize-font.smaller          : C-Down
+URxvt.resize-font.bigger           : C-Up
 ! }}}
-
-! Gruvbox color scheme {{{
-! *background: #282828
-! *foreground: #ebdbb2
-! ! Black + DarkGrey
-! *color0:  #282828
-! *color8:  #928374
-! ! DarkRed + Red
-! *color1:  #cc241d
-! *color9:  #fb4934
-! ! DarkGreen + Green
-! *color2:  #98971a
-! *color10: #b8bb26
-! ! DarkYellow + Yellow
-! *color3:  #d79921
-! *color11: #fabd2f
-! ! DarkBlue + Blue
-! *color4:  #458588
-! *color12: #83a598
-! ! DarkMagenta + Magenta
-! *color5:  #b16286
-! *color13: #d3869b
-! ! DarkCyan + Cyan
-! *color6:  #689d6a
-! *color14: #8ec07c
-! ! LightGrey + White
-! *color7:  #a89984
-! *color15: #ebdbb2
-! }}}
-
-! Colorscheme - connermcd {{{
-! URxvt*foreground      : #aaaaaa
-! URxvt*background : #000000
-! !black
-! *color0 :            #222222
-! *color8 :            #454545
-! !red
-! *color1 :            #B22222
-! *color9 :            #FA8072
-! !green
-! *color2 :            #556B2F
-! *color10:            #779A3E
-! !yellow
-! *color3 :            #B8860B
-! *color11:            #DAA520
-! !blue
-! *color4 :            #4682B4
-! *color12:            #6495ED
-! !magenta
-! *color5 :            #9932CC
-! *color13:            #DA70D6
-! !cyan
-! *color6 :            #87CEEB
-! *color14:            #B0E0E6
-! !white
-! *color7 :            #C0C0C0
-! *color15: #FFFFFF
-! }}}
-
-! Colorscheme - Base16 3024 {{{
-#define base00 #090300
-#define base01 #3a3432
-#define base02 #4a4543
-#define base03 #5c5855
-#define base04 #807d7c
-#define base05 #a5a2a2
-#define base06 #d6d5d4
-#define base07 #f7f7f7
-#define base08 #db2d20
-#define base09 #e8bbd0
-#define base0A #fded02
-#define base0B #01a252
-#define base0C #b5e4f4
-#define base0D #01a0e4
-#define base0E #a16a94
-#define base0F #cdab53
-
-*.foreground  : base05
-*.background  : base00
-*.cursorColor : base05
-*.color0      : base00
-*.color1      : base08
-*.color2      : base0B
-*.color3      : base0A
-*.color4      : base0D
-*.color5      : base0E
-*.color6      : base0C
-*.color7      : base05
-*.color8      : base03
-*.color9      : base09
-*.color10     : base01
-*.color11     : base02
-*.color12     : base04
-*.color13     : base06
-*.color14     : base0F
-*.color15     : base07
-*.color16     : base09
-*.color17     : base0F
-*.color18     : base01
-*.color19     : base02
-*.color20     : base04
-*.color21     : base06
+! Colorscheme (Dracula) {{{
+*.foreground : #F8F8F2
+*.background : #282A36
+*.color0     : #000000
+*.color1     : #FF5555
+*.color2     : #50FA7B
+*.color3     : #F1FA8C
+*.color4     : #BD93F9
+*.color5     : #FF79C6
+*.color6     : #8BE9FD
+*.color7     : #BFBFBF
+*.color8     : #4D4D4D
+*.color9     : #FF6E67
+*.color10    : #5AF78E
+*.color11    : #F4F99D
+*.color12    : #CAA9FA
+*.color13    : #FF92D0
+*.color14    : #9AEDFE
+*.color15    : #E6E6E6
 ! }}}

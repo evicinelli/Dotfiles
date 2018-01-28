@@ -76,13 +76,11 @@ fi
 
 }
 
-function todo-list-at () {
+function todo-ls-tags() {
     grep -o "@.[a-z]*" $TD | sort | uniq
-}
-
-function todo-list-projects () {
     grep -o "\+.[a-z]*" $TD | sort | uniq
 }
+
 # }}}
 
 # Utility {{{

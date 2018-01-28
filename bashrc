@@ -56,6 +56,7 @@ fi
 set -o vi
 bind TAB:menu-complete
 bind Control-l:clear-screen
+bind 'Control-k:"clear; l\n"'
 
 # Shell options
 shopt -s autocd
