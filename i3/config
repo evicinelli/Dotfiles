@@ -127,12 +127,11 @@ set $sysmenu "Exit - Halt - Reboot - Suspend - Lock"
 bindsym $mod+Delete mode $sysmenu
 mode $sysmenu {
 	bindsym r         restart
-	bindsym e         exec --no-startup-id i3-nagbar -t warning -m 'Logout?' -b 'S' 'i3-msg exit' 
+	bindsym e         exec --no-startup-id i3-nagbar -t warning -m 'Logout?' -b 'y' 'i3-msg exit' 
 	bindsym h         exec --no-startup-id systemctl poweroff
 	bindsym b         exec --no-startup-id systemctl reboot
-	bindsym s         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p && systemctl suspend;
-#	bindsym l         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p
-	bindsym l         exec --no-startup-id i3lock
+	bindsym s         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p && i3 mode default && systemctl suspend;
+	bindsym l         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p && i3 mode default
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
 }
@@ -162,5 +161,5 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/img
 exec --no-startup-id owncloud
-exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id xmodmap ~/Dotfiles/Xmodmap
 # }}}

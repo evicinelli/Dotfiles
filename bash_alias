@@ -1,16 +1,16 @@
 # Variables {{{
 export EDITOR=vim
 export DOTS='/home/vic/Dotfiles'
-export UNI="/home/vic/ownCloud/Uni/"
+export UNI="/home/vic/ownCloud/Uni"
 export OC="/home/vic/ownCloud"
 export PW="/home/vic/ownCloud/Archivio/Password-store"
 export TD="/home/vic/ownCloud/todo.txt"
 export DN="/home/vic/ownCloud/done.txt"
-export DOCUMENTS="/home/vic/ownCloud/Documenti/"
-export DOWNLOADS="/home/vic/Scaricati/"
-export NOTES="/home/vic/ownCloud/Notes/"
-export WS="/home/vic/ownCloud/Workspace/"
-export MEDIA="/home/vic/ownCloud/Media/"
+export DOCUMENTS="/home/vic/ownCloud/Documenti"
+export DOWNLOADS="/home/vic/Scaricati"
+export NOTES="/home/vic/ownCloud/Notes"
+export WS="/home/vic/ownCloud/Workspace"
+export MEDIA="/home/vic/ownCloud/Media"
 # }}}
 
 # Colori {{{
@@ -37,13 +37,13 @@ alias h="man"
 alias pfind="bash /home/vic/Dotfiles/bin/pfind"
 alias p="pass"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
-alias please="sudo "
 alias bashr="source ~/.bashrc"
 alias ssh-serverino="pass -c Casa/serverino-user && ssh user@192.168.1.197"
 alias pandoc="pandoc --latex-engine=lualatex -H ~/Modelli/settings.tex -S"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias atls="atq"
-alias fdate="date +%F -d "$*""
+alias fdate="date +%F -d"
+alias xmo="xmodmap ~/Dotfiles/Xmodmap"
 # }}}
 
 # Git {{{

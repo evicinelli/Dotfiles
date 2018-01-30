@@ -108,6 +108,16 @@ function count () {
 	grep -c ".*"
     fi
 }
+
+function fix-mimecache () {
+    cd ~/.local/share/applications/
+    rm mimeinfo.cache
+    ln -s $DOTS/mimeinfo.cache
+}
+
+function emoji () {
+    grep -Ei "$*" /home/vic/ownCloud/Archivio/emoji.txt
+}
 # }}}
 
 # Motivation {{{
