@@ -128,7 +128,7 @@ horizontal_padding = 8
 #  * foreground: use the same color as the foreground;
 #  * frame: use the same color as the frame;
 #  * anything else will be interpreted as a X color.
-separator_color = frame
+# separator_color = frame
 
 # Print a notification on startup.
 # This is mainly for error detection, since dbus (re-)starts dunst
@@ -169,25 +169,25 @@ history = mod4+n
 
 # Context menu.
 context = mod4+shift+space
-[frame]
-width = 3
-color = "#4D4D4D"
+#[frame]
+#width = 3
+#color = "#4D4D4D"
 # 
 # # IMPORTANT: colors have to be defined in quotation marks.
 # # Otherwise the "#" and following would be interpreted as a comment.
 [urgency_low]
-background = "#282A36"
-foreground = "#4D4D4D"
+#background = "#282A36"
+#foreground = "#4D4D4D"
 timeout = 10
 
 [urgency_normal]
-background = "#282A36"
-foreground = "#F8F8F2"
+#background = "#282A36"
+#foreground = "#F8F8F2"
 timeout = 10
 
 [urgency_critical]
-background = "#FF6E67"
-foreground = "#F8F8F2"
+#background = "#FF6E67"
+#foreground = "#F8F8F2"
 timeout = 0
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
@@ -220,6 +220,10 @@ timeout = 0
 #    # This notification will not be displayed
 appname = "*fce*"
 format = ""
+
+[ignore2]
+appname = "(A) ULTIM'ORA 24"
+urgency = low
 #[ignore2]
 #    appname = "NetworkManager"
 #    format = ""

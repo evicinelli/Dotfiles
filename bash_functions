@@ -53,9 +53,12 @@ if [[ $# -gt 0 ]]; then
     # echo $ENTRIES
     # echo $ENTRIES_NO
     if [[ $ENTRIES_NO -eq 1 ]]; then
-	# Marchiamo quell'entry come completata nel file
-	echo -e "Marco come completato: "$ENTRY
-	sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
+        # Marchiamo quell'entry come completata nel file
+        echo -e "Marco come completato: "$ENTRY
+        sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
+        if [[ -f ~/oggi.txt ]]; then
+            sed -in "s/$ENTRY//" ~/oggi.txt
+        fi
     else 
 	# Trovare un modo più carino per fare pure questo
 	if [[ $ENTRIES_NO -gt 1 ]]; then

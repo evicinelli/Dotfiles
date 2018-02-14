@@ -1,39 +1,21 @@
 ! Urxvt settings {{{
-URxvt*depth                        : 32
-URxvt*buffered                     : true
-URxvt*internalBorder               : 5
-URxvt*scrollBar                    : false
-URxvt*pointerBlank                 : true
-URxvt*font                         : xft:Inconsolata:size=12
-URxvt*perl-ext-common              : default,matcher,resize-font
-URxvt*matcher.button               : 1
-URxvt*termName                     : rxvt-unicode-256color
-URxvt*iso14755                     : false
-URxvt*iso14755_52                  : false
-URxvt.perl-ext-common              : dault,matcher
-URxvt.url-launcher                 : /usr/bin/xdg-open
-URxvt*urlLauncher                  : /home/vic/Scaricati/Apps/Firefox\ Dev/firefox
-URxvt.matcher.button               : 1
-URxvt.resize-font.smaller          : C-Down
-URxvt.resize-font.bigger           : C-Up
-! }}}
-! Colorscheme (Dracula) {{{
-*.foreground : #F8F8F2
-*.background : #282A36
-*.color0     : #000000
-*.color1     : #FF5555
-*.color2     : #50FA7B
-*.color3     : #F1FA8C
-*.color4     : #BD93F9
-*.color5     : #FF79C6
-*.color6     : #8BE9FD
-*.color7     : #BFBFBF
-*.color8     : #4D4D4D
-*.color9     : #FF6E67
-*.color10    : #5AF78E
-*.color11    : #F4F99D
-*.color12    : #CAA9FA
-*.color13    : #FF92D0
-*.color14    : #9AEDFE
-*.color15    : #E6E6E6
+URxvt*depth               : 32
+URxvt*buffered            : true
+URxvt*internalBorder      : 5
+URxvt*scrollBar           : false
+URxvt*pointerBlank        : true
+URxvt*font                : xft:Inconsolata:size=12
+URxvt*perl-ext-common     : default,matcher,resize-font
+URxvt*matcher.button      : 1
+URxvt*termName            : rxvt-unicode-256color
+URxvt*iso14755            : false
+URxvt*iso14755_52         : false
+URxvt.perl-ext-common     : dault,matcher
+URxvt.url-launcher        : /usr/bin/xdg-open
+URxvt*urlLauncher         : /home/vic/Scaricati/Apps/Firefox\ Dev/firefox
+URxvt.matcher.button      : 1
+URxvt.resize-font.smaller : C-Down
+URxvt.resize-font.bigger  : C-Up
+*.background              : #000000
+*.foreground              : #ffffff
 ! }}}

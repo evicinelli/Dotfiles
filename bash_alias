@@ -1,6 +1,6 @@
 # Variables {{{
 export EDITOR=vim
-export DOTS='/home/vic/Dotfiles'
+export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/ownCloud/Uni"
 export OC="/home/vic/ownCloud"
 export PW="/home/vic/ownCloud/Archivio/Password-store"
@@ -26,24 +26,27 @@ else
 fi
 # }}}
 
-# Troppo lunghi da scrivere {{{
+# Troppo lunghi da scrivere (o li sbaglio sempre) {{{
 alias l='pwd;ls --group-directories-first -l -h -X'
 alias gi="gvim"
 alias o="xdg-open"
 alias t="tree . -L 1"
 alias tt="tree . -L 2"
 alias ttt="tree . -L 3"
+alias cp="rsync --archive --verbose --human-readable"
 alias h="man"
 alias pfind="bash /home/vic/Dotfiles/bin/pfind"
 alias p="pass"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
 alias bashr="source ~/.bashrc"
 alias ssh-serverino="pass -c Casa/serverino-user && ssh user@192.168.1.197"
-alias pandoc="pandoc --latex-engine=lualatex -H ~/Modelli/settings.tex -S"
+alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias atls="atq"
 alias fdate="date +%F -d"
-alias xmo="xmodmap ~/Dotfiles/Xmodmap"
+alias xm="xmodmap ~/Dotfiles/Xmodmap"
+alias maketemp="mktemp"
+alias myip="curl http://myip.dnsomatic.com && echo ''"
 # }}}
 
 # Git {{{

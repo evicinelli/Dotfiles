@@ -76,34 +76,12 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Source Sans Pro 9
+font pango:Latin Modern Sans 9
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
-set_from_resource $pdark background #282828
-set_from_resource $dark background #282828
-set_from_resource $text foreground #fbf1c7
-set_from_resource $urgent color9 #cc241d
-set_from_resource $clear color8 #504945
-set_from_resource $accent color6 #83a598
-#          		        border  bg 		text  indicator
-client.focused          $clear  $clear  $text $base0F
-client.focused_inactive $dark   $dark   $text $base0F
-client.unfocused        $dark   $dark   $text $base0F
-client.urgent           $urgent $urgent $text $base0F
- bar {
-#        position top
-  status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-  font pango:Inconsolata 12
-  strip_workspace_numbers yes
-	colors {
-		separator $text
-		background $pdark
-		statusline $text
-#		                   border  bg	   text
-		focused_workspace  $accent $accent $pdark
-		active_workspace   $accent $accent $pdark
-		inactive_workspace $pdark  $pdark  $text
-		urgent_workspace   $urgent $urgent $pdark
-	}
+bar {
+    status_command i3blocks -c $HOME/.config/i3/i3blocksrc
+    font pango:Inconsolata 12
+    strip_workspace_numbers yes
 }
 # }}}
 
@@ -130,8 +108,8 @@ mode $sysmenu {
 	bindsym e         exec --no-startup-id i3-nagbar -t warning -m 'Logout?' -b 'y' 'i3-msg exit' 
 	bindsym h         exec --no-startup-id systemctl poweroff
 	bindsym b         exec --no-startup-id systemctl reboot
-	bindsym s         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p && i3 mode default && systemctl suspend;
-	bindsym l         exec --no-startup-id ~/Dotfiles/bin/lock.sh -p && i3 mode default
+	bindsym s         exec --no-startup-id i3lock && i3 mode default && systemctl suspend;
+	bindsym l         exec --no-startup-id i3lock && i3 mode default
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
 }
@@ -147,19 +125,19 @@ mode "resize" {
 set $monitor "Edpi1 - Hdmi1 - Clonato - Destra"
 bindsym $mod+m mode $monitor
 mode $monitor {
-	bindsym e exec --no-startup-id $HOME/Dotfiles/bin/internal.sh; mode "default"
-	bindsym h exec --no-startup-id $HOME/Dotfiles/bin/hdmi-1.sh; mode "default"
+	bindsym Escape mode "default"
 	bindsym c exec --no-startup-id $HOME/Dotfiles/bin/clonato.sh; mode "default"
 	bindsym d exec --no-startup-id $HOME/Dotfiles/bin/destra.sh; mode "default"
-	bindsym Escape mode "default"
+	bindsym e exec --no-startup-id $HOME/Dotfiles/bin/internal.sh; mode "default"
+	bindsym h exec --no-startup-id $HOME/Dotfiles/bin/hdmi-1.sh; mode "default"
 }
 # }}}
 
 # AUTOSTART APPLICATIONS {{{
+exec_always --no-startup-id xmodmap /home/vic/Dotfiles/Xmodmap
 exec --no-startup-id compton -b
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/img
 exec --no-startup-id owncloud
-exec --no-startup-id xmodmap ~/Dotfiles/Xmodmap
 # }}}
