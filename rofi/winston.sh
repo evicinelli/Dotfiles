@@ -22,24 +22,24 @@ declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["apps"]="rofi -show drun"
+COMMANDS["apps"]="rofi -combi-modi window,drun -show combi"
 LABELS["apps"]=""
 
 # find files
-COMMANDS["file"]="/home/$(whoami)/Dotfiles/bin/script/file.sh"
+COMMANDS["file"]="/home/$(whoami)/Dotfiles/rofi/file.sh"
 LABELS["file"]=""
 
 # open custom www searches
-COMMANDS["www"]="/home/$(whoami)/Dotfiles/bin/script/web.sh"
+COMMANDS["www"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
 LABELS["www"]=""
 
 # bins
 COMMANDS["bin"]="rofi -show run"
 LABELS["bin"]=""
 
-COMMANDS["win"]="rofi -show window"
-LABELS["win"]=""
-
+# Pass
+COMMANDS["pass"]="~/Dotfiles/rofi/pass.sh"
+LABELS["pass"]=""
 ################################################################################
 # do not edit below
 ################################################################################
@@ -60,7 +60,7 @@ function print_menu()
 ##
 function start()
 {
-    print_menu | sort | rofi -dmenu -i -p " " -auto-select -matching fuzzy
+print_menu | sort | rofi -dmenu -i -p " " -auto-select
 }
 
 
