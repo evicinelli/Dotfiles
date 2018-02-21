@@ -80,7 +80,7 @@ font pango:Latin Modern Sans 9
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
 bar {
     status_command i3blocks -c $HOME/.config/i3/i3blocksrc
-    font pango:Inconsolata 12
+    font pango:Deja Vu Sans Mono 10
     strip_workspace_numbers yes
 }
 # }}}

@@ -42,7 +42,8 @@ todo-ls() {
 	    grep -Gi "$1" $TD
 	fi
     else
-	cat $TD | grep "due:$(date +%F)"
+        [[ -f ~/oggi.txt ]] && cat oggi.txt && echo -ne "\n"
+        cat $TD | grep "due:$(date +%F)"
     fi
 }
 

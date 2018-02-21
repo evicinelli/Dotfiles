@@ -40,6 +40,15 @@ LABELS["bin"]=""
 # Pass
 COMMANDS["pass"]="~/Dotfiles/rofi/pass.sh"
 LABELS["pass"]=""
+
+# Recent
+ COMMANDS["recent"]="~/Dotfiles/rofi/recent.sh"
+ LABELS["recent"]=""
+
+# Utils
+# COMMANDS["utils"]="~/Dotfiles/rofi/misc.sh"
+# LABELS["utils"]=""
+
 ################################################################################
 # do not edit below
 ################################################################################
@@ -50,9 +59,9 @@ function print_menu()
 {
     for key in ${!LABELS[@]}
     do
-	echo "$key    ${LABELS}"
-	#   echo "$key    ${LABELS[$key]}"
-	# my top version just shows the first field in labels row, not two words side by side
+        echo "$key    ${LABELS}"
+        #   echo "$key    ${LABELS[$key]}"
+        # my top version just shows the first field in labels row, not two words side by side
     done
 }
 ##
@@ -60,7 +69,7 @@ function print_menu()
 ##
 function start()
 {
-print_menu | sort | rofi -dmenu -i -p " " -auto-select
+    print_menu | sort | rofi -dmenu -i -p " " -select string -auto-select -lines ${#LABELS[*]}
 }
 
 

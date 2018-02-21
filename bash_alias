@@ -11,6 +11,7 @@ export DOWNLOADS="/home/vic/Scaricati"
 export NOTES="/home/vic/ownCloud/Notes"
 export WS="/home/vic/ownCloud/Workspace"
 export MEDIA="/home/vic/ownCloud/Media"
+export P="/home/vic/ownCloud/Workspace/LEOS"
 # }}}
 
 # Colori {{{

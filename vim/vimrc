@@ -37,7 +37,7 @@ set smartindent           " Smart indent
 set tabstop=4             " show existing tab with 4 spaces width
 set shiftwidth=4          " when indenting with '>', use 4 spaces width
 set expandtab             " On pressing tab, insert 4 spaces
-set foldmethod=marker     " Fold what's inside {{{ }}} block
+set foldmethod=syntax     " Fold according to syntax
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set hidden                " Allow to switch buffer without saving it
 set colorcolumn=+1        " Highlight column where the 81/th char lives
@@ -55,8 +55,7 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=Inconsolata\ 12
-colorscheme hipster                                           " Colorscheme
+set guifont=Deja\ Vu\ Sans\ Mono\ 10
 if has('gui_running')
     set guioptions-=m                                         " remove menu bar
     set guioptions-=T                                         " remove toolbar
@@ -65,6 +64,7 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
+    colorscheme hipster                                           " Colorscheme
     set t_Co=256                                              " 256 color vim
 endif
 " }}}
@@ -105,6 +105,7 @@ noremap viz [zjV]zk
 noremap <BS> -
 noremap n nzz
 noremap N Nzz
+noremap <leader><leader> zA
 noremap <F9> :se nowrap!<CR>
 inoremap { {}<Left>
 inoremap [ []<Left>
