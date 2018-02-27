@@ -1,10 +1,8 @@
 #! /bin/bash
 
-declare -a commands;
-commands=(
+declare -a commands=(
     "i3 border toggle"
-    "systemctl reboot"
-    "systemctl poweroff"
+    "firefox https://web.whatsapp.com && i3 [class = "Firefox*"] focus"
 )
-toExecute=$(echo $commands | rofi -dmenu -i)
+toExecute=$(for i in ${!commands[*]}; do echo ${commands[i]}; done | rofi -dmenu -i -p "Wokflows ")
 eval $toExecute

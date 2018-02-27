@@ -40,12 +40,10 @@ sudo apt autoclean
 # Collego i dotfiles
 mkdir $HOME/.config/dunst
 cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/i3
-cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/terminator
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/bashrc
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/bashrc; mv bashrc .bashrc
 cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/rofi
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/vim/vimrc
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/compton.conf
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/gtkrc-2.0.mine .gtkrc-2.0
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/vim/vimrc; mv vimrc .vimrc
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/compton.conf; mv compton.conf .compton.conf
 cd $HOME/.local/share/applications/ ; ln -sf $HOME/Dotfiles/mimeinfo.cache
 cd $HOME/.config/dunst/             ; ln -sf $HOME/Dotfiles/dunstrc
 

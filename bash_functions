@@ -42,7 +42,7 @@ todo-ls() {
 	    grep -Gi "$1" $TD
 	fi
     else
-        [[ -f ~/oggi.txt ]] && cat oggi.txt && echo -ne "\n"
+        [[ -f ~/oggi.txt ]] && cat ~/oggi.txt && echo -ne "\n"
         cat $TD | grep "due:$(date +%F)"
     fi
 }
@@ -54,9 +54,10 @@ if [[ $# -gt 0 ]]; then
     # echo $ENTRIES
     # echo $ENTRIES_NO
     if [[ $ENTRIES_NO -eq 1 ]]; then
-        # Marchiamo quell'entry come completata nel file
+        # Marchiamo quell'entry come completata in todo.txt
         echo -e "Marco come completato: "$ENTRY
         sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
+        # Se esiste anche un file ~/oggi.txt, rimuoviamo l'entry anche da lì
         if [[ -f ~/oggi.txt ]]; then
             sed -in "s/$ENTRY//" ~/oggi.txt
         fi
@@ -76,6 +77,9 @@ fi
 # Trovare un modo più carino per farlo
 if [ -w /home/vic/ownCloud/todo.txtn ]; then
     rm /home/vic/ownCloud/todo.txtn
+fi
+if [ -w ~/oggi.txtn ]; then
+    rm ~/oggi.txtn
 fi
 
 }

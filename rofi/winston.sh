@@ -22,7 +22,7 @@ declare -A LABELS
 declare -A COMMANDS
 # List of defined 'bangs'
 # launch programs
-COMMANDS["apps"]="rofi -combi-modi window,drun -show combi"
+COMMANDS["apps"]="rofi -no-levenshtein-sort -combi-modi window,drun -show combi"
 LABELS["apps"]=""
 
 # find files
@@ -38,16 +38,16 @@ COMMANDS["bin"]="rofi -show run"
 LABELS["bin"]=""
 
 # Pass
-COMMANDS["pass"]="~/Dotfiles/rofi/pass.sh"
-LABELS["pass"]=""
+COMMANDS["password"]="~/Dotfiles/rofi/pass.sh"
+LABELS["password"]="prova"
 
 # Recent
  COMMANDS["recent"]="~/Dotfiles/rofi/recent.sh"
  LABELS["recent"]=""
 
 # Utils
-# COMMANDS["utils"]="~/Dotfiles/rofi/misc.sh"
-# LABELS["utils"]=""
+COMMANDS["utils"]="~/Dotfiles/rofi/misc.sh"
+LABELS["utils"]=""
 
 ################################################################################
 # do not edit below
@@ -59,9 +59,7 @@ function print_menu()
 {
     for key in ${!LABELS[@]}
     do
-        echo "$key    ${LABELS}"
-        #   echo "$key    ${LABELS[$key]}"
-        # my top version just shows the first field in labels row, not two words side by side
+        echo "$key    ${LABELS}" # ${LABELS[$key]}"
     done
 }
 ##
@@ -69,7 +67,7 @@ function print_menu()
 ##
 function start()
 {
-    print_menu | sort | rofi -dmenu -i -p " " -select string -auto-select -lines ${#LABELS[*]}
+    print_menu | sort | rofi -dmenu -i -p "Winston ▶ " -matching fuzzy -lines ${#LABELS[*]} -auto-select
 }
 
 

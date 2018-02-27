@@ -2,7 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
-Plug 'chriskempson/base16-vim'                       " Colorscheme
+Plug 'rakr/vim-one'                  " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                            " Vim-startify
@@ -14,8 +14,7 @@ Plug 'mileszs/ack.vim'                               " Vim Ack
 Plug 'mtth/scratch.vim'                              " Scratch buffer made easy
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
-Plug 'dracula/vim'
-Plug 'skwp/vim-colors-solarized'
+Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
 call plug#end()
 "}}}
 "
@@ -56,7 +55,9 @@ set fillchars+=vert:\|                                        " Vertical separat
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set guifont=Deja\ Vu\ Sans\ Mono\ 10
+colorscheme one
 if has('gui_running')
+    set bg=light
     set guioptions-=m                                         " remove menu bar
     set guioptions-=T                                         " remove toolbar
     set guioptions-=r                                         " remove right-hand scroll bar
@@ -64,7 +65,7 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
-    colorscheme hipster                                           " Colorscheme
+    set bg=dark
     set t_Co=256                                              " 256 color vim
 endif
 " }}}
@@ -81,7 +82,14 @@ let g:goyo_width = 130
 let g:scratch_insert_autohide = 0
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_guifg = 'DarkGray'
-" }}}
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }" }}}
 
 " Statusline {{{
 set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
@@ -102,6 +110,8 @@ noremap <leader>so :!xdg-open "%" <CR>
 noremap <leader>a :Ack 
 noremap <F8> :se spell!<CR>
 noremap viz [zjV]zk
+noremap vaz [zV]z
+noremap Z zMzv
 noremap <BS> -
 noremap n nzz
 noremap N Nzz
@@ -157,3 +167,4 @@ com! DiffSaved call s:DiffWithSaved()
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 " }}}
+"vim: fdm=marker
