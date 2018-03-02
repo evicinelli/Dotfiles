@@ -2,7 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
-Plug 'rakr/vim-one'                  " Colorscheme
+Plug 'rakr/vim-one'                                  " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                            " Vim-startify
@@ -71,17 +71,18 @@ endif
 " }}}
 
 " Plugin settings {{{
+let NERDTreeChDirMode = 0
 let anyfold_activate = 1
 let anyfold_fold_comments = 1
-let g:startify_custom_header = [system("motivation")]
-let g:startify_change_to_dir = 0
-let g:startify_change_to_vcs_root = 0
-let NERDTreeChDirMode = 0
+let g:one_allow_italics = 1
 let g:goyo_height = 50
 let g:goyo_width = 130
-let g:scratch_insert_autohide = 0
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_guifg = 'DarkGray'
+let g:scratch_insert_autohide = 0
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 0
+let g:startify_custom_header = [system("motivation")]
 let g:tagbar_type_markdown = {
     \ 'ctagstype' : 'markdown',
     \ 'kinds' : [
@@ -167,4 +168,4 @@ com! DiffSaved call s:DiffWithSaved()
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 " }}}
-"vim: fdm=marker
+" vim: fdm=marker

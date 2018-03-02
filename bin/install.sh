@@ -20,7 +20,7 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 
 # Installo le cose
 sudo apt update
-sudo apt install i3 i3blocks rofi vim vim-gtk3 rxvt-unicode-256color fonts-inconsolata compton arandr dunst spotify-client lxappearance xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gnome-sushi gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra
+sudo apt install i3 i3blocks rofi vim vim-gtk3 rxvt-unicode-256color fonts-inconsolata compton arandr dunst spotify-client lxappearance xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gnome-sushi gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv
 
 # Vim Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -78,12 +78,33 @@ bindsym $mod+shift+a focus child
 # THEMING {{{
 font pango:Latin Modern Sans Quotation 8
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
+set_from_resource $pdark background #282828
+set_from_resource $dark background #282828
+set_from_resource $text foreground #fbf1c7
+set_from_resource $urgent color9 #cc241d
+set_from_resource $clear color8 #504945
+set_from_resource $accent color6 #83a598
+#          		        border  bg 		text  indicator
+client.focused          $clear  $clear  $text $base0F
+client.focused_inactive $dark   $dark   $text $base0F
+client.unfocused        $dark   $dark   $text $base0F
+client.urgent           $urgent $urgent $text $base0F
 bar {
     position top
     status_command i3blocks -c $HOME/.config/i3/i3blocksrc
     font pango:Deja Vu Sans Mono 10.5
     strip_workspace_numbers yes
-}
+    colors {
+            separator $text
+            background $pdark
+            statusline $text
+#		                   border  bg	   text
+            focused_workspace  $accent $accent $pdark
+            active_workspace   $accent $accent $pdark
+            inactive_workspace $pdark  $pdark  $text
+            urgent_workspace   $urgent $urgent $pdark
+        }
+    }
 # }}}
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS {{{

@@ -34,7 +34,7 @@ COMMANDS["www"]="/home/$(whoami)/Dotfiles/rofi/web.sh"
 LABELS["www"]=""
 
 # bins
-COMMANDS["bin"]="rofi -show run"
+COMMANDS["bin"]="rofi -show run -no-levenshtein-sort"
 LABELS["bin"]=""
 
 # Pass

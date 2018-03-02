@@ -81,6 +81,13 @@ source ~/Dotfiles/bash_functions
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
+    if [[ "$host" != "pelican" || "$user" != "vic" ]]; then
+        if ["$color_prompt" = "yes"]; then
+            echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host "
+        else
+            echo "$user@$host "
+        fi
+    fi
 }
 
 if [ "$color_prompt" = "yes" ]; then
