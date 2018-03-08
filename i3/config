@@ -22,8 +22,7 @@ set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
 bindsym --whole-window $mod+button2 kill
-bindsym Mod1+Control+t  exec --no-startup-id urxvt
-workspace_layout tabbed
+# workspace_layout tabbed
 # }}}
 
 # WORKSPACES {{{
@@ -114,6 +113,7 @@ for_window [class = "Spotify"] move to workspace $workspace10
 
 # APP-SPECIFIC BINDINGS {{{
 bindsym Shift+space exec --no-startup-id bash $HOME/Dotfiles/rofi/winston.sh
+bindsym Control+Mod1+t  exec --no-startup-id urxvt
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
@@ -163,3 +163,4 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/img
 exec --no-startup-id owncloud
 # }}}
+# vim: fdm=marker

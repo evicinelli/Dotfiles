@@ -44,6 +44,7 @@ set shell=/bin/bash\ -i   " Which shell to use
 set spelllang=it,en       " Spell dictionaries
 set splitright            " vsplit on the right
 set mouse=a               " Enable mouse in terminal vim
+set modeline              " Vim executes vimL commands if they are found in the current file
 let mapleader = " "
 let maplocalleader = " "
 "}}}
