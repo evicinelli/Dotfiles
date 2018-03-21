@@ -27,7 +27,7 @@ todo-add(){
 	if [[ "$*" == "" ]]; then
 	    echo >> $TD
 	else
-	    echo "$*" "+background" >> $TD
+	    echo "$*" >> $TD
 	fi
     else
 	echo "Nope, dammi qualcosa da fare!"
@@ -59,7 +59,8 @@ if [[ $# -gt 0 ]]; then
         sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
         # Se esiste anche un file ~/oggi.txt, rimuoviamo l'entry anche da lì
         if [[ -f ~/oggi.txt ]]; then
-            sed -in "s/$ENTRY//" ~/oggi.txt
+            ENTRY_OGGI=$(sed -n "/$*/p" ~/oggi.txt)
+            sed -in "s/$ENTRY_OGGI//" ~/oggi.txt
         fi
     else 
 	# Trovare un modo più carino per fare pure questo
@@ -162,3 +163,5 @@ motivation() {
     echo -ne "   $I\n"
 }
 # }}}
+
+# vim: ft=sh fdm=marker

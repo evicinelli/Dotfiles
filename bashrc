@@ -68,6 +68,7 @@ shopt -s dirspell
 shopt -s cdspell
 shopt -s autocd
 shopt -s globstar
+shopt -s extglob
 shopt -s checkwinsize
 shopt -s histappend
 

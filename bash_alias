@@ -2,6 +2,7 @@
 export EDITOR=vim
 export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/ownCloud/Uni"
+export UNIGIT="/home/vic/ownCloud/Uni/AppuntiUni"
 export OC="/home/vic/ownCloud"
 export PW="/home/vic/ownCloud/Archivio/Password-store"
 export TD="/home/vic/ownCloud/todo.txt"
@@ -45,9 +46,10 @@ alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias atls="atq"
 alias fdate="date +%F -d"
-alias xm="xmodmap ~/Dotfiles/Xmodmap"
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
+alias android-emulator="/home/vic/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
+alias android-studio="/home/vic/Scaricati/Apps/android-studio/bin/studio.sh"
 # }}}
 
 # Git {{{
@@ -67,5 +69,7 @@ alias ta="todo-add"
 alias tl="todo-ls"
 alias td="todo-done"
 alias te="vi $TD"
+alias ge="gvim $TD"
 alias remindme="bash /home/vic/Dotfiles/bin/remindme.sh"
 # }}}
+# vim: ft=sh fdm=marker

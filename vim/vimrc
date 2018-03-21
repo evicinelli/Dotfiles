@@ -8,7 +8,8 @@ Plug 'airblade/vim-gitgutter'                        " Git diff aside line numbe
 Plug 'mhinz/vim-startify'                            " Vim-startify
 Plug 'tpope/vim-surround'                            " Surrounding motions on steroid
 Plug 'sheerun/vim-polyglot'                          " A collection of language pack
-Plug 'freitass/todo.txt-vim'                         " Todo.txt support
+""Plug 'freitass/todo.txt-vim'                         " Todo.txt support
+Plug 'fretep/todo.txt-vim'
 Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
 Plug 'mileszs/ack.vim'                               " Vim Ack
 Plug 'mtth/scratch.vim'                              " Scratch buffer made easy
@@ -17,19 +18,19 @@ Plug 'junegunn/limelight.vim'                        " Focus only current paragr
 Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
 call plug#end()
 "}}}
-"
+
 " General Settings {{{
 syntax enable             " Enable syntax Highlighting
 filetype plugin on        " Filetype plugin
 filetype plugin indent on " Specific indentation rules depending on file type
-set relativenumber        " Line numbers are relative to current line
+set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
 set wildmenu              " Tab autocompletion in menu
 set wildignorecase        " Ignore case when autocomplete
+set ignorecase            " Mah
 set autoread              " Autoreload file if modified from external command
 set hlsearch              " Highlight all search results
 set smartcase             " Smart-case search
-set ignorecase            " Case-insensitive
 set incsearch             " Incremental search
 set autoindent            " Auto-indent
 set smartindent           " Smart indent
@@ -55,8 +56,9 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=Deja\ Vu\ Sans\ Mono\ 10
+set guifont=Ubuntu\ Mono\ 11.5
 colorscheme one
+set bg=dark
 if has('gui_running')
     set bg=light
     set guioptions-=m                                         " remove menu bar
@@ -66,15 +68,12 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
-    set bg=dark
-    set t_Co=256                                              " 256 color vim
+    "set t_Co=256                                              " 256 color vim
 endif
 " }}}
 
 " Plugin settings {{{
 let NERDTreeChDirMode = 0
-let anyfold_activate = 1
-let anyfold_fold_comments = 1
 let g:one_allow_italics = 1
 let g:goyo_height = 50
 let g:goyo_width = 130
@@ -84,41 +83,27 @@ let g:scratch_insert_autohide = 0
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let g:startify_custom_header = [system("motivation")]
-let g:tagbar_type_markdown = {
-    \ 'ctagstype' : 'markdown',
-    \ 'kinds' : [
-        \ 'h:Heading_L1',
-        \ 'i:Heading_L2',
-        \ 'k:Heading_L3'
-    \ ]
-\ }" }}}
+" }}}
 
 " Statusline {{{
 set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
-
 " }}}
 
 " Custom mappings and abbreviations {{{
-noremap <C-l> gt<CR>
-noremap <C-h> gT<CR>
+noremap <C-l> l
+noremap <C-h> h
 noremap <C-n> :NERDTreeToggle<CR>
 noremap <C-g> :Goyo<CR>
 noremap <F1> nop
 noremap Q :q!
-noremap H ^
-noremap L g_
 noremap Y y$
 noremap <leader>so :!xdg-open "%" <CR>
 noremap <leader>a :Ack 
 noremap <F8> :se spell!<CR>
+noremap <F9> :se nowrap!<CR>
 noremap viz [zjV]zk
 noremap vaz [zV]z
 noremap Z zMzv
-noremap <BS> -
-noremap n nzz
-noremap N Nzz
-noremap <leader><leader> zA
-noremap <F9> :se nowrap!<CR>
 inoremap { {}<Left>
 inoremap [ []<Left>
 inoremap ( ()<Left>
@@ -126,6 +111,7 @@ inoremap " ""<Left>
 inoremap ` ``<Left>
 inoremap <F1> <Esc>
 inoremap <C-Backspace> <C-w>
+cnoremap W w
 cabbrev f find
 " }}}
 
@@ -148,8 +134,8 @@ cabbrev f find
 " Autogroups and Autocmds {{{
 augroup text
      au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=markdown
-     au BufNewFile,BufRead,BufWrite todo.txt setl ft=todo
-     au BufNewFile,BufRead,BufWrite done.txt setl ft=todo
+     au BufNewFile,BufRead,BufWrite todo.txt setl ft=todo | set nospell
+     au BufNewFile,BufRead,BufWrite done.txt setl ft=todo | set nospell
 augroup end
 augroup nonvim
     au!
