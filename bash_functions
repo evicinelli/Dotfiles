@@ -36,6 +36,7 @@ todo-add(){
 
 todo-ls() {
     if [[ $# -gt 0 ]]; then
+    [[ "$*" = "w" ]] && (echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..6}; do tl $i days; done)
 	if date -d "$*" > /dev/null 2>&1; then
 	    grep -Gi "$(date +%F --date="$*")" $TD
 	else
@@ -121,7 +122,7 @@ function count () {
 function fix-mimecache () {
     cd ~/.local/share/applications/
     rm mimeinfo.cache
-    ln -s $DOTS/mimeinfo.cache
+    ln -s $DF/mimeinfo.cache
 }
 
 function emoji () {

@@ -1,5 +1,5 @@
 # i3blocks config file
-#
+
 # Please see man i3blocks for a complete reference!
 # The man page is also hosted at http://vivien.github.io/i3blocks
 #
@@ -33,7 +33,7 @@ align=center
 instance=spotify
 interval=1
 signal=10
-color=#4848484
+#color=#4848484
 
 [separator]
 

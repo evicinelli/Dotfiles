@@ -3,12 +3,12 @@ call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
 Plug 'rakr/vim-one'                                  " Colorscheme
+Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                            " Vim-startify
 Plug 'tpope/vim-surround'                            " Surrounding motions on steroid
 Plug 'sheerun/vim-polyglot'                          " A collection of language pack
-""Plug 'freitass/todo.txt-vim'                         " Todo.txt support
 Plug 'fretep/todo.txt-vim'
 Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
 Plug 'mileszs/ack.vim'                               " Vim Ack
@@ -16,6 +16,7 @@ Plug 'mtth/scratch.vim'                              " Scratch buffer made easy
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
+" Plug 'freitass/todo.txt-vim'                       " Todo.txt support
 call plug#end()
 "}}}
 
@@ -56,11 +57,9 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=Ubuntu\ Mono\ 11.5
-colorscheme one
-set bg=dark
+set guifont=Ubuntu\ Mono\ 13
+colorscheme base16-solarized-light
 if has('gui_running')
-    set bg=light
     set guioptions-=m                                         " remove menu bar
     set guioptions-=T                                         " remove toolbar
     set guioptions-=r                                         " remove right-hand scroll bar
@@ -68,7 +67,9 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
-    "set t_Co=256                                              " 256 color vim
+    colorscheme base16-solarized-dark
+    let base16colorspace=256
+    set t_Co=256                                              " 256 color vim
 endif
 " }}}
 

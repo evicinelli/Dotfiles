@@ -77,12 +77,12 @@ bindsym $mod+shift+a focus child
 # THEMING {{{
 font pango:Ubuntu Mono 10
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/bin/unsplash.sh"
- set_from_resource $pdark background #282828
- set_from_resource $dark background #282828
- set_from_resource $text foreground #fbf1c7
- set_from_resource $urgent color9 #cc241d
- set_from_resource $clear color8 #504945
- set_from_resource $accent color6 #83a598
+ set_from_resource $pdark background
+ set_from_resource $dark background
+ set_from_resource $text foreground
+ set_from_resource $urgent color9
+ set_from_resource $clear color19
+ set_from_resource $accent color6
  #          		        border  bg 		text  indicator
  client.focused          $clear  $clear  $text $base0F
  client.focused_inactive $dark   $dark   $text $base0F

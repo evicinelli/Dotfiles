@@ -30,6 +30,9 @@ sudo tee -a /usr/share/bash-completion/completions/pass << EOF
 complete -o filenames -o nospace -F _pass p
 EOF
 
+# Per fare andare d'accordo base16 con urxvt
+git clone https://github.com/chriskempson/base16-shell.git ~/Scaricati/Apps/
+
 # Aggiorno e pulisco tutto
 sudo apt upgrade
 sudo apt dist-upgrade
