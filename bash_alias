@@ -1,5 +1,6 @@
 # Variables {{{
 export EDITOR=vim
+export GIT_EDITOR=vim
 export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/ownCloud/Uni"
 export UNIGIT="/home/vic/ownCloud/Uni/AppuntiUni"
@@ -50,6 +51,7 @@ alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias android-emulator="/home/vic/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
 alias android-studio="/home/vic/Scaricati/Apps/android-studio/bin/studio.sh"
+alias upnp-srv-up="/home/vic/Dotfiles/bin/mount-upnp-server.sh"
 # }}}
 
 # Git {{{

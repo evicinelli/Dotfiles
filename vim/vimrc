@@ -93,6 +93,8 @@ set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
 " Custom mappings and abbreviations {{{
 noremap <C-l> l
 noremap <C-h> h
+noremap <C-j> j
+noremap <C-k> k
 noremap <C-n> :NERDTreeToggle<CR>
 noremap <C-g> :Goyo<CR>
 noremap <F1> nop

@@ -38,7 +38,7 @@ todo-ls() {
     if [[ $# -gt 0 ]]; then
     [[ "$*" = "w" ]] && (echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..6}; do tl $i days; done)
 	if date -d "$*" > /dev/null 2>&1; then
-	    grep -Gi "$(date +%F --date="$*")" $TD
+	    grep -Gi "due:$(date +%F --date="$*")" $TD
 	else
 	    grep -Gi "$1" $TD
 	fi
@@ -55,22 +55,22 @@ if [[ $# -gt 0 ]]; then
     # echo $ENTRIES
     # echo $ENTRIES_NO
     if [[ $ENTRIES_NO -eq 1 ]]; then
-        # Marchiamo quell'entry come completata in todo.txt
-        echo -e "Marco come completato: "$ENTRY
-        sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
-        # Se esiste anche un file ~/oggi.txt, rimuoviamo l'entry anche da lì
-        if [[ -f ~/oggi.txt ]]; then
-            ENTRY_OGGI=$(sed -n "/$*/p" ~/oggi.txt)
-            sed -in "s/$ENTRY_OGGI//" ~/oggi.txt
-        fi
-    else 
-	# Trovare un modo più carino per fare pure questo
-	if [[ $ENTRIES_NO -gt 1 ]]; then
-	    echo -e "Più di un match, specifica meglio cosa vuoi marcare come compleato"
-	    grep "$*" $TD
-	else
-	    echo -e "Nada de nada, mi sa che hai scritto male"
-	fi
+            # Marchiamo quell'entry come completata in todo.txt
+            echo -e "Marco come completato: "$ENTRY
+            sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
+            # Se esiste anche un file ~/oggi.txt, rimuoviamo l'entry anche da lì
+            if [[ -f ~/oggi.txt ]]; then
+                ENTRY_OGGI=$(sed -n "/$*/p" ~/oggi.txt)
+                sed -in "s/$ENTRY_OGGI//" ~/oggi.txt
+            fi
+        else 
+        # Trovare un modo più carino per fare pure questo
+            if [[ $ENTRIES_NO -gt 1 && $ENTRY_OGGI = "" ]]; then
+                echo -e "Più di un match, specifica meglio cosa vuoi marcare come compleato"
+                grep "$*" $TD
+            else
+                echo -e "Nada de nada, mi sa che hai scritto male"
+            fi
     fi
 else
    echo "Scrivi cosa vuoi che venga marcato come fatto, testina!" 
