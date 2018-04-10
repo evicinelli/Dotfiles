@@ -9,7 +9,7 @@ Plug 'airblade/vim-gitgutter'                        " Git diff aside line numbe
 Plug 'mhinz/vim-startify'                            " Vim-startify
 Plug 'tpope/vim-surround'                            " Surrounding motions on steroid
 Plug 'sheerun/vim-polyglot'                          " A collection of language pack
-Plug 'fretep/todo.txt-vim'
+Plug 'fretep/todo.txt-vim'                           " Todo.txt support
 Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
 Plug 'mileszs/ack.vim'                               " Vim Ack
 Plug 'mtth/scratch.vim'                              " Scratch buffer made easy
@@ -102,6 +102,8 @@ noremap Q :q!
 noremap Y y$
 noremap <leader>so :!xdg-open "%" <CR>
 noremap <leader>a :Ack 
+noremap <leader>f :find *
+noremap <leader>F :find 
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap viz [zjV]zk
@@ -115,7 +117,6 @@ inoremap ` ``<Left>
 inoremap <F1> <Esc>
 inoremap <C-Backspace> <C-w>
 cnoremap W w
-cabbrev f find
 " }}}
 
 " Extended text Objects (thanks to Conner McDaniel) {{{

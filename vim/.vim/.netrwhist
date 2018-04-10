@@ -1,10 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/vic/Dotfiles/rofi'
-let g:netrw_dirhist_2='/usr/share/X11/xorg.conf.d'
-let g:netrw_dirhist_3='/home/vic/ownCloud/Workspace/Data/list.cpp'
-let g:netrw_dirhist_4='/'
-let g:netrw_dirhist_5='/tmp/musicPlayer'
-let g:netrw_dirhist_6='/tmp/musicPlayer/config_scripts'
-let g:netrw_dirhist_7='/tmp/musicPlayer'
-let g:netrw_dirhist_8='/tmp/musicPlayer/resources'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/vic/ownCloud/Uni/AppuntiUni/TecWeb'
+let g:netrw_dirhist_2='/home/vic/ownCloud/Uni/AppuntiUni/TecWeb/Vic'
+let g:netrw_dirhist_3='/home/vic/ownCloud/Uni/AppuntiUni/SO/Vic/Notes'
+let g:netrw_dirhist_4='/home/vic/AndroidStudioProjects'
+let g:netrw_dirhist_5='/home/vic/AndroidStudioProjects/FirstAppliation'
+let g:netrw_dirhist_6='/home/vic/ownCloud'

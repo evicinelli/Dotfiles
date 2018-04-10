@@ -1,6 +1,7 @@
 # Variables {{{
 export EDITOR=vim
 export GIT_EDITOR=vim
+
 export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/ownCloud/Uni"
 export UNIGIT="/home/vic/ownCloud/Uni/AppuntiUni"
@@ -18,39 +19,38 @@ export P="/home/vic/ownCloud/Workspace/LEOS"
 
 # Colori {{{
 if [[ $color_prompt == "yes" ]]; then 
-    alias ls='ls --color=auto --group-directories-first -h'
+    alias ls='ls -s --color=auto --group-directories-first -h'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 else
-    alias ls='ls --group-directories-first -h'
+    alias ls='ls -s --group-directories-first -h'
 fi
 # }}}
 
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
-alias l='pwd;ls --group-directories-first -l -h -X'
+alias android-emulator="/home/vic/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
+alias android-studio="/home/vic/Scaricati/Apps/android-studio/bin/studio.sh"
+alias bashr="source ~/.bashrc"
+alias cp="rsync --archive --verbose --human-readable"
+alias fdate="date +%F -d"
+alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
+alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
+alias l='pwd;ls --group-directories-first -s -l -h'
+alias maketemp="mktemp"
+alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias o="xdg-open"
+alias p="pass"
+alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias t="tree . -L 1"
 alias tt="tree . -L 2"
 alias ttt="tree . -L 3"
-alias cp="rsync --archive --verbose --human-readable"
-alias h="man"
-alias pfind="bash /home/vic/Dotfiles/bin/pfind"
-alias p="pass"
-alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
-alias bashr="source ~/.bashrc"
-alias ssh-serverino="pass -c Casa/serverino-user && ssh user@192.168.1.197"
-alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
-alias gcal="gcalcli --calendar=\"Personale\""
-alias atls="atq"
-alias fdate="date +%F -d"
-alias maketemp="mktemp"
-alias myip="curl http://myip.dnsomatic.com && echo ''"
-alias android-emulator="/home/vic/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
-alias android-studio="/home/vic/Scaricati/Apps/android-studio/bin/studio.sh"
+alias serverino-poweroff="ssh root@192.168.1.197 'systemctl poweroff'"
+alias ssh-serverino="ssh root@192.168.1.197"
+alias upnp-srv-down="sudo umount /media/vic/Upnp\ Salotto/"
 alias upnp-srv-up="/home/vic/Dotfiles/bin/mount-upnp-server.sh"
 # }}}
 

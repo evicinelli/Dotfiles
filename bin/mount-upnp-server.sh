@@ -1,7 +1,7 @@
 #! /bin/bash
 
 SERVER_IP=192.168.1.197
-MOUNT_DIR="/media/$(whoami)/Upnp\ Salotto"
+MOUNT_DIR="/media/$(whoami)/Upnp Salotto"
 
 # Assicurarsi che cartella /media/vic/Upnp Salotto sia presente
 ([[ -d "$MOUNT_DIR" ]] && echo "ok" || sudo mkdir "$MOUNT_DIR")

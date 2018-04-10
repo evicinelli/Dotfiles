@@ -1,2 +1,3 @@
 clear Lock
 keycode 66 = Escape
+keycode 62 = Escape

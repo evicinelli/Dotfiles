@@ -36,7 +36,7 @@ todo-add(){
 
 todo-ls() {
     if [[ $# -gt 0 ]]; then
-    [[ "$*" = "w" ]] && (echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..6}; do tl $i days; done)
+    [[ "$*" = "w" ]] && (echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..7}; do tl $i days; echo; done)
 	if date -d "$*" > /dev/null 2>&1; then
 	    grep -Gi "due:$(date +%F --date="$*")" $TD
 	else
