@@ -57,11 +57,11 @@ if [[ $# -gt 0 ]]; then
     if [[ $ENTRIES_NO -eq 1 ]]; then
             # Marchiamo quell'entry come completata in todo.txt
             echo -e "Marco come completato: "$ENTRY
-            sed -in "s/$ENTRY/x $(date +%F)\ &/" $TD
+            sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
             # Se esiste anche un file ~/oggi.txt, rimuoviamo l'entry anche da lì
             if [[ -f ~/oggi.txt ]]; then
                 ENTRY_OGGI=$(sed -n "/$*/p" ~/oggi.txt)
-                sed -in "s/$ENTRY_OGGI//" ~/oggi.txt
+                sed -in "s/{$ENTRY_OGGI}//" ~/oggi.txt
             fi
         else 
         # Trovare un modo più carino per fare pure questo

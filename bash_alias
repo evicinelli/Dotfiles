@@ -4,7 +4,7 @@ export GIT_EDITOR=vim
 
 export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/ownCloud/Uni"
-export UNIGIT="/home/vic/ownCloud/Uni/AppuntiUni"
+export UG="/home/vic/ownCloud/Uni/AppuntiUni"
 export OC="/home/vic/ownCloud"
 export PW="/home/vic/ownCloud/Archivio/Password-store"
 export TD="/home/vic/ownCloud/todo.txt"
