@@ -1,0 +1,21 @@
+#!/bin/bash
+# Pass wrapper per permettere di cercare nell'archivio delle password ricordandosi solamente la parte finale della password
+FILTER="s:${PW}::;s:.gpg::"
+IFS=$'\n'
+
+PWS=($(find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER ))
+PWN=${#PWS[*]}
+
+if [[ $PWN -ne 1 ]];
+then
+    #echo ${PWS[*]}
+    if [[ $# -ne 0 ]]; then pass find $1; else pass ls; fi
+    exit 0
+else
+    echo "---------------------------------------"
+    echo $PW$PWS
+    echo "---------------------------------------"
+    pass $2 $PWS
+fi
+
+exit 0
