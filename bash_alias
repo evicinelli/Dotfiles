@@ -14,7 +14,7 @@ export DOWNLOADS="/home/vic/Scaricati"
 export NOTES="/home/vic/ownCloud/Notes"
 export WS="/home/vic/ownCloud/Workspace"
 export MEDIA="/home/vic/ownCloud/Media"
-export P="/home/vic/ownCloud/Workspace/LEOS"
+export P="/home/vic/ownCloud/Workspace/TW2018"
 # }}}
 
 # Colori {{{
@@ -48,10 +48,11 @@ alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias t="tree . -L 1"
 alias tt="tree . -L 2"
 alias ttt="tree . -L 3"
-alias serverino-poweroff="ssh root@192.168.1.197 'systemctl poweroff'"
-alias ssh-serverino="ssh root@192.168.1.197"
-alias upnp-srv-down="sudo umount /media/vic/Upnp\ Salotto/"
-alias upnp-srv-up="/home/vic/Dotfiles/bin/mount-upnp-server.sh"
+alias tr="tree . -R"
+alias srv-poweroff="ssh root@192.168.1.197 'systemctl poweroff'"
+alias srv-shh="ssh root@192.168.1.197"
+alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
+alias srv-upnp-up="/home/vic/Dotfiles/bin/mount-upnp-server.sh"
 # }}}
 
 # Git {{{

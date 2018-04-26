@@ -91,12 +91,14 @@ ps1_hostname() {
     fi
 }
 
-if [ "$color_prompt" = "yes" ]; then
-    PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\]:\[\e[0m\] "
-else
-    PS1="$(ps1_hostname)\W: "
-fi
-
+prompt() {
+    if [ "$color_prompt" = "yes" ]; then
+        export PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\] [$(tl | grep -v "^x .*"| count), [$(tl | sort | grep "^(.*" | count)!]]:\[\e[0m\] "
+    else
+        export PS1="$(ps1_hostname)\W: "
+    fi
+}
+export PROMPT_COMMAND=prompt
 # Sourcing external files
 source /usr/share/bash-completion/completions/pass
 [[ -r .bashrc_local ]] && source .bashrc_local

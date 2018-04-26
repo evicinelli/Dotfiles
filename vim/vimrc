@@ -146,6 +146,10 @@ augroup nonvim
     au!
     au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &ft=&ft | redraw!
 augroup end
+
+augroup pythonFiles
+    au BufNewFile,BufRead,BufWrite *.py noremap <leader>p :!python "%" &<CR>
+augroup end
 " }}}
 
 " Functions {{{

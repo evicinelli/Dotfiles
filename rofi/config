@@ -1,5 +1,0 @@
-rofi.font:Ubuntu Mono 13
-rofi.hide-scrollbar: true
-rofi.separator-style: none
-rofi.threads: 0
-rofi.levenshtein-sort: true
