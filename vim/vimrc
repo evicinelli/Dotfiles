@@ -15,6 +15,7 @@ Plug 'mtth/scratch.vim'                              " Scratch buffer made easy
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
+Plug 'lifepillar/vim-cheat40'                        " Vim cheatsheet
 " Plug 'freitass/todo.txt-vim'                       " Todo.txt support
 call plug#end()
 "}}}
@@ -56,7 +57,7 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=Ubuntu\ Mono\ 13
+set guifont=Inconsolata\ 13
 colorscheme base16-solarized-light
 set bg=light
 if has('gui_running')
@@ -139,16 +140,19 @@ cnoremap W w
 " Autogroups and Autocmds {{{
 augroup text
      au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=markdown
-     au BufNewFile,BufRead,BufWrite todo.txt setl ft=todo | set nospell
-     au BufNewFile,BufRead,BufWrite done.txt setl ft=todo | set nospell
+     au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
+     au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
 augroup end
 augroup nonvim
     au!
     au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &ft=&ft | redraw!
 augroup end
-
 augroup pythonFiles
     au BufNewFile,BufRead,BufWrite *.py noremap <leader>p :!python "%" &<CR>
+augroup end
+augroup todotxt
+    au BufNewFile,BufRead,BufWrite *.todo.txt setl ft=todo | set nospell
+    au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
 augroup end
 " }}}
 

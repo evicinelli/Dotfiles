@@ -1,4 +1,5 @@
 # find files
+[[ -f ~/Dotfiles/dmenurc ]] && . ~/Dotfiles/dmenurc || DMENU=dmenu
 xdg-open "$(find /home/$(whoami) /tmp /media/$(whoami) \
 -not -path "/tmp/.*" \
 -not -path "/home/$(whoami)/.*"  \
@@ -6,4 +7,4 @@ xdg-open "$(find /home/$(whoami) /tmp /media/$(whoami) \
 -not -path "/home/$(whoami)/Scaricati/App*" \
 -not -path "/home/vic/AndroidStudioProjects*" \
 -not -path "/home/vic/Workspace/Android*" \
-| dmenu  -f -fn "Ubuntu Mono-13" -i -p "File ")"
+| eval ${DMENU} -p "File ")"

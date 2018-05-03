@@ -5,6 +5,7 @@ application/excel=libreoffice-calc.desktop;
 application/gpx+xml=org.gnome.Maps.desktop;
 application/gzip=org.gnome.FileRoller.desktop;
 application/illustrator=inkscape.desktop;
+application/javascript=gvim.desktop;vim.desktop
 application/macwriteii=libreoffice-writer.desktop;
 application/mathml+xml=libreoffice-math.desktop;
 application/mbox=evolution.desktop;

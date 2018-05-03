@@ -36,22 +36,23 @@ todo-add(){
 
 todo-ls() {
     if [[ $# -gt 0 ]]; then
-    [[ "$*" = "w" ]] && (echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..7}; do tl $i days; echo; done)
-	if date -d "$*" > /dev/null 2>&1; then
-	    grep -Gi "due:$(date +%F --date="$*")" $TD
-	else
-	    grep -Gi "$1" $TD
-	fi
-    else
-        [[ -f ~/oggi.txt ]] && cat ~/oggi.txt && echo -ne "\n"
-        cat $TD | grep "due:$(date +%F)"
+        [[ "$*" = "w" ]] && (echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..7}; do tl $i days; echo; done)
+        [[ "$*" = "past" ]] && (for i in {-100..0}; do tl $i days; done | sort | grep -v "^x .*")
+        if date -d "$*" > /dev/null 2>&1; then
+            grep -Gi "due:$(date +%F --date="$*")" $TD
+        else
+            grep -Gi "$1" $TD
+        fi
+        else
+            [[ -f ~/oggi.txt ]] && cat ~/oggi.txt && echo -ne "\n"
+            cat $TD | grep "due:$(date +%F)"
     fi
 }
 
 todo-done () {
 if [[ $# -gt 0 ]]; then
-    ENTRIES_NO=$(sed -n "/$*/p" $TD | grep -c "")
-    ENTRY=$(sed -n "/$*/p" $TD)
+    ENTRIES_NO=$(sed -n "/$*/p" $TD | grep -v "^x .*" | grep -c "")
+    ENTRY=$(sed -n "/$*/p" $TD | grep -v "^x .*")
     # echo $ENTRIES
     # echo $ENTRIES_NO
     if [[ $ENTRIES_NO -eq 1 ]]; then

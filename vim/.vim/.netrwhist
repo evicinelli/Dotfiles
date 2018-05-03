@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='scp://emanuele.vicinelli@annina.cs.unibo.it/home/web/emanuele.vicinelli/html/'
 let g:netrw_dirhist_2='scp://emanuele.vicinelli@annina.cs.unibo.it/'
+let g:netrw_dirhist_3='/home/vic/ownCloud/Workspace/TW2018/recommendations/node_modules'
+let g:netrw_dirhist_4='/home/vic/ownCloud/Workspace/TW2018/.git'
+let g:netrw_dirhist_5='/var/lib/pam'
+let g:netrw_dirhist_6='scp://emanuele.vicinelli@annina.cs.unibo.it/'
