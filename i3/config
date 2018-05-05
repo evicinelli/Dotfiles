@@ -92,7 +92,7 @@ bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 # client.urgent           $urgent $urgent $text $base0F }}}
 bar {
     position top
-    status_command i3blocks -c $HOME/.config/i3/i3blocksrc
+    status_command i3blocks
     font pango:Inconsolata 12
     strip_workspace_numbers yes
 # {{{    colors {

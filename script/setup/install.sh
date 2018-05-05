@@ -1,9 +1,11 @@
 ## Script di post installazione e configurazione 
 
-# Configuriamo git
+# Configuriamo git {{{
 git config --global user.email "emanuele.vicinelli@gmail.com"
 git config --global user.name "Emanuele Vicinelli"
+# }}}
 
+# Apt {{{
 # Installo i pacchettini deb tattici
 sudo apt install dirmngr
 cd /tmp
@@ -20,8 +22,19 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 
 # Installo le cose
 sudo apt update
-sudo apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color fonts-inconsolata compton arandr dunst spotify-client lxappearance xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gnome-sushi gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv
+sudo apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color fonts-inconsolata compton arandr dunst spotify-client lxappearance xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs
 
+# Aggiorno e pulisco tutto
+sudo apt upgrade
+sudo apt dist-upgrade
+sudo apt clean
+sudo apt autoremove
+sudo apt autoclean
+
+
+#}}}
+
+# Configurazioni {{{
 # Vim Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -33,21 +46,16 @@ EOF
 # Per fare andare d'accordo base16 con urxvt
 git clone https://github.com/chriskempson/base16-shell.git ~/Scaricati/Apps/
 
-# Aggiorno e pulisco tutto
-sudo apt upgrade
-sudo apt dist-upgrade
-sudo apt clean
-sudo apt autoremove
-sudo apt autoclean
-
 # Collego i dotfiles
 mkdir $HOME/.config/dunst
 cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/i3
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/bashrc; mv bashrc .bashrc
-# cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/rofi
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/vim/vimrc; mv vimrc .vimrc
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/compton.conf; mv compton.conf .compton.conf
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/bashrc ./.bashrc
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/vim/vimrc ./.vimrc
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/compton.conf ./.compton.conf
+cd $HOME                            ; ln -s ~/Dotfiles/i3/i3blocks.conf ./.i3blocks.conf
 cd $HOME/.local/share/applications/ ; ln -sf $HOME/Dotfiles/mimeinfo.cache
 cd $HOME/.config/dunst/             ; ln -sf $HOME/Dotfiles/dunstrc
+# }}}
 
 echo "Fatto, fai meglio a controllare però"
+# vim: fdm=marker
