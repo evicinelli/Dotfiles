@@ -8,7 +8,7 @@ esac
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
-BASH_ENV=~/.profile
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -16,26 +16,15 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-    xterm*|rxvt*)
-	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-	;;
-    *)
-	;;
-esac
-
-# Do we want color?
-case "$TERM" in
-    xterm-*color|rxvt-unicode-256color) color_prompt=yes;;
-    *) color_prompt=no;;
-esac
+# case "$TERM" in
+#     xterm*|rxvt*) PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1" ;;
+#     *) ;;
+# esac
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -45,14 +34,6 @@ if ! shopt -oq posix; then
     fi
 fi
 # }}}
-
-# Configurazioni di base {{{
-
-# Source stuff
-# source ~/Dotfiles/bash_alias
-# source ~/Dotfiles/bash_functions
-source /usr/share/bash-completion/completions/pass
-[[ -r .bashrc_local ]] && source .bashrc_local
 
 # Vim keys and general keybindings {{{
 set -o vi
@@ -80,39 +61,30 @@ shopt -s histappend
 export PROMPT_COMMAND=prompt
 
 prompt() {
-    toDo=$(tl | grep -v "^x .*"| count)
-    toDoUrgent=$(tl | sort | grep "^(.*" | count)
-    if [ "$color_prompt" = "yes" ]; then
+    toDo=$(tl | grep -v "^x .*"| wc -l)
+    toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
         export PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
-    else
-        export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]: "
-    fi
 }
 
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
-    if [[ "$host" != "pelican" || "$user" != "vic" ]]; then
-        if ["$color_prompt" = "yes"]; then
-            echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host "
-        else
-            echo "$user@$host "
-        fi
-    fi
+    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host "
 }
 
 # Base16 colorscheme stuff
-if [ "$color_prompt" = "yes" ]; then
-    BASE16_SHELL=$HOME/Scaricati/Apps/base16-shell/
-    [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-fi
+case $TERM in
+    rxvt*)
+        BASE16_SHELL=$HOME/Scaricati/Apps/base16-shell/
+        [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)" ;;
+    *) ;;
+esac
 # }}}
 
 # Alias {{{
 # Variables {{{
 export EDITOR=vim
 export GIT_EDITOR=vim
-
 export DF='/home/vic/Dotfiles'
 export UNI="/home/vic/ownCloud/Uni"
 export UG="/home/vic/ownCloud/Uni/AppuntiUni"
@@ -126,21 +98,15 @@ export NOTES="/home/vic/ownCloud/Notes"
 export WS="/home/vic/ownCloud/Workspace"
 export MEDIA="/home/vic/ownCloud/Media"
 export P="/home/vic/ownCloud/Workspace/TW2018"
-
-export DMENU="dmenu -f -i -fn \"Ubuntu Mono-13\""
+export SRV="192.168.1.197"
 # }}}
 
 # Colori {{{
-if [[ $color_prompt == "yes" ]]; then 
-    alias ls='ls -s --color=auto --group-directories-first -h'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-else
-    alias ls='ls -s --group-directories-first -h'
-fi
+alias ls='ls -s --color=yes --group-directories-first -h'
+alias dir='dir --color=yes'
+alias vdir='vdir --color=yes'
+alias grep='grep --color=yes'
+alias fgrep='fgrep --color=yes'
 # }}}
 
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
@@ -158,12 +124,12 @@ alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias o="xdg-open"
 alias p="pass"
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
-alias t="tree . -L 1"
-alias tt="tree . -L 2"
-alias ttt="tree . -L 3"
-alias tr="tree . -R"
-alias srv-poweroff="ssh root@192.168.1.197 'systemctl poweroff'"
-alias srv-shh="ssh root@192.168.1.197"
+alias t="tree -L 1"
+alias tt="tree -L 2"
+alias ttt="tree -L 3"
+alias tr="tree -R"
+alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
+alias srv-shh="ssh root@$SRV"
 alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
 alias srv-upnp-up="/home/vic/Dotfiles/script/mount-upnp-server.sh"
 # }}}
@@ -172,9 +138,9 @@ alias srv-upnp-up="/home/vic/Dotfiles/script/mount-upnp-server.sh"
 alias g="git"
 alias gs="git status"
 alias gd="git diff"
-alias gr="git remove"
+alias grm="git remove"
 alias ga="git add"
-alias gc="git commit -m"
+alias gc="git commit"
 alias gpush="git push"
 alias gpull="git pull"
 alias glog="git log --graph --oneline"
@@ -200,14 +166,6 @@ dirfind() {
     find $1 -type d -iwholename "*$2**" 2> /dev/null
 }
 
-recent () {
-    find $OC -type f -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec echo {} \;
-}
-
-edit-recent () {
-    find $OC -type f -regex ".*\.\(md\|txt\)" -mtime -"$1" -not -path "/home/vic/ownCloud/.*" -exec vim "{}" \+
-}
-
 clean-swp () {
     find $HOME -name "*.swp" -ok rm "{}" \;
     find $HOME -name "*.swo" -ok rm "{}" \;
@@ -221,30 +179,15 @@ todo-add(){
     fi
 }
 
-# todo-ls() {
-#     if [[ $# -gt 0 ]]; then
-#         [[ "$*" = "w" ]] && (echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..7}; do tl $i days; echo; done)
-#         [[ "$*" = "past" ]] && (for i in {-100..0}; do tl $i days; done | sort | grep -v "^x .*")
-#         if date -d "$*" > /dev/null 2>&1; then
-#             grep -Gi "due:$(date +%F --date="$*")" $TD
-#         else
-#             grep -Gi "$1" $TD
-#         fi
-#         else
-#             [[ -f ~/oggi.txt ]] && cat ~/oggi.txt && echo -ne "\n"
-#             cat $TD | grep "due:$(date +%F)"
-#     fi
-# }
-
 todo-ls() {
     if [[ $# -gt 0 ]]; then
 		case "$*" in
 			"w") 
-				echo -e "# Todo per i prossimi 7 giorni #"; for i in {0..7}; do tl $i days echo; done;;
+				for i in {0..7}; do tl $i days; done | grep -v "^x .*";;
 			"past") 
-				for i in {-100..0}; do tl $i days; done | sort | grep -v "^x .*";;
+				for i in {-100..0}; do tl $i days; done | grep -v "^x .*";;
 			"month")
-				for i in {1..31}; do tl $i days; done | grep -v "^x .*";;
+				for i in {0..31}; do tl $i days; done | grep -v "^x .*";;
 			*) 
 				if date -d "$*" > /dev/null 2>&1; then 
 					grep -Gi due:$(date +%F --date="$*") $TD 
@@ -296,34 +239,30 @@ function todo-ls-tags() {
 
 # Utility {{{
 transfer() {
+    MAX_DOWN=${2:-3}; # if not $2, then default to 3 downloads
+    MAX_DAYS=${3:-2}; # if not $3, then default to 2 days
     if [ $# -eq 0 ]; then
-	echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
-	return 1;
+        echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
+        return 1;
     fi
     tmpfile=$( mktemp -t transferXXX );
     if tty -s; then
-	basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
-	curl -H "Max-Downloads: 3" -H "Max-Days: 2" --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
-    else curl -H "Max-Downloads: 3" -H "Max-Days: 2" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
+        basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
+        curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
+    else curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
     fi;
-    cat $tmpfile | xclip -selection c;
+    cat $tmpfile | xclip -selection c; # copy to x clipboard
+    cat $tmpfile | xclip -selection primary; # copy to primary clipboard
     cat $tmpfile;
     echo -e "\n"
     rm -f $tmpfile;
-}
-
-function count () {
-    if [[ $# -eq 1 ]]; then 
-	grep -c "$1"
-    else
-	grep -c ".*"
-    fi
 }
 
 function fix-mimecache () {
     cd ~/.local/share/applications/
     rm mimeinfo.cache
     ln -s $DF/mimeinfo.cache
+    cd ~-
 }
 
 function emoji () {
@@ -367,5 +306,9 @@ motivation() {
 # }}}
 
 # }}}
+
+# Override delle impostazioni con i valori locali
+source /usr/share/bash-completion/completions/pass
+[[ -r .bashrc_local ]] && source .bashrc_local
 
 # vim: fdm=marker
