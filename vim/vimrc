@@ -89,7 +89,7 @@ let g:startify_custom_header = [system("motivation")]
 " }}}
 
 " Statusline {{{
-set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ \|\ %p%%
+set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
 " }}}
 
 " Custom mappings and abbreviations {{{

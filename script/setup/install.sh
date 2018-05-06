@@ -39,6 +39,8 @@ sudo apt autoclean
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Modifichine ai file di configurazione in giro
+touch ~/.inputrc
+echo "set editing-mode vi" >> ~/.inputrc
 sudo tee -a /usr/share/bash-completion/completions/pass << EOF
 complete -o filenames -o nospace -F _pass p
 EOF

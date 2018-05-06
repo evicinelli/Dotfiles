@@ -1,3 +1,24 @@
+# Variables {{{
+export EDITOR=vim
+export GIT_EDITOR=vim
+export DF='/home/vic/Dotfiles'
+export UNI="/home/vic/ownCloud/Uni"
+export UG="/home/vic/ownCloud/Uni/AppuntiUni"
+export OC="/home/vic/ownCloud"
+export PW="/home/vic/ownCloud/Archivio/Password-store"
+export TD="/home/vic/ownCloud/todo.txt"
+export DN="/home/vic/ownCloud/done.txt"
+export DOCUMENTS="/home/vic/ownCloud/Documenti"
+export DOWNLOADS="/home/vic/Scaricati"
+export NOTES="/home/vic/ownCloud/Notes"
+export WS="/home/vic/ownCloud/Workspace"
+export MEDIA="/home/vic/ownCloud/Media"
+export P="/home/vic/ownCloud/Workspace/TW2018"
+export SRV="192.168.1.197"
+# Se abbiamo variabili locali da ridefinire, usiamo quelle
+[[ -r .bashrc_local ]] && source .bashrc_local
+# }}}
+
 # Defaults  {{{
 # If not running interactively, don't do anything
 case $- in
@@ -82,31 +103,12 @@ esac
 # }}}
 
 # Alias {{{
-# Variables {{{
-export EDITOR=vim
-export GIT_EDITOR=vim
-export DF='/home/vic/Dotfiles'
-export UNI="/home/vic/ownCloud/Uni"
-export UG="/home/vic/ownCloud/Uni/AppuntiUni"
-export OC="/home/vic/ownCloud"
-export PW="/home/vic/ownCloud/Archivio/Password-store"
-export TD="/home/vic/ownCloud/todo.txt"
-export DN="/home/vic/ownCloud/done.txt"
-export DOCUMENTS="/home/vic/ownCloud/Documenti"
-export DOWNLOADS="/home/vic/Scaricati"
-export NOTES="/home/vic/ownCloud/Notes"
-export WS="/home/vic/ownCloud/Workspace"
-export MEDIA="/home/vic/ownCloud/Media"
-export P="/home/vic/ownCloud/Workspace/TW2018"
-export SRV="192.168.1.197"
-# }}}
-
 # Colori {{{
-alias ls='ls -s --color=yes --group-directories-first -h'
-alias dir='dir --color=yes'
-alias vdir='vdir --color=yes'
-alias grep='grep --color=yes'
-alias fgrep='fgrep --color=yes'
+alias ls='ls -s --color=auto --group-directories-first -h'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
 # }}}
 
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
@@ -118,7 +120,7 @@ alias fdate="date +%F -d"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
-alias l='pwd;ls --group-directories-first -s -l -h'
+alias l='pwd;ls -l'
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias o="xdg-open"
@@ -304,11 +306,10 @@ motivation() {
     echo -ne "   $I\n"
 }
 # }}}
-
 # }}}
 
-# Override delle impostazioni con i valori locali
+# Altro {{{
 source /usr/share/bash-completion/completions/pass
-[[ -r .bashrc_local ]] && source .bashrc_local
+# }}}
 
 # vim: fdm=marker
