@@ -1,19 +1,19 @@
 # Variables {{{
 export EDITOR=vim
 export GIT_EDITOR=vim
-export DF='/home/vic/Dotfiles'
-export UNI="/home/vic/ownCloud/Uni"
-export UG="/home/vic/ownCloud/Uni/AppuntiUni"
-export OC="/home/vic/ownCloud"
-export PW="/home/vic/ownCloud/Archivio/Password-store"
-export TD="/home/vic/ownCloud/todo.txt"
-export DN="/home/vic/ownCloud/done.txt"
-export DOCUMENTS="/home/vic/ownCloud/Documenti"
-export DOWNLOADS="/home/vic/Scaricati"
-export NOTES="/home/vic/ownCloud/Notes"
-export WS="/home/vic/ownCloud/Workspace"
-export MEDIA="/home/vic/ownCloud/Media"
-export P="/home/vic/ownCloud/Workspace/TW2018"
+export DF="$HOME/Dotfiles"
+export UNI="$HOME/ownCloud/Uni"
+export UG="$HOME/ownCloud/Uni/AppuntiUni"
+export OC="$HOME/ownCloud"
+export PW="$HOME/ownCloud/Archivio/Password-store"
+export TD="$HOME/ownCloud/todo.txt"
+export DN="$HOME/ownCloud/done.txt"
+export DOCUMENTS="$HOME/ownCloud/Documenti"
+export DOWNLOADS="$HOME/Scaricati"
+export NOTES="$HOME/ownCloud/Notes"
+export WS="$HOME/ownCloud/Workspace"
+export MEDIA="$HOME/ownCloud/Media"
+export P="$HOME/ownCloud/Workspace/TW2018"
 export SRV="192.168.1.197"
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r .bashrc_local ]] && source .bashrc_local
