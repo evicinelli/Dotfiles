@@ -112,9 +112,9 @@ alias fgrep='fgrep --color=auto'
 # }}}
 
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
-alias android-emulator="/home/vic/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
-alias android-studio="/home/vic/Scaricati/Apps/android-studio/bin/studio.sh"
-alias bashr="source ~/.bashrc"
+alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
+alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
+alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
 alias fdate="date +%F -d"
 alias gcal="gcalcli --calendar=\"Personale\""
@@ -133,7 +133,7 @@ alias tr="tree -R"
 alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
 alias srv-shh="ssh root@$SRV"
 alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
-alias srv-upnp-up="/home/vic/Dotfiles/script/mount-upnp-server.sh"
+alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server.sh"
 # }}}
 
 # Git {{{
@@ -190,6 +190,7 @@ todo-ls() {
 				for i in {-100..0}; do tl $i days; done | grep -v "^x .*";;
 			"month")
 				for i in {0..31}; do tl $i days; done | grep -v "^x .*";;
+            "someday") cat $TD | grep -v "due:.*$" | grep -v "^x .*";;
 			*) 
 				if date -d "$*" > /dev/null 2>&1; then 
 					grep -Gi due:$(date +%F --date="$*") $TD 
