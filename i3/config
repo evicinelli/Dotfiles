@@ -22,7 +22,7 @@ set $mod Mod4
 floating_modifier $mod
 bindsym $mod+q kill
 bindsym --whole-window $mod+button2 kill
-# workspace_layout tabbed
+popup_during_fullscreen leave_fullscreen
 # }}}
 
 # WORKSPACES {{{

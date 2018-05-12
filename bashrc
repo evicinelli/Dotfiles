@@ -16,7 +16,7 @@ export MEDIA="$HOME/ownCloud/Media"
 export P="$HOME/ownCloud/Workspace/TW2018"
 export SRV="192.168.1.197"
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
-[[ -r .bashrc_local ]] && source .bashrc_local
+[[ -r ~/.bashrc_local ]] && source .bashrc_local
 # }}}
 
 # Defaults  {{{
@@ -84,7 +84,7 @@ export PROMPT_COMMAND=prompt
 prompt() {
     toDo=$(tl | grep -v "^x .*"| wc -l)
     toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
-        export PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
+    export PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
 }
 
 ps1_hostname() {
@@ -93,11 +93,13 @@ ps1_hostname() {
     [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host "
 }
 
-# Base16 colorscheme stuff
+# Colorscheme (if set $COLORSCHEME and $BASE16_SHELL)
 case $TERM in
     rxvt*)
-        BASE16_SHELL=$HOME/Scaricati/Apps/base16-shell/
-        [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)" ;;
+        if [[ ! -z $COLORSCHEME ]] && [[ ! -z $BASE16_SHELL ]]; then
+            [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)" ;
+            eval $COLORSCHEME;
+        fi;;
     *) ;;
 esac
 # }}}
@@ -184,13 +186,11 @@ todo-add(){
 todo-ls() {
     if [[ $# -gt 0 ]]; then
 		case "$*" in
-			"w") 
-				for i in {0..7}; do tl $i days; done | grep -v "^x .*";;
-			"past") 
-				for i in {-100..0}; do tl $i days; done | grep -v "^x .*";;
-			"month")
-				for i in {0..31}; do tl $i days; done | grep -v "^x .*";;
+			"w") for i in {0..7}; do tl $i days; done | grep -v "^x .*";;
+			"past") for i in {-100..-1}; do tl $i days; done | grep -v "^x .*";;
+			"month") for i in {0..31}; do tl $i days; done | grep -v "^x .*";;
             "someday") cat $TD | grep -v "due:.*$" | grep -v "^x .*";;
+            "not done") tl | grep -v "^x .*";;
 			*) 
 				if date -d "$*" > /dev/null 2>&1; then 
 					grep -Gi due:$(date +%F --date="$*") $TD 
@@ -198,7 +198,7 @@ todo-ls() {
 				fi
 		esac
 	else
-		cat $TD | grep "due:$(date +%F)"
+		cat $TD | grep "due:$(date +%F)" | grep -v "^x .*"
     fi
 }
 
@@ -237,7 +237,6 @@ function todo-ls-tags() {
     grep -o "@.[a-z]*" $TD | sort | uniq
     grep -o "\+.[a-z]*" $TD | sort | uniq
 }
-
 # }}}
 
 # Utility {{{
@@ -245,9 +244,14 @@ transfer() {
     MAX_DOWN=${2:-3}; # if not $2, then default to 3 downloads
     MAX_DAYS=${3:-2}; # if not $3, then default to 2 days
     if [ $# -eq 0 ]; then
-        echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
+        echo -e "No arguments specified. Usage:\ntransfer [# allowed downloads] [# days] /path/to/file/or/name\ncat /tmp/test.md | transfer test.md\n(Default: 3 downloads, 2 days max)";
         return 1;
     fi
+    if [[ "$*" -eq "--help" ]]; then
+        cat <<< EOF
+        EOF
+    return 1;
+fi
     tmpfile=$( mktemp -t transferXXX );
     if tty -s; then
         basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');

@@ -16,7 +16,6 @@ Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
 Plug 'lifepillar/vim-cheat40'                        " Vim cheatsheet
-" Plug 'freitass/todo.txt-vim'                       " Todo.txt support
 call plug#end()
 "}}}
 
@@ -57,8 +56,8 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=Inconsolata\ 13
-colorscheme base16-solarized-light
+set guifont=Inconsolata\ 12
+colorscheme base16-one-light
 set bg=light
 if has('gui_running')
     set guioptions-=m                                         " remove menu bar
@@ -68,7 +67,7 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
-    colorscheme base16-solarized-dark
+    colorscheme base16-onedark
     let base16colorspace=256
     set bg=dark
     set t_Co=256                                              " 256 color vim
@@ -118,7 +117,7 @@ inoremap " ""<Left>
 inoremap ` ``<Left>
 inoremap <F1> <Esc>
 inoremap <C-Backspace> <C-w>
-cnoremap W w
+cabbrev f find
 " }}}
 
 " Extended text Objects (thanks to Conner McDaniel) {{{

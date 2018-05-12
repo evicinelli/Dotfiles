@@ -10,6 +10,8 @@ declare -a commands=(
     "redshift-gtk -x #reset #day"
     "redshift-gtk -O 2000 #red #night"
     "firefox --private-window #incognito"
+    "notify-send DUNST_COMMAND_PAUSE #do not disturb start dndstart dnd"
+    "notify-send DUNST_COMMAND_RESUME #do not disturb end stop dndstop dnd"
 )
 toExecute=$(for i in ${!commands[*]}; do echo ${commands[$i]}; done | eval ${DMENU} -p "Utils " -l 8)
 eval $toExecute
