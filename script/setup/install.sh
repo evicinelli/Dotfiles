@@ -47,7 +47,7 @@ EOF
 
 # Per fare andare d'accordo base16 con urxvt
 git clone https://github.com/chriskempson/base16-shell.git ~/Scaricati/Apps/
-echo "BASE16_SHELL=\"$HOME/Scaricati/Apps/base16-shell/\"" >> .bashrc_local
+echo -ne "BASE16_SHELL=\"$HOME/Scaricati/Apps/base16-shell/\"\nCOLORSCHEME=\"base16_onedark\"" >> .bashrc_local
 
 # Collego i dotfiles
 mkdir $HOME/.config/dunst
