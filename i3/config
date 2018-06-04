@@ -79,32 +79,11 @@ bindsym $mod+shift+a focus child
 # THEMING {{{
 font pango:Inconsolata 10
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
-# {{{set_from_resource $pdark background
-# set_from_resource $dark background
-# set_from_resource $text foreground
-# set_from_resource $urgent color9
-# set_from_resource $clear color19
-# set_from_resource $accent color6
-# #          		        border  bg 		text  indicator
-# client.focused          $clear  $clear  $text $urgent
-# client.focused_inactive $dark   $dark   $text $base0F
-# client.unfocused        $dark   $dark   $text $base0F
-# client.urgent           $urgent $urgent $text $base0F }}}
 bar {
     position top
     status_command i3blocks
     font pango:Inconsolata 12
     strip_workspace_numbers yes
-# {{{    colors {
-#             separator $text
-#             background $pdark
-#             statusline $text
-# #		                   border  bg	   text
-#             focused_workspace  $accent $accent $pdark
-#             active_workspace   $accent $accent $pdark
-#             inactive_workspace $pdark  $pdark  $text
-#             urgent_workspace   $urgent $urgent $pdark
-#         } }}}
    }
 # }}}
 
@@ -154,10 +133,10 @@ set $monitor "Edpi1 - Hdmi1 - Clonato - Destra"
 bindsym $mod+m mode $monitor
 mode $monitor {
 	bindsym Escape mode "default"
-	bindsym c exec --no-startup-id $HOME/Dotfiles/bin/clonato.sh; mode "default"
-	bindsym d exec --no-startup-id $HOME/Dotfiles/bin/destra.sh; mode "default"
-	bindsym e exec --no-startup-id $HOME/Dotfiles/bin/internal.sh; mode "default"
-	bindsym h exec --no-startup-id $HOME/Dotfiles/bin/hdmi-1.sh; mode "default"
+	bindsym c exec --no-startup-id $HOME/Dotfiles/script/monitor/clonato.sh; mode "default"
+	bindsym d exec --no-startup-id $HOME/Dotfiles/script/monitor/destra.sh; mode "default"
+	bindsym e exec --no-startup-id $HOME/Dotfiles/script/monitor/internal.sh; mode "default"
+	bindsym h exec --no-startup-id $HOME/Dotfiles/script/monitor/hdmi-1.sh; mode "default"
 }
 # }}}
 

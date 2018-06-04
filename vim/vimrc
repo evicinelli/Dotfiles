@@ -15,7 +15,8 @@ Plug 'mtth/scratch.vim'                              " Scratch buffer made easy
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
-Plug 'lifepillar/vim-cheat40'                        " Vim cheatsheet
+Plug 'vim-airline/vim-airline'                       " Statusline
+Plug 'vim-airline/vim-airline-themes'                " Airline theme
 call plug#end()
 "}}}
 
@@ -46,6 +47,7 @@ set spelllang=it,en       " Spell dictionaries
 set splitright            " vsplit on the right
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
+set noshowmode            " No insert/visual mode indicator
 let mapleader = " "
 let maplocalleader = " "
 "}}}
@@ -57,7 +59,7 @@ set fillchars+=vert:\|                                        " Vertical separat
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set guifont=Inconsolata\ 12
-colorscheme base16-one-light
+colorscheme base16-solarized-light
 set bg=light
 if has('gui_running')
     set guioptions-=m                                         " remove menu bar
@@ -88,35 +90,35 @@ let g:startify_custom_header = [system("motivation")]
 " }}}
 
 " Statusline {{{
-set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
+" set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
 " }}}
 
 " Custom mappings and abbreviations {{{
-noremap <C-l> l
+inoremap " ""<Left>
+inoremap ( ()<Left>
+inoremap <C-Backspace> <C-w>
+inoremap <F1> <Esc>
+inoremap [ []<Left>
+inoremap ` ``<Left>
+inoremap { {}<Left>
+noremap :Q :q
+noremap :W :w
+noremap Y y$
+noremap Z zMzv
+noremap vaz [zV]z
+noremap viz [zjV]zk
+noremap <C-g> :Goyo<CR>
 noremap <C-h> h
 noremap <C-j> j
 noremap <C-k> k
+noremap <C-l> l
 noremap <C-n> :NERDTreeToggle<CR>
-noremap <C-g> :Goyo<CR>
 noremap <F1> nop
-noremap Q :q!
-noremap Y y$
-noremap <leader>so :!xdg-open "%" <CR>
-noremap <leader>a :Ack 
-noremap <leader>f :find *
-noremap <leader>F :find 
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
-noremap viz [zjV]zk
-noremap vaz [zV]z
-noremap Z zMzv
-inoremap { {}<Left>
-inoremap [ []<Left>
-inoremap ( ()<Left>
-inoremap " ""<Left>
-inoremap ` ``<Left>
-inoremap <F1> <Esc>
-inoremap <C-Backspace> <C-w>
+noremap <leader>a :Ack 
+noremap <leader>so :!xdg-open "%" <CR>
+noremap <leader><leader> za <CR>
 cabbrev f find
 " }}}
 
@@ -134,6 +136,7 @@ cabbrev f find
 "     exe "vnoremap vi".item." T".item."dt"item
 "     exe "vnoremap va".item." T".item."dt"item
 " endfor
+set matchpairs+=<:>
 " }}}
 
 " Autogroups and Autocmds {{{
@@ -153,6 +156,8 @@ augroup todotxt
     au BufNewFile,BufRead,BufWrite *.todo.txt setl ft=todo | set nospell
     au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
 augroup end
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 " }}}
 
 " Functions {{{
@@ -164,19 +169,6 @@ function! s:DiffWithSaved()
     exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-" Increase/decrease font size
-nnoremap <C-Up> :silent! let &guifont = substitute(
- \ &guifont,
- \ '\[0-9]+\',
- \ '\=eval(submatch(0)+1)',
- \ '')<CR>
-nnoremap <C-Down> :silent! let &guifont = substitute(
- \ &guifont,
- \ ':h\zs\d\+',
- \ '\=eval(submatch(0)-1)',
- \ '')<CR>
-
 " }}}
+
 " vim: fdm=marker

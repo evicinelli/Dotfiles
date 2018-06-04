@@ -1,6 +1,5 @@
 clear Lock
 keycode 66 = Escape
-keycode 62 = Escape
 
 
 ! Natural scrolling (http://forums.debian.net/viewtopic.php?t=121162)

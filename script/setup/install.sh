@@ -34,9 +34,13 @@ sudo apt autoclean
 
 #}}}
 
-# Configurazioni {{{
+# Altro {{{
 # Vim Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 # Modifichine ai file di configurazione in giro
 touch ~/.inputrc

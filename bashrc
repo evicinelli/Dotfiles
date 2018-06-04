@@ -14,9 +14,10 @@ export NOTES="$HOME/ownCloud/Notes"
 export WS="$HOME/ownCloud/Workspace"
 export MEDIA="$HOME/ownCloud/Media"
 export P="$HOME/ownCloud/Workspace/TW2018"
+export MED="$OC/Uni/Medicina"
 export SRV="192.168.1.197"
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
-[[ -r ~/.bashrc_local ]] && source .bashrc_local
+[[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
 
 # Defaults  {{{
@@ -49,9 +50,9 @@ fi
 
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
+        . /usr/share/bash-completion/bash_completion
     elif [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
+        . /etc/bash_completion
     fi
 fi
 # }}}
@@ -85,6 +86,7 @@ prompt() {
     toDo=$(tl | grep -v "^x .*"| wc -l)
     toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
     export PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
+    [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
 }
 
 ps1_hostname() {
@@ -102,62 +104,9 @@ case $TERM in
         fi;;
     *) ;;
 esac
-# }}}
 
-# Alias {{{
-# Colori {{{
-alias ls='ls -s --color=auto --group-directories-first -h'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-# }}}
-
-# Troppo lunghi da scrivere (o li sbaglio sempre) {{{
-alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
-alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
-alias bashr="source $HOME/.bashrc"
-alias cp="rsync --archive --verbose --human-readable"
-alias fdate="date +%F -d"
-alias gcal="gcalcli --calendar=\"Personale\""
-alias gi="gvim"
-alias gtd="bash ~/Scaricati/Apps/gtd/gtd -n"
-alias l='pwd;ls -l'
-alias maketemp="mktemp"
-alias myip="curl http://myip.dnsomatic.com && echo ''"
-alias o="xdg-open"
-alias p="pass"
-alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
-alias t="tree -L 1"
-alias tt="tree -L 2"
-alias ttt="tree -L 3"
-alias tr="tree -R"
-alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
-alias srv-shh="ssh root@$SRV"
-alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
-alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server.sh"
-# }}}
-
-# Git {{{
-alias g="git"
-alias gs="git status"
-alias gd="git diff"
-alias grm="git remove"
-alias ga="git add"
-alias gc="git commit"
-alias gpush="git push"
-alias gpull="git pull"
-alias glog="git log --graph --oneline"
-# }}}
-
-# Todo {{{
-alias ta="todo-add"
-alias tl="todo-ls"
-alias td="todo-done"
-alias te="vi $TD"
-alias ge="gvim $TD"
-alias remindme="bash /home/vic/Dotfiles/script/remindme.sh"
-# }}}
+alias day="eval $COLORSCHEME_DAY"
+alias night="eval $COLORSCHEME_NIGHT"
 # }}}
 
 # Functions {{{
@@ -171,56 +120,56 @@ dirfind() {
 }
 
 clean-swp () {
-    find $HOME -name "*.swp" -ok rm "{}" \;
-    find $HOME -name "*.swo" -ok rm "{}" \;
+find $HOME -name "*.swp" -ok rm "{}" \;
+find $HOME -name "*.swo" -ok rm "{}" \;
 }
 # }}}
 
 # Todo {{{
 todo-add(){
-    if [[ $# -gt 0 ]]; then
-	    echo "$*" >> $TD
-    fi
+if [[ $# -gt 0 ]]; then
+    echo "$*" >> $TD
+fi
 }
 
 todo-ls() {
-    if [[ $# -gt 0 ]]; then
-		case "$*" in
-			"w") for i in {0..7}; do tl $i days; done | grep -v "^x .*";;
-			"past") for i in {-100..-1}; do tl $i days; done | grep -v "^x .*";;
-			"month") for i in {0..31}; do tl $i days; done | grep -v "^x .*";;
-            "someday") cat $TD | grep -v "due:.*$" | grep -v "^x .*";;
-            "not done") tl | grep -v "^x .*";;
-			*) 
-				if date -d "$*" > /dev/null 2>&1; then 
-					grep -Gi due:$(date +%F --date="$*") $TD 
-				else grep -Gi "$*" $TD
-				fi
-		esac
-	else
-		cat $TD | grep "due:$(date +%F)" | grep -v "^x .*"
-    fi
+if [[ $# -gt 0 ]]; then
+    case "$*" in
+        "w") for i in {0..7}; do todo-ls $i days; done | grep -v "^x .*";;
+        "past") for i in {-100..-1}; do todo-ls $i days; done | grep -v "^x .*";;
+        "future") for i in {0..31}; do todo-ls $i days; done | grep -v "^x .*";;
+        "someday") cat $TD | grep -v "due:.*$" | grep -v "^x .*";;
+        *) 
+            if date -d "$*" > /dev/null 2>&1; then 
+                grep -Gi due:$(date +%F --date="$*") $TD 
+            else 
+                grep -Gi "$*" $TD
+            fi
+    esac
+else
+    cat $TD | grep "due:$(date +%F)" | grep -v "^x .*"
+fi
 }
 
 todo-done () {
 if [[ $# -gt 0 ]]; then
-    ENTRIES_NO=$(sed -n "/$*/p" $TD | grep -v "^x .*" | wc -l)
-    ENTRY=$(sed -n "/$*/p" $TD | grep -v "^x .*")
+    QUERY=$(sed "s/\ /.*/g" <<< $*) # Fuzzy match
+    ENTRIES_NO=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*" | wc -l)
+    ENTRY=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*")
     if [[ $ENTRIES_NO -eq 1 ]]; then
-            # Marchiamo quell'entry come completata in todo.txt
-            echo -e "Marco come completato: "$ENTRY
-            sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
-        else 
+        # Marchiamo quell'entry come completata in todo.txt
+        echo -e "Marco come completato: "$ENTRY
+        sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
+    else 
         # Trovare un modo più carino per fare pure questo
-            if [[ $ENTRIES_NO -gt 1 ]]; then
-                echo -e "Più di un match, specifica meglio cosa vuoi marcare come compleato"
-                grep "$*" $TD
-            else
-                echo -e "Nada de nada, mi sa che hai scritto male"
-            fi
+        if [[ $ENTRIES_NO -gt 1 ]]; then
+            sed -in "s/$( sed -n "/$QUERY/p" $TD | grep -v "^x .*" | fzf)/x $(date +%F)\ &/" $TD
+        else
+            echo -e "Nada de nada, mi sa che hai scritto male"
+        fi
     fi
 else
-   echo "Scrivi cosa vuoi che venga marcato come fatto, testina!" 
+    sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
 fi
 
 # Trovare un modo più carino per farlo
@@ -241,17 +190,21 @@ function todo-ls-tags() {
 
 # Utility {{{
 transfer() {
-    MAX_DOWN=${2:-3}; # if not $2, then default to 3 downloads
-    MAX_DAYS=${3:-2}; # if not $3, then default to 2 days
+    MAX_DOWN=${2:-3}; # if not $2, then default to 3 downloads allowed
+    MAX_DAYS=${3:-2}; # if not $3, then default to 2 days allowed
     if [ $# -eq 0 ]; then
-        echo -e "No arguments specified. Usage:\ntransfer [# allowed downloads] [# days] /path/to/file/or/name\ncat /tmp/test.md | transfer test.md\n(Default: 3 downloads, 2 days max)";
+        cat << EOF
+No arguments specified. 
+
+USAGE:
+    transfer /path/to/file/or/name [# allowed downloads] [# days] 
+    cat /tmp/test.md | transfer test.md
+
+OPTIONS:
+    Default: 3 downloads, 2 days max
+EOF
         return 1;
     fi
-    if [[ "$*" -eq "--help" ]]; then
-        cat <<< EOF
-        EOF
-    return 1;
-fi
     tmpfile=$( mktemp -t transferXXX );
     if tty -s; then
         basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
@@ -313,8 +266,66 @@ motivation() {
 # }}}
 # }}}
 
+# Alias {{{
+# Colori {{{
+alias ls='ls -h --color=auto --group-directories-first'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+# }}}
+
+# Troppo lunghi da scrivere (o li sbaglio sempre) {{{
+alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
+alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
+alias bashr="source $HOME/.bashrc"
+alias cp="rsync --archive --verbose --human-readable"
+alias fd="date +%F -d"
+alias gcal="gcalcli --calendar=\"Personale\""
+alias gi="gvim"
+alias gv="gvim"
+alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
+alias l='pwd;ls -l'
+alias maketemp="mktemp"
+alias myip="curl http://myip.dnsomatic.com && echo ''"
+alias o="xdg-open"
+alias p="pass"
+alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
+alias t="tree -L 1"
+alias tt="tree -L 2"
+alias ttt="tree -L 3"
+alias tr="tree -R"
+alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
+alias srv-shh="ssh root@$SRV"
+alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
+alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server.sh"
+# }}}
+
+# Git {{{
+alias g="git"
+alias gs="git status"
+alias gd="git diff"
+alias grm="git remove"
+alias ga="git add"
+alias gc="git commit"
+alias gpush="git push"
+alias gpull="git pull"
+alias glog="git log --graph --oneline"
+# }}}
+
+# Todo {{{
+alias ta="todo-add"
+alias tl="todo-ls"
+alias td="todo-done"
+alias te="vi $TD"
+alias ge="gvim $TD"
+alias remindme="bash /home/vic/Dotfiles/script/remindme.sh"
+# }}}
+# }}}
+
 # Altro {{{
 source /usr/share/bash-completion/completions/pass
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # }}}
 
 # vim: fdm=marker

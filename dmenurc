@@ -1,1 +1,3 @@
 DMENU="dmenu -f -i -fn \"Inconsolata-14\""
+
+# vim: ft=sh
