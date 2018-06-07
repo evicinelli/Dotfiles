@@ -177,7 +177,7 @@ context = mod4+shift+space
 [urgency_low]
 #background = "#282A36"
 #foreground = "#4D4D4D"
-timeout = 10
+timeout = 0
 
 [urgency_normal]
 #background = "#282A36"
@@ -215,12 +215,12 @@ timeout = 0
 #    summary = "*script*"
 #    script = dunst_test.sh
 
+# This notification will not be displayed
 [ignore]
-#    # This notification will not be displayed
 appname = "*fce*"
 format = ""
 
-[ignore2]
+[ignore]
 appname = "(A) ULTIM'ORA 24"
 urgency = low
 #[ignore2]

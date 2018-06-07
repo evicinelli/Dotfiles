@@ -1,20 +1,23 @@
 # Variables {{{
 export EDITOR=vim
 export GIT_EDITOR=vim
-export DF="$HOME/Dotfiles"
-export UNI="$HOME/ownCloud/Uni"
-export UG="$HOME/ownCloud/Uni/AppuntiUni"
+# Folder
 export OC="$HOME/ownCloud"
-export PW="$HOME/ownCloud/Archivio/Password-store"
-export TD="$HOME/ownCloud/todo.txt"
-export DN="$HOME/ownCloud/done.txt"
-export DOCUMENTS="$HOME/ownCloud/Documenti"
-export DOWNLOADS="$HOME/Scaricati"
-export NOTES="$HOME/ownCloud/Notes"
-export WS="$HOME/ownCloud/Workspace"
-export MEDIA="$HOME/ownCloud/Media"
-export P="$HOME/ownCloud/Workspace/TW2018"
+export DF="$HOME/Dotfiles"
+export DN="$OC/done.txt"
+export DOC="$OC/Documenti"
+export DOWN="$HOME/Scaricati"
 export MED="$OC/Uni/Medicina"
+export MEDIA="$OC/Media"
+export MODELS="$OC/Archivio/Modelli"
+export NOTES="$OC/Notes"
+export P="$OC/Workspace/TW2018"
+export PW="$OC/Archivio/Password-store"
+export TD="$OC/todo.txt"
+export UG="$OC/Uni/AppuntiUni"
+export UNI="$OC/Uni"
+export WS="$OC/Workspace"
+# Ip address
 export SRV="192.168.1.197"
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
@@ -123,6 +126,18 @@ clean-swp () {
 find $HOME -name "*.swp" -ok rm "{}" \;
 find $HOME -name "*.swo" -ok rm "{}" \;
 }
+
+# Password {{{
+p () {
+    FILTER="s:${PW}::;s:.gpg::"
+    pass `fzf <<< $(find $PW -type f -name "*.gpg" | sed -e $FILTER | grep "$*")`
+}
+
+pc () {
+    FILTER="s:${PW}::;s:.gpg::"
+    pass -c `fzf <<< $(find $PW -type f -name "*.gpg" | sed -e $FILTER | grep "$*")`
+}
+# }}}
 # }}}
 
 # Todo {{{
@@ -135,19 +150,19 @@ fi
 todo-ls() {
 if [[ $# -gt 0 ]]; then
     case "$*" in
-        "w") for i in {0..7}; do todo-ls $i days; done | grep -v "^x .*";;
-        "past") for i in {-100..-1}; do todo-ls $i days; done | grep -v "^x .*";;
-        "future") for i in {0..31}; do todo-ls $i days; done | grep -v "^x .*";;
-        "someday") cat $TD | grep -v "due:.*$" | grep -v "^x .*";;
+        "w") for i in {0..7}; do todo-ls $i days; done;;
+        "past") for i in {-100..-1}; do todo-ls $i days; done;;
+        "future") for i in {0..31}; do todo-ls $i days; done;;
+        "someday") cat $TD | grep -v "due:.*$";;
         *) 
             if date -d "$*" > /dev/null 2>&1; then 
-                grep -Gi due:$(date +%F --date="$*") $TD 
+                cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
             else 
-                grep -Gi "$*" $TD
+                cat $TD | grep -v "^x .*" | grep -Gi "$*" $TD
             fi
     esac
 else
-    cat $TD | grep "due:$(date +%F)" | grep -v "^x .*"
+    cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
 fi
 }
 
@@ -209,7 +224,8 @@ EOF
     if tty -s; then
         basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
         curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
-    else curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
+    else
+        curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
     fi;
     cat $tmpfile | xclip -selection c; # copy to x clipboard
     cat $tmpfile | xclip -selection primary; # copy to primary clipboard
@@ -259,6 +275,7 @@ motivation() {
     "Start where you are. Use what you have. Do what you can. -Arthur Ashe"
     "When I stand before God at the end of my life, I would hope that I would not have a single bit of talent left and could say, I used everything you gave me. -Erma Bombeck"
     "The only person you are destined to become is the person you decide to be. -Ralph Waldo Emerson"
+    "No greater opportunity or obligation can fall the lot of a human being than to be a physician. In the care of suffering he needs technical skill, scientific knowledge and human understanding. He who uses these with courage, humility and wisdom will provide a unique service to his fellow man and will build an enduring edifice of character within himself. The physician should ask of his destiny no more than this and he should be content with no less -Tinsley Randolph Harrison, Harrison's principles of Internal Medicine"
     )
     I=${QUOTES["RANDOM%${#QUOTES[@]}"]}
     echo -ne "   $I\n"
@@ -269,6 +286,7 @@ motivation() {
 # Alias {{{
 # Colori {{{
 alias ls='ls -h --color=auto --group-directories-first'
+alias sl='ls'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
@@ -290,7 +308,6 @@ alias l='pwd;ls -l'
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias o="xdg-open"
-alias p="pass"
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias t="tree -L 1"
 alias tt="tree -L 2"

@@ -1,6 +1,7 @@
 ﻿" Vim-plug {{{
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
+Plug '~/.fzf/'                                       " Fzf <3
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
 Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
@@ -52,16 +53,17 @@ let mapleader = " "
 let maplocalleader = " "
 "}}}
 
-" Appearance {{{
+" Appearance and gui settings {{{
 set cursorline                                                " Highlight current line
 set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set guifont=Inconsolata\ 12
-colorscheme base16-solarized-light
+colorscheme base16-black-metal
 set bg=light
 if has('gui_running')
+    let g:fzf_launcher = 'urxvt -geometry 120x30 -e sh -c %s' " Launcher for fzf
     set guioptions-=m                                         " remove menu bar
     set guioptions-=T                                         " remove toolbar
     set guioptions-=r                                         " remove right-hand scroll bar
@@ -69,7 +71,7 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
-    colorscheme base16-onedark
+    colorscheme base16-black-metal
     let base16colorspace=256
     set bg=dark
     set t_Co=256                                              " 256 color vim
@@ -117,8 +119,9 @@ noremap <F1> nop
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader>a :Ack 
+noremap <leader>f :FZF<CR>
 noremap <leader>so :!xdg-open "%" <CR>
-noremap <leader><leader> za <CR>
+noremap <leader><leader> zA <CR>
 cabbrev f find
 " }}}
 
