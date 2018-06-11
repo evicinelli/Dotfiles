@@ -110,6 +110,8 @@ esac
 
 alias day="eval $COLORSCHEME_DAY"
 alias night="eval $COLORSCHEME_NIGHT"
+# Socc'mel s'lè bròt
+alias colorscheme='bash $HOME/Scaricati/Apps/base16-shell/scripts/base16-$(ls $HOME/Scaricati/Apps/base16-shell/scripts | sed "s/base16-//"| fzf)'
 # }}}
 
 # Functions {{{
@@ -127,17 +129,6 @@ find $HOME -name "*.swp" -ok rm "{}" \;
 find $HOME -name "*.swo" -ok rm "{}" \;
 }
 
-# Password {{{
-p () {
-    FILTER="s:${PW}::;s:.gpg::"
-    pass `fzf <<< $(find $PW -type f -name "*.gpg" | sed -e $FILTER | grep "$*")`
-}
-
-pc () {
-    FILTER="s:${PW}::;s:.gpg::"
-    pass -c `fzf <<< $(find $PW -type f -name "*.gpg" | sed -e $FILTER | grep "$*")`
-}
-# }}}
 # }}}
 
 # Todo {{{
@@ -281,6 +272,28 @@ motivation() {
     echo -ne "   $I\n"
 }
 # }}}
+
+# Fzf helpers {{{
+__fzf_pws__ () {
+    FILTER="s:${PW}/::;s:.gpg::"
+    readarray PWS < <(find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
+    echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
+}
+bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
+# }}}
+
+wakeup () {
+    sleepingHours=8
+    sleepingMinutes=20
+    sleepingSeconds=$(((sleepingHours*60+sleepingMinutes)*60))
+    morningTime=${1:-"8:30"}
+    morningSeconds=$(date +%s -d "tomorrow $morningTime")
+    duration=$((morningSeconds-sleepingSeconds))
+    # echo $duration
+    sleepTime=$(date -d "@$duration")
+    echo $sleepTime
+}
+
 # }}}
 
 # Alias {{{
@@ -298,8 +311,8 @@ alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus
 alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
-alias fd="date +%F -d"
 alias fdate="date +%F -d"
+alias fj='fg $(jobs | fzf | cut -d" " -f1 | grep -Eo "[0-9]+")'
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gv="gvim"
@@ -308,6 +321,7 @@ alias l='pwd;ls -l'
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias o="xdg-open"
+alias p='pass'
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias t="tree -L 1"
 alias tt="tree -L 2"
@@ -338,6 +352,7 @@ alias td="todo-done"
 alias te="vi $TD"
 alias ge="gvim $TD"
 alias remindme="bash /home/vic/Dotfiles/script/remindme.sh"
+alias tlrem="cat $OC/remember.todo.txt"
 # }}}
 # }}}
 

@@ -2,6 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug '~/.fzf/'                                       " Fzf <3
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
 Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
@@ -12,10 +13,9 @@ Plug 'sheerun/vim-polyglot'                          " A collection of language 
 Plug 'fretep/todo.txt-vim'                           " Todo.txt support
 Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
 Plug 'mileszs/ack.vim'                               " Vim Ack
-Plug 'mtth/scratch.vim'                              " Scratch buffer made easy
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
-Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
+""Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
 Plug 'vim-airline/vim-airline'                       " Statusline
 Plug 'vim-airline/vim-airline-themes'                " Airline theme
 call plug#end()
@@ -62,6 +62,9 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non print
 set guifont=Inconsolata\ 12
 colorscheme base16-black-metal
 set bg=light
+" }}}
+
+" Gvim vs terminal vim settings {{{
 if has('gui_running')
     let g:fzf_launcher = 'urxvt -geometry 120x30 -e sh -c %s' " Launcher for fzf
     set guioptions-=m                                         " remove menu bar
@@ -75,6 +78,7 @@ else
     let base16colorspace=256
     set bg=dark
     set t_Co=256                                              " 256 color vim
+    noremap <leader>b :Buffer<CR>
 endif
 " }}}
 
@@ -105,6 +109,7 @@ inoremap ` ``<Left>
 inoremap { {}<Left>
 noremap :Q :q
 noremap :W :w
+noremap :e<space> :FZF<CR>
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z
@@ -119,7 +124,7 @@ noremap <F1> nop
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader>a :Ack 
-noremap <leader>f :FZF<CR>
+noremap <leader>t :Tags<CR>
 noremap <leader>so :!xdg-open "%" <CR>
 noremap <leader><leader> zA <CR>
 cabbrev f find
