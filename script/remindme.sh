@@ -5,7 +5,7 @@ if [[ $# -gt 0 ]]; then
 #	echo "Ancora non ci siamo"
 #    else
 	echo -e "Ok, alle $1 ti ricorderò di $2"
-	at "$1" <<< "notify-send --urgency=critical \"REMINDME:\" \"$2\""
+	at "$1" <<< "notify-send DUNST_COMMAND_RESUME && notify-send --urgency=critical \"REMINDME:\" \"$2\""
 #    fi
 else
     echo "Nulla di fatto"

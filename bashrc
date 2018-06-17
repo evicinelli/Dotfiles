@@ -1,10 +1,11 @@
 # Variables {{{
 export EDITOR=vim
 export GIT_EDITOR=vim
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 # Folder
 export OC="$HOME/ownCloud"
 export DF="$HOME/Dotfiles"
-export DN="$OC/done.txt"
+export DN="$OC/Dropbox/done.txt"
 export DOC="$OC/Documenti"
 export DOWN="$HOME/Scaricati"
 export MED="$OC/Uni/Medicina"
@@ -13,7 +14,7 @@ export MODELS="$OC/Archivio/Modelli"
 export NOTES="$OC/Notes"
 export P="$OC/Workspace/TW2018"
 export PW="$OC/Archivio/Password-store"
-export TD="$OC/todo.txt"
+export TD="$OC/Dropbox/todo.txt"
 export UG="$OC/Uni/AppuntiUni"
 export UNI="$OC/Uni"
 export WS="$OC/Workspace"
@@ -21,6 +22,11 @@ export WS="$OC/Workspace"
 export SRV="192.168.1.197"
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
+# }}}
+
+# Completions {{{
+source /usr/share/bash-completion/completions/pass
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # }}}
 
 # Defaults  {{{
@@ -31,7 +37,7 @@ case $- in
 esac
 
 HISTCONTROL=ignoreboth
-HISTSIZE=1000
+HISTSIZE=100000
 HISTFILESIZE=2000
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -100,7 +106,7 @@ ps1_hostname() {
 
 # Colorscheme (if set $COLORSCHEME and $BASE16_SHELL)
 case $TERM in
-    rxvt*)
+    screen|rxvt*)
         if [[ ! -z $COLORSCHEME ]] && [[ ! -z $BASE16_SHELL ]]; then
             [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)" ;
             eval $COLORSCHEME;
@@ -159,7 +165,7 @@ fi
 
 todo-done () {
 if [[ $# -gt 0 ]]; then
-    QUERY=$(sed "s/\ /.*/g" <<< $*) # Fuzzy match
+    QUERY=$(sed -e "s/\ /.*/g" <<< $*) # Insensitive match with space repleaced with .*
     ENTRIES_NO=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*" | wc -l)
     ENTRY=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*")
     if [[ $ENTRIES_NO -eq 1 ]]; then
@@ -327,8 +333,9 @@ alias t="tree -L 1"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
 alias tr="tree -R"
+alias httpserver="python -m SimpleHTTPServer 8000"
 alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
-alias srv-shh="ssh root@$SRV"
+alias srv-ssh="ssh root@$SRV"
 alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
 alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server.sh"
 # }}}
@@ -356,9 +363,11 @@ alias tlrem="cat $OC/remember.todo.txt"
 # }}}
 # }}}
 
-# Altro {{{
-source /usr/share/bash-completion/completions/pass
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Tmux {{{
+if [ -z "$TMUX" ]; then
+    tmux
+    eval $COLORSCHEME
+fi
 # }}}
 
 # vim: fdm=marker

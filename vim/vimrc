@@ -2,7 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug '~/.fzf/'                                       " Fzf <3
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
 Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
@@ -15,7 +15,7 @@ Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
 Plug 'mileszs/ack.vim'                               " Vim Ack
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
-""Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
+Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
 Plug 'vim-airline/vim-airline'                       " Statusline
 Plug 'vim-airline/vim-airline-themes'                " Airline theme
 call plug#end()
@@ -49,6 +49,7 @@ set splitright            " vsplit on the right
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
 set noshowmode            " No insert/visual mode indicator
+set updatetime=1000       " Consider vim inactive after 1 sec of no activity
 let mapleader = " "
 let maplocalleader = " "
 "}}}
@@ -78,7 +79,6 @@ else
     let base16colorspace=256
     set bg=dark
     set t_Co=256                                              " 256 color vim
-    noremap <leader>b :Buffer<CR>
 endif
 " }}}
 
@@ -155,9 +155,9 @@ augroup text
 augroup end
 augroup nonvim
     au!
-    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &ft=&ft | redraw!
+    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.docx,*.odt,*.ppt,*.pptx,*.odp,*.xls,*.xlsx,*.ods sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
-augroup pythonFiles
+augroup pyFiles
     au BufNewFile,BufRead,BufWrite *.py noremap <leader>p :!python "%" &<CR>
 augroup end
 augroup todotxt
@@ -166,6 +166,7 @@ augroup todotxt
 augroup end
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+autocmd CursorHold * update " Autosave the buffer if on hold > updatetime ms (normal mode only)
 " }}}
 
 " Functions {{{

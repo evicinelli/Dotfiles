@@ -7,29 +7,29 @@ git config --global user.name "Emanuele Vicinelli"
 
 # Apt {{{
 # Installo i pacchettini deb tattici
-sudo apt install dirmngr
+apt install dirmngr
 cd /tmp
 wget -O libssl.deb "http://ftp.it.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u6_amd64.deb"
-sudo dpkg -i libssl.deb
+dpkg -i libssl.deb
 wget -O playerctl5.deb "https://github.com/acrisci/playerctl/releases/download/v0.5.0/playerctl-0.5.0_amd64.deb"
-sudo dpkg -i playerctl5.deb
+dpkg -i playerctl5.deb
 
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
 
 # Rimuovo le cose non necessarie
-# sudo apt remove gedit
+# apt remove gedit
 
 # Installo le cose
-sudo apt update
-sudo apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color fonts-inconsolata compton arandr dunst spotify-client lxappearance xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs
+apt update
+apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color fonts-inconsolata compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs nautilus-dropbox
 
 # Aggiorno e pulisco tutto
-sudo apt upgrade
-sudo apt dist-upgrade
-sudo apt clean
-sudo apt autoremove
-sudo apt autoclean
+apt upgrade
+apt dist-upgrade
+apt clean
+apt autoremove
+apt autoclean
 
 
 #}}}
@@ -45,9 +45,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 # Modifichine ai file di configurazione in giro
 touch ~/.inputrc
 echo "set editing-mode vi" >> ~/.inputrc
-sudo tee -a /usr/share/bash-completion/completions/pass << EOF
-complete -o filenames -o nospace -F _pass p
-EOF
 
 # Per fare andare d'accordo base16 con urxvt
 git clone https://github.com/chriskempson/base16-shell.git ~/Scaricati/Apps/
