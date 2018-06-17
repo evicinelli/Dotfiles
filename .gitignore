@@ -1,9 +1,1 @@
 *.swp
-
-# Roba locale di vim che tanto viene scaricata
-vim/.vim/autoload/*
-vim/.vim/colors/*
-vim/.vim/plugged/*
-vim/.vim/plugged/scratch.vim # Mah
-vim/.vim/spell/*
-vim/.vim/.netrwhist
