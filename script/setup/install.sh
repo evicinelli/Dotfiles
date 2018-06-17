@@ -54,7 +54,7 @@ echo -ne "BASE16_SHELL=\"$HOME/Scaricati/Apps/base16-shell/\"\nCOLORSCHEME=\"bas
 mkdir $HOME/.config/dunst
 cd $HOME/.config/                   ; ln -sf $HOME/Dotfiles/i3
 cd $HOME/                           ; ln -sf $HOME/Dotfiles/bashrc ./.bashrc
-cd $HOME/                           ; ln -sf $HOME/Dotfiles/vim/vimrc ./.vimrc
+cd $HOME/                           ; ln -sf $HOME/Dotfiles/vim ./.vim
 cd $HOME/                           ; ln -sf $HOME/Dotfiles/compton.conf ./.compton.conf
 cd $HOME                            ; ln -s ~/Dotfiles/i3/i3blocks.conf ./.i3blocks.conf
 cd $HOME/.local/share/applications/ ; ln -sf $HOME/Dotfiles/mimeinfo.cache
