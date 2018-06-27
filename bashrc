@@ -1,6 +1,5 @@
 # Variables {{{
 export EDITOR=vim
-export GIT_EDITOR=vim
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 # Folder
 export OC="$HOME/ownCloud"
@@ -27,6 +26,7 @@ export SRV="192.168.1.197"
 # Completions {{{
 source /usr/share/bash-completion/completions/pass
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias
 # }}}
 
 # Defaults  {{{
@@ -202,31 +202,34 @@ function todo-ls-tags() {
 
 # Utility {{{
 transfer() {
-    MAX_DOWN=${2:-3}; # if not $2, then default to 3 downloads allowed
-    MAX_DAYS=${3:-2}; # if not $3, then default to 2 days allowed
+    MAX_DAYS=${2:-"2d"}; # if not $3, then default to 2 days allowed
     if [ $# -eq 0 ]; then
         cat << EOF
 No arguments specified. 
 
 USAGE:
-    transfer /path/to/file/or/name [# allowed downloads] [# days] 
-    cat /tmp/test.md | transfer test.md
+    transfer file [# days] 
 
 OPTIONS:
-    Default: 3 downloads, 2 days max
+    Default: $MAX_DAYS max
+
+INFO:
+    https://file.io
+    5G max
 EOF
         return 1;
     fi
     tmpfile=$( mktemp -t transferXXX );
-    if tty -s; then
-        basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
-        curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
-    else
-        curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
-    fi;
-    cat $tmpfile | xclip -selection c; # copy to x clipboard
-    cat $tmpfile | xclip -selection primary; # copy to primary clipboard
-    cat $tmpfile;
+    # if tty -s; then
+    #     basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
+    #     curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
+    # else
+    #     curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
+    # fi;
+    curl -F "file=@$1" https://file.io/?expires=$MAX_DAYS
+    # cat $tmpfile | xclip -selection c; # copy to x clipboard
+    # cat $tmpfile | xclip -selection primary; # copy to primary clipboard
+    # cat $tmpfile;
     echo -e "\n"
     rm -f $tmpfile;
 }
@@ -317,7 +320,8 @@ alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus
 alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
-alias fdate="date +%F -d"
+alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
+alias fd="date +%F -d"
 alias fj='fg $(jobs | fzf | cut -d" " -f1 | grep -Eo "[0-9]+")'
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
@@ -328,6 +332,7 @@ alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias o="xdg-open"
 alias p='pass'
+alias pc='pass -c'
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias t="tree -L 1"
 alias tt="tree -L 2"
@@ -364,10 +369,10 @@ alias tlrem="cat $OC/remember.todo.txt"
 # }}}
 
 # Tmux {{{
-if [ -z "$TMUX" ]; then
-    tmux
-    eval $COLORSCHEME
-fi
+# if [ -z "$TMUX" ]; then
+#     tmux
+#     eval $COLORSCHEME
+# fi
 # }}}
 
 # vim: fdm=marker

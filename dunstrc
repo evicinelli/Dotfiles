@@ -1,5 +1,5 @@
 [global]
-font = Inconsolata 12
+font = Monaco 10
 
 # Allow a small subset of html markup:
 #   <b>bold</b>
@@ -94,7 +94,7 @@ monitor = 0
 # 
 # If this option is set to mouse or keyboard, the monitor option
 # will be ignored.
-follow = keyboard
+follow = mouse
 
 # Should a notification popped up from history be sticky or timeout
 # as if it would normally do.
@@ -137,6 +137,7 @@ startup_notification = false
 
 # dmenu path.
 dmenu = /usr/bin/dmenu -p dunst:
+# dmenu = /usr/bin/rofi -dmenu -p -i  dunst
 
 # Browser for opening urls in context menu.
 browser = /usr/bin/firefox -new-tab
@@ -215,12 +216,12 @@ timeout = 0
 #    summary = "*script*"
 #    script = dunst_test.sh
 
-# This notification will not be displayed
 [ignore]
+#    # This notification will not be displayed
 appname = "*fce*"
 format = ""
 
-[ignore]
+[ignore2]
 appname = "(A) ULTIM'ORA 24"
 urgency = low
 #[ignore2]

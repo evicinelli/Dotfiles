@@ -3,7 +3,7 @@ URxvt*buffered        :true
 !URxvt*internalBorder  :5
 URxvt*scrollBar       :false
 URxvt*pointerBlank    :true
-URxvt*font            :xft:Inconsolata:size=12
+URxvt*font            :xft:Monaco:size=11
 URxvt*perl-ext-common :default,matcher,resize-font
 URxvt*matcher.button  :1
 URxvt*termName        :rxvt-unicode-256color
@@ -16,55 +16,4 @@ URxvt.matcher.button  :1
 URxvt.keysym.C-minus  :resize-font:smaller
 URxvt.keysym.C-plus   :resize-font:bigger
 URxvt.keysym.C-equal  :resize-font:reset
-! *.background                                     : #000000
-! *.foreground                                     : #ffffff
-
-! Note: no color needed, handled by base16-shell (https://github.com/chriskempson/base16-shell)
-! Solarized dark {{{
-! #define base00 #000000
-! #define base01 #262626
-! #define base02 #301430
-! #define base03 #303030
-! #define base04 #32322f
-! #define base05 #331833
-! #define base06 #386175
-! #define base07 #3c664e
-! #define base08 #418db3
-! #define base09 #423d35
-! #define base0A #444444
-! #define base0B #44807d
-! #define base0C #554d4b
-! #define base0D #576157
-! #define base0E #595959
-! #define base0F #5f875f
-! *foreground                                        : base05
-! #ifdef background_opacity
-! *background                                        : [background_opacity]base00
-! #else
-! *background                                        : base00
-! #endif
-! *cursorColor                                       : base05
-! *color0                                            : base00
-! *color1                                            : base08
-! *color2                                            : base0B
-! *color3                                            : base0A
-! *color4                                            : base0D
-! *color5                                            : base0E
-! *color6                                            : base0C
-! *color7                                            : base05
-! *color8                                            : base03
-! *color9                                            : base08
-! *color10                                           : base0B
-! *color11                                           : base0A
-! *color12                                           : base0D
-! *color13                                           : base0E
-! *color14                                           : base0C
-! *color15                                           : base07
-! *color16                                           : base09
-! *color17                                           : base0F
-! *color18                                           : base01
-! *color19                                           : base02
-! *color20                                           : base04
-! *color21                                           : base06
-! }}}
-! vim                                              : fdm=marker
+! vim: fdm=marker

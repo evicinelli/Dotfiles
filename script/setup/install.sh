@@ -48,7 +48,7 @@ echo "set editing-mode vi" >> ~/.inputrc
 
 # Per fare andare d'accordo base16 con urxvt
 git clone https://github.com/chriskempson/base16-shell.git ~/Scaricati/Apps/
-echo -ne "BASE16_SHELL=\"$HOME/Scaricati/Apps/base16-shell/\"\nCOLORSCHEME=\"base16_onedark\"" >> .bashrc_local
+echo -ne "BASE16_SHELL=\"$HOME/Scaricati/Apps/base16-shell/\"\nCOLORSCHEME=\"base16_default-dark\"" >> .bashrc_local
 
 # Collego i dotfiles
 mkdir $HOME/.config/dunst
@@ -61,5 +61,5 @@ cd $HOME/.local/share/applications/ ; ln -sf $HOME/Dotfiles/mimeinfo.cache
 cd $HOME/.config/dunst/             ; ln -sf $HOME/Dotfiles/dunstrc
 # }}}
 
-echo "Fatto, fai meglio a controllare però"
+echo "Fatto, fai meglio a controllare però. Poi riavvia"
 # vim: fdm=marker

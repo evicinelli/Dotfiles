@@ -77,12 +77,12 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Inconsolata 10
+font pango:Monaco 8
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
     status_command i3blocks
-    font pango:Inconsolata 12
+    font pango:Monaco 10
     strip_workspace_numbers yes
    }
 # }}}
@@ -147,5 +147,6 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
 exec_always --no-startup-id feh --bg-fill $HOME/img
 exec --no-startup-id owncloud
+exec --no-startup-id dropbox start
 # }}}
 # vim: fdm=marker

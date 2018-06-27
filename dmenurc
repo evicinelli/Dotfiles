@@ -1,3 +1,3 @@
-DMENU="dmenu -f -i -fn \"Inconsolata-14\""
+DMENU="dmenu -f -i -fn \"Monaco-12\""
 
 # vim: ft=sh

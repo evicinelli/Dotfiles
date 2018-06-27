@@ -2,7 +2,6 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug '~/.fzf/'                                       " Fzf <3
-"Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
 Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
@@ -15,7 +14,8 @@ Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
 Plug 'mileszs/ack.vim'                               " Vim Ack
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
-Plug 'gabrielelana/vim-markdown'                     " Complete markdown support
+Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-airline/vim-airline'                       " Statusline
 Plug 'vim-airline/vim-airline-themes'                " Airline theme
 call plug#end()
@@ -46,9 +46,10 @@ set colorcolumn=+1        " Highlight column where the 81/th char lives
 set shell=/bin/bash\ -i   " Which shell to use
 set spelllang=it,en       " Spell dictionaries
 set splitright            " vsplit on the right
+set splitbelow            " split below
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
-set noshowmode            " No insert/visual mode indicator
+set noshowmode            " No mode indicator
 set updatetime=1000       " Consider vim inactive after 1 sec of no activity
 let mapleader = " "
 let maplocalleader = " "
@@ -61,13 +62,13 @@ set fillchars+=vert:\|                                        " Vertical separat
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set guifont=Inconsolata\ 12
-colorscheme base16-black-metal
 set bg=light
 " }}}
 
 " Gvim vs terminal vim settings {{{
 if has('gui_running')
-    let g:fzf_launcher = 'urxvt -geometry 120x30 -e sh -c %s' " Launcher for fzf
+    colorscheme base16-default-light
+    let g:fzf_launcher = 'i3-sensible-terminal -geometry 120x30 -e bash -c %s' " Launcher for fzf
     set guioptions-=m                                         " remove menu bar
     set guioptions-=T                                         " remove toolbar
     set guioptions-=r                                         " remove right-hand scroll bar
@@ -75,7 +76,7 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
-    colorscheme base16-black-metal
+    colorscheme base16-default-dark                           " Doesn't really matter, chosen by base16-shell anyway
     let base16colorspace=256
     set bg=dark
     set t_Co=256                                              " 256 color vim
@@ -93,6 +94,10 @@ let g:scratch_insert_autohide = 0
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let g:startify_custom_header = [system("motivation")]
+let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
+let g:pandoc#biblio#use_bibtool = 1
+let g:pandoc#syntax#conceal#use = 0
+let g:airline_symbols_ascii = 1
 " }}}
 
 " Statusline {{{
@@ -109,7 +114,7 @@ inoremap ` ``<Left>
 inoremap { {}<Left>
 noremap :Q :q
 noremap :W :w
-noremap :e<space> :FZF<CR>
+noremap :e :FZF<CR>
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z
@@ -120,7 +125,9 @@ noremap <C-j> j
 noremap <C-k> k
 noremap <C-l> l
 noremap <C-n> :NERDTreeToggle<CR>
-noremap <F1> nop
+noremap <F1> :tabnew <CR>
+noremap <leader>p :tabprevious <CR>
+noremap <leader>n :tabNext <CR>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader>a :Ack 
@@ -149,13 +156,14 @@ set matchpairs+=<:>
 
 " Autogroups and Autocmds {{{
 augroup text
-     au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=markdown
+     au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
      au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
      au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
 augroup end
 augroup nonvim
     au!
-    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.docx,*.odt,*.ppt,*.pptx,*.odp,*.xls,*.xlsx,*.ods sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
+    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.odt,*.ppt,*.odp,*.xls,*.ods,*.{mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
+    au BufReadPost *.{docx,xlsx,pptx} sil exe "!libreoffice " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
 augroup pyFiles
     au BufNewFile,BufRead,BufWrite *.py noremap <leader>p :!python "%" &<CR>
@@ -166,7 +174,7 @@ augroup todotxt
 augroup end
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-autocmd CursorHold * update " Autosave the buffer if on hold > updatetime ms (normal mode only)
+autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
 " }}}
 
 " Functions {{{
@@ -178,6 +186,23 @@ function! s:DiffWithSaved()
     exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
-" }}}
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <leader>ls :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m --height=80%',
+\   'down':    len(<sid>buflist()) + 2
+\ })<CR>
 
 " vim: fdm=marker
