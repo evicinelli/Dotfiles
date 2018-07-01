@@ -61,7 +61,7 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=Inconsolata\ 12
+set guifont=Monaco\ 11
 set bg=light
 " }}}
 
@@ -98,10 +98,11 @@ let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 0
 let g:airline_symbols_ascii = 1
+" let g:airline_symbols.maxlinenr = ''
 " }}}
 
 " Statusline {{{
-" set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l:%v/%L\ \|\ %p%%
+" set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ \|\ %p%%
 " }}}
 
 " Custom mappings and abbreviations {{{
@@ -156,7 +157,7 @@ set matchpairs+=<:>
 
 " Autogroups and Autocmds {{{
 augroup text
-     au BufNewFile,BufRead *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
+     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
      au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
      au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
 augroup end
@@ -198,11 +199,11 @@ function! s:bufopen(e)
   execute 'buffer' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
-nnoremap <silent> <leader>ls :call fzf#run({
+nnoremap <silent> :ls :call fzf#run({
 \   'source':  reverse(<sid>buflist()),
 \   'sink':    function('<sid>bufopen'),
 \   'options': '+m --height=80%',
-\   'down':    len(<sid>buflist()) + 2
+\   'down':    len(<sid>buflist())
 \ })<CR>
 
 " vim: fdm=marker

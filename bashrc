@@ -278,7 +278,8 @@ motivation() {
     "No greater opportunity or obligation can fall the lot of a human being than to be a physician. In the care of suffering he needs technical skill, scientific knowledge and human understanding. He who uses these with courage, humility and wisdom will provide a unique service to his fellow man and will build an enduring edifice of character within himself. The physician should ask of his destiny no more than this and he should be content with no less -Tinsley Randolph Harrison, Harrison's principles of Internal Medicine"
     )
     I=${QUOTES["RANDOM%${#QUOTES[@]}"]}
-    echo -ne "   $I\n"
+    echo "$I"
+    echo
 }
 # }}}
 
@@ -334,6 +335,7 @@ alias o="xdg-open"
 alias p='pass'
 alias pc='pass -c'
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
+alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
 alias t="tree -L 1"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
