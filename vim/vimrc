@@ -16,8 +16,8 @@ Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-airline/vim-airline'                       " Statusline
-Plug 'vim-airline/vim-airline-themes'                " Airline theme
+""Plug 'vim-airline/vim-airline'                       " Statusline
+""Plug 'vim-airline/vim-airline-themes'                " Airline theme
 call plug#end()
 "}}}
 
@@ -49,7 +49,6 @@ set splitright            " vsplit on the right
 set splitbelow            " split below
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
-set noshowmode            " No mode indicator
 set updatetime=1000       " Consider vim inactive after 1 sec of no activity
 let mapleader = " "
 let maplocalleader = " "
@@ -97,12 +96,13 @@ let g:startify_custom_header = [system("motivation")]
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 0
-let g:airline_symbols_ascii = 1
 " let g:airline_symbols.maxlinenr = ''
 " }}}
 
 " Statusline {{{
-" set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ \|\ %p%%
+set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ \|\ %p%%
+"set noshowmode            " No mode indicator
+" let g:airline_symbols_ascii = 1
 " }}}
 
 " Custom mappings and abbreviations {{{
@@ -116,6 +116,7 @@ inoremap { {}<Left>
 noremap :Q :q
 noremap :W :w
 noremap :e :FZF<CR>
+noremap :E :FZF 
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z

@@ -6,6 +6,7 @@ export OC="$HOME/ownCloud"
 export DF="$HOME/Dotfiles"
 export DN="$OC/Dropbox/done.txt"
 export DOC="$OC/Documenti"
+export DBX="$OC/Dropbox"
 export DOWN="$HOME/Scaricati"
 export MED="$OC/Uni/Medicina"
 export MEDIA="$OC/Media"
@@ -95,6 +96,8 @@ prompt() {
     toDo=$(tl | grep -v "^x .*"| wc -l)
     toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
     export PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
+    export TDN=$toDo
+    export TDUN=$toDoUrgent
     [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
 }
 
@@ -201,6 +204,9 @@ function todo-ls-tags() {
 # }}}
 
 # Utility {{{
+daysuntil () {
+curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
+}
 transfer() {
     MAX_DAYS=${2:-"2d"}; # if not $3, then default to 2 days allowed
     if [ $# -eq 0 ]; then
@@ -244,11 +250,16 @@ function fix-mimecache () {
 function emoji () {
     grep -Ei "$*" /home/vic/ownCloud/Archivio/emoji.txt
 }
+
+function gong () {
+    at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav"
+}
 # }}}
 
 # Motivation {{{
 motivation() {
     QUOTES=(
+    "La terza: considerare come se mi trovassi in punto di morte la forma e misura che allora vorrei aver tenuto nel compiere la presente scelta, e in base a ciò regolandomi, io prenda in tutto la mia decisione"
     "Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better. -Samuel Beckett "
     "Never give up, for that is just the place and time that the tide will turn. -Harriet Beecher Stowe "
     "Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time. -Thomas A. Edison"
@@ -322,7 +333,9 @@ alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
-alias fd="date +%F -d"
+fd () {
+    date +%F -d  "$*"
+}
 alias fj='fg $(jobs | fzf | cut -d" " -f1 | grep -Eo "[0-9]+")'
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"

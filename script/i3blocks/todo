@@ -1,0 +1,15 @@
+#!/bin/bash
+red="#FF0000"
+yellow="#FFAE00"
+green="#A8FF00"
+
+echo "$TDN, $TDUN!"
+
+if [[ $TDUN -gt 0 ]]; then
+    echo "$red"
+    exit 0
+elif [[ $TDN -gt 0 ]]; then
+    echo "$yellow"
+else
+    echo "$green"
+fi
