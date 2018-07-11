@@ -1,14 +1,25 @@
-#!/bin/bash
-red="#FF0000"
-yellow="#FFAE00"
-green="#A8FF00"
+#! /bin/bash -i
+red="#AB4642"
+yellow="#F7CA88"
+green="#A1B56C"
 
-echo "$TDN, $TDUN!"
+tdf="/home/vic/ownCloud/Dropbox/todo.txt"
 
-if [[ $TDUN -gt 0 ]]; then
+case ${BLOCK_BUTTON} in
+    3) gvim $tdf && disown;;
+    *) ;;
+esac
+
+tdn=$(cat "$tdf" | grep -v "^x" | grep "due:`date +%F`" | wc -l)
+tdun=$(cat "$tdf" | grep -v "^x" | grep "due:`date +%F`" | grep "^(" | wc -l)
+echo $tdn, $tdun! # Real text
+echo # Short text
+
+# Color
+if [[ $tdun -gt 0 ]]; then
     echo "$red"
     exit 0
-elif [[ $TDN -gt 0 ]]; then
+elif [[ $tdn -gt 0 ]]; then
     echo "$yellow"
 else
     echo "$green"
