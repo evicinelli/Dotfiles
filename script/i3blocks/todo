@@ -1,4 +1,4 @@
-#! /bin/bash -i
+#! /bin/bash
 red="#AB4642"
 yellow="#F7CA88"
 green="#A1B56C"
@@ -6,7 +6,7 @@ green="#A1B56C"
 tdf="/home/vic/ownCloud/Dropbox/todo.txt"
 
 case ${BLOCK_BUTTON} in
-    3) gvim $tdf && disown;;
+    3) gview $tdf && disown;;
     *) ;;
 esac
 

@@ -14,7 +14,7 @@
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # }}}
 
-COLLECTION_NUMBER="429524"
+COLLECTION_NUMBER="289662"
 rm img
 wget -O img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 feh --bg-scale $(pwd)/img

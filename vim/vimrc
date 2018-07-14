@@ -2,6 +2,7 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug '~/.fzf/'                                       " Fzf <3
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
 Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
@@ -16,6 +17,7 @@ Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'lilydjwg/colorizer'                            " Hilight color
 ""Plug 'vim-airline/vim-airline'                       " Statusline
 ""Plug 'vim-airline/vim-airline-themes'                " Airline theme
 call plug#end()
@@ -86,7 +88,7 @@ endif
 let NERDTreeChDirMode = 0
 let g:one_allow_italics = 1
 let g:goyo_height = 50
-let g:goyo_width = 130
+let g:goyo_width = 60
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:scratch_insert_autohide = 0

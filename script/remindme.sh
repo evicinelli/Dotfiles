@@ -1,5 +1,5 @@
 #! /bin/bash
-
+export DISPLAY=:0
 if [[ $# -gt 0 ]]; then
     time=$1
     shift

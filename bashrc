@@ -1,5 +1,6 @@
 # Variables {{{
 export EDITOR=vim
+export TERMINAL=urxvt
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 # Folder
 export OC="$HOME/ownCloud"
@@ -300,7 +301,7 @@ __fzf_pws__ () {
     readarray PWS < <(find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
     echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
 }
-bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
+bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
 # }}}
 
 wakeup () {
@@ -349,6 +350,7 @@ alias p='pass'
 alias pc='pass -c'
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
+alias py="python"
 alias t="tree -L 1"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
