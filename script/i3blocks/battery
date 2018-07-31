@@ -66,8 +66,8 @@ if ($status eq 'Discharging') {
     } else {
         print "#A1B56C\n";
     }
-} else {
-    print "#7CAFC2"
+} elsif ($percent < 70){
+    print "#888888"
 }
 
 exit(0);

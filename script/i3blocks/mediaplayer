@@ -78,3 +78,6 @@ if (join(" - ", @metadata) ne "(null) - (null)") {
 } else {
     print("Not Playing");
 }
+my $status = qx(playerctl $player_arg status);
+# Short text
+print("\n", $status);

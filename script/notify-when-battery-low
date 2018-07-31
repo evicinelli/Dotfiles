@@ -1,14 +1,14 @@
 #! /bin/bash
 export DISPLAY=:0
-PATH=usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/vic/.fzf/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/vic/.fzf/bin
 
 acpiOutput=`acpi -V | grep "Battery 0"`
 status=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f1`
 perc=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f2 | sed "s/ //" | sed "s/%//"`
 remaining=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f3 | sed "s/ remaining.*//"`
 
-if [ $status == "Discharging" ] && [ $perc -le 7]; then
+if [ $status == "Discharging" ] && [ $perc -le 7 ] ; then
     notify-send DUNST_COMMAND_RESUME
-    notify-send --urgency=critical "BATTERIA SCARICAAAAAA (<$perc%) " "Mettila in carica, muvèt!!"
+    notify-send --urgency=critical "BATTERIA SCARICAAAAAA ($perc%) " "Mettila in carica, muvèt!!"
 fi
 

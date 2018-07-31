@@ -6,7 +6,7 @@ green="#A1B56C"
 tdf="/home/vic/ownCloud/Dropbox/todo.txt"
 
 case ${BLOCK_BUTTON} in
-    3) gview $tdf && disown;;
+    3) urxvt -e bash -c "gview $tdf && disown";;
     *) ;;
 esac
 

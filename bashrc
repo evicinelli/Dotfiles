@@ -19,7 +19,7 @@ export TD="$OC/Dropbox/todo.txt"
 export UG="$OC/Uni/AppuntiUni"
 export UNI="$OC/Uni"
 export WS="$OC/Workspace"
-# Ip address
+# Ip address serverino casa
 export SRV="192.168.1.197"
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
@@ -28,7 +28,7 @@ export SRV="192.168.1.197"
 # Completions {{{
 source /usr/share/bash-completion/completions/pass
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias
+complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
 # }}}
 
 # Defaults  {{{
@@ -39,8 +39,8 @@ case $- in
 esac
 
 HISTCONTROL=ignoreboth
-HISTSIZE=100000
-HISTFILESIZE=2000
+HISTSIZE=1000000
+HISTFILESIZE=1000000
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # set variable identifying the chroot you work in (used in the prompt below)
@@ -72,7 +72,8 @@ fi
 set -o vi
 bind TAB:menu-complete
 bind Control-l:clear-screen
-bind 'Control-k:"clear; l\n"'
+bind 'C-e:"vim\n"'
+bind '"\C-o": "fzf | xargs -0I\"{}\" xdg-open \"{}\" \n"'
 # }}}
 
 # Shell options {{{
@@ -91,23 +92,6 @@ shopt -s histappend
 # }}}
 
 # Prompt and colorscheme {{{
-export PROMPT_COMMAND=prompt
-
-prompt() {
-    toDo=$(tl | grep -v "^x .*"| wc -l)
-    toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
-    export PS1="$(ps1_hostname)\[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
-    export TDN=$toDo
-    export TDUN=$toDoUrgent
-    [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
-}
-
-ps1_hostname() {
-    host=$(hostname)
-    user=$(whoami)
-    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host "
-}
-
 # Colorscheme (if set $COLORSCHEME and $BASE16_SHELL)
 case $TERM in
     screen|rxvt*)
@@ -118,10 +102,23 @@ case $TERM in
     *) ;;
 esac
 
-alias day="eval $COLORSCHEME_DAY"
-alias night="eval $COLORSCHEME_NIGHT"
-# Socc'mel s'lè bròt
-alias colorscheme='bash $HOME/Scaricati/Apps/base16-shell/scripts/base16-$(ls $HOME/Scaricati/Apps/base16-shell/scripts | sed "s/base16-//"| fzf)'
+# Prompt
+export PROMPT_COMMAND=prompt
+prompt() {
+    toDo=$(tl | grep -v "^x .*"| wc -l)
+    toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
+    export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
+    [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
+    # Se è più tardi delle 20:00 passiamo al tema scuro
+    [ $TERM = "rxvt-unicode-256color" -a $(date +%H%M) -ge  2000 ] && eval $COLORSCHEME_DARK || eval $COLORSCHEME_LIGHT
+}
+
+ps1_hostname() {
+    host=$(hostname)
+    user=$(whoami)
+    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host"
+}
+
 # }}}
 
 # Functions {{{
@@ -152,8 +149,8 @@ todo-ls() {
 if [[ $# -gt 0 ]]; then
     case "$*" in
         "w") for i in {0..7}; do todo-ls $i days; done;;
-        "past") for i in {-100..-1}; do todo-ls $i days; done;;
-        "future") for i in {0..31}; do todo-ls $i days; done;;
+        "past") for i in {-93..-1}; do todo-ls $i days; done;;
+        "month") for i in {0..31}; do todo-ls $i days; done;;
         "someday") cat $TD | grep -v "due:.*$";;
         *) 
             if date -d "$*" > /dev/null 2>&1; then 
@@ -205,9 +202,31 @@ function todo-ls-tags() {
 # }}}
 
 # Utility {{{
-daysuntil () {
-curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
+wttr () {
+    curl "https://wttr.in/~$*"
 }
+
+fd () {
+    date +%F -d  "$*"
+}
+
+testscore () {
+    if [[ $# -gt 0 ]]; then
+        echo -ne "`date`
+        $1 errate
+        $2 non date
+        $3 corrette
+        TOT: `bc <<< "-0.4*$1 + 0 * $2 + 1.5*$3"`\n---\n" | tee -a  ~/ownCloud/Uni/Medicina/Ammissione/Prove.md
+        echo
+    else echo "Usage: testscore #NO, #NIL, #OK"
+    fi
+
+}
+
+daysuntil () {
+    curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
+}
+
 transfer() {
     MAX_DAYS=${2:-"2d"}; # if not $3, then default to 2 days allowed
     if [ $# -eq 0 ]; then
@@ -215,14 +234,14 @@ transfer() {
 No arguments specified. 
 
 USAGE:
-    transfer file [# days] 
+transfer file [# days] 
 
 OPTIONS:
-    Default: $MAX_DAYS max
+Default: $MAX_DAYS max
 
 INFO:
-    https://file.io
-    5G max
+https://file.io
+5G max
 EOF
         return 1;
     fi
@@ -258,6 +277,18 @@ function gong () {
 # }}}
 
 # Motivation {{{
+wakeup () {
+    sleepingHours=8
+    sleepingMinutes=20
+    sleepingSeconds=$(((sleepingHours*60+sleepingMinutes)*60))
+    morningTime=${1:-"8:30"}
+    morningSeconds=$(date +%s -d "tomorrow $morningTime")
+    duration=$((morningSeconds-sleepingSeconds))
+    # echo $duration
+    sleepTime=$(date -d "@$duration")
+    echo $sleepTime
+}
+
 motivation() {
     QUOTES=(
     "La terza: considerare come se mi trovassi in punto di morte la forma e misura che allora vorrei aver tenuto nel compiere la presente scelta, e in base a ciò regolandomi, io prenda in tutto la mia decisione"
@@ -304,18 +335,6 @@ __fzf_pws__ () {
 bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
 # }}}
 
-wakeup () {
-    sleepingHours=8
-    sleepingMinutes=20
-    sleepingSeconds=$(((sleepingHours*60+sleepingMinutes)*60))
-    morningTime=${1:-"8:30"}
-    morningSeconds=$(date +%s -d "tomorrow $morningTime")
-    duration=$((morningSeconds-sleepingSeconds))
-    # echo $duration
-    sleepTime=$(date -d "@$duration")
-    echo $sleepTime
-}
-
 # }}}
 
 # Alias {{{
@@ -331,35 +350,35 @@ alias fgrep='fgrep --color=auto'
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
 alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
 alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
+alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
-alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
-fd () {
-    date +%F -d  "$*"
-}
 alias fj='fg $(jobs | fzf | cut -d" " -f1 | grep -Eo "[0-9]+")'
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
-alias gv="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
+alias gv="gvim"
+alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='pwd;ls -l'
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
+alias notability="bash /home/vic/Dotfiles/script/notability.sh"
+alias n="notability $NOTES"
 alias o="xdg-open"
 alias p='pass'
-alias pc='pass -c'
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
+alias pc='pass -c'
 alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
 alias py="python"
-alias t="tree -L 1"
-alias tt="tree -L 2"
-alias ttt="tree -L 3"
-alias tr="tree -R"
-alias httpserver="python -m SimpleHTTPServer 8000"
+alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
 alias srv-ssh="ssh root@$SRV"
 alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
 alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server.sh"
+alias t="tree -L 1"
+alias tr="tree -R"
+alias tt="tree -L 2"
+alias ttt="tree -L 3"
 # }}}
 
 # Git {{{
@@ -383,6 +402,7 @@ alias ge="gvim $TD"
 alias remindme="bash /home/vic/Dotfiles/script/remindme.sh"
 alias tlrem="cat $OC/remember.todo.txt"
 # }}}
+
 # }}}
 
 # Tmux {{{

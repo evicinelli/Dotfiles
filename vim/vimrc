@@ -2,7 +2,6 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug '~/.fzf/'                                       " Fzf <3
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
 Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
@@ -11,15 +10,15 @@ Plug 'mhinz/vim-startify'                            " Vim-startify
 Plug 'tpope/vim-surround'                            " Surrounding motions on steroid
 Plug 'sheerun/vim-polyglot'                          " A collection of language pack
 Plug 'fretep/todo.txt-vim'                           " Todo.txt support
-Plug 'majutsushi/tagbar',	{'on': 'Tagbar'}         " Tagbar
-Plug 'mileszs/ack.vim'                               " Vim Ack
+Plug 'mileszs/ack.vim'                               " Ack in vim
 Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
-Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc-syntax'                  " Pandoc integration
 Plug 'lilydjwg/colorizer'                            " Hilight color
-""Plug 'vim-airline/vim-airline'                       " Statusline
-""Plug 'vim-airline/vim-airline-themes'                " Airline theme
+Plug 'w0rp/ale', {'on':'ALEEnable'}                  " Linting engine
+""Plug 'vim-airline/vim-airline'                     " Statusline
+""Plug 'vim-airline/vim-airline-themes'              " Airline theme
 call plug#end()
 "}}}
 
@@ -51,7 +50,7 @@ set splitright            " vsplit on the right
 set splitbelow            " split below
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
-set updatetime=1000       " Consider vim inactive after 1 sec of no activity
+set updatetime=4000       " Consider vim inactive after 1 sec of no activity
 let mapleader = " "
 let maplocalleader = " "
 "}}}
@@ -62,14 +61,14 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=Monaco\ 11
+set guifont=DejaVu\ Sans\ Mono\ 11
 set bg=light
 " }}}
 
 " Gvim vs terminal vim settings {{{
+colorscheme base16-default-light
 if has('gui_running')
-    colorscheme base16-default-light
-    let g:fzf_launcher = 'i3-sensible-terminal -geometry 120x30 -e bash -c %s' " Launcher for fzf
+    let g:fzf_launcher = 'urxvt -geometry 120x30 -e bash -c %s' " Launcher for fzf
     set guioptions-=m                                         " remove menu bar
     set guioptions-=T                                         " remove toolbar
     set guioptions-=r                                         " remove right-hand scroll bar
@@ -77,7 +76,6 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
 else
-    colorscheme base16-default-dark                           " Doesn't really matter, chosen by base16-shell anyway
     let base16colorspace=256
     set bg=dark
     set t_Co=256                                              " 256 color vim
@@ -86,7 +84,6 @@ endif
 
 " Plugin settings {{{
 let NERDTreeChDirMode = 0
-let g:one_allow_italics = 1
 let g:goyo_height = 50
 let g:goyo_width = 60
 let g:limelight_conceal_ctermfg = 'gray'
@@ -98,12 +95,10 @@ let g:startify_custom_header = [system("motivation")]
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 0
-" let g:airline_symbols.maxlinenr = ''
 " }}}
 
 " Statusline {{{
-set statusline=%=%n\ \|\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ \|\ %p%%
-"set noshowmode            " No mode indicator
+set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)\ \|\ %{strftime('%a\ %e\ %b\ %H:%M')}\ 
 " let g:airline_symbols_ascii = 1
 " }}}
 
@@ -141,7 +136,7 @@ noremap <leader><leader> zA <CR>
 cabbrev f find
 " }}}
 
-" Extended text Objects (thanks to Conner McDaniel) {{{
+" Extended text Objects and matchpairs (thanks to Conner McDaniel) {{{
 " They slow down quite a bit commands like cc, dd, yy..
 " let s:items = [ "." , "-" , "_" , "*" , ":" , "/" , "<bar>"] 
 " 

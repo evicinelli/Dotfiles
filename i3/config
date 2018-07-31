@@ -78,12 +78,12 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Monaco 8
+font pango:DejaVu Sans Mono 8
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
     position top
     status_command i3blocks
-    font pango:Monaco 10
+    font pango:DejaVu Sans Mono 10
     strip_workspace_numbers yes
    }
 # }}}
@@ -101,6 +101,7 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+ 
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
+bindsym $mod+Insert exec --no-startup-id bash /$HOME/ownCloud/Workspace/advacedInsert.sh
 bindsym --release Print exec --no-startup-id gnome-screenshot -aic
 # }}}
 
@@ -138,6 +139,7 @@ mode $monitor {
 	bindsym d exec --no-startup-id $HOME/Dotfiles/script/monitor/destra.sh; mode "default"
 	bindsym e exec --no-startup-id $HOME/Dotfiles/script/monitor/internal.sh; mode "default"
 	bindsym h exec --no-startup-id $HOME/Dotfiles/script/monitor/hdmi-1.sh; mode "default"
+    bindsym a exec --no-startup-id arandr; mode "default"
 }
 # }}}
 

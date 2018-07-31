@@ -22,7 +22,7 @@ echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.li
 
 # Installo le cose
 apt update
-apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color fonts-inconsolata compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs nautilus-dropbox
+apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color fonts-dejavu compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs nautilus-dropbox
 
 # Aggiorno e pulisco tutto
 apt upgrade
