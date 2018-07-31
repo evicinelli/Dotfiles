@@ -73,7 +73,7 @@ set -o vi
 bind TAB:menu-complete
 bind Control-l:clear-screen
 bind 'C-e:"vim\n"'
-bind '"\C-o": "fzf | xargs -0I\"{}\" xdg-open \"{}\" \n"'
+bind '"\C-o": "fzf | (xargs -0I{} xdg-open \"{}\" &) \n"'
 # }}}
 
 # Shell options {{{
