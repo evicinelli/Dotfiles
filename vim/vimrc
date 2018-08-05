@@ -17,8 +17,8 @@ Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                  " Pandoc integration
 Plug 'lilydjwg/colorizer'                            " Hilight color
 Plug 'w0rp/ale', {'on':'ALEEnable'}                  " Linting engine
-""Plug 'vim-airline/vim-airline'                     " Statusline
-""Plug 'vim-airline/vim-airline-themes'              " Airline theme
+Plug 'vim-airline/vim-airline'                     " Statusline
+Plug 'vim-airline/vim-airline-themes'              " Airline theme
 call plug#end()
 "}}}
 
@@ -61,8 +61,11 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
-set guifont=DejaVu\ Sans\ Mono\ 11
+set guifont=Meslo\ LG\ M\ 11
 set bg=light
+let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 " }}}
 
 " Gvim vs terminal vim settings {{{
@@ -98,8 +101,10 @@ let g:pandoc#syntax#conceal#use = 0
 " }}}
 
 " Statusline {{{
-set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)\ \|\ %{strftime('%a\ %e\ %b\ %H:%M')}\ 
-" let g:airline_symbols_ascii = 1
+""set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)\ \|\ %{strftime('%a\ %e\ %b\ %H:%M')}\ 
+let g:airline_symbols_ascii = 1
+let g:airline_section_z=' %l/%L:%v (%p%%)'
+set noshowmode
 " }}}
 
 " Custom mappings and abbreviations {{{
@@ -110,9 +115,11 @@ inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
+inoremap <C-p> <Esc>:FZF<CR>
 noremap :Q :q
 noremap :W :w
 noremap :e :FZF<CR>
+noremap <C-p> :FZF<CR>
 noremap :E :FZF 
 noremap Y y$
 noremap Z zMzv

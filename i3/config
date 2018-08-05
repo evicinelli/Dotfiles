@@ -90,6 +90,7 @@ bar {
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS {{{
 assign [class = "Telegram"] $workspace9
+for_window [class = "URxvt"] border none
 for_window [class = "Spotify"] move to workspace $workspace10
 # }}}
 

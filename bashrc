@@ -71,9 +71,13 @@ fi
 # Vim keys and general keybindings {{{
 set -o vi
 bind TAB:menu-complete
+bind M-\t:menu-complete-backward
+bind C-f:menu-complete
+bind C-b:menu-complete-backward
+bind C-e:complete
 bind Control-l:clear-screen
-bind 'C-e:"vim\n"'
-bind '"\C-o": "fzf | (xargs -0I{} xdg-open \"{}\" &) \n"'
+bind '"\C-o": "fzf | xargs -0I{} xdg-open \"{}\"\n"'
+
 # }}}
 
 # Shell options {{{
@@ -109,8 +113,8 @@ prompt() {
     toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
     export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
     [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
-    # Se è più tardi delle 20:00 passiamo al tema scuro
-    [ $TERM = "rxvt-unicode-256color" -a $(date +%H%M) -ge  2000 ] && eval $COLORSCHEME_DARK || eval $COLORSCHEME_LIGHT
+    # Se è più tardi delle 20:00 o prima delle 7:00
+    [ $TERM = "rxvt-unicode-256color" -a $(date +%H%M) -ge  2130 -o $(date +%H%M) -le 0700 ] && eval $COLORSCHEME_DARK || eval $COLORSCHEME_LIGHT
 }
 
 ps1_hostname() {
@@ -333,6 +337,7 @@ __fzf_pws__ () {
     echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
 }
 bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
+
 # }}}
 
 # }}}
