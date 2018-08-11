@@ -25,9 +25,14 @@ LABELS["www"]=""
 # Pass
 COMMANDS["password"]="~/Dotfiles/script/pass.sh"
 LABELS["password"]="prova"
+
 # Utils
 COMMANDS["utils"]="~/Dotfiles/script/utils.sh"
 LABELS["utils"]=""
+
+# Windows
+COMMANDS["windows"]="rofi -show window -matching fuzzy"
+LABELS["windows"]=""
 
 function print_menu()
 {

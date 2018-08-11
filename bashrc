@@ -98,7 +98,7 @@ shopt -s histappend
 # Prompt and colorscheme {{{
 # Colorscheme (if set $COLORSCHEME and $BASE16_SHELL)
 case $TERM in
-    screen|rxvt*)
+    rxvt*)
         if [[ ! -z $COLORSCHEME ]] && [[ ! -z $BASE16_SHELL ]]; then
             [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)" ;
             eval $COLORSCHEME;
@@ -114,7 +114,7 @@ prompt() {
     export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
     [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
     # Se è più tardi delle 20:00 o prima delle 7:00
-    [ $TERM = "rxvt-unicode-256color" -a $(date +%H%M) -ge  2130 -o $(date +%H%M) -le 0700 ] && eval $COLORSCHEME_DARK || eval $COLORSCHEME_LIGHT
+    # [ $TERM = "rxvt-unicode-256color" -a $(date +%H%M) -ge  2130 -o $(date +%H%M) -le 0700 ] && eval $COLORSCHEME_DARK || eval $COLORSCHEME_LIGHT
 }
 
 ps1_hostname() {

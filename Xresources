@@ -1,6 +1,6 @@
 URxvt*depth           :32
 URxvt*buffered        :true
-URxvt*internalBorder  :5
+URxvt*internalBorder  :10
 !URxvt*lineSpace       :2
 URxvt*scrollBar       :false
 URxvt*pointerBlank    :true

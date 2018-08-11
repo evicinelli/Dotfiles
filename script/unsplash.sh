@@ -19,4 +19,7 @@ rm img
 wget -O img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 feh --bg-scale $(pwd)/img
 
+
+/home/vic/.local/bin/wal $HOME/img
+
 # vim: fdm=marker

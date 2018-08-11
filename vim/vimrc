@@ -15,7 +15,6 @@ Plug 'godlygeek/tabular'                             " Tabularize
 Plug 'junegunn/limelight.vim'                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                  " Pandoc integration
-Plug 'lilydjwg/colorizer'                            " Hilight color
 Plug 'w0rp/ale', {'on':'ALEEnable'}                  " Linting engine
 Plug 'vim-airline/vim-airline'                     " Statusline
 Plug 'vim-airline/vim-airline-themes'              " Airline theme
@@ -87,8 +86,6 @@ endif
 
 " Plugin settings {{{
 let NERDTreeChDirMode = 0
-let g:goyo_height = 50
-let g:goyo_width = 60
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:scratch_insert_autohide = 0

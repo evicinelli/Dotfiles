@@ -1,10 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/vic/.password-store/Banca'
-let g:netrw_dirhist_2='/home/vic/Scaricati/Apps/base16-shell/templates'
-let g:netrw_dirhist_3='/home/vic/ownCloud/Workspace/TW2018/src'
-let g:netrw_dirhist_4='/home/vic/ownCloud/Workspace/TW2018'
-let g:netrw_dirhist_5='/home/vic'
-let g:netrw_dirhist_6='/home/vic/ownCloud/Notes'
-let g:netrw_dirhist_7='/home/vic/.android'
-let g:netrw_dirhist_8='/home/vic/_Elastislide'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/home/vic/ownCloud/Uni/Medicina/Ammissione'

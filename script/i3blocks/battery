@@ -56,8 +56,9 @@ print "$short_text\n";
 
 # consider color and urgent flag only on discharge
 if ($status eq 'Discharging') {
-#
-    if ($percent < 20) {
+    if ($percent < 7 ) {
+        exit 33
+    } elsif ($percent < 20) {
         print "#AB4642\n";
     } elsif ($percent < 50) {
         print "#F7CA88\n";

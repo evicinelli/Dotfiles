@@ -78,14 +78,14 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:DejaVu Sans Mono 8
+font pango:Meslo LG S 9
 bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
 bar {
-    position top
+    # position top
     status_command i3blocks
-    font pango:DejaVu Sans Mono 10
+    font pango:Meslo LG S 10
     strip_workspace_numbers yes
-   }
+}
 # }}}
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS {{{
