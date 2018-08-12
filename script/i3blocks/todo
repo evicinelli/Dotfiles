@@ -1,7 +1,7 @@
 #! /bin/bash
-red="#AB4642"
-yellow="#F7CA88"
-green="#A1B56C"
+#red="#AB4642"
+#yellow="#F7CA88"
+#green="#A1B56C"
 
 tdf="/home/vic/ownCloud/Dropbox/todo.txt"
 
@@ -18,9 +18,10 @@ echo # Short text
 # Color
 if [[ $tdun -gt 0 ]]; then
     echo "$red"
-    exit 0
+    exit 33
 elif [[ $tdn -gt 0 ]]; then
     echo "$yellow"
+    exit 33
 else
     echo "$green"
 fi

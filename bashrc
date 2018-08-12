@@ -95,7 +95,7 @@ shopt -s checkwinsize
 shopt -s histappend
 # }}}
 
-# Prompt and colorscheme {{{
+# Colorscheme {{{
 # Colorscheme (if set $COLORSCHEME and $BASE16_SHELL)
 case $TERM in
     rxvt*)
@@ -105,8 +105,10 @@ case $TERM in
         fi;;
     *) ;;
 esac
+(cat ~/.cache/wal/sequences &)
+# }}}
 
-# Prompt
+# Prompt {{{
 export PROMPT_COMMAND=prompt
 prompt() {
     toDo=$(tl | grep -v "^x .*"| wc -l)
@@ -318,10 +320,6 @@ motivation() {
     "You take your life in your own hands, and what happens? A terrible thing, no one to blame -Erica Jong"
     "Whether you think you can or you think you can’t, you’re right. -Henry Ford"
     "If the wind will not serve, take to the oars. -Latin Proverb"
-    "Fall seven times and stand up eight. -Japanese Proverb"
-    "Start where you are. Use what you have. Do what you can. -Arthur Ashe"
-    "When I stand before God at the end of my life, I would hope that I would not have a single bit of talent left and could say, I used everything you gave me. -Erma Bombeck"
-    "The only person you are destined to become is the person you decide to be. -Ralph Waldo Emerson"
     "No greater opportunity or obligation can fall the lot of a human being than to be a physician. In the care of suffering he needs technical skill, scientific knowledge and human understanding. He who uses these with courage, humility and wisdom will provide a unique service to his fellow man and will build an enduring edifice of character within himself. The physician should ask of his destiny no more than this and he should be content with no less -Tinsley Randolph Harrison, Harrison's principles of Internal Medicine"
     )
     I=${QUOTES["RANDOM%${#QUOTES[@]}"]}

@@ -1,3 +1,4 @@
-DMENU="dmenu -f -i"" -fn \"Dejavu-Sans-Mono-13\""
+. "${HOME}/.cache/wal/colors.sh"
+DMENU="dmenu -f -i"" -fn \"Dejavu-Sans-Mono-13\" -nb \"$color0\" -nf \"$color15\" -sb \"$color1\" -sf \"$color15\""
 
 # vim: ft=sh

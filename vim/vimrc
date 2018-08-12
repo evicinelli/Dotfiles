@@ -3,7 +3,6 @@ call plug#begin()
 Plug 'tpope/vim-sensible'                            " Sensible default
 Plug '~/.fzf/'                                       " Fzf <3
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'} " Nerdtree
-Plug 'chriskempson/base16-vim'                       " Colorscheme
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                            " Vim-startify
@@ -16,8 +15,9 @@ Plug 'junegunn/limelight.vim'                        " Focus only current paragr
 Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                  " Pandoc integration
 Plug 'w0rp/ale', {'on':'ALEEnable'}                  " Linting engine
-Plug 'vim-airline/vim-airline'                     " Statusline
-Plug 'vim-airline/vim-airline-themes'              " Airline theme
+Plug 'vim-airline/vim-airline'                       " Statusline
+Plug 'vim-airline/vim-airline-themes'                " Airline theme
+Plug 'dylanaraps/wal.vim'                            " Colorscheme
 call plug#end()
 "}}}
 
@@ -55,7 +55,7 @@ let maplocalleader = " "
 "}}}
 
 " Appearance and gui settings {{{
-set cursorline                                                " Highlight current line
+" set cursorline                                                " Highlight current line
 set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
@@ -68,7 +68,7 @@ let &t_EI = "\<Esc>[2 q"
 " }}}
 
 " Gvim vs terminal vim settings {{{
-colorscheme base16-default-light
+colorscheme wal
 if has('gui_running')
     let g:fzf_launcher = 'urxvt -geometry 120x30 -e bash -c %s' " Launcher for fzf
     set guioptions-=m                                         " remove menu bar
@@ -80,7 +80,7 @@ if has('gui_running')
 else
     let base16colorspace=256
     set bg=dark
-    set t_Co=256                                              " 256 color vim
+ ""   set t_Co=256                                              " 256 color vim
 endif
 " }}}
 
