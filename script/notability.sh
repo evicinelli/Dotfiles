@@ -2,8 +2,10 @@
 
 (
 #cd $NOTES
-cd $*
-note=`fzf --print-query`
+base_dir="$1"
+cd $base_dir
+shift
+note=`fzf --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
 if [[ $? -eq 0 ]]; then
     # edit note
     $EDITOR "`tail -n1 <<< "$note"`"
