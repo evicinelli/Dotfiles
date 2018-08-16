@@ -95,17 +95,9 @@ shopt -s checkwinsize
 shopt -s histappend
 # }}}
 
-# Colorscheme {{{
-# Colorscheme (if set $COLORSCHEME and $BASE16_SHELL)
-case $TERM in
-    rxvt*)
-        if [[ ! -z $COLORSCHEME ]] && [[ ! -z $BASE16_SHELL ]]; then
-            [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)" ;
-            eval $COLORSCHEME;
-        fi;;
-    *) ;;
-esac
-(cat ~/.cache/wal/sequences &)
+# Colorscheme (pywal) {{{
+[ -f ~/.cache/wal/colors.sh ] && . "${HOME}/.cache/wal/colors.sh"
+( [ -f ~/.cache/wal/sequences ] && cat ~/.cache/wal/sequences &)
 # }}}
 
 # Prompt {{{
@@ -365,7 +357,7 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='pwd;ls -l'
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
-alias notability="bash /home/vic/Dotfiles/script/notability.sh"
+alias notability="bash $DF/script/notability.sh"
 alias n="notability $NOTES"
 alias o="xdg-open"
 alias p='pass'

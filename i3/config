@@ -86,14 +86,15 @@ set_from_resource $text foreground #fbf1c7
 set_from_resource $urgent color9 #cc241d
 set_from_resource $clear color8 #504945
 set_from_resource $accent color6 #83a598
-#          		        border  bg 		text  indicator
+#                       border  bg      text  indicator
 client.focused          $clear  $clear  $text $base0F
 client.focused_inactive $dark   $dark   $text $base0F
 client.unfocused        $dark   $dark   $text $base0F
-client.urgent $urgent $urgent $text $base0F
+client.urgent           $urgent $urgent $text $base0F
 bar {
     # position top
     status_command i3blocks
+    # tray_output none
     font pango:Meslo LG S 10
     strip_workspace_numbers yes
 	colors {

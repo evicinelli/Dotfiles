@@ -16,8 +16,8 @@ Plug 'vim-pandoc/vim-pandoc'                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                  " Pandoc integration
 Plug 'w0rp/ale', {'on':'ALEEnable'}                  " Linting engine
 Plug 'vim-airline/vim-airline'                       " Statusline
-Plug 'vim-airline/vim-airline-themes'                " Airline theme
 Plug 'dylanaraps/wal.vim'                            " Colorscheme
+Plug 'lilydjwg/colorizer'                            " Hilight color definition
 call plug#end()
 "}}}
 
@@ -57,7 +57,7 @@ let maplocalleader = " "
 " Appearance and gui settings {{{
 " set cursorline                                                " Highlight current line
 set linespace=6                                               " Line spacing
-set fillchars+=vert:\|                                        " Vertical separator char
+set fillchars+=vert:∙                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:…,precedes:… " Non printable chars
 set guifont=Meslo\ LG\ M\ 11
@@ -95,6 +95,10 @@ let g:startify_custom_header = [system("motivation")]
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 0
+let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-h': 'split',
+    \ 'ctrl-v': 'vsplit' }
 " }}}
 
 " Statusline {{{

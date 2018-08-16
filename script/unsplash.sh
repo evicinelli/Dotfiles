@@ -1,5 +1,5 @@
 #! /bin/bash 
-#	get wallpaper randomly from unsplash
+#	get wallpaper randomly from unsplash, apply it, and using pywal build a matching colorscheme
 
 # API DOC --  https://source.unsplash.com  {{{
 # https://source.unsplash.com/random/{SIZE}
@@ -17,9 +17,10 @@
 COLLECTION_NUMBER="629911"
 rm img
 wget -O img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
-feh --bg-scale $(pwd)/img
+# feh --bg-scale $(pwd)/img
 
 
 /home/vic/.local/bin/wal -c -i $HOME/img
+# . "${HOME}/.cache/wal/colors.sh"
 
 # vim: fdm=marker
