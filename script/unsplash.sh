@@ -14,13 +14,26 @@
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # }}}
 
+# Settings
+PARAMS=$*
 COLLECTION_NUMBER="629911"
-rm img
-wget -O img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
-# feh --bg-scale $(pwd)/img
+COLLECTION_NUMBER="1912959"
+
+# Grabbing wallpaper from unsplash
+rm $HOME/img
+wget -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 
 
-/home/vic/.local/bin/wal -c -i $HOME/img
-# . "${HOME}/.cache/wal/colors.sh"
+# Do we have pywal installed?
+if [[ -x $HOME/.local/bin/wal ]]; then
+    # I3 and terminal theming
+    /home/vic/.local/bin/wal $PARAMS -c -i $HOME/img
+else
+    # We don't :(
+    feh --bg-scale $HOME/img
+fi
+
+# Theme notification
+bash $HOME/Dotfiles/script/start-dunst.sh
 
 # vim: fdm=marker

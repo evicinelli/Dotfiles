@@ -1,7 +1,9 @@
 # Variables {{{
 export EDITOR=vim
 export TERMINAL=urxvt
+export BROWSER=chromium
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
+
 # Folder
 export OC="$HOME/ownCloud"
 export DF="$HOME/Dotfiles"
@@ -71,9 +73,6 @@ fi
 # Vim keys and general keybindings {{{
 set -o vi
 bind TAB:menu-complete
-bind M-\t:menu-complete-backward
-bind C-f:menu-complete
-bind C-b:menu-complete-backward
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-o": "fzf | xargs -0I{} xdg-open \"{}\"\n"'
@@ -85,10 +84,8 @@ shopt -s autocd
 shopt -s cdspell
 shopt -s dirspell
 shopt -s direxpand
-shopt -s direxpand
 shopt -s dirspell
 shopt -s cdspell
-shopt -s autocd
 shopt -s globstar
 shopt -s extglob
 shopt -s checkwinsize
@@ -107,8 +104,6 @@ prompt() {
     toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
     export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
     [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
-    # Se è più tardi delle 20:00 o prima delle 7:00
-    # [ $TERM = "rxvt-unicode-256color" -a $(date +%H%M) -ge  2130 -o $(date +%H%M) -le 0700 ] && eval $COLORSCHEME_DARK || eval $COLORSCHEME_LIGHT
 }
 
 ps1_hostname() {
@@ -130,8 +125,8 @@ dirfind() {
 }
 
 clean-swp () {
-find $HOME -name "*.swp" -ok rm "{}" \;
-find $HOME -name "*.swo" -ok rm "{}" \;
+    find $HOME -name "*.swp" -ok rm "{}" \;
+    find $HOME -name "*.swo" -ok rm "{}" \;
 }
 
 # }}}
@@ -200,8 +195,13 @@ function todo-ls-tags() {
 # }}}
 
 # Utility {{{
+fj () {
+    fg $(jobs | fzf -1 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+}
+
 wttr () {
-    curl "https://wttr.in/~$*"
+    CITY=`sed "s/ /+/g" <<< "$*"`
+    curl "https://wttr.in/~$CITY"
 }
 
 fd () {
@@ -214,7 +214,7 @@ testscore () {
         $1 errate
         $2 non date
         $3 corrette
-        TOT: `bc <<< "-0.4*$1 + 0 * $2 + 1.5*$3"`\n---\n" | tee -a  ~/ownCloud/Uni/Medicina/Ammissione/Prove.md
+        TOT: `bc <<< "-0.4*$1 + 0 * $2 + 1.5*$3"` (`bc <<< "$1 + $2 + $3"`)\n---\n"
         echo
     else echo "Usage: testscore #NO, #NIL, #OK"
     fi
@@ -225,7 +225,7 @@ daysuntil () {
     curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
 }
 
-transfer() {
+transfer () {
     MAX_DAYS=${2:-"2d"}; # if not $3, then default to 2 days allowed
     if [ $# -eq 0 ]; then
         cat << EOF
@@ -239,21 +239,12 @@ Default: $MAX_DAYS max
 
 INFO:
 https://file.io
-5G max
+100MB max
 EOF
         return 1;
     fi
     tmpfile=$( mktemp -t transferXXX );
-    # if tty -s; then
-    #     basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
-    #     curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile;
-    # else
-    #     curl -H "Max-Downloads: $MAX_DOWN" -H "Max-Days: $MAX_DAYS" --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ;
-    # fi;
     curl -F "file=@$1" https://file.io/?expires=$MAX_DAYS
-    # cat $tmpfile | xclip -selection c; # copy to x clipboard
-    # cat $tmpfile | xclip -selection primary; # copy to primary clipboard
-    # cat $tmpfile;
     echo -e "\n"
     rm -f $tmpfile;
 }
@@ -266,10 +257,14 @@ function fix-mimecache () {
 }
 
 function emoji () {
-    grep -Ei "$*" /home/vic/ownCloud/Archivio/emoji.txt
+    EMOJI="$(cat /home/vic/ownCloud/Archivio/emoji.txt | fzf --query="$*" | sed -n "/\:.*\:/p")"
+    echo $EMOJI
+    echo "$EMOJI" | xclip -selection=PRIMARY
+    echo "$EMOJI" | xclip -selection=CLIPBOARD
 }
 
 function gong () {
+    remindme $* "GONG: TIME IS UP (`date +%H:%M`)"
     at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav"
 }
 # }}}
@@ -279,7 +274,7 @@ wakeup () {
     sleepingHours=8
     sleepingMinutes=20
     sleepingSeconds=$(((sleepingHours*60+sleepingMinutes)*60))
-    morningTime=${1:-"8:30"}
+    morningTime=${1:-"7:30"}
     morningSeconds=$(date +%s -d "tomorrow $morningTime")
     duration=$((morningSeconds-sleepingSeconds))
     # echo $duration
@@ -348,7 +343,6 @@ alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
-alias fj='fg $(jobs | fzf | cut -d" " -f1 | grep -Eo "[0-9]+")'
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"

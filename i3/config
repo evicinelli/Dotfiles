@@ -79,7 +79,8 @@ bindsym $mod+shift+a focus child
 
 # THEMING {{{
 font pango:Meslo LG S 10
-bindsym $mod+Shift+d exec --no-startup-id "sh $HOME/Dotfiles/script/unsplash.sh"
+bindsym $mod+Shift+d exec --no-startup-id "bash $HOME/Dotfiles/script/unsplash.sh"
+bindsym $mod+Shift+t exec --no-startup-id "bash $HOME/Dotfiles/script/i3-tray-toggle.sh"
 set_from_resource $pdark background #282828
 set_from_resource $dark background #282828
 set_from_resource $text foreground #fbf1c7
@@ -94,8 +95,8 @@ client.urgent           $urgent $urgent $text $base0F
 bar {
     # position top
     status_command i3blocks
-    # tray_output none
-    font pango:Meslo LG S 10
+    tray_output none
+    font pango:Meslo LG L 10
     strip_workspace_numbers yes
 	colors {
 		separator $text
@@ -170,6 +171,7 @@ mode $monitor {
 exec_always --no-startup-id xmodmap /home/vic/Dotfiles/Xmodmap
 exec_always --no-startup-id feh --bg-fill $HOME/img
 exec_always --no-startup-id $HOME/.local/bin/wal -R
+exec --no-startup-id bash $HOME/Dotfiles/script/start-dunst.sh
 exec --no-startup-id compton -b
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet

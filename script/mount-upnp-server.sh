@@ -10,7 +10,7 @@ MOUNT_DIR="/media/$(whoami)/Upnp Salotto"
 # sudo modprobe fuse
 
 # Montare server Upnp in modo che sia visibile
-djmount -o default_permission allow_other "$MOUNT_DIR"
+su -c 'djmount -o default_permission allow_other "$MOUNT_DIR"'
 
 # Riavvio il server upnp, altrimenti nella cartella non si vedono i media (mah)
 sleep 1

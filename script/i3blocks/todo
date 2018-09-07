@@ -1,12 +1,10 @@
 #! /bin/bash
-#red="#AB4642"
-#yellow="#F7CA88"
-#green="#A1B56C"
 
+. ${HOME}/.cache/wal/colors.sh # colorscheme from wal
 tdf="/home/vic/ownCloud/Dropbox/todo.txt"
 
 case ${BLOCK_BUTTON} in
-    3) urxvt -e bash -c "gview $tdf && disown";;
+    3) urxvt -e bash -c "i3 floating toggle && view $tdf";;
     *) ;;
 esac
 
@@ -17,11 +15,9 @@ echo # Short text
 
 # Color
 if [[ $tdun -gt 0 ]]; then
-    echo "$red"
     exit 33
 elif [[ $tdn -gt 0 ]]; then
-    echo "$yellow"
-    exit 33
+    echo $color1
 else
     echo "$green"
 fi

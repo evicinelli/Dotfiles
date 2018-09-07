@@ -10,8 +10,12 @@ if [[ $? -eq 0 ]]; then
     # edit note
     $EDITOR "`tail -n1 <<< "$note"`"
 elif [[ $? -eq 1 ]]; then
-    # add new note
-    touch "$note.md"
-    $EDITOR "$note.md"
+    if [[ $note != "" ]]; then
+        # add new note
+        touch "$note.md"
+        $EDITOR "$note.md"
+    else
+        exit 0
+    fi
 fi
 )
