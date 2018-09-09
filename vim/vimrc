@@ -1,7 +1,7 @@
 ﻿" Vim-plug {{{
 call plug#begin()
 Plug 'tpope/vim-sensible'                                     " Sensible default
-Plug '~/.fzf/',	{ 'dir': '~/.fzf', 'do': './install --all' }  " Fzf <3
+Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }  " Fzf <3
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'}          " Nerdtree
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                    " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                                 " Git diff aside line numbers
@@ -57,7 +57,7 @@ let maplocalleader = " "
 " Appearance and gui settings {{{
 " set cursorline                                                " Highlight current line
 set linespace=6                                               " Line spacing
-set fillchars+=vert:\|                                        " Vertical separator char
+set fillchars+=vert:∙                                         " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
 set guifont=Meslo\ LG\ M\ 11
@@ -179,8 +179,6 @@ augroup todotxt
     au BufNewFile,BufRead,BufWrite *.todo.txt setl ft=todo | set nospell
     au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
 augroup end
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
 " }}}
 

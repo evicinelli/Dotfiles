@@ -94,8 +94,8 @@ client.unfocused        $dark   $dark   $text $base0F
 client.urgent           $urgent $urgent $text $base0F
 bar {
     # position top
-    status_command i3blocks
     tray_output none
+    status_command i3blocks
     font pango:Meslo LG L 10
     strip_workspace_numbers yes
 	colors {
@@ -155,12 +155,14 @@ mode "resize" {
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
-set $monitor "Edpi1 - Hdmi1 - Clonato - Destra"
+set $monitor "Edpi1 - Hdmi1 - Clonato - Doppio - Sinistra/Destra (r/R)"
 bindsym $mod+m mode $monitor
 mode $monitor {
 	bindsym Escape mode "default"
 	bindsym c exec --no-startup-id $HOME/Dotfiles/script/monitor/clonato.sh; mode "default"
 	bindsym d exec --no-startup-id $HOME/Dotfiles/script/monitor/destra.sh; mode "default"
+	bindsym r exec --no-startup-id $HOME/Dotfiles/script/monitor/ruotato-sinistra.sh; mode "default"
+	bindsym Shift + r exec --no-startup-id $HOME/Dotfiles/script/monitor/ruotato-destra.sh; mode "default"
 	bindsym e exec --no-startup-id $HOME/Dotfiles/script/monitor/internal.sh; mode "default"
 	bindsym h exec --no-startup-id $HOME/Dotfiles/script/monitor/hdmi-1.sh; mode "default"
     bindsym a exec --no-startup-id arandr; mode "default"

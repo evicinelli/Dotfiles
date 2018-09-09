@@ -1,3 +1,38 @@
+# Setup  {{{
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+    *) return;;
+esac
+
+HISTCONTROL=ignoreboth
+HISTSIZE=1000000
+HISTFILESIZE=1000000
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+    xterm*|rxvt*) PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1" ;;
+    *) ;;
+esac
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+# Bash completion
+if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
+fi
+
+# Fzf
+[[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
+# }}}
+
 # Variables {{{
 export EDITOR=vim
 export TERMINAL=urxvt
@@ -27,47 +62,10 @@ export SRV="192.168.1.197"
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
 
-# Completions {{{
+# Completions & fzf {{{
 source /usr/share/bash-completion/completions/pass
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
-# }}}
-
-# Defaults  {{{
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-    *) return;;
-esac
-
-HISTCONTROL=ignoreboth
-HISTSIZE=1000000
-HISTFILESIZE=1000000
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-#     xterm*|rxvt*) PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1" ;;
-#     *) ;;
-# esac
-
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
-
-
-if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    fi
-fi
 # }}}
 
 # Vim keys and general keybindings {{{
@@ -75,7 +73,6 @@ set -o vi
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-o": "fzf | xargs -0I{} xdg-open \"{}\"\n"'
 
 # }}}
 
@@ -315,14 +312,15 @@ motivation() {
 }
 # }}}
 
-# Fzf helpers {{{
+# Fzf stuff {{{
 __fzf_pws__ () {
     FILTER="s:${PW}/::;s:.gpg::"
     readarray PWS < <(find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
     echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
 }
 bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
-
+bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa "'
+bind '"\C-o": "fzf | xargs -0I{} xdg-open \"{}\"\n"'
 # }}}
 
 # }}}
@@ -343,6 +341,7 @@ alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
+alias fg="fj"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"

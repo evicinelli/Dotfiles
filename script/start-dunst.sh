@@ -5,6 +5,7 @@ pkill dunst
 
 # Do we have wal?
 if [[ -e $HOME/.cache/wal/colors.sh ]]; then
+    echo "Wal!"
     source "${HOME}/.cache/wal/colors.sh"
 
     # Start dunst with color sourced
