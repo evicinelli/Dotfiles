@@ -60,7 +60,7 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:∙                                         " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set guifont=Meslo\ LG\ M\ 11
+set guifont=Source\ Code\ Pro\ 12
 set bg=light
 let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
 let &t_SR = "\<Esc>[4 q"
@@ -77,9 +77,9 @@ if has('gui_running')
     set guioptions-=L                                         " remove left-hand scroll bar
     set guioptions-=b
     set guioptions-=e
+    set bg=light
 else
     let base16colorspace=256
-    set bg=dark
  ""   set t_Co=256                                              " 256 color vim
 endif
 " }}}

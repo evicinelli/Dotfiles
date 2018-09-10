@@ -1,11 +1,11 @@
 #! /bin/bash 
+FONT="SourceCodePro 12"
 
 # Kill dunst
 pkill dunst
 
 # Do we have wal?
 if [[ -e $HOME/.cache/wal/colors.sh ]]; then
-    echo "Wal!"
     source "${HOME}/.cache/wal/colors.sh"
 
     # Start dunst with color sourced
@@ -17,7 +17,7 @@ if [[ -e $HOME/.cache/wal/colors.sh ]]; then
         -bf "$color15" \
         -cf "$color15" \
         -nf "$color15" \
-        -fn "DejaVu Sans Mono 11" \
+        -fn $FONT \
         -geometry "300x5-30+30" >/dev/null &
 else
     /usr/bin/dunst >/dev/null &

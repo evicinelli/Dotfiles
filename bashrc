@@ -10,12 +10,6 @@ HISTSIZE=1000000
 HISTFILESIZE=1000000
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-    xterm*|rxvt*) PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1" ;;
-    *) ;;
-esac
-
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
@@ -29,7 +23,7 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Fzf
+# Is fzf installed? If not, install it, i use it a lot
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 # }}}
 
@@ -56,16 +50,16 @@ export TD="$OC/Dropbox/todo.txt"
 export UG="$OC/Uni/AppuntiUni"
 export UNI="$OC/Uni"
 export WS="$OC/Workspace"
-# Ip address serverino casa
+# Ip address home server
 export SRV="192.168.1.197"
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
 
 # Completions & fzf {{{
-source /usr/share/bash-completion/completions/pass
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
+[ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
 # }}}
 
 # Vim keys and general keybindings {{{
@@ -261,7 +255,7 @@ function emoji () {
 }
 
 function gong () {
-    remindme $* "GONG: TIME IS UP (`date +%H:%M`)"
+    bash $HOME/Dotfiles/script/remindme.sh $* "GONG: TIME IS UP (`date +%H:%M`)"
     at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav"
 }
 # }}}
@@ -387,7 +381,7 @@ alias tl="todo-ls"
 alias td="todo-done"
 alias te="vi $TD"
 alias ge="gvim $TD"
-alias remindme="bash /home/vic/Dotfiles/script/remindme.sh"
+alias remindme="bash $HOME/Dotfiles/script/remindme.sh"
 alias tlrem="cat $OC/remember.todo.txt"
 # }}}
 

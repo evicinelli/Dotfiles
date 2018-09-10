@@ -1,4 +1,5 @@
 # i3 config file (v4)
+# vim: fdm=marker
 
 # SETTING VARS {{{
 set $Up k
@@ -78,7 +79,7 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Meslo LG S 10
+font pango:Source Sans Pro 10
 bindsym $mod+Shift+d exec --no-startup-id "bash $HOME/Dotfiles/script/unsplash.sh"
 bindsym $mod+Shift+t exec --no-startup-id "bash $HOME/Dotfiles/script/i3-tray-toggle.sh"
 set_from_resource $pdark background #282828
@@ -96,7 +97,7 @@ bar {
     # position top
     tray_output none
     status_command i3blocks
-    font pango:Meslo LG L 10
+    font pango:Source Code Pro 10.5
     strip_workspace_numbers yes
 	colors {
 		separator $text
@@ -171,7 +172,6 @@ mode $monitor {
 
 # AUTOSTART APPLICATIONS {{{
 exec_always --no-startup-id xmodmap /home/vic/Dotfiles/Xmodmap
-exec_always --no-startup-id feh --bg-fill $HOME/img
 exec_always --no-startup-id $HOME/.local/bin/wal -R
 exec --no-startup-id bash $HOME/Dotfiles/script/start-dunst.sh
 exec --no-startup-id compton -b
@@ -180,4 +180,3 @@ exec --no-startup-id nm-applet
 exec --no-startup-id owncloud
 exec --no-startup-id dropbox start
 # }}}
-# vim: fdm=marker
