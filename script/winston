@@ -15,19 +15,19 @@ COMMANDS["apps"]="i3-dmenu-desktop --dmenu='${DMENU}'"
 LABELS["apps"]=""
 
 # find files
-COMMANDS["file"]="/home/$(whoami)/Dotfiles/script/file.sh"
+COMMANDS["file"]="/home/$(whoami)/Dotfiles/script/winston-file"
 LABELS["file"]=""
 
 # open custom www searches
-COMMANDS["www"]="/home/$(whoami)/Dotfiles/script/web.sh"
+COMMANDS["www"]="/home/$(whoami)/Dotfiles/script/winston-web"
 LABELS["www"]=""
 
 # Pass
-COMMANDS["password"]="~/Dotfiles/script/pass.sh"
+COMMANDS["password"]="~/Dotfiles/script/winston-pass"
 LABELS["password"]="prova"
 
 # Utils
-COMMANDS["utils"]="~/Dotfiles/script/utils.sh"
+COMMANDS["utils"]="~/Dotfiles/script/winston-utils"
 LABELS["utils"]=""
 
 # Windows

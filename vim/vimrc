@@ -1,23 +1,24 @@
 ﻿" Vim-plug {{{
 call plug#begin()
-Plug 'tpope/vim-sensible'                                     " Sensible default
-Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }  " Fzf <3
-Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'}          " Nerdtree
-Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                    " Goyo - distraction free writing
-Plug 'airblade/vim-gitgutter'                                 " Git diff aside line numbers
-Plug 'mhinz/vim-startify'                                     " Vim-startify
-Plug 'tpope/vim-surround'                                     " Surrounding motions on steroid
-Plug 'sheerun/vim-polyglot'                                   " A collection of language pack
-Plug 'fretep/todo.txt-vim'                                    " Todo.txt support
-Plug 'mileszs/ack.vim'                                        " Ack in vim
-Plug 'godlygeek/tabular'                                      " Tabularize
-Plug 'junegunn/limelight.vim'                                 " Focus only current paragraph
-Plug 'vim-pandoc/vim-pandoc'                                  " Pandoc integration
-Plug 'vim-pandoc/vim-pandoc-syntax'                           " Pandoc integration
-Plug 'w0rp/ale', {'on':'ALEEnable'}                           " Linting engine
-Plug 'vim-airline/vim-airline'                                " Statusline
-Plug 'dylanaraps/wal.vim'                                     " Colorscheme
-Plug 'lilydjwg/colorizer'                                     " Hilight color definition
+Plug 'tpope/vim-sensible'                                            " Sensible default
+Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
+Plug 'junegunn/fzf.vim'                                              " Fzf <3 vim
+Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'}                 " Nerdtree
+Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                           " Goyo - distraction free writing
+Plug 'airblade/vim-gitgutter'                                        " Git diff aside line numbers
+Plug 'mhinz/vim-startify'                                            " Vim-startify
+Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
+Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
+Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
+Plug 'mileszs/ack.vim'                                               " Ack in vim
+Plug 'godlygeek/tabular'                                             " Tabularize
+Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
+Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
+Plug 'w0rp/ale', {'on':'ALEEnable'}                                  " Linting engine
+Plug 'vim-airline/vim-airline'                                       " Statusline
+Plug 'dylanaraps/wal.vim'                                            " Colorscheme
+Plug 'lilydjwg/colorizer'                                            " Hilight color definition
 call plug#end()
 "}}}
 
@@ -88,10 +89,8 @@ endif
 let NERDTreeChDirMode = 0
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_guifg = 'DarkGray'
-let g:scratch_insert_autohide = 0
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
-"let g:startify_custom_header = [system("motivation")]
 let g:startify_custom_header = [""]
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
@@ -120,6 +119,7 @@ inoremap { {}<Left>
 inoremap <C-p> <Esc>:FZF<CR>
 noremap :Q :q
 noremap :W :w
+noremap :ls :Buffers<CR>
 noremap <C-p> :FZF<CR>
 noremap <C-o> :FZF 
 noremap Y y$
@@ -198,17 +198,5 @@ function! s:buflist()
   redir END
   return split(ls, '\n')
 endfunction
-
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-nnoremap <silent> :ls :call fzf#run({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '+m --height=80%',
-\   'down':    len(<sid>buflist())
-\ })<CR>
-
 " vim: fdm=marker
 

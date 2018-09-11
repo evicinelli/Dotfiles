@@ -6,8 +6,7 @@ acpiOutput=`acpi -V | grep "Battery 0"`
 status=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f1`
 perc=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f2 | sed "s/ //" | sed "s/%//"`
 remaining=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f3 | sed "s/ remaining.*//"`
-# Treshold varia a seconda della capacità massima di carica della batteria, per tenere conto dell'invecchiamento della stessa
-treshold=`bc <<< "95 - $(acpi -V | grep "last full capacity" | grep -o ".[0-9]*%" | sed "s/%//")"` 
+treshold=10
 
 # echo $treshold
 

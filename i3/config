@@ -80,8 +80,8 @@ bindsym $mod+shift+a focus child
 
 # THEMING {{{
 font pango:Source Sans Pro 10
-bindsym $mod+Shift+d exec --no-startup-id "bash $HOME/Dotfiles/script/unsplash.sh"
-bindsym $mod+Shift+t exec --no-startup-id "bash $HOME/Dotfiles/script/i3-tray-toggle.sh"
+bindsym $mod+Shift+d exec --no-startup-id "bash $HOME/Dotfiles/script/unsplash"
+bindsym $mod+Shift+t exec --no-startup-id "bash $HOME/Dotfiles/script/i3-tray-toggle"
 set_from_resource $pdark background #282828
 set_from_resource $dark background #282828
 set_from_resource $text foreground #fbf1c7
@@ -97,7 +97,7 @@ bar {
     # position top
     tray_output none
     status_command i3blocks
-    font pango:Source Code Pro 10.5
+    font pango:Inconsolata 12
     strip_workspace_numbers yes
 	colors {
 		separator $text
@@ -119,7 +119,7 @@ for_window [class = "Spotify"] move to workspace $workspace10
 # }}}
 
 # APP-SPECIFIC BINDINGS {{{
-bindsym Shift+space exec --no-startup-id bash $HOME/Dotfiles/script/winston.sh
+bindsym Shift+space exec --no-startup-id bash $HOME/Dotfiles/script/winston
 bindsym Control+Mod1+t  exec --no-startup-id urxvt
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
@@ -173,7 +173,7 @@ mode $monitor {
 # AUTOSTART APPLICATIONS {{{
 exec_always --no-startup-id xmodmap /home/vic/Dotfiles/Xmodmap
 exec_always --no-startup-id $HOME/.local/bin/wal -R
-exec --no-startup-id bash $HOME/Dotfiles/script/start-dunst.sh
+exec --no-startup-id bash $HOME/Dotfiles/script/start-dunst
 exec --no-startup-id compton -b
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet

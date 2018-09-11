@@ -18,11 +18,11 @@ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50
 echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
 
 # Rimuovo le cose non necessarie
-# apt remove gedit
+apt remove gedit
 
 # Installo le cose
 apt update
-apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color fonts-dejavu compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin mplayer dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs nautilus-dropbox
+apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs nautilus-dropbox kodi
 
 # Aggiorno e pulisco tutto
 apt upgrade
@@ -37,10 +37,6 @@ apt autoclean
 # Altro {{{
 # Vim Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# Fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
 
 # Modifichine ai file di configurazione in giro
 touch ~/.inputrc

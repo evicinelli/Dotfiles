@@ -1,75 +1,21 @@
-#!/usr/bin/perl
-#
-# Copyright 2014 Pierre Mavro <deimos@deimos.fr>
-# Copyright 2014 Vivien Didelot <vivien@didelot.org>
-#
-# Licensed under the terms of the GNU GPL v3, or any later version.
-#
-# This script is meant to use with i3blocks. It parses the output of the "acpi"
-# command (often provided by a package of the same name) to read the status of
-# the battery, and eventually its remaining time (to full charge or discharge).
-#
-# The color will gradually change for a percentage below 85%, and the urgency
-# (exit code 33) is set if there is less that 5% remaining.
+#! /bin/bash
+BAT_NO="0"
 
-use strict;
-use warnings;
-use utf8;
+acpiOutput=`acpi -V | grep "Battery $BAT_NO"`
+status=`echo $acpiOutput | head -n 1 | sed "s/Battery $BAT_NO\: //" | cut -d"," -f1`
+perc=`echo $acpiOutput | head -n 1 | sed "s/Battery $BAT_NO\: //" | cut -d"," -f2 | sed "s/ //" | sed "s/%//"`
+remaining=`echo $acpiOutput | grep -Eo "[0-9]+:[0-9]+"`
+# Treshold varia a seconda della capacità massima di carica della batteria, per tenere conto del suo invecchiamento
+treshold=`bc <<< "95 - $(acpi -V | grep "last full capacity" | grep -o ".[0-9]*%" | sed "s/%//")"` 
 
-my $acpi;
-my $status;
-my $percent;
-my $full_text;
-my $short_text;
-my $bat_number = $ENV{BLOCK_INSTANCE} || 0;
-my $file = "~/.i3blocks_battery_notificationsent";
+echo "$perc%, $remaining"
+echo "$perc"
 
-# read the first line of the "acpi" command output
-open (ACPI, "acpi -b | grep 'Battery $bat_number' |") or die;
-$acpi = <ACPI>;
-close(ACPI);
+case ${BLOCK_BUTTON} in
+    3) urxvt -e bash -c "i3 floating toggle >/dev/null; acpi -V; sleep 30";;
+    *)
+esac
 
-# fail on unexpected output
-if ($acpi !~ /: (\w+), (\d+)%/) {
-    die "$acpi\n";
-}
-
-$status = $1;
-$percent = $2;
-$full_text = "$percent%";
-
-if ($status eq 'Discharging') {
-    $full_text .= ' D';
-} elsif ($status eq 'Charging') {
-    $full_text .= ' C';
-}
-
-$short_text = $full_text;
-
-if ($acpi =~ /(\d\d:\d\d):/) {
-    $full_text .= " ($1)";
-}
-
-# print text
-print "$full_text\n";
-print "$short_text\n";
-
-# consider color and urgent flag only on discharge
-if ($status eq 'Discharging') {
-    if ($percent < 15 ) {
-        exit 33
-        #    } elsif ($percent < 20) {
-        #        print "#AB4642\n";
-        #    } elsif ($percent < 50) {
-        #        print "#F7CA88\n";
-        #    } elsif ($percent < 80) {
-        #        print "#86C1B9\n";
-        #    } else {
-        #        print "#A1B56C\n";
-        #    }
-        #} elsif ($percent < 70){
-        #    print "#888888"
-    }
-}
-
-exit(0);
+if [ $status == "Discharging" ] && [ $perc -le $treshold ]; then
+    exit 33
+fi

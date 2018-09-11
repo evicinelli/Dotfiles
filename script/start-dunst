@@ -1,8 +1,9 @@
 #! /bin/bash 
-FONT="SourceCodePro 12"
+
+FONT="Inconsolata 12"
 
 # Kill dunst
-pkill dunst
+killall dunst
 
 # Do we have wal?
 if [[ -e $HOME/.cache/wal/colors.sh ]]; then
@@ -14,10 +15,13 @@ if [[ -e $HOME/.cache/wal/colors.sh ]]; then
         -nb "$color3" \
         -cb "$color2" \
         -lf "${color15:=#CCCCCC}" \
-        -bf "$color15" \
-        -cf "$color15" \
-        -nf "$color15" \
+        -bf "$color0" \
+        -cf "$color0" \
+        -nf "$color0" \
         -fn $FONT \
+        -key "mod4+x" \
+        -all_key "mod4+shift+x" \
+        -history_key "mod4+n" \
         -geometry "300x5-30+30" >/dev/null &
 else
     /usr/bin/dunst >/dev/null &

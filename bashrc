@@ -25,6 +25,8 @@ fi
 
 # Is fzf installed? If not, install it, i use it a lot
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
+
+[[ -d $HOME/Dotfiles ]] && export PATH=${PATH}:$HOME/Dotfiles/script
 # }}}
 
 # Variables {{{
@@ -199,6 +201,10 @@ fd () {
     date +%F -d  "$*"
 }
 
+xd () {
+    date +%x -d "$*"
+}
+
 testscore () {
     if [[ $# -gt 0 ]]; then
         echo -ne "`date`
@@ -255,7 +261,7 @@ function emoji () {
 }
 
 function gong () {
-    bash $HOME/Dotfiles/script/remindme.sh $* "GONG: TIME IS UP (`date +%H:%M`)"
+    bash $HOME/Dotfiles/script/remindme $* "GONG: TIME IS UP (`date +%H:%M`)"
     at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav"
 }
 # }}}
@@ -335,7 +341,6 @@ alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashr="source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
-alias fg="fj"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
@@ -344,7 +349,7 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='pwd;ls -l'
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
-alias notability="bash $DF/script/notability.sh"
+alias notability="bash $DF/script/notability"
 alias n="notability $NOTES"
 alias o="xdg-open"
 alias p='pass'
@@ -356,7 +361,7 @@ alias scp="rsync --archive --checksum --compress --human-readable --itemize-chan
 alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
 alias srv-ssh="ssh root@$SRV"
 alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
-alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server.sh"
+alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server"
 alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
@@ -381,7 +386,6 @@ alias tl="todo-ls"
 alias td="todo-done"
 alias te="vi $TD"
 alias ge="gvim $TD"
-alias remindme="bash $HOME/Dotfiles/script/remindme.sh"
 alias tlrem="cat $OC/remember.todo.txt"
 # }}}
 
