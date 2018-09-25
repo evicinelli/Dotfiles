@@ -14,14 +14,16 @@
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # }}}
 
-# Collezioni precedenti {{{
+# Collezion[e/i] {{{
 # COLLECTION_NUMBER="1912959"
-# COLLECTION_NUMBER="629911"
+COLLECTION_NUMBER="629911"
+# COLLECTION_NUMBER="198884"
+# COLLECTION_NUMBER="1778533" # Collezione mia
 # }}}
+
 
 # Settings
 PARAMS=$*
-COLLECTION_NUMBER="198884"
 
 # Grabbing wallpaper from unsplash
 rm $HOME/img
@@ -38,6 +40,6 @@ else
 fi
 
 # Theme notification
-bash $HOME/Dotfiles/script/start-dunst.sh
+bash $HOME/Dotfiles/script/start-dunst
 
 # vim: fdm=marker

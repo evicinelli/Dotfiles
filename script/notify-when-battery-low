@@ -8,7 +8,6 @@ perc=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" |
 remaining=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f3 | sed "s/ remaining.*//"`
 treshold=10
 
-# echo $treshold
 
 if [ $status == "Discharging" ] && [ $perc -le $treshold ] ; then
     notify-send DUNST_COMMAND_RESUME

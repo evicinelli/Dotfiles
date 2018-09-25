@@ -1,6 +1,6 @@
 #! /bin/bash 
 
-FONT="Inconsolata 12"
+FONT="Monaco 10"
 
 # Kill dunst
 killall dunst

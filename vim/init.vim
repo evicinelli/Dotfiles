@@ -2,12 +2,13 @@
 call plug#begin()
 Plug 'tpope/vim-sensible'                                            " Sensible default
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
-Plug 'junegunn/fzf.vim'                                              " Fzf <3 vim
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'}                 " Nerdtree
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                                            " Vim-startify
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
+Plug 'tpope/vim-fugitive'
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
 Plug 'mileszs/ack.vim'                                               " Ack in vim
@@ -15,7 +16,7 @@ Plug 'godlygeek/tabular'                                             " Tabulariz
 Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-Plug 'w0rp/ale', {'on':'ALEEnable'}                                  " Linting engine
+"Plug 'w0rp/ale', {'on':'ALEEnable'}                                  " Linting engine
 Plug 'vim-airline/vim-airline'                                       " Statusline
 Plug 'dylanaraps/wal.vim'                                            " Colorscheme
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
@@ -28,6 +29,7 @@ filetype plugin on        " Filetype plugin
 filetype plugin indent on " Specific indentation rules depending on file type
 set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
+set directory="$HOME/.swp//" " Where to put swap files
 set wildmenu              " Tab autocompletion in menu
 set wildignorecase        " Ignore case when autocomplete
 set ignorecase            " Mah
@@ -61,7 +63,7 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:∙                                         " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set guifont=Source\ Code\ Pro\ 12
+set guifont=IBM\ Plex\ Mono\ 10
 set bg=light
 let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
 let &t_SR = "\<Esc>[4 q"
@@ -99,6 +101,7 @@ let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
     \ 'ctrl-v': 'vsplit' }
+set completefunc=emoji#complete
 " }}}
 
 " Statusline {{{
@@ -117,11 +120,10 @@ inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
 inoremap <C-p> <Esc>:FZF<CR>
+noremap <C-B> :Buffers<CR>
 noremap :Q :q
 noremap :W :w
-noremap :ls :Buffers<CR>
 noremap <C-p> :FZF<CR>
-noremap <C-o> :FZF 
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z

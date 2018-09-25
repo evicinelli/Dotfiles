@@ -27,6 +27,7 @@ fi
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
 [[ -d $HOME/Dotfiles ]] && export PATH=${PATH}:$HOME/Dotfiles/script
+export PATH="${PATH}:${HOME}/.local/bin/"
 # }}}
 
 # Variables {{{
@@ -138,10 +139,10 @@ if [[ $# -gt 0 ]]; then
         "past") for i in {-93..-1}; do todo-ls $i days; done;;
         "month") for i in {0..31}; do todo-ls $i days; done;;
         "someday") cat $TD | grep -v "due:.*$";;
-        *) 
-            if date -d "$*" > /dev/null 2>&1; then 
+        *)
+            if date -d "$*" > /dev/null 2>&1; then
                 cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
-            else 
+            else
                 cat $TD | grep -v "^x .*" | grep -Gi "$*" $TD
             fi
     esac
@@ -159,7 +160,7 @@ if [[ $# -gt 0 ]]; then
         # Marchiamo quell'entry come completata in todo.txt
         echo -e "Marco come completato: "$ENTRY
         sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
-    else 
+    else
         # Trovare un modo più carino per fare pure questo
         if [[ $ENTRIES_NO -gt 1 ]]; then
             sed -in "s/$( sed -n "/$QUERY/p" $TD | grep -v "^x .*" | fzf)/x $(date +%F)\ &/" $TD
@@ -188,8 +189,22 @@ function todo-ls-tags() {
 # }}}
 
 # Utility {{{
+ack () {
+    [[ `which ag` ]] && ag "$*" || ack -i "$*"
+}
+
+push () {
+    # Push a notification to all the devices connected by pushbullet
+    curl -s --header "Access-Token: $PB_TOKEN" \
+        --header "Content-Type: application/json" \
+        --data-binary "{\"body\":\"$*\",\"title\":\"Broadcasted Push\",\"type\":\"note\"}" \
+        --request POST \
+        https://api.pushbullet.com/v2/pushes
+    echo
+}
+
 fj () {
-    fg $(jobs | fzf -1 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+    fg $(jobs | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
 }
 
 wttr () {
@@ -205,18 +220,18 @@ xd () {
     date +%x -d "$*"
 }
 
-testscore () {
-    if [[ $# -gt 0 ]]; then
-        echo -ne "`date`
-        $1 errate
-        $2 non date
-        $3 corrette
-        TOT: `bc <<< "-0.4*$1 + 0 * $2 + 1.5*$3"` (`bc <<< "$1 + $2 + $3"`)\n---\n"
-        echo
-    else echo "Usage: testscore #NO, #NIL, #OK"
-    fi
-
-}
+# testscore () {
+#     if [[ $# -gt 0 ]]; then
+#         echo -ne "`date`
+#         $1 errate
+#         $2 non date
+#         $3 corrette
+#         TOT: `bc <<< "-0.4*$1 + 0 * $2 + 1.5*$3"` (`bc <<< "$1 + $2 + $3"`)\n---\n"
+#         echo
+#     else echo "Usage: testscore #NO, #NIL, #OK"
+#     fi
+#
+# }
 
 daysuntil () {
     curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
@@ -226,10 +241,10 @@ transfer () {
     MAX_DAYS=${2:-"2d"}; # if not $3, then default to 2 days allowed
     if [ $# -eq 0 ]; then
         cat << EOF
-No arguments specified. 
+No arguments specified.
 
 USAGE:
-transfer file [# days] 
+transfer file [# days]
 
 OPTIONS:
 Default: $MAX_DAYS max
@@ -256,8 +271,8 @@ function fix-mimecache () {
 function emoji () {
     EMOJI="$(cat /home/vic/ownCloud/Archivio/emoji.txt | fzf --query="$*" | sed -n "/\:.*\:/p")"
     echo $EMOJI
-    echo "$EMOJI" | xclip -selection=PRIMARY
-    echo "$EMOJI" | xclip -selection=CLIPBOARD
+    echo "$EMOJI" | xclip -selection primary
+    echo "$EMOJI" | xclip -selection clipboard
 }
 
 function gong () {
@@ -319,6 +334,7 @@ __fzf_pws__ () {
     echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
 }
 bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
+
 bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa "'
 bind '"\C-o": "fzf | xargs -0I{} xdg-open \"{}\"\n"'
 # }}}
@@ -339,7 +355,7 @@ alias fgrep='fgrep --color=auto'
 alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
 alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
-alias bashr="source $HOME/.bashrc"
+alias bashrc="vi $HOME/.bashrc; source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
@@ -349,7 +365,6 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='pwd;ls -l'
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
-alias notability="bash $DF/script/notability"
 alias n="notability $NOTES"
 alias o="xdg-open"
 alias p='pass'
@@ -366,6 +381,8 @@ alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
+alias unicode='echo ✓ ™ ♪ ♫ ☃ ° Ɵ ∫ 💙'
+alias vimrc="vi $HOME/.vim/vimrc"
 # }}}
 
 # Git {{{
@@ -388,7 +405,6 @@ alias te="vi $TD"
 alias ge="gvim $TD"
 alias tlrem="cat $OC/remember.todo.txt"
 # }}}
-
 # }}}
 
 # Tmux {{{
