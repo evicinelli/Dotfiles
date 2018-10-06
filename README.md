@@ -1,11 +1,11 @@
-# Dotfiles, for my own reference
+# Dotfiles
 - Post install script: `script/setup/install.sh`
 - Feel free to copy :heart:
 
-# Used:
+# Used
 - [fzf](https://github.com/junegunn/fzf)
-- Font: Monaco
+- Font Family: Monaco
 - Vim
     - [VimPlug](https://github.com/junegunn/vim-plug)
 - i3 + i3blocks
-- [ pywal ](https://github.com/dylanaraps/pywal)
+- [pywal](https://github.com/dylanaraps/pywal)

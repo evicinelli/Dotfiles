@@ -6,8 +6,7 @@ case $- in
 esac
 
 HISTCONTROL=ignoreboth
-HISTSIZE=1000000
-HISTFILESIZE=1000000
+HISTSIZE= HISTFILESIZE= # Infinite history
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 if [ -x /usr/bin/dircolors ]; then
@@ -23,7 +22,7 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Is fzf installed? If not, install it, i use it a lot
+# Is fzf installed? If not install it (<3 fzf)
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
 [[ -d $HOME/Dotfiles ]] && export PATH=${PATH}:$HOME/Dotfiles/script
@@ -53,8 +52,10 @@ export TD="$OC/Dropbox/todo.txt"
 export UG="$OC/Uni/AppuntiUni"
 export UNI="$OC/Uni"
 export WS="$OC/Workspace"
+
 # Ip address home server
 export SRV="192.168.1.197"
+
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -189,8 +190,11 @@ function todo-ls-tags() {
 # }}}
 
 # Utility {{{
+wifi () {
+    nmcli -a device wifi connect "$( nmcli --color yes device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
+}
 ack () {
-    [[ `which ag` ]] && ag "$*" || ack -i "$*"
+    [[ `which ag` ]] && ag "$*"; echo || ack "$*"
 }
 
 push () {
@@ -333,10 +337,21 @@ __fzf_pws__ () {
     readarray PWS < <(find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
     echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
 }
-bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' #wtf?! Just works, no question asked
+bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Super beautiful ;)
+bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa\n "'
+bind '"\C-o": "xdg-open \"`fzf`\"\n"'
+# }}}
 
-bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa "'
-bind '"\C-o": "fzf | xargs -0I{} xdg-open \"{}\"\n"'
+# Altra roba {{{
+revealjs () {
+    INPUT=$1
+    shift
+    wget https://github.com/hakimel/reveal.js/archive/master.tar.gz
+    tar -xzvf master.tar.gz
+    mv reveal.js-master reveal.js && rm master.tar.gz
+    pandoc -t revealjs -s --self-contained $* $INPUT -o index.html
+    # rm -r reveal.js
+}
 # }}}
 
 # }}}
@@ -363,12 +378,16 @@ alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
 alias gv="gvim"
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='pwd;ls -l'
+alias mkdir="mkdir -pv"
 alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
+alias neton="nmcli networking on"
+alias netoff="nmcli networking off"
 alias o="xdg-open"
 alias p='pass'
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
+alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
 alias pc='pass -c'
 alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
 alias py="python"

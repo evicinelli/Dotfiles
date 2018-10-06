@@ -79,7 +79,7 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:IBM Plex Sans 10
+font pango:Monaco 10
 bindsym $mod+Shift+d exec --no-startup-id "bash $HOME/Dotfiles/script/unsplash"
 bindsym $mod+Shift+t exec --no-startup-id "bash $HOME/Dotfiles/script/i3-tray-toggle"
 set_from_resource $pdark background #282828
@@ -97,7 +97,7 @@ bar {
     # position top
     tray_output none
     status_command i3blocks
-    font pango:Monaco 10.3
+    font pango:Monaco 10.7
     strip_workspace_numbers yes
 	colors {
 		separator $text

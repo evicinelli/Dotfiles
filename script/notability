@@ -12,8 +12,8 @@ if [[ $? -eq 0 ]]; then
 elif [[ $? -eq 1 ]]; then
     if [[ $note != "" ]]; then
         # add new note
-        touch "$note.md"
-        $EDITOR "$note.md"
+        touch "$note.txt"
+        $EDITOR "$note.txt"
     else
         exit 0
     fi

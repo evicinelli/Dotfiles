@@ -22,7 +22,7 @@ apt remove gedit
 
 # Installo le cose
 apt update
-apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs nautilus-dropbox kodi
+apt install i3 i3blocks vim vim-gtk3 rxvt-unicode-256color compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk vlc zip ufw tree xbacklight pass xclip rsync owncloud-client gufw ranger at apt-transport-https libnotify-bin dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra mpv sshfs nautilus-dropbox kodi python3-pip
 
 # Aggiorno e pulisco tutto
 apt upgrade
@@ -40,11 +40,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 # Modifichine ai file di configurazione in giro
 touch ~/.inputrc
-echo "set editing-mode vi" >> ~/.inputrc
+echo -ne "set editing-mode vi\nset completion-ignore-case on\nset show-all-if-ambiguous on" >> ~/.inputrc
 
-# Per fare andare d'accordo base16 con urxvt
-git clone https://github.com/chriskempson/base16-shell.git ~/Scaricati/Apps/
-echo -ne "BASE16_SHELL=\"$HOME/Scaricati/Apps/base16-shell/\"\nCOLORSCHEME=\"base16_default-dark\"" >> .bashrc_local
+# Pywal
+pip3 install --user pywal
 
 # Collego i dotfiles
 mkdir $HOME/.config/dunst
