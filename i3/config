@@ -95,7 +95,7 @@ client.unfocused        $dark   $dark   $text $base0F
 client.urgent           $urgent $urgent $text $base0F
 bar {
     # position top
-    tray_output none
+    # tray_output none
     status_command i3blocks
     font pango:Monaco 10.7
     strip_workspace_numbers yes
@@ -138,8 +138,8 @@ mode $sysmenu {
 	bindsym e         exec --no-startup-id i3-nagbar -t warning -m 'Logout?' -b 'y' 'i3-msg exit' 
 	bindsym h         exec --no-startup-id systemctl poweroff
 	bindsym b         exec --no-startup-id systemctl reboot
-	bindsym s         exec --no-startup-id i3lock && i3 mode default && systemctl suspend;
-	bindsym l         exec --no-startup-id i3lock && i3 mode default
+	bindsym s         exec --no-startup-id notify-send DUNST_COMMAND_PAUSE && i3lock && i3 mode default && systemctl suspend && notify-send DUNST_COMMAND_RESUME;
+	bindsym l         exec --no-startup-id notify-send DUNST_COMMAND_PAUSE && i3lock && i3 mode default
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
 }

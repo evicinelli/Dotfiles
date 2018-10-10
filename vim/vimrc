@@ -1,9 +1,7 @@
-﻿" Vim-plug {{{
+﻿"Vim-plug {{{
 call plug#begin()
 Plug 'tpope/vim-sensible'                                            " Sensible default
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
-Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree',	{'on': 'NERDTreeToggle'}                 " Nerdtree
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                                            " Vim-startify
@@ -16,7 +14,6 @@ Plug 'godlygeek/tabular'                                             " Tabulariz
 Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-"Plug 'w0rp/ale', {'on':'ALEEnable'}                                  " Linting engine
 Plug 'vim-airline/vim-airline'                                       " Statusline
 Plug 'dylanaraps/wal.vim'                                            " Colorscheme
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
@@ -58,7 +55,7 @@ let maplocalleader = " "
 " Appearance and gui settings {{{
 " set cursorline                                                " Highlight current line
 set linespace=6                                               " Line spacing
-set fillchars+=vert:∙                                         " Vertical separator char
+set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
 set guifont=Monaco\ 11
@@ -103,7 +100,7 @@ set completefunc=emoji#complete
 " }}}
 
 " Statusline {{{
-""set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)\ \|\ %{strftime('%a\ %e\ %b\ %H:%M')}\ 
+" set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)\ \|\ %{strftime('%a\ %e\ %b\ %H:%M')}\ 
 let g:airline_symbols_ascii = 1
 let g:airline_section_z=' %l/%L:%v (%p%%)'
 set noshowmode
@@ -113,7 +110,6 @@ set noshowmode
 inoremap jk <Esc>
 inoremap " ""<Left>
 inoremap ( ()<Left>
-inoremap <C-Backspace> <C-w>
 inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
@@ -133,10 +129,6 @@ noremap <C-h> h
 noremap <C-j> j
 noremap <C-k> k
 noremap <C-l> l
-noremap <C-n> :NERDTreeToggle<CR>
-noremap <F1> :tabnew <CR>
-noremap <leader>p :tabprevious <CR>
-noremap <leader>n :tabNext <CR>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader>a :Ack 

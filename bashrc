@@ -26,7 +26,7 @@ fi
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
 [[ -d $HOME/Dotfiles ]] && export PATH=${PATH}:$HOME/Dotfiles/script
-export PATH="${PATH}:${HOME}/.local/bin/"
+export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 # }}}
 
 # Variables {{{
@@ -42,15 +42,14 @@ export DN="$OC/Dropbox/done.txt"
 export DOC="$OC/Documenti"
 export DBX="$OC/Dropbox"
 export DOWN="$HOME/Scaricati"
-export MED="$OC/Uni/Medicina"
+export MED="/home/vic/ownCloud/Uni/Medicina/Med1/"
 export MEDIA="$OC/Media"
 export MODELS="$OC/Archivio/Modelli"
 export NOTES="$DBX/Notes"
 export P="$OC/Workspace/TW2018"
 export PW="$OC/Archivio/Password-store"
 export TD="$OC/Dropbox/todo.txt"
-export UG="$OC/Uni/AppuntiUni"
-export UNI="$OC/Uni"
+export UNI="$OC/Uni/AppuntiUni"
 export WS="$OC/Workspace"
 
 # Ip address home server
@@ -64,6 +63,9 @@ export SRV="192.168.1.197"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
 [ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
+
+[[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/fd --type f'
+[[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/fd --type f'
 # }}}
 
 # Vim keys and general keybindings {{{
@@ -110,21 +112,11 @@ ps1_hostname() {
 # }}}
 
 # Functions {{{
-# Find wrapper {{{
-ffind() {
-    find $1 -type f -iwholename "*$2*" 2> /dev/null
-}
-
-dirfind() {
-    find $1 -type d -iwholename "*$2**" 2> /dev/null
-}
-
 clean-swp () {
     find $HOME -name "*.swp" -ok rm "{}" \;
     find $HOME -name "*.swo" -ok rm "{}" \;
 }
 
-# }}}
 
 # Todo {{{
 todo-add(){
@@ -136,7 +128,7 @@ fi
 todo-ls() {
 if [[ $# -gt 0 ]]; then
     case "$*" in
-        "w") for i in {0..7}; do todo-ls $i days; done;;
+        "w") for i in {0..7}; do date +%x -d "$i days"; todo-ls $i days; echo; done;;
         "past") for i in {-93..-1}; do todo-ls $i days; done;;
         "month") for i in {0..31}; do todo-ls $i days; done;;
         "someday") cat $TD | grep -v "due:.*$";;
@@ -193,10 +185,6 @@ function todo-ls-tags() {
 wifi () {
     nmcli -a device wifi connect "$( nmcli --color yes device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
 }
-ack () {
-    [[ `which ag` ]] && ag "$*"; echo || ack "$*"
-}
-
 push () {
     # Push a notification to all the devices connected by pushbullet
     curl -s --header "Access-Token: $PB_TOKEN" \
@@ -334,12 +322,12 @@ motivation() {
 # Fzf stuff {{{
 __fzf_pws__ () {
     FILTER="s:${PW}/::;s:.gpg::"
-    readarray PWS < <(find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
+    readarray PWS < <(/usr/bin/find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
     echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
 }
-bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Super beautiful ;)
-bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa\n "'
-bind '"\C-o": "xdg-open \"`fzf`\"\n"'
+bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__   `\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Super beautiful ;)
+bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"'
+bind '"\C-o": "(cd ~; xdg-open \"`fzf`\")\n"'
 # }}}
 
 # Altra roba {{{
@@ -404,6 +392,16 @@ alias unicode='echo ✓ ™ ♪ ♫ ☃ ° Ɵ ∫ 💙'
 alias vimrc="vi $HOME/.vim/vimrc"
 # }}}
 
+# Function as alias {{{
+ack () {
+    [[ -x /usr/bin/ag ]] && /usr/bin/ag "$*"; echo || ack "$*"
+}
+
+find() {
+    [[ -x /usr/bin/fd ]] && /usr/bin/fd $* || find $*
+}
+
+# }}}
 # Git {{{
 alias g="git"
 alias gs="git status"
@@ -424,13 +422,6 @@ alias te="vi $TD"
 alias ge="gvim $TD"
 alias tlrem="cat $OC/remember.todo.txt"
 # }}}
-# }}}
-
-# Tmux {{{
-# if [ -z "$TMUX" ]; then
-#     tmux
-#     eval $COLORSCHEME
-# fi
 # }}}
 
 # vim: fdm=marker

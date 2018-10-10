@@ -15,14 +15,15 @@ if [[ -e $HOME/.cache/wal/colors.sh ]]; then
         -nb "$color3" \
         -cb "$color2" \
         -lf "${color15:=#CCCCCC}" \
-        -bf "$color0" \
-        -cf "$color0" \
-        -nf "$color0" \
+        -bf "$color15" \
+        -cf "$color15" \
+        -nf "$color15" \
         -fn $FONT \
         -key "mod4+x" \
         -all_key "mod4+shift+x" \
         -history_key "mod4+n" \
         -geometry "300x5-30+30" >/dev/null &
+    
 else
     /usr/bin/dunst >/dev/null &
 fi
