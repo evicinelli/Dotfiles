@@ -95,8 +95,8 @@ client.unfocused        $dark   $dark   $text $base0F
 client.urgent           $urgent $urgent $text $base0F
 bar {
     # position top
-    # tray_output none
-    status_command i3blocks
+    tray_output none
+    status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
     font pango:Monaco 10.7
     strip_workspace_numbers yes
 	colors {

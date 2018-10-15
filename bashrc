@@ -22,7 +22,7 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Is fzf installed? If not install it (<3 fzf)
+# Is fzf already installed?
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
 [[ -d $HOME/Dotfiles ]] && export PATH=${PATH}:$HOME/Dotfiles/script
@@ -33,7 +33,6 @@ export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 export EDITOR=vim
 export TERMINAL=urxvt
 export BROWSER=chromium
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 
 # Folder
 export OC="$HOME/ownCloud"
@@ -66,14 +65,18 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 
 [[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/fd --type f'
 [[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/fd --type f'
+[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 # }}}
 
-# Vim keys and general keybindings {{{
+# Vim keys and  keybindings {{{
 set -o vi
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-
+# Fzf bindings
+bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__   `\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Password finder
+bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # File finder
+bind '"\C-o": "(cd ~;f=\"$(fzf)\"; [[ ! -z \"$f\" ]] && xdg-open \"$f\")\n"' # Open files
 # }}}
 
 # Shell options {{{
@@ -99,8 +102,8 @@ export PROMPT_COMMAND=prompt
 prompt() {
     toDo=$(tl | grep -v "^x .*"| wc -l)
     toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
-    export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]]:\[\e[0m\] "
-    [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]:" # Gvim terminal
+    export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]] > \[\e[0m\]"
+    [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]  > " # Gvim terminal
 }
 
 ps1_hostname() {
@@ -127,10 +130,16 @@ fi
 
 todo-ls() {
 if [[ $# -gt 0 ]]; then
-    case "$*" in
-        "w") for i in {0..7}; do date +%x -d "$i days"; todo-ls $i days; echo; done;;
+    case "$1" in
+        "agenda")
+            # tl agenda < # days>
+            end=${2:-6} # if not $2, by default print todos for next 6 days
+            for (( i=0; i<$end; i++ )) do
+                t=$(todo-ls $i days);
+                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ---\n"; echo "$t";);
+            done;
+            echo ;;
         "past") for i in {-93..-1}; do todo-ls $i days; done;;
-        "month") for i in {0..31}; do todo-ls $i days; done;;
         "someday") cat $TD | grep -v "due:.*$";;
         *)
             if date -d "$*" > /dev/null 2>&1; then
@@ -208,29 +217,12 @@ fd () {
     date +%F -d  "$*"
 }
 
-xd () {
-    date +%x -d "$*"
-}
-
-# testscore () {
-#     if [[ $# -gt 0 ]]; then
-#         echo -ne "`date`
-#         $1 errate
-#         $2 non date
-#         $3 corrette
-#         TOT: `bc <<< "-0.4*$1 + 0 * $2 + 1.5*$3"` (`bc <<< "$1 + $2 + $3"`)\n---\n"
-#         echo
-#     else echo "Usage: testscore #NO, #NIL, #OK"
-#     fi
-#
-# }
-
 daysuntil () {
     curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
 }
 
 transfer () {
-    MAX_DAYS=${2:-"2d"}; # if not $3, then default to 2 days allowed
+    MAX_DAYS=${2:-"2d"}; # Default: 2days
     if [ $# -eq 0 ]; then
         cat << EOF
 No arguments specified.
@@ -325,9 +317,6 @@ __fzf_pws__ () {
     readarray PWS < <(/usr/bin/find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
     echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
 }
-bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__   `\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Super beautiful ;)
-bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"'
-bind '"\C-o": "(cd ~; xdg-open \"`fzf`\")\n"'
 # }}}
 
 # Altra roba {{{
@@ -355,11 +344,12 @@ alias fgrep='fgrep --color=auto'
 # }}}
 
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
-alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
-alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
+# alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
+# alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc; source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
+alias ffd="/usr/bin/fd"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
@@ -367,7 +357,6 @@ alias gv="gvim"
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='pwd;ls -l'
 alias mkdir="mkdir -pv"
-alias maketemp="mktemp"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
 alias neton="nmcli networking on"
@@ -392,16 +381,6 @@ alias unicode='echo ✓ ™ ♪ ♫ ☃ ° Ɵ ∫ 💙'
 alias vimrc="vi $HOME/.vim/vimrc"
 # }}}
 
-# Function as alias {{{
-ack () {
-    [[ -x /usr/bin/ag ]] && /usr/bin/ag "$*"; echo || ack "$*"
-}
-
-find() {
-    [[ -x /usr/bin/fd ]] && /usr/bin/fd $* || find $*
-}
-
-# }}}
 # Git {{{
 alias g="git"
 alias gs="git status"
@@ -412,6 +391,7 @@ alias gc="git commit"
 alias gpush="git push"
 alias gpull="git pull"
 alias glog="git log --graph --oneline"
+# }}}
 # }}}
 
 # Todo {{{

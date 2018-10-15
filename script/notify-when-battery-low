@@ -9,7 +9,7 @@ remaining=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: 
 treshold=10
 maxCapacity=$(acpi -V | grep "last full capacity" | grep -o ".[0-9]*%" | sed "s/%//")
 
-if [ $status == "Discharging" ] && [ $perc -le $treshold ] ; then
+if [ $status == "Discharging" ] && [ $perc -le $treshold ] && [ ! -f /tmp/battery-dnd ]; then
     notify-send DUNST_COMMAND_RESUME
     notify-send --urgency=critical "BATTERIA SCARICAAAAAA ($perc%) " "Mettila in carica, muvèt!!"
 fi
