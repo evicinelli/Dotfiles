@@ -59,13 +59,13 @@ export SRV="192.168.1.197"
 # }}}
 
 # Completions & fzf {{{
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
 [ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
 
 [[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/fd --type f'
 [[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/fd --type f'
 [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
 
 # Vim keys and  keybindings {{{
@@ -136,7 +136,7 @@ if [[ $# -gt 0 ]]; then
             end=${2:-6} # if not $2, by default print todos for next 6 days
             for (( i=0; i<$end; i++ )) do
                 t=$(todo-ls $i days);
-                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ---\n"; echo "$t";);
+                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
             done;
             echo ;;
         "past") for i in {-93..-1}; do todo-ls $i days; done;;
