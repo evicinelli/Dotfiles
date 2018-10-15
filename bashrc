@@ -27,6 +27,7 @@ fi
 
 [[ -d $HOME/Dotfiles ]] && export PATH=${PATH}:$HOME/Dotfiles/script
 export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
+set -o vi
 # }}}
 
 # Variables {{{
@@ -69,7 +70,6 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 # }}}
 
 # Vim keys and  keybindings {{{
-set -o vi
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
