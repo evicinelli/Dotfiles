@@ -1,7 +1,6 @@
 #! /bin/bash 
-#	get wallpaper randomly from unsplash, apply it, and using pywal build a matching colorscheme
 
-# API DOC --  https://source.unsplash.com  {{{
+# Api --  https://source.unsplash.com  {{{
 # https://source.unsplash.com/random/{SIZE}
 # https://source.unsplash.com/user/{USERNAME}/{SIZE}
 # https://source.unsplash.com/user/{USERNAME}/likes/{SIZE}
@@ -14,17 +13,17 @@
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # }}}
 
-# Collezion[e/i] {{{
+# Collezioni {{{
 
+# COLLECTION_NUMBER="1778533" # Collezione mia
 # COLLECTION_NUMBER="1912959"
 # COLLECTION_NUMBER="629911"
 # COLLECTION_NUMBER="198884"
-# COLLECTION_NUMBER="1778533" # Collezione mia
 # COLLECTION_NUMBER="289662"
 # COLLECTION_NUMBER="217569"
 # COLLECTION_NUMBER="201"
 # COLLECTION_NUMBER="266986"
-#  COLLECTION_NUMBER="142563" # stelline
+# COLLECTION_NUMBER="142563" # stelline
 # COLLECTION_NUMBER="452289"
 # COLLECTION_NUMBER="862387"
 # COLLECTION_NUMBER="1007074"
@@ -54,7 +53,7 @@ else
     feh --bg-scale $HOME/.img
 fi
 
-# Theme notification
-bash $HOME/Dotfiles/script/start-dunst
+# Theme dunst
+$HOME/Dotfiles/script/start-dunst
 
 # vim: fdm=marker

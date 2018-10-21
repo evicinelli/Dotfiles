@@ -42,7 +42,7 @@ export DN="$OC/Dropbox/done.txt"
 export DOC="$OC/Documenti"
 export DBX="$OC/Dropbox"
 export DOWN="$HOME/Scaricati"
-export MED="/home/vic/ownCloud/Uni/Medicina/Med1/"
+export MED="$OC/Uni/AppuntiUni/Medicina/Med1"
 export MEDIA="$OC/Media"
 export MODELS="$OC/Archivio/Modelli"
 export NOTES="$DBX/Notes"
@@ -63,8 +63,8 @@ export SRV="192.168.1.197"
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
 [ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
 
-[[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/fd --type f'
-[[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/fd --type f'
+[[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f'
+[[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f'
 [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
@@ -191,6 +191,10 @@ function todo-ls-tags() {
 # }}}
 
 # Utility {{{
+tny () {
+    [[ $# -gt 0 ]] && ( wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1; echo;) || echo "tny nttps://url.com"
+}
+
 wifi () {
     nmcli -a device wifi connect "$( nmcli --color yes device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
 }
@@ -355,7 +359,7 @@ alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
 alias gv="gvim"
 alias httpserver="python -m SimpleHTTPServer 8000"
-alias l='pwd;ls -l'
+alias l='ls'
 alias mkdir="mkdir -pv"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"

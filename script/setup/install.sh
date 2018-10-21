@@ -47,6 +47,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 touch ~/.inputrc
 echo -ne "set editing-mode vi\nset completion-ignore-case on\nset show-all-if-ambiguous on" >> ~/.inputrc
 
+echo -ne "source $HOME/.bashrc" >> $HOME/.bash_profile
+
 # Pywal
 pip3 install --user pywal
 

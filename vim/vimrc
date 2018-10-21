@@ -120,6 +120,7 @@ noremap <C-B> :Buffers<CR>
 noremap :Q :q
 noremap :W :w
 noremap <C-p> :FZF<CR>
+noremap <C-o> :FZF ~ <CR>
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z
