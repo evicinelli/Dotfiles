@@ -4,7 +4,7 @@
 
 # Used
 - [fzf](https://github.com/junegunn/fzf)
-- Font Family: Monaco
+- Font Family: Inconsolata
 - Vim
     - [VimPlug](https://github.com/junegunn/vim-plug)
 - i3 + i3blocks

@@ -41,19 +41,19 @@ PARAMS=$*
 
 # Grabbing wallpaper from unsplash
 rm $HOME/.img
-wget -O $HOME/.img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+wget --quiet -O $HOME/.img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 
 
 # Do we have pywal installed?
 if [[ -x $HOME/.local/bin/wal ]]; then
     # I3 and terminal theming
-    wal $PARAMS -c -i $HOME/.img
+    /home/vic/.local/bin/wal $PARAMS -c -i $HOME/.img >/dev/null
 else
     # We don't :(
     feh --bg-scale $HOME/.img
 fi
 
 # Theme dunst
-$HOME/Dotfiles/script/start-dunst
+$HOME/Dotfiles/script/start-dunst 2&1>/dev/null
 
 # vim: fdm=marker

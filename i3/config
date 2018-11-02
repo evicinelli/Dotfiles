@@ -79,9 +79,10 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Monaco 10
-bindsym $mod+Shift+d exec --no-startup-id "bash $HOME/Dotfiles/script/unsplash > /tmp/unsplash.log"
-bindsym $mod+Shift+t exec --no-startup-id "bash $HOME/Dotfiles/script/i3-tray-toggle"
+font pango:Inconsolata 11
+bindsym $mod+Shift+d exec --no-startup-id $HOME/Dotfiles/script/unsplash
+bindsym $mod+Shift+f exec --no-startup-id $HOME/Dotfiles/script/unsplash -l
+bindsym $mod+Shift+t exec --no-startup-id $HOME/Dotfiles/script/i3-tray-toggle
 set_from_resource $pdark background #282828
 set_from_resource $dark background #282828
 set_from_resource $text foreground #fbf1c7
@@ -95,9 +96,9 @@ client.unfocused        $dark   $dark   $text $base0F
 client.urgent           $urgent $urgent $text $base0F
 bar {
     # position top
-    # tray_output none
+    tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
-    font pango:Monaco 10.7
+    font pango:Inconsolata 12
     strip_workspace_numbers yes
 	colors {
 		separator $text

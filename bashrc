@@ -55,6 +55,9 @@ export WS="$OC/Workspace"
 # Ip address home server
 export SRV="192.168.1.197"
 
+# Pattern
+export EMPTY_LINES="^$"
+
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -132,14 +135,21 @@ todo-ls() {
 if [[ $# -gt 0 ]]; then
     case "$1" in
         "agenda")
-            # tl agenda < # days>
+            # tl agenda [ # days ]
             end=${2:-6} # if not $2, by default print todos for next 6 days
             for (( i=0; i<$end; i++ )) do
                 t=$(todo-ls $i days);
                 [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
             done;
             echo ;;
-        "past") for i in {-93..-1}; do todo-ls $i days; done;;
+        "past")
+            # tl past [# days]
+            end=${2:-100} # if not $2, by default print todos for the past 100 days
+            for (( i=$end; i>0; i-- )) do
+                t=$(todo-ls -$i days);
+                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "-$i days") ($i days ago) --- \n"; echo "$t";);
+            done;
+            echo ;;
         "someday") cat $TD | grep -v "due:.*$";;
         *)
             if date -d "$*" > /dev/null 2>&1; then
@@ -217,7 +227,7 @@ wttr () {
     curl "https://wttr.in/~$CITY"
 }
 
-fd () {
+df () {
     date +%F -d  "$*"
 }
 
@@ -353,7 +363,6 @@ alias fgrep='fgrep --color=auto'
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc; source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
-alias ffd="/usr/bin/fd"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
@@ -401,6 +410,7 @@ alias glog="git log --graph --oneline"
 # Todo {{{
 alias ta="todo-add"
 alias tl="todo-ls"
+alias tla="todo-ls agenda"
 alias td="todo-done"
 alias te="vi $TD"
 alias ge="gvim $TD"
