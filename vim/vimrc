@@ -48,6 +48,7 @@ set splitbelow            " Split below
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
 set updatetime=4000       " Consider vim inactive after 4 sec of no activity in normal mode
+set omnifunc=syntaxcomplete#Complete
 let mapleader = " "
 let maplocalleader = " "
 "}}}

@@ -103,8 +103,8 @@ shopt -s histappend
 # Prompt {{{
 export PROMPT_COMMAND=prompt
 prompt() {
-    toDo=$(tl | grep -v "^x .*"| wc -l)
-    toDoUrgent=$(tl | sort | grep "^(.*" | wc -l)
+    [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
+    [[ -e $TD ]] && toDoUrgent=$(tl | sort | grep "^(.*" | wc -l) || toDoUrgent="x"
     export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]] > \[\e[0m\]"
     [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]  > " # Gvim terminal
 }
