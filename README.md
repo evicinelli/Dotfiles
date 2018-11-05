@@ -4,7 +4,7 @@
 
 # Used
 - [fzf](https://github.com/junegunn/fzf)
-- Font Family: Inconsolata
+- Font Family: Fira
 - Vim
     - [VimPlug](https://github.com/junegunn/vim-plug)
 - i3 + i3blocks

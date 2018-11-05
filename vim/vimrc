@@ -59,7 +59,7 @@ set linespace=6                                               " Line spacing
 set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set guifont=Inconsolata\ 12
+set guifont=Fira\ Mono\ 12
 set bg=light
 let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
 let &t_SR = "\<Esc>[4 q"
@@ -133,7 +133,7 @@ noremap <C-k> k
 noremap <C-l> l
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
-noremap <leader>a :Ack 
+noremap <leader>a :Ack -i 
 noremap <leader>t :Tags<CR>
 noremap <leader>so :!xdg-open "%" <CR>
 noremap <leader><leader> zA <CR>

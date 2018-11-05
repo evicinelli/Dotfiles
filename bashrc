@@ -137,19 +137,26 @@ if [[ $# -gt 0 ]]; then
         "agenda")
             # tl agenda [ # days ]
             end=${2:-6} # if not $2, by default print todos for next 6 days
-            for (( i=0; i<$end; i++ )) do
-                t=$(todo-ls $i days);
-                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
-            done;
+            if [[ $end -ge 0 ]]; then
+                for (( i=0; i<$end; i++ )) do
+                    t=$(todo-ls $i days);
+                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
+                done;
+            else
+                for (( i=$end; i<0; i++ )) do
+                    t=$(todo-ls $i days);
+                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
+                done;
+            fi
             echo ;;
         "past")
             # tl past [# days]
             end=${2:-100} # if not $2, by default print todos for the past 100 days
             for (( i=$end; i>0; i-- )) do
                 t=$(todo-ls -$i days);
-                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "-$i days") ($i days ago) --- \n"; echo "$t";);
+                [[ ! -z "$t" ]] && echo $t;
             done;
-            echo ;;
+            ;;
         "someday") cat $TD | grep -v "due:.*$";;
         *)
             if date -d "$*" > /dev/null 2>&1; then
@@ -360,6 +367,7 @@ alias fgrep='fgrep --color=auto'
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
 # alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
 # alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
+alias tm="tmux -f $DF/tmux.conf"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc; source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
@@ -404,7 +412,6 @@ alias gc="git commit"
 alias gpush="git push"
 alias gpull="git pull"
 alias glog="git log --graph --oneline"
-# }}}
 # }}}
 
 # Todo {{{

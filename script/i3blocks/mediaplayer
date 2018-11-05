@@ -76,7 +76,7 @@ push(@metadata, $title) if $title;
 if (join(" - ", @metadata) ne "(null) - (null)") {
     print(join(" - ", @metadata)) if @metadata;
 } else {
-    print("NP");
+    print("Not Playing");
 }
 my $status = qx(playerctl $player_arg status);
 # Short text
