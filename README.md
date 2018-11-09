@@ -4,7 +4,9 @@
 
 # Used
 - [fzf](https://github.com/junegunn/fzf)
-- Font Family: Fira
+- Font Family: San Francisco
+    - [SF](https://github.com/sahibjotsaggu/San-Francisco-Pro-Fonts)
+    - [SFMono](https://github.com/ZulwiyozaPutra/SF-Mono-Font)
 - Vim
     - [VimPlug](https://github.com/junegunn/vim-plug)
 - i3 + i3blocks

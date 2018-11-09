@@ -66,8 +66,8 @@ export EMPTY_LINES="^$"
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
 [ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
 
-[[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f'
-[[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f'
+[[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f --no-ignore'
+[[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f --no-ignore'
 [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
@@ -76,10 +76,13 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
+bind -r "\C-j"
 # Fzf bindings
 bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__   `\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Password finder
 bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # File finder
 bind '"\C-o": "(cd ~;f=\"$(fzf)\"; [[ ! -z \"$f\" ]] && xdg-open \"$f\")\n"' # Open files
+bind -x '"\C-j": "fj"' # Open files
+
 # }}}
 
 # Shell options {{{
@@ -105,8 +108,8 @@ export PROMPT_COMMAND=prompt
 prompt() {
     [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(tl | sort | grep "^(.*" | wc -l) || toDoUrgent="x"
-    export PS1="$(ps1_hostname) \[\e[1;36m\]\W\[\e[1;31m\] [$toDo, [$toDoUrgent!]] > \[\e[0m\]"
-    [[ $TERM = "dumb" ]] && export PS1="$(ps1_hostname)\W [$toDo, [$toDoUrgent!]]  > " # Gvim terminal
+    export PS1="\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W > \[\e[0m\]"
+    [[ $TERM = "dumb" ]] && export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W > " # Gvim terminal
 }
 
 ps1_hostname() {
@@ -124,7 +127,7 @@ clean-swp () {
 }
 
 
-# Todo {{{
+# Todo manager {{{
 todo-add(){
 if [[ $# -gt 0 ]]; then
     echo "$*" >> $TD
@@ -207,6 +210,30 @@ function todo-ls-tags() {
 }
 # }}}
 
+# Password manager {{{
+p () {
+
+    edit_key=ctrl-e
+    view_key=ctrl-v
+
+    # [[ $1 -eq "generate" || $1 -eq "add" ]] && (pass "$*"; exit 0)
+
+    FILTER="s:${PW}/::;s:.gpg::"
+    readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
+
+    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf -0 --expect=$edit_key,$view_key --query="$@")
+    first=$(echo $fzfOut | cut -d" " -f1)
+    second=$(echo $fzfOut | cut -d" " -f2)
+
+    case "$first" in
+        $edit_key) pass edit "$second";;
+        $view_key) pass "$second";;
+        *)pass -c "$first";;
+    esac
+
+}
+# }}}
+
 # Utility {{{
 tny () {
     [[ $# -gt 0 ]] && ( wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1; echo;) || echo "tny nttps://url.com"
@@ -226,7 +253,8 @@ push () {
 }
 
 fj () {
-    fg $(jobs | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+    job=$(jobs | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+    [[ ! -z $job ]] && fg $job
 }
 
 wttr () {
@@ -286,50 +314,6 @@ function gong () {
 }
 # }}}
 
-# Motivation {{{
-wakeup () {
-    sleepingHours=8
-    sleepingMinutes=20
-    sleepingSeconds=$(((sleepingHours*60+sleepingMinutes)*60))
-    morningTime=${1:-"7:30"}
-    morningSeconds=$(date +%s -d "tomorrow $morningTime")
-    duration=$((morningSeconds-sleepingSeconds))
-    # echo $duration
-    sleepTime=$(date -d "@$duration")
-    echo $sleepTime
-}
-
-motivation() {
-    QUOTES=(
-    "La terza: considerare come se mi trovassi in punto di morte la forma e misura che allora vorrei aver tenuto nel compiere la presente scelta, e in base a ciò regolandomi, io prenda in tutto la mia decisione"
-    "Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better. -Samuel Beckett "
-    "Never give up, for that is just the place and time that the tide will turn. -Harriet Beecher Stowe "
-    "Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time. -Thomas A. Edison"
-    "Life isn't about getting and having, it's about giving and being. -Kevin Kruse"
-    "Strive not to be a success, but rather to be of value. -Albert Einstein"
-    "You miss 100% of the shots you don't take. -Wayne Gretzky"
-    "People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents. -Andrew Carnegie"
-    "Only those who dare to fail greatly can ever achieve greatly. -Robert F. Kennedy"
-    "All our dreams can come true, if we have the courage to pursue them. -Walt Disney "
-    "Success consists of going from failure to failure without loss of enthusiasm. -Winston Churchill"
-    "The start is what stops most people. -Don Shula"
-    "Genius: one percent inspiration and 99 percent perspiration -Thomas Edison"
-    "The best time to plant a tree was 20 years ago. The second best time is now. -Chinese Proverb"
-    "I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed. -Michael Jordan"
-    "If you hear a voice within you say “you cannot paint,” then by all means paint and that voice will be silenced. -Vincent Van Gogh"
-    "I attribute my success to this: I never gave or took any excuse. -Florence Nightingale"
-    "People often say that motivation doesn’t last. Well, neither does bathing.  That’s why we recommend it daily. -Zig Ziglar"
-    "Believe you can and you’re halfway there. -Theodore Roosevelt"
-    "Everything you’ve ever wanted is on the other side of fear. -George Addair"
-    "You take your life in your own hands, and what happens? A terrible thing, no one to blame -Erica Jong"
-    "Whether you think you can or you think you can’t, you’re right. -Henry Ford"
-    "If the wind will not serve, take to the oars. -Latin Proverb"
-    "No greater opportunity or obligation can fall the lot of a human being than to be a physician. In the care of suffering he needs technical skill, scientific knowledge and human understanding. He who uses these with courage, humility and wisdom will provide a unique service to his fellow man and will build an enduring edifice of character within himself. The physician should ask of his destiny no more than this and he should be content with no less -Tinsley Randolph Harrison, Harrison's principles of Internal Medicine"
-    )
-    I=${QUOTES["RANDOM%${#QUOTES[@]}"]}
-    echo "$I"
-    echo
-}
 # }}}
 
 # Fzf stuff {{{
@@ -383,7 +367,6 @@ alias n="notability $NOTES"
 alias neton="nmcli networking on"
 alias netoff="nmcli networking off"
 alias o="xdg-open"
-alias p='pass'
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
 alias pc='pass -c'

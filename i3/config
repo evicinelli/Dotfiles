@@ -79,7 +79,7 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Fira Sans 11
+font pango:SF Pro Display 11
 bindsym $mod+Shift+d exec --no-startup-id $HOME/Dotfiles/script/unsplash
 bindsym $mod+Shift+f exec --no-startup-id $HOME/Dotfiles/script/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/Dotfiles/script/i3-tray-toggle
@@ -98,7 +98,7 @@ bar {
     # position top
     tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
-    font pango:Fira Mono 12
+    font pango:SF Mono 12
     strip_workspace_numbers yes
 	colors {
 		separator $text
@@ -139,8 +139,8 @@ mode $sysmenu {
 	bindsym e         exec --no-startup-id i3-nagbar -t warning -m 'Logout?' -b 'y' 'i3-msg exit' 
 	bindsym h         exec --no-startup-id systemctl poweroff
 	bindsym b         exec --no-startup-id systemctl reboot
-	bindsym s         exec --no-startup-id notify-send DUNST_COMMAND_PAUSE && i3lock && i3 mode default && systemctl suspend && notify-send DUNST_COMMAND_RESUME;
-	bindsym l         exec --no-startup-id notify-send DUNST_COMMAND_PAUSE && i3lock && i3 mode default
+	bindsym s         exec --no-startup-id i3lock && i3 mode default && systemctl suspend
+	bindsym l         exec --no-startup-id i3lock && i3 mode default
 	bindsym Return    mode "default"
 	bindsym Escape    mode "default"
 }

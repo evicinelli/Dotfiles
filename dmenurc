@@ -1,5 +1,5 @@
 . "${HOME}/.cache/wal/colors.sh"
-FONT="FiraMono-12"
+FONT="SFMono-12"
 DMENU="dmenu -f -i"" -fn $FONT -nb \"$color0\" -nf \"$color15\" -sb \"$color1\" -sf \"$color15\""
 
 # vim: ft=sh

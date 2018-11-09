@@ -1,6 +1,6 @@
 #! /bin/bash 
 
-FONT="FiraCode 12"
+FONT="SFMono 12"
 
 # Kill dunst
 killall dunst
