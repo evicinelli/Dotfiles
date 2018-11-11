@@ -1,10 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/vic/ownCloud/Uni/AppuntiUni/Medicina/Med1'
-let g:netrw_dirhist_2='/home/vic/ownCloud/Dropbox/GVS/Sanitaria'
-let g:netrw_dirhist_3='/home/vic/ownCloud/Uni/AppuntiUni/Medicina/Med1'
-let g:netrw_dirhist_4='/home/vic/ownCloud/Uni/AppuntiUni/Medicina/Med1/pdf'
-let g:netrw_dirhist_5='/home/vic/ownCloud/Uni/AppuntiUni/Medicina/Med1/slide'
-let g:netrw_dirhist_6='/home/vic/ownCloud/Uni/AppuntiUni/Medicina/Med1'
-let g:netrw_dirhist_7='/usr/share/fonts'
-let g:netrw_dirhist_8='/home/vic/ownCloud/Uni/AppuntiUni/Medicina/Med1/img'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/vic/.fzf'
+let g:netrw_dirhist_2='/home/vic/.fzf/shell'
+let g:netrw_dirhist_3='/home/vic/_gvs/estratti/sent'

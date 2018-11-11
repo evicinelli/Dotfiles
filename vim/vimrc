@@ -92,7 +92,8 @@ let g:startify_change_to_vcs_root = 0
 let g:startify_custom_header = [""]
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
-let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#syntax#conceal#use = 1
+let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx']
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
@@ -108,7 +109,6 @@ set noshowmode
 " }}}
 
 " Custom mappings and abbreviations {{{
-inoremap jk <Esc>
 inoremap " ""<Left>
 inoremap ( ()<Left>
 inoremap <F1> <Esc>
@@ -117,6 +117,7 @@ inoremap ` ``<Left>
 inoremap { {}<Left>
 inoremap <C-p> <Esc>:FZF<CR>
 inoremap <C-z> <C-o><C-z>
+inoremap <C-l> <C-o>:noh<CR>
 noremap <C-B> :Buffers<CR>
 noremap :Q :q
 noremap :W :w

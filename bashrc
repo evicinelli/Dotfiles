@@ -66,8 +66,8 @@ export EMPTY_LINES="^$"
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
 [ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
 
-[[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f --no-ignore'
-[[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f --no-ignore'
+# [[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f --no-ignore'
+# [[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f --no-ignore'
 [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
@@ -76,12 +76,9 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind -r "\C-j"
-# Fzf bindings
-bind '"\C-v": "\C-x\C-a$a \C-x\C-addi`__fzf_pws__   `\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Password finder
 bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # File finder
-bind '"\C-o": "(cd ~;f=\"$(fzf)\"; [[ ! -z \"$f\" ]] && xdg-open \"$f\")\n"' # Open files
-bind -x '"\C-j": "fj"' # Open files
+bind -x '"\C-o": "of"' # Open files
+bind -x '"\C-j": "fj"' # Job control
 
 # }}}
 
@@ -121,11 +118,24 @@ ps1_hostname() {
 # }}}
 
 # Functions {{{
+
+# Altra roba {{{
+revealjs () {
+    INPUT=$1
+    shift
+    wget https://github.com/hakimel/reveal.js/archive/master.tar.gz
+    tar -xzvf master.tar.gz
+    mv reveal.js-master reveal.js && rm master.tar.gz
+    pandoc -t revealjs -s --self-contained $* $INPUT -o index.html
+    # rm -r reveal.js
+}
+
 clean-swp () {
     find $HOME -name "*.swp" -ok rm "{}" \;
     find $HOME -name "*.swo" -ok rm "{}" \;
 }
 
+# }}}
 
 # Todo manager {{{
 todo-add(){
@@ -221,7 +231,7 @@ p () {
     FILTER="s:${PW}/::;s:.gpg::"
     readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
 
-    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf -0 --expect=$edit_key,$view_key --query="$@")
+    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf -0 --expect=$edit_key,$view_key --query="$@" --header="$edit_key to edit, $view_key to cat, Enter to copy the password")
     first=$(echo $fzfOut | cut -d" " -f1)
     second=$(echo $fzfOut | cut -d" " -f2)
 
@@ -242,6 +252,7 @@ tny () {
 wifi () {
     nmcli -a device wifi connect "$( nmcli --color yes device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
 }
+
 push () {
     # Push a notification to all the devices connected by pushbullet
     curl -s --header "Access-Token: $PB_TOKEN" \
@@ -250,6 +261,14 @@ push () {
         --request POST \
         https://api.pushbullet.com/v2/pushes
     echo
+}
+
+share () {
+    if [[ $# -gt 0 ]]; then
+        file=$(mktemp);
+        qrencode -s 20 "$*" -o $file
+        xdg-open $file
+    fi
 }
 
 fj () {
@@ -301,38 +320,14 @@ function fix-mimecache () {
     cd ~-
 }
 
-function emoji () {
-    EMOJI="$(cat /home/vic/ownCloud/Archivio/emoji.txt | fzf --query="$*" | sed -n "/\:.*\:/p")"
-    echo $EMOJI
-    echo "$EMOJI" | xclip -selection primary
-    echo "$EMOJI" | xclip -selection clipboard
-}
-
 function gong () {
     bash $HOME/Dotfiles/script/remindme $* "GONG: TIME IS UP (`date +%H:%M`)"
     at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav"
 }
-# }}}
 
-# }}}
-
-# Fzf stuff {{{
-__fzf_pws__ () {
-    FILTER="s:${PW}/::;s:.gpg::"
-    readarray PWS < <(/usr/bin/find $PW -type f -iwholename "*$1*.gpg" | sed -e $FILTER)
-    echo ${PWS[*]} | sed "s/ /\\n/g" | fzf
-}
-# }}}
-
-# Altra roba {{{
-revealjs () {
-    INPUT=$1
-    shift
-    wget https://github.com/hakimel/reveal.js/archive/master.tar.gz
-    tar -xzvf master.tar.gz
-    mv reveal.js-master reveal.js && rm master.tar.gz
-    pandoc -t revealjs -s --self-contained $* $INPUT -o index.html
-    # rm -r reveal.js
+function of () {
+    f=$(cd ~; fzf --query="$*")
+    [[ ! -z $f ]] && xdg-open "$f"
 }
 # }}}
 
