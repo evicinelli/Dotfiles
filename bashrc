@@ -77,7 +77,7 @@ bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # File finder
-bind -x '"\C-o": "of"' # Open files
+bind -x '"\C-o": "fo"' # Open files
 bind -x '"\C-j": "fj"' # Job control
 
 # }}}
@@ -164,6 +164,7 @@ if [[ $# -gt 0 ]]; then
             echo ;;
         "past")
             # tl past [# days]
+            local IFS=""
             end=${2:-100} # if not $2, by default print todos for the past 100 days
             for (( i=$end; i>0; i-- )) do
                 t=$(todo-ls -$i days);
@@ -171,6 +172,14 @@ if [[ $# -gt 0 ]]; then
             done;
             ;;
         "someday") cat $TD | grep -v "due:.*$";;
+        "tags")
+            # local IFS=""
+            readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
+            for tag in ${tags[*]}; do
+                echo -ne "\n- $tag --- \n"
+                cat $TD | grep -v "^x" | grep "$tag"
+            done
+            ;;
         *)
             if date -d "$*" > /dev/null 2>&1; then
                 cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
@@ -325,9 +334,9 @@ function gong () {
     at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav"
 }
 
-function of () {
+function fo () {
     f=$(cd ~; fzf --query="$*")
-    [[ ! -z $f ]] && xdg-open "$f"
+    [[ ! -z $f ]] && xdg-open "$HOME/$f"
 }
 # }}}
 
@@ -364,7 +373,6 @@ alias netoff="nmcli networking off"
 alias o="xdg-open"
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
-alias pc='pass -c'
 alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
 alias py="python"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"

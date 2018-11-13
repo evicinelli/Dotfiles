@@ -79,7 +79,7 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:SF Pro Display 11
+font pango:Fira Sans 11
 bindsym $mod+Shift+d exec --no-startup-id $HOME/Dotfiles/script/unsplash
 bindsym $mod+Shift+f exec --no-startup-id $HOME/Dotfiles/script/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/Dotfiles/script/i3-tray-toggle
@@ -98,7 +98,7 @@ bar {
     # position top
     tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
-    font pango:SF Mono 12
+    font pango:Fira Sans 12
     strip_workspace_numbers yes
 	colors {
 		separator $text
