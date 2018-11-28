@@ -33,13 +33,15 @@ set -o vi
 # Variables {{{
 export EDITOR=vim
 export TERMINAL=urxvt
-export BROWSER=chromium
+export BROWSER=qutebrowser
+export OPEN=xdg-open
 
 # Folder
 export OC="$HOME/ownCloud"
 export DF="$HOME/Dotfiles"
 export DN="$OC/Dropbox/done.txt"
 export DOC="$OC/Documenti"
+export GVS="$DBX/GVS"
 export DBX="$OC/Dropbox"
 export DOWN="$HOME/Scaricati"
 export MED="$OC/Uni/AppuntiUni/Medicina/Med1"
@@ -68,17 +70,17 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 
 # [[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f --no-ignore'
 # [[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f --no-ignore'
-[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
+[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--exact --height 40% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
 
-# Vim keys and  keybindings {{{
+# Keybindings {{{
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # File finder
-bind -x '"\C-o": "fo"' # Open files
-bind -x '"\C-j": "fj"' # Job control
+bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
+bind '"\C-o": " fo"' # Open files
+bind '"\C-k": " fj"' # Job control, C-j unavailable
 
 # }}}
 
@@ -105,8 +107,9 @@ export PROMPT_COMMAND=prompt
 prompt() {
     [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(tl | sort | grep "^(.*" | wc -l) || toDoUrgent="x"
-    export PS1="\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W > \[\e[0m\]"
-    [[ $TERM = "dumb" ]] && export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W > " # Gvim terminal
+    [[ ! $(jobs | wc -l ) = 0 ]] && bg_jobs="(`jobs | wc -l`) "|| bg_jobs=""
+    export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W > \[\e[0m\]"
+    [[ $TERM = "dumb" ]] && export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W > " # Gvim terminal
 }
 
 ps1_hostname() {
@@ -184,7 +187,7 @@ if [[ $# -gt 0 ]]; then
             if date -d "$*" > /dev/null 2>&1; then
                 cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
             else
-                cat $TD | grep -v "^x .*" | grep -Gi "$*" $TD
+                cat $TD | grep -v "^x" | grep -Gi "$*" $TD
             fi
     esac
 else
@@ -232,21 +235,23 @@ function todo-ls-tags() {
 # Password manager {{{
 p () {
 
-    edit_key=ctrl-e
-    view_key=ctrl-v
+    edit_key=ctrl-v
+    view_key=ctrl-c
+    pipe_key=ctrl-p
 
     # [[ $1 -eq "generate" || $1 -eq "add" ]] && (pass "$*"; exit 0)
 
     FILTER="s:${PW}/::;s:.gpg::"
     readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
 
-    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf -0 --expect=$edit_key,$view_key --query="$@" --header="$edit_key to edit, $view_key to cat, Enter to copy the password")
+    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf -1 -0 --expect=$edit_key,$view_key,$pipe_key --query="$@" --header="$edit_key to edit, $view_key to cat, $pipe_key to print the entry, Enter to copy the password")
     first=$(echo $fzfOut | cut -d" " -f1)
     second=$(echo $fzfOut | cut -d" " -f2)
 
     case "$first" in
         $edit_key) pass edit "$second";;
         $view_key) pass "$second";;
+        $pipe_key) \C-x\C-a$a\C-x\C-addi`echo "pass $second"`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa ;;
         *)pass -c "$first";;
     esac
 
@@ -254,12 +259,15 @@ p () {
 # }}}
 
 # Utility {{{
+share-home-network () {
+    share "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
+}
 tny () {
     [[ $# -gt 0 ]] && ( wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1; echo;) || echo "tny nttps://url.com"
 }
 
 wifi () {
-    nmcli -a device wifi connect "$( nmcli --color yes device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
+    nmcli -a device wifi connect "$( nmcli --color no device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
 }
 
 push () {
@@ -268,7 +276,8 @@ push () {
         --header "Content-Type: application/json" \
         --data-binary "{\"body\":\"$*\",\"title\":\"Broadcasted Push\",\"type\":\"note\"}" \
         --request POST \
-        https://api.pushbullet.com/v2/pushes
+        https://api.pushbullet.com/v2/pushes \
+        && exit 0 || exit 1
     echo
 }
 
@@ -276,7 +285,7 @@ share () {
     if [[ $# -gt 0 ]]; then
         file=$(mktemp);
         qrencode -s 20 "$*" -o $file
-        xdg-open $file
+        $OPEN $file
     fi
 }
 
@@ -335,8 +344,8 @@ function gong () {
 }
 
 function fo () {
-    f=$(cd ~; fzf --query="$*")
-    [[ ! -z $f ]] && xdg-open "$HOME/$f"
+    f=$(fzf --exact --query="$*")
+    [[ ! -z $f ]] && eval "$OPEN \"$f\""
 }
 # }}}
 
@@ -359,6 +368,7 @@ alias tm="tmux -f $DF/tmux.conf"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc; source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
+alias clipboard="xclip -selection PRIMARY"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
@@ -370,7 +380,7 @@ alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
 alias neton="nmcli networking on"
 alias netoff="nmcli networking off"
-alias o="xdg-open"
+alias o="$OPEN"
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
 alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"

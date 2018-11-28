@@ -14,9 +14,10 @@ Plug 'godlygeek/tabular'                                             " Tabulariz
 Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-Plug 'vim-airline/vim-airline'                                       " Statusline
+"Plug 'vim-airline/vim-airline'                                       " Statusline
 Plug 'dylanaraps/wal.vim'                                            " Colorscheme
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
+Plug 'vim-scripts/AfterColors.vim'
 call plug#end()
 "}}}
 
@@ -55,10 +56,10 @@ let maplocalleader = " "
 " Appearance and gui settings {{{
 " set cursorline                                                " Highlight current line
 set linespace=6                                               " Line spacing
-set fillchars+=vert:\|                                        " Vertical separator char
+""set fillchars+=vert:\|                                        " Vertical separator char
 set shortmess+=I                                              " No greetings
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set guifont=SF\ Mono\ 12
+set guifont=Fira\ Code\ 11
 set bg=light
 let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
 let &t_SR = "\<Esc>[4 q"
@@ -76,7 +77,7 @@ if has('gui_running')
     set guioptions-=b
     set guioptions-=e
     set bg=light
-    set colorscheme=default
+    colorscheme default
 else
     "
 endif
@@ -100,13 +101,6 @@ let g:fzf_action = {
 set completefunc=emoji#complete
 " }}}
 
-" Statusline {{{
-"set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)
-let g:airline_symbols_ascii = 1
-let g:airline_section_z=' %l/%L:%v (%p%%)'
-set noshowmode
-" }}}
-
 " Custom mappings and abbreviations {{{
 inoremap " ""<Left>
 inoremap ( ()<Left>
@@ -117,20 +111,21 @@ inoremap { {}<Left>
 inoremap <C-p> <Esc>:FZF<CR>
 inoremap <C-z> <C-o><C-z>
 inoremap <C-l> <C-o>:noh<CR>
-noremap <C-B> :Buffers<CR>
 noremap :Q :q
 noremap :W :w
 noremap <C-p> :FZF<CR>
-noremap <C-o> :FZF ~ <CR>
+noremap <leader>p :FZF<CR>
+noremap <C-f> :FZF 
+noremap <C-l> :noh<CR>
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z
 noremap viz [zjV]zk
 noremap <C-g> :Goyo<CR>
-noremap <C-h> h
-noremap <C-j> j
-noremap <C-k> k
-noremap <C-l> l
+" noremap <C-h> h
+" noremap <C-j> j
+" noremap <C-k> k
+" noremap <C-l> l
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader>a :Ack -i 
@@ -142,7 +137,7 @@ vnoremap K k
 cabbrev f find
 " }}}
 
-" Extended text Objects and matchpairs (thanks to Conner McDaniel) {{{
+" Extended text Objects and matchpairs (Conner McDaniel) {{{
 " They slow down quite a bit commands like cc, dd, yy..
 " let s:items = [ "." , "-" , "_" , "*" , ":" , "/" , "<bar>"] 
 " 
@@ -196,4 +191,13 @@ function! s:buflist()
   redir END
   return split(ls, '\n')
 endfunction
+" }}}
+
+" Statusline {{{
+"set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)
+""let g:airline_symbols_ascii = 1
+""let g:airline_section_z=' %l/%L:%v (%p%%)'
+""set noshowmode
+" }}}
+
 " vim: fdm=marker

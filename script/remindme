@@ -7,5 +7,5 @@ if [[ $# -gt 0 ]]; then
 	echo -e "Ok, alle $time ti ricorderò di $mess"
 	at "$time" <<< "notify-send DUNST_COMMAND_RESUME && notify-send --urgency=critical \"REMINDME:\" \"$mess\""
 else
-    echo "Nulla di fatto"
+    atq
 fi

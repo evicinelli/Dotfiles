@@ -1,6 +1,7 @@
 #! /bin/bash
 
 BAT_NO=0
+# BAT_NO=1
 
 acpiOutput=`acpi -V | grep "Battery $BAT_NO"`
 status=`echo $acpiOutput | head -n 1 | sed "s/Battery $BAT_NO\: //" | cut -d"," -f1`

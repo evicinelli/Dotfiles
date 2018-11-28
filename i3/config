@@ -96,9 +96,9 @@ client.unfocused        $dark   $dark   $text $base0F
 client.urgent           $urgent $urgent $text $base0F
 bar {
     # position top
-    tray_output none
+    # tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
-    font pango:Fira Sans 12
+    font pango:SF Mono 12.4
     strip_workspace_numbers yes
 	colors {
 		separator $text
