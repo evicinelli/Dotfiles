@@ -2,6 +2,7 @@
 
 (
 #cd $NOTES
+ext="md"
 base_dir="$1"
 cd $base_dir
 shift
@@ -13,7 +14,7 @@ elif [[ $? -eq 1 ]]; then
     if [[ $note != "" ]]; then
         # add new note
         touch "$note.txt"
-        $EDITOR "$note.txt"
+        $EDITOR "$note.$ext"
     else
         exit 0
     fi

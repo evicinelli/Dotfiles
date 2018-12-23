@@ -1,6 +1,8 @@
 ﻿"Vim-plug {{{
 call plug#begin()
-Plug 'tpope/vim-sensible'                                            " Sensible default
+if !has("nvim")
+    Plug 'tpope/vim-sensible'                                            " Sensible default
+endif
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                                        " Git diff aside line numbers
@@ -14,14 +16,14 @@ Plug 'godlygeek/tabular'                                             " Tabulariz
 Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-"Plug 'vim-airline/vim-airline'                                       " Statusline
 Plug 'dylanaraps/wal.vim'                                            " Colorscheme
+Plug 'romainl/Apprentice'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
 Plug 'vim-scripts/AfterColors.vim'
 call plug#end()
 "}}}
 
-" General Settings {{{
+" Options {{{
 syntax enable             " Enable syntax Highlighting
 filetype plugin on        " Filetype plugin
 filetype plugin indent on " Specific indentation rules depending on file type
@@ -51,23 +53,15 @@ set modeline              " Vim executes vimL commands if they are found in the 
 set updatetime=4000       " Consider vim inactive after 4 sec of no activity in normal mode
 let mapleader = " "
 let maplocalleader = " "
+if has("nvim")
+    set inccommand=nosplit
+endif
 "}}}
 
-" Appearance and gui settings {{{
-" set cursorline                                                " Highlight current line
-set linespace=6                                               " Line spacing
-""set fillchars+=vert:\|                                        " Vertical separator char
-set shortmess+=I                                              " No greetings
+" Appearance {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set guifont=Fira\ Code\ 11
 set bg=light
-let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
-" }}}
-
-" Gvim vs terminal vim settings {{{
-colorscheme wal
+colorscheme apprentice
 if has('gui_running')
     let g:fzf_launcher = 'urxvt -geometry 120x30 -e bash -c %s' " Launcher for fzf
     set guioptions-=m                                         " remove menu bar
@@ -76,87 +70,105 @@ if has('gui_running')
     set guioptions-=L                                         " remove left-hand scroll bar
     set guioptions-=b
     set guioptions-=e
-    set bg=light
+    set bg=dark
     colorscheme default
+    set guifont=Inconsolata\ 12
+    set linespace=6                                               " Line spacing
 else
-    "
+    let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
+    let &t_SR = "\<Esc>[4 q"
+    let &t_EI = "\<Esc>[2 q"
 endif
+" set shortmess+=I                                              " No greetings
+" set fillchars+=vert:\|                                        " Vertical separator char
+" set cursorline                                                " Highlight current line
 " }}}
 
 " Plugin settings {{{
-let NERDTreeChDirMode = 0
+let g:netrw_banner = 0          " no banner
+let g:netwr_browse_split = 4    " open in prior window
+let g:netwr_altv = 1            " split to the right
+let g:netrw_liststyle = 0       " tree view
+let g:netwr_list_hide = netrw_gitignore#Hide()
+
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_guifg = 'DarkGray'
+
 let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let g:startify_custom_header = [""]
+
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 1
-let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx']
+let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx', 'codeblock_start', 'quotes']
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
     \ 'ctrl-v': 'vsplit' }
-set completefunc=emoji#complete
 " }}}
 
-" Custom mappings and abbreviations {{{
+" Mappings {{{
+cabbrev f find
 inoremap " ""<Left>
 inoremap ( ()<Left>
+inoremap <C-l> <C-o>:noh<CR>
+inoremap <C-p> <Esc>:FZF<CR>
+inoremap <C-z> <C-o><C-z>
 inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
-inoremap <C-p> <Esc>:FZF<CR>
-inoremap <C-z> <C-o><C-z>
-inoremap <C-l> <C-o>:noh<CR>
 noremap :Q :q
 noremap :W :w
-noremap <C-p> :FZF<CR>
-noremap <leader>p :FZF<CR>
-noremap <C-f> :FZF 
+noremap <C-g> :Goyo<CR>
+noremap <C-h> h
+noremap <C-j> j
+noremap <C-k> k
+noremap <C-l> l
 noremap <C-l> :noh<CR>
+noremap <C-n> :cn<CR>
+noremap <C-o> :FZF --no-exact<CR>
+noremap <C-p> :cp<CR>
+noremap <F8> :se spell!<CR>
+noremap <F9> :se nowrap!<CR>
+noremap <leader><leader> zA <CR>
+noremap <leader>a :Ack -i 
+noremap <leader>f :FZF --no-exact 
+noremap <leader>fd :FZF --no-exact $DBX<CR>
+noremap <leader>fh :FZF --no-exact ~<CR>
+noremap <leader>fm :FZF --no-exact $MED<CR>
+noremap <leader>fo :FZF --no-exact $OC<CR>
+noremap <leader>p :FZF --no-exact<CR>
+noremap <leader>so :!xdg-open "%" <CR>
+noremap <leader>t :Tags<CR>
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z
 noremap viz [zjV]zk
-noremap <C-g> :Goyo<CR>
-" noremap <C-h> h
-" noremap <C-j> j
-" noremap <C-k> k
-" noremap <C-l> l
-noremap <F8> :se spell!<CR>
-noremap <F9> :se nowrap!<CR>
-noremap <leader>a :Ack -i 
-noremap <leader>t :Tags<CR>
-noremap <leader>so :!xdg-open "%" <CR>
-noremap <leader><leader> zA <CR>
 vnoremap J j
 vnoremap K k
-cabbrev f find
 " }}}
 
-" Extended text Objects and matchpairs (Conner McDaniel) {{{
-" They slow down quite a bit commands like cc, dd, yy..
-" let s:items = [ "." , "-" , "_" , "*" , ":" , "/" , "<bar>"] 
-" 
-" for item in s:items
-"     exe "noremap yi".item." T".item."dt".item
-"     exe "noremap ya".item." T".item."dt".item
-"     exe "noremap ci".item." T".item."dt".item
-"     exe "noremap ca".item." T".item."dt".item
-"     exe "noremap di".item." T".item."dt".item
-"     exe "noremap da".item." T".item."dt".item
-"     exe "vnoremap vi".item." T".item."dt"item
-"     exe "vnoremap va".item." T".item."dt"item
-" endfor
+" Extended text Objects (Conner McDaniel) and matchpairs {{{
+let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\" ]
+for item in s:items
+    exe "noremap yi".item." T".item."yt".item
+    exe "noremap ya".item." F".item."yf".item
+    exe "noremap ci".item." T".item."ct".item
+    exe "noremap ca".item." F".item."cf".item
+    exe "noremap di".item." T".item."dt".item
+    exe "noremap da".item." F".item."df".item
+    exe "vnoremap vi".item." T".item."vt"item
+    exe "vnoremap va".item." F".item."vf"item
+endfor
+
 set matchpairs+=<:>
 " }}}
-
-" Autogroups and Autocmds {{{
+"
+ " Autogroups and Autocmds {{{
 augroup text
-     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
+     " au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
      au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
      au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
 augroup end
@@ -173,9 +185,18 @@ augroup todotxt
     au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
 augroup end
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
+autocmd! BufWritePost $DF/vim/vimrc source %
+autocmd! BufWritePost $DF/bashrc !source %
 " }}}
 
 " Functions {{{
+function! FileViewer()
+    set nosplitright
+    vsplit .
+    normal 30< 
+    set splitright
+endfunction
+
 function! s:DiffWithSaved()
     let filetype=&ft
     diffthis
@@ -194,10 +215,15 @@ endfunction
 " }}}
 
 " Statusline {{{
-"set statusline=%=\ %F\ %m%r%h%w\ \|\ %Y\ \|\ %l/%L:%v\ (%p%%)
-""let g:airline_symbols_ascii = 1
-""let g:airline_section_z=' %l/%L:%v (%p%%)'
-""set noshowmode
+set statusline=%F%=\ %m%r%h%w\ \/\ %Y\ \/\ %l\|%L:%v\ (%p%%)
+" set showtabline=2
+" let g:airline_symbols_ascii = 1
+" let g:airline_section_z=' %l/%L:%v (%p%%)'
+" set noshowmode
+" }}}
+
+" Notes {{{
+command! -nargs=1 Ngrep vimgrep "<args>" $MED/**/*.md
 " }}}
 
 " vim: fdm=marker

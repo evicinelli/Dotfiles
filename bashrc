@@ -31,10 +31,14 @@ set -o vi
 # }}}
 
 # Variables {{{
-export EDITOR=vim
+[[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
+# [[ -e /usr/bin/nvim-qt ]] && export VISUAL="nvim-qt" || export VISUAL="$EDITOR -g"
+# export EDITOR=vim
+# export VISUAL=vim
 export TERMINAL=urxvt
 export BROWSER=qutebrowser
 export OPEN=xdg-open
+unset VISUAL
 
 # Folder
 export OC="$HOME/ownCloud"
@@ -70,7 +74,7 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 
 # [[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f --no-ignore'
 # [[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f --no-ignore'
-[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--exact --height 40% --reverse --border --cycle'
+[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--height 40% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
 
@@ -98,8 +102,8 @@ shopt -s histappend
 # }}}
 
 # Colorscheme (pywal) {{{
-[ -f ~/.cache/wal/colors.sh ] && . "${HOME}/.cache/wal/colors.sh"
-( [ -f ~/.cache/wal/sequences ] && cat ~/.cache/wal/sequences &)
+# [ -f ~/.cache/wal/colors.sh ] && . "${HOME}/.cache/wal/colors.sh"
+# ( [ -f ~/.cache/wal/sequences ] && cat ~/.cache/wal/sequences &)
 # }}}
 
 # Prompt {{{
@@ -107,9 +111,13 @@ export PROMPT_COMMAND=prompt
 prompt() {
     [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(tl | sort | grep "^(.*" | wc -l) || toDoUrgent="x"
-    [[ ! $(jobs | wc -l ) = 0 ]] && bg_jobs="(`jobs | wc -l`) "|| bg_jobs=""
-    export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W > \[\e[0m\]"
-    [[ $TERM = "dumb" ]] && export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W > " # Gvim terminal
+    [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
+    end=">"
+    if [[ $TERM = "dumb" ]]; then 
+        export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Gvim terminal
+    else
+        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W $end \[\e[0m\]"
+    fi
 }
 
 ps1_hostname() {
@@ -141,6 +149,12 @@ clean-swp () {
 # }}}
 
 # Todo manager {{{
+todo-edit() {
+    [[ $# -gt 0 ]] && \
+        vim $TD -c "/$(sed "s/ /.*/g" <<< "$*")" -c "normal zR" || \
+        vim $TD
+}
+
 todo-add(){
 if [[ $# -gt 0 ]]; then
     echo "$*" >> $TD
@@ -183,11 +197,20 @@ if [[ $# -gt 0 ]]; then
                 cat $TD | grep -v "^x" | grep "$tag"
             done
             ;;
+
+        "projects")
+            readarray tags < <(grep -o "\+.[a-z]*" $TD | sort | uniq)
+            for tag in ${tags[*]}; do
+                echo -ne "\n- $tag --- \n"
+                cat $TD | grep -v "^x" | grep "$tag"
+            done
+            ;;
         *)
             if date -d "$*" > /dev/null 2>&1; then
                 cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
             else
-                cat $TD | grep -v "^x" | grep -Gi "$*" $TD
+                args="$(sed -e "s/\ /.*/g" <<< "$*")" # space -> .*
+                cat $TD | grep -v "^x" | grep -Gi "$args" $TD
             fi
     esac
 else
@@ -244,14 +267,14 @@ p () {
     FILTER="s:${PW}/::;s:.gpg::"
     readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
 
-    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf -1 -0 --expect=$edit_key,$view_key,$pipe_key --query="$@" --header="$edit_key to edit, $view_key to cat, $pipe_key to print the entry, Enter to copy the password")
+    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf --no-exact -0 --expect=$edit_key,$view_key,$pipe_key --query="$@" --header="$edit_key to edit, $view_key to cat, $pipe_key to copy the entry, Enter to copy the password")
     first=$(echo $fzfOut | cut -d" " -f1)
     second=$(echo $fzfOut | cut -d" " -f2)
 
     case "$first" in
         $edit_key) pass edit "$second";;
         $view_key) pass "$second";;
-        $pipe_key) \C-x\C-a$a\C-x\C-addi`echo "pass $second"`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa ;;
+        $pipe_key) echo $second | xclip -selection primary;;
         *)pass -c "$first";;
     esac
 
@@ -290,7 +313,7 @@ share () {
 }
 
 fj () {
-    job=$(jobs | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+    job=$(jobs -ls | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
     [[ ! -z $job ]] && fg $job
 }
 
@@ -300,7 +323,7 @@ wttr () {
 }
 
 df () {
-    date +%F -d  "$*"
+    date +%F -d "$*"
 }
 
 daysuntil () {
@@ -344,14 +367,22 @@ function gong () {
 }
 
 function fo () {
-    f=$(fzf --exact --query="$*")
-    [[ ! -z $f ]] && eval "$OPEN \"$f\""
+    f=$(fzf --query="$*")
+   [[ ! -z $f ]] && eval "$OPEN \"$f\""
 }
 # }}}
 
 # }}}
 
 # Alias {{{
+
+# Vim and neovim {{{
+    alias vi="$EDITOR"
+    alias vim="$EDITOR"
+    alias vimdiff="$EDITOR -d"
+    alias gv="$VISUAL"
+# }}}
+
 # Colori {{{
 alias ls='ls -h --color=auto --group-directories-first'
 alias sl='ls'
@@ -364,6 +395,7 @@ alias fgrep='fgrep --color=auto'
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
 # alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
 # alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
+alias ll="ls -l"
 alias tm="tmux -f $DF/tmux.conf"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc; source $HOME/.bashrc"
@@ -378,7 +410,7 @@ alias l='ls'
 alias mkdir="mkdir -pv"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
-alias neton="nmcli networking on"
+alias neton="nmcli networking on &"
 alias netoff="nmcli networking off"
 alias o="$OPEN"
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
@@ -415,7 +447,7 @@ alias ta="todo-add"
 alias tl="todo-ls"
 alias tla="todo-ls agenda"
 alias td="todo-done"
-alias te="vi $TD"
+alias te="todo-edit"
 alias ge="gvim $TD"
 alias tlrem="cat $OC/remember.todo.txt"
 # }}}

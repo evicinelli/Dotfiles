@@ -7,7 +7,7 @@ URxvt*lineSpace       :2
 URxvt*scrollBar       :false
 URxvt*pointerBlank    :true
 ! URxvt*font            :xft:Fira Code:size=12
-URxvt*font            :xft:SF Mono:size=12
+URxvt*font            :xft:Inconsolata:size=12
 URxvt*perl-ext-common :default,matcher,resize-font
 URxvt*matcher.button  :1
 URxvt*termName        :rxvt-unicode-256color
@@ -19,4 +19,117 @@ URxvt.matcher.button  :1
 URxvt.keysym.C-minus  :resize-font:smaller
 URxvt.keysym.C-plus   :resize-font:bigger
 URxvt.keysym.C-equal  :resize-font:reset
+!
+! ! Connermcd {{{
+! *foreground : #FFFFFF
+! *background : #222222
+! !black
+! *color0 :            #222222
+! *color8 :            #454545
+! !red
+! *color1 :            #B22222
+! *color9 :            #FA8072
+! !green
+! *color2 :            #556B2F
+! *color10:            #779A3E
+! !yellow
+! *color3 :            #B8860B
+! *color11:            #DAA520
+! !blue
+! *color4 :            #4682B4
+! *color12:            #6495ED
+! !magenta
+! *color5 :            #9932CC
+! *color13:            #DA70D6
+! !cyan
+! *color6 :            #87CEEB
+! *color14:            #B0E0E6
+! !white
+! *color7 :            #C0C0C0
+! *color15:            #FFFFFF
+!}}}
+! Apprentice colorscheme {{{1
+! special
+*.foreground:   #bcbcbc
+*.background:   #262626
+*.cursorColor:  #bcbcbc
+! black
+*.color0:       #1c1c1c
+*.color8:       #444444
+
+! red
+*.color1:       #af5f5f
+*.color9:       #ff8700
+
+! green
+*.color2:       #5f875f
+*.color10:      #87af87
+
+! yellow
+*.color3:       #87875f
+*.color11:      #ffffaf
+
+! blue
+*.color4:       #5f87af
+*.color12:      #8fafd7
+
+! magenta
+*.color5:       #5f5f87
+*.color13:      #8787af
+
+cyan
+*.color6:       #5f8787
+*.color14:      #5fafaf
+
+! white
+*.color7:       #6c6c6c
+*.color15:      #ffffff
+! }}}
+! ! Monokai {{{ 
+! 
+! #define base00 #272822
+! #define base01 #383830
+! #define base02 #49483e
+! #define base03 #75715e
+! #define base04 #a59f85
+! #define base05 #f8f8f2
+! #define base06 #f5f4f1
+! #define base07 #f9f8f5
+! #define base08 #f92672
+! #define base09 #fd971f
+! #define base0A #f4bf75
+! #define base0B #a6e22e
+! #define base0C #a1efe4
+! #define base0D #66d9ef
+! #define base0E #ae81ff
+! #define base0F #cc6633
+! 
+! *.color0:       base00
+! *.color1:       base08
+! *.color2:       base0B
+! *.color3:       base0A
+! *.color4:       base0D
+! *.color5:       base0E
+! *.color6:       base0C
+! *.color7:       base05
+!  
+! *.color8:       base03
+! *.color9:       base08
+! *.color10:      base0B
+! *.color11:      base0A
+! *.color12:      base0D
+! *.color13:      base0E
+! *.color14:      base0C
+! *.color15:      base07
+!  
+! ! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! ! use 'shell' template to set these if necessary
+! *.color16:      base09
+! *.color17:      base0F
+! *.color18:      base01
+! *.color19:      base02
+! *.color20:      base04
+! *.color21:      base06
+! !}}}
+!
 ! vim: fdm=marker
