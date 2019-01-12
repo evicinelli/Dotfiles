@@ -16,15 +16,14 @@ Plug 'godlygeek/tabular'                                             " Tabulariz
 Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-Plug 'dylanaraps/wal.vim'                                            " Colorscheme
-Plug 'romainl/Apprentice'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
 Plug 'vim-scripts/AfterColors.vim'
 call plug#end()
 "}}}
 
 " Options {{{
-syntax enable             " Enable syntax Highlighting
+syntax enable             " Enable syntax Highighting
 filetype plugin on        " Filetype plugin
 filetype plugin indent on " Specific indentation rules depending on file type
 set number relativenumber " Line numbers are relative to current line
@@ -50,7 +49,7 @@ set splitright            " Vsplit on the right
 set splitbelow            " Split below
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
-set updatetime=4000       " Consider vim inactive after 4 sec of no activity in normal mode
+set updatetime=2000       " Consider vim inactive after 4 sec of no activity in normal mode
 let mapleader = " "
 let maplocalleader = " "
 if has("nvim")
@@ -58,10 +57,17 @@ if has("nvim")
 endif
 "}}}
 
+" Statusline {{{
+set statusline=%F%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ %L)\ \/\ %{strftime('%H:%M')}\ 
+
+" set showtabline=2
+" let g:airline_symbols_ascii = 1
+" let g:airline_section_z=' %l/%L:%v (%p%%)'
+" set noshowmode
+" }}}
+
 " Appearance {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set bg=light
-colorscheme apprentice
 if has('gui_running')
     let g:fzf_launcher = 'urxvt -geometry 120x30 -e bash -c %s' " Launcher for fzf
     set guioptions-=m                                         " remove menu bar
@@ -70,17 +76,18 @@ if has('gui_running')
     set guioptions-=L                                         " remove left-hand scroll bar
     set guioptions-=b
     set guioptions-=e
-    set bg=dark
-    colorscheme default
-    set guifont=Inconsolata\ 12
+    set guifont=B612\ Mono\ 12
     set linespace=6                                               " Line spacing
 else
     let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
 endif
-" set shortmess+=I                                              " No greetings
-" set fillchars+=vert:\|                                        " Vertical separator char
+set t_Co=256
+set bg=light
+set shortmess+=I                                              " No greetings
+set fillchars=vert:\|,fold:*
+colorscheme PaperColor
 " set cursorline                                                " Highlight current line
 " }}}
 
@@ -121,6 +128,7 @@ inoremap ` ``<Left>
 inoremap { {}<Left>
 noremap :Q :q
 noremap :W :w
+noremap / mc/
 noremap <C-g> :Goyo<CR>
 noremap <C-h> h
 noremap <C-j> j
@@ -141,7 +149,6 @@ noremap <leader>fm :FZF --no-exact $MED<CR>
 noremap <leader>fo :FZF --no-exact $OC<CR>
 noremap <leader>p :FZF --no-exact<CR>
 noremap <leader>so :!xdg-open "%" <CR>
-noremap <leader>t :Tags<CR>
 noremap Y y$
 noremap Z zMzv
 noremap vaz [zV]z
@@ -151,7 +158,7 @@ vnoremap K k
 " }}}
 
 " Extended text Objects (Conner McDaniel) and matchpairs {{{
-let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\" ]
+let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\"]
 for item in s:items
     exe "noremap yi".item." T".item."yt".item
     exe "noremap ya".item." F".item."yf".item
@@ -168,7 +175,7 @@ set matchpairs+=<:>
 "
  " Autogroups and Autocmds {{{
 augroup text
-     " au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
+     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc | noremap <leader>t :TOC<CR> | inoremap <C-j> ![](img/)<Left>
      au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
      au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
 augroup end
@@ -212,18 +219,18 @@ function! s:buflist()
   redir END
   return split(ls, '\n')
 endfunction
-" }}}
 
-" Statusline {{{
-set statusline=%F%=\ %m%r%h%w\ \/\ %Y\ \/\ %l\|%L:%v\ (%p%%)
-" set showtabline=2
-" let g:airline_symbols_ascii = 1
-" let g:airline_section_z=' %l/%L:%v (%p%%)'
-" set noshowmode
+function! s:goyo_enter()
+    set statusline=%F%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ %L)\ \/\ %{strftime('%H:%M')}\ 
+    set laststatus=2
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
 " }}}
 
 " Notes {{{
-command! -nargs=1 Ngrep vimgrep "<args>" $MED/**/*.md
+command! -nargs=1 Nack vimgrep "<args>" $MED/**/*.md
+nnoremap <leader>na :Nack 
 " }}}
 
-" vim: fdm=marker
+"vim: fdm=marker

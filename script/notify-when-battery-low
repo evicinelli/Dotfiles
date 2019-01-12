@@ -2,10 +2,10 @@
 export DISPLAY=:0
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/vic/.fzf/bin
 
-acpiOutput=`acpi -V | grep "Battery 0"`
-status=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f1`
-perc=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f2 | sed "s/ //" | sed "s/%//"`
-remaining=`echo $acpiOutput | grep "Battery 0" | head -n 1 | sed "s/Battery 0\: //" | cut -d"," -f3 | sed "s/ remaining.*//"`
+acpiOutput=`acpi -V | grep "Battery $BATTERY_NUMBER"`
+status=`echo $acpiOutput | grep "Battery $BATTERY_NUMBER" | head -n 1 | sed "s/Battery $BATTERY_NUMBER\: //" | cut -d"," -f1`
+perc=`echo $acpiOutput | grep "Battery $BATTERY_NUMBER" | head -n 1 | sed "s/Battery $BATTERY_NUMBER\: //" | cut -d"," -f2 | sed "s/ //" | sed "s/%//"`
+remaining=`echo $acpiOutput | grep "Battery $BATTERY_NUMBER" | head -n 1 | sed "s/Battery $BATTERY_NUMBER\: //" | cut -d"," -f3 | sed "s/ remaining.*//"`
 treshold=10
 maxCapacity=$(acpi -V | grep "last full capacity" | grep -o ".[0-9]*%" | sed "s/%//")
 

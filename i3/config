@@ -1,5 +1,5 @@
 # i3 config file (v4)
-# vim: fdm=marker
+# vim: fdm=marker ft=i3config
 
 # SETTING VARS {{{
 set $Up k
@@ -79,26 +79,26 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Inconsolata 11
+font pango:B612 Regular 10
 bindsym $mod+Shift+d exec --no-startup-id $HOME/Dotfiles/script/unsplash
 bindsym $mod+Shift+f exec --no-startup-id $HOME/Dotfiles/script/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/Dotfiles/script/i3-tray-toggle
-set_from_resource $pdark background #282828
-set_from_resource $dark background #282828
-set_from_resource $text foreground #fbf1c7
-set_from_resource $urgent color9 #cc241d
-set_from_resource $clear color8 #504945
-set_from_resource $accent color6 #83a598
+set_from_resource $pdark color7
+set_from_resource $text background
+set_from_resource $dark color7
+set_from_resource $urgent color1
+set_from_resource $clear color8
+set_from_resource $accent color4
 #                       border  bg      text  indicator
-client.focused          $clear  $clear  $text $base0F
-client.focused_inactive $dark   $dark   $text $base0F
-client.unfocused        $dark   $dark   $text $base0F
-client.urgent           $urgent $urgent $text $base0F
+client.focused          $clear $clear  $pdark $urgent
+client.focused_inactive $dark   $dark   $text $urgent
+client.unfocused        $dark   $dark   $text $urgent
+client.urgent           $urgent $urgent $text $pdark
 bar {
-    # position top
+    position top
     tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
-    font pango:Inconsolata 12
+    font pango:B612 Regular 11
     strip_workspace_numbers yes
 	colors {
 		separator $text
@@ -118,8 +118,8 @@ assign [class = "Telegram"] $workspace9
 for_window [class = "Spotify"] move to workspace $workspace10
 # }}}
 
-# Bindings {{{
-bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn \"Inconsolata-14\""
+# BINDINGS {{{
+bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"Deja Vu Sans Mono-14\""
 bindsym Control+Mod1+p exec --no-startup-id /home/vic/Dotfiles/script/winston-pass
 bindsym Control+Mod1+u exec --no-startup-id /home/vic/Dotfiles/script/winston-utils
 bindsym Control+Mod1+t  exec --no-startup-id urxvt
@@ -130,6 +130,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
 bindsym $mod+Insert exec --no-startup-id bash /$HOME/ownCloud/Workspace/advacedInsert.sh
 bindsym --release Print exec --no-startup-id gnome-screenshot -aic
+bindsym $Mod+o exec --no-startup-id xdg-open $(fd | rofi -dmenu -i -matching fuzzy)
 # }}}
 
 # MODES {{{

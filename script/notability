@@ -4,6 +4,7 @@
 #cd $NOTES
 ext="md"
 base_dir="$1"
+# new_key="ctrl-n"
 cd $base_dir
 shift
 note=`fzf -1 --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`

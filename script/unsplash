@@ -37,8 +37,9 @@
 
 # COLLECTION_NUMBER="311766" # Autumn
 # COLLECTION_NUMBER="3403104" # Autumn is here
-COLLECTION_NUMBER="827743"
+# COLLECTION_NUMBER="827743"
 # COLLECTION_NUMBER="573009"
+COLLECTION_NUMBER="1112050"
 
 # Settings
 PARAMS=$*
@@ -46,7 +47,6 @@ PARAMS=$*
 # Grabbing wallpaper from unsplash
 rm $HOME/.img
 # wget --quiet -O $HOME/.img "https://source.unsplash.com/user/evicinelli/likes/1600x900"
-# wget -O $HOME/.img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/"
 wget --quiet -O $HOME/.img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 
 # # Do we have pywal installed?
