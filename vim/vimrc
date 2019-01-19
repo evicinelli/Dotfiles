@@ -16,9 +16,8 @@ Plug 'godlygeek/tabular'                                             " Tabulariz
 Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'lifepillar/vim-solarized8'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
-Plug 'vim-scripts/AfterColors.vim'
 call plug#end()
 "}}}
 
@@ -58,7 +57,7 @@ endif
 "}}}
 
 " Statusline {{{
-set statusline=%F%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ %L)\ \/\ %{strftime('%H:%M')}\ 
+set statusline=%t%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%)\ \/\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 
 " set showtabline=2
 " let g:airline_symbols_ascii = 1
@@ -76,19 +75,22 @@ if has('gui_running')
     set guioptions-=L                                         " remove left-hand scroll bar
     set guioptions-=b
     set guioptions-=e
-    set guifont=B612\ Mono\ 12
+    set guifont=Fira\ Code\ 12
     set linespace=6                                               " Line spacing
 else
     let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
 endif
-set t_Co=256
-set bg=light
+set t_Co=16
+set bg=dark
+let g:solarized_use16 = 1
+let g:solarized_statusline = "low"
+let g:solarized_term_italics = 1
+colorscheme solarized8
 set shortmess+=I                                              " No greetings
-set fillchars=vert:\|,fold:*
-colorscheme PaperColor
-" set cursorline                                                " Highlight current line
+set fillchars=vert:\|,fold:-
+set cursorline
 " }}}
 
 " Plugin settings {{{
@@ -175,25 +177,37 @@ set matchpairs+=<:>
 "
  " Autogroups and Autocmds {{{
 augroup text
-     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc | noremap <leader>t :TOC<CR> | inoremap <C-j> ![](img/)<Left>
+     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
      au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
      au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
 augroup end
+
 augroup nonvim
     au!
     au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.odt,*.ppt,*.odp,*.xls,*.ods,*.{mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
     au BufReadPost *.{docx,xlsx,pptx} sil exe "!libreoffice " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
+
 augroup pyFiles
     au BufNewFile,BufRead,BufWrite *.py noremap <leader>p :!python "%" &<CR>
 augroup end
+
 augroup todotxt
     au BufNewFile,BufRead,BufWrite *.todo.txt setl ft=todo | set nospell
     au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
 augroup end
+
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
+
 autocmd! BufWritePost $DF/vim/vimrc source %
 autocmd! BufWritePost $DF/bashrc !source %
+
+au BufNewFile,BufRead *.md
+    \ inoremap <C-j> ![](img/)<Left> |
+    \ inoremap ~ ~~<Left> |
+    \ inoremap ^ ^^<Left> |
+    \ normal zR
+
 " }}}
 
 " Functions {{{
@@ -219,13 +233,6 @@ function! s:buflist()
   redir END
   return split(ls, '\n')
 endfunction
-
-function! s:goyo_enter()
-    set statusline=%F%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ %L)\ \/\ %{strftime('%H:%M')}\ 
-    set laststatus=2
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
 " }}}
 
 " Notes {{{

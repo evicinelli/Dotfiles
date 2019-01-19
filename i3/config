@@ -24,6 +24,8 @@ floating_modifier $mod
 bindsym $mod+q kill
 bindsym --whole-window $mod+button2 kill
 popup_during_fullscreen leave_fullscreen
+new_window pixel 2
+new_float pixel 5
 # workspace_layout tabbed
 # }}}
 
@@ -79,18 +81,18 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:B612 Regular 10
+font pango:Fira Sans 8
 bindsym $mod+Shift+d exec --no-startup-id $HOME/Dotfiles/script/unsplash
 bindsym $mod+Shift+f exec --no-startup-id $HOME/Dotfiles/script/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/Dotfiles/script/i3-tray-toggle
-set_from_resource $pdark color7
-set_from_resource $text background
-set_from_resource $dark color7
+set_from_resource $pdark color0
+set_from_resource $text color12
+set_from_resource $dark color11
 set_from_resource $urgent color1
-set_from_resource $clear color8
-set_from_resource $accent color4
+set_from_resource $clear color12
+set_from_resource $accent color6
 #                       border  bg      text  indicator
-client.focused          $clear $clear  $pdark $urgent
+client.focused          $accent $accent  $pdark $urgent
 client.focused_inactive $dark   $dark   $text $urgent
 client.unfocused        $dark   $dark   $text $urgent
 client.urgent           $urgent $urgent $text $pdark
@@ -98,7 +100,8 @@ bar {
     position top
     tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
-    font pango:B612 Regular 11
+# I like having i3bar a little bit higher
+    font pango:Fira Code 9.999999999999999999999999999
     strip_workspace_numbers yes
 	colors {
 		separator $text
@@ -119,7 +122,7 @@ for_window [class = "Spotify"] move to workspace $workspace10
 # }}}
 
 # BINDINGS {{{
-bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"Deja Vu Sans Mono-14\""
+bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"FiraCode-12\" -nb \"$pdark\" -sb \"$accent\" -nf \"$text\""
 bindsym Control+Mod1+p exec --no-startup-id /home/vic/Dotfiles/script/winston-pass
 bindsym Control+Mod1+u exec --no-startup-id /home/vic/Dotfiles/script/winston-utils
 bindsym Control+Mod1+t  exec --no-startup-id urxvt
@@ -182,6 +185,6 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
 exec --no-startup-id owncloud
 exec --no-startup-id dropbox start
-exec --no-startup-id /usr/bin/dunst -key "mod4+x" -all_key "mod4+shift+x" -history_key "mod4+n" -geometry "300x5-30+30" -fn "Inconsolata 12"
+# exec_always --no-startup-id pkill dunst;/usr/bin/dunst -key "mod4+x" -all_key "mod4+shift+x" -history_key "mod4+n" -geometry "300x5-30+30" -fn "Fira Sans 10"
 # vim: fdm=marker
 # }}}

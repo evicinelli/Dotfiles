@@ -32,9 +32,7 @@ set -o vi
 
 # Variables {{{
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
-# [[ -e /usr/bin/nvim-qt ]] && export VISUAL="nvim-qt" || export VISUAL="$EDITOR -g"
-# export EDITOR=vim
-# export VISUAL=vim
+export PATH="${PATH}:$HOME/bin/"
 export TERMINAL=urxvt
 export BROWSER=qutebrowser
 export OPEN=xdg-open
@@ -63,6 +61,8 @@ export WS="$OC/Workspace"
 export SRV="192.168.1.197"
 export EMPTY_LINES="^$"
 export BATTERY_NUMBER=1
+export BREAK_LENGTH=5
+export WORK_LENGTH=20
 
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
@@ -97,7 +97,6 @@ alias cp="rsync --archive --verbose --human-readable"
 alias clipboard="xclip -selection PRIMARY"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
-alias gtd="bash ~/Scaricati/Apps/gtd/gtd -T"
 alias gv="gvim"
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
@@ -144,6 +143,7 @@ alias td="todo-done"
 alias te="todo-edit"
 alias ge="gvim $TD"
 alias tlrem="cat $OC/remember.todo.txt"
+alias gtd="gtd -bTn $WORK_LENGTH $BREAK_LENGTH"
 # }}}
 # }}}
 
@@ -153,7 +153,7 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 
 # [[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f --no-ignore'
 # [[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f --no-ignore'
-[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--color=16 --height 40% --reverse --border --cycle'
+[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 40% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
 
@@ -437,7 +437,7 @@ function fix-mimecache () {
 
 function gong () {
     bash $HOME/Dotfiles/script/remindme $* "GONG: TIME IS UP (`date +%H:%M`)"
-    at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav"
+    at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=8.0"
 }
 
 function fo () {
