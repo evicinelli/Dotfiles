@@ -18,6 +18,7 @@ Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc in
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
 Plug 'lifepillar/vim-solarized8'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
+Plug'christoomey/vim-tmux-navigator'
 call plug#end()
 "}}}
 
@@ -57,7 +58,7 @@ endif
 "}}}
 
 " Statusline {{{
-set statusline=%t%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%)\ \/\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
+set statusline=%t%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ di\ %L)\ \/\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 
 " set showtabline=2
 " let g:airline_symbols_ascii = 1
@@ -121,13 +122,15 @@ let g:fzf_action = {
 cabbrev f find
 inoremap " ""<Left>
 inoremap ( ()<Left>
-inoremap <C-l> <C-o>:noh<CR>
+inoremap <C-c> <C-o>:noh<CR>
 inoremap <C-p> <Esc>:FZF<CR>
 inoremap <C-z> <C-o><C-z>
 inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
+noremap j gj
+noremap k gk
 noremap :Q :q
 noremap :W :w
 noremap / mc/
@@ -136,7 +139,7 @@ noremap <C-h> h
 noremap <C-j> j
 noremap <C-k> k
 noremap <C-l> l
-noremap <C-l> :noh<CR>
+noremap <C-c> :noh<CR>
 noremap <C-n> :cn<CR>
 noremap <C-o> :FZF --no-exact<CR>
 noremap <C-p> :cp<CR>
@@ -203,9 +206,9 @@ autocmd! BufWritePost $DF/vim/vimrc source %
 autocmd! BufWritePost $DF/bashrc !source %
 
 au BufNewFile,BufRead *.md
-    \ inoremap <C-j> ![](img/)<Left> |
-    \ inoremap ~ ~~<Left> |
-    \ inoremap ^ ^^<Left> |
+    \ inoremap <C-j> ![](img/)<Left>|
+    \ inoremap ~ ~~<Left>|
+    \ inoremap ^ ^^<Left>|
     \ normal zR
 
 " }}}
@@ -237,7 +240,7 @@ endfunction
 
 " Notes {{{
 command! -nargs=1 Nack vimgrep "<args>" $MED/**/*.md
-nnoremap <leader>na :Nack 
+nnoremap <leader>n :Nack 
 " }}}
 
 "vim: fdm=marker

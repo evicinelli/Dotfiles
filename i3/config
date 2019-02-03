@@ -101,7 +101,7 @@ bar {
     tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
 # I like having i3bar a little bit higher
-    font pango:Fira Code 9.999999999999999999999999999
+    font pango:Fira Code Retina 10
     strip_workspace_numbers yes
 	colors {
 		separator $text

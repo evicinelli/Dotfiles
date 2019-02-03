@@ -61,8 +61,8 @@ export WS="$OC/Workspace"
 export SRV="192.168.1.197"
 export EMPTY_LINES="^$"
 export BATTERY_NUMBER=1
-export BREAK_LENGTH=5
-export WORK_LENGTH=20
+export BREAK_LENGTH=10
+export WORK_LENGTH=40
 
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
@@ -90,7 +90,6 @@ alias fgrep='fgrep --color=auto'
 # alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
 # alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias ll="ls -l"
-alias tm="tmux -f $DF/tmux.conf"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc && source $HOME/.bashrc"
 alias cp="rsync --archive --verbose --human-readable"
@@ -119,7 +118,7 @@ alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
-alias unicode='echo ✓ ™ ♪ ♫ ☃ ° Ɵ ∫ 💙'
+alias unicode='echo ✓ ™ ♪ ♫ ☃ ° Ɵ ∫ 💙 ☤ ⚕'
 alias vimrc="vi $HOME/.vim/vimrc"
 # }}}
 
@@ -143,7 +142,7 @@ alias td="todo-done"
 alias te="todo-edit"
 alias ge="gvim $TD"
 alias tlrem="cat $OC/remember.todo.txt"
-alias gtd="gtd -bTn $WORK_LENGTH $BREAK_LENGTH"
+alias gtd="gtd -Tn $WORK_LENGTH $BREAK_LENGTH"
 # }}}
 # }}}
 
@@ -186,7 +185,7 @@ prompt() {
     [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(tl | sort | grep "^(.*" | wc -l) || toDoUrgent="x"
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
-    end=">"
+    end="⚕"
     if [[ $TERM = "dumb" ]]; then 
         export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Gvim terminal
     else
@@ -449,7 +448,7 @@ function fo () {
 
 # }}}
 
-# [[ -e /usr/bin/tmux ]] && (tm new-session -A -s main)
+# [[ -e /usr/bin/tmux ]] && (tmux -f $DF/tmux.conf new-session -A -s main)
 
 # vim: fdm=marker
 
