@@ -87,7 +87,6 @@ set t_Co=16
 set bg=dark
 let g:solarized_use16 = 1
 let g:solarized_statusline = "low"
-let g:solarized_term_italics = 1
 colorscheme solarized8
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
@@ -119,7 +118,6 @@ let g:fzf_action = {
 " }}}
 
 " Mappings {{{
-cabbrev f find
 inoremap " ""<Left>
 inoremap ( ()<Left>
 inoremap <C-c> <C-o>:noh<CR>
@@ -162,6 +160,10 @@ vnoremap J j
 vnoremap K k
 " }}}
 
+" Abbreviations {{{
+cabbrev f find
+iabbrev perchè perché
+" }}}
 " Extended text Objects (Conner McDaniel) and matchpairs {{{
 let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\"]
 for item in s:items

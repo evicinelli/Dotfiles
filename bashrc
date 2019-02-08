@@ -186,10 +186,10 @@ prompt() {
     [[ -e $TD ]] && toDoUrgent=$(tl | sort | grep "^(.*" | wc -l) || toDoUrgent="x"
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
     end="⚕"
-    if [[ $TERM = "dumb" ]]; then 
+    if [[ $TERM = "dumb" ]]; then
         export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Gvim terminal
     else
-        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W $end \[\e[0m\]"
+        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W \[\e[1;37m\]$end \[\e[0m\]"
     fi
 }
 
@@ -204,6 +204,9 @@ ps1_hostname() {
 # Functions {{{
 
 # Altra roba {{{
+devdocs () {
+    $BROWSER "\!devdocs $*" && i3 [class=$BROWSER] focus
+}
 revealjs () {
     INPUT=$1
     shift
@@ -448,7 +451,7 @@ function fo () {
 
 # }}}
 
-# [[ -e /usr/bin/tmux ]] && (tmux -f $DF/tmux.conf new-session -A -s main)
+# [[ $TERM != "screen" ]] && (tmux -f $DF/tmux.conf new-session -A -s main)
 
 # vim: fdm=marker
 

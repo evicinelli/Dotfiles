@@ -98,7 +98,7 @@ client.unfocused        $dark   $dark   $text $urgent
 client.urgent           $urgent $urgent $text $pdark
 bar {
     position top
-    tray_output none
+    # tray_output none
     status_command i3blocks -c $HOME/Dotfiles/i3/i3blocks.conf
 # I like having i3bar a little bit higher
     font pango:Fira Code Retina 10
@@ -178,13 +178,12 @@ mode $monitor {
 
 # AUTOSTART APPLICATIONS {{{
 exec_always --no-startup-id xmodmap /home/vic/Dotfiles/Xmodmap
-# exec_always --no-startup-id $HOME/.local/bin/wal -R
 exec_always --no-startup-id feh --bg-fill ~/.img
 exec --no-startup-id compton -b
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
 exec --no-startup-id owncloud
 exec --no-startup-id dropbox start
-# exec_always --no-startup-id pkill dunst;/usr/bin/dunst -key "mod4+x" -all_key "mod4+shift+x" -history_key "mod4+n" -geometry "300x5-30+30" -fn "Fira Sans 10"
+exec --no-startup-id killall gnome-keyring-daemon
 # vim: fdm=marker
 # }}}
