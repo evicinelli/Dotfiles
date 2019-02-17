@@ -21,9 +21,7 @@ URxvt.keysym.C-equal  :resize-font:reset
 !URxvt*boldFont        :
 URxvt*letterSpace     :-1
 
-! Colorscheme
-! #include "/home/vic/Dotfiles/solarized.xresources"
-! PaperColor Theme
+! Colorscheme - PaperColor Theme
 *foreground: #4D4D4C
 *background: #EEEEEE
 ! black
