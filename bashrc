@@ -51,7 +51,6 @@ export MED="$OC/Uni/AppuntiUni/Medicina/Med1"
 export MEDIA="$OC/Media"
 export MODELS="$OC/Archivio/Modelli"
 export NOTES="$DBX/Notes"
-export P="$OC/Workspace/TW2018"
 export PW="$OC/Archivio/Password-store"
 export TD="$OC/Dropbox/todo.txt"
 export UNI="$OC/Uni/AppuntiUni"
@@ -160,10 +159,8 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
-bind '"\C-o": " fo"' # Open files
+bind '"\C-p": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
 bind '"\C-k": " fj"' # Job control, C-j unavailable
-
 # }}}
 
 # Shell options {{{
@@ -189,7 +186,7 @@ prompt() {
     if [[ $TERM = "dumb" ]]; then
         export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Gvim terminal
     else
-        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W \[\e[1;37m\]$end \[\e[0m\]"
+        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W $end \[\e[0m\]"
     fi
 }
 
@@ -336,14 +333,15 @@ function todo-ls-tags() {
 
 # Password manager {{{
 p () {
-
     edit_key=ctrl-v
     view_key=ctrl-c
 
     FILTER="s:${PW}/::;s:.gpg::"
     readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
 
-    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf --no-exact --expect=$edit_key,$view_key,$pipe_key --query="$@" --header="enter to copy, $edit_key to edit, $view_key to cat")
+    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf --no-exact \
+            --expect=$edit_key,$view_key,$pipe_key --query="$@"\
+            --header="enter to copy, $edit_key to edit, $view_key to cat")
     first=$(echo $fzfOut | cut -d" " -f1)
     second=$(echo $fzfOut | cut -d" " -f2)
 
@@ -357,22 +355,11 @@ p () {
 # }}}
 
 # Utility {{{
-bright () {
-    xrdb -merge <<EOF
-*background: #ffffff
-*foreground: #000000
-EOF
-}
 
-dark () {
-    xrdb -merge <<EOF
-*foreground: #ffffff
-*background: #000000
-EOF
-}
 share-home-network () {
     share "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
 }
+
 tny () {
     [[ $# -gt 0 ]] && ( wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1; echo;) || echo "tny nttps://url.com"
 }
@@ -383,12 +370,13 @@ wifi () {
 
 push () {
     # Push a notification to all the devices connected by pushbullet
+    [[ -z $PB_TOKEN ]] && echo "Devi impostare l'autenticazione per pushbullet! (https://docs.pushbullet.com/#api-quick-start)" && exit 1
     curl -s --header "Access-Token: $PB_TOKEN" \
         --header "Content-Type: application/json" \
         --data-binary "{\"body\":\"$*\",\"title\":\"Broadcasted Push\",\"type\":\"note\"}" \
         --request POST \
         https://api.pushbullet.com/v2/pushes \
-        && exit 0 || exit 130
+        && exit 0 || exit 1
     echo
 }
 
@@ -438,8 +426,27 @@ function fix-mimecache () {
 }
 
 function gong () {
-    bash $HOME/Dotfiles/script/remindme $* "GONG: TIME IS UP (`date +%H:%M`)"
-    at $* <<< " mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=8.0"
+    if [[ $# -gt 0 ]]; then
+        case $1 in
+            "-g")
+                time=$2
+                shift
+                mess=$*
+                at $time <<<"notify-send DUNST_COMMAND_RESUME && notify-send --urgency=critical \"REMINDME: $mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5";;
+            *)
+                time=$1
+                shift
+                mess=$*
+                at $time <<<"notify-send DUNST_COMMAND_RESUME && notify-send --urgency=critical \"REMINDME: $mess\"";;
+        esac
+    else
+        echo "
+gong [-g] <time_at_witch_to_gong> <message>
+
+OPTIONS:
+	-g : actually gong
+"
+    fi
 }
 
 function fo () {
@@ -450,8 +457,6 @@ function fo () {
 # }}}
 
 # }}}
-
-# [[ $TERM != "screen" ]] && (tmux -f $DF/tmux.conf new-session -A -s main)
 
 # vim: fdm=marker
 

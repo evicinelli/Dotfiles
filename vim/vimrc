@@ -18,7 +18,7 @@ Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc in
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
 Plug 'lifepillar/vim-solarized8'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
-Plug'christoomey/vim-tmux-navigator'
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 "}}}
 
@@ -45,7 +45,7 @@ set linebreak             " Break long lines at spaces, not in the middle of a w
 set hidden                " Allow to switch buffer without saving it
 set colorcolumn=+1        " Highlight column where the 81/th char lives
 set spelllang=it,en       " Spell dictionaries
-set splitright            " Vsplit on the right
+"set splitright            " Vsplit on the right
 set splitbelow            " Split below
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
@@ -76,7 +76,7 @@ if has('gui_running')
     set guioptions-=L                                         " remove left-hand scroll bar
     set guioptions-=b
     set guioptions-=e
-    set guifont=Fira\ Code\ 12
+    set guifont=IBM\ Plex\ Mono\ 12
     set linespace=6                                               " Line spacing
 else
     let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
@@ -84,10 +84,8 @@ else
     let &t_EI = "\<Esc>[2 q"
 endif
 set t_Co=16
-set bg=dark
-let g:solarized_use16 = 1
-let g:solarized_statusline = "low"
-colorscheme solarized8
+set bg=light
+colorscheme PaperColor
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
 set cursorline
@@ -111,6 +109,7 @@ let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx', 'codeblock_start', 'quotes']
+let g:pandoc#toc#close_after_navigating = 0
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
@@ -139,8 +138,7 @@ noremap <C-k> k
 noremap <C-l> l
 noremap <C-c> :noh<CR>
 noremap <C-n> :cn<CR>
-noremap <C-o> :FZF --no-exact<CR>
-noremap <C-p> :cp<CR>
+noremap <C-p> :FZF --no-exact<CR>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader><leader> zA <CR>
@@ -243,6 +241,17 @@ endfunction
 " Notes {{{
 command! -nargs=1 Nack vimgrep "<args>" $MED/**/*.md
 nnoremap <leader>n :Nack 
+
+" Take notes the good way
+" https://hundredrabbits.itch.io/left
+function! s:TN()
+    Goyo
+    vertical resize 400
+    TOC
+    set nowrap
+    normal h
+endfunction
+command! TN call s:TN()
 " }}}
 
 "vim: fdm=marker

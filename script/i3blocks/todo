@@ -12,7 +12,7 @@ echo # Short text
 if [[ $tdun -gt 0 ]]; then
     exit 33
 elif [[ $tdn -gt 0 ]]; then
-    echo "#dc322f"
+    echo "#d7005f"
 else
     echo "$green"
 fi
