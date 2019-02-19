@@ -18,7 +18,7 @@ Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc in
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
 Plug 'lifepillar/vim-solarized8'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'morhetz/gruvbox'
 call plug#end()
 "}}}
 
@@ -76,7 +76,7 @@ if has('gui_running')
     set guioptions-=L                                         " remove left-hand scroll bar
     set guioptions-=b
     set guioptions-=e
-    set guifont=IBM\ Plex\ Mono\ 12
+    set guifont=DejaVu\ Sans\ Mono\ 12
     set linespace=6                                               " Line spacing
 else
     let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
@@ -84,8 +84,8 @@ else
     let &t_EI = "\<Esc>[2 q"
 endif
 set t_Co=16
-set bg=light
-colorscheme PaperColor
+set bg=dark
+colorscheme gruvbox
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
 set cursorline
@@ -202,8 +202,7 @@ augroup end
 
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
 
-autocmd! BufWritePost $DF/vim/vimrc source %
-autocmd! BufWritePost $DF/bashrc !source %
+autocmd! BufWritePost *vimrc* source %
 
 au BufNewFile,BufRead *.md
     \ inoremap <C-j> ![](img/)<Left>|

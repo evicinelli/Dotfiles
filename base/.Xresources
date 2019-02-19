@@ -1,12 +1,11 @@
 ! Urxvt
 URxvt*depth           :32
 URxvt*buffered        :true
-URxvt*internalBorder  :20
+URxvt*internalBorder  :30
 URxvt*lineSpace       :2
 URxvt*scrollBar       :false
 URxvt*pointerBlank    :true
-!URxvt*font            :xft:Inconsolata:size=12
-URxvt*font            :xft:IBM Plex Mono:size=12
+URxvt*font            :xft:DejaVu Sans Mono:size=12
 URxvt*perl-ext-common :default,matcher,resize-font
 URxvt*matcher.button  :1
 URxvt*termName        :rxvt-unicode-256color
@@ -21,31 +20,6 @@ URxvt.keysym.C-equal  :resize-font:reset
 !URxvt*boldFont        :
 URxvt*letterSpace     :-1
 
-! Colorscheme - PaperColor Theme
-*foreground: #4D4D4C
-*background: #EEEEEE
-! black
-*color0: #EDEDED
-*color8: #969694
-! red
-*color1: #D7005F
-*color9: #D7005F
-! green
-*color2: #718C00
-*color10: #718C00
-! yellow / orange
-*color3: #D75F00
-*color11: #D75F00
-! blue
-*color4: #4271AE
-*color12: #4271AE
-! magenta
-*color5: #8959A8
-*color13: #8959A8
-! cyan
-*color6: #3E999F
-*color14: #3E999F
-! white
-*color7: #4D4D4C
-*color15: #F5F5F5
+#include "/home/vic/.Colors.Xresources"
+
 ! vim: fdm=marker

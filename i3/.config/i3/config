@@ -81,16 +81,16 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:IBM Plex Mono 8
-bindsym $mod+Shift+d exec --no-startup-id $HOME/Dotfiles/script/unsplash
-bindsym $mod+Shift+f exec --no-startup-id $HOME/Dotfiles/script/unsplash -l
-bindsym $mod+Shift+t exec --no-startup-id $HOME/Dotfiles/script/i3-tray-toggle
+font pango:Deja Vu Sans Mono 8
+bindsym $mod+Shift+d exec --no-startup-id $HOME/bin/unsplash
+bindsym $mod+Shift+f exec --no-startup-id $HOME/bin/unsplash -l
+bindsym $mod+Shift+t exec --no-startup-id $HOME/bin/i3-tray-toggle
 set_from_resource $pdark color0
 set_from_resource $text color7
 set_from_resource $dark color8
 set_from_resource $urgent color1
 set_from_resource $clear color6
-set_from_resource $accent color7
+set_from_resource $accent color4
 #                       border  bg       text  indicator
 client.focused          $accent $accent  $pdark $urgent
 client.focused_inactive $dark   $dark    $text  $urgent
@@ -99,8 +99,8 @@ client.urgent           $urgent $urgent  $text  $pdark
 bar {
     position top
     tray_output none
-    status_command i3blocks -c i3blocks.conf
-    font pango:IBM Plex Mono 11
+    status_command i3blocks
+    font pango:Deja Vu Sans Mono 11
     strip_workspace_numbers yes
 	colors {
 		separator $text
@@ -118,12 +118,13 @@ bar {
 # CLASSES AND WINDOW-SPECIFIC SETTINGS {{{
 assign [class = "Telegram"] $workspace9
 for_window [class = "Spotify"] move to workspace $workspace10
+for_window [class = "URxvt"] border none
 # }}}
 
 # BINDINGS {{{
-bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"IBMPlexMono-12\" -nb \"$pdark\" -sb \"$accent\" -nf \"$text\""
-bindsym Control+Mod1+p exec --no-startup-id /home/vic/Dotfiles/script/winston-pass
-bindsym Control+Mod1+u exec --no-startup-id /home/vic/Dotfiles/script/winston-utils
+bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"DejaVuSansMono-12\" -nb \"$pdark\" -sb \"$accent\" -nf \"$text\""
+bindsym Control+Mod1+p exec --no-startup-id ~/bin/winston-pass
+bindsym Control+Mod1+u exec --no-startup-id ~/bin/winston-utils
 bindsym Control+Mod1+t  exec --no-startup-id urxvt
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next

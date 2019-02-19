@@ -25,18 +25,15 @@ fi
 # Is fzf already installed?
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
-[[ -d $HOME/Dotfiles ]] && export PATH=${PATH}:$HOME/Dotfiles/script
-export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 set -o vi
 # }}}
 
 # Variables {{{
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
-export PATH="${PATH}:$HOME/bin/"
+export PATH="${PATH}:$HOME/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 export TERMINAL=urxvt
 export BROWSER=qutebrowser
 export OPEN=xdg-open
-unset VISUAL
 export TERM="xterm-256color"
 
 # Folder
@@ -68,6 +65,10 @@ export WORK_LENGTH=40
 # }}}
 
 # Alias {{{
+
+alias la="ls -a"
+alias ll="ls -l"
+alias lla="ls -la"
 
 # Vim and neovim {{{
     alias vi="$EDITOR"
@@ -112,13 +113,12 @@ alias scp="rsync --archive --checksum --compress --human-readable --itemize-chan
 alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
 alias srv-ssh="ssh root@$SRV"
 alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
-alias srv-upnp-up="$HOME/Dotfiles/script/mount-upnp-server"
 alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
 alias unicode='echo ✓ ™ ♪ ♫ ☃ ° Ɵ ∫ 💙 ☤ ⚕'
-alias vimrc="vi $HOME/.vim/vimrc"
+alias vimrc="vi $HOME/.config/nvim/vimrc"
 # }}}
 
 # Git {{{
@@ -186,7 +186,7 @@ prompt() {
     if [[ $TERM = "dumb" ]]; then
         export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Gvim terminal
     else
-        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;36m\] $(ps1_hostname)\W $end \[\e[0m\]"
+        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;34m\] $(ps1_hostname)\W $end \[\e[0m\]"
     fi
 }
 

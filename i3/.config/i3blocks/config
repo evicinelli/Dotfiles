@@ -21,7 +21,7 @@
 # urgent
 
 # Global properties
-command=$HOME/Dotfiles/script/i3blocks/$BLOCK_NAME
+command=~/bin/i3blocks/$BLOCK_NAME
 separator_block_width=7
 markup=none
 # Separator
