@@ -1,4 +1,5 @@
 #! /bin/bash
+source ~/.dmenurc
 declare -a commands=(
     "i3 border toggle #i3 border toggle"
     "i3 floating toggle; i3 sticky toggle #sticky window"
@@ -13,5 +14,5 @@ declare -a commands=(
     "notify-send DUNST_COMMAND_RESUME #do not disturb end stop dndstop dnd"
     " notify-send --urgency=critical CRITICAL critical; notify-send --urgency=normal NORMAL normal; notify-send --urgency=low LOW low # notificaition testing"
 )
-toExecute=$(for i in ${!commands[*]}; do echo ${commands[$i]}; done | dmenu -p "Utils " -l 8 -sb "#4271AE" -nb "#EEEEEE" -fn "IBMPlexMono-13")
+toExecute=$(for i in ${!commands[*]}; do echo ${commands[$i]}; done | eval "$DMENU -p \"Utils \" -l 8 -sb \"#4271AE\"")
 eval $toExecute

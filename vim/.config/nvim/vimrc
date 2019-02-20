@@ -18,7 +18,7 @@ Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc in
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
 Plug 'lifepillar/vim-solarized8'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
-Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 "}}}
 
@@ -83,12 +83,12 @@ else
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
 endif
-set t_Co=16
-set bg=dark
-colorscheme gruvbox
+set t_Co=256
+set bg=light
+colorscheme base16-grayscale-light
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
-set cursorline
+set nocursorline
 " }}}
 
 " Plugin settings {{{
@@ -110,6 +110,7 @@ let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx', 'codeblock_start', 'quotes']
 let g:pandoc#toc#close_after_navigating = 0
+
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
@@ -126,6 +127,8 @@ inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
+noremap <leader>nn :set number relativenumber <CR>
+noremap <leader>nnr :set nonumber norelativenumber <CR>
 noremap j gj
 noremap k gk
 noremap :Q :q
@@ -251,6 +254,12 @@ function! s:TN()
     normal h
 endfunction
 command! TN call s:TN()
+
+function! s:goyo_enter()
+	vertical resize
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
 " }}}
 
 "vim: fdm=marker

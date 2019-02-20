@@ -1,5 +1,5 @@
 [global]
-    font = IBM Plex Mono 11
+    font = iA Writer Mono S Italic 11
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -24,7 +24,7 @@
     format = "<b>%s</b>\n%b"
     
     # Sort messages by urgency.
-    sort = yes
+    sort = no
     
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -64,7 +64,7 @@
     # the top and down respectevly.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-30+20"
+    geometry = "300x5-30+30"
     
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -147,10 +147,6 @@
     # Paths to default icons.
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
-# [frame]
-#     width = 3
-#     color = "#d33682"
-
 [shortcuts]
 
     # Shortcuts are specified as [modifier+][modifier+]...key
@@ -175,18 +171,18 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#EEEEEE"
-    foreground = "#969694"
+    background = "#f7f7f7"
+    foreground = "#e0e0e0"
     timeout = 10
 
 [urgency_normal]
-    background = "#3E999F"
-    foreground = "#EEEEEE"
+    background = "#f7f7f7"
+    foreground = "#464646"
     timeout = 10
 
 [urgency_critical]
-    background = "#D7005F"
-    foreground = "#EEEEEE"
+    background = "#00baff"
+    foreground = "#464646"
     timeout = 0
 
 

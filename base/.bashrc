@@ -176,7 +176,8 @@ shopt -s checkwinsize
 shopt -s histappend
 # }}}
 
-# Prompt {{{
+# Prompt  & colors{{{
+bash ~/bin/gruvbox/gruvbox_256palette.sh
 export PROMPT_COMMAND=prompt
 prompt() {
     [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
