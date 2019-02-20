@@ -8,11 +8,13 @@ tdun=$(cat "$tdf" | grep -v "^x" | grep "due:`date +%F`" | grep "^(" | wc -l)
 echo $tdn, $tdun! # Real text
 echo # Short text
 
+case ${BLOCK_BUTTON} in
+    3) notify-send --urgency=normal "TODO" "$(cat "$tdf" | grep "due:`date +%F`")";;
+    *)
+esac
+
 # Color
 if [[ $tdun -gt 0 ]]; then
     exit 33
-elif [[ $tdn -gt 0 ]]; then
-    echo "#d7005f"
-else
-    echo "$green"
 fi
+
