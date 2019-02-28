@@ -1,24 +1,23 @@
 ! Urxvt
-URxvt*depth           :32
-URxvt*buffered        :true
-URxvt*internalBorder  :30
-URxvt*lineSpace       :2
-URxvt*scrollBar       :false
-URxvt*pointerBlank    :true
-URxvt*font            :xft:iA Writer Mono S:size=12
-URxvt*perl-ext-common :default,matcher,resize-font
-URxvt*matcher.button  :1
-URxvt*termName        :rxvt-unicode-256color
-URxvt*iso14755        :false
-URxvt*iso14755_52     :false
+URxvt.depth           :32
+URxvt.buffered        :true
+URxvt.internalBorder  :30
+URxvt.lineSpace       :2
+URxvt.scrollBar       :false
+URxvt.pointerBlank    :true
+URxvt.font            :xft:Input Mono Light:size=12
+URxvt.perl-ext-common :default,matcher,resize-font
+URxvt.matcher.button  :1
+URxvt.termName        :rxvt-unicode-256color
+URxvt.iso14755        :false
+URxvt.iso14755_52     :false
 URxvt.perl-ext-common :default,matcher,resize-font
 URxvt.url-launcher    :/usr/bin/xdg-open
 URxvt.matcher.button  :1
 URxvt.keysym.C-minus  :resize-font:smaller
 URxvt.keysym.C-plus   :resize-font:bigger
 URxvt.keysym.C-equal  :resize-font:reset
-!URxvt*boldFont        :
-URxvt*letterSpace     :-1
+Urxvt.skipBuiltinGlyphs: true
 
 ! Base16 Grayscale Light
 ! Scheme: Alexandre Gavioli (https://github.com/Alexx2/)
@@ -36,7 +35,7 @@ URxvt*letterSpace     :-1
 #define base0A #a0a0a0
 #define base0B #8e8e8e
 #define base0C #868686
-#define base0D #686868
+#define base0D #a9a9a9
 #define base0E #747474
 #define base0F #5e5e5e
 

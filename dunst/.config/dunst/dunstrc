@@ -219,7 +219,8 @@
 #    format = ""
 
 [ignore]
-    summary = "Luminosità*"
+	appname = "xfce4-power-manager"
+    format = ""
 
 #[signed_on]
 #    appname = Pidgin

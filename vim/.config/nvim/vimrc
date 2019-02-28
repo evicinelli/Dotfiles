@@ -78,10 +78,6 @@ if has('gui_running')
     set guioptions-=e
     set guifont=DejaVu\ Sans\ Mono\ 12
     set linespace=6                                               " Line spacing
-else
-    let &t_SI = "\<Esc>[6 q"                                      " Cursor shape (insert, normal, replace)
-    let &t_SR = "\<Esc>[4 q"
-    let &t_EI = "\<Esc>[2 q"
 endif
 set t_Co=256
 set bg=light
@@ -127,10 +123,9 @@ inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
+noremap <F1> <Esc>
 noremap <leader>nn :set number relativenumber <CR>
 noremap <leader>nnr :set nonumber norelativenumber <CR>
-noremap j gj
-noremap k gk
 noremap :Q :q
 noremap :W :w
 noremap / mc/
@@ -159,6 +154,9 @@ noremap vaz [zV]z
 noremap viz [zjV]zk
 vnoremap J j
 vnoremap K k
+if has("nvim")
+    " tnoremap
+endif
 " }}}
 
 " Abbreviations {{{
@@ -208,9 +206,10 @@ autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetim
 autocmd! BufWritePost *vimrc* source %
 
 au BufNewFile,BufRead *.md
-    \ inoremap <C-j> ![](img/)<Left>|
+    \ inoremap <C-j> ![<++>](img/<++>)|
     \ inoremap ~ ~~<Left>|
     \ inoremap ^ ^^<Left>|
+    \ nnoremap <leader><leader> /<++><CR>cf>|
     \ normal zR
 
 " }}}
@@ -257,9 +256,15 @@ command! TN call s:TN()
 
 function! s:goyo_enter()
 	vertical resize
+    GitGutterBufferDisable
+endfunction
+
+function! s:goyo_leave()
+    GitGutterBufferEnable
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
 
 "vim: fdm=marker

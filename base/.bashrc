@@ -34,7 +34,6 @@ export PATH="${PATH}:$HOME/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Ap
 export TERMINAL=urxvt
 export BROWSER=qutebrowser
 export OPEN=xdg-open
-export TERM="xterm-256color"
 
 # Folder
 export OC="$HOME/ownCloud"
@@ -149,9 +148,7 @@ alias gtd="gtd -Tn $WORK_LENGTH $BREAK_LENGTH"
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
 [ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
 
-# [[ -x /usr/bin/fd ]] && export FZF_DEFAULT_COMMAND='/usr/bin/env fd --type f --no-ignore'
-# [[ -x /usr/bin/fd ]] && export FZF_CTRL_T_COMMAND='/usr/bin/env fd --type f --no-ignore'
-[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 40% --reverse --border --cycle'
+[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 # }}}
 
@@ -459,5 +456,6 @@ function fo () {
 
 # }}}
 
-# vim: fdm=marker
+[[ ! $TERM == "screen-256color" ]] && tmux new-session -A -s pelican
 
+# vim: fdm=marker

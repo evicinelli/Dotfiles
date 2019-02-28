@@ -14,7 +14,7 @@ echo "$perc% $ss, $remaining"
 echo "$perc"
 
 case ${BLOCK_BUTTON} in
-    3) notify-send --urgency=low "BATTERY STATUS" "$(acpi -V | grep "Battery")";;
+    3) notify-send --urgency=low "SYSTEM STATUS" "NET\n$(nmcli -a | grep "\(wlp3s0\|enp2s0\)" | head -n 2)\n\nDBX\n$(dropbox status)\n\nSCREEN\n$(redshift -p)\n\nBAT\n$(acpi -V | grep "Battery")";;
     *)
 esac
 
