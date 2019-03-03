@@ -6,6 +6,7 @@ URxvt.lineSpace       :2
 URxvt.scrollBar       :false
 URxvt.pointerBlank    :true
 URxvt.font            :xft:Input Mono Light:size=12
+URxvt.boldFont        :xft:Input Mono:size=12
 URxvt.perl-ext-common :default,matcher,resize-font
 URxvt.matcher.button  :1
 URxvt.termName        :rxvt-unicode-256color
