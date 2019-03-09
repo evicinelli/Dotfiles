@@ -1,5 +1,5 @@
 [global]
-    font = iA Writer Mono S Italic 11
+    font = SF Mono 10.5
     
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -171,19 +171,19 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#f7f7f7"
-    foreground = "#b9b9b9"
-    timeout = 10
+    # background = "#f7f7f7"
+    # foreground = "#b9b9b9"
+    # timeout = 10
 
 [urgency_normal]
-    background = "#f7f7f7"
-    foreground = "#464646"
-    timeout = 10
+    # background = "#f7f7f7"
+    # foreground = "#464646"
+    # timeout = 10
 
 [urgency_critical]
-    background = "#00baff"
-    foreground = "#464646"
-    timeout = 0
+    # background = "#00baff"
+    # foreground = "#464646"
+    # timeout = 0
 
 
 # Every section that isn't one of the above is interpreted as a rules to

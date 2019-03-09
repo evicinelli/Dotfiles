@@ -142,6 +142,7 @@ alias ge="gvim $TD"
 alias tlrem="cat $OC/remember.todo.txt"
 alias gtd="gtd -Tn $WORK_LENGTH $BREAK_LENGTH"
 # }}}
+alias quantum="~/Scaricati/Apps/firefox/firefox"
 # }}}
 
 # Completions & fzf {{{

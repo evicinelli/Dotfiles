@@ -1,4 +1,4 @@
 #! /bin/bash
 source ~/.dmenurc
 echo $DMENU
-pass -c $(find ~/ownCloud/Archivio/Password-store/ -type f -not -name ".*" | sed -n 's:/home/vic/ownCloud/Archivio/Password-store/::;s:.gpg::p' | eval "$DMENU -p \"Pass \" -sb \"#00baff\"")
+pass -c $(find ~/ownCloud/Archivio/Password-store/ -type f -not -name ".*" | sed -n 's:/home/vic/ownCloud/Archivio/Password-store/::;s:.gpg::p' | eval "$DMENU -p \"Pass \" -sb \"darkred\"")

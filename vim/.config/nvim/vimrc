@@ -18,7 +18,7 @@ Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc in
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
 Plug 'lifepillar/vim-solarized8'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
-Plug 'chriskempson/base16-vim'
+Plug 'jeffkreeftmeijer/vim-dim'                                      " 16 color colorscheme
 call plug#end()
 "}}}
 
@@ -76,12 +76,11 @@ if has('gui_running')
     set guioptions-=L                                         " remove left-hand scroll bar
     set guioptions-=b
     set guioptions-=e
-    set guifont=Input\ Mono\ Light\ 12
     set linespace=6                                               " Line spacing
 endif
 set t_Co=256
-set bg=light
-colorscheme base16-grayscale-light
+set bg=dark
+colorscheme dim
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
 set nocursorline
@@ -206,7 +205,7 @@ autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetim
 autocmd! BufWritePost *vimrc* source %
 
 au BufNewFile,BufRead *.md
-    \ inoremap <C-j> ![<++>](img/<++>)|
+    \ inoremap <C-j> ![<++>](../img/<++>)|
     \ inoremap ~ ~~<Left>|
     \ inoremap ^ ^^<Left>|
     \ nnoremap <leader><leader> /<++><CR>cf>|

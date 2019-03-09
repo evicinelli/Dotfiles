@@ -40,15 +40,21 @@
 # COLLECTION_NUMBER="827743"
 # COLLECTION_NUMBER="573009"
 # COLLECTION_NUMBER="353649"
-COLLECTION_NUMBER="1185443"
+COLLECTION_NUMBER="573009"
 
 # Settings
 PARAMS=$*
 
+# B&W
+function imagemagick () {
+    convert $1 -type grayscale $1
+}
+
 # Grabbing wallpaper from unsplash
-rm $HOME/.img
+rm $HOME/img.png
 # wget --quiet -O $HOME/.img "https://source.unsplash.com/user/evicinelli/likes/1600x900"
-wget --quiet -O $HOME/.img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+wget --quiet -O $HOME/img.png "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+# imagemagick img.png
 
 # # Do we have pywal installed?
 # if [[ -x $HOME/.local/bin/wal ]]; then
@@ -56,7 +62,7 @@ wget --quiet -O $HOME/.img "https://source.unsplash.com/collection/$COLLECTION_N
 #     /home/vic/.local/bin/wal $PARAMS -c -i $HOME/.img >/dev/null
 # else
 #     # We don't :(
-     feh --bg-scale $HOME/.img
+     feh --bg-scale $HOME/img.png
 # fi
 
 # Theme dunst

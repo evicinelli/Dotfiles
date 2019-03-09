@@ -26,7 +26,7 @@ bindsym --whole-window $mod+button2 kill
 popup_during_fullscreen leave_fullscreen
 new_window pixel 2
 new_float pixel 7
-# workspace_layout tabbed
+workspace_auto_back_and_forth yes
 # }}}
 
 # WORKSPACES {{{
@@ -52,7 +52,6 @@ bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 bindsym $mod+Shift+Tab move container to workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
-workspace_auto_back_and_forth yes
 bindsym $mod+Return workspace next_on_output
 bindsym $mod+BackSpace workspace prev_on_output
 bindsym $mod+Shift+Return move container to workspace next_on_output
@@ -81,48 +80,26 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Input Mono 8
+font pango:SF Mono 8
 bindsym $mod+Shift+d exec --no-startup-id $HOME/bin/unsplash
 bindsym $mod+Shift+f exec --no-startup-id $HOME/bin/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/bin/i3-tray-toggle
-set_from_resource $pdark color0 #000
-set_from_resource $text color7 #000
-set_from_resource $dark color8 #000
-set_from_resource $urgent color1 #000
-set_from_resource $clear color6 #000
-set_from_resource $accent color7 #000
-#                       border  bg       text  indicator
-client.focused          $accent $accent  $pdark $urgent
-client.focused_inactive $dark   $dark    $text  $urgent
-client.unfocused        $dark   $dark    $text  $urgent
-client.urgent           $urgent $urgent  $text  $pdark
 bar {
     position top
     tray_output none
     status_command i3blocks
-    font pango: Input Mono Light 11
+    font pango: SF Mono 12
     strip_workspace_numbers yes
-	colors {
-		separator $text
-		background $pdark
-		statusline $text
-#		                   border  bg	   text
-		focused_workspace  $accent $accent $pdark
-		active_workspace   $accent $accent $pdark
-		inactive_workspace $pdark  $pdark  $text
-		urgent_workspace   $urgent $urgent $pdark
- }
 }
 # }}}
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS {{{
 assign [class = "Telegram"] $workspace9
 for_window [class = "Spotify"] move to workspace $workspace10
-for_window [class = "URxvt"] border none
 # }}}
 
 # BINDINGS {{{
-bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"InputMonoLight-12\" -nb \"$pdark\" -sb \"$accent\" -nf \"$text\""
+bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"SFMono-12\""
 bindsym Control+Mod1+p exec --no-startup-id ~/bin/winston-pass
 bindsym Control+Mod1+u exec --no-startup-id ~/bin/winston-utils
 bindsym Control+Mod1+t  exec --no-startup-id urxvt
@@ -164,19 +141,19 @@ set $monitor "Edpi1 - Hdmi1 - Clonato - Doppio - Sinistra/Destra (r/R)"
 bindsym $mod+m mode $monitor
 mode $monitor {
 	bindsym Escape mode "default"
-	bindsym c exec --no-startup-id $HOME/Dotfiles/script/monitor/clonato.sh; mode "default"
-	bindsym d exec --no-startup-id $HOME/Dotfiles/script/monitor/destra.sh; mode "default"
-	bindsym r exec --no-startup-id $HOME/Dotfiles/script/monitor/ruotato-sinistra.sh; mode "default"
-	bindsym Shift + r exec --no-startup-id $HOME/Dotfiles/script/monitor/ruotato-destra.sh; mode "default"
-	bindsym e exec --no-startup-id $HOME/Dotfiles/script/monitor/internal.sh; mode "default"
-	bindsym h exec --no-startup-id $HOME/Dotfiles/script/monitor/hdmi-1.sh; mode "default"
+	bindsym c exec --no-startup-id $HOME/Dotfiles/script/bin/monitor/clonato.sh; mode "default"
+	bindsym d exec --no-startup-id $HOME/Dotfiles/script/bin/monitor/destra.sh; mode "default"
+	bindsym r exec --no-startup-id $HOME/Dotfiles/script/bin/monitor/ruotato-sinistra.sh; mode "default"
+	bindsym Shift + r exec --no-startup-id $HOME/Dotfiles/bin/script/monitor/ruotato-destra.sh; mode "default"
+	bindsym e exec --no-startup-id $HOME/Dotfiles/script/bin/monitor/internal.sh; mode "default"
+	bindsym h exec --no-startup-id $HOME/Dotfiles/script/bin/monitor/hdmi-1.sh; mode "default"
     bindsym a exec --no-startup-id arandr; mode "default"
 }
 # }}}
 
 # AUTOSTART APPLICATIONS {{{
 exec_always --no-startup-id xmodmap ~/.Xmodmap
-exec_always --no-startup-id feh --bg-fill ~/.img
+exec_always --no-startup-id feh --bg-fill ~/img
 exec --no-startup-id compton -b
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet

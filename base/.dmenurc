@@ -1,3 +1,5 @@
-DMENU="dmenu -f -i -fn \"InputMonoLight-12\" -nb \"#f5f5f5\" -nf \"#464646\""
+DMENU="dmenu -f -i -fn \"SFMono-12\""
+
+#-nb \"#f5f5f5\" -nf \"#464646\""
 
 # vim: ft=sh
