@@ -457,6 +457,6 @@ function fo () {
 
 # }}}
 
-[[ ! $TERM == "screen-256color" ]] && tmux new-session -A -s pelican
+[[ ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker
