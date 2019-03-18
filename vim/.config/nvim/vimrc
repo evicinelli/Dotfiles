@@ -4,6 +4,7 @@ if !has("nvim")
     Plug 'tpope/vim-sensible'                                            " Sensible default
 endif
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
+Plug 'junegunn/fzf.vim',
 Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                           " Goyo - distraction free writing
 Plug 'airblade/vim-gitgutter'                                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                                            " Vim-startify
@@ -19,6 +20,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc in
 Plug 'lifepillar/vim-solarized8'
 Plug 'lilydjwg/colorizer'                                            " Hilight color definition
 Plug 'jeffkreeftmeijer/vim-dim'                                      " 16 color colorscheme
+Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 call plug#end()
 "}}}
 
@@ -45,11 +47,12 @@ set linebreak             " Break long lines at spaces, not in the middle of a w
 set hidden                " Allow to switch buffer without saving it
 set colorcolumn=+1        " Highlight column where the 81/th char lives
 set spelllang=it,en       " Spell dictionaries
-"set splitright            " Vsplit on the right
+set splitright            " Vsplit on the right
 set splitbelow            " Split below
 set mouse=a               " Enable mouse in terminal vim
 set modeline              " Vim executes vimL commands if they are found in the current file
 set updatetime=2000       " Consider vim inactive after 4 sec of no activity in normal mode
+set noautochdir
 let mapleader = " "
 let maplocalleader = " "
 if has("nvim")
@@ -58,7 +61,8 @@ endif
 "}}}
 
 " Statusline {{{
-set statusline=%t%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ di\ %L)\ \/\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
+set statusline=%t%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ di\ %L)
+"\ \/\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 
 " set showtabline=2
 " let g:airline_symbols_ascii = 1
@@ -78,7 +82,7 @@ if has('gui_running')
     set guioptions-=e
     set linespace=6                                               " Line spacing
 endif
-set t_Co=256
+"set t_Co=256
 set bg=dark
 colorscheme dim
 set shortmess+=I                                              " No greetings
@@ -100,9 +104,10 @@ let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let g:startify_custom_header = [""]
 
-let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile"]
+let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#modules#disabled = ["folding"]
 " let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx', 'codeblock_start', 'quotes']
 let g:pandoc#toc#close_after_navigating = 0
 
@@ -110,6 +115,12 @@ let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
     \ 'ctrl-v': 'vsplit' }
+
+let g:autocd#autocmd_enable = 1
+let g:autocd#markers = { 
+    \ '**/Medicina/**/*.md': ['Makefile']
+    \}
+
 " }}}
 
 " Mappings {{{
@@ -177,7 +188,7 @@ endfor
 
 set matchpairs+=<:>
 " }}}
-"
+
  " Autogroups and Autocmds {{{
 augroup text
      au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
@@ -205,7 +216,7 @@ autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetim
 autocmd! BufWritePost *vimrc* source %
 
 au BufNewFile,BufRead *.md
-    \ inoremap <C-j> ![<++>](../img/<++>)|
+    \ inoremap <C-j> ![<++>](img/<++>)|
     \ inoremap ~ ~~<Left>|
     \ inoremap ^ ^^<Left>|
     \ nnoremap <leader><leader> /<++><CR>cf>|
@@ -243,7 +254,6 @@ command! -nargs=1 Nack vimgrep "<args>" $MED/**/*.md
 nnoremap <leader>n :Nack 
 
 " Take notes the good way
-" https://hundredrabbits.itch.io/left
 function! s:TN()
     Goyo
     vertical resize 400

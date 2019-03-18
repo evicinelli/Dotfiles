@@ -88,7 +88,7 @@ bar {
     position top
     tray_output none
     status_command i3blocks
-    font pango: SF Mono 12
+    font pango: SF Mono 11
     strip_workspace_numbers yes
 }
 # }}}

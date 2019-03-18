@@ -36,21 +36,21 @@ export BROWSER=qutebrowser
 export OPEN=xdg-open
 
 # Folder
-export OC="$HOME/ownCloud"
+export F="$HOME/ownCloud"
 export DF="$HOME/Dotfiles"
-export DN="$OC/Dropbox/done.txt"
-export DOC="$OC/Documenti"
-export DBX="$OC/Dropbox"
+export DN="$F/Dropbox/done.txt"
+export DOC="$F/Documenti"
+export DBX="$F/Dropbox"
 export GVS="$DBX/GVS"
 export DOWN="$HOME/Scaricati"
-export MED="$OC/Uni/AppuntiUni/Medicina/Med1"
-export MEDIA="$OC/Media"
-export MODELS="$OC/Archivio/Modelli"
+export MED="$F/Uni/AppuntiUni/Medicina/Med1"
+export MEDIA="$F/Media"
+export MODELS="$F/Archivio/Modelli"
 export NOTES="$DBX/Notes"
-export PW="$OC/Archivio/Password-store"
-export TD="$OC/Dropbox/todo.txt"
-export UNI="$OC/Uni/AppuntiUni"
-export WS="$OC/Workspace"
+export PW="$F/Archivio/Password-store"
+export TD="$F/Dropbox/todo.txt"
+export UNI="$F/Uni/AppuntiUni"
+export WS="$F/Workspace"
 
 # Altro
 export SRV="192.168.1.197"
@@ -175,7 +175,6 @@ shopt -s histappend
 # }}}
 
 # Prompt  & colors{{{
-bash ~/bin/gruvbox/gruvbox_256palette.sh
 export PROMPT_COMMAND=prompt
 prompt() {
     [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
@@ -183,7 +182,7 @@ prompt() {
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
     end="⚕"
     if [[ $TERM = "dumb" ]]; then
-        export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Gvim terminal
+        export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
     else
         export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;34m\] $(ps1_hostname)\W $end \[\e[0m\]"
     fi
