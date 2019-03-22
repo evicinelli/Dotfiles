@@ -14,7 +14,7 @@ declare -a commands=(
     "notify-send DUNST_COMMAND_RESUME #do not disturb end stop dndstop dnd"
     " notify-send --urgency=critical CRITICAL critical; notify-send --urgency=normal NORMAL normal; notify-send --urgency=low LOW low # notificaition testing"
 )
-toExecute=$(for i in ${!commands[*]}; do echo ${commands[$i]}; done | eval "$DMENU -p \"Utils \" -l 8 ")
+toExecute=$(for i in ${!commands[*]}; do echo ${commands[$i]}; done | eval "$DMENU -p \"Utils \" -sb grey -l 8 ")
 eval $toExecute
 
 

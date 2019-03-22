@@ -5,7 +5,7 @@ URxvt.internalBorder  :30
 URxvt.lineSpace       :2
 URxvt.scrollBar       :false
 URxvt.pointerBlank    :true
-URxvt.font            :xft:SF Mono:size=12
+URxvt.font            :xft:Monaco:size=12
 !URxvt.boldFont        :xft:Fira Code Bold:size=12
 URxvt.perl-ext-common :default,matcher,resize-font
 URxvt.matcher.button  :1
@@ -22,6 +22,9 @@ Urxvt.skipBuiltinGlyphs: true
 
 *foreground:   #fff
 *background:   #000
-!*cursorColor:  #00baff
+*cursorColor:  lightblue
+
+#include "/home/vic/.Xresources.local"
 
  vim: fdm=marker
+

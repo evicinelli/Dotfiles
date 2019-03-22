@@ -86,11 +86,14 @@ bindsym $mod+Shift+f exec --no-startup-id $HOME/bin/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/bin/i3-tray-toggle
 bar {
     position top
-    tray_output none
+    # tray_output none
     status_command i3blocks
     font pango: SF Mono 11
     strip_workspace_numbers yes
 }
+
+## Wallpaper
+exec_always --no-startup-id feh --bg-scale $HOME/img.png
 # }}}
 
 # CLASSES AND WINDOW-SPECIFIC SETTINGS {{{
@@ -109,6 +112,8 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+ 
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
 bindsym --release Print exec --no-startup-id gnome-screenshot -aic
+
+bindsym XF86HomePage exec i3-sensible-terminal
 # }}}
 
 # MODES {{{
@@ -153,7 +158,6 @@ mode $monitor {
 
 # AUTOSTART APPLICATIONS {{{
 exec_always --no-startup-id xmodmap ~/.Xmodmap
-exec_always --no-startup-id feh --bg-fill ~/img
 exec --no-startup-id compton -b
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet

@@ -5,8 +5,6 @@ if !has("nvim")
 endif
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/fzf.vim',
-Plug 'junegunn/goyo.vim', 	{'on': 'Goyo'}                           " Goyo - distraction free writing
-Plug 'airblade/vim-gitgutter'                                        " Git diff aside line numbers
 Plug 'mhinz/vim-startify'                                            " Vim-startify
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'tpope/vim-fugitive'
@@ -14,11 +12,8 @@ Plug 'sheerun/vim-polyglot'                                          " A collect
 Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
 Plug 'mileszs/ack.vim'                                               " Ack in vim
 Plug 'godlygeek/tabular'                                             " Tabularize
-Plug 'junegunn/limelight.vim'                                        " Focus only current paragraph
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-Plug 'lifepillar/vim-solarized8'
-Plug 'lilydjwg/colorizer'                                            " Hilight color definition
 Plug 'jeffkreeftmeijer/vim-dim'                                      " 16 color colorscheme
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 call plug#end()
@@ -139,7 +134,6 @@ noremap <leader>nnr :set nonumber norelativenumber <CR>
 noremap :Q :q
 noremap :W :w
 noremap / mc/
-noremap <C-g> :Goyo<CR>
 noremap <C-h> h
 noremap <C-j> j
 noremap <C-k> k

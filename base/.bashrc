@@ -32,7 +32,7 @@ set -o vi
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export PATH="${PATH}:$HOME/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 export TERMINAL=urxvt
-export BROWSER=qutebrowser
+export BROWSER=$HOME/Scaricati/Apps/firefox/firefox
 export OPEN=xdg-open
 
 # Folder
@@ -142,12 +142,13 @@ alias ge="gvim $TD"
 alias tlrem="cat $OC/remember.todo.txt"
 alias gtd="gtd -Tn $WORK_LENGTH $BREAK_LENGTH"
 # }}}
+
 alias quantum="~/Scaricati/Apps/firefox/firefox"
 # }}}
 
 # Completions & fzf {{{
 complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
-[ -f /usr/share/bash-completion/completions/pass ] &&source /usr/share/bash-completion/completions/pass
+[ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
 
 [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
@@ -355,7 +356,7 @@ p () {
 # Utility {{{
 
 share-home-network () {
-    share "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
+    qr "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
 }
 
 tny () {
@@ -378,7 +379,7 @@ push () {
     echo
 }
 
-share () {
+qr () {
     if [[ $# -gt 0 ]]; then
         file=$(mktemp);
         qrencode -s 20 "$*" -o $file
@@ -386,6 +387,7 @@ share () {
     fi
 }
 
+# Foreground a job searching the process name
 fj () {
     job=$(jobs -ls | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
     [[ ! -z $job ]] && fg $job
