@@ -3,10 +3,10 @@ URxvt.depth           :32
 URxvt.buffered        :true
 URxvt.internalBorder  :30
 URxvt.lineSpace       :2
+!URxvt.letterSpace     :-1
 URxvt.scrollBar       :false
 URxvt.pointerBlank    :true
 URxvt.font            :xft:Monaco:size=12
-!URxvt.boldFont        :xft:Fira Code Bold:size=12
 URxvt.perl-ext-common :default,matcher,resize-font
 URxvt.matcher.button  :1
 URxvt.termName        :rxvt-unicode-256color
@@ -26,5 +26,4 @@ Urxvt.skipBuiltinGlyphs: true
 
 #include "/home/vic/.Xresources.local"
 
- vim: fdm=marker
-
+! vim: fdm=marker
