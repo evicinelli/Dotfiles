@@ -5,10 +5,14 @@ case $- in
     *) return;;
 esac
 
-HISTCONTROL=ignoreboth
+# History
+HISTCONTROL="erasedups:ignoreboth" # Avioid duplicates
 HISTSIZE= HISTFILESIZE= # Infinite history
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+HISTTIMEFORMAT='%F %T '
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo" # Do not record everything
 
+# Colors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
@@ -26,6 +30,7 @@ fi
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
 set -o vi
+source $DF/script/bin/todo
 # }}}
 
 # Variables {{{
@@ -68,6 +73,7 @@ export WORK_LENGTH=40
 alias la="ls -a"
 alias ll="ls -l"
 alias lla="ls -la"
+alias refresh='source ~/.bashrc'
 
 # Vim and neovim {{{
     alias vi="$EDITOR"
@@ -100,7 +106,7 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias mkdir="mkdir -pv"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
-alias n="notability $NOTES"
+alias n="notes $NOTES"
 alias neton="nmcli networking on &"
 alias netoff="nmcli networking off"
 alias o="$OPEN"
@@ -152,6 +158,9 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 
 [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+bind "set completion-ignore-case on"
+bind "set completion-map-case on"
+bind "set show-all-if-ambiguous on"
 # }}}
 
 # Keybindings {{{
@@ -164,7 +173,6 @@ bind '"\C-k": " fj"' # Job control, C-j unavailable
 
 # Shell options {{{
 shopt -s autocd
-shopt -s cdspell
 shopt -s dirspell
 shopt -s direxpand
 shopt -s dirspell
@@ -173,13 +181,14 @@ shopt -s globstar
 shopt -s extglob
 shopt -s checkwinsize
 shopt -s histappend
+shopt -s cdable_vars
 # }}}
 
 # Prompt  & colors{{{
-export PROMPT_COMMAND=prompt
+export PROMPT_COMMAND="history -a;prompt"
 prompt() {
-    [[ -e $TD ]] && toDo=$(tl | grep -v "^x .*"| wc -l) || toDo="x"
-    [[ -e $TD ]] && toDoUrgent=$(tl | sort | grep "^(.*" | wc -l) || toDoUrgent="x"
+    [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
+    [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
     end="⚕"
     if [[ $TERM = "dumb" ]]; then
@@ -223,112 +232,6 @@ nack () {
 
 # }}}
 
-# Todo manager {{{
-todo-edit() {
-    [[ $# -gt 0 ]] && \
-        vim $TD -c "/$(echo $* | sed "s/ /.*/g")" -c "normal zR" || \
-        vim $TD
-}
-
-todo-add(){
-if [[ $# -gt 0 ]]; then
-    echo "$*" >> $TD
-fi
-}
-
-todo-ls() {
-if [[ $# -gt 0 ]]; then
-    case "$1" in
-        "agenda")
-            # tl agenda [ # days ]
-            end=${2:-6} # if not $2, by default print todos for next 6 days
-            if [[ $end -ge 0 ]]; then
-                for (( i=0; i<$end; i++ )) do
-                    t=$(todo-ls $i days);
-                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
-                done;
-            else
-                for (( i=$end; i<0; i++ )) do
-                    t=$(todo-ls $i days);
-                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
-                done;
-            fi
-            echo ;;
-        "past")
-            # tl past [# days]
-            local IFS=""
-            end=${2:-100} # if not $2, by default print todos for the past 100 days
-            for (( i=$end; i>0; i-- )) do
-                t=$(todo-ls -$i days);
-                [[ ! -z "$t" ]] && echo $t;
-            done;
-            ;;
-        "someday") cat $TD | grep -v "due:.*$";;
-        "tags")
-            # local IFS=""
-            readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
-            for tag in ${tags[*]}; do
-                echo -ne "\n- $tag --- \n"
-                cat $TD | grep -v "^x" | grep "$tag"
-            done
-            ;;
-
-        "proj")
-            readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
-            for tag in ${tags[*]}; do
-                echo -ne "\n- $tag --- \n"
-                cat $TD | grep -v "^x" | grep "$tag"
-            done
-            ;;
-        *)
-            if date -d "$*" > /dev/null 2>&1; then
-                cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
-            else
-                args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
-                cat $TD | grep -v "^x" | grep -Gi "$args" $TD
-            fi
-    esac
-else
-    cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
-fi
-}
-
-todo-done () {
-if [[ $# -gt 0 ]]; then
-    QUERY=$(echo $* | sed -e "s/\ /.*/g") # Insensitive match with space repleaced with .*
-    ENTRIES_NO=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*" | wc -l)
-    ENTRY=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*")
-    if [[ $ENTRIES_NO -eq 1 ]]; then
-        # Marchiamo quell'entry come completata in todo.txt
-        echo -e "Marco come completato: "$ENTRY
-        sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
-    else
-        # Trovare un modo più carino per fare pure questo
-        if [[ $ENTRIES_NO -gt 1 ]]; then
-            sed -in "s/$( sed -n "/$QUERY/p" $TD | grep -v "^x .*" | fzf)/x $(date +%F)\ &/" $TD
-        else
-            echo -e "Nada de nada, mi sa che hai scritto male"
-        fi
-    fi
-else
-    sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
-fi
-
-# Trovare un modo più carino per farlo
-if [ -w /home/vic/ownCloud/todo.txtn ]; then
-    rm /home/vic/ownCloud/todo.txtn
-fi
-if [ -w ~/oggi.txtn ]; then
-    rm ~/oggi.txtn
-fi
-
-}
-
-function todo-ls-tags() {
-    grep -o "@.[a-z]*" $TD | sort | uniq
-    grep -o "\+\w*" $TD | sort | uniq
-}
-# }}}
 
 # Password manager {{{
 p () {

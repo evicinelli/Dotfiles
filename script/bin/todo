@@ -1,0 +1,113 @@
+# A very simple yet super effective cli todo manager
+# Depends on todo.txt, bash, date
+
+TD="$HOME/ownCloud/Dropbox/todo.txt"
+DN="$HOME/ownCloud/Dropbox/done.txt"
+
+todo-edit() {
+    [[ $# -gt 0 ]] && \
+         $EDITOR $TD -c "/$(echo $* | sed "s/ /.*/g")" -c "normal zR" || \
+         $EDITOR $TD
+}
+
+todo-add(){
+date_exit_status=$?
+if [[ $# -gt 0 ]]; then
+    if [[ $date_exit_status -eq 0 ]]; then
+        echo "$*" >> $TD
+    fi
+fi
+}
+
+todo-ls() {
+if [[ $# -gt 0 ]]; then
+    case "$1" in
+        "agenda")
+            # tl agenda [ # days ]
+            end=${2:-6} # if not $2, by default print todos for next 6 days
+            if [[ $end -ge 0 ]]; then
+                for (( i=0; i<$end; i++ )) do
+                    t=$(todo-ls $i days);
+                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
+                done;
+            else
+                for (( i=$end; i<0; i++ )) do
+                    t=$(todo-ls $i days);
+                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
+                done;
+            fi
+            echo ;;
+        "past")
+            # tl past [# days]
+            local IFS=""
+            end=${2:-100} # if not $2, by default print todos for the past 100 days
+            for (( i=$end; i>0; i-- )) do
+                t=$(todo-ls -$i days);
+                [[ ! -z "$t" ]] && echo $t;
+            done;
+            ;;
+        "someday") cat $TD | grep -v "due:.*$";;
+        "tags")
+            # local IFS=""
+            readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
+            for tag in ${tags[*]}; do
+                echo -ne "\n- $tag --- \n"
+                cat $TD | grep -v "^x" | grep "$tag"
+            done
+            ;;
+
+        "proj")
+            readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
+            for tag in ${tags[*]}; do
+                echo -ne "\n- $tag --- \n"
+                cat $TD | grep -v "^x" | grep "$tag"
+            done
+            ;;
+        *)
+            if date -d "$*" > /dev/null 2>&1; then
+                cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
+            else
+                args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
+                cat $TD | grep -v "^x" | grep -Gi "$args" $TD
+            fi
+    esac
+else
+    cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
+fi
+}
+
+todo-done () {
+if [[ $# -gt 0 ]]; then
+    QUERY=$(echo $* | sed -e "s/\ /.*/g") # Insensitive match with space repleaced with .*
+    ENTRIES_NO=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*" | wc -l)
+    ENTRY=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*")
+    if [[ $ENTRIES_NO -eq 1 ]]; then
+        # Marchiamo quell'entry come completata in todo.txt
+        echo -e "Marco come completato: "$ENTRY
+        sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
+    else
+        # Trovare un modo più carino per fare pure questo
+        if [[ $ENTRIES_NO -gt 1 ]]; then
+            sed -in "s/$( sed -n "/$QUERY/p" $TD | grep -v "^x .*" | fzf)/x $(date +%F)\ &/" $TD
+        else
+            echo -e "Nada de nada, mi sa che hai scritto male"
+        fi
+    fi
+else
+    sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
+fi
+
+# Trovare un modo più carino per farlo
+if [ -w /home/vic/ownCloud/todo.txtn ]; then
+    rm /home/vic/ownCloud/todo.txtn
+fi
+if [ -w ~/oggi.txtn ]; then
+    rm ~/oggi.txtn
+fi
+
+}
+
+function todo-ls-tags() {
+    grep -o "@.[a-z]*" $TD | sort | uniq
+    grep -o "\+\w*" $TD | sort | uniq
+}

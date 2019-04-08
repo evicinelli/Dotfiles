@@ -1,5 +1,5 @@
 [global]
-    font = SF Mono 10.5
+    font = Meslo LG M 10.5
     
     # Allow a small subset of html markup:
     #   <b>bold</b>

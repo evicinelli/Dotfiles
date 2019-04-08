@@ -80,15 +80,15 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:SF Mono 8
+font pango:Meslo LG M 8
 bindsym $mod+Shift+d exec --no-startup-id $HOME/bin/unsplash
 bindsym $mod+Shift+f exec --no-startup-id $HOME/bin/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/bin/i3-tray-toggle
 bar {
     position top
-    tray_output none
+    # tray_output none
     status_command i3blocks
-    font pango: SF Mono 11
+    font pango:Meslo LG M 11
     strip_workspace_numbers yes
 }
 
@@ -102,7 +102,7 @@ for_window [class = "Spotify"] move to workspace $workspace10
 # }}}
 
 # BINDINGS {{{
-bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"SFMono-12\""
+bindsym Control+space exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn \"MesloLGS-Regular-12\""
 bindsym Control+Mod1+p exec --no-startup-id ~/bin/winston-pass
 bindsym Control+Mod1+u exec --no-startup-id ~/bin/winston-utils
 bindsym Control+Mod1+t  exec --no-startup-id urxvt
@@ -111,6 +111,7 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+ 
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
+bindsym Control+Insert exec $HOME/bin/advi
 bindsym --release Print exec --no-startup-id gnome-screenshot -aic
 
 bindsym XF86HomePage exec i3-sensible-terminal

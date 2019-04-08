@@ -1,7 +1,9 @@
 #! /bin/bash
 
-file=$(mktemp)
+[[ -e /tmp/advi ]] || mkdir /tmp/advi
+file=$(mktemp -p /tmp/advi)
 
+EDITOR=nvim-qt
 $EDITOR $file
 
 [[ $? -eq 0 ]] && cat $file | xclip -selection PRIMARY
