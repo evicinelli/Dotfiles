@@ -80,7 +80,7 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Meslo LG M 8
+font pango:Inconsolata 8
 bindsym $mod+Shift+d exec --no-startup-id $HOME/bin/unsplash
 bindsym $mod+Shift+f exec --no-startup-id $HOME/bin/unsplash -l
 bindsym $mod+Shift+t exec --no-startup-id $HOME/bin/i3-tray-toggle
@@ -88,7 +88,7 @@ bar {
     position top
     # tray_output none
     status_command i3blocks
-    font pango:Meslo LG M 11
+    font pango:Inconsolata 13
     strip_workspace_numbers yes
 }
 

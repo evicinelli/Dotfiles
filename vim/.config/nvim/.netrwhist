@@ -1,8 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/vic'
-let g:netrw_dirhist_2='/tmp/advi'
-let g:netrw_dirhist_3='/tmp'
-let g:netrw_dirhist_4='/home/vic/.config/argos'
-let g:netrw_dirhist_5='/home/vic'
-let g:netrw_dirhist_6='/home/vic/.config/argos'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/vic/Dotfiles/openbox/.config/tint2'
+let g:netrw_dirhist_2='/home/vic/Dotfiles/openbox/.config'
+let g:netrw_dirhist_3='/home/vic/Dotfiles/openbox/.config/tint2'
+let g:netrw_dirhist_4='/home/vic/Dotfiles/openbox'
+let g:netrw_dirhist_5='/home/vic/Dotfiles/openbox/.config'
+let g:netrw_dirhist_6='/home/vic/Dotfiles/openbox/.config/openbox'
+let g:netrw_dirhist_7='/home/vic/Dotfiles/dunst/.config/dunst'
+let g:netrw_dirhist_8='/home/vic/Dotfiles/openbox/.config/openbox'

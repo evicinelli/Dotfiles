@@ -30,15 +30,18 @@ fi
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
 set -o vi
-source $DF/script/bin/todo
 # }}}
 
 # Variables {{{
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export PATH="${PATH}:$HOME/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 export TERMINAL=urxvt
-export BROWSER=$HOME/Scaricati/Apps/firefox/firefox
+export BROWSER=firefox-esr
 export OPEN=xdg-open
+
+
+TD="$HOME/ownCloud/Dropbox/todo.txt"
+DN="$HOME/ownCloud/Dropbox/done.txt"
 
 # Folder
 export F="$HOME/ownCloud"
@@ -110,6 +113,7 @@ alias n="notes $NOTES"
 alias neton="nmcli networking on &"
 alias netoff="nmcli networking off"
 alias o="$OPEN"
+alias open="$OPEN"
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
 alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
 alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
@@ -122,7 +126,17 @@ alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
-alias unicode='echo ✓ ™ ♪ ♫ ☃ ° Ɵ ∫ 💙 ☤ ⚕'
+alias unicode='echo "✓ ™ ♪ ♫ ☃ ° Ɵ ∫ ❤ ☤ ⚕
+  ‘’ “” ‚„ ′″‹› «» -–—
+(/)[|]{\} * †‡§¶|‖ @ №
+$£¥€₹₺₽¢ƒ %‰ ¼½¾⅓⅔⅛⅜⅝
++−×÷∙=<>≤≥±^≠~≈¬ #π∞µ∂∫√
+•◦▪▫▴▸▾◂▵▹▿◃
+●○■□▲▶▼◀△▷▽◁❒◆►◄◙◉◘
+←↖↑↗→↘↓↙ ⇐⇑⇒⇓ ↔↕↨ ♀♂ ☼⌂ ☑ ✓
+☻  ☕ 💩 🤖 🔒
+     
+"'
 alias vimrc="vi $HOME/.config/nvim/vimrc"
 # }}}
 
@@ -184,28 +198,6 @@ shopt -s histappend
 shopt -s cdable_vars
 # }}}
 
-# Prompt  & colors{{{
-export PROMPT_COMMAND="history -a;prompt"
-prompt() {
-    [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
-    [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"
-    [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
-    end="⚕"
-    if [[ $TERM = "dumb" ]]; then
-        export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
-    else
-        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;34m\] $(ps1_hostname)\W $end \[\e[0m\]"
-    fi
-}
-
-ps1_hostname() {
-    host=$(hostname)
-    user=$(whoami)
-    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host"
-}
-
-# }}}
-
 # Functions {{{
 
 # Altra roba {{{
@@ -232,6 +224,115 @@ nack () {
 
 # }}}
 
+# Todo manager {{{
+todo-edit() {
+    [[ $# -gt 0 ]] && \
+         $EDITOR $TD -c "/$(echo $* | sed "s/ /.*/g")" -c "normal zR" || \
+         $EDITOR $TD
+}
+
+todo-add(){
+date_exit_status=$?
+if [[ $# -gt 0 ]]; then
+    if [[ $date_exit_status -eq 0 ]]; then
+        echo "$*" >> $TD
+    fi
+fi
+}
+
+todo-ls() {
+if [[ $# -gt 0 ]]; then
+    case "$1" in
+        "agenda")
+            # tl agenda [ # days ]
+            end=${2:-6} # if not $2, by default print todos for next 6 days
+            if [[ $end -ge 0 ]]; then
+                for (( i=0; i<$end; i++ )) do
+                    t=$(todo-ls $i days);
+                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
+                done;
+            else
+                for (( i=$end; i<0; i++ )) do
+                    t=$(todo-ls $i days);
+                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
+                done;
+            fi
+            echo ;;
+        "past")
+            # tl past [# days]
+            local IFS=""
+            end=${2:-100} # if not $2, by default print todos for the past 100 days
+            for (( i=$end; i>0; i-- )) do
+                t=$(todo-ls -$i days);
+                [[ ! -z "$t" ]] && echo $t;
+            done;
+            ;;
+        "someday") cat $TD | grep -v "due:.*$";;
+        "tags")
+            # local IFS=""
+            readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
+            for tag in ${tags[*]}; do
+                echo -ne "\n- $tag --- \n"
+                cat $TD | grep -v "^x" | grep "$tag"
+            done
+            ;;
+
+        "proj")
+            readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
+            for tag in ${tags[*]}; do
+                echo -ne "\n- $tag --- \n"
+                cat $TD | grep -v "^x" | grep "$tag"
+            done
+            ;;
+        *)
+            if date -d "$*" > /dev/null 2>&1; then
+                cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
+            else
+                args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
+                cat $TD | grep -v "^x" | grep -Gi "$args" $TD
+            fi
+    esac
+else
+    cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
+fi
+}
+
+todo-done () {
+if [[ $# -gt 0 ]]; then
+    QUERY=$(echo $* | sed -e "s/\ /.*/g") # Insensitive match with space repleaced with .*
+    ENTRIES_NO=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*" | wc -l)
+    ENTRY=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*")
+    if [[ $ENTRIES_NO -eq 1 ]]; then
+        # Marchiamo quell'entry come completata in todo.txt
+        echo -e "Marco come completato: "$ENTRY
+        sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
+    else
+        # Trovare un modo più carino per fare pure questo
+        if [[ $ENTRIES_NO -gt 1 ]]; then
+            sed -in "s/$( sed -n "/$QUERY/p" $TD | grep -v "^x .*" | fzf)/x $(date +%F)\ &/" $TD
+        else
+            echo -e "Nada de nada, mi sa che hai scritto male"
+        fi
+    fi
+else
+    sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
+fi
+
+# Trovare un modo più carino per farlo
+if [ -w /home/vic/ownCloud/todo.txtn ]; then
+    rm /home/vic/ownCloud/todo.txtn
+fi
+if [ -w ~/oggi.txtn ]; then
+    rm ~/oggi.txtn
+fi
+
+}
+
+function todo-ls-tags() {
+    grep -o "@.[a-z]*" $TD | sort | uniq
+    grep -o "\+\w*" $TD | sort | uniq
+}
+# }}}
 
 # Password manager {{{
 p () {
@@ -334,13 +435,14 @@ function gong () {
             "-g")
                 time=$2
                 shift
+                shift
                 mess=$*
-                at $time <<<"notify-send DUNST_COMMAND_RESUME && notify-send --urgency=critical \"REMINDME: $mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5";;
+                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5 --volume=70";;
             *)
                 time=$1
                 shift
                 mess=$*
-                at $time <<<"notify-send DUNST_COMMAND_RESUME && notify-send --urgency=critical \"REMINDME: $mess\"";;
+                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\"";;
         esac
     else
         echo "
@@ -361,6 +463,29 @@ function fo () {
 
 # }}}
 
-[[ ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
+# Prompt  & colors{{{
+export PROMPT_COMMAND="history -a;prompt"
+prompt() {
+    [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
+    [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"
+    [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
+    # end="⚕"
+    end=">"
+    if [[ $TERM = "dumb" ]]; then
+        export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
+    else
+        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;34m\] $(ps1_hostname)\W $end \[\e[0m\]"
+    fi
+}
+
+ps1_hostname() {
+    host=$(hostname)
+    user=$(whoami)
+    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host"
+}
+
+# }}}
+
+[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker
