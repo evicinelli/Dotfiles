@@ -82,7 +82,7 @@ colorscheme dim
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
 set cursorline
-set guifont=Inconsolata\ 13
+set guifont=Meslo\ LG\ S\ 11
 
 "highlight clear StatusLine
 highlight StatusLine   ctermfg=7    ctermbg=8

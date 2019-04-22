@@ -218,9 +218,10 @@
 #    summary = "foobar"
 #    format = ""
 
-[ignore]
-	appname = "xfce4-power-manager"
-    format = ""
+
+# [ignore]
+# 	appname = "xfce4-power-manager"
+#     format = ""
 
 #[signed_on]
 #    appname = Pidgin
@@ -231,15 +232,15 @@
 #    appname = Pidgin
 #    summary = *signed off*
 #    urgency = low
-#
+
 #[says]
 #    appname = Pidgin
 #    summary = *says*
 #    urgency = critical
-#
+
 #[twitter]
 #    appname = Pidgin
 #    summary = *twitter.com*
 #    urgency = normal
-#
+
 # vim: ft=cfg

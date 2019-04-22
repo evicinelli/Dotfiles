@@ -360,7 +360,7 @@ p () {
 # Utility {{{
 
 share-home-network () {
-    qr "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
+    sqr "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
 }
 
 tny () {
@@ -383,12 +383,17 @@ push () {
     echo
 }
 
-qr () {
+sqr () {
     if [[ $# -gt 0 ]]; then
         file=$(mktemp);
         qrencode -s 20 "$*" -o $file
         $OPEN $file
     fi
+}
+
+qr () {
+    MSG="$(echo $* | sed "s/ /\\ /g")"
+    curl qrenco.de/"$*"
 }
 
 # Foreground a job searching the process name
