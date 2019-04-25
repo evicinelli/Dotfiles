@@ -97,25 +97,26 @@ alias fgrep='fgrep --color=auto'
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
 # alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
 # alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
-alias ll="ls -l"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc && source $HOME/.bashrc"
-alias cp="rsync --archive --verbose --human-readable"
+alias bc="bc -l"
+alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
 alias clipboard="xclip -selection PRIMARY"
+alias cp="rsync --archive --verbose --human-readable"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias gi="gvim"
 alias gv="gvim"
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
+alias ll="ls -l"
 alias mkdir="mkdir -pv"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias n="notes $NOTES"
-alias neton="nmcli networking on &"
 alias netoff="nmcli networking off"
+alias neton="nmcli networking on &"
 alias o="$OPEN"
 alias open="$OPEN"
 alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
-alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
 alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
 alias py="python"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
@@ -126,17 +127,7 @@ alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
-alias unicode='echo "✓ ™ ♪ ♫ ☃ ° Ɵ ∫ ❤ ☤ ⚕
-  ‘’ “” ‚„ ′″‹› «» -–—
-(/)[|]{\} * †‡§¶|‖ @ №
-$£¥€₹₺₽¢ƒ %‰ ¼½¾⅓⅔⅛⅜⅝
-+−×÷∙=<>≤≥±^≠~≈¬ #π∞µ∂∫√
-•◦▪▫▴▸▾◂▵▹▿◃
-●○■□▲▶▼◀△▷▽◁❒◆►◄◙◉◘
-←↖↑↗→↘↓↙ ⇐⇑⇒⇓ ↔↕↨ ♀♂ ☼⌂ ☑ ✓
-☻  ☕ 💩 🤖 🔒
-     
-"'
+alias unicode='echo "✓ ™ ♪ ♫ ☃ ° Ɵ ∫ ❤ ☤ ⚕ ‘’ “” ‚„ ′″‹› «» -–— (/)[|]{\} * †‡§¶|‖ @ № $£¥€₹₺₽¢ƒ %‰ ¼½¾⅓⅔⅛⅜⅝ +−×÷∙=<>≤≥±^≠~≈¬ #π∞µ∂∫√ •◦▪▫▴▸▾◂▵▹▿◃ ●○■□▲▶▼◀△▷▽◁❒◆►◄◙◉◘ ←↖↑↗→↘↓↙ ⇐⇑⇒⇓ ↔↕↨ ♀♂ ☼⌂ ☑ ✓ ☻  ☕ 💩 🤖 🔒       "'
 alias vimrc="vi $HOME/.config/nvim/vimrc"
 # }}}
 
@@ -392,8 +383,12 @@ sqr () {
 }
 
 qr () {
-    MSG="$(echo $* | sed "s/ /\\ /g")"
-    curl qrenco.de/"$*"
+    if [[ $# -gt 0 ]]; then
+        MSG="$(echo $* | sed "s/ /\\ /g")"
+        curl qrenco.de/"$*"
+    else
+        curl -F-=\<- qrenco.de
+    fi
 }
 
 # Foreground a job searching the process name
