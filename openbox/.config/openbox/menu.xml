@@ -11,7 +11,7 @@
 				<execute>x-www-browser</execute>
 			</action>
 		</item>
-		<item label="Music">
+        <item label="Spotify">
 			<action name="Execute">
                 <execute><command>spotify</command></execute>
 			</action>

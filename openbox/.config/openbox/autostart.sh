@@ -1,4 +1,4 @@
 compton -f &
 # feh --bg-scale ~/img.png
-xsetroot -grey
+xsetroot -solid gray
 tint2 &

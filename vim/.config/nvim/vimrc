@@ -1,10 +1,10 @@
 ﻿"Vim-plug {{{
 call plug#begin()
 if !has("nvim")
-    Plug 'tpope/vim-sensible'                                            " Sensible default
+    Plug 'tpope/vim-sensible'                                        " Sensible default
 endif
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
-"Plug 'junegunn/fzf.vim',
+                                                                     " Plug 'junegunn/fzf.vim',
 Plug 'mhinz/vim-startify'                                            " Vim-startify
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'tpope/vim-fugitive'
@@ -16,6 +16,8 @@ Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc in
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
 Plug 'jeffkreeftmeijer/vim-dim'                                      " 16 color colorscheme
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
+Plug 'SirVer/ultisnips'                                              " Snippets
+Plug 'junegunn/goyo.vim'
 call plug#end()
 " }}}
 
@@ -82,7 +84,7 @@ colorscheme dim
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
 set cursorline
-set guifont=Meslo\ LG\ S\ 11
+set guifont=Iosevka\ 13
 
 "highlight clear StatusLine
 highlight clear FoldColumn|hi FoldColumn ctermfg=0
@@ -92,14 +94,18 @@ highlight StatusLineNC   ctermfg=11    ctermbg=0
 "highlight LineNr ctermfg=11 ctermbg=0
 highlight clear CursorLine
 highlight CursorLine ctermbg=8
-highlight ColorColumn ctermbg=9
-highlight SpellBad ctermbg=9 ctermfg=0
+highlight ColorColumn ctermbg=9 ctermfg=15
+highlight SpellBad ctermbg=none ctermfg=9
+highlight SpellCap ctermbg=none ctermfg=14
 highlight Folded ctermbg=8 ctermfg=7
 "highlight FoldColumn ctermbg=0 ctermfg=3
 highlight TodoDueToday ctermbg=3 ctermfg=0
+highlight PmenuSel ctermbg=4
 " }}}
 
 " Plugin settings {{{
+let g:UltiSnipsNoPythonWarning = 1
+
 let g:netrw_banner = 0          " no banner
 let g:netwr_browse_split = 4    " open in prior window
 let g:netwr_altv = 1            " split to the right
@@ -261,28 +267,6 @@ endfunction
 " Notes {{{
 command! -nargs=1 Nack vimgrep "<args>" $MED/**/*.md
 nnoremap <leader>n :Nack 
-
-" Take notes the good way
-function! s:TN()
-    Goyo
-    vertical resize 400
-    TOC
-    set nowrap
-    normal h
-endfunction
-command! TN call s:TN()
-
-function! s:goyo_enter()
-	vertical resize
-    GitGutterBufferDisable
-endfunction
-
-function! s:goyo_leave()
-    GitGutterBufferEnable
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " }}}
 
 " vim: fdm=marker

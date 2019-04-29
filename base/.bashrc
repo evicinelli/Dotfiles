@@ -205,8 +205,9 @@ revealjs () {
     # rm -r reveal.js
 } 
 clean-swp () {
-    find $HOME -name "*.swp" -ok rm "{}" \;
-    find $HOME -name "*.swo" -ok rm "{}" \;
+    # find $HOME -name "*.swp" -ok rm "{}" \;
+    # find $HOME -name "*.swo" -ok rm "{}" \;
+    rm -r ~/.local/share/nvim/swap/*
 }
 
 nack () {
@@ -223,10 +224,14 @@ todo-edit() {
 }
 
 todo-add(){
+# $ todo-add "(A) task +project @context due:<date in words>"
+arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
+d=$(date +%F -d "$arg")
 date_exit_status=$?
+task=$(echo $* | sed "s/due:.*$/due:$d/")
 if [[ $# -gt 0 ]]; then
     if [[ $date_exit_status -eq 0 ]]; then
-        echo "$*" >> $TD
+        echo "$task" >> $TD
     fi
 fi
 }
@@ -437,12 +442,12 @@ function gong () {
                 shift
                 shift
                 mess=$*
-                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5 --volume=70";;
+                at $time <<<"notify-send --urgency=critical \"REMINDME: sono le $(date +%H:%M)!\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5 --volume=70";;
             *)
                 time=$1
                 shift
                 mess=$*
-                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\"";;
+                at $time <<<"notify-send --urgency=critical \"REMINDME: sono le $(date +%H:%M)!\" \"$mess\"";;
         esac
     else
         echo "

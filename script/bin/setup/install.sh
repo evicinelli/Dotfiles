@@ -25,7 +25,9 @@ apt remove gedit
 
 # Installo le cose
 apt update
-apt install stow i3 i3blocks vim rxvt-unicode-256color compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk mpv zip ufw tree pass xclip rsync owncloud-client gufw at apt-transport-https libnotify-bin dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra sshfs nautilus-dropbox kodi python3-pip
+# apt install stow i3 i3blocks vim rxvt-unicode-256color compton arandr dunst spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk mpv zip ufw tree pass xclip rsync owncloud-client gufw at apt-transport-https libnotify-bin dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra sshfs nautilus-dropbox kodi python3-pip
+
+apt install stow neovim rxvt-unicode-256color compton arandr spotify-client xfce4-power-manager pavucontrol build-essential curl redshift-gtk mpv zip ufw tree pass xclip rsync nextcloud-client gufw at apt-transport-https libnotify-bin dh-autoreconf sxiv moreutils gcalcli texlive-latex-extra sshfs kodi python3-pip openbox lxmenu-data openbox-menu tint2
 
 # Aggiorno e pulisco tutto
 apt upgrade
