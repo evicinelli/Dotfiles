@@ -11,19 +11,14 @@
 				<execute>x-www-browser</execute>
 			</action>
 		</item>
-        <item label="Spotify">
-			<action name="Execute">
-                <execute><command>spotify</command></execute>
-			</action>
-		</item>
 		<item label="_Telegram">
 			<action name="Execute">
                 <execute><command>/home/vic/Scaricati/Apps/Telegram/Telegram</command></execute>
 			</action>
 		</item>
-		<item label="Nautilus">
+		<item label="Execute">
 			<action name="Execute">
-				<execute>nautilus</execute>
+				<execute>dmenu_run -fn "Iosevka-13"</execute>
 			</action>
 		</item>
 		<separator/>
@@ -45,7 +40,33 @@
 		</item>
 		<separator/>
 		<item label="Exit">
-			<action name="Exit"/>
+            <menu id="exit-menu" label="Esci">
+                <item label="Spegni (_H)">
+                    <action name="execute">
+                        <execute></execute>
+                    </action>
+                </item>
+                <item label="Riavvia">
+                    <action name="execute">
+                        <execute></execute>
+                    </action>
+                </item>
+                <item label="Blocca">
+                    <action name="execute">
+                        <execute></execute>
+                    </action>
+                </item>
+                <item label="Sos_pendi">
+                    <action name="execute">
+                        <execute></execute>
+                    </action>
+                </item>
+                <item label="Sospendi e blocca">
+                    <action name="execute">
+                        <execute></execute>
+                    </action>
+                </item>
+            </menu
 		</item>
 	</menu>
 </openbox_menu>

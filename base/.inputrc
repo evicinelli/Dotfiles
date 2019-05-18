@@ -1,7 +1,7 @@
 set editing-mode vi
 set completion-ignore-case
 set show-all-if-ambiguous on
-set menu-complete-display-prefix on
+# set menu-complete-display-prefix on
 set colored-stats on
 set colored-completion-prefix on
 set completion-map-case on

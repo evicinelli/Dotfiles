@@ -29,38 +29,38 @@
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
-      <name>Iosevka</name>
+      <name>Source Code Pro</name>
       <size>10</size>
       <weight>Regular</weight>
       <slant>Normal</slant>
     </font>
     <font place="InactiveWindow">
-      <name>Iosevka</name>
+      <name>Source Code Pro</name>
       <size>8</size>
       <weight>Normal</weight>
       <slant>Italic</slant>
     </font>
     <font place="MenuHeader">
-      <name>Iosevka Medium</name>
+      <name>Source Code Pro Medium</name>
       <size>10</size>
       <weight>Normal</weight>
       <slant>Normal</slant>
     </font>
     <font place="MenuItem">
-      <name>Iosevka</name>
+      <name>Source Code Pro</name>
       <size>10</size>
       <weight>Normal</weight>
       <slant>Normal</slant>
     </font>
     <font place="ActiveOnScreenDisplay">
-      <name>Iosevka</name>
+      <name>Source Code Pro</name>
       <size>11</size>
       <weight>Normal</weight>
       <slant>Normal</slant>
     </font>
     <font place="InactiveOnScreenDisplay">
-      <name>Iosevka</name>
-      <size>9</size>
+      <name>Source Code Pro</name>
+      <size>10</size>
       <weight>Normal</weight>
       <slant>Italic</slant>
     </font>
@@ -124,39 +124,15 @@
         <wrap>yes</wrap>
       </action>
     </keybind>
-    <keybind key="C-A-Up">
-      <action name="GoToDesktop">
-        <to>up</to>
-        <wrap>yes</wrap>
-      </action>
-    </keybind>
-    <keybind key="C-A-Down">
-      <action name="GoToDesktop">
-        <to>down</to>
-        <wrap>yes</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Left">
+    <keybind key="C-S-A-Left">
       <action name="SendToDesktop">
         <to>left</to>
         <wrap>yes</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Right">
+    <keybind key="C-S-A-Right">
       <action name="SendToDesktop">
         <to>right</to>
-        <wrap>yes</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Up">
-      <action name="SendToDesktop">
-        <to>up</to>
-        <wrap>yes</wrap>
-      </action>
-    </keybind>
-    <keybind key="S-A-Down">
-      <action name="SendToDesktop">
-        <to>down</to>
         <wrap>yes</wrap>
       </action>
     </keybind>
@@ -361,12 +337,12 @@
           <to>next</to>
         </action>
       </mousebind>
-      <mousebind button="A-S-Up" action="Click">
+      <mousebind button="C-A-S-Up" action="Click">
         <action name="SendToDesktop">
           <to>previous</to>
         </action>
       </mousebind>
-      <mousebind button="A-S-Down" action="Click">
+      <mousebind button="C-A-S-Down" action="Click">
         <action name="SendToDesktop">
           <to>next</to>
         </action>
@@ -612,11 +588,6 @@
     </context>
     <context name="Root">
       <!-- Menus -->
-      <mousebind button="Left" action="Press">
-        <action name="ShowMenu">
-          <menu>client-list-combined-menu</menu>
-        </action>
-      </mousebind>
       <mousebind button="Middle" action="Press">
         <action name="ShowMenu">
           <menu>client-list-combined-menu</menu>

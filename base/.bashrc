@@ -6,10 +6,10 @@ case $- in
 esac
 
 # History
-HISTCONTROL="erasedups:ignoreboth" # Avioid duplicates
+HISTCONTROL="ignoredups:erasedups:ignoreboth" # Avioid duplicates
 HISTSIZE= HISTFILESIZE= # Infinite history
 HISTTIMEFORMAT='%F %T '
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo" # Do not record everything
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo" # Do not append this to history
 
 # Colors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -225,14 +225,18 @@ todo-edit() {
 
 todo-add(){
 # $ todo-add "(A) task +project @context due:<date in words>"
-arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
-d=$(date +%F -d "$arg")
-date_exit_status=$?
-task=$(echo $* | sed "s/due:.*$/due:$d/")
 if [[ $# -gt 0 ]]; then
-    if [[ $date_exit_status -eq 0 ]]; then
-        echo "$task" >> $TD
+    arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
+    d=$(date +%F -d "$arg")
+    date_exit_status=$?
+    task=$(echo $* | sed "s/due:.*$/due:$d/")
+    if [[ $# -gt 0 ]]; then
+        if [[ $date_exit_status -eq 0 ]]; then
+            echo "$task" >> $TD
+        fi
     fi
+else
+    echo "todo-add (A) task +project @context due:<date in \`date -d\` compatible format>"
 fi
 }
 
@@ -442,12 +446,12 @@ function gong () {
                 shift
                 shift
                 mess=$*
-                at $time <<<"notify-send --urgency=critical \"REMINDME: sono le $(date +%H:%M)!\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5 --volume=70";;
+                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5 --volume=70";;
             *)
                 time=$1
                 shift
                 mess=$*
-                at $time <<<"notify-send --urgency=critical \"REMINDME: sono le $(date +%H:%M)!\" \"$mess\"";;
+                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\"";;
         esac
     else
         echo "
@@ -469,7 +473,8 @@ function fo () {
 # }}}
 
 # Prompt  & colors{{{
-export PROMPT_COMMAND="history -a;prompt"
+# http://unix.stackexchange.com/a/18443/27433
+export PROMPT_COMMAND="history -a;history -n;prompt"
 prompt() {
     [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"

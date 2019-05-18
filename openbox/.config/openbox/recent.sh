@@ -8,7 +8,7 @@ FILES=$(find ~/ownCloud -type f -atime -2 -printf "%A+ %p\n" | sort | tac | cut 
 
 echo "<openbox_pipe_menu>"
 for f in $FILES; do
-echo "<item label=\"_$(basename $f)\">
+echo "<item label=\"$(basename $f)\">
 	<action name=\"Execute\">
 		<command><![CDATA[xdg-open \"$f\"]]></command>
 	</action>

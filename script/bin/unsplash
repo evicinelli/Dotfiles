@@ -28,7 +28,7 @@
 # COLLECTION_NUMBER="452289"
 # COLLECTION_NUMBER="862387"
 # COLLECTION_NUMBER="1007074"
-# COLLECTION_NUMBER="921374"
+# COLLECTION_NUMBER="921374" # Pattern
 # COLLECTION_NUMBER="142376"
 # COLLECTION_NUMBER="326594"
 # COLLECTION_NUMBER="1657511"
@@ -42,8 +42,11 @@
 # COLLECTION_NUMBER="1816977"
 # COLLECTION_NUMBER="357786"
 # COLLECTION_NUMBER="220388"
-COLLECTION_NUMBER="2358"
+# COLLECTION_NUMBER="235" # Best NASA
+# COLLECTION_NUMBER="311432"
 # }}}
+
+COLLECTION_NUMBER="573009"
 
 
 # Settings
@@ -66,7 +69,8 @@ wget --quiet -O $HOME/img.png "https://source.unsplash.com/collection/$COLLECTIO
 #     /home/vic/.local/bin/wal $PARAMS -c -i $HOME/.img >/dev/null
 # else
 #     # We don't :(
-     feh --bg-scale $HOME/img.png
+     # feh --bg-scale $HOME/img.png
+     feh --bg-fill $HOME/img.png
 # fi
 
 # Theme dunst
