@@ -2,9 +2,10 @@
 # [include] (/etc/X11/fluxbox/fluxbox-menu)
    [exec] (XTerm) {x-terminal-emulator}
    [exec] (Web Browser) {x-www-browser}
-   [exec] (Exec) {rofi -show drun -font "Source Code Pro 12"}
    [exec] (Telegram) {~/Scaricati/Apps/Telegram/Telegram}
    [exec] (File Manager) {nautilus}
+   [exec] (Spotify) {spotify}
+   [exec] (Exec) {rofi -show drun -font "Source Code Pro 12"}
    [separator]
    [exec] (Applications) {nautilus /usr/share/applications}
    # [submenu] (Applicazioni) {}

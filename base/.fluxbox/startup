@@ -6,7 +6,6 @@ nm-applet &
 compton -b &
 xfce4-power-manager &
 # feh --bg-fill ~/img.png
-fbsetroot -solid dark "#cc0000"
 
 
 which fbautostart > /dev/null
@@ -14,3 +13,5 @@ if [ $? -eq 0 ]; then
     fbautostart
 fi
 exec fluxbox
+
+fbsetbg -b -solid dark "#582c83" &

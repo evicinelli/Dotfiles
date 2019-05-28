@@ -157,7 +157,8 @@ noremap <C-k> k
 noremap <C-l> l
 noremap <C-c> :noh<CR>
 noremap <C-n> :cn<CR>
-noremap <C-p> :FZF --no-exact<CR>
+noremap <C-o> :FZF --no-exact<CR>
+noremap <C-p> :cp<CR>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader><leader> zA <CR>

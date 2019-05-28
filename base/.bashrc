@@ -154,7 +154,6 @@ alias tlrem="cat $OC/remember.todo.txt"
 alias gtd="gtd -Tn $WORK_LENGTH $BREAK_LENGTH"
 # }}}
 
-alias quantum="~/Scaricati/Apps/firefox/firefox"
 # }}}
 
 # Completions & fzf {{{
@@ -172,7 +171,7 @@ bind "set show-all-if-ambiguous on"
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-p": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
+bind '"\C-o": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
 bind '"\C-k": " fj"' # Job control, C-j unavailable
 # }}}
 
@@ -446,7 +445,7 @@ function gong () {
                 shift
                 shift
                 mess=$*
-                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5 --volume=70";;
+                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5 --volume=40";;
             *)
                 time=$1
                 shift

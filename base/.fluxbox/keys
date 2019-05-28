@@ -124,3 +124,5 @@ Control Shift Mod4 F9 :TakeToWorkspace 9
 Control Shift Mod4 F10 :TakeToWorkspace 10
 Control Shift Mod4 F11 :TakeToWorkspace 11
 Control Shift Mod4 F12 :TakeToWorkspace 12
+
+Print :Exec gnome-screenshot -aic

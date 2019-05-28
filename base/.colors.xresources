@@ -13,12 +13,13 @@
 *color10:            #CFFB8A
 !yellow
 *color3 :            #B8860B
-*color11:            #DAA520
+*color11:            #FFCC00
 !blue
 *color4 :            #4682B4
 *color12:            #6495ED
 !magenta
-*color5 :            #A26FBB
+! *color5 :            #582c83 !volt
+*color5:             #842CDB
 *color13:            #E1a4ff
 !cyan
 *color6 :            #87CEEB

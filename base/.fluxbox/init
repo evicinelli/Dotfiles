@@ -74,3 +74,6 @@ session.styleFile:	/usr/share/fluxbox/styles/Squared_for_Debian
 session.forcePseudoTransparency:	false
 session.cacheMax:	200
 session.styleOverlay:	/home/vic/.fluxbox/overlay
+
+# Theming
+*font:							Ubuntu-10
