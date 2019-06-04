@@ -1,4 +1,7 @@
 #!/bin/sh
+
+$volt="#582c83"
+$color="#074f97"
 xmodmap "/home/vic/.Xmodmap"
 
 dropbox start &
@@ -14,4 +17,4 @@ if [ $? -eq 0 ]; then
 fi
 exec fluxbox
 
-fbsetbg -b -solid dark "#582c83" &
+fbsetbg -b -solid dark $color &

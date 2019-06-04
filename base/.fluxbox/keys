@@ -9,7 +9,9 @@ OnLeftGrip Move1 :StartResizing bottomleft
 OnRightGrip Move1 :StartResizing bottomright
 
 OnTitlebar Control Mouse1 :StartTabbing
-OnTitlebar Double Mouse1 :Shade
+OnTitlebar Double Mouse1 :Maximize
+OnTitlebar Mouse5 :Shade
+OnTitlebar Mouse4 :Unshade
 OnTitlebar Mouse1 :MacroCmd {Raise} {Focus} {ActivateTab}
 OnTitlebar Mouse2 :Lower
 OnTitlebar Mouse3 :WindowMenu

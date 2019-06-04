@@ -33,8 +33,8 @@ set -o vi
 # }}}
 
 # Variables {{{
-[[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export PATH="${PATH}:$HOME/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
+[[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export TERMINAL=urxvt
 export BROWSER=firefox-esr
 export OPEN=xdg-open

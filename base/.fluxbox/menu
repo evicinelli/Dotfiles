@@ -5,7 +5,7 @@
    [exec] (Telegram) {~/Scaricati/Apps/Telegram/Telegram}
    [exec] (File Manager) {nautilus}
    [exec] (Spotify) {spotify}
-   [exec] (Exec) {rofi -show drun -font "Source Code Pro 12"}
+[exec] (Exec) {dmenu_run -fn "InputMono-12"}
    [separator]
    [exec] (Applications) {nautilus /usr/share/applications}
    # [submenu] (Applicazioni) {}
@@ -120,12 +120,11 @@
 #   [reconfig] (Reconfigure)
    [separator]
    [restart] (Restart)
-   [submenu] (Exit)
-        [exec] (Halt) {systemctl poweroff}
-        [exec] (Restart) {systemctl reboot}
-        [exec] (Lock) {i3lock}
-        [exec] (Suspend) {systemctl suspend}
-        [exec] (Lock & Suspend) {i3lock && systemctl suspend}
-        [exit] (Exit)
-   [end]
+   [Separator]
+    [exec] (Halt) {systemctl poweroff}
+    [exec] (Reboot) {systemctl reboot}
+    [exec] (Lock & Suspend) {i3lock && systemctl suspend}
+    [exec] (Lock) {i3lock}
+    [exec] (Suspend) {systemctl suspend}
+    [exit] (Exit)
 [end]

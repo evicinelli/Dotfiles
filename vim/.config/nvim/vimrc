@@ -137,7 +137,6 @@ let g:autocd#markers = { '**/Medicina/**/*.md': ['Makefile'] }
 " Mappings {{{
 inoremap " ""<Left>
 inoremap ( ()<Left>
-inoremap <C-c> <C-o>:noh<CR>
 inoremap <C-z> <C-o><C-z>
 inoremap <F1> <Esc>
 inoremap [ []<Left>
@@ -155,7 +154,6 @@ noremap <C-h> h
 noremap <C-j> j
 noremap <C-k> k
 noremap <C-l> l
-noremap <C-c> :noh<CR>
 noremap <C-n> :cn<CR>
 noremap <C-o> :FZF --no-exact<CR>
 noremap <C-p> :cp<CR>
