@@ -5,6 +5,7 @@
    [exec] (Telegram) {~/Scaricati/Apps/Telegram/Telegram}
    [exec] (File Manager) {nautilus}
    [exec] (Spotify) {spotify}
+   [exec] (Chrome) {google-chrome}
 [exec] (Exec) {dmenu_run -fn "InputMono-12"}
    [separator]
    [exec] (Applications) {nautilus /usr/share/applications}

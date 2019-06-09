@@ -2,6 +2,7 @@
 
 $volt="#582c83"
 $color="#074f97"
+$color=$volt
 xmodmap "/home/vic/.Xmodmap"
 
 dropbox start &

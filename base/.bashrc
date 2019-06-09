@@ -419,15 +419,7 @@ daysuntil () {
 }
 
 transfer () {
-    if [ $# -eq 0 ]; then 
-        echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"
-        return 1;
-    fi
-    tmpfile=$( mktemp -t transferXXX ); 
-    curl --progress-bar --upload-file "-" "https://transfer.sh/$1" -H "Max-Days: ${2:-7}" >> $tmpfile;
-    cat $tmpfile;
-    rm -f $tmpfile;
-    echo;
+    echo "Non ancora!"
 }
 
 function fix-mimecache () {
@@ -478,8 +470,8 @@ prompt() {
     [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
-    # end="⚕"
-    end=">"
+    end="⚕"
+    # end=">"
     if [[ $TERM = "dumb" ]]; then
         export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
     else

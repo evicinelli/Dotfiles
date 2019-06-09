@@ -4,10 +4,9 @@
 #cd $NOTES
 ext="md"
 base_dir="$1"
-# new_key="ctrl-n"
-cd $base_dir
 shift
-note=`fzf --height=100% -1 --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
+cd $base_dir
+note=`find -type f -not -wholename "*Archivio*" | fzf --height=100% -1 --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
 if [[ $? -eq 0 ]]; then
     # edit note
     $EDITOR "`tail -n1 <<< "$note"`"

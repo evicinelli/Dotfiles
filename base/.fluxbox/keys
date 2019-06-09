@@ -20,9 +20,9 @@ OnTitlebar Move1  :StartMoving
 OnToolbar Mouse4 :PrevWindow {static groups} (iconhidden=no)
 OnToolbar Mouse5 :NextWindow {static groups} (iconhidden=no)
 
-OnWindow Mod1 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
-OnWindow Mod1 Mouse2 :Close
-OnWindow Mod1 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+OnWindow Mod4 Mouse1 :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindow Mod4 Mouse2 :Close
+OnWindow Mod4 Mouse3 :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
 
 OnWindowBorder Move1 :StartMoving
 
@@ -49,7 +49,7 @@ Mod4 9 :Tab 9
 Control Mod1 t :Exec x-terminal-emulator
 
 # open a dialog to run programs
-Mod1 F2 :Exec dmenu_run -fn "SourceCodePro-12"
+Mod1 F2 :Exec dmenu_run -fn "Monospace-12"
 
 # volume settings, using common keycodes
 # if these don't work, use xev to find out your real keycodes
@@ -60,8 +60,8 @@ XF86AudioMute :Exec amixer sset Master toggle
 # current window commands
 Mod4 Q :Close
 Mod4 Shift Q :Kill
-Mod1 Down :Minimize
-Mod1 Up :Maximize
+Mod4 Down :Minimize
+Mod4 Up :Maximize
 Mod4 f :Fullscreen
 
 
@@ -69,21 +69,22 @@ Mod4 f :Fullscreen
 Mod1 space :WindowMenu
 Control space :WorkspaceMenu
 Mod4 space :RootMenu
+Mod4 w :Exec rofi -show window
 
 # exit fluxbox
 Control Mod1 Delete :Exit
 
 # change to previous/next workspace
-Control Mod1 Left :PrevWorkspace
-Control Mod1 Right :NextWorkspace
+Mod4 Left :PrevWorkspace
+Mod4 Right :NextWorkspace
 
 # send the current window to previous/next workspace
-Mod4 Left :SendToPrevWorkspace
-Mod4 Right :SendToNextWorkspace
+Mod4 Shift Left :SendToPrevWorkspace
+Mod4 Shift Right :SendToNextWorkspace
 
 # send the current window and follow it to previous/next workspace
-Control Mod4 Left :TakeToPrevWorkspace
-Control Mod4 Right :TakeToNextWorkspace
+Mod4 Control Left :TakeToPrevWorkspace
+Mod4 Control Right :TakeToNextWorkspace
 
 # change to a specific workspace
 Mod4 F1 :Workspace 1
