@@ -29,11 +29,11 @@ full_text=/
 separator=false
 align=center
 
-[gtd]
+# [gtd]
 interval=1
 #signal=10
 
-[mediaplayer]
+# [mediaplayer]
 instance=spotify
 interval=1
 signal=10

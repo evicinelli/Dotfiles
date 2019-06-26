@@ -101,11 +101,10 @@ alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
 alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
+alias bell="echo -e '\a' && tmux display-message 'BELL <3' && notify-send --urgency=critical 'BELL'"
 alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable"
 alias gcal="gcalcli --calendar=\"Personale\""
-alias gi="gvim"
-alias gv="gvim"
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
@@ -116,13 +115,12 @@ alias netoff="nmcli networking off"
 alias neton="nmcli networking on &"
 alias o="$OPEN"
 alias open="$OPEN"
-alias pandoc="pandoc --latex-engine=lualatex --smart --normalize --standalone"
-alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
+# alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
 alias py="python"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
-alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
-alias srv-ssh="ssh root@$SRV"
-alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
+# alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
+# alias srv-ssh="ssh root@$SRV"
+# alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
 alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
@@ -172,7 +170,7 @@ bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-o": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
-bind '"\C-k": " fj"' # Job control, C-j unavailable
+bind '"\C-a": " fj"'
 # }}}
 
 # Shell options {{{
@@ -488,5 +486,8 @@ ps1_hostname() {
 # }}}
 
 [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
+
+source /etc/profile.d/undistract-me.sh
+export UDM_PLAY_SOUND=1
 
 # vim: fdm=marker
