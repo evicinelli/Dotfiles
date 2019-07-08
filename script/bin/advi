@@ -3,8 +3,8 @@
 [[ -e /tmp/advi ]] || mkdir /tmp/advi
 file=$(mktemp -p /tmp/advi)
 
-EDITOR=nvim-qt
-$EDITOR $file
+EDITOR="urxvt -e sh -c nvim"
+$EDITOR\ $file
 
 [[ $? -eq 0 ]] && cat $file | xclip -selection PRIMARY
 [[ $? -eq 0 ]] && cat $file | xclip -selection CLIPBOARD

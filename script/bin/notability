@@ -2,7 +2,7 @@
 
 (
 #cd $NOTES
-ext="md"
+ext="txt"
 base_dir="$1"
 shift
 cd $base_dir

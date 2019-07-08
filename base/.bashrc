@@ -33,32 +33,27 @@ set -o vi
 # }}}
 
 # Variables {{{
-export PATH="${PATH}:$HOME/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
+export PATH="${PATH}:$HOME/Dotfiles/script/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export TERMINAL=urxvt
 export BROWSER=firefox-esr
 export OPEN=xdg-open
 
-
-TD="$HOME/ownCloud/Dropbox/todo.txt"
-DN="$HOME/ownCloud/Dropbox/done.txt"
-
-# Folder
-export F="$HOME/ownCloud"
+export P="/home/vic/pCloudDrive"
 export DF="$HOME/Dotfiles"
-export DN="$F/Dropbox/done.txt"
-export DOC="$F/Documenti"
-export DBX="$F/Dropbox"
-export GVS="$DBX/GVS"
+export DN="$HOME/.todo/done.txt"
+export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"
-export MED="$F/Uni/AppuntiUni/Medicina/Med1"
-export MEDIA="$F/Media"
-export MODELS="$F/Archivio/Modelli"
-export NOTES="$DBX/Notes"
-export PW="$F/Archivio/Password-store"
-export TD="$F/Dropbox/todo.txt"
-export UNI="$F/Uni/AppuntiUni"
-export WS="$F/Workspace"
+export GVS="$P/Gvs"
+export MED="$P/Uni/Med/Med1"
+export MEDIA="$P/Media"
+export NOTES="$P/Notes"
+export PW="$P/Documenti/Password-store"
+export TD="$HOME/.todo/todo.txt"
+export UNI="$P/Uni/AppuntiUni"
+
+export F="$HOME/ownCloud"
+export DBX="$F/Dropbox"
 
 # Altro
 export SRV="192.168.1.197"
@@ -100,7 +95,7 @@ alias fgrep='fgrep --color=auto'
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
-alias beamer="pandoc -t beamer -H /home/vic/ownCloud/Modelli/beamer.tex"
+alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias bell="echo -e '\a' && tmux display-message 'BELL <3' && notify-send --urgency=critical 'BELL'"
 alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable"
@@ -110,12 +105,13 @@ alias l='ls'
 alias ll="ls -l"
 alias mkdir="mkdir -pv"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
-alias n="notes $NOTES"
+alias n="notability $NOTES"
 alias netoff="nmcli networking off"
 alias neton="nmcli networking on &"
 alias o="$OPEN"
 alias open="$OPEN"
 # alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
+alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt "
 alias py="python"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 # alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
@@ -125,7 +121,7 @@ alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
-alias unicode='echo "✓ ™ ♪ ♫ ☃ ° Ɵ ∫ ❤ ☤ ⚕ ‘’ “” ‚„ ′″‹› «» -–— (/)[|]{\} * †‡§¶|‖ @ № $£¥€₹₺₽¢ƒ %‰ ¼½¾⅓⅔⅛⅜⅝ +−×÷∙=<>≤≥±^≠~≈¬ #π∞µ∂∫√ •◦▪▫▴▸▾◂▵▹▿◃ ●○■□▲▶▼◀△▷▽◁❒◆►◄◙◉◘ ←↖↑↗→↘↓↙ ⇐⇑⇒⇓ ↔↕↨ ♀♂ ☼⌂ ☑ ✓ ☻  ☕ 💩 🤖 🔒       "'
+alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “”   ‚  „   ′″  ‹›   «  »   -–  —   (  /  )[  |  ]  {  \  }   *   †‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒                  "'
 alias vimrc="vi $HOME/.config/nvim/vimrc"
 # }}}
 
@@ -147,8 +143,6 @@ alias tl="todo-ls"
 alias tla="todo-ls agenda"
 alias td="todo-done"
 alias te="todo-edit"
-alias ge="gvim $TD"
-alias tlrem="cat $OC/remember.todo.txt"
 alias gtd="gtd -Tn $WORK_LENGTH $BREAK_LENGTH"
 # }}}
 
@@ -159,6 +153,7 @@ complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias co
 [ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
 
 [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle'
+# [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_COMMAND='fdfind'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 bind "set completion-ignore-case on"
 bind "set completion-map-case on"
@@ -192,6 +187,7 @@ shopt -s cdable_vars
 devdocs () {
     $BROWSER "\!devdocs $*" && i3 [class=$BROWSER] focus
 }
+
 revealjs () {
     INPUT=$1
     shift
@@ -200,7 +196,8 @@ revealjs () {
     mv reveal.js-master reveal.js && rm master.tar.gz
     pandoc -t revealjs -s --self-contained $* $INPUT -o index.html
     # rm -r reveal.js
-} 
+}
+
 clean-swp () {
     # find $HOME -name "*.swp" -ok rm "{}" \;
     # find $HOME -name "*.swo" -ok rm "{}" \;
@@ -315,14 +312,6 @@ else
     sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
 fi
 
-# Trovare un modo più carino per farlo
-if [ -w /home/vic/ownCloud/todo.txtn ]; then
-    rm /home/vic/ownCloud/todo.txtn
-fi
-if [ -w ~/oggi.txtn ]; then
-    rm ~/oggi.txtn
-fi
-
 }
 
 function todo-ls-tags() {
@@ -380,7 +369,7 @@ push () {
     echo
 }
 
-sqr () {
+_qr () {
     if [[ $# -gt 0 ]]; then
         file=$(mktemp);
         qrencode -s 20 "$*" -o $file
@@ -462,18 +451,50 @@ function fo () {
 # }}}
 
 # Prompt  & colors{{{
+
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
+
+# Tomnomnom dotfiles {{{
+txtblk='\[\e[0;30m\]' # Black - Regular
+txtred='\[\e[0;31m\]' # Red
+txtgrn='\[\e[0;32m\]' # Green
+txtylw='\[\e[0;33m\]' # Yellow
+txtblu='\[\e[0;34m\]' # Blue
+txtpur='\[\e[0;35m\]' # Purple
+txtcyn='\[\e[0;36m\]' # Cyan
+txtwht='\[\e[0;37m\]' # White
+bldblk='\[\e[1;30m\]' # Black - Bold
+bldred='\[\e[1;31m\]' # Red
+bldgrn='\[\e[1;32m\]' # Green
+bldylw='\[\e[1;33m\]' # Yellow
+bldblu='\[\e[1;34m\]' # Blue
+bldpur='\[\e[1;35m\]' # Purple
+bldcyn='\[\e[1;36m\]' # Cyan
+bldwht='\[\e[1;37m\]' # White
+txtrst='\[\e[0m\]'    # Text Reset
+# }}}
 prompt() {
+    jobColor=${bldblu}
+    todoColor=${bldgrn}
+    dirColor=${bldpur}
+
+    # Todays todo
     [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"
+    [[ $toDo -gt 0 ]] && todoColor=${bldylw}
+    [[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
+
+    # ctr-z'd jobs
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
-    end="⚕"
-    # end=">"
+
+    # end="⚕"
+    end=">"
+
     if [[ $TERM = "dumb" ]]; then
         export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
     else
-        export PS1="\[\e[1;34m\]$bg_jobs\[\e[1;31m\][$toDo, [$toDoUrgent!]]\[\e[1;34m\] $(ps1_hostname)\W $end \[\e[0m\]"
+        export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, [$toDoUrgent!]]${dirColor} $(ps1_hostname)\W $end ${txtrst}"
     fi
 }
 
@@ -485,9 +506,9 @@ ps1_hostname() {
 
 # }}}
 
+# Tmux
 [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
 
 source /etc/profile.d/undistract-me.sh
-export UDM_PLAY_SOUND=1
 
 # vim: fdm=marker

@@ -1,7 +1,7 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/vic/Dotfiles/vim/.config/nvim'
-let g:netrw_dirhist_2='/home/vic/Dotfiles/vim/.config/nvim/plugged'
-let g:netrw_dirhist_3='/home/vic/Dotfiles/vim/.config/nvim'
-let g:netrw_dirhist_4='/home/vic/Dotfiles/vim/.config/nvim/spell'
-let g:netrw_dirhist_5='/home/vic/Dotfiles/vim/.config/nvim'
+let g:netrw_dirhist_1='/home/vic/src/github.com/powerline/fonts'
+let g:netrw_dirhist_2='/tmp'
+let g:netrw_dirhist_3='/home/vic'
+let g:netrw_dirhist_4='/home/vic/pCloudDrive/Uni/Med/Med1'
+let g:netrw_dirhist_5='/home/vic/pCloudDrive/Uni/Med/Med1/anatomia'

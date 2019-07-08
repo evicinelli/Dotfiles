@@ -1,8 +1,8 @@
 # A very simple yet super effective cli todo manager
 # Depends on todo.txt, bash, date
 
-TD="$HOME/ownCloud/Dropbox/todo.txt"
-DN="$HOME/ownCloud/Dropbox/done.txt"
+TD="/home/vic/.todo/todo.txt"
+DN="$HOME/vic/.todo/done.txt"
 
 todo-edit() {
     [[ $# -gt 0 ]] && \

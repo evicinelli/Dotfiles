@@ -85,7 +85,7 @@ bindsym $mod+Shift+d exec --no-startup-id $HOME/bin/unsplash
 bindsym $mod+Shift+t exec --no-startup-id $HOME/bin/i3-tray-toggle
 bar {
     position top
-    tray_output none
+    # tray_output none
     status_command i3blocks
     font pango:Inconsolata 13
     strip_workspace_numbers yes
