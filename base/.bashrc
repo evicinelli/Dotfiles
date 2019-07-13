@@ -9,7 +9,7 @@ esac
 HISTCONTROL="ignoredups:erasedups:ignoreboth" # Avioid duplicates
 HISTSIZE= HISTFILESIZE= # Infinite history
 HISTTIMEFORMAT='%F %T '
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo" # Do not append this to history
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo:unsplash" # Do not append this to history
 
 # Colors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -33,7 +33,7 @@ set -o vi
 # }}}
 
 # Variables {{{
-export PATH="${PATH}:$HOME/Dotfiles/script/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
+export PATH="${PATH}:$HOME/Dotfiles/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export TERMINAL=urxvt
 export BROWSER=firefox-esr
@@ -45,7 +45,7 @@ export DN="$HOME/.todo/done.txt"
 export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"
 export GVS="$P/Gvs"
-export MED="$P/Uni/Med/Med1"
+export MED="$HOME/AppuntiUni/Medicina/Med1"
 export MEDIA="$P/Media"
 export NOTES="$P/Notes"
 export PW="$P/Documenti/Password-store"
@@ -113,6 +113,7 @@ alias open="$OPEN"
 # alias pdfjoin=" pdfjoin --paper a4paper --rotateoversize false"
 alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt "
 alias py="python"
+alias quantum="/home/vic/Scaricati/Apps/firefox/firefox"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 # alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
 # alias srv-ssh="ssh root@$SRV"
@@ -489,7 +490,8 @@ prompt() {
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
 
     # end="⚕"
-    end="🍺"
+    # end="🍺"
+    end="▶"
     # end=">"
 
     if [[ $TERM = "dumb" ]]; then

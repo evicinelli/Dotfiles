@@ -15,62 +15,59 @@
 
 # Collezioni {{{
 
-# COLLECTION_NUMBER="1186428"
-# COLLECTION_NUMBER="1778533" # Collezione mia
-# COLLECTION_NUMBER="1912959"
-# COLLECTION_NUMBER="629911"
-# COLLECTION_NUMBER="198884"
-# COLLECTION_NUMBER="289662"
-# COLLECTION_NUMBER="217569"
-# COLLECTION_NUMBER="201"
-# COLLECTION_NUMBER="266986"
-# COLLECTION_NUMBER="142563" # stelline
-# COLLECTION_NUMBER="452289"
-# COLLECTION_NUMBER="862387"
 # COLLECTION_NUMBER="1007074"
-# COLLECTION_NUMBER="921374" # Pattern
+# COLLECTION_NUMBER="1186428"
 # COLLECTION_NUMBER="142376"
-# COLLECTION_NUMBER="326594"
+# COLLECTION_NUMBER="142563" # stelline
 # COLLECTION_NUMBER="1657511"
-# COLLECTION_NUMBER="353649"
-# COLLECTION_NUMBER="1922729" # Beautiful shots from above
-# COLLECTION_NUMBER="311766" # Autumn
-# COLLECTION_NUMBER="3403104" # Autumn is here
-# COLLECTION_NUMBER="827743"
-# COLLECTION_NUMBER="573009"
-# COLLECTION_NUMBER="353649"
+# COLLECTION_NUMBER="1778533" # Collezione mia
 # COLLECTION_NUMBER="1816977"
-# COLLECTION_NUMBER="357786"
+# COLLECTION_NUMBER="1912959"
+# COLLECTION_NUMBER="1922729" # Beautiful shots from above
+# COLLECTION_NUMBER="198884"
+# COLLECTION_NUMBER="201"
+# COLLECTION_NUMBER="217569"
 # COLLECTION_NUMBER="220388"
 # COLLECTION_NUMBER="235" # Best NASA
+# COLLECTION_NUMBER="266986"
+# COLLECTION_NUMBER="289662"
 # COLLECTION_NUMBER="311432"
+# COLLECTION_NUMBER="311766" # Autumn
+# COLLECTION_NUMBER="326594"
+# COLLECTION_NUMBER="3403104" # Autumn is here
+# COLLECTION_NUMBER="353649"
+# COLLECTION_NUMBER="357786"
+# COLLECTION_NUMBER="429524"
+# COLLECTION_NUMBER="452289"
+# COLLECTION_NUMBER="573009"
+COLLECTION_NUMBER="573009"
+# COLLECTION_NUMBER="629911"
+# COLLECTION_NUMBER="827743"
+# COLLECTION_NUMBER="862387"
+# COLLECTION_NUMBER="921374" # Pattern
 # }}}
 
-COLLECTION_NUMBER="429524"
 
 # Settings
 PARAMS=$*
 
-# B&W
+# Imagemagick
 function imagemagick () {
     convert $1 -type grayscale $1
 }
 
 # Grabbing wallpaper from unsplash
-# rm $HOME/img.png
-# wget --quiet -O $HOME/.img "https://source.unsplash.com/user/evicinelli/likes/1600x900"
 wget --quiet -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 # imagemagick img.png
 
-# # Do we have pywal installed?
-# if [[ -x $HOME/.local/bin/wal ]]; then
-#     # I3 and terminal theming
-#     /home/vic/.local/bin/wal $PARAMS -c -i $HOME/.img >/dev/null
-# else
-#     # We don't :(
+## Do we have pywal installed?
+#if [[ -x $HOME/.local/bin/wal ]]; then
+#    # Wal
+#    /home/vic/.local/bin/wal $PARAMS -c -i $HOME/.img >/dev/null
+#else
+#    # We don't :(
      feh --bg-scale $HOME/img
-#     feh --bg-fill $HOME/img.png
-# fi
+#fi
 
 # Theme dunst
 # $HOME/Dotfiles/script/start-dunst 2&1>/dev/null

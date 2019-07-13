@@ -14,11 +14,11 @@ Plug 'mileszs/ack.vim'                                               " Ack in vi
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-Plug 'jeffkreeftmeijer/vim-dim'                                      " 16 color colorscheme
+Plug 'jeffkreeftmeijer/vim-dim'                                      " Default improved: 16 color colorscheme
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'SirVer/ultisnips'                                              " Snippets
 Plug 'junegunn/goyo.vim'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'                                " Now vim <3 tmux
 call plug#end()
 " }}}
 
@@ -42,10 +42,10 @@ set noautochdir
 set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
 set shiftwidth=4          " When indenting with '>', use 4 spaces width
-set showcmd
+set showcmd               " Show partially typed commands
 set smartcase             " Smart-case search
 set smartindent           " Smart indent
-set spell
+set spell                 " Spelling on
 set spelllang=it,en       " Spell dictionaries
 set splitbelow            " Split below
 set splitright            " Vsplit on the right
@@ -61,16 +61,11 @@ endif
 "}}}
 
 " Statusline {{{
-set statusline=%t%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ di\ %L)
-"\ \/\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
-
-" set showtabline=2
-" let g:airline_symbols_ascii = 1
-" let g:airline_section_z=' %l/%L:%v (%p%%)'
-" set noshowmode
+set statusline=%t%=\ %m%r%h%w\ \/\ %Y\ \/\ %l,%v\ (%p%%\ di\ %L)\ \/\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 " }}}
 
 " Appearance {{{
+set nocursorline
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 if has('gui_running')
     let g:fzf_launcher = 'urxvt -geometry 120x30 -e bash -c %s' " Launcher for fzf
@@ -82,18 +77,14 @@ if has('gui_running')
     set guioptions-=e
     set linespace=6                                               " Line spacing
 endif
+set t_Co=16
 colorscheme dim
 set shortmess+=I                                              " No greetings
 set fillchars=vert:\|,fold:-
-set guifont=Source\ Code\ Pro\ 12
 
-"hi CursorLine ctermbg=7
-"highlight FoldColumn ctermfg=15 ctermbg=0
-"highlight LineNr ctermfg=7 ctermbg=15
-"highlight NonText ctermfg = 0
-"highlight VertSplit   ctermfg=7    ctermbg=0              " Vertical split background
-"highlight clear CursorLine                                " Cursorline
+highlight clear CursorLine
 highlight ColorColumn ctermfg=9
+highlight CursorLine cterm=bold
 highlight FoldColumn ctermbg=0 ctermfg=8
 highlight Folded ctermbg=8 ctermfg=7
 highlight PmenuSel ctermbg=4 ctermfg=0
@@ -120,11 +111,11 @@ let g:startify_change_to_dir = 0
 let g:startify_change_to_vcs_root = 0
 let g:startify_custom_header = [""]
 
-let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
-let g:pandoc#biblio#use_bibtool = 1
-let g:pandoc#syntax#conceal#use = 1
 "let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#biblio#use_bibtool = 1
+let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
 let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx', 'codeblock_start', 'quotes', 'long-dashes', 'reference']
+let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position ="left"
 
@@ -141,6 +132,7 @@ let g:autocd#markers = { '**/Medicina/**/*.md': ['Makefile'] }
 " Mappings {{{
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+cnoremap X x
 inoremap " ""<Left>
 inoremap ( ()<Left>
 inoremap <C-z> <C-o><C-z>
@@ -151,11 +143,9 @@ inoremap { {}<Left>
 noremap / mc/
 noremap :Q :q
 noremap :W :w
-noremap <Backspace> k
 noremap <C-n> :cn<CR>
 noremap <C-o> :FZF --no-exact<CR>
 noremap <C-p> :cp<CR>
-noremap <CR> j
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
@@ -218,7 +208,7 @@ augroup end
 augroup nonvim
     au!
     au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.odt,*.ppt,*.odp,*.xls,*.ods,*.{mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
-    au BufReadPost *.{docx,xlsx,pptx} sil exe "!libreoffice " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
+    au BufReadPost *.{docx,xlsx,pptx} sil exe "!soffice " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
 
 augroup pyFiles
@@ -236,7 +226,7 @@ autocmd! BufWritePost *vimrc* source %
 
 au BufNewFile,BufRead *.md
     \ nnoremap <leader><leader> /<++><CR>cf>|
-    " \ inoremap <C-j> ![<++>](img/<++>)|
+    \ inoremap <C-i> ![<++>](img/<++>)|
     \ inoremap ^ ^^<Left>|
     \ inoremap ~ ~~<Left>|
 
@@ -276,7 +266,6 @@ function! s:buflist()
   return split(ls, '\n')
 endfunction
 
-
 " }}}
 
 " Notes {{{
@@ -284,13 +273,13 @@ command! -nargs=1 Nack vimgrep "<args>" $MED/**/*.md
 nnoremap <leader>n :Nack 
 
 function! s:TakeNotes()
-    " Goyo
+    Goyo 100%
     " vertical resize
     silent! TOC
     se nowrap
     "normal l
 endfunction
-com! Focus call s:TakeNotes()
+com! Notes call s:TakeNotes()
 
 " }}}
 
