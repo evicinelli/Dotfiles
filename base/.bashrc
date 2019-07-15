@@ -323,24 +323,29 @@ function todo-ls-tags() {
 
 # Password manager {{{
 p () {
-    edit_key=ctrl-v
-    view_key=ctrl-c
+    if [[ $1 =~ ls|find|grep|add|generate ]]; then
+        pass $*
+    else
+        edit_key=ctrl-v
+        view_key=ctrl-c
 
-    FILTER="s:${PW}/::;s:.gpg::"
-    readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
+        FILTER="s:${PW}/::;s:.gpg::"
+        readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
 
-    fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf --no-exact \
-            --expect=$edit_key,$view_key,$pipe_key --query="$@"\
-            --header="enter to copy, $edit_key to edit, $view_key to cat")
-    first=$(echo $fzfOut | cut -d" " -f1)
-    second=$(echo $fzfOut | cut -d" " -f2)
+        fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" | fzf --no-exact \
+                --expect=$edit_key,$view_key,$pipe_key --query="$@"\
+                --header="enter to copy, $edit_key to edit, $view_key to cat")
+        first=$(echo $fzfOut | cut -d" " -f1)
+        second=$(echo $fzfOut | cut -d" " -f2)
 
-    case "$first" in
-        $edit_key) pass edit "$second";;
-        $view_key) pass "$second";;
-        *) pass -c "$first";;
-    esac
-
+        if [[ ! -z $second ]]; then
+            case "$first" in
+                $edit_key) pass edit "$second";;
+                $view_key) pass "$second";;
+                *) pass -c "$second";;
+            esac
+        fi
+    fi
 }
 # }}}
 

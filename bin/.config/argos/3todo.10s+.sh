@@ -1,6 +1,7 @@
 #! /bin/bash
+# Bruuuttino forte
 
-source $HOME/Dotfiles/script/bin/todo
+source $HOME/Dotfiles/bin/todo
 
 tdn=$(todo-ls | wc -l)
 tdun=$(todo-ls | grep "^(" | wc -l)
