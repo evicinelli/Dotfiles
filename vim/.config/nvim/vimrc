@@ -92,13 +92,14 @@ function! GetColor()
         let bgColor = "2"
     elseif (currentMode =~# 'i')
         let bgColor = "1"
-    elseif (currentMode =~# 'v\|V\|\^V')
+    elseif (currentMode =~# 'v\|V\|^V')
         let bgColor = "4"
     elseif (currentMode =~# 't')
         let bgColor = "3"
         let textColor = "8"
-    elseif (currentMode =~# 's\|r')
+    elseif (currentMode =~# 's\|R')
         let bgColor = "6"
+        let textColor = 8
     elseif (currentMode =~# 'c')
         let bgColor = "5"
     endif
@@ -241,7 +242,7 @@ augroup todotxt
 augroup end
 
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
-
+autocmd BufNew *term:\/\/* set nospell
 autocmd! BufWritePost *vimrc* source %
 
 au BufNewFile,BufRead *.md
