@@ -142,7 +142,6 @@ inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
-noremap / mc/
 noremap :Q :q
 noremap :W :w
 noremap <C-n> :cn<CR>
