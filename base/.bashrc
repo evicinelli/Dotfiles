@@ -214,8 +214,7 @@ nack () {
 # Todo manager {{{
 todo-edit() {
     [[ $# -gt 0 ]] && \
-         $EDITOR $TD -c "/$(echo $* | sed "s/ /.*/g")" -c "normal zR" || \
-         $EDITOR $TD
+        $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
 }
 
 todo-add(){

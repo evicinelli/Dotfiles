@@ -1,10 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/etc/apt/sources.list.d'
-let g:netrw_dirhist_2='/etc/apt'
-let g:netrw_dirhist_3='/etc/apt/sources.list.d'
-let g:netrw_dirhist_4='/etc/apt'
-let g:netrw_dirhist_5='/etc/apt/auth.conf.d'
-let g:netrw_dirhist_6='/etc/apt'
-let g:netrw_dirhist_7='/etc/apt/sources.list.d'
-let g:netrw_dirhist_8='/home/vic'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/vic/pCloudDrive/Proj/at-man/src'
+let g:netrw_dirhist_2='/home/vic/pCloudDrive/Proj/at-man/src/controller'
+let g:netrw_dirhist_3='/home/vic/AppuntiUni/Medicina/Med1/img'
+let g:netrw_dirhist_4='/home/vic'

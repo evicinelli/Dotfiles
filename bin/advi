@@ -1,10 +1,10 @@
 #! /bin/bash
 
 [[ -e /tmp/advi ]] || mkdir /tmp/advi
-file=$(mktemp -p /tmp/advi)
 
-EDITOR="urxvt -e sh -c nvim"
-$EDITOR\ $file
+file=$(mktemp -t XXXX -p /tmp/advi)
 
-[[ $? -eq 0 ]] && cat $file | xclip -selection PRIMARY
-[[ $? -eq 0 ]] && cat $file | xclip -selection CLIPBOARD
+gnome-terminal -- nvim ${file}
+
+cat ${file} | xclip -selection primary -f | xclip -selection clipboar
+cat ${file} | wl-copy

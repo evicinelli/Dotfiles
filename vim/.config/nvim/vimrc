@@ -3,19 +3,14 @@ call plug#begin()
 if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default
 endif
-" Plug 'junegunn/fzf.vim',
-Plug 'SirVer/ultisnips'                                              " Snippets
 Plug 'christoomey/vim-tmux-navigator'                                " Now vim <3 tmux
 Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'jeffkreeftmeijer/vim-dim'                                      " Default improved: 16 color colorscheme
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'
-Plug 'mhinz/vim-startify'                                            " Vim-startify
-Plug 'mileszs/ack.vim'                                               " Ack in vim
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
@@ -61,12 +56,10 @@ if has("nvim")
 endif
 "}}}
 
-" Appearance {{{
-set nocursorline
+" Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set t_Co=16
 colorscheme dim
-set shortmess+=I                                              " No greetings
 set fillchars=vert:\ ,fold:\ 
 
 highlight clear CursorLine
@@ -78,11 +71,9 @@ highlight PmenuSel ctermbg=4 ctermfg=0
 highlight SpellBad ctermfg=9 ctermbg=none
 highlight SpellCap ctermbg=14 ctermfg=0
 highlight TodoDueToday ctermbg=3 ctermfg=0
-" }}}
 
-" Statusline {{{
 set noshowmode
-function! GetColor()
+function! ChangeColorMode()
 
     let currentMode = mode()
     let bgColor = "8"
@@ -92,7 +83,7 @@ function! GetColor()
         let bgColor = "2"
     elseif (currentMode =~# 'i')
         let bgColor = "1"
-    elseif (currentMode =~# 'v\|V\|^V')
+    elseif (currentMode =~# 'v\|V\|\')
         let bgColor = "4"
     elseif (currentMode =~# 't')
         let bgColor = "3"
@@ -112,27 +103,17 @@ function! GetColor()
 endfunction
 
 ""set noshowmode
-set stl=%1*%{GetColor()}\ \ %{toupper(mode())}\ \ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\ %l,%v\ (%p%%\ di\ %L)
-"\ \/\ %3*%{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
+set stl=%1*%{ChangeColorMode()}\ \ %{toupper(mode())}\ \ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\ %l,%v\ (%p%%\ di\ %L) " \ %0*\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 " }}}
 
 " Plugin settings {{{
-let g:UltiSnipsNoPythonWarning = 1
-
 let g:netrw_banner = 0          " no banner
 let g:netwr_browse_split = 4    " open in prior window
 let g:netwr_altv = 1            " split to the right
 let g:netrw_liststyle = 0       " tree view
 let g:netwr_list_hide = netrw_gitignore#Hide()
 
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_guifg = 'DarkGray'
-
-let g:startify_change_to_dir = 0
-let g:startify_change_to_vcs_root = 0
-let g:startify_custom_header = [""]
-
-"let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#modules#disabled = ["folding"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
 let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx', 'codeblock_start', 'quotes', 'long-dashes', 'reference']
@@ -201,7 +182,9 @@ iabbrev perchè perché
 iabbrev Perchè Perché
  " }}}
 
-" Extended text Objects (Conner McDaniel) and matchpairs {{{
+" Extended text Objects and matchpairs {{{
+" Thanks to Conner McDaniel
+set matchpairs+=<:>
 let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\", "^", "~"]
 for item in s:items
     exe "noremap yi".item." T".item."yt".item
@@ -213,8 +196,6 @@ for item in s:items
     exe "vnoremap vi".item." T".item."vt"item
     exe "vnoremap va".item." F".item."vf"item
 endfor
-
-set matchpairs+=<:>
 " }}}
 
  " Autogroups and Autocmds {{{
@@ -250,8 +231,6 @@ au BufNewFile,BufRead *.md
     \ inoremap ![ ![<++>](img/<++>)|
     \ inoremap ^ ^^<Left>|
     \ inoremap ~ ~~<Left>|
-
-au BufEnter * if &ft ==# 'qf' | set nowrap | endif
 " }}}
 
 " Functions {{{
