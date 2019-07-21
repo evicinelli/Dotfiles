@@ -510,7 +510,6 @@ ps1_hostname() {
     user=$(whoami)
     [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host"
 }
-
 # }}}
 
 # Tmux

@@ -21,7 +21,7 @@ if [[ $ARGOS_MENU_OPEN ]]; then
     echo "---"
     if [[ $tdn -gt 0 ]]; then
         for f in $(todo-ls); do
-            echo "$f | bash='source ~/Dotfiles/script/bin/todo && todo-done \"$f\"' terminal='false'"
+            echo "$f | bash='source ~/Dotfiles/bin/todo && todo-done \"$f\"' terminal='false'"
         done
     else
         echo "Relax <3"
