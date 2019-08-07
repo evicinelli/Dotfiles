@@ -90,8 +90,6 @@ alias fgrep='fgrep --color=auto'
 # }}}
 
 # Troppo lunghi da scrivere (o li sbaglio sempre) {{{
-# alias android-emulator="$HOME/Workspace/Android/Sdk/emulator/emulator -avd Nexus_5X_API_27_x86 -use-system-libs -no-snapshot"
-# alias android-studio="$HOME/Scaricati/Apps/android-studio/bin/studio.sh"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
@@ -115,14 +113,11 @@ alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt
 alias py="python"
 alias quantum="/home/vic/Scaricati/Apps/firefox/firefox"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
-# alias srv-poweroff="ssh root@$SRV 'systemctl poweroff'"
-# alias srv-ssh="ssh root@$SRV"
-# alias srv-upnp-down="sudo umount /media/vic/Upnp\ Salotto/"
 alias t="tree -L 1"
 alias tr="tree -R"
 alias tt="tree -L 2"
 alias ttt="tree -L 3"
-alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “”   ‚  „   ′″  ‹›   «  »   -–  —   (  /  )[  |  ]  {  \  }   *   †‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑                 "'
+alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
 alias vimrc="vi $HOME/.config/nvim/vimrc"
 # }}}
 
@@ -322,7 +317,7 @@ function todo-ls-tags() {
 
 # Password manager {{{
 p () {
-    if [[ $1 =~ ls|find|grep|add|generate ]]; then
+    if [[ $1 =~ ls|find|grep|add|generate|show|insert|edit|rm|mv|cp|git|help|version ]]; then
         pass $*
     else
         edit_key=ctrl-v
@@ -484,13 +479,13 @@ prompt() {
     todoColor=${bldgrn}
     dirColor=${bldpur}
 
-    # Todays todo
+    # Today's todos
     [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
     [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"
     [[ $toDo -gt 0 ]] && todoColor=${bldylw}
     [[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
 
-    # ctr-z'd jobs
+    # suspended jobs
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
 
     # end="⚕"

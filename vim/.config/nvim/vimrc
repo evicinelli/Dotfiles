@@ -64,47 +64,53 @@ colorscheme dim
 set fillchars=vert:\ ,fold:\ 
 
 highlight clear CursorLine
-highlight ColorColumn ctermfg=9
+highlight clear TabLine
+highlight ColorColumn ctermbg=7
 highlight CursorLine cterm=bold
 highlight FoldColumn ctermbg=0 ctermfg=8
-"highlight Folded ctermbg=8 ctermfg=7
+highlight Folded ctermbg=7 ctermfg=none
+highlight LineNR ctermbg=7 ctermfg=none
 highlight PmenuSel ctermbg=4 ctermfg=0
 highlight SpellBad ctermfg=9 ctermbg=none
 highlight SpellCap ctermbg=14 ctermfg=0
+highlight StatusLine ctermbg=7
 highlight TodoDueToday ctermbg=3 ctermfg=0
 
 set noshowmode
-function! ChangeColorMode()
+function! GetModeAndColor()
 
     let currentMode = mode()
-    let bgColor = "8"
-    let textColor = "15"
+    let bgColor = 8
+    let textColor = 7
 
-    if (currentMode =~# 'n' )
-        let bgColor = "2"
+    if (currentMode =~# 'n')
+        let bgColor = 2
     elseif (currentMode =~# 'i')
-        let bgColor = "1"
+        let bgColor = 1
+        let textColor = 15
     elseif (currentMode =~# 'v\|V\|\')
-        let bgColor = "4"
+        let bgColor = 4
+        if (currentMode == "\")
+            let currentMode = "CV"
+        endif
     elseif (currentMode =~# 't')
-        let bgColor = "3"
-        let textColor = "8"
+        let bgColor = 3
+        let textColor = 8
     elseif (currentMode =~# 's\|R')
-        let bgColor = "6"
+        let bgColor = 6
         let textColor = 8
     elseif (currentMode =~# 'c')
-        let bgColor = "5"
+        let bgColor = 5
     endif
 
     exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
     exe "hi! User2 ctermfg=".textColor." ctermbg=".(bgColor + 8)." cterm=bold"
     redrawstatus    " Ha risolto ogni problema <3
 
-    return ""
+    return toupper(currentMode)
 endfunction
 
-""set noshowmode
-set stl=%1*%{ChangeColorMode()}\ \ %{toupper(mode())}\ \ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\ %l,%v\ (%p%%\ di\ %L)\ " \ %0*\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
+set stl=%1*\ \ %{GetModeAndColor()}\ \ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\ %l,%v\ (%p%%\ di\ %L)\ " \ %0*\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 " }}}
 
 " Plugin settings {{{
@@ -130,6 +136,7 @@ let g:fzf_action = {
 let g:autocd#autocmd_enable = 1
 let g:autocd#markers = { '**/Medicina/**/*.md': ['Makefile'] }
 
+
 " }}}
 
 " Mappings {{{
@@ -146,7 +153,6 @@ inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
 noremap <C-n> :cn<CR>
-noremap <C-o> :FZF --no-exact<CR>
 noremap <C-p> :cp<CR>
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
@@ -155,20 +161,15 @@ noremap <leader><leader> zA <CR>
 noremap <leader>a :Ack -i 
 noremap <leader>b :browse oldfile<CR>
 noremap <leader>f :FZF --no-exact 
-noremap <leader>fh :FZF --no-exact ~<CR>
-noremap <leader>fm :FZF --no-exact $MED<CR>
-noremap <leader>fp :FZF --no-exact $P<CR>
 noremap <leader>n :Nack 
-noremap <leader>nn :set number relativenumber <CR>
-noremap <leader>nnr :set nonumber norelativenumber <CR>
 noremap <leader>p :FZF --no-exact<CR>
 noremap <leader>so :!xdg-open "%" <CR>
 noremap Y y$
 noremap Z zMzv
 noremap j gj
 noremap k gk
-noremap vaz [zV]z
-noremap viz [zjV]zk
+vnoremap az [zo]z
+vnoremap iz [zjo]zk
 vnoremap J gj
 vnoremap K gk
 if has("nvim")
@@ -231,11 +232,13 @@ au BufNewFile,BufRead *.md
     \ inoremap ![ ![<++>](img/<++>)|
     \ inoremap ^ ^^<Left>|
     \ inoremap ~ ~~<Left>|
+
+au BufEnter *pandoc#TOC* set nowrap
 " }}}
 
 " Functions {{{
 function! s:goyo_enter()
-    vertical resize
+    " vertical resize
 endfunction
 
 function! s:goyo_leave()

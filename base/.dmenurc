@@ -1,4 +1,4 @@
-DMENU="dmenu -f -i -fn \"MesloLGS-Regular-12\""
+DMENU="dmenu -f -i -fn \"Inconsolata-14\""
 
 #-nb \"#f5f5f5\" -nf \"#464646\""
 

@@ -21,11 +21,11 @@
 # urgent
 
 # Global properties
-command=~/bin/i3blocks/$BLOCK_NAME
+command=~/Dotfiles/bin/i3blocks/$BLOCK_NAME
 separator_block_width=7
 markup=none
 # Separator
-full_text=/
+full_text=∙
 separator=false
 align=center
 
@@ -38,8 +38,6 @@ instance=spotify
 interval=1
 signal=10
 #color=#4848484
-
-[separator]
 
 [volume]
 instance=Master

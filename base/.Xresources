@@ -3,7 +3,7 @@
 !URxvt.letterSpace     :-1
 URxvt.buffered        :true
 URxvt.depth           :32
-URxvt.font            :xft:Noto Mono,Noto Color Emoji:size=12
+URxvt.font            :xft:Inconsolata:size=13
 URxvt.iso14755        :false
 URxvt.iso14755_52     :false
 URxvt.keysym.C-F2     :resize-font:reset
