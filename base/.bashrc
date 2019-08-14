@@ -35,7 +35,7 @@ set -o vi
 # Variables {{{
 export PATH="${PATH}:$HOME/Dotfiles/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
-export TERMINAL=urxvt
+export TERMINAL=kitty
 export BROWSER=firefox-esr
 export OPEN=xdg-open
 
@@ -160,8 +160,9 @@ bind "set show-all-if-ambiguous on"
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-o": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
+# bind '"\C-o": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
 bind '"\C-a": " fj"'
+bind '"\C-p": " fj"'
 # }}}
 
 # Shell options {{{
@@ -490,8 +491,8 @@ prompt() {
 
     # end="⚕"
     # end="🍺"
-    end="▶"
-    # end=">"
+    # end="▶"
+    end=">"
 
     if [[ $TERM = "dumb" ]]; then
         export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal

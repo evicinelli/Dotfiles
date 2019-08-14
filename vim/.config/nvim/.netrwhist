@@ -1,10 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/vic/pCloudDrive/Proj/at-man/src'
-let g:netrw_dirhist_2='/home/vic/pCloudDrive/Proj/at-man/src/controller'
-let g:netrw_dirhist_3='/home/vic/AppuntiUni/Medicina/Med1/img'
-let g:netrw_dirhist_4='/home/vic'
-let g:netrw_dirhist_5='/home/vic/pCloudDrive/Gvs/web'
-let g:netrw_dirhist_6='/home/vic/Dotfiles/bin'
-let g:netrw_dirhist_7='/var/lib/flatpak/runtime/org.gnome.Platform/x86_64/3.32/6869751f600dd3dd1b5b996d9e5940399e15326aac48e13c37cdf7330706a084/files/share/common-lisp/source'
-let g:netrw_dirhist_8='/home/vic/Dotfiles/wm/i3/.config/i3blocks'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/usr/share/nvim'
+let g:netrw_dirhist_2='/home/vic/Scaricati/Apps/anki-2.0.52/bin/include'
+let g:netrw_dirhist_3='/home/vic/Scaricati/Apps/anki-2.0.52/bin/include/python2.7'
+let g:netrw_dirhist_4='/home/vic/Scaricati/Apps/anki-2.0.52/bin/include'
+let g:netrw_dirhist_5='/home/vic/Scaricati/Apps/anki-2.0.52/bin/include/python2.7'

@@ -9,6 +9,7 @@ Plug 'godlygeek/tabular'                                             " Tabulariz
 Plug 'jeffkreeftmeijer/vim-dim'                                      " Default improved: 16 color colorscheme
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'
+" Plug 'lilydjwg/colorizer'
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
@@ -32,12 +33,14 @@ set hidden                " Allow to switch buffer without saving it
 set hlsearch              " Highlight all search results
 set ignorecase            " Mah
 set incsearch             " Incremental search
+set lazyredraw            " Redraw screen only when necessary
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set modeline              " Vim executes vimL commands if they are found in the current file
 set mouse=a               " Enable mouse in terminal vim
-set noautochdir
+set noautochdir           " Do not change folder
 set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
+set secure                " No shell command on autocmd
 set shiftwidth=4          " When indenting with '>', use 4 spaces width
 set showcmd               " Show partially typed commands
 set smartcase             " Smart-case search
@@ -64,16 +67,18 @@ colorscheme dim
 set fillchars=vert:\ ,fold:\ 
 
 highlight clear CursorLine
-highlight clear TabLine
-highlight ColorColumn ctermbg=7
-highlight CursorLine cterm=bold
+"highlight CursorLineNR cterm=bold ctermbg=15
+highlight Folded ctermbg=8 ctermfg=0
+highlight LineNR ctermbg=0 ctermfg=none
+highlight StatusLine ctermbg=8 ctermfg=15
+highlight StatusLineNC ctermbg=8 ctermfg=0
+highlight TabLineFill ctermfg=8
+highlight ColorColumn ctermbg=8
+highlight CursorLine ctermbg=8
 highlight FoldColumn ctermbg=0 ctermfg=8
-highlight Folded ctermbg=7 ctermfg=none
-highlight LineNR ctermbg=7 ctermfg=none
 highlight PmenuSel ctermbg=4 ctermfg=0
 highlight SpellBad ctermfg=9 ctermbg=none
 highlight SpellCap ctermbg=14 ctermfg=0
-highlight StatusLine ctermbg=7
 highlight TodoDueToday ctermbg=3 ctermfg=0
 
 set noshowmode
@@ -81,13 +86,12 @@ function! GetModeAndColor()
 
     let currentMode = mode()
     let bgColor = 8
-    let textColor = 7
+    let textColor = 15
 
     if (currentMode =~# 'n')
         let bgColor = 2
     elseif (currentMode =~# 'i')
         let bgColor = 1
-        let textColor = 15
     elseif (currentMode =~# 'v\|V\|\')
         let bgColor = 4
         if (currentMode == "\")
@@ -98,7 +102,7 @@ function! GetModeAndColor()
         let textColor = 8
     elseif (currentMode =~# 's\|R')
         let bgColor = 6
-        let textColor = 8
+        "let textColor = 8
     elseif (currentMode =~# 'c')
         let bgColor = 5
     endif
@@ -120,11 +124,11 @@ let g:netwr_altv = 1            " split to the right
 let g:netrw_liststyle = 0       " tree view
 let g:netwr_list_hide = netrw_gitignore#Hide()
 
-let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#modules#disabled = ["folding"] " Troppo lento
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
-let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'list', 'dashes', 'image', 'atx', 'codeblock_start', 'quotes', 'long-dashes', 'reference']
-let g:pandoc#syntax#conceal#use = 1
+let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'image', 'block', 'subscript', 'superscript', 'strikeout', 'atx', 'codeblock_start', 'codeblock_delim', 'footnote', 'definition', 'list', 'newline', 'quotes', 'inlinecode']
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position ="left"
 
@@ -136,7 +140,7 @@ let g:fzf_action = {
 let g:autocd#autocmd_enable = 1
 let g:autocd#markers = { '**/Medicina/**/*.md': ['Makefile'] }
 
-
+let g:goyo_width = 100
 " }}}
 
 " Mappings {{{
@@ -239,6 +243,7 @@ au BufEnter *pandoc#TOC* set nowrap
 " Functions {{{
 function! s:goyo_enter()
     " vertical resize
+    highlight NonText ctermfg=0
 endfunction
 
 function! s:goyo_leave()

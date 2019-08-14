@@ -7,9 +7,9 @@ txt="🔋 $perc % $status"
 if [[ $perc -le 25 ]]; then
     echo "$txt | color='red'"
 elif [[ $perc -le "50" ]]; then 
-    echo "$txt" #"| color='yellow'"
+    echo "$txt" "| color='yellow'"
 else
-    echo "$txt" #" | color='light green'"
+    echo "$txt" " | color='light green'"
 fi
 echo "---"
 if [[ $ARGOS_MENU_OPEN ]]; then
