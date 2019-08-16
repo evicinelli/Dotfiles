@@ -511,6 +511,4 @@ ps1_hostname() {
 # Tmux
 [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
 
-source /etc/profile.d/undistract-me.sh
-
 # vim: fdm=marker
