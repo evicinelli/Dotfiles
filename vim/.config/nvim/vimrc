@@ -106,6 +106,7 @@ function! GetModeAndColor()
             let textColor = 0
         elseif (currentMode =~# 'c')
             let bgColor = 5
+            let textColor = 0
         endif
     else
         let textColor = 15

@@ -71,7 +71,7 @@ export WORK_LENGTH=40
 alias la="ls -a"
 alias ll="ls -l"
 alias lla="ls -la"
-alias refresh='source ~/.bashrc'
+alias rm="rm -I"
 
 # Vim and neovim {{{
     alias vi="$EDITOR"
