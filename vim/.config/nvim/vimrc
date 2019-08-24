@@ -8,9 +8,7 @@ Plug 'fretep/todo.txt-vim'                                           " Todo.txt 
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'jeffkreeftmeijer/vim-dim'                                      " Default improved: 16 color colorscheme
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
-"Plug 'junegunn/fzf.vim'                                              " Fzf <3 vim
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
-" Plug 'lilydjwg/colorizer'                                            " Color the colors
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
@@ -143,14 +141,6 @@ let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
     \ 'ctrl-v': 'vsplit' }
-let g:fzf_buffers_jump = 1
-function! s:fzf_statusline()
-  highlight fzf1 ctermfg=0 ctermbg=0
-  highlight fzf2 ctermfg=0 ctermbg=0
-  highlight fzf3 ctermfg=0 ctermbg=0
-  setlocal statusline=" "
-endfunction
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 let g:autocd#autocmd_enable = 1
 let g:autocd#markers = { '**/Medicina/**/*.md': ['Makefile'] }
@@ -165,6 +155,7 @@ cnoremap Q q
 cnoremap W w
 cnoremap X x
 cabbrev ls Buffers
+cabbrev p Files
 inoremap " ""<Left>
 inoremap ( ()<Left>
 inoremap <C-z> <C-o><C-z>
@@ -222,6 +213,11 @@ endfor
  " Autogroups and Autocmds {{{
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+
 augroup text
      au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
      au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
@@ -282,6 +278,8 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
+command! -nargs=? Files FZF --query=<args>
+
 " Now :ls <3 fzf
 function! s:buflist()
   redir => ls
@@ -294,13 +292,17 @@ function! s:bufopen(e)
   execute 'buffer' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
-command! -nargs=* Buffers :call fzf#run({
+command! -nargs=* Buffers call fzf#run(fzf#wrap({
 \   'source':  reverse(<sid>buflist()),
 \   'sink':    function('<sid>bufopen'),
 \   'options': '-1 +m --query="<f-args>"',
 \   'down':    len(<sid>buflist()) + 4
-\ })
+\ }))
 
+" fzf search :oldfiles
+command! -bang MRU call fzf#run(fzf#wrap({
+\   "source": v:oldfiles,
+\}, <bang>0))
 " }}}
 
 " Notes {{{
