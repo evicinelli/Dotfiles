@@ -83,7 +83,7 @@ function! GetModeAndColor()
 
     let currentMode = mode()
     let bgColor = 8
-    let textColor = 15
+    let textColor = 0
 
     if (or(&ma, and(!&ma, currentMode =~# 't')))
         if (currentMode =~# 'n')
@@ -93,7 +93,6 @@ function! GetModeAndColor()
             let bgColor = 1
         elseif (currentMode =~# 'v\|V\|\')
             let bgColor = 4
-            let textColor = 0
             if (currentMode == "\")
                 let currentMode = "CV"
             endif
@@ -105,7 +104,6 @@ function! GetModeAndColor()
             let textColor = 0
         elseif (currentMode =~# 'c')
             let bgColor = 5
-            let textColor = 0
         endif
     else
         let textColor = 15
