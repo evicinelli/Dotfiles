@@ -45,8 +45,11 @@
 # COLLECTION_NUMBER="862387"
 # COLLECTION_NUMBER="921374" # Pattern
 # COLLECTION_NUMBER="4994801"
-COLLECTION_NUMBER="452289"
+#COLLECTION_NUMBER="452289"
+COLLECTION_NUMBER="1971015"
 # }}}
+
+user="brutus"
 
 
 # Settings
@@ -58,8 +61,9 @@ function imagemagick () {
 }
 
 # Grabbing wallpaper from unsplash
-#wget -O $HOME/img "https://source.unsplash.com/featured"
-wget -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+#wget -O $HOME/img "https://source.unsplash.com/featured/1600x900"
+#wget -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+wget -O $HOME/img "https://source.unsplash.com/user/$user/1600x900"
 # imagemagick img.png
 
 ## Do we have pywal installed?

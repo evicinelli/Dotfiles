@@ -82,7 +82,7 @@ set noshowmode
 function! GetModeAndColor()
 
     let currentMode = mode()
-    let bgColor = 8
+    let bgColor = 0
     let textColor = 0
 
     if (or(&ma, and(!&ma, currentMode =~# 't')))
@@ -106,8 +106,8 @@ function! GetModeAndColor()
             let bgColor = 5
         endif
     else
-        let textColor = 15
-        let bgColor = 10000000
+        let textColor = 0
+        let bgColor = 240
     endif
 
     exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
@@ -130,8 +130,8 @@ let g:netwr_list_hide = netrw_gitignore#Hide()
 " let g:pandoc#modules#disabled = ["folding"] " Troppo lento
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
-let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'image', 'block', 'subscript', 'superscript', 'strikeout', 'atx', 'codeblock_start', 'codeblock_delim', 'footnote', 'definition', 'list', 'newline', 'quotes', 'inlinecode']
+let g:pandoc#syntax#conceal#use = 1
+let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'image', 'subscript', 'superscript', 'strikeout', 'atx', 'codeblock_start', 'codeblock_delim', 'footnote', 'definition', 'list', 'newline', 'quotes', 'inlinecode', 'ellipses']
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position ="left"
 
