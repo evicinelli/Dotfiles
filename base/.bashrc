@@ -163,6 +163,7 @@ bind Control-l:clear-screen
 # bind '"\C-o": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
 bind '"\C-a": " fj"'
 bind '"\C-p": " fj"'
+bind '"\C-o": " mimeopen \"$(fzf)\""'
 # }}}
 
 # Shell options {{{

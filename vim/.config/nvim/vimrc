@@ -21,6 +21,7 @@ call plug#end()
 syntax enable             " Enable syntax Highighting
 filetype plugin on        " Filetype plugin
 filetype plugin indent on " Specific indentation rules depending on file type
+" set secure                " No shell command on autocmd
 set autoindent            " Auto-indent
 set autoread              " Auto reload file if modified from external command
 set clipboard=unnamed,unnamedplus   " Integrate with system clipboard
@@ -39,7 +40,6 @@ set mouse=a               " Enable mouse in terminal vim
 set noautochdir           " Do not change folder
 set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
-" set secure                " No shell command on autocmd
 set shiftwidth=4          " When indenting with '>', use 4 spaces width
 set showcmd               " Show partially typed commands
 set smartcase             " Smart-case search
@@ -49,6 +49,9 @@ set spelllang=it,en       " Spell dictionaries
 set splitbelow            " Split below
 set splitright            " Vsplit on the right
 set tabstop=4             " Show existing tab with 4 spaces width
+set undofile              " Persistent history
+set undodir=~/.vimundo    " Persistent undo kept under ~/.vimundo/
+set undolevels=5000       " Keep up to 5000 edits in undofile
 set updatetime=2000       " Consider vim inactive after x sec of no activity in normal mode
 set wildignorecase        " Ignore case when autocomplete
 set wildmenu              " Tab autocompletion in menu
