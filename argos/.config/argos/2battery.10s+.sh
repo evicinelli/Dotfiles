@@ -1,0 +1,1 @@
+/home/vic/Dotfiles/bin/.config/argos/2battery.10s+.sh

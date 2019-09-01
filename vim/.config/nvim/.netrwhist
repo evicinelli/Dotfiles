@@ -1,3 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/vic/Scrivania/AppuntiUni/Medicina/Med1'
+let g:netrw_dirhist_2='/home/vic/Scrivania/AppuntiUni/Medicina/Med1/anatomia/decorsi'
+let g:netrw_dirhist_3='/home/vic/Dotfiles/wm/i3/.config'
+let g:netrw_dirhist_4='/home/vic/Dotfiles/wm/i3'
+let g:netrw_dirhist_5='/home/vic/Dotfiles/wm'
+let g:netrw_dirhist_6='/home/vic/Dotfiles/wm/i3'
+let g:netrw_dirhist_7='/home/vic/Dotfiles/wm/i3/.config'

@@ -14,6 +14,7 @@ Plug 'sheerun/vim-polyglot'                                          " A collect
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
+Plug 'machakann/vim-highlightedyank'                                 " Highlight what's going to be yanked
 call plug#end()
 " }}}
 
@@ -173,7 +174,7 @@ noremap <leader><leader> zA <CR>
 noremap <leader>a :Ack -i 
 noremap <leader>b :browse oldfile<CR>
 noremap <leader>f :FZF --no-exact 
-noremap <leader>n :Nack 
+noremap <leader>na :Nack 
 noremap <leader>p :FZF --no-exact<CR>
 noremap <leader>so :!xdg-open "%" <CR>
 noremap Y y$
@@ -279,7 +280,7 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
-command! -nargs=? Files FZF --query=<args>
+command! -nargs=? Files FZF --query=<args>\ 
 
 " Now :ls <3 fzf
 function! s:buflist()
@@ -296,7 +297,7 @@ endfunction
 command! -nargs=* Buffers call fzf#run(fzf#wrap({
 \   'source':  reverse(<sid>buflist()),
 \   'sink':    function('<sid>bufopen'),
-\   'options': '-1 +m --query="<f-args>"',
+\   'options': '-1 --exact +m --query="<f-args>"',
 \   'down':    len(<sid>buflist()) + 4
 \ }))
 

@@ -36,8 +36,8 @@ set -o vi
 export PATH="${PATH}:$HOME/Dotfiles/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export TERMINAL=kitty
-export BROWSER=firefox-esr
-export OPEN=xdg-open
+export BROWSER=quantum
+export OPEN=mimeopen
 
 export P="/home/vic/pCloudDrive"
 export DF="$HOME/Dotfiles"
@@ -59,8 +59,8 @@ export DBX="$F/Dropbox"
 export SRV="192.168.1.197"
 export EMPTY_LINES="^$"
 export BATTERY_NUMBER=1
-export BREAK_LENGTH=10
-export WORK_LENGTH=40
+export BREAK_LENGTH=5
+export WORK_LENGTH=25
 
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
