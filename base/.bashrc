@@ -37,23 +37,21 @@ export PATH="${PATH}:$HOME/Dotfiles/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Sca
 [[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export TERMINAL=kitty
 export BROWSER=quantum
-export OPEN=mimeopen
+export OPEN=xdg-open
 
+# Folder
 export P="/home/vic/pCloudDrive"
 export DF="$HOME/Dotfiles"
-export DN="$HOME/.todo/done.txt"
+export DN="$P/Documenti/Todo/done.txt"
 export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"
 export GVS="$P/Gvs"
-export MED="$HOME/Scrivania/AppuntiUni/Medicina/Med1"
+export MED="$P/Uni/Appunti/Medicina/Med2"
 export MEDIA="$P/Media"
 export NOTES="$P/Notes"
 export PW="$P/Documenti/Password-store"
-export TD="$HOME/.todo/todo.txt"
+export TD="$P/Documenti/Todo/todo.txt"
 export UNI="$P/Uni/AppuntiUni"
-
-export F="$HOME/ownCloud"
-export DBX="$F/Dropbox"
 
 # Altro
 export SRV="192.168.1.197"
@@ -160,10 +158,9 @@ bind "set show-all-if-ambiguous on"
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-# bind '"\C-o": " \C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa"' # Select files
 bind '"\C-a": " fj"'
-bind '"\C-p": " fj"'
-bind '"\C-o": " mimeopen \"$(fzf)\""'
+bind -r '"\C-z"'
+bind '"\C-z": " fj"'
 # }}}
 
 # Shell options {{{
@@ -182,6 +179,10 @@ shopt -s cdable_vars
 # Functions {{{
 
 # Altra roba {{{
+dict() {
+    curl dict://dict.org/d:${1} | less
+}
+
 devdocs () {
     $BROWSER "\!devdocs $*" && i3 [class=$BROWSER] focus
 }
@@ -444,7 +445,7 @@ OPTIONS:
 }
 
 function fo () {
-    f=$(fzf --query="$*")
+    f=$(fdfind . ~ -I | fzf --query="$*")
     [[ ! -z $f ]] && eval "$OPEN \"$f\""
 }
 
@@ -488,15 +489,16 @@ prompt() {
     [[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
 
     # suspended jobs
-    [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(`jobs -ls | wc -l`) "|| bg_jobs=""
+    [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(\j) "|| bg_jobs=""
 
     # end="⚕"
     # end="🍺"
     # end="▶"
     end=">"
+    # end="💰"
 
     if [[ $TERM = "dumb" ]]; then
-        export PS1="$bg_jobs[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
+        export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
     else
         export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, [$toDoUrgent!]]${dirColor} $(ps1_hostname)\W $end ${txtrst}"
     fi
@@ -510,6 +512,6 @@ ps1_hostname() {
 # }}}
 
 # Tmux
-[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
+# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker

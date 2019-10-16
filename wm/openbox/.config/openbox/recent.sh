@@ -2,7 +2,7 @@
 # Script that generates a openbox pipe menu to display recent files
 
 IFS=$'\n'
-FILES=$(find ~/ownCloud -type f -atime -2 -printf "%A+ %p\n" | sort | tac | cut -f 2- -d ' ' | grep -v "/home/vic/\..*" | grep -v ".git" | grep -v "Med.*/img/.*" | grep -v ".dropbox.*" | head -n 50)
+FILES=$(find ~/pCloudDrive/ -type f -atime -2 -printf "%A+ %p\n" | sort | tac | cut -f 2- -d ' ' | grep -v "/home/vic/\..*" | grep -v ".git" | grep -v "Med.*/img/.*" | grep -v ".dropbox.*" | head -n 50)
 
 # echo $FILES
 

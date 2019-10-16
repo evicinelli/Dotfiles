@@ -1,11 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/vic/Scrivania/AppuntiUni/Medicina/Med1'
-let g:netrw_dirhist_2='/home/vic/Scrivania/AppuntiUni/Medicina/Med1/anatomia/decorsi'
-let g:netrw_dirhist_3='/home/vic/Dotfiles/wm/i3/.config'
-let g:netrw_dirhist_4='/home/vic/Dotfiles/wm/i3'
-let g:netrw_dirhist_5='/home/vic/Dotfiles/wm'
-let g:netrw_dirhist_6='/home/vic/Dotfiles/wm/i3'
-let g:netrw_dirhist_7='/home/vic/Dotfiles/wm/i3/.config'
-let g:netrw_dirhist_8='/home/vic/.tmux'
-let g:netrw_dirhist_9='/home/vic/.tmux/plugins'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/vic/.cache/ulauncher_cache/extensions/com.github.ulauncher.ulauncher-emoji'
+let g:netrw_dirhist_2='/home/vic/.config/gtk-2.0'
+let g:netrw_dirhist_3='/home/vic/Scrivania/Appunti/.git'
+let g:netrw_dirhist_4='/home/vic/Scrivania/AppuntiUni/Medicina/Med2'
+let g:netrw_dirhist_5='/home/vic/pCloudDrive/Uni/Appunti/Medicina/Med2'

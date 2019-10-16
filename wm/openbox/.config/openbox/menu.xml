@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
-	<menu id="root-menu" label="Openbox 3">
-		<item label="_XTerminal emulator">
-			<action name="Execute">
-				<execute>x-terminal-emulator</execute>
-			</action>
-		</item>
-		<item label="Web browser">
-			<action name="Execute">
-				<execute>x-www-browser</execute>
-			</action>
-		</item>
-		<item label="_Telegram">
-			<action name="Execute">
+    <menu id="root-menu" label="Openbox 3">
+        <item label="_XTerminal emulator">
+            <action name="Execute">
+                <execute>kitty</execute>
+            </action>
+        </item>
+        <item label="Web browser">
+            <action name="Execute">
+                <execute>~/Scaricati/Apps/firefox/firefox</execute>
+            </action>
+        </item>
+        <item label="_Telegram">
+            <action name="Execute">
                 <execute><command>/home/vic/Scaricati/Apps/Telegram/Telegram</command></execute>
-			</action>
-		</item>
-		<item label="Execute">
-			<action name="Execute">
-				<execute>dmenu_run -fn "Iosevka-13"</execute>
-			</action>
-		</item>
-		<separator/>
-        <menu execute="/home/vic/Dotfiles/openbox/.config/openbox/recent.sh" id="pipe-2" label="Recent _files"/> <!--- FANCULOOOOOOOOOOOOOOOO -->
-		<separator/>
-        <menu execute="openbox-menu --terminal='urxvt -e' -i lxde-applications.menu" id="pipe-532019" label="Apps"/> <!--- FANCULOOOOOOOOOOOOOOOO -->
-		<menu id="client-list-menu"/>
-		<separator/>
-		<item label="ObConf">
-			<action name="Execute">
-				<execute>obconf</execute>
-			</action>
-		</item>
-		<item label="Reconfigure">
-			<action name="Reconfigure"/>
-		</item>
-		<item label="Restart">
-			<action name="Restart"/>
-		</item>
-		<separator/>
-		<item label="Exit">
+            </action>
+        </item>
+        <item label="Spotify">
+            <action name="Execute">
+                <execute>flatpak run com.spotify.Client</execute>
+            </action>
+        </item>
+        <item label="Execute">
+            <action name="Execute">
+                <execute>dmenu_run -fn "PragmataPro-13"</execute>
+            </action>
+        </item>
+        <separator/>
+        <menu execute="/home/vic/Dotfiles/wm/openbox/.config/openbox/recent.sh" id="pipe-2" label="Recent _files"/> <!--FANCULOOOOOOOOOOOOOOOO -->
+        <separator/>
+        <menu execute="openbox-menu --terminal='kitty'" id="pipe-532019" label="Apps"/> <!--- FANCULOOOOOOOOOOOOOOOO -->
+        <menu id="client-list-menu"/>
+        <separator/>
+        <item label="ObConf">
+            <action name="Execute">
+                <execute>obconf</execute>
+            </action>
+        </item>
+        <item label="Reconfigure">
+            <action name="Reconfigure"/>
+        </item>
+        <item label="Restart">
+            <action name="Restart"/>
+        </item>
+        <separator/>
+        <item label="Exit">
             <menu id="exit-menu" label="Esci">
                 <item label="Spegni (_H)">
                     <action name="execute">
@@ -67,6 +72,6 @@
                     </action>
                 </item>
             </menu
-		</item>
-	</menu>
+        </item>
+    </menu>
 </openbox_menu>
