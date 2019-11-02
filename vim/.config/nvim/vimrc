@@ -20,6 +20,8 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'challenger-deep-theme/vim'
 Plug 'jnurmine/Zenburn'
 
+Plug 'chrisbra/csv.vim'
+
 call plug#end()
 " }}}
 
@@ -33,7 +35,7 @@ set autoindent            " Auto-indent
 set autoread              " Auto reload file if modified from external command
 set backupdir=/tmp//      " Backup file in /tmp//
 set colorcolumn=+1        " Highlight column where the 81/th char lives
-set directory=$XDG_DATA_HOME/nvim/swap// " Swap file in ~/.config/nvim/swap//
+set directory=~/.local/share/nvim/swap// " Swap file in ~/.config/nvim/swap//
 set expandtab             " On pressing tab, insert 4 spaces
 set foldmethod=syntax     " Fold according to syntax
 set guicursor=a:blinkon1  " Cursor blinks every second
@@ -256,10 +258,10 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-set stl=%1*\ \ %{toupper(mode())}\ \ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\ %l,%v\ (%p%%\ di\ %L)\ " \ %0*\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 
 set termguicolors
-colorscheme default
+colorscheme solarized8
+set bg=light
 
 highlight ColorColumn ctermbg=0
 highlight Comment ctermfg=15
@@ -271,50 +273,50 @@ highlight LineNR ctermbg=0 ctermfg=none
 highlight PmenuSel ctermbg=4 ctermfg=0
 highlight SpellBad ctermfg=9 ctermbg=none
 highlight SpellCap ctermbg=14 ctermfg=0
-highlight StatusLine ctermbg=0 ctermfg=15
-highlight StatusLineNC ctermbg=0 ctermfg=8
+highlight StatusLine ctermbg=red ctermfg=blue
+highlight StatusLineNC ctermbg=Yellow ctermfg=Green
 highlight TabLineFill ctermfg=0
 highlight TodoDueToday ctermbg=3 ctermfg=0
 
 "highlight pandocStrong cterm=bold
 "highlight pandocEmphasis cterm=underline
 
-""function! GetModeAndColor()
-""
-""    let currentMode = mode()
-""    let bgColor = 0
-""    let textColor = 0
-""
-""    if (or(&ma, and(!&ma, currentMode =~# 't')))
-""        if (currentMode =~# 'n')
-""            let bgColor = 2
-""        elseif (currentMode =~# 'i')
-""            let bgColor = 1
-""        elseif (currentMode =~# 'v\|V\|\')
-""            let bgColor = 4
-""            if (currentMode == "\")
-""                let currentMode = "CV"
-""            endif
-""        elseif (currentMode =~# 't')
-""            let bgColor = 3
-""        elseif (currentMode =~# 's\|R')
-""            let bgColor = 6
-""        elseif (currentMode =~# 'c')
-""            let bgColor = 5
-""        endif
-""    else
-""        let textColor = 0
-""        let bgColor = 240
-""    endif
-""
-""    exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
-""    exe "hi! User2 ctermfg=".textColor." ctermbg=".(bgColor + 8)." cterm=bold"
-""    redrawstatus    " Ha risolto ogni problema <3
-""
-""    return toupper(currentMode)
-""endfunction
+function! GetModeAndColor()
 
-"set stl=%1*\ \ %{GetModeAndColor()}\ \ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\ %l,%v\ (%p%%\ di\ %L)\ " \ %0*\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
+    let currentMode = mode()
+    let bgColor = 0
+    let textColor = 0
+
+    if (or(&ma, and(!&ma, currentMode =~# 't')))
+        if (currentMode =~# 'n')
+            let bgColor = 2
+        elseif (currentMode =~# 'i')
+            let bgColor = 1
+        elseif (currentMode =~# 'v\|V\|\')
+            let bgColor = 4
+            if (currentMode == "\")
+                let currentMode = "CV"
+            endif
+        elseif (currentMode =~# 't')
+            let bgColor = 3
+        elseif (currentMode =~# 's\|R')
+            let bgColor = 6
+        elseif (currentMode =~# 'c')
+            let bgColor = 5
+        endif
+    else
+        let textColor = 0
+        let bgColor = 240
+    endif
+
+    exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
+    exe "hi! User2 ctermfg=".textColor." ctermbg=".(bgColor + 8)." cterm=bold"
+    redrawstatus    " Ha risolto ogni problema <3
+
+    return toupper(currentMode)
+endfunction
+
+set stl=%1*\ %{GetModeAndColor()}\ \|\ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\|\ %l,%v\ (%p%%\ di\ %L)\ " \ %0*\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
 " }}}
 
 " vim: fdm=marker

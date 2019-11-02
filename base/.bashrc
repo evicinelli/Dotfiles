@@ -1,4 +1,4 @@
-# Setup  {{{
+#texlive-latex-recommended texlive-xetex texlive-luatex pandoc-citeproc Setup  {{{
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -159,8 +159,7 @@ bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-a": " fj"'
-bind -r '"\C-z"'
-bind '"\C-z": " fj"'
+bind '"\C-o": " fo"'
 # }}}
 
 # Shell options {{{
@@ -446,7 +445,9 @@ OPTIONS:
 
 function fo () {
     f=$(fdfind . ~ -I | fzf --query="$*")
-    [[ ! -z $f ]] && eval "$OPEN \"$f\""
+    if [[ ! -z $f ]]; then
+        [[ -d $f ]] && cd "$f" || eval "$OPEN \"$f\""
+    fi
 }
 
 # }}}
@@ -507,7 +508,7 @@ prompt() {
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
-    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host"
+    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host - "
 }
 # }}}
 

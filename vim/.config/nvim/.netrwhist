@@ -1,7 +1,7 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/vic/.cache/ulauncher_cache/extensions/com.github.ulauncher.ulauncher-emoji'
-let g:netrw_dirhist_2='/home/vic/.config/gtk-2.0'
-let g:netrw_dirhist_3='/home/vic/Scrivania/Appunti/.git'
-let g:netrw_dirhist_4='/home/vic/Scrivania/AppuntiUni/Medicina/Med2'
-let g:netrw_dirhist_5='/home/vic/pCloudDrive/Uni/Appunti/Medicina/Med2'
+let g:netrw_dirhist_1='/home/vic/$XDG_DATA_HOME/nvim'
+let g:netrw_dirhist_2='/home/vic/$XDG_DATA_HOME'
+let g:netrw_dirhist_3='/home/vic/$XDG_DATA_HOME/nvim'
+let g:netrw_dirhist_4='/home/vic/$XDG_DATA_HOME'
+let g:netrw_dirhist_5='/home/vic/.local/share/nvim/swap'
