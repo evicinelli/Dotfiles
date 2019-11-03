@@ -220,7 +220,7 @@ if [[ $# -gt 0 ]]; then
     arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
     d=$(date +%F -d "$arg")
     date_exit_status=$?
-    task=$(echo $* | sed "s/due:.*$/due:$d/")
+    task=$(echo "$(date -I) $*" | sed "s/due:.*$/due:$d/")
     if [[ $# -gt 0 ]]; then
         if [[ $date_exit_status -eq 0 ]]; then
             echo "$task" >> $TD

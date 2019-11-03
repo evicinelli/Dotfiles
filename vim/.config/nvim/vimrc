@@ -260,8 +260,8 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\ ,fold:\ 
 
 set termguicolors
-colorscheme solarized8
-set bg=light
+colorscheme default
+"set bg=dark
 
 highlight ColorColumn ctermbg=0
 highlight Comment ctermfg=15
