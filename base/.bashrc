@@ -495,8 +495,8 @@ prompt() {
 
     # end="⚕"
     # end="🍺"
-    # end="▶"
-    end=">"
+    end="▶"
+    # end=">"
     # end="💰"
 
     if [[ $TERM = "dumb" ]]; then

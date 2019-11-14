@@ -177,7 +177,7 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenum
   \| autocmd BufLeave <buffer> set laststatus=1 showmode ruler number relativenumber
 
 augroup text
-     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
+     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc | inoremap ![ ![](img/)<Left>
      au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
      au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
 augroup end
