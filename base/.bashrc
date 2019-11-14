@@ -47,12 +47,15 @@ export DN="$P/Documenti/Todo/done.txt"
 export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"
 export GVS="$P/Gvs"
-export MED="$P/Uni/Appunti/Medicina/Med2"
 export MEDIA="$P/Media"
 export NOTES="$P/Notes"
 export PW="$P/Documenti/Password-store"
 export TD="$P/Documenti/Todo/todo.txt"
 export UNI="$P/Uni/AppuntiUni"
+
+# Appunti Medicina
+export MED="$P/Uni/Appunti/Medicina/Med2"
+export MED1="$P/Uni/Appunti/Medicina/Med1"
 
 # Altro
 export SRV="192.168.1.197"

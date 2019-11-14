@@ -1,4 +1,4 @@
-# A very simple yet super effective cli todo manager
+# A very simple yet super effective (at least, for me) cli todo manager
 # Depends on todo.txt, bash, date
 
 TD="$HOME/pCloudDrive/Documenti/Todo/todo.txt"
@@ -111,3 +111,7 @@ function todo-ls-tags() {
     grep -o "@.[a-z]*" $TD | sort | uniq
     grep -o "\+\w*" $TD | sort | uniq
 }
+
+# Main
+
+todo-ls $*
