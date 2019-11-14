@@ -1,0 +1,3 @@
+#! /bin/bash
+
+xdg-open "$(fdfind --no-ignore . ~ | rofi -i -dmenu)"

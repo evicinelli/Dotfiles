@@ -1,4 +1,4 @@
-#texlive-latex-recommended texlive-xetex texlive-luatex pandoc-citeproc Setup  {{{
+# Setup  {{{
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -29,6 +29,7 @@ fi
 # Is fzf already installed?
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 
+# Vim
 set -o vi
 # }}}
 
@@ -220,7 +221,7 @@ if [[ $# -gt 0 ]]; then
     arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
     d=$(date +%F -d "$arg")
     date_exit_status=$?
-    task=$(echo "$(date -I) $*" | sed "s/due:.*$/due:$d/")
+    task=$(echo "$*" | sed "s/due:.*$/due:$d/")
     if [[ $# -gt 0 ]]; then
         if [[ $date_exit_status -eq 0 ]]; then
             echo "$task" >> $TD
@@ -508,7 +509,7 @@ prompt() {
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
-    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "\[\e[1;30m\]$user\[\e[0;37m\]@\[\e[1;36m\]$host - "
+    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "$user@$host - "
 }
 # }}}
 

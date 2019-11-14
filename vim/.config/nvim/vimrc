@@ -47,7 +47,7 @@ set laststatus=1          " Statusbar only if > 2 windows
 set lazyredraw            " Redraw screen only when necessary
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set modeline              " Vim executes vimL commands if they are found in the current file
-set mouse=a               " Enable mouse in terminal vim
+set mouse=                " Disable mouse in terminal vim, :set mouse=a to enable
 set noautochdir           " Do not change folder
 set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
@@ -98,6 +98,8 @@ let g:autocd#autocmd_enable = 1
 let g:autocd#markers = { '**/Medicina/**/*.txt': ['Makefile'] }
 
 let g:goyo_width = "50%"
+
+let g:csv_highlight_column = 'y'
 " }}}
 
 " Mappings {{{
@@ -260,63 +262,63 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\ ,fold:\ 
 
 set termguicolors
-colorscheme default
-"set bg=dark
+colorscheme solarized8
+set bg=light
 
-highlight ColorColumn ctermbg=0
-highlight Comment ctermfg=15
-highlight CursorLine ctermbg=0
-highlight CursorLineNr ctermbg=0
-highlight FoldColumn ctermbg=0 ctermfg=8
-highlight Folded ctermbg=0 ctermfg=15
-highlight LineNR ctermbg=0 ctermfg=none
-highlight PmenuSel ctermbg=4 ctermfg=0
-highlight SpellBad ctermfg=9 ctermbg=none
-highlight SpellCap ctermbg=14 ctermfg=0
-highlight StatusLine ctermbg=red ctermfg=blue
-highlight StatusLineNC ctermbg=Yellow ctermfg=Green
-highlight TabLineFill ctermfg=0
-highlight TodoDueToday ctermbg=3 ctermfg=0
-
-"highlight pandocStrong cterm=bold
-"highlight pandocEmphasis cterm=underline
+"highlight ColorColumn ctermbg=0
+"highlight Comment ctermfg=15
+"highlight CursorLine ctermbg=0
+"highlight CursorLineNr ctermbg=0
+"highlight FoldColumn ctermbg=0 ctermfg=8
+"highlight Folded guibg=0
+"highlight LineNR ctermbg=0 ctermfg=none
+"highlight PmenuSel ctermbg=4 ctermfg=0
+"highlight SpellBad ctermfg=9 ctermbg=none
+"highlight SpellCap ctermbg=14 ctermfg=0
+""highlight StatusLine ctermbg=black ctermfg=white
+""highlight StatusLineNC ctermbg=black ctermfg=white
+"highlight TabLineFill ctermfg=0
+"highlight TodoDueToday ctermbg=3 ctermfg=0
+"
+""highlight pandocStrong cterm=bold
+""highlight pandocEmphasis cterm=underline
 
 function! GetModeAndColor()
-
+"
     let currentMode = mode()
-    let bgColor = 0
-    let textColor = 0
-
-    if (or(&ma, and(!&ma, currentMode =~# 't')))
-        if (currentMode =~# 'n')
-            let bgColor = 2
-        elseif (currentMode =~# 'i')
-            let bgColor = 1
-        elseif (currentMode =~# 'v\|V\|\')
-            let bgColor = 4
-            if (currentMode == "\")
-                let currentMode = "CV"
-            endif
-        elseif (currentMode =~# 't')
-            let bgColor = 3
-        elseif (currentMode =~# 's\|R')
-            let bgColor = 6
-        elseif (currentMode =~# 'c')
-            let bgColor = 5
-        endif
-    else
-        let textColor = 0
-        let bgColor = 240
-    endif
-
-    exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
-    exe "hi! User2 ctermfg=".textColor." ctermbg=".(bgColor + 8)." cterm=bold"
-    redrawstatus    " Ha risolto ogni problema <3
-
+"    let bgColor = 0
+"    let textColor = "black"
+"
+"    if (or(&ma, and(!&ma, currentMode =~# 't')))
+"        if (currentMode =~# 'n')
+"            let bgColor = 2
+"        elseif (currentMode =~# 'i')
+"            let bgColor = 1
+"        elseif (currentMode =~# 'v\|V\|\')
+"            let bgColor = 4
+"            if (currentMode == "\")
+"                let currentMode = "CV"
+"            endif
+"        elseif (currentMode =~# 't')
+"            let bgColor = 3
+"        elseif (currentMode =~# 's\|R')
+"            let bgColor = 6
+"        elseif (currentMode =~# 'c')
+"            let bgColor = 5
+"        endif
+"    else
+"        let textColor = 0
+"        let bgColor = 240
+"    endif
+"
+"    exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
+"    exe "hi! User2 ctermfg=".textColor." ctermbg=".(bgColor + 8)." cterm=bold"
+"    redrawstatus    " Ha risolto ogni problema <3
+"
     return toupper(currentMode)
 endfunction
 
-set stl=%1*\ %{GetModeAndColor()}\ \|\ %2*\ %t\ %0*%=\ %0*%m%r%h%w\ %2*\ %Y\ %1*\|\ %l,%v\ (%p%%\ di\ %L)\ " \ %0*\ %{strftime('%H:%M')}\ %{system('[[\ -e\ \/tmp\/gtd\ \]\]\ &&\ cat\ \/tmp\/gtd')}
+set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}
 " }}}
 
 " vim: fdm=marker
