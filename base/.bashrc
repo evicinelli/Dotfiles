@@ -220,14 +220,18 @@ todo-edit() {
 
 todo-add(){
 # $ todo-add "(A) task +project @context due:<date in words>"
+priority_or_done_pattern="^(\([A-Z]\))|^x "
 if [[ $# -gt 0 ]]; then
+    pri=""
     arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
     d=$(date +%F -d "$arg")
     date_exit_status=$?
-    task=$(echo "$*" | sed "s/due:.*$/due:$d/")
+    preTask=$(echo "$*" | sed "s/due:.*$/due:$d/") # Date in correct format
+    pri=$(echo "$*" | egrep -o "$priority_or_done_pattern") # Get priority or done state
+    task=$(echo "$preTask" | sed -E "s/$priority_or_done_pattern//") # remove everything that matched
     if [[ $# -gt 0 ]]; then
         if [[ $date_exit_status -eq 0 ]]; then
-            echo "$task" >> $TD
+           echo "$pri $(date -I) $task" | sed "s/^ //" >> $TD
         fi
     fi
 else

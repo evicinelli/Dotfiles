@@ -15,12 +15,14 @@ Plug 'tpope/vim-surround'                                            " Surroundi
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
 Plug 'machakann/vim-highlightedyank'                                 " Highlight what's going to be yanked
+Plug 'chrisbra/csv.vim'                          " Csv file made right
 Plug 'lifepillar/vim-solarized8'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'challenger-deep-theme/vim'
 Plug 'jnurmine/Zenburn'
+Plug 'mhartington/oceanic-next'
+Plug 'morhetz/gruvbox'
 
-Plug 'chrisbra/csv.vim'
 
 call plug#end()
 " }}}
@@ -35,6 +37,7 @@ set autoindent            " Auto-indent
 set autoread              " Auto reload file if modified from external command
 set backupdir=/tmp//      " Backup file in /tmp//
 set colorcolumn=+1        " Highlight column where the 81/th char lives
+set cursorline            " Highlight the line in which the cursor is
 set directory=~/.local/share/nvim/swap// " Swap file in ~/.config/nvim/swap//
 set expandtab             " On pressing tab, insert 4 spaces
 set foldmethod=syntax     " Fold according to syntax
@@ -143,10 +146,14 @@ if has("nvim")
 endif
 " }}}
 
-" Abbreviations {{{
+" Abbreviations and digraphs {{{
 cabbrev f find
 iabbrev perchè perché
 iabbrev Perchè Perché
+dig lt 0060
+dig gt 0062
+dig ra 8594
+dig Ra 8658
  " }}}
 
 " Extended text Objects and matchpairs {{{
@@ -178,8 +185,8 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenum
 
 augroup text
      au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc | inoremap ![ ![](img/)<Left>
-     au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell
-     au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell
+     au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell | se nowrap
+     au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell | se nowrap
 augroup end
 
 augroup nonvim
@@ -262,8 +269,8 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\ ,fold:\ 
 
 set termguicolors
-colorscheme solarized8
-set bg=light
+colorscheme gruvbox
+set bg=dark
 
 "highlight ColorColumn ctermbg=0
 "highlight Comment ctermfg=15
