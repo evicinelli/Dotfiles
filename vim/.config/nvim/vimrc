@@ -17,11 +17,13 @@ Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc in
 Plug 'machakann/vim-highlightedyank'                                 " Highlight what's going to be yanked
 Plug 'chrisbra/csv.vim'                          " Csv file made right
 Plug 'lifepillar/vim-solarized8'
+Plug 'icymind/NeoSolarized'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'challenger-deep-theme/vim'
 Plug 'jnurmine/Zenburn'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
+Plug 'rickhowe/diffchar.vim'
 
 
 call plug#end()
@@ -46,7 +48,7 @@ set hidden                " Allow to switch buffer without saving it
 set hlsearch              " Highlight all search results
 set ignorecase            " Mah
 set incsearch             " Incremental search
-set laststatus=1          " Statusbar only if > 2 windows
+set laststatus=2          " Statusbar only if > 2 windows
 set lazyredraw            " Redraw screen only when necessary
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set modeline              " Vim executes vimL commands if they are found in the current file
@@ -56,7 +58,7 @@ set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
 set shiftwidth=4          " When indenting with '>', use 4 spaces width
 set showcmd               " Show partially typed commands
-set showmode
+set noshowmode
 set smartcase             " Smart-case search
 set smartindent           " Smart indent
 set spell                 " Spelling on
@@ -127,7 +129,7 @@ noremap <leader><leader> zA <CR>
 noremap <leader>1 :set laststatus=1 \| set showmode <CR>
 noremap <leader>2 :set laststatus=2 \| set noshowmode <CR>
 noremap <leader>a :Ack -i 
-noremap <leader>b :Buffers <CR>
+noremap <leader>b :Buf <CR>
 noremap <leader>f :FZF --no-exact 
 noremap <leader>m :MRU <CR>
 noremap <leader>na :Nack 
@@ -266,29 +268,12 @@ nnoremap <leader>n :Nack
 
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
-set fillchars=vert:\ ,fold:\ 
+set fillchars=vert:\|,fold:\ 
 
 set termguicolors
-colorscheme gruvbox
-set bg=dark
-
-"highlight ColorColumn ctermbg=0
-"highlight Comment ctermfg=15
-"highlight CursorLine ctermbg=0
-"highlight CursorLineNr ctermbg=0
-"highlight FoldColumn ctermbg=0 ctermfg=8
-"highlight Folded guibg=0
-"highlight LineNR ctermbg=0 ctermfg=none
-"highlight PmenuSel ctermbg=4 ctermfg=0
-"highlight SpellBad ctermfg=9 ctermbg=none
-"highlight SpellCap ctermbg=14 ctermfg=0
-""highlight StatusLine ctermbg=black ctermfg=white
-""highlight StatusLineNC ctermbg=black ctermfg=white
-"highlight TabLineFill ctermfg=0
-"highlight TodoDueToday ctermbg=3 ctermfg=0
-"
-""highlight pandocStrong cterm=bold
-""highlight pandocEmphasis cterm=underline
+colorscheme NeoSolarized
+set bg=light
+hi TodoDueToday guibg=lightGreen
 
 function! GetModeAndColor()
 "
@@ -320,12 +305,12 @@ function! GetModeAndColor()
 "
 "    exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
 "    exe "hi! User2 ctermfg=".textColor." ctermbg=".(bgColor + 8)." cterm=bold"
-"    redrawstatus    " Ha risolto ogni problema <3
 "
+    redrawstatus    " Ha risolto ogni problema <3
     return toupper(currentMode)
 endfunction
 
-set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}
+set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
 " }}}
 
 " vim: fdm=marker
