@@ -39,7 +39,7 @@ set autoindent            " Auto-indent
 set autoread              " Auto reload file if modified from external command
 set backupdir=/tmp//      " Backup file in /tmp//
 set colorcolumn=+1        " Highlight column where the 81/th char lives
-set cursorline            " Highlight the line in which the cursor is
+set nocursorline            " Highlight the line in which the cursor is
 set directory=~/.local/share/nvim/swap// " Swap file in ~/.config/nvim/swap//
 set expandtab             " On pressing tab, insert 4 spaces
 set foldmethod=syntax     " Fold according to syntax
@@ -270,10 +270,13 @@ nnoremap <leader>n :Nack
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\|,fold:\ 
 
-set termguicolors
-colorscheme NeoSolarized
-set bg=light
-hi TodoDueToday guibg=lightGreen
+set notermguicolors
+colorscheme hipster
+set bg=dark
+hi TodoDueToday guibg=lightYellow guifg=black
+hi TodoDueToday ctermbg=lightYellow ctermfg=black
+hi clear CursorLine
+hi CursorLine ctermbg=lightgray
 
 function! GetModeAndColor()
 "
