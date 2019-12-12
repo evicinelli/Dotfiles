@@ -23,6 +23,7 @@ Plug 'challenger-deep-theme/vim'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
+Plug 'nightsense/cosmic_latte'
 call plug#end()
 " }}}
 
@@ -271,7 +272,7 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\|,fold:\ 
 
 set termguicolors
-colorscheme OceanicNext
+colorscheme cosmic_latte
 set bg=dark
 hi TodoDueToday guibg=lightYellow guifg=black
 hi TodoDueToday ctermbg=lightYellow ctermfg=black

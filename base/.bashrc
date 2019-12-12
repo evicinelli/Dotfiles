@@ -518,9 +518,11 @@ ps1_hostname() {
     user=$(whoami)
     [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "$user@$host - "
 }
+bash ~/.config/nvim/plugged/cosmic_latte/shell/cosmic_latte_dark.sh
 # }}}
 
 # Tmux
 # [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
+
 
 # vim: fdm=marker
