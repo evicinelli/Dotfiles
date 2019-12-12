@@ -14,18 +14,15 @@ Plug 'sheerun/vim-polyglot'                                          " A collect
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
-Plug 'machakann/vim-highlightedyank'                                 " Highlight what's going to be yanked
-Plug 'chrisbra/csv.vim'                          " Csv file made right
-Plug 'lifepillar/vim-solarized8'
+Plug 'chrisbra/csv.vim'                                              " Csv file made right
+Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
+Plug 'mbbill/undotree'
 Plug 'icymind/NeoSolarized'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'challenger-deep-theme/vim'
-Plug 'jnurmine/Zenburn'
+Plug 'jpo/vim-railscasts-theme'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
-Plug 'rickhowe/diffchar.vim'
-
-
 call plug#end()
 " }}}
 
@@ -120,8 +117,9 @@ inoremap <F1> <Esc>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
+noremap <C-b> :Buffers<CR>
 noremap <C-n> :cn<CR>
-noremap <C-p> :cp<CR>
+noremap <C-p> :FZF<CR>
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
@@ -152,6 +150,9 @@ endif
 cabbrev f find
 iabbrev perchè perché
 iabbrev Perchè Perché
+iabbrev sg sg.
+iabbrev pz pz.
+iabbrev tp tp.
 dig lt 0060
 dig gt 0062
 dig ra 8594
@@ -181,9 +182,8 @@ autocmd! BufWritePost *vimrc* source %
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
-  \| autocmd BufLeave <buffer> set laststatus=1 showmode ruler number relativenumber
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
 
 augroup text
      au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc | inoremap ![ ![](img/)<Left>
@@ -270,8 +270,8 @@ nnoremap <leader>n :Nack
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\|,fold:\ 
 
-set notermguicolors
-colorscheme hipster
+set termguicolors
+colorscheme OceanicNext
 set bg=dark
 hi TodoDueToday guibg=lightYellow guifg=black
 hi TodoDueToday ctermbg=lightYellow ctermfg=black
