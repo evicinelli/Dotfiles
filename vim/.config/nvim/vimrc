@@ -273,7 +273,6 @@ set fillchars=vert:\|,fold:\
 
 set termguicolors
 colorscheme cosmic_latte
-set bg=dark
 hi TodoDueToday guibg=lightYellow guifg=black
 hi TodoDueToday ctermbg=lightYellow ctermfg=black
 hi clear CursorLine

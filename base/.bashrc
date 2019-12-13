@@ -35,7 +35,7 @@ set -o vi
 
 # Variables {{{
 export PATH="${PATH}:$HOME/Dotfiles/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
-[[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
+export EDITOR=vim
 export TERMINAL=kitty
 export BROWSER=quantum
 export OPEN=xdg-open
@@ -63,24 +63,20 @@ export EMPTY_LINES="^$"
 export BATTERY_NUMBER=1
 export BREAK_LENGTH=5
 export WORK_LENGTH=25
+export BG=light
 
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
 
 # Alias {{{
-
 alias la="ls -a"
 alias ll="ls -l"
 alias lla="ls -la"
 alias rm="rm -I"
-
-# Vim and neovim {{{
-    alias vi="$EDITOR"
-    alias vim="$EDITOR"
-    alias vimdiff="$EDITOR -d"
-    alias gv="$VISUAL"
-# }}}
+alias vi="vim"
+alias nvim="vim"
+alias vimdiff="vim -d"
 
 # Colori {{{
 alias ls='ls -h --color=auto --group-directories-first'
@@ -180,6 +176,9 @@ shopt -s cdable_vars
 # }}}
 
 # Functions {{{
+function vim {
+    env vim --cmd "set bg=$BG" $@
+}
 
 # Altra roba {{{
 dict() {
@@ -518,11 +517,19 @@ ps1_hostname() {
     user=$(whoami)
     [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "$user@$host - "
 }
-bash ~/.config/nvim/plugged/cosmic_latte/shell/cosmic_latte_dark.sh
-# }}}
 
-# Tmux
-# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
+night() {
+    bash ~/.config/nvim/plugged/cosmic_latte/shell/cosmic_latte_dark.sh
+    BG="dark"
+}
+
+day() {
+    bash ~/.config/nvim/plugged/cosmic_latte/shell/cosmic_latte_light.sh
+    BG="light"
+}
+
+day # Sia fatta la luce!
+# }}}
 
 
 # vim: fdm=marker
