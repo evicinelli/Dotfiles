@@ -23,6 +23,7 @@ Plug 'challenger-deep-theme/vim'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
+Plug 'nightsense/cosmic_latte'
 call plug#end()
 " }}}
 
@@ -273,7 +274,6 @@ set fillchars=vert:\|,fold:\
 set notermguicolors
 colorscheme dim
 set bg=dark
-
 function! GetModeAndColor()
     return toupper(mode())
 endfunction
