@@ -36,7 +36,7 @@ set autoindent            " Auto-indent
 set autoread              " Auto reload file if modified from external command
 set backupdir=/tmp//      " Backup file in /tmp//
 set colorcolumn=+1        " Highlight column where the 81/th char lives
-set nocursorline            " Highlight the line in which the cursor is
+set cursorline            " Highlight the line in which the cursor is
 set directory=~/.local/share/nvim/swap// " Swap file in ~/.config/nvim/swap//
 set expandtab             " On pressing tab, insert 4 spaces
 set foldmethod=syntax     " Fold according to syntax
@@ -270,50 +270,25 @@ nnoremap <leader>n :Nack
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\|,fold:\ 
 
-set termguicolors
-colorscheme OceanicNext
+set notermguicolors
+colorscheme dim
 set bg=dark
-hi TodoDueToday guibg=lightYellow guifg=black
-hi TodoDueToday ctermbg=lightYellow ctermfg=black
-hi clear CursorLine
-hi CursorLine ctermbg=lightgray
 
 function! GetModeAndColor()
-"
-    let currentMode = mode()
-"    let bgColor = 0
-"    let textColor = "black"
-"
-"    if (or(&ma, and(!&ma, currentMode =~# 't')))
-"        if (currentMode =~# 'n')
-"            let bgColor = 2
-"        elseif (currentMode =~# 'i')
-"            let bgColor = 1
-"        elseif (currentMode =~# 'v\|V\|\')
-"            let bgColor = 4
-"            if (currentMode == "\")
-"                let currentMode = "CV"
-"            endif
-"        elseif (currentMode =~# 't')
-"            let bgColor = 3
-"        elseif (currentMode =~# 's\|R')
-"            let bgColor = 6
-"        elseif (currentMode =~# 'c')
-"            let bgColor = 5
-"        endif
-"    else
-"        let textColor = 0
-"        let bgColor = 240
-"    endif
-"
-"    exe "hi! User1 ctermfg=".textColor." ctermbg=".bgColor." cterm=bold"
-"    exe "hi! User2 ctermfg=".textColor." ctermbg=".(bgColor + 8)." cterm=bold"
-"
-    redrawstatus    " Ha risolto ogni problema <3
-    return toupper(currentMode)
+    return toupper(mode())
 endfunction
-
 set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
+"}}}
+
+" Highliting and colors {{{
+highlight LineNR ctermbg=0 ctermfg=none
+highlight PmenuSel ctermbg=blue ctermfg=0
+highlight SpellBad ctermbg=red ctermfg=black
+highlight SpellCap ctermfg=yellow
+hi TodoDueToday ctermbg=yellow ctermfg=black
+hi clear CursorLine
+hi CursorLine ctermbg=240
+
 " }}}
 
 " vim: fdm=marker
