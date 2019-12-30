@@ -6,7 +6,7 @@ ext="txt"
 base_dir="$1"
 shift
 cd $base_dir
-note=`find -type f -not -wholename "*Archivio*" | fzf --height=100% -1 --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
+note=`find -type f -regex ".*\.\(txt\|md\)" -not -wholename "*Archivio*" | fzf --height=100% -1 --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
 if [[ $? -eq 0 ]]; then
     # edit note
     $EDITOR "`tail -n1 <<< "$note"`"

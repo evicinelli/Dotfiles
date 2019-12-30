@@ -17,9 +17,13 @@ Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc in
 Plug 'chrisbra/csv.vim'                                              " Csv file made right
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
 Plug 'mbbill/undotree'
-Plug 'icymind/NeoSolarized'
+
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'arcticicestudio/nord-vim'
 Plug 'challenger-deep-theme/vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'icymind/NeoSolarized'
+Plug 'jnurmine/Zenburn'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
@@ -271,8 +275,8 @@ nnoremap <leader>n :Nack
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\|,fold:\ 
 
-set notermguicolors
-colorscheme dim
+set termguicolors
+colorscheme zenburn
 set bg=dark
 function! GetModeAndColor()
     return toupper(mode())
@@ -286,8 +290,8 @@ highlight PmenuSel ctermbg=blue ctermfg=0
 highlight SpellBad ctermbg=red ctermfg=black
 highlight SpellCap ctermfg=yellow
 hi TodoDueToday ctermbg=yellow ctermfg=black
-hi clear CursorLine
-hi CursorLine ctermbg=240
+""hi clear CursorLine
+""hi CursorLine ctermbg=0 cterm=bold
 
 " }}}
 
