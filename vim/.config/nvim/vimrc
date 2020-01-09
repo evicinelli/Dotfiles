@@ -24,6 +24,7 @@ Plug 'challenger-deep-theme/vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'icymind/NeoSolarized'
 Plug 'jnurmine/Zenburn'
+Plug 'junegunn/seoul256.vim'
 Plug 'jpo/vim-railscasts-theme'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
@@ -276,7 +277,7 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\|,fold:\ 
 
 set termguicolors
-colorscheme zenburn
+colorscheme seoul256
 set bg=dark
 function! GetModeAndColor()
     return toupper(mode())
@@ -285,11 +286,11 @@ set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ 
 "}}}
 
 " Highliting and colors {{{
-highlight LineNR ctermbg=0 ctermfg=none
-highlight PmenuSel ctermbg=blue ctermfg=0
-highlight SpellBad ctermbg=red ctermfg=black
-highlight SpellCap ctermfg=yellow
-hi TodoDueToday ctermbg=yellow ctermfg=black
+"highlight LineNR ctermbg=0 ctermfg=none
+"highlight PmenuSel ctermbg=blue ctermfg=0
+"highlight SpellBad ctermbg=red ctermfg=black
+"highlight SpellCap ctermfg=yellow
+"hi TodoDueToday ctermbg=yellow ctermfg=black
 ""hi clear CursorLine
 ""hi CursorLine ctermbg=0 cterm=bold
 

@@ -181,34 +181,6 @@ function vim {
 }
 
 # Altra roba {{{
-dict() {
-    curl dict://dict.org/d:${1} | less
-}
-
-devdocs () {
-    $BROWSER "\!devdocs $*" && i3 [class=$BROWSER] focus
-}
-
-revealjs () {
-    INPUT=$1
-    shift
-    wget https://github.com/hakimel/reveal.js/archive/master.tar.gz
-    tar -xzvf master.tar.gz
-    mv reveal.js-master reveal.js && rm master.tar.gz
-    pandoc -t revealjs -s --self-contained $* $INPUT -o index.html
-    # rm -r reveal.js
-}
-
-clean-swp () {
-    # find $HOME -name "*.swp" -ok rm "{}" \;
-    # find $HOME -name "*.swo" -ok rm "{}" \;
-    rm -r ~/.local/share/nvim/swap/*
-}
-
-nack () {
-    $EDITOR +Nack\ "$*"
-}
-
 # }}}
 
 # Todo manager {{{
@@ -418,12 +390,18 @@ transfer () {
     echo "Non ancora!"
 }
 
-function fix-mimecache () {
-    cd ~/.local/share/applications/
-    rm mimeinfo.cache
-    ln -s $DF/mimeinfo.cache
-    cd ~-
+dict() {
+    curl dict://dict.org/d:${1} | less
 }
+
+clean-swp () {
+    rm -r ~/.local/share/nvim/swap/*
+}
+
+nack () {
+    $EDITOR +Nack\ "$*"
+}
+
 
 function gong () {
     if [[ $# -gt 0 ]]; then
@@ -451,7 +429,7 @@ OPTIONS:
 }
 
 function fo () {
-    f=$(fdfind . ~ -I | fzf --query="$*")
+    f=$(fdfind --full-path ${1:-'.'} -I | fzf )
     if [[ ! -z $f ]]; then
         [[ -d $f ]] && cd "$f" || eval "$OPEN \"$f\""
     fi
@@ -461,8 +439,7 @@ function fo () {
 
 # }}}
 
-# Prompt  & colors{{{
-
+# Prompt  {{{
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
 
@@ -518,17 +495,6 @@ ps1_hostname() {
     [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "$user@$host - "
 }
 
-night() {
-    bash ~/.config/nvim/plugged/cosmic_latte/shell/cosmic_latte_dark.sh
-    BG="dark"
-}
-
-day() {
-    bash ~/.config/nvim/plugged/cosmic_latte/shell/cosmic_latte_light.sh
-    BG="light"
-}
-
-day # Sia fatta la luce!
 # }}}
 
 
