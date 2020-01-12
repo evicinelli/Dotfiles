@@ -1,0 +1,18 @@
+#! /bin/bash
+source ~/.dmenurc
+declare -a commands=(
+    "firefox https://web.whatsapp.com && i3 [class = "Firefox*"] focus #whatsapp web"
+    "bash $HOME/bin/gtd -Tn 25 5"
+    "gksudo service network-manager restart #nmr"
+    "redshift-gtk -x #reset #day"
+    "redshift-gtk -O 1000 #red #night"
+    "google-chrome --incognito #incognito"
+    "google-chrome https://sites.google.com/a/vallelavino.it/area-soci/inserimento-turni #zola61"
+    "notify-send DUNST_COMMAND_PAUSE #do not disturb start dndstart dnd"
+    "notify-send DUNST_COMMAND_RESUME #do not disturb end stop dndstop dnd"
+    "google-chrome --new-window https://sites.google.com/a/vallelavino.it/area-soci/calendario-turni-zola-61 https://sites.google.com/a/vallelavino.it/area-soci/inserimento-turni https://sites.google.com/a/vallelavino.it/area-soci/calendari-turni/emanuele-vicinelli https://calendar.google.com/ && i3 [class="Chromium"] focus #gvs #zola61 #ambulanza #turno"
+)
+toExecute=$(for i in ${!commands[*]}; do echo ${commands[$i]}; done | fzf)
+eval $toExecute &
+
+

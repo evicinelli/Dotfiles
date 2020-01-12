@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/vic/pCloudDrive/Back-up/Todo'
 let g:netrw_dirhist_2='/home/vic/pCloudDrive/Uni/_/Secondo anno'
 let g:netrw_dirhist_3='/home/vic/pCloudDrive/Documenti/Todo'
+let g:netrw_dirhist_4='/home/vic/Dotfiles/kitty/.config/kitty'

@@ -51,7 +51,7 @@ set hidden                " Allow to switch buffer without saving it
 set hlsearch              " Highlight all search results
 set ignorecase            " Mah
 set incsearch             " Incremental search
-set laststatus=2          " Statusbar only if > 2 windows
+set laststatus=1          " Statusbar only if > 2 windows
 set lazyredraw            " Redraw screen only when necessary
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set modeline              " Vim executes vimL commands if they are found in the current file
@@ -61,7 +61,7 @@ set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
 set shiftwidth=4          " When indenting with '>', use 4 spaces width
 set showcmd               " Show partially typed commands
-set noshowmode
+set showmode
 set smartcase             " Smart-case search
 set smartindent           " Smart indent
 set spell                 " Spelling on
