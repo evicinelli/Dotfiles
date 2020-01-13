@@ -176,12 +176,6 @@ shopt -s cdable_vars
 # }}}
 
 # Functions {{{
-function vim {
-    env vim --cmd "set bg=$BG" $@
-}
-
-# Altra roba {{{
-# }}}
 
 # Todo manager {{{
 todo-edit() {
@@ -237,13 +231,13 @@ if [[ $# -gt 0 ]]; then
                 [[ ! -z "$t" ]] && echo $t;
             done;
             ;;
-        "someday") cat $TD | grep -v "due:.*$";;
+        "someday") grep -v "due:.*$" $TD;;
         "tags")
             # local IFS=""
             readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
             for tag in ${tags[*]}; do
                 echo -ne "\n- $tag --- \n"
-                cat $TD | grep -v "^x" | grep "$tag"
+                grep -v "^x" $TD | grep "$tag"
             done
             ;;
 
@@ -251,19 +245,19 @@ if [[ $# -gt 0 ]]; then
             readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
             for tag in ${tags[*]}; do
                 echo -ne "\n- $tag --- \n"
-                cat $TD | grep -v "^x" | grep "$tag"
+                grep -v "^x" $TD | grep "$tag"
             done
             ;;
         *)
             if date -d "$*" > /dev/null 2>&1; then
-                cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
+                grep -v "^x .*" $TD | grep -Gi "due:$(date +%F --date="$*")"
             else
                 args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
-                cat $TD | grep -v "^x" | grep -Gi "$args" $TD
+                grep -v "^x" $TD | grep -Gi "$args" $TD
             fi
     esac
 else
-    cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
+    grep -v "^x .*" $TD | grep "due:$(date +%F --date="today")"
 fi
 }
 
@@ -327,7 +321,13 @@ p () {
 # Utility {{{
 
 share-home-network () {
-    sqr "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
+    file=$(mktemp)
+    qrencode "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;" -o $file
+    xdg-open $file
+}
+
+qr (){
+    curl "qrenco.de/$*"
 }
 
 tny () {
@@ -336,35 +336,6 @@ tny () {
 
 wifi () {
     nmcli -a device wifi connect "$( nmcli --color no device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
-}
-
-push () {
-    # Push a notification to all the devices connected by pushbullet
-    [[ -z $PB_TOKEN ]] && echo "Devi impostare l'autenticazione per pushbullet! (https://docs.pushbullet.com/#api-quick-start)" && exit 1
-    curl -s --header "Access-Token: $PB_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data-binary "{\"body\":\"$*\",\"title\":\"Broadcasted Push\",\"type\":\"note\"}" \
-        --request POST \
-        https://api.pushbullet.com/v2/pushes \
-        && exit 0 || exit 1
-    echo
-}
-
-_qr () {
-    if [[ $# -gt 0 ]]; then
-        file=$(mktemp);
-        qrencode -s 20 "$*" -o $file
-        $OPEN $file
-    fi
-}
-
-qr () {
-    if [[ $# -gt 0 ]]; then
-        MSG="$(echo $* | sed "s/ /\\ /g")"
-        curl qrenco.de/"$*"
-    else
-        curl -F-=\<- qrenco.de
-    fi
 }
 
 # Foreground a job searching the process name
@@ -376,10 +347,6 @@ fj () {
 wttr () {
     CITY=`sed "s/ /+/g" <<< "$*"`
     curl "https://wttr.in/~$CITY"
-}
-
-df () {
-    date +%F -d "$*"
 }
 
 daysuntil () {
@@ -429,9 +396,21 @@ OPTIONS:
 }
 
 function fo () {
-    f=$(fdfind --full-path ${1:-'.'} -I | fzf )
+    IFS=$'\n'
+    f=($(fdfind . ${1:-"."} -I | fzf --expect=ctrl-o,ctrl-c,ctrl-f,ctrl-g)) #--header "C-o: mimeopen; C-c: copy path; C-f: cd in parent folder; C-g: open file manager in parent folder\n"))
     if [[ ! -z $f ]]; then
-        [[ -d $f ]] && cd "$f" || eval "$OPEN \"$f\""
+        case ${f[0]} in
+            "ctrl-o") # Ask which application use to open
+                mimeopen --ask ${f[1]};;
+            "ctrl-c") # Copy path
+                echo "${f[1]}" | xclip -selection primary -f | xclip -selection clipboard;;
+            "ctrl-f") # Cd in parent folder
+                [[ -d ${f[1]} ]] && cd "${f[1]}" || cd "$(dirname "${f[1]}")" ;;
+            "ctrl-g") # Open file manager in parent folder
+                [[ -d ${f[1]} ]] && xdg-open "${f[1]}" || xdg-open "$(dirname ${f[1]})" ;;
+            *)        # Open file
+               xdg-open "${f[0]}"
+        esac
     fi
 }
 
