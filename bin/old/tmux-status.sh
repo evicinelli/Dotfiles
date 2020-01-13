@@ -1,18 +1,21 @@
 #! /bin/bash
 
 function get_todo_from_file() {
+    file=/home/vic/pCloudDrive/Documenti/Todo/todo.txt
     color="colour2"
     symbol="   "
-    todos=$(cat ~/.todo/todo.txt | grep "due:$(date +%F)" | grep -v "^x" | wc -l)
-    urgent=$(cat ~/.todo/todo.txt | grep "due:$(date +%F)" | grep -v "^x" | grep "^(" | wc -l)
+    todos=$(grep "due:$(date +%F)" $file | grep -v "^x" | wc -l)
+    urgent=$(grep "due:$(date +%F)" $file | grep -v "^x" | grep "^(" | wc -l)
 
     if [[ urgent -gt 0 ]]; then
         color="colour1"
+        symbol=" $urgent "
     elif [[ todos -gt 0 ]]; then
         color="colour3"
+        symbol=" $todos "
     fi
 
-    echo -ne "#[bg=$color]$symbol#[default]"
+    echo -ne "#[default]#[bg=$color, fg=colour0]$symbol#[default]"
 }
 
 # Spotify
@@ -29,6 +32,8 @@ function muuuuusic() {
 
 DELIM="/"
 
-echo "$(muuuuusic) BAT:$(cat /sys/class/power_supply/BAT0/capacity)% $DELIM $(nm-online -t 0 && echo 'ONLINE' || echo 'OFFLINE') $DELIM VOL:$(amixer | grep Front | grep Playback | cut -d'%' -f1 | cut -d '[' -f2 | head -n2 | tail -n1)% #[bg=colour8 fg=colour15] $(date +%H:%M\ %a\ %d ) #[default]$(get_todo_from_file)"
+#echo "$(muuuuusic) BAT:$(cat /sys/class/power_supply/BAT0/capacity)% $DELIM $(nm-online -t 0 && echo 'ONLINE' || echo 'OFFLINE') $DELIM VOL:$(amixer | grep Front | grep Playback | cut -d'%' -f1 | cut -d '[' -f2 | head -n2 | tail -n1)% #[bg=colour8 fg=colour15] $(date +%H:%M\ %a\ %d ) #[default]$(get_todo_from_file)"
+
+echo "$(acpi | cut -d ',' -f 2,3) #[bg=colour0 fg=colour15] $(date +%H:%M\ %a\ %d) #[default]$(get_todo_from_file)"
 
 # ∙ $([[ `playerctl status` -ne 'No players found' ]] && echo `playerctl artist` - `playerctl title` || echo "NP")"

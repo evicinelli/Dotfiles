@@ -80,11 +80,11 @@ bindsym $mod+shift+a focus child
 # }}}
 
 # THEMING {{{
-font pango:Pragmata Pro
+font pango:Inconsolata 14
 bindsym $mod+Shift+d exec --no-startup-id $HOME/bin/unsplash
 bindsym $mod+Shift+t exec --no-startup-id $HOME/bin/i3-tray-toggle
 bar {
-    font pango:Pragmata Pro 13
+    font pango:Inconsolata 14
     position top
     status_command i3blocks
     strip_workspace_numbers yes
