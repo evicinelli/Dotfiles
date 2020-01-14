@@ -277,7 +277,7 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\|,fold:\ 
 
 set termguicolors
-colorscheme seoul256
+colorscheme OceanicNext
 set bg=dark
 function! GetModeAndColor()
     return toupper(mode())

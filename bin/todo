@@ -1,21 +1,34 @@
+#! /usr/bin/env bash
+
 # A very simple yet super effective (at least, for me) cli todo manager
-# Depends on todo.txt, bash, date
+# Depends on: date, standard bash utilities, todo.txt format
 
 TD="$HOME/pCloudDrive/Documenti/Todo/todo.txt"
 DN="$HOME/pCloudDrive/Documenti/Todo/done.txt"
 
 todo-edit() {
     [[ $# -gt 0 ]] && \
-         $EDITOR $TD -c "/$(echo $* | sed "s/ /.*/g")" -c "normal zR" || \
-         $EDITOR $TD
+        $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
 }
 
 todo-add(){
-date_exit_status=$?
+# $ todo-add "(A) task +project @context due:<date in words>"
+priority_or_done_pattern="^(\([A-Z]\))|^x "
 if [[ $# -gt 0 ]]; then
-    if [[ $date_exit_status -eq 0 ]]; then
-        echo "$*" >> $TD
+    pri=""
+    arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
+    d=$(date +%F -d "$arg")
+    date_exit_status=$?
+    preTask=$(echo "$*" | sed "s/due:.*$/due:$d/") # Date in correct format
+    pri=$(echo "$*" | egrep -o "$priority_or_done_pattern") # Get priority or done state
+    task=$(echo "$preTask" | sed -E "s/$priority_or_done_pattern//") # remove everything that matched
+    if [[ $# -gt 0 ]]; then
+        if [[ $date_exit_status -eq 0 ]]; then
+           echo "$pri $(date -I) $task" | sed "s/^ //" >> $TD
+        fi
     fi
+else
+    echo "todo-add (A) task +project @context due:<date in \`date -d\` compatible format>"
 fi
 }
 
@@ -96,15 +109,6 @@ if [[ $# -gt 0 ]]; then
 else
     sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
 fi
-
-# Trovare un modo più carino per farlo
-if [ -w /home/vic/ownCloud/todo.txtn ]; then
-    rm /home/vic/ownCloud/todo.txtn
-fi
-if [ -w ~/oggi.txtn ]; then
-    rm ~/oggi.txtn
-fi
-
 }
 
 function todo-ls-tags() {
@@ -114,4 +118,11 @@ function todo-ls-tags() {
 
 # Main
 
-todo-ls $*
+case $1 in
+    "edit") shift; todo-edit $*;;
+    "add") shift; todo-add $*;;
+    "ls") shift; todo-ls $*;;
+    "done") shift; todo-done $*;;
+    "tags") shift; todo-ls-tags $*;;
+    *) todo-ls today;;
+esac
