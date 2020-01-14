@@ -35,7 +35,7 @@ set -o vi
 
 # Variables {{{
 export PATH="${PATH}:$HOME/Dotfiles/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
-export EDITOR=vim
+[[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
 export TERMINAL=kitty
 export BROWSER=quantum
 export OPEN=xdg-open
@@ -63,7 +63,6 @@ export EMPTY_LINES="^$"
 export BATTERY_NUMBER=1
 export BREAK_LENGTH=5
 export WORK_LENGTH=25
-export BG=light
 
 # Se abbiamo variabili locali da ridefinire, usiamo quelle
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
@@ -74,9 +73,15 @@ alias la="ls -a"
 alias ll="ls -l"
 alias lla="ls -la"
 alias rm="rm -I"
-alias vi="vim"
-alias nvim="vim"
-alias vimdiff="vim -d"
+alias sort="sort -n"
+alias pandoc="pandoc --pdf-engine=xelatex"
+
+# Vim and neovim {{{
+    alias vi="$EDITOR"
+    alias vim="$EDITOR"
+    alias vimdiff="$EDITOR -d"
+    alias gv="$VISUAL"
+# }}}
 
 # Colori {{{
 alias ls='ls -h --color=auto --group-directories-first'
@@ -100,6 +105,7 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
 alias mkdir="mkdir -pv"
+alias mn="notability $MED"
 alias myip="curl http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
 alias netoff="nmcli networking off"
@@ -111,10 +117,6 @@ alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt
 alias py="python"
 alias quantum="/home/vic/Scaricati/Apps/firefox/firefox"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
-alias t="tree -L 1"
-alias tr="tree -R"
-alias tt="tree -L 2"
-alias ttt="tree -L 3"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
 alias vimrc="vi $HOME/.config/nvim/vimrc"
 # }}}
@@ -131,13 +133,13 @@ alias gpull="git pull"
 alias glog="git log --graph --oneline"
 # }}}
 
-# Todo {{{
-alias ta="todo-add"
-alias tl="todo-ls"
-alias tla="todo-ls agenda"
-alias td="todo-done"
-alias te="todo-edit"
-alias gtd="gtd -Tn $WORK_LENGTH $BREAK_LENGTH"
+# Todo manager {{{
+alias t="todo"
+alias ta="todo add"
+alias tl="todo ls"
+alias tla="todo ls agenda"
+alias td="todo done"
+alias te="todo edit"
 # }}}
 
 # }}}
@@ -177,117 +179,35 @@ shopt -s cdable_vars
 
 # Functions {{{
 
-# Todo manager {{{
-todo-edit() {
-    [[ $# -gt 0 ]] && \
-        $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
+# Altra roba {{{
+dict() {
+    curl dict://dict.org/d:${1} | less
 }
 
-todo-add(){
-# $ todo-add "(A) task +project @context due:<date in words>"
-priority_or_done_pattern="^(\([A-Z]\))|^x "
-if [[ $# -gt 0 ]]; then
-    pri=""
-    arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
-    d=$(date +%F -d "$arg")
-    date_exit_status=$?
-    preTask=$(echo "$*" | sed "s/due:.*$/due:$d/") # Date in correct format
-    pri=$(echo "$*" | egrep -o "$priority_or_done_pattern") # Get priority or done state
-    task=$(echo "$preTask" | sed -E "s/$priority_or_done_pattern//") # remove everything that matched
-    if [[ $# -gt 0 ]]; then
-        if [[ $date_exit_status -eq 0 ]]; then
-           echo "$pri $(date -I) $task" | sed "s/^ //" >> $TD
-        fi
-    fi
-else
-    echo "todo-add (A) task +project @context due:<date in \`date -d\` compatible format>"
-fi
+devdocs () {
+    $BROWSER "\!devdocs $*" && i3 [class=$BROWSER] focus
 }
 
-todo-ls() {
-if [[ $# -gt 0 ]]; then
-    case "$1" in
-        "agenda")
-            # tl agenda [ # days ]
-            end=${2:-6} # if not $2, by default print todos for next 6 days
-            if [[ $end -ge 0 ]]; then
-                for (( i=0; i<$end; i++ )) do
-                    t=$(todo-ls $i days);
-                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
-                done;
-            else
-                for (( i=$end; i<0; i++ )) do
-                    t=$(todo-ls $i days);
-                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
-                done;
-            fi
-            echo ;;
-        "past")
-            # tl past [# days]
-            local IFS=""
-            end=${2:-100} # if not $2, by default print todos for the past 100 days
-            for (( i=$end; i>0; i-- )) do
-                t=$(todo-ls -$i days);
-                [[ ! -z "$t" ]] && echo $t;
-            done;
-            ;;
-        "someday") grep -v "due:.*$" $TD;;
-        "tags")
-            # local IFS=""
-            readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
-            for tag in ${tags[*]}; do
-                echo -ne "\n- $tag --- \n"
-                grep -v "^x" $TD | grep "$tag"
-            done
-            ;;
-
-        "proj")
-            readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
-            for tag in ${tags[*]}; do
-                echo -ne "\n- $tag --- \n"
-                grep -v "^x" $TD | grep "$tag"
-            done
-            ;;
-        *)
-            if date -d "$*" > /dev/null 2>&1; then
-                grep -v "^x .*" $TD | grep -Gi "due:$(date +%F --date="$*")"
-            else
-                args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
-                grep -v "^x" $TD | grep -Gi "$args" $TD
-            fi
-    esac
-else
-    grep -v "^x .*" $TD | grep "due:$(date +%F --date="today")"
-fi
+revealjs () {
+    INPUT=$1
+    shift
+    wget https://github.com/hakimel/reveal.js/archive/master.tar.gz
+    tar -xzvf master.tar.gz
+    mv reveal.js-master reveal.js && rm master.tar.gz
+    pandoc -t revealjs -s --self-contained $* $INPUT -o index.html
+    # rm -r reveal.js
 }
 
-todo-done () {
-if [[ $# -gt 0 ]]; then
-    QUERY=$(echo $* | sed -e "s/\ /.*/g") # Insensitive match with space repleaced with .*
-    ENTRIES_NO=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*" | wc -l)
-    ENTRY=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*")
-    if [[ $ENTRIES_NO -eq 1 ]]; then
-        # Marchiamo quell'entry come completata in todo.txt
-        echo -e "Marco come completato: "$ENTRY
-        sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
-    else
-        # Trovare un modo più carino per fare pure questo
-        if [[ $ENTRIES_NO -gt 1 ]]; then
-            sed -in "s/$( sed -n "/$QUERY/p" $TD | grep -v "^x .*" | fzf)/x $(date +%F)\ &/" $TD
-        else
-            echo -e "Nada de nada, mi sa che hai scritto male"
-        fi
-    fi
-else
-    sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
-fi
-
+clean-swp () {
+    # find $HOME -name "*.swp" -ok rm "{}" \;
+    # find $HOME -name "*.swo" -ok rm "{}" \;
+    rm -r ~/.local/share/nvim/swap/*
 }
 
-function todo-ls-tags() {
-    grep -o "@.[a-z]*" $TD | sort | uniq
-    grep -o "\+\w*" $TD | sort | uniq
+nack () {
+    $EDITOR +Nack\ "$*"
 }
+
 # }}}
 
 # Password manager {{{
@@ -320,14 +240,37 @@ p () {
 
 # Utility {{{
 
-share-home-network () {
-    file=$(mktemp)
-    qrencode "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;" -o $file
-    xdg-open $file
+ding () {
+    file=$P/Res/ping.opus
+    mpv $file &>/dev/null &
 }
 
-qr (){
-    curl "qrenco.de/$*"
+# 25/5 - https://github.com/connermcd/gtd
+gtd () {
+
+    trap 'echo -ne "\nBrev, hai lavorato per $i cicli ($(( $i*25 )) minuti)"' 2 3 9 15
+    i=0;
+    getopts ":p" opt
+
+
+    case ${opt} in 
+        p)
+            echo "$(date): 🍅 🎉 PAUSA"
+            notify-send --urgency=critical "🍅 🎉" "Pausina" && ding && sleep $(( 60*5 ))
+            ;;
+    esac
+    while :
+    do
+        echo "$(date): 🍅 💻 LAVORO"
+        notify-send --urgency=critical "🍅 💻" "Lavora!" && ding && sleep $(( 60*25 ))
+        i=$(( $i+1 ))
+        echo "$(date): 🍅 🎉 PAUSA"
+        notify-send --urgency=critical "🍅 🎉" "Pausina" && ding && sleep $(( 60*5 ))
+    done;
+}
+
+share-home-network () {
+    sqr "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
 }
 
 tny () {
@@ -336,6 +279,35 @@ tny () {
 
 wifi () {
     nmcli -a device wifi connect "$( nmcli --color no device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
+}
+
+push () {
+    # Push a notification to all the devices connected by pushbullet
+    [[ -z $PB_TOKEN ]] && echo "Devi impostare l'autenticazione per pushbullet! (https://docs.pushbullet.com/#api-quick-start)" && exit 1
+    curl -s --header "Access-Token: $PB_TOKEN" \
+        --header "Content-Type: application/json" \
+        --data-binary "{\"body\":\"$*\",\"title\":\"Broadcasted Push\",\"type\":\"note\"}" \
+        --request POST \
+        https://api.pushbullet.com/v2/pushes \
+        && exit 0 || exit 1
+    echo
+}
+
+_qr () {
+    if [[ $# -gt 0 ]]; then
+        file=$(mktemp);
+        qrencode -s 20 "$*" -o $file
+        $OPEN $file
+    fi
+}
+
+qr () {
+    if [[ $# -gt 0 ]]; then
+        MSG="$(echo $* | sed "s/ /\\ /g")"
+        curl qrenco.de/"$*"
+    else
+        curl -F-=\<- qrenco.de
+    fi
 }
 
 # Foreground a job searching the process name
@@ -349,6 +321,10 @@ wttr () {
     curl "https://wttr.in/~$CITY"
 }
 
+df () {
+    date +%F -d "$*"
+}
+
 daysuntil () {
     curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
 }
@@ -357,18 +333,12 @@ transfer () {
     echo "Non ancora!"
 }
 
-dict() {
-    curl dict://dict.org/d:${1} | less
+function fix-mimecache () {
+    cd ~/.local/share/applications/
+    rm mimeinfo.cache
+    ln -s $DF/mimeinfo.cache
+    cd ~-
 }
-
-clean-swp () {
-    rm -r ~/.local/share/nvim/swap/*
-}
-
-nack () {
-    $EDITOR +Nack\ "$*"
-}
-
 
 function gong () {
     if [[ $# -gt 0 ]]; then
@@ -396,7 +366,7 @@ OPTIONS:
 }
 
 function fo () {
-    IFS=$'\n'
+ IFS=$'\n'
     f=($(fdfind . ${1:-"."} -I | fzf --expect=ctrl-o,ctrl-c,ctrl-f,ctrl-g)) #--header "C-o: mimeopen; C-c: copy path; C-f: cd in parent folder; C-g: open file manager in parent folder\n"))
     if [[ ! -z $f ]]; then
         case ${f[0]} in
@@ -418,7 +388,8 @@ function fo () {
 
 # }}}
 
-# Prompt  {{{
+# Prompt  & colors{{{
+
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
 
@@ -447,34 +418,36 @@ prompt() {
     dirColor=${bldpur}
 
     # Today's todos
-    [[ -e $TD ]] && toDo=$(todo-ls | wc -l) || toDo="x"
-    [[ -e $TD ]] && toDoUrgent=$(todo-ls | grep "^(" | wc -l) || toDoUrgent="x"
+    [[ -e $TD ]] && toDo=$(todo ls | wc -l) || toDo="x"
+    [[ -e $TD ]] && toDoUrgent=$(todo ls | grep "^(A" | wc -l) || toDoUrgent="x"
     [[ $toDo -gt 0 ]] && todoColor=${bldylw}
     [[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
 
     # suspended jobs
     [[ ! $(jobs -ls | wc -l ) = 0 ]] && bg_jobs="(\j) "|| bg_jobs=""
 
-    # end="⚕"
+    end="⚕"
     # end="🍺"
-    end="▶"
+    # end="▶"
     # end=">"
+    # end=":"
     # end="💰"
 
     if [[ $TERM = "dumb" ]]; then
         export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
     else
-        export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, [$toDoUrgent!]]${dirColor} $(ps1_hostname)\W $end ${txtrst}"
+        export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, [$toDoUrgent!]]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
     fi
 }
 
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
-    [[ "$host" != "pelican" || "$user" != "vic" ]] && echo "$user@$host - "
+    [[ ! "$host" =~ pelican|lenovo || "$user" != "vic" ]] && echo "$user@$host"
 }
-
 # }}}
 
+# Tmux
+# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker

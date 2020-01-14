@@ -7,8 +7,8 @@ TD="$HOME/pCloudDrive/Documenti/Todo/todo.txt"
 DN="$HOME/pCloudDrive/Documenti/Todo/done.txt"
 
 todo-edit() {
-    [[ $# -gt 0 ]] && \
-        $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
+[[ $# -gt 0 ]] && \
+    $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
 }
 
 todo-add(){
@@ -24,7 +24,7 @@ if [[ $# -gt 0 ]]; then
     task=$(echo "$preTask" | sed -E "s/$priority_or_done_pattern//") # remove everything that matched
     if [[ $# -gt 0 ]]; then
         if [[ $date_exit_status -eq 0 ]]; then
-           echo "$pri $(date -I) $task" | sed "s/^ //" >> $TD
+            echo "$pri $(date -I) $task" | sed "s/^ //" >> $TD
         fi
     fi
 else
@@ -37,28 +37,19 @@ if [[ $# -gt 0 ]]; then
     case "$1" in
         "agenda")
             # tl agenda [ # days ]
-            end=${2:-6} # if not $2, by default print todos for next 6 days
-            if [[ $end -ge 0 ]]; then
-                for (( i=0; i<$end; i++ )) do
-                    t=$(todo-ls $i days);
-                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
-                done;
-            else
-                for (( i=$end; i<0; i++ )) do
-                    t=$(todo-ls $i days);
-                    [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
-                done;
-            fi
-            echo ;;
-        "past")
-            # tl past [# days]
-            local IFS=""
-            end=${2:-100} # if not $2, by default print todos for the past 100 days
-            for (( i=$end; i>0; i-- )) do
-                t=$(todo-ls -$i days);
-                [[ ! -z "$t" ]] && echo $t;
+        end=${2:-6} # if not $2, by default print todos for next 6 days
+        if [[ $end -ge 0 ]]; then
+            for (( i=0; i<$end; i++ )) do
+                t=$(todo-ls $i days);
+                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
             done;
-            ;;
+        else
+            for (( i=$end; i<0; i++ )) do
+                t=$(todo-ls $i days);
+                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
+            done;
+        fi
+        echo ;;
         "someday") cat $TD | grep -v "due:.*$";;
         "tags")
             # local IFS=""
@@ -116,13 +107,54 @@ function todo-ls-tags() {
     grep -o "\+\w*" $TD | sort | uniq
 }
 
-# Main
+function todo-agenda(){
+    echo "!!!"
+    todo-ls agenda
+}
 
-case $1 in
-    "edit") shift; todo-edit $*;;
+function todo-past(){
+local IFS=""
+end=${1:-100} # if not $2, by default print todos for the past 100 days
+for (( i=$end; i>0; i-- )) do
+    t=$(todo-ls -$i days);
+    [[ ! -z "$t" ]] && echo $t;
+done;
+}
+
+usage (){
+cat <<EOH
+    "edit") edit $TD
     "add") shift; todo-add $*;;
     "ls") shift; todo-ls $*;;
     "done") shift; todo-done $*;;
     "tags") shift; todo-ls-tags $*;;
-    *) todo-ls today;;
+    "agenda") shift; todo-agenda $*;;
+    "past") shift; todo-past $*;;
+    "someday") shift; todo-someday $*;;
+    "u") usage ;;
+    *) todo-ls $* ;;
+EOH
+
+}
+
+# Main
+
+case $1 in
+    "edit") shift; todo-edit $*;;
+    "add"|"a") shift; todo-add $*;;
+    "ls") shift; todo-ls $*;;
+    "done") shift; todo-done $*;;
+    "tags") shift; todo-ls-tags $*;;
+    "agenda") shift; todo-agenda $*;;
+    "past") shift; todo-past $*;;
+    "someday") shift; todo-someday $*;;
+    "u") usage ;;
+    *) todo-ls $* ;;
 esac
+
+## TODO
+## list tag e progetti per bene
+## Someday command
+## Usage command
+## Someday command
+## Usage command
