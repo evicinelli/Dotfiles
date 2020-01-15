@@ -1,11 +1,10 @@
 #! /bin/bash
 
 function get_todo_from_file() {
-    file=/home/vic/pCloudDrive/Documenti/Todo/todo.txt
     color="colour2"
     symbol="   "
-    todos=$(grep "due:$(date +%F)" $file | grep -v "^x" | wc -l)
-    urgent=$(grep "due:$(date +%F)" $file | grep -v "^x" | grep "^(" | wc -l)
+    todos=$(todo ls | wc -l)
+    urgent=$(todo ls| grep -v "^x" | grep "^(" | wc -l)
 
     if [[ urgent -gt 0 ]]; then
         color="colour1"

@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+IFS=$'\n'
+f=($(fdfind . ${1:-"."} -I | fzf --expect=ctrl-o,ctrl-c,ctrl-f,ctrl-g)) #--header "C-o: mimeopen; C-c: copy path; C-f: cd in parent folder; C-g: open file manager in parent folder\n"))
+if [[ ! -z $f ]]; then
+    case ${f[0]} in
+        "ctrl-o") # Ask which application use to open
+            mimeopen --ask ${f[1]};;
+        "ctrl-c") # Copy path
+            echo "${f[1]}" | xclip -selection primary -f | xclip -selection clipboard;;
+        "ctrl-f") # Cd in parent folder
+            [[ -d ${f[1]} ]] && cd "${f[1]}" || cd "$(dirname "${f[1]}")" ;;
+        "ctrl-g") # Open file manager in parent folder
+            [[ -d ${f[1]} ]] && xdg-open "${f[1]}" || xdg-open "$(dirname ${f[1]})" ;;
+        *)        # Open file
+            xdg-open "${f[0]}"
+    esac
+fi

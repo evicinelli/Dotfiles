@@ -33,51 +33,16 @@ fi
 }
 
 todo-ls() {
-if [[ $# -gt 0 ]]; then
-    case "$1" in
-        "agenda")
-            # tl agenda [ # days ]
-        end=${2:-6} # if not $2, by default print todos for next 6 days
-        if [[ $end -ge 0 ]]; then
-            for (( i=0; i<$end; i++ )) do
-                t=$(todo-ls $i days);
-                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
-            done;
+    if [[ $# -gt 0 ]]; then
+        if date -d "$*" > /dev/null 2>&1; then
+            cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
         else
-            for (( i=$end; i<0; i++ )) do
-                t=$(todo-ls $i days);
-                [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
-            done;
+            args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
+            cat $TD | grep -v "^x" | grep -Gi "$args" $TD
         fi
-        echo ;;
-        "someday") cat $TD | grep -v "due:.*$";;
-        "tags")
-            # local IFS=""
-            readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
-            for tag in ${tags[*]}; do
-                echo -ne "\n- $tag --- \n"
-                cat $TD | grep -v "^x" | grep "$tag"
-            done
-            ;;
-
-        "proj")
-            readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
-            for tag in ${tags[*]}; do
-                echo -ne "\n- $tag --- \n"
-                cat $TD | grep -v "^x" | grep "$tag"
-            done
-            ;;
-        *)
-            if date -d "$*" > /dev/null 2>&1; then
-                cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
-            else
-                args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
-                cat $TD | grep -v "^x" | grep -Gi "$args" $TD
-            fi
-    esac
-else
-    cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
-fi
+    else
+        cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
+    fi
 }
 
 todo-done () {
@@ -102,14 +67,20 @@ else
 fi
 }
 
-function todo-ls-tags() {
-    grep -o "@.[a-z]*" $TD | sort | uniq
-    grep -o "\+\w*" $TD | sort | uniq
-}
-
 function todo-agenda(){
-    echo "!!!"
-    todo-ls agenda
+end=${1:-6} # if not $2, by default print todos for next 6 days
+if [[ $end -ge 0 ]]; then
+    for (( i=0; i<$end; i++ )) do
+        t=$(todo-ls $i days);
+        [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
+    done;
+else
+    for (( i=$end; i<0; i++ )) do
+        t=$(todo-ls $i days);
+        [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
+    done;
+fi
+echo
 }
 
 function todo-past(){
@@ -121,40 +92,50 @@ for (( i=$end; i>0; i-- )) do
 done;
 }
 
-usage (){
-cat <<EOH
-    "edit") edit $TD
-    "add") shift; todo-add $*;;
-    "ls") shift; todo-ls $*;;
-    "done") shift; todo-done $*;;
-    "tags") shift; todo-ls-tags $*;;
-    "agenda") shift; todo-agenda $*;;
-    "past") shift; todo-past $*;;
-    "someday") shift; todo-someday $*;;
-    "u") usage ;;
-    *) todo-ls $* ;;
-EOH
-
+function todo-someday(){
+    cat $TD | grep -v "due:.*$"
 }
 
-# Main
+function todo-ls-proj(){
+    # local IFS=""
+    readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
+    for tag in ${tags[*]}; do
+        echo -ne "\n- $tag --- \n"
+        cat $TD | grep -v "^x" | grep "$tag"
+    done
+}
 
-case $1 in
-    "edit") shift; todo-edit $*;;
-    "add"|"a") shift; todo-add $*;;
-    "ls") shift; todo-ls $*;;
-    "done") shift; todo-done $*;;
-    "tags") shift; todo-ls-tags $*;;
-    "agenda") shift; todo-agenda $*;;
-    "past") shift; todo-past $*;;
-    "someday") shift; todo-someday $*;;
-    "u") usage ;;
-    *) todo-ls $* ;;
-esac
+function todo-ls-tags(){
+    readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
+    for tag in ${tags[*]}; do
+        echo -ne "\n- $tag --- \n"
+        cat $TD | grep -v "^x" | grep "$tag"
+    done
+}
 
+usage (){
+cat <<EOH
 ## TODO
 ## list tag e progetti per bene
 ## Someday command
 ## Usage command
 ## Someday command
 ## Usage command
+EOH
+}
+
+# Main
+
+case $1 in
+    "edit"|"e") shift; todo-edit $*;;
+    "add"|"a") shift; todo-add $*;;
+    "ls"|"l") shift; todo-ls $*;;
+    "done"|"d") shift; todo-done $*;;
+    "tags"|"t") shift; todo-ls-tags $*;;
+    "proj"|"j") shift; todo-ls-proj $*;;
+    "agenda"|"g") shift; todo-agenda $*;;
+    "past"|"p") shift; todo-past $*;;
+    "someday"|"s") shift; todo-someday $*;;
+    "u") usage ;;
+    *) todo-ls $* ;;
+esac
