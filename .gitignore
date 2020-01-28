@@ -1,1 +1,12 @@
-*.swp
+pCloudDrive/
+Downloads/
+.bash_history
+.bash_history
+.cache/
+.gitconfig
+.netrwhist
+.password-store
+.pcloud/
+.ssh
+.swp
+.vimundo/
