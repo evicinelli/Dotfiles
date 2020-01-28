@@ -1,3 +1,0 @@
-#! /usr/bin/env bash
-
-[[ -f /tmp/gtd ]] && cat /tmp/gtd && echo " |" || echo ""

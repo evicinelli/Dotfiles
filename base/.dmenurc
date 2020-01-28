@@ -1,5 +1,0 @@
-DMENU="dmenu -f -i -fn \"Inconsolata-14\""
-
-#-nb \"#f5f5f5\" -nf \"#464646\""
-
-# vim: ft=sh

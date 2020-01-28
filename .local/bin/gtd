@@ -1,0 +1,43 @@
+#! /usr/bin/env bash
+# Simple pomodoro timer. Default: 25 minutes work, 5 minute break
+
+ding(){
+    file=$P/Res/ping.opus
+    mpv $file &>/dev/null &
+}
+
+_work () {
+    ding
+    echo "$(date): 🍅 💻 LAVORO"
+    notify-send --urgency=critical "💻" "Lavora!"
+    sleep $(( 60*$1 ))
+}
+
+_break () {
+    ding
+    echo "$(date): 🍅 🎉 PAUSA"
+    notify-send --urgency=critical "🎉" "Pausina"
+    sleep $(( 60*$1 ))
+}
+
+    i=0;
+
+
+main(){
+    getopts ":p" opt
+
+    case ${opt} in 
+        p) _break $2 ;;
+    esac
+
+    while :
+    do
+        _work $1
+        i=$(( $i+1 ))
+        _break $2
+    done;
+}
+
+i=0;
+trap 'echo -e "\nBrev, hai lavorato per $i cicli ($(( $i*${1:-25} )) minuti)" && exit' 2 3 9 15
+main ${1:-25} ${2:-5}
