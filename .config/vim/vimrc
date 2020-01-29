@@ -3,7 +3,7 @@ call plug#begin()
 if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default
 endif
-Plug 'christoomey/vim-tmux-navigator'                                " Now vim <3 tmux
+"Plug 'christoomey/vim-tmux-navigator'                                " Now vim <3 tmux
 Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'jeffkreeftmeijer/vim-dim'                                      " Default improved: 16 color colorscheme
@@ -18,16 +18,16 @@ Plug 'chrisbra/csv.vim'                                              " Csv file 
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
 Plug 'mbbill/undotree'
 
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'arcticicestudio/nord-vim'
-Plug 'challenger-deep-theme/vim'
-Plug 'cocopon/iceberg.vim'
-Plug 'lifepillar/vim-solarized8'
-Plug 'jnurmine/Zenburn'
-Plug 'junegunn/seoul256.vim'
-Plug 'jpo/vim-railscasts-theme'
-Plug 'mhartington/oceanic-next'
-Plug 'morhetz/gruvbox'
+"Plug 'NLKNguyen/papercolor-theme'
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'challenger-deep-theme/vim'
+"Plug 'cocopon/iceberg.vim'
+"Plug 'lifepillar/vim-solarized8'
+"Plug 'jnurmine/Zenburn'
+"Plug 'junegunn/seoul256.vim'
+"Plug 'jpo/vim-railscasts-theme'
+"Plug 'mhartington/oceanic-next'
+"Plug 'morhetz/gruvbox'
 Plug 'nightsense/cosmic_latte'
 Plug 'srcery-colors/srcery-vim'
 call plug#end()
@@ -37,8 +37,8 @@ call plug#end()
 syntax enable             " Enable syntax Highighting
 filetype plugin on        " Filetype plugin
 filetype plugin indent on " Specific indentation rules depending on file type
-" set secure                " No shell command on autocmd
-" set clipboard=unnamed,unnamedplus   " Integrate with system clipboard
+set secure                " No shell command on autocmd
+set clipboard=unnamed,unnamedplus   " Integrate with system clipboard
 set autoindent            " Auto-indent
 set autoread              " Auto reload file if modified from external command
 set backupdir=/tmp//      " Backup file in /tmp//
@@ -115,32 +115,32 @@ let g:csv_highlight_column = 'y'
 " Mappings {{{
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap Q q
-cnoremap W w
-cnoremap X x
-inoremap " ""<Left>
-inoremap ( ()<Left>
 inoremap <C-z> <C-o><C-z>
-inoremap <F1> <Esc>
-inoremap [ []<Left>
-inoremap ` ``<Left>
-inoremap { {}<Left>
 noremap <C-b> :Buffers<CR>
+noremap <C-k> :FZF<CR>
+noremap <C-l> :noh <CR>
 noremap <C-n> :cn<CR>
-noremap <C-p> :FZF<CR>
-noremap <F1> <Esc>
-noremap <F8> :se spell!<CR>
-noremap <F9> :se nowrap!<CR>
-noremap <leader><leader> zA <CR>
+noremap <C-p> :cp<CR>
 noremap <leader>1 :set laststatus=1 \| set showmode <CR>
 noremap <leader>2 :set laststatus=2 \| set noshowmode <CR>
+noremap <leader><leader> zA <CR>
 noremap <leader>a :Ack -i 
-noremap <leader>b :Buf <CR>
 noremap <leader>f :FZF --no-exact 
 noremap <leader>m :MRU <CR>
 noremap <leader>na :Nack 
 noremap <leader>p :FZF --no-exact<CR>
 noremap <leader>so :!xdg-open "%" <CR>
+noremap <F1> <Esc>
+noremap <F8> :se spell!<CR>
+noremap <F9> :se nowrap!<CR>
+inoremap [ []<Left>
+inoremap ` ``<Left>
+inoremap { {}<Left>
+cnoremap Q q
+cnoremap W w
+cnoremap X x
+inoremap " ""<Left>
+inoremap ( ()<Left>
 noremap Y y$
 noremap Z zMzv
 noremap j gj
@@ -291,7 +291,7 @@ highlight CursorLine ctermbg=0 cterm=bold
 highlight CursorLineNr ctermbg=0
 highlight FoldColumn ctermbg=0 ctermfg=8
 highlight Folded ctermbg=8 ctermfg=15 cterm=bold
-highlight SpellBad ctermfg=15 ctermbg=9 cterm=underline
+highlight SpellBad ctermfg=9 ctermbg=0 cterm=underline
 highlight SpellCap ctermbg=14 ctermfg=0
 " }}}
 

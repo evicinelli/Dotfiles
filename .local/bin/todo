@@ -12,7 +12,6 @@ todo-edit() {
 }
 
 todo-add(){
-# $ todo-add "(A) task +project @context due:<date in words>"
 priority_or_done_pattern="^(\([A-Z]\))|^x "
 if [[ $# -gt 0 ]]; then
     pri=""
@@ -72,12 +71,12 @@ end=${1:-6} # if not $2, by default print todos for next 6 days
 if [[ $end -ge 0 ]]; then
     for (( i=0; i<$end; i++ )) do
         t=$(todo-ls $i days);
-        [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") --- \n"; echo "$t";);
+        [[ ! -z "$t" ]] && (printf "\n\e[1;31m - $(date +%a\ %x -d "$i days") --- \e[0;37m\n"; echo "$t";);
     done;
 else
     for (( i=$end; i<0; i++ )) do
         t=$(todo-ls $i days);
-        [[ ! -z "$t" ]] && (echo -ne "\n- $(date +%a\ %x -d "$i days") ($i days ago) --- \n"; echo "$t";);
+        [[ ! -z "$t" ]] && (printf "\n\e[1;31m - $(date +%a\ %x -d "$i days") ($i days ago) --- \e[0;37m\n"; echo "$t";);
     done;
 fi
 echo
