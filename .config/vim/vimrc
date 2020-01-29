@@ -278,16 +278,21 @@ nnoremap <leader>n :Nack
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\|,fold:\ 
 
-set termguicolors
-set bg=light
-colorscheme solarized8
-let g:solarized_extra_hi_groups=1
+set notermguicolors
+set bg=dark
+colorscheme dim
 function! GetModeAndColor()
     return toupper(mode())
 endfunction
 set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
 
-hi TodoDueToday guibg=Yellow guifg=gray
+hi TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
+highlight CursorLine ctermbg=0 cterm=bold
+highlight CursorLineNr ctermbg=0
+highlight FoldColumn ctermbg=0 ctermfg=8
+highlight Folded ctermbg=8 ctermfg=15 cterm=bold
+highlight SpellBad ctermfg=15 ctermbg=9 cterm=underline
+highlight SpellCap ctermbg=14 ctermfg=0
 " }}}
 
 " vim: fdm=marker
