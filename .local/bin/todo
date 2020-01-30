@@ -112,6 +112,10 @@ function todo-ls-tags(){
     done
 }
 
+todo-urgent (){
+    todo-ls $* | grep -e "^([A-E])"
+}
+
 usage (){
 cat <<EOH
 USAGE:
@@ -144,6 +148,7 @@ case $1 in
     "agenda"|"g") shift; todo-agenda $*;;
     "past"|"p") shift; todo-past $*;;
     "someday"|"s") shift; todo-someday $*;;
-    "u") usage ;;
+    "urgent" | "u") shift; todo-urgent $*;;
+    "h") usage ;;
     *) todo-ls $* ;;
 esac
