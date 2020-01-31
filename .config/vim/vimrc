@@ -223,7 +223,6 @@ function! s:goyo_enter()
     silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
     highlight NonText ctermfg=0
     set scrolloff=999
-    "set bg=light
 endfunction
 
 function! s:goyo_leave()
@@ -279,19 +278,19 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\|,fold:\ 
 
 set notermguicolors
-set bg=dark
+set bg=light
 colorscheme dim
 function! GetModeAndColor()
     return toupper(mode())
 endfunction
 set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
 
+highlight clear SpellBad
 highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
-highlight CursorLine ctermbg=0 cterm=bold
-"highlight CursorLineNr ctermbg=0
+highlight CursorLine cterm=bold
 highlight FoldColumn ctermbg=0 ctermfg=8
 highlight Folded ctermbg=0 ctermfg=15 cterm=bold
-highlight SpellBad ctermfg=9 ctermbg=0 cterm=underline
+highlight SpellBad ctermfg=9 cterm=underline
 highlight SpellCap ctermbg=14 ctermfg=0
 " }}}
 
