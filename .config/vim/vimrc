@@ -22,7 +22,7 @@ Plug 'mbbill/undotree'
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'challenger-deep-theme/vim'
 "Plug 'cocopon/iceberg.vim'
-"Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-solarized8'
 "Plug 'jnurmine/Zenburn'
 "Plug 'junegunn/seoul256.vim'
 "Plug 'jpo/vim-railscasts-theme'
@@ -277,21 +277,22 @@ nnoremap <leader>n :Nack
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\|,fold:\ 
 
-set notermguicolors
+set termguicolors
 set bg=light
-colorscheme dim
-function! GetModeAndColor()
-    return toupper(mode())
-endfunction
-set stl=\ %{GetModeAndColor()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
+colorscheme solarized8
 
-highlight clear SpellBad
-highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
-highlight CursorLine cterm=bold
-highlight FoldColumn ctermbg=0 ctermfg=8
-highlight Folded ctermbg=0 ctermfg=15 cterm=bold
-highlight SpellBad ctermfg=9 cterm=underline
-highlight SpellCap ctermbg=14 ctermfg=0
+set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
+
+" Highlight groups only if we set notermguicolors
+if (! &termguicolors)
+    highlight clear SpellBad
+    highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
+    highlight CursorLine cterm=bold gui=bold
+    highlight FoldColumn ctermbg=0 ctermfg=8
+    highlight Folded ctermbg=0 ctermfg=15 cterm=bold
+    highlight SpellBad ctermfg=9 cterm=underline
+    highlight SpellCap ctermbg=14 ctermfg=0
+endif
 " }}}
 
 " vim: fdm=marker

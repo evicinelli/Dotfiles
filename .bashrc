@@ -167,14 +167,11 @@ shopt -s histappend
 
 # Functions {{{
 
-# Altra roba {{{
 dict() {
     curl dict://dict.org/d:${1} | less
 }
 
 cswp () {
-    # find $HOME -name "*.swp" -ok rm "{}" \;
-    # find $HOME -name "*.swo" -ok rm "{}" \;
     rm -r ~/.local/share/nvim/swap/*
 }
 
@@ -186,8 +183,6 @@ ding () {
     file=$P/Res/ping.opus
     mpv $file &>/dev/null &
 }
-
-# 25/5 - https://github.com/connermcd/gtd
 
 share-home-network () {
     sqr "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
@@ -213,23 +208,6 @@ push () {
     echo
 }
 
-_qr () {
-    if [[ $# -gt 0 ]]; then
-        file=$(mktemp);
-        qrencode -s 20 "$*" -o $file
-        $OPEN $file
-    fi
-}
-
-qr () {
-    if [[ $# -gt 0 ]]; then
-        MSG="$(echo $* | sed "s/ /\\ /g")"
-        curl qrenco.de/"$*"
-    else
-        curl -F-=\<- qrenco.de
-    fi
-}
-
 # Foreground a job searching the process name
 fj () {
     job=$(jobs -ls | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
@@ -241,23 +219,12 @@ wttr () {
     curl "https://wttr.in/~$CITY"
 }
 
-df () {
-    date +%F -d "$*"
-}
-
 daysuntil () {
     curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
 }
 
 transfer () {
     echo "Non ancora!"
-}
-
-function fix-mimecache () {
-    cd ~/.local/share/applications/
-    rm mimeinfo.cache
-    ln -s $DF/mimeinfo.cache
-    cd ~-
 }
 
 function gong () {
@@ -285,7 +252,6 @@ OPTIONS:
     fi
 }
 
-# }}}
 
 # }}}
 
