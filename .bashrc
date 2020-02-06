@@ -34,6 +34,7 @@ set -o vi
 # }}}
 
 # Variables {{{
+export PATH=${PATH}:$HOME/.local/bin
 export EDITOR=vim
 export TERMINAL=kitty
 export OPEN=xdg-open

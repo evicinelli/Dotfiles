@@ -116,11 +116,13 @@ todo-urgent (){
 
 usage (){
 cat <<EOH
+
 USAGE
 
     todo <command> [argument]
 
 COMMANDS
+
     a   add         add [argument] as a new task. If a due date is set, it must be specified in a \`date -d\` compatible format
     g   agenda      list tasks for the next 6 days
     d   done        set task containing [argument] as done
