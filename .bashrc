@@ -219,7 +219,7 @@ wttr () {
 }
 
 daysuntil () {
-    curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
+    echo $(( ($(date "+%s" -d "$*") - $(date "+%s" -d "today")) / (60*60*24) ))
 }
 
 # }}}

@@ -283,7 +283,6 @@ colorscheme solarized8
 
 set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
 
-" Highlight groups only if we set notermguicolors
 if (! &termguicolors)
     highlight clear SpellBad
     highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
