@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+GONG="/home/vic/pCloudDrive/Res/ping.opus"
+
+function gong () {
+    case $1 in
+        "-g")
+            time=$2
+            shift
+            shift
+            mess=$*
+            at $time <<<"notify-send --urgency=critical \"DING!\" \"$mess\" && mpv $GONG--speed=3.5";;# --volume=60";;
+        *)
+            time=$1
+            shift
+            mess=$*
+            at $time <<<"notify-send --urgency=critical \"DING!\" \"$mess\"";;
+    esac
+}
+
+usage() {
+cat <<-EOH
+USAGE:
+    gong [-g] <time_at_witch_to_gong> <message>
+
+OPTIONS:
+    -g : actually gong
+EOH
+}
+
+[[ $# -gt 0 ]] && gong $* || usage

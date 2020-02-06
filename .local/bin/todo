@@ -67,28 +67,27 @@ fi
 }
 
 function todo-agenda(){
-end=${1:-6} # if not $2, by default print todos for next 6 days
-if [[ $end -ge 0 ]]; then
-    for (( i=0; i<$end; i++ )) do
-        t=$(todo-ls $i days);
-        [[ ! -z "$t" ]] && (printf "\n\e[1;31m - $(date +%a\ %x -d "$i days") --- \e[0;37m\n"; echo "$t";);
+    end=${1:-6} # if not $2, by default print todos for next 6 days
+    [[ $end -gt 0 ]] && days=$(seq 0 $end) || days=$(seq $end 0)
+    for i in $days; do
+        t=$(todo-ls $i days)
+        day_title="- $(date +%a\ %x -d "$i days") ($i days) --\n"
+        if tty -s; then
+            [[ ! -z "$t" ]] && echo -e "\e[1;31m${day_title}\e[0;37m${t}\n"
+        else
+            [[ ! -z "$t" ]] && echo -e "${day_title}${t}\n"
+        fi
     done;
-else
-    for (( i=$end; i<0; i++ )) do
-        t=$(todo-ls $i days);
-        [[ ! -z "$t" ]] && (printf "\n\e[1;31m - $(date +%a\ %x -d "$i days") ($i days ago) --- \e[0;37m\n"; echo "$t";);
-    done;
-fi
-echo
+    echo
 }
 
 function todo-past(){
-local IFS=""
-end=${1:-100} # if not $2, by default print todos for the past 100 days
-for (( i=$end; i>0; i-- )) do
-    t=$(todo-ls -$i days);
-    [[ ! -z "$t" ]] && echo $t;
-done;
+    local IFS=""
+    end=${1:-100} # if not $2, by default print todos for the past 100 days
+    for (( i=$end; i>0; i-- )) do
+        t=$(todo-ls -$i days);
+        [[ ! -z "$t" ]] && echo $t;
+    done;
 }
 
 function todo-someday(){
@@ -96,10 +95,9 @@ function todo-someday(){
 }
 
 function todo-ls-proj(){
-    # local IFS=""
     readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
     for tag in ${tags[*]}; do
-        echo -ne "\n- $tag --- \n"
+        echo -ne "\n- $tag --\n"
         cat $TD | grep -v "^x" | grep "$tag"
     done
 }
@@ -118,36 +116,34 @@ todo-urgent (){
 
 usage (){
 cat <<EOH
-USAGE:
+USAGE
 
-    todo [command] [argument]
+    todo <command> [argument]
 
-COMMANDS:
-
-    add        add [argument] as a new task. If a due date is set, it must be specified in a \`date -d\` compatible format
-    agenda     list tasks for the next 6 days
-    done       set task containing [argument] as done
-    edit       edit $TD
-    ls         list today's tasks
-    past       list overdue tasks
-    proj       list tasks grouped by @project
-    someday    list tasks which does not have a due date
-    tags       list tasks grouped by +tags
+COMMANDS
+    a   add         add [argument] as a new task. If a due date is set, it must be specified in a \`date -d\` compatible format
+    g   agenda      list tasks for the next 6 days
+    d   done        set task containing [argument] as done
+    e   edit        edit $TD
+    l   ls          list today's tasks
+    p   past        list overdue tasks
+    j   proj        list tasks grouped by @project
+    s   someday     list tasks which do not have a due date
+    t   tags        list tasks grouped by +tags
 EOH
 }
 
 # Main
-
 case $1 in
-    "edit"|"e") shift; todo-edit $*;;
     "add"|"a") shift; todo-add $*;;
-    "ls"|"l") shift; todo-ls $*;;
-    "done"|"d") shift; todo-done $*;;
-    "tags"|"t") shift; todo-ls-tags $*;;
-    "proj"|"j") shift; todo-ls-proj $*;;
     "agenda"|"g") shift; todo-agenda $*;;
+    "done"|"d") shift; todo-done $*;;
+    "edit"|"e") shift; todo-edit $*;;
+    "ls"|"l") shift; todo-ls $*;;
     "past"|"p") shift; todo-past $*;;
+    "proj"|"j") shift; todo-ls-proj $*;;
     "someday"|"s") shift; todo-someday $*;;
+    "tags"|"t") shift; todo-ls-tags $*;;
     "urgent" | "u") shift; todo-urgent $*;;
     "h") usage ;;
     *) todo-ls $* ;;

@@ -34,8 +34,7 @@ set -o vi
 # }}}
 
 # Variables {{{
-export PATH="${PATH}:$HOME/Dotfiles/bin/:${PATH}:${HOME}/.local/bin/:${HOME}/Scaricati/Apps/Telegram"
-[[ -e /usr/bin/nvim ]] && export EDITOR=nvim || export EDITOR=vim
+export EDITOR=vim
 export TERMINAL=kitty
 export OPEN=xdg-open
 
@@ -222,36 +221,6 @@ wttr () {
 daysuntil () {
     curl -s https://daycalc.appspot.com/`date +%m/%d/%Y --date "$*"` | grep -Eo "[0-9]+ days" | head -n 1
 }
-
-transfer () {
-    echo "Non ancora!"
-}
-
-function gong () {
-    if [[ $# -gt 0 ]]; then
-        case $1 in
-            "-g")
-                time=$2
-                shift
-                shift
-                mess=$*
-                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\" && mpv /usr/lib/libreoffice/share/gallery/sounds/gong.wav --speed=3.5";;# --volume=60";;
-            *)
-                time=$1
-                shift
-                mess=$*
-                at $time <<<"notify-send --urgency=critical \"REMINDME\" \"$mess\"";;
-        esac
-    else
-        echo "
-gong [-g] <time_at_witch_to_gong> <message>
-
-OPTIONS:
-	-g : actually gong
-"
-    fi
-}
-
 
 # }}}
 
