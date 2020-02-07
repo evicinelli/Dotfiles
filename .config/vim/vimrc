@@ -275,22 +275,30 @@ nnoremap <leader>n :Nack
 
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
-set fillchars=vert:\|,fold:\ 
+set fillchars=vert:\ ,fold:\ 
 
-set termguicolors
+set notermguicolors
 set bg=light
-colorscheme solarized8
+colorscheme dim
 
 set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
 
 if (! &termguicolors)
     highlight clear SpellBad
-    highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
+    highlight clear Folded
+    highlight ColorColumn ctermbg=0 ctermfg=15
     highlight CursorLine cterm=bold gui=bold
+    highlight CursorLineNr ctermbg=0
     highlight FoldColumn ctermbg=0 ctermfg=8
-    highlight Folded ctermbg=0 ctermfg=15 cterm=bold
+    highlight Folded ctermbg=0 cterm=bold
+    highlight LineNr ctermbg=0
+    highlight SignColumn ctermbg=0 ctermfg=8
     highlight SpellBad ctermfg=9 cterm=underline
     highlight SpellCap ctermbg=14 ctermfg=0
+    highlight Statusline ctermbg=0 ctermfg=7
+    highlight StatuslineNC ctermbg=0 ctermfg=8
+    highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
+
 endif
 " }}}
 
