@@ -26,22 +26,22 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Is fzf already installed?
+# Fzf
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
+[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle'
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
-# Vim
+# Ultime cose
 set -o vi
+export PATH=${PATH}:$HOME/.local/bin
+export EDITOR=vim
 # }}}
 
 # Variables {{{
-export PATH=${PATH}:$HOME/.local/bin
-export EDITOR=vim
 export TERMINAL=kitty
 export OPEN=xdg-open
 
-# Folder
 export P="/home/vic/pCloudDrive"
-export DF="$HOME/Dotfiles"
 export DN="$P/Documenti/Todo/done.txt"
 export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"
@@ -60,30 +60,20 @@ export MED1="$P/Uni/Appunti/Medicina/Med1"
 # }}}
 
 # Alias {{{
+alias dir='dir --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
 alias la="ls -a"
 alias ll="ls -l"
 alias lla="ls -la"
-alias rm="rm -I"
-alias sort="sort -n"
-alias pandoc="pandoc --pdf-engine=xelatex"
-
-# Vim and neovim {{{
-    alias vi="$EDITOR"
-    alias vim="$EDITOR"
-    alias vimdiff="$EDITOR -d"
-    alias gv="$VISUAL"
-# }}}
-
-# Colori {{{
 alias ls='ls -h --color=auto --group-directories-first'
+alias pandoc="pandoc --pdf-engine=xelatex"
+alias rm="rm -I"
 alias sl='ls'
-alias dir='dir --color=auto'
+alias sort="sort -n"
 alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-# }}}
 
-# Troppo lunghi da scrivere (o li sbaglio sempre) {{{
+# Troppo lunghi da scrivere (o li sbaglio sempre)
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="vi $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
@@ -107,9 +97,8 @@ alias py="python"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
 alias vimrc="vi $HOME/.config/vim/vimrc"
-# }}}
 
-# Git {{{
+# Git
 alias g="git"
 alias gs="git status"
 alias gd="git diff"
@@ -119,26 +108,21 @@ alias gc="git commit"
 alias gpush="git push"
 alias gpull="git pull"
 alias glog="git log --graph --oneline"
-# }}}
 
-# Todo manager {{{
-alias t="todo"
+# Todo
 alias ta="todo add"
 alias tl="todo ls"
-alias tla="todo ls agenda"
+alias tg="todo agenda"
 alias td="todo done"
 alias te="todo edit"
-# }}}
 
 # }}}
 
-# Completions & fzf {{{
-complete -o bashdefault -o default -F _fzf_path_completion o # xdg-open alias completes with fzf when run o **
+# Completions {{{
+complete -o bashdefault -o default -F _fzf_path_completion o
+complete -o bashdefault -o default -F _fzf_path_completion open
 [ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
 
-[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle'
-# [[ -d $HOME/.fzf ]] && export FZF_DEFAULT_COMMAND='fdfind'
-[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 bind "set completion-ignore-case on"
 bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
@@ -166,7 +150,6 @@ shopt -s histappend
 # }}}
 
 # Functions {{{
-
 dict() {
     curl dict://dict.org/d:${1} | less
 }
@@ -189,7 +172,7 @@ share-home-network () {
 }
 
 tny () {
-    [[ $# -gt 0 ]] && ( wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1; echo;) || echo "tny nttps://url.com"
+    [[ $# -gt 0 ]] && ( wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1; echo;) || echo "tny https://url.com"
 }
 
 wifi () {
@@ -265,8 +248,8 @@ prompt() {
 
     # end="⚕"
     # end="🍺"
-    end="▶ "
-    # end=">"
+    # end="▶ "
+    end=">"
     # end=":"
     # end="💰"
 
@@ -283,8 +266,5 @@ ps1_hostname() {
     [[ ! "$host" =~ pelican|lenovo || "$user" != "vic" ]] && echo "$user@$host"
 }
 # }}}
-
-# Tmux
-# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker

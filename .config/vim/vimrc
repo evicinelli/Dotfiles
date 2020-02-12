@@ -22,7 +22,7 @@ Plug 'mbbill/undotree'
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'challenger-deep-theme/vim'
 "Plug 'cocopon/iceberg.vim'
-Plug 'lifepillar/vim-solarized8'
+"Plug 'lifepillar/vim-solarized8'
 "Plug 'jnurmine/Zenburn'
 "Plug 'junegunn/seoul256.vim'
 "Plug 'jpo/vim-railscasts-theme'
@@ -278,7 +278,7 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\ ,fold:\ 
 
 set notermguicolors
-set bg=light
+set bg=dark
 colorscheme dim
 
 set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
