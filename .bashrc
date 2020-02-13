@@ -32,7 +32,6 @@ fi
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # Ultime cose
-set -o vi
 export PATH=${PATH}:$HOME/.local/bin
 export EDITOR=vim
 # }}}
@@ -122,10 +121,6 @@ alias te="todo edit"
 complete -o bashdefault -o default -F _fzf_path_completion o
 complete -o bashdefault -o default -F _fzf_path_completion open
 [ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
-
-bind "set completion-ignore-case on"
-bind "set completion-map-case on"
-bind "set show-all-if-ambiguous on"
 # }}}
 
 # Keybindings {{{

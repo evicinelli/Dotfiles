@@ -3,8 +3,8 @@
 # A very simple yet super effective (at least, for me) cli todo manager
 # Depends on: vim, date, standard bash utilities, todo.txt format
 
-TD="$HOME/pCloudDrive/Documenti/Todo/todo.txt"
-DN="$HOME/pCloudDrive/Documenti/Todo/done.txt"
+TD=${TD:-"$HOME/todo.txt"}
+DN=${DN:-"$HOME/done.txt"}
 
 todo-edit() {
 [[ $# -gt 0 ]] && \
@@ -45,25 +45,18 @@ todo-ls() {
 }
 
 todo-done () {
-if [[ $# -gt 0 ]]; then
-    QUERY=$(echo $* | sed -e "s/\ /.*/g") # Insensitive match with space repleaced with .*
-    ENTRIES_NO=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*" | wc -l)
-    ENTRY=$(sed -n "/$QUERY/p" $TD | grep -v "^x .*")
-    if [[ $ENTRIES_NO -eq 1 ]]; then
-        # Marchiamo quell'entry come completata in todo.txt
-        echo -e "Marco come completato: "$ENTRY
-        sed -in "s/${ENTRY}/x $(date +%F)\ &/" $TD
+    if [[ $# -gt 0 ]]; then
+        QUERY=$(echo $* | sed -e "s/\ /.*/g")
+        ENTRY=$(grep -i "$QUERY" $TD | grep -v "^x .*")
+        ENTRIES_NO=$(echo -e "$ENTRY" | grep -v "^$"| wc -l)
+        [[ $ENTRIES_NO -gt 0 ]] || (echo "Nada de nada, mi sa che hai scritto male" && exit)
+        [[ $ENTRIES_NO -gt 1 ]] && ENTRY=$(echo -e "$ENTRY" | fzf)
     else
-        # Trovare un modo più carino per fare pure questo
-        if [[ $ENTRIES_NO -gt 1 ]]; then
-            sed -in "s/$( sed -n "/$QUERY/p" $TD | grep -v "^x .*" | fzf)/x $(date +%F)\ &/" $TD
-        else
-            echo -e "Nada de nada, mi sa che hai scritto male"
-        fi
+        ENTRY=$(cat $TD | fzf)
     fi
-else
-    sed -in "s/$(cat $TD | fzf)/x $(date +%F)\ &/" $TD
-fi
+
+    echo -e "Marco come completato: $ENTRY"
+    sed -i "s/$ENTRY/x $(date +%F)\ &/" $TD
 }
 
 function todo-agenda(){
