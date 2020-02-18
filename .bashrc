@@ -34,11 +34,12 @@ fi
 # Ultime cose
 export PATH=${PATH}:$HOME/.local/bin
 export EDITOR=vim
+export LC_ALL=it_IT.UTF-8
 # }}}
 
 # Variables {{{
 export TERMINAL=kitty
-export OPEN=xdg-open
+export OPEN=mimeopen
 
 export P="/home/vic/pCloudDrive"
 export DN="$P/Documenti/Todo/done.txt"
@@ -234,7 +235,7 @@ prompt() {
 
     # Today's todos
     [[ -e $TD ]] && toDo=$(todo ls | wc -l) || toDo="x"
-    [[ -e $TD ]] && toDoUrgent=$(todo ls | grep "^(A" | wc -l) || toDoUrgent="x"
+    [[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l) || toDoUrgent="x"
     [[ $toDo -gt 0 ]] && todoColor=${bldylw}
     [[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
 
