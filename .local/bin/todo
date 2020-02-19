@@ -56,12 +56,13 @@ todo-done () {
         ENTRIES_NO=$(echo -e "$ENTRY" | grep -v "^$"| wc -l)
         [[ $ENTRIES_NO -gt 0 ]] || (echo "Nada de nada, mi sa che hai scritto male" && exit)
         [[ $ENTRIES_NO -gt 1 ]] && ENTRY=$(echo -e "$ENTRY" | fzf)
-    else
-        ENTRY=$(cat $TD | fzf)
-    fi
 
-    echo -e "Marco come completato: $ENTRY"
-    sed -i "s/$ENTRY/x $(date +%F)\ &/" $TD
+        echo -e "Marco come completato: $ENTRY"
+        sed -i "s/$ENTRY/x $(date +%F)\ &/" $TD
+    else
+        # ENTRY=$(cat $TD | fzf)
+        todo-ls "due:$(date -I -d "today")" | grep "^x"
+    fi
 }
 
 function todo-agenda(){

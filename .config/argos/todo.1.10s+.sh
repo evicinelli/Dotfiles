@@ -10,19 +10,26 @@ urgent=($(TD=~/pCloudDrive/Documenti/Todo/todo.txt todo urgent))
 
 echo "<span color=\"$color\"> ${#todos[*]}, ${#urgent[*]}!</span>"
 
+
 echo "---"
 
-for t in ${todos[*]}; do
-    if [[ $t =~ ^\( ]]; then
-        color="Crimson"
-    elif [[ $t =~ .*@gvs.* ]]; then
-        color="RoyalBlue"
-    else
-        color="white"
-    fi
-    echo "<span color=\"$color\">$t </span> | bash='TD=~/pCloudDrive/Documenti/Todo/todo.txt todo done \"$t\"' refresh=true terminal=false"
-done
+if [[ $ARGOS_MENU_OPEN == "true" ]]; then
+    for t in ${todos[*]}; do
+        if [[ $t =~ ^\( ]]; then
+            color="Crimson"
+        elif [[ $t =~ .*@gvs.* ]]; then
+            color="RoyalBlue"
+        else
+            color="white"
+        fi
+        echo "<span color=\"$color\">$t </span> | bash='TD=~/pCloudDrive/Documenti/Todo/todo.txt todo done \"$t\"' refresh=true terminal=false"
+    done
 
-echo "--"
+    for t in $(TD=~/pCloudDrive/Documenti/Todo/todo.txt todo done); do
+        echo "$t | color=gray"
+    done
 
-echo "Edit todo file | bash='${EDITOR:-vim} /home/vic/pCloudDrive/Documenti/Todo/todo.txt'"
+    echo "--"
+
+    echo "Edit todo file | bash='${EDITOR:-vim} /home/vic/pCloudDrive/Documenti/Todo/todo.txt'"
+fi
