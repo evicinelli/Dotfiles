@@ -34,7 +34,6 @@ fi
 # Ultime cose
 export PATH=${PATH}:$HOME/.local/bin
 export EDITOR=vim
-export LC_ALL=it_IT.UTF-8
 # }}}
 
 # Variables {{{
@@ -75,7 +74,7 @@ alias vdir='vdir --color=auto'
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
-alias bashrc="vi $HOME/.bashrc && source $HOME/.bashrc"
+alias bashrc="$EDITOR $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
 alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias clipboard="xclip -selection PRIMARY"
