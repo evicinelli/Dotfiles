@@ -1,0 +1,16 @@
+[user]
+	email = emanuele.vicinelli@gmail.com
+	name = Emanuele Vicinelli
+
+[alias]
+	s = status
+	d = diff
+	rm = remove
+	a = add
+	c = commit --message
+	ps = push
+	pl = pull
+	log = log --graph --oneline
+
+[color]
+    ui = auto

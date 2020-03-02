@@ -80,6 +80,7 @@ alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable"
 alias gcal="gcalcli --calendar=\"Personale\""
+alias g="git"
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
@@ -97,16 +98,6 @@ alias scp="rsync --archive --checksum --compress --human-readable --itemize-chan
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
 alias vimrc="vi $HOME/.config/vim/vimrc"
 
-# Git
-alias g="git"
-alias gs="git status"
-alias gd="git diff"
-alias grm="git remove"
-alias ga="git add"
-alias gc="git commit"
-alias gpush="git push"
-alias gpull="git pull"
-alias glog="git log --graph --oneline"
 
 # Todo
 alias ta="todo add"
