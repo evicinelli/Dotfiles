@@ -84,8 +84,8 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
 alias mkdir="mkdir -pv"
-alias mn="notability $MED"
-alias myip="curl http://myip.dnsomatic.com && echo ''"
+alias mn="notability $MED/.."
+alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
 alias netoff="nmcli networking off"
 alias neton="nmcli networking on &"
@@ -146,11 +146,11 @@ shopt -s histappend
 
 # Functions {{{
 dict() {
-    curl dict://dict.org/d:${1} | less
+    wget -qO - dict://dict.org/d:${1} | less
 }
 
 cswp () {
-    rm -r ~/.local/share/nvim/swap/*
+    [[ $(ls ~/.local/share/nvim/swap/ | wc -l) -gt 0 ]] && rm -r ~/.local/share/nvim/swap/*
 }
 
 nack () {
@@ -174,18 +174,6 @@ wifi () {
     nmcli -a device wifi connect "$( nmcli --color no device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
 }
 
-push () {
-    # Push a notification to all the devices connected by pushbullet
-    [[ -z $PB_TOKEN ]] && echo "Devi impostare l'autenticazione per pushbullet! (https://docs.pushbullet.com/#api-quick-start)" && exit 1
-    curl -s --header "Access-Token: $PB_TOKEN" \
-        --header "Content-Type: application/json" \
-        --data-binary "{\"body\":\"$*\",\"title\":\"Broadcasted Push\",\"type\":\"note\"}" \
-        --request POST \
-        https://api.pushbullet.com/v2/pushes \
-        && exit 0 || exit 1
-    echo
-}
-
 # Foreground a job searching the process name
 fj () {
     job=$(jobs -ls | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
@@ -194,7 +182,7 @@ fj () {
 
 wttr () {
     CITY=`sed "s/ /+/g" <<< "$*"`
-    curl "https://wttr.in/~$CITY"
+    wget -qO - "https://wttr.in/~$CITY"
 }
 
 daysuntil () {
@@ -241,12 +229,8 @@ prompt() {
     # suspended jobs
     [[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
-    # end="⚕"
-    # end="🍺"
-    # end="▶ "
-    end=">"
-    # end=":"
-    # end="💰"
+    # end="⚕" end="🍺" end=">" end=":" end="💰"
+    end="▶"
 
     if [[ $TERM = "dumb" ]]; then
         export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
@@ -258,7 +242,7 @@ prompt() {
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
-    [[ ! "$host" =~ pelican|lenovo || "$user" != "vic" ]] && echo "$user@$host"
+    [[ ! "$host" =~ pelican || "$user" != "vic" ]] && echo "$user@$host "
 }
 # }}}
 

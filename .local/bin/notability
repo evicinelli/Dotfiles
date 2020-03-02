@@ -1,11 +1,10 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 (
-#cd $NOTES
 ext="txt"
 base_dir="$1"
 shift
-cd $base_dir
+cd $base_dir # Useful if you want to run `make` directly inside vim
 note=`find -type f -regex ".*\.\(txt\|md\)" -not -wholename "*Archivio*" | fzf --exact --height=100% -1 --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
 if [[ $? -eq 0 ]]; then
     # edit note
@@ -16,7 +15,7 @@ elif [[ $? -eq 1 ]]; then
         touch "$note.$ext"
         $EDITOR "$note.$ext"
     else
-        exit 0
+        exit 1
     fi
 fi
 )

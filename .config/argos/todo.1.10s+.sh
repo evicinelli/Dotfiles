@@ -19,6 +19,8 @@ if [[ $ARGOS_MENU_OPEN == "true" ]]; then
             color="Crimson"
         elif [[ $t =~ .*@gvs.* ]]; then
             color="RoyalBlue"
+	elif [[ $t =~ .*@med.* ]]; then
+	    color="Tomato"
         else
             color="white"
         fi

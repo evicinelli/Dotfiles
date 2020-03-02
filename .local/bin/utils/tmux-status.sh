@@ -1,16 +1,17 @@
 #! /bin/bash
 
+DELIM="|"
 function get_todo_from_file() {
-    color="colour2"
+    color="colour10"
     symbol="   "
     todos=$(todo ls | wc -l)
     urgent=$(todo ls| grep -v "^x" | grep "^(" | wc -l)
 
     if [[ urgent -gt 0 ]]; then
-        color="colour1"
+        color="colour9"
         symbol=" $urgent "
     elif [[ todos -gt 0 ]]; then
-        color="colour3"
+        color="colour11"
         symbol=" $todos "
     fi
 
@@ -19,16 +20,17 @@ function get_todo_from_file() {
 
 function muuuuusic() {
     if [[ $(ps aux | grep "spotify" | wc -l) -gt 2 && $(playerctl status) == "Playing" ]]; then
-        printf "%s %.25s %s"  "#[bg=colour10 fg=colour0]" "$(playerctl metadata -f "{{title}} - {{artist}}")" "#[default]"
+        color=colour10
+        printf "%s %.25s %s"  "#[bg=$color fg=colour0]" "$(playerctl metadata -f "{{title}} - {{artist}}")" "#[default]"
     else
-        printf "|"
+        print "$DELIM"
     fi
-    return 0
 }
 
 battery() {
-    acpi -V | head -n1 | cut -d"," -f2,3
+    # acpi -V | head -n1 | cut -d"," -f2,3
+    [[ $(cat /sys/class/power_supply/BAT0/status) == "Charging " ]] && bat_status="▲" || bat_status="▼"
+    echo "$(cat /sys/class/power_supply/BAT0/capacity)% $bat_status"
 }
 
-DELIM="|"
 echo "$(muuuuusic) $(battery) $DELIM $(date +%H:%M\ %a\ %d) $(get_todo_from_file)"

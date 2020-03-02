@@ -9,7 +9,7 @@ function gong () {
             shift
             shift
             mess=$*
-            at $time <<<"notify-send --urgency=critical \"DING!\" \"$mess\" && mpv $GONG--speed=3.5";;# --volume=60";;
+            at $time <<<"notify-send --urgency=critical \"DING!\" \"$mess\" && mpv $GONG ";;# --volume=60";;
         *)
             time=$1
             shift

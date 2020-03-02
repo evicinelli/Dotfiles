@@ -287,16 +287,16 @@ if (! &termguicolors)
     highlight clear SpellBad
     highlight clear Folded
     highlight ColorColumn ctermbg=0 ctermfg=15
-    highlight CursorLine cterm=bold gui=bold
     highlight CursorLineNr ctermbg=0
     highlight FoldColumn ctermbg=0 ctermfg=8
     highlight Folded ctermbg=0 cterm=bold
     highlight LineNr ctermbg=0
     highlight SignColumn ctermbg=0 ctermfg=8
+    highlight StatuslineNC ctermbg=0 ctermfg=8
+    highlight Statusline ctermbg=0 ctermfg=7
+    highlight CursorLine cterm=bold gui=bold
     highlight SpellBad ctermfg=9 cterm=underline
     highlight SpellCap ctermbg=14 ctermfg=0
-    highlight Statusline ctermbg=0 ctermfg=7
-    highlight StatuslineNC ctermbg=0 ctermfg=8
     highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
 
 endif
