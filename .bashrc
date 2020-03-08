@@ -37,7 +37,6 @@ export EDITOR=vim
 # }}}
 
 # Variables {{{
-export TERMINAL=kitty
 export OPEN=mimeopen
 
 export P="/home/vic/pCloudDrive"
@@ -70,7 +69,6 @@ alias pandoc="pandoc --pdf-engine=xelatex"
 alias rm="rm -I"
 alias sl='ls'
 alias sort="sort -n"
-alias vdir='vdir --color=auto'
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
@@ -96,7 +94,7 @@ alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt
 alias py="python"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
-alias vimrc="vi $HOME/.config/vim/vimrc"
+alias vimrc="vim $HOME/.config/vim/vimrc"
 
 
 # Todo
@@ -182,10 +180,11 @@ daysuntil () {
 
 # }}}
 
-# Prompt  & colors{{{
+# Prompt, colors and appearance {{{
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -233,7 +232,7 @@ prompt() {
 ps1_hostname() {
     host=$(hostname)
     user=$(whoami)
-    [[ ! "$host" =~ pelican || "$user" != "vic" ]] && echo "$user@$host "
+    [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
 }
 # }}}
 
