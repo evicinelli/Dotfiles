@@ -53,7 +53,7 @@ set hidden                " Allow to switch buffer without saving it
 set hlsearch              " Highlight all search results
 set ignorecase            " Mah
 set incsearch             " Incremental search
-set laststatus=1          " Statusbar only if > 2 windows
+" set laststatus=1          " Statusbar only if > 2 windows
 set lazyredraw            " Redraw screen only when necessary
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set modeline              " Vim executes vimL commands if they are found in the current file
@@ -293,16 +293,7 @@ if (! &termguicolors)
     highlight SpellCap ctermbg=14 ctermfg=0
     highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
     highlight Comment ctermfg=7
-    if ( &bg == "dark" )
-        highlight ColorColumn ctermbg=0 ctermfg=15
-        highlight CursorLineNr ctermbg=0
-        highlight FoldColumn ctermbg=0 ctermfg=7
-        highlight Folded ctermbg=0 cterm=bold
-        highlight LineNr ctermbg=0 ctermfg=7
-        highlight SignColumn ctermbg=0 ctermfg=7
-        highlight StatuslineNC ctermbg=0 ctermfg=7
-        highlight Statusline ctermbg=0 ctermfg=7
-    else
+    if ( &bg == "light" )
         highlight ColorColumn ctermbg=15 ctermfg=8
         highlight CursorLineNr ctermbg=15
         highlight FoldColumn ctermbg=15 ctermfg=8
@@ -311,6 +302,15 @@ if (! &termguicolors)
         highlight SignColumn ctermbg=15 ctermfg=8
         highlight StatuslineNC ctermbg=15 ctermfg=8
         highlight Statusline ctermbg=15 ctermfg=8
+    else
+        highlight ColorColumn ctermbg=0 ctermfg=15
+        highlight CursorLineNr ctermbg=0
+        highlight FoldColumn ctermbg=0 ctermfg=7
+        highlight Folded ctermbg=0 cterm=bold
+        highlight LineNr ctermbg=0 ctermfg=7
+        highlight SignColumn ctermbg=0 ctermfg=7
+        highlight StatuslineNC ctermbg=0 ctermfg=7
+        highlight Statusline ctermbg=0 ctermfg=7
     endif
 
 endif

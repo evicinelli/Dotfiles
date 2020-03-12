@@ -83,7 +83,8 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
 alias mkdir="mkdir -pv"
-alias mn="notability $MED/.."
+alias mn="notability $MED"
+alias amn="notability $MED/.."
 alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
 alias netoff="nmcli networking off"
@@ -95,15 +96,6 @@ alias py="python"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
 alias vimrc="vim $HOME/.config/vim/vimrc"
-
-
-# Todo
-alias ta="todo add"
-alias tl="todo ls"
-alias tg="todo agenda"
-alias td="todo done"
-alias te="todo edit"
-
 # }}}
 
 # Completions {{{
