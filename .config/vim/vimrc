@@ -6,7 +6,6 @@ endif
 "Plug 'christoomey/vim-tmux-navigator'                                " Now vim <3 tmux
 Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
-Plug 'jeffkreeftmeijer/vim-dim'                                      " Default improved: 16 color colorscheme
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
@@ -17,19 +16,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc in
 Plug 'chrisbra/csv.vim'                                              " Csv file made right
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
 Plug 'mbbill/undotree'
-
-"Plug 'NLKNguyen/papercolor-theme'
-"Plug 'arcticicestudio/nord-vim'
-"Plug 'challenger-deep-theme/vim'
-"Plug 'cocopon/iceberg.vim'
-"Plug 'lifepillar/vim-solarized8'
-"Plug 'jnurmine/Zenburn'
-"Plug 'junegunn/seoul256.vim'
-"Plug 'jpo/vim-railscasts-theme'
-"Plug 'mhartington/oceanic-next'
-"Plug 'morhetz/gruvbox'
-"Plug 'nightsense/cosmic_latte'
-"Plug 'srcery-colors/srcery-vim'
+Plug 'reedes/vim-colors-pencil'
 
 call plug#end()
 " }}}
@@ -98,7 +85,6 @@ let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'image', 'subscript', 'superscript', 'strikeout', 'atx', 'codeblock_start', 'codeblock_delim', 'footnote', 'definition', 'list', 'newline', 'quotes', 'inlinecode', 'ellipses']
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position ="left"
-let g:pandoc#folding#mode = "stacked"
 
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
@@ -215,7 +201,7 @@ augroup todotxt
     au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
 augroup end
 " }}}
-
+:
 " Functions {{{
 
 " Goyo
@@ -277,43 +263,14 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-let &bg=$BG  " Light|dark, see .bashrc
+" let &bg=$BG  " Light|dark, see .bashrc
+set bg=dark
 
 set notermguicolors
-colorscheme dim
+colorscheme dimim
 
 set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
 
-" So che non mi va bene niente, lo so
-if (! &termguicolors)
-    highlight clear SpellBad
-    highlight clear Folded
-    highlight CursorLine cterm=bold gui=bold
-    highlight SpellBad ctermfg=9 cterm=underline
-    highlight SpellCap ctermbg=14 ctermfg=0
-    highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
-    highlight Comment ctermfg=7
-    if ( &bg == "light" )
-        highlight ColorColumn ctermbg=15 ctermfg=8
-        highlight CursorLineNr ctermbg=15
-        highlight FoldColumn ctermbg=15 ctermfg=8
-        highlight Folded ctermbg=15 cterm=bold
-        highlight LineNr ctermbg=15 ctermfg=8
-        highlight SignColumn ctermbg=15 ctermfg=8
-        highlight StatuslineNC ctermbg=15 ctermfg=8
-        highlight Statusline ctermbg=15 ctermfg=8
-    else
-        highlight ColorColumn ctermbg=0 ctermfg=15
-        highlight CursorLineNr ctermbg=0
-        highlight FoldColumn ctermbg=0 ctermfg=7
-        highlight Folded ctermbg=0 cterm=bold
-        highlight LineNr ctermbg=0 ctermfg=7
-        highlight SignColumn ctermbg=0 ctermfg=7
-        highlight StatuslineNC ctermbg=0 ctermfg=7
-        highlight Statusline ctermbg=0 ctermfg=7
-    endif
-
-endif
 " }}}
 
 " vim: fdm=marker
