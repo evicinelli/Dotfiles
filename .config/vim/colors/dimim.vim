@@ -46,14 +46,12 @@ highlight Search       ctermfg=0           ctermbg=11
 highlight Special      ctermfg=5
 highlight SpecialKey   ctermfg=4
 highlight SpellBad     ctermbg=NONE        ctermfg=9    cterm=underline
-highlight SpellCap     ctermfg=0           ctermbg=14
+highlight SpellCap     ctermbg=NONE        ctermfg=NONE cterm=italic
 highlight SpellLocal   ctermbg=14
 highlight SpellRare    ctermfg=5
 highlight Statement    ctermfg=3
 highlight StatusLine   cterm=bold
 highlight StatusLineNC cterm=NONE
-highlight TabLine      cterm=underline     ctermfg=0    ctermbg=7
-highlight TabLineFill  cterm=reverse
 highlight TabLineSel   cterm=bold
 highlight TermCursor   cterm=reverse
 highlight Title        ctermfg=5
@@ -70,14 +68,15 @@ if &bg == "light"
   highlight ColorColumn  ctermfg=8   ctermbg=15
   highlight Comment      ctermfg=7 cterm=NONE
   highlight FoldColumn   ctermfg=7   ctermbg=15
-  highlight Folded       ctermfg=8    ctermbg=7
+  highlight Folded       ctermfg=8    ctermbg=15
   highlight LineNr       ctermfg=7    ctermbg=15
-  highlight Pmenu        ctermfg=0    ctermbg=7
+  highlight Pmenu        ctermfg=0    ctermbg=15
   highlight PmenuSel     ctermfg=7    ctermbg=0
   highlight SignColumn   ctermfg=8    ctermbg=15
   highlight SpellCap     ctermfg=8    ctermbg=7
   highlight StatusLine   ctermfg=8    ctermbg=15
   highlight StatusLineNC ctermfg=8    ctermbg=7
+  highlight TabLine      ctermfg=7    ctermbg=15
   highlight TabLineFill ctermfg=15
   highlight VertSplit    ctermfg=8    ctermbg=7
   highlight WildMenu     ctermfg=15
@@ -93,6 +92,7 @@ else
   highlight SpellCap     ctermfg=7    ctermbg=8
   highlight StatusLine   ctermfg=15   ctermbg=0
   highlight StatusLineNC ctermfg=7    ctermbg=8
+  highlight TabLine      ctermfg=8    ctermbg=0
   highlight TabLineFill ctermfg=0
   highlight VertSplit    ctermfg=7    ctermbg=8
   highlight WildMenu     ctermfg=0
