@@ -16,4 +16,3 @@ fi
 cat $tmpfile | xclip -f -selection primary | xclip -f -selection clipboard
 rm -f $tmpfile
 echo
-return 0
