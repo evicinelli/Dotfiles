@@ -103,8 +103,6 @@ let g:csv_highlight_column = 'y'
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 inoremap <C-z> <C-o><C-z>
-noremap <C-b> :Buffers<CR>
-noremap <C-k> :FZF<CR>
 noremap <C-l> :noh <CR>
 noremap <C-n> :cn<CR>
 noremap <C-p> :cp<CR>
@@ -112,10 +110,11 @@ noremap <leader>1 :set laststatus=1 \| set showmode <CR>
 noremap <leader>2 :set laststatus=2 \| set noshowmode <CR>
 noremap <leader><leader> zA <CR>
 noremap <leader>a :Ack -i 
+noremap <leader>b :Buffers<CR>
 noremap <leader>f :FZF --no-exact 
 noremap <leader>m :MRU <CR>
 noremap <leader>na :Nack 
-noremap <leader>p :FZF --no-exact<CR>
+noremap <leader>p :FZF<CR>
 noremap <leader>so :!xdg-open "%" <CR>
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
@@ -201,20 +200,26 @@ augroup todotxt
     au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
 augroup end
 " }}}
-:
+
 " Functions {{{
 
 " Goyo
 function! s:goyo_enter()
     " vertical resize
     silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    highlight NonText ctermfg=0
     set scrolloff=999
+    if &bg == "light"
+        hi NonText ctermfg=white ctermbg=NONE
+    endif
+    hi Whitespace ctermfg=NONE ctermbg=NONE
+    hi EndOfBuffer ctermfg=NONE ctermfg=NONE
+
 endfunction
 
 function! s:goyo_leave()
      silent! source ~/.config/nvim/init.vim
      set scrolloff=0
+     let &bg=&bg
 endfunction
 
 " Diff from current buffer against saved file
@@ -263,8 +268,7 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-" let &bg=$BG  " Light|dark, see .bashrc
-set bg=dark
+let &bg=$BG  " Light|dark, see .bashrc
 
 set notermguicolors
 colorscheme dimim

@@ -79,6 +79,7 @@ alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias g="git"
+alias gogh='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
