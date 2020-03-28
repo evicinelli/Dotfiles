@@ -17,11 +17,9 @@ if exists("syntax_on")
 endif
 let colors_name = "dimim"
 
-highlight Comment      ctermfg=14 cterm=italic
+highlight Comment      ctermfg=7 cterm=italic
 highlight Conceal      ctermfg=7           ctermbg=7
 highlight Constant     ctermfg=1
-highlight CursorColumn ctermbg=7
-highlight CursorLine   cterm=bold gui=bold
 highlight CursorLineNr ctermfg=10          ctermbg=NONE
 highlight DiffAdd      ctermfg=0           ctermbg=2
 highlight DiffChange   ctermfg=0           ctermbg=3
@@ -65,8 +63,10 @@ highlight WildMenu     ctermbg=13
 
 " Dim line numbers, comments, statusline...
 if &bg == "light"
-  highlight ColorColumn  ctermfg=8   ctermbg=15
-  highlight FoldColumn   ctermfg=7   ctermbg=15
+  highlight ColorColumn  ctermfg=8    ctermbg=15
+  highlight CursorColumn ctermbg=15   cterm=NONE
+  highlight CursorLine   ctermbg=15   cterm=NONE
+  highlight FoldColumn   ctermfg=7    ctermbg=15
   highlight Folded       ctermfg=8    ctermbg=15
   highlight LineNr       ctermfg=7    ctermbg=15
   highlight Pmenu        ctermfg=0    ctermbg=15
@@ -76,19 +76,21 @@ if &bg == "light"
   highlight StatusLine   ctermfg=8    ctermbg=15
   highlight StatusLineNC ctermfg=8    ctermbg=7
   highlight TabLine      ctermfg=7    ctermbg=15
-  highlight TabLineFill ctermfg=15
+  highlight TabLineFill  ctermfg=15
   highlight VertSplit    ctermfg=8    ctermbg=7
   highlight WildMenu     ctermfg=15
 else
   highlight ColorColumn  ctermfg=0    ctermbg=0
+  highlight CursorColumn ctermbg=0    cterm=NONE
+  highlight CursorLine   ctermbg=0    cterm=NONE
   highlight FoldColumn   ctermfg=8    ctermbg=0
-  highlight Folded       ctermfg=7    ctermbg=0
+  highlight Folded       ctermfg=8    ctermbg=0
   highlight LineNr       ctermfg=7    ctermbg=0
   highlight Pmenu        ctermfg=15   ctermbg=0
   highlight PmenuSel     ctermfg=8    ctermbg=15
   highlight SignColumn   ctermfg=7    ctermbg=0
   highlight SpellCap     ctermfg=7    ctermbg=8
-  highlight StatusLine   ctermfg=15   ctermbg=0
+  highlight StatusLine   ctermfg=8    ctermbg=0
   highlight StatusLineNC ctermfg=7    ctermbg=8
   highlight TabLine      ctermfg=8    ctermbg=0
   highlight TabLineFill ctermfg=0
@@ -97,4 +99,5 @@ else
 endif
 
 " Personal hi groups
-highlight TodoDueToday ctermbg=yellow ctermfg=black cterm=bold
+highlight TodoDueToday ctermbg=11 ctermfg=15 cterm=bold
+"highlight CursorLine   cterm=bold gui=bold

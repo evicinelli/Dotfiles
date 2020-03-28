@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+IFS=$'\n'
+FILE=$P/Notes/spese.txt
+
+
+getTags(){
+    grep -o "@.[[:alnum:]]*" $FILE | sort | uniq
+}
+
+# Shamefully inefficient
+
+real_total=0
+for tag in $(getTags); do
+    total=$(awk -F' ' -- "/$tag/{s+=\$2}END{print s}" $FILE)
+    real_total=$(bc <<< "$real_total + $total")
+    printf "%-20s %.1f€\n" "$tag" "$total"
+done
+printf "%20s %s\n" "====================" "-----"
+printf "%-20s %.1f€\n" "Uncategorized:" "$(grep -v '@.[[:alnum:]]*' $FILE | grep -v "^#" | awk -F' ' -- '{s+=$2}END{print s}')"
+printf "%-20s %.1f€\n\n" "TOTAL:" $real_total
+
+echo -e "Ultimo aggiornamento: $(ls -al $FILE | cut -d" " -f6-8)\n"

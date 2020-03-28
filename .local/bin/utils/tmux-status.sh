@@ -1,11 +1,11 @@
 #! /bin/bash
 
 DELIM="|"
-function get_todo_from_file() {
+function todos() {
     color="colour10"
     symbol="   "
     todos=$(todo ls | wc -l)
-    urgent=$(todo ls| grep -v "^x" | grep "^(" | wc -l)
+    urgent=$(todo urgent | wc -l)
 
     if [[ urgent -gt 0 ]]; then
         color="colour9"
@@ -33,4 +33,4 @@ battery() {
     echo "$(cat /sys/class/power_supply/BAT0/capacity)% $bat_status"
 }
 
-echo "$(muuuuusic) $(battery) $DELIM $(date +%H:%M\ %a\ %d) $(get_todo_from_file)"
+echo "$(muuuuusic) $(battery) $DELIM $(date +%H:%M\ %a\ %d) $(todos)"

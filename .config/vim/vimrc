@@ -60,7 +60,7 @@ set splitright            " Vsplit on the right
 set tabstop=4             " Show existing tab with 4 spaces width
 set undodir=~/.vimundo    " Persistent undo kept under ~/.vimundo/
 set undofile              " Persistent history
-set undolevels=5000       " Keep up to 5000 edits in undofile
+set undolevels=5000       " How many edit are saved in undofile
 set updatetime=2000       " Consider vim inactive after x sec of no activity in normal mode
 set wildignorecase        " Ignore case when autocomplete
 set wildmenu              " Tab autocompletion in menu
@@ -73,18 +73,18 @@ endif
 
 " Plugin settings {{{
 let g:netrw_banner = 0          " no banner
-let g:netwr_browse_split = 4    " open in prior window
-let g:netwr_altv = 1            " split to the right
 let g:netrw_liststyle = 0       " tree view
+let g:netwr_altv = 1            " split to the right
+let g:netwr_browse_split = 4    " open in prior window
 let g:netwr_list_hide = netrw_gitignore#Hide()
 
-" let g:pandoc#modules#disabled = ["folding"] " Troppo lento
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
-let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#folding#mode = "relative"
 let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'image', 'subscript', 'superscript', 'strikeout', 'atx', 'codeblock_start', 'codeblock_delim', 'footnote', 'definition', 'list', 'newline', 'quotes', 'inlinecode', 'ellipses']
+let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#toc#close_after_navigating = 0
-let g:pandoc#toc#position ="left"
+let g:pandoc#toc#position = "left"
 
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
@@ -209,7 +209,7 @@ function! s:goyo_enter()
     silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
     set scrolloff=999
     if &bg == "light"
-        hi NonText ctermfg=white ctermbg=NONE
+        hi NonText ctermfg=15 ctermbg=NONE
     endif
     hi Whitespace ctermfg=NONE ctermbg=NONE
     hi EndOfBuffer ctermfg=NONE ctermfg=NONE
@@ -273,7 +273,11 @@ let &bg=$BG  " Light|dark, see .bashrc
 set notermguicolors
 colorscheme dimim
 
-set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
+set stl=\ %{GetMode()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
+
+function! GetMode()
+    return toupper(mode())
+endfunction
 
 " }}}
 
