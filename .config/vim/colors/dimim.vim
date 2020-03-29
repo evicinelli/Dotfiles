@@ -1,14 +1,20 @@
 " Default improved improved
 " Fork of https://github.com/jeffkreeftmeijer/vim-dim (awesome)
 "
-" Color 0 8 Black
-" Color 1 9 Red
-" Color 2 10 Green
-" Color 3 11 Yellow
-" Color 4 12 Blue
-" Color 5 13 Purple
-" Color 6 14 Cyan
-" Color 7 15 White
+" Purpose of this colorscheme is to use only cterm color, allowing you to have
+" the same colorscheme across all terminal applications. The color must be
+" set in your terminal emulator settings
+"
+" Cterm color   Name
+" ------------- -------
+"      0 8      Black
+"      1 9      Red
+"      2 10     Green
+"      3 11     Yellow
+"      4 12     Blue
+"      5 13     Purple
+"      6 14     Cyan
+"      7 15     White
 
 highlight clear
 

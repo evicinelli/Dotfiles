@@ -268,7 +268,7 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-let &bg=$BG  " Light|dark, see .bashrc
+let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
 set notermguicolors
 colorscheme dimim
