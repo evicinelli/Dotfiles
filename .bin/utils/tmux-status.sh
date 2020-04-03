@@ -2,6 +2,7 @@
 
 DELIM="|"
 function todos() {
+    [[ BG == "dark" ]] && color_fg=colour0 || color_fg=colour15
     color="colour10"
     symbol="   "
     todos=$(todo ls | wc -l)
@@ -15,7 +16,7 @@ function todos() {
         symbol=" $todos "
     fi
 
-    echo -ne "#[default]#[bg=$color, fg=colour0]$symbol#[default]"
+    echo -ne "#[default]#[bg=$color, fg=$color_fg]$symbol#[default]"
 }
 
 function muuuuusic() {

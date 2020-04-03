@@ -32,7 +32,7 @@ fi
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # Ultime cose
-export PATH=${PATH}:$HOME/.local/bin
+export PATH=${PATH}:$HOME/.local/bin:$HOME/.bin
 export EDITOR=vim
 # }}}
 
@@ -76,7 +76,7 @@ alias bashrc="$EDITOR $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
 alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias clipboard="xclip -selection PRIMARY"
-alias cp="rsync --archive --verbose --human-readable"
+alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias g="git"
 alias gogh='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
@@ -159,8 +159,13 @@ wifi () {
 
 # Foreground a job searching the process name
 fj () {
-    job=$(jobs -ls | fzf -1 -0 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+    job=$(jobs -ls | fzf -1 -0 --exact --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
     [[ ! -z $job ]] && fg $job
+
+    # TODO
+    # C-B: background selected jobs
+    # C-K: kill selected job
+    # C-D: disown selected job
 }
 
 wttr () {
@@ -230,6 +235,7 @@ ps1_hostname() {
 }
 # }}}
 
-#[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM =~ screen* ]] && tmux new-session -A -s $(hostname)
+# Tmux
+# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM =~ screen* ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker
