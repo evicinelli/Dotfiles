@@ -51,8 +51,9 @@ export TD="$P/Documenti/Todo/todo.txt"
 export UNI="$P/Uni/AppuntiUni"
 
 # Uni
-export MED="$P/Uni/Appunti/Medicina/Med2"
-export MED1="$P/Uni/Appunti/Medicina/Med1"
+export MED="$P/Uni/Med-Notes/"
+export MED1="$MED/Med1/"
+export MED2="$MED/Med2/"
 
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -84,8 +85,8 @@ alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
 alias mkdir="mkdir -pv"
-alias mn="notability $MED"
-alias amn="notability $MED/.."
+alias mn="notability $MED2"
+alias amn="notability $MED"
 alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
 alias n="notability $NOTES"
 alias netoff="nmcli networking off"
@@ -183,7 +184,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular

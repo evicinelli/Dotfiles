@@ -3,8 +3,8 @@ call plug#begin()
 if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default
 endif
-Plug 'chrisbra/csv.vim'                                              " Csv file made right
 " Plug 'christoomey/vim-tmux-navigator'                                " Now vim <3 tmux
+Plug 'chrisbra/csv.vim'                                              " Csv file made right
 Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
@@ -14,6 +14,7 @@ Plug 'paroxayte/autocd.vim'                                          " Autocd in
 Plug 'reedes/vim-colors-pencil'
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
+Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
@@ -26,22 +27,22 @@ call plug#end()
 syntax enable             " Enable syntax Highighting
 filetype plugin on        " Filetype plugin
 filetype plugin indent on " Specific indentation rules depending on file type
-set secure                " No shell command on autocmd
-"set clipboard=unnamed,unnamedplus   " Integrate with system clipboard
+" set clipboard=unnamed,unnamedplus   " Integrate with system clipboard
+" set guicursor=a:blinkon1  " Cursor blinks every second
+" set laststatus=1          " Statusbar only if > 2 windows
 set autoindent            " Auto-indent
 set autoread              " Auto reload file if modified from external command
 set backupdir=/tmp//      " Backup file in /tmp//
+set breakindent           " Indent word wrapped line as much as parent line
 set colorcolumn=+1        " Highlight column where the 81/th char lives
 set cursorline            " Highlight the line in which the cursor is
 set directory=~/.local/share/nvim/swap// " Swap file in ~/.config/nvim/swap//
 set expandtab             " On pressing tab, insert 4 spaces
 set foldmethod=syntax     " Fold according to syntax
-"set guicursor=a:blinkon1  " Cursor blinks every second
 set hidden                " Allow to switch buffer without saving it
 set hlsearch              " Highlight all search results
 set ignorecase            " Mah
 set incsearch             " Incremental search
-" set laststatus=1          " Statusbar only if > 2 windows
 set lazyredraw            " Redraw screen only when necessary
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set modeline              " Vim executes vimL commands if they are found in the current file
@@ -49,6 +50,7 @@ set mouse=a               " Disable mouse in terminal vim, :set mouse=a to enabl
 set noautochdir           " Do not change folder
 set number relativenumber " Line numbers are relative to current line
 set path^=**              " Recursive file search starting from current dir
+set secure                " No shell command on autocmd
 set shiftwidth=4          " When indenting with '>', use 4 spaces width
 set showcmd               " Show partially typed commands
 set showmode
@@ -165,8 +167,8 @@ for item in s:items
     exe "noremap ca".item." F".item."cf".item
     exe "noremap di".item." T".item."dt".item
     exe "noremap da".item." F".item."df".item
-    exe "vnoremap vi".item." T".item."vt"item
-    exe "vnoremap va".item." F".item."vf"item
+    exe "vnoremap vi".item." T".item."vt".item
+    exe "vnoremap va".item." F".item."vf".item
 endfor
 " }}}
 

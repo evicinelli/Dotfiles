@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-PATH=$PATH:$HOME/.local/bin
+PATH=$PATH:$HOME/.bin
 IFS=$'\n'
 color="MediumSeaGreen"
 todos=($(TD=~/pCloudDrive/Documenti/Todo/todo.txt todo ls | sort -n))
