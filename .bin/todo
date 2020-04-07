@@ -61,7 +61,7 @@ todo-done () {
         sed -i "s/$ENTRY/x $(date +%F)\ &/" $TD
     else
         # ENTRY=$(cat $TD | fzf)
-        todo-ls "due:$(date -I -d "today")" | grep "^x"
+        todo-ls "^x $(date -I)"
     fi
 }
 

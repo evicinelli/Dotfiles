@@ -3,19 +3,16 @@ call plug#begin()
 if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default
 endif
-" Plug 'christoomey/vim-tmux-navigator'                                " Now vim <3 tmux
 Plug 'chrisbra/csv.vim'                                              " Csv file made right
 Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree'                                               " Visualize history tree
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
-Plug 'reedes/vim-colors-pencil'
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
-Plug 'ap/vim-css-color'
-Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'                                          " Comment done right
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
@@ -75,15 +72,14 @@ endif
 "}}}
 
 " Plugin settings {{{
-let g:netrw_banner = 0          " no banner
-let g:netrw_liststyle = 0       " tree view
+let g:netrw_banner = 1          " banner (with help)
+let g:netrw_liststyle = 0       " buffer view
 let g:netwr_altv = 1            " split to the right
 let g:netwr_browse_split = 4    " open in prior window
 let g:netwr_list_hide = netrw_gitignore#Hide()
 
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
-let g:pandoc#folding#mode = "relative"
 let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'image', 'subscript', 'superscript', 'strikeout', 'atx', 'codeblock_start', 'codeblock_delim', 'footnote', 'definition', 'list', 'newline', 'quotes', 'inlinecode', 'ellipses']
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#toc#close_after_navigating = 0
@@ -115,6 +111,7 @@ inoremap <C-z> <C-o><C-z>
 inoremap [ []<Left>
 inoremap ` ``<Left>
 inoremap { {}<Left>
+noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
 noremap <C-p> :cp<CR>
 noremap <F1> <Esc>
@@ -122,12 +119,10 @@ noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
 noremap <leader>1 :set laststatus=1 \| set showmode <CR>
 noremap <leader>2 :set laststatus=2 \| set noshowmode <CR>
-noremap <leader><leader> zA <CR>
 noremap <leader>a :Ack -i 
 noremap <leader>b :Buffers<CR>
 noremap <leader>f :FZF --no-exact 
 noremap <leader>m :MRU <CR>
-noremap <leader>na :Nack 
 noremap <leader>p :FZF<CR>
 noremap <leader>so :!xdg-open "%" <CR>
 noremap Y y$
@@ -276,12 +271,7 @@ let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 set notermguicolors
 colorscheme dimim
 
-set stl=\ %{GetMode()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
-
-function! GetMode()
-    return toupper(mode())
-endfunction
-
+set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
 " }}}
 
 " vim: fdm=marker

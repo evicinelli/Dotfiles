@@ -25,7 +25,7 @@ if [[ $ARGOS_MENU_OPEN == "true" ]]; then
         else
             color="white"
         fi
-        echo "<span color=\"$color\">$t </span> | bash='TD=~/pCloudDrive/Documenti/Todo/todo.txt todo done \"$t\"' refresh=true terminal=false"
+        echo "<span color=\"$color\">$t </span> | bash='TD=~/pCloudDrive/Documenti/Todo/todo.txt ~/.bin/todo done \"$t\"' refresh=true terminal=false"
     done
 
     for t in $(TD=~/pCloudDrive/Documenti/Todo/todo.txt todo done); do

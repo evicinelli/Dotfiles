@@ -20,7 +20,15 @@ if [[ $POWER_SUPPLY_STATUS == "Charging" ]]; then COLOR=cyan; fi
 
 echo "⚡️ $POWER_SUPPLY_CAPACITY % | color=$COLOR"
 echo "---"
-for line in $(acpi -V | grep -v "no state information available" | grep -v "Cooling"); do
+for line in $(acpi -V | grep "Battery"); do
+    echo "$line | font=Monospace"
+done
+
+echo "---"
+
+echo "Temp"
+
+for line in $(sensors); do
     echo "$line | font=Monospace"
 done
 

@@ -40,6 +40,7 @@ export EDITOR=vim
 export OPEN=mimeopen
 
 export P="/home/vic/pCloudDrive"
+export p="/home/vic/pCloudDrive"
 export DN="$P/Documenti/Todo/done.txt"
 export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"
@@ -48,7 +49,8 @@ export MEDIA="$P/Media"
 export NOTES="$P/Notes"
 export PW="$P/Documenti/Password-store"
 export TD="$P/Documenti/Todo/todo.txt"
-export UNI="$P/Uni/AppuntiUni"
+export UNI="$P/Uni/"
+export _uni="$P/Uni/_/"
 
 # Uni
 export MED="$P/Uni/Med-Notes/"
@@ -72,29 +74,30 @@ alias sl='ls'
 alias sort="sort -n"
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
+alias amn="nv $MED"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="$EDITOR $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
 alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
-alias gcal="gcalcli --calendar=\"Personale\""
 alias g="git"
+alias gcal="gcalcli --calendar=\"Personale\""
 alias gogh='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
 alias mkdir="mkdir -pv"
-alias mn="notability $MED2"
-alias amn="notability $MED"
+alias mn="nv $MED2"
 alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
-alias n="notability $NOTES"
+alias n="nv $NOTES"
 alias netoff="nmcli networking off"
 alias neton="nmcli networking on &"
 alias o="$OPEN"
 alias open="$OPEN"
 alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt "
 alias py="python"
+alias qr="qrencode --type=UTF8 -o -"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 alias te="todo edit"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
@@ -129,10 +132,6 @@ shopt -s histappend
 # }}}
 
 # Functions {{{
-dict() {
-    wget -qO - dict://dict.org/d:${1} | less
-}
-
 cswp () {
     [[ $(ls ~/.local/share/nvim/swap/ | wc -l) -gt 0 ]] && rm -r ~/.local/share/nvim/swap/*
 }
@@ -147,7 +146,11 @@ ding () {
 }
 
 share-home-network () {
-    sqr "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
+    echo "Home Network"
+    qrencode --type=UTF8 -o - "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
+    echo -e "\n\n Rete ospiti"
+    echo "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi-ospiti | head -n 1);;" | qrencode --type=UTF8 -o -
+
 }
 
 tny () {
@@ -184,7 +187,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
