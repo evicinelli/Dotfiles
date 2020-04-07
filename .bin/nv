@@ -1,0 +1,27 @@
+#! /usr/bin/env bash
+# Notational velocity clone (notational.net) using fzf and vim
+
+(
+ext="txt"
+base_dir="${1:-.}"
+
+shift
+cd $base_dir
+note=`find -type f -regex ".*\.\(txt\|md\)" -not -wholename "*Archivio*" | fzf --exact --height=100% --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
+
+if [[ $? -eq 0 ]]; then         # If the note exists
+    # edit note
+    $EDITOR "`tail -n1 <<< "$note"`"
+elif [[ $? -eq 1 ]]; then       # If the note doesn't exist
+    if [[ $note != "" ]]; then
+        folder=$(dirname "$note")
+        file=$(basename "$note")
+        [[ ! $folder == "." ]] && mkdir "$folder" # If $note contains a directory which is not the pwd, then create it
+
+        date  >> "$note.$ext" # Create note and write date
+        ${EDITOR:-vim} "$note.$ext"
+    else
+        exit 1
+    fi
+fi
+)
