@@ -115,7 +115,7 @@ bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-a": " fj"'
-bind '"\C-o": " fo"'
+bind '"\C-f": " fo"'
 # }}}
 
 # Shell options {{{
@@ -187,7 +187,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
