@@ -23,56 +23,59 @@ if exists("syntax_on")
 endif
 let colors_name = "dimim"
 
-highlight Comment      ctermfg=6 cterm=italic
-highlight Conceal      ctermfg=7           ctermbg=7
-highlight Constant     ctermfg=1
-highlight CursorLineNr ctermfg=11          ctermbg=none
-highlight DiffAdd      ctermfg=0           ctermbg=2
-highlight DiffChange   ctermfg=0           ctermbg=3
-highlight DiffDelete   ctermfg=0           ctermbg=1
-highlight DiffText     ctermfg=0           ctermbg=11   cterm=bold
-highlight Directory    ctermfg=4
-highlight Error        ctermfg=15          ctermbg=9
-highlight ErrorMsg     ctermfg=15          ctermbg=1
-highlight Folded       cterm=bold
-highlight Identifier   ctermfg=6           cterm=none
-highlight Ignore       ctermfg=15
-highlight IncSearch    cterm=reverse
-highlight MatchParen   ctermbg=14
-highlight ModeMsg      cterm=bold
-highlight MoreMsg      ctermfg=2
-highlight NonText      ctermfg=12
-highlight PmenuSbar    ctermbg=8
-highlight PmenuThumb   ctermbg=0
-highlight PreProc      ctermfg=5
-highlight Question     ctermfg=2
-highlight Search       ctermfg=0           ctermbg=11
-highlight Special      ctermfg=5
-highlight SpecialKey   ctermfg=4
-highlight SpellBad     ctermbg=none        ctermfg=9    cterm=underline
-highlight SpellCap     ctermbg=none        ctermfg=none cterm=italic
-highlight SpellLocal   ctermbg=14
-highlight SpellRare    ctermfg=5
-highlight Statement    ctermfg=3
-highlight StatusLine   cterm=bold
-highlight StatusLineNC cterm=none
-highlight TabLine      cterm=none
-highlight TabLineSel   cterm=bold cterm=underline
-highlight TermCursor   cterm=reverse
-highlight Title        ctermfg=5
-highlight Todo         ctermfg=0           ctermbg=11
-highlight Type         ctermfg=2
-highlight Underlined   cterm=underline     ctermfg=5
-highlight VertSplit    cterm=none
-highlight Visual       ctermfg=none        ctermbg=none cterm =inverse
-highlight WarningMsg   ctermfg=1
-highlight WildMenu     ctermbg=13
+highlight Comment       ctermfg=7                           cterm=italic
+highlight Conceal       ctermfg=7           ctermbg=7
+highlight Constant      ctermfg=1
+highlight CursorLineNr  ctermfg=11          ctermbg=none
+highlight DiffAdd       ctermfg=0           ctermbg=2
+highlight DiffChange    ctermfg=0           ctermbg=3
+highlight DiffDelete    ctermfg=0           ctermbg=1
+highlight DiffText      ctermfg=0           ctermbg=11      cterm=bold
+highlight Directory     ctermfg=4
+highlight Error         ctermfg=15          ctermbg=9
+highlight ErrorMsg      ctermfg=15          ctermbg=1
+highlight Folded                                            cterm=bold
+highlight Identifier    ctermfg=6                           cterm=none
+highlight Ignore        ctermfg=15
+highlight IncSearch                                         cterm=reverse
+highlight MatchParen                        ctermbg=14
+highlight ModeMsg                                           cterm=bold
+highlight MoreMsg       ctermfg=2
+highlight NonText       ctermfg=12
+highlight PmenuSbar                         ctermbg=8
+highlight PmenuThumb                        ctermbg=0
+highlight PreProc       ctermfg=5
+highlight Question      ctermfg=2
+highlight Search        ctermfg=0           ctermbg=11
+highlight Special       ctermfg=5
+highlight SpecialKey    ctermfg=4
+highlight SpellBad      ctermfg=9           ctermbg=none    cterm=underline
+highlight SpellCap      ctermfg=none        ctermbg=none    cterm=italic
+highlight SpellLocal                        ctermbg=14
+highlight SpellRare     ctermfg=5
+highlight Statement     ctermfg=3
+highlight StatusLine                                        cterm=bold
+highlight StatusLineNC                                      cterm=none
+highlight TabLine                                           cterm=none
+highlight TabLineSel                                        cterm=bold cterm=underline
+highlight TermCursor                                        cterm=reverse
+highlight Title         ctermfg=5
+highlight Todo          ctermfg=0           ctermbg=11
+highlight Type          ctermfg=2
+highlight Underlined    ctermfg=5                           cterm=underline
+highlight VertSplit                                         cterm=none
+highlight Visual        ctermfg=none        ctermbg=none    cterm =inverse
+highlight WarningMsg    ctermfg=1
+highlight WildMenu                          ctermbg=13
+"
+" Personal hi group
+highlight TodoDueToday                      ctermbg=11     cterm=bold
 
-" Dim line numbers, comments, statusline...
+" Highlight groups that depends on background
 if &bg == "light"
   highlight ColorColumn  ctermfg=none ctermbg=15
-  highlight CursorColumn ctermbg=15   cterm=none
-  highlight CursorLine   ctermbg=15   cterm=none
+  highlight CursorColumn              ctermbg=15   cterm=none
+  highlight CursorLine                ctermbg=15   cterm=none
   highlight FoldColumn   ctermfg=7    ctermbg=15
   highlight Folded       ctermfg=8    ctermbg=15
   highlight LineNr       ctermfg=7    ctermbg=15
@@ -89,8 +92,8 @@ if &bg == "light"
   highlight TodoDueToday ctermfg=15
 else
   highlight ColorColumn  ctermfg=none ctermbg=0
-  highlight CursorColumn ctermbg=0    cterm=none
-  highlight CursorLine   ctermbg=0    cterm=none
+  highlight CursorColumn              ctermbg=0    cterm=none
+  highlight CursorLine                ctermbg=0    cterm=none
   highlight FoldColumn   ctermfg=8    ctermbg=0
   highlight Folded       ctermfg=8    ctermbg=0
   highlight LineNr       ctermfg=8    ctermbg=0
@@ -106,6 +109,3 @@ else
   highlight WildMenu     ctermfg=0
   highlight TodoDueToday ctermfg=0
 endif
-
-" Personal hi group
-highlight TodoDueToday ctermbg=11 cterm=bold

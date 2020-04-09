@@ -14,10 +14,11 @@ real_total=0
 for tag in $(getTags); do
     total=$(awk -F' ' -- "/$tag/{s+=\$2}END{print s}" $FILE)
     real_total=$(bc <<< "$real_total + $total")
-    printf "%-20s %.1f€\n" "$tag" "$total"
+    # printf "%-20s %.1f€\n" "$tag" "$total"
+    printf "%.1f€\t\t%s\n" "$total" "$tag"
 done
-printf "%20s %s\n" "====================" "-----"
-printf "%-20s %.1f€\n" "Uncategorized:" "$(grep -v '@.[[:alnum:]]*' $FILE | grep -v "^#" | awk -F' ' -- '{s+=$2}END{print s}')"
-printf "%-20s %.1f€\n\n" "TOTAL:" $real_total
+printf "%s\t\t%s\n" "----" "====================" 
+printf "%.1f€\t\t%s\n" "$(grep -v '@.[[:alnum:]]*' $FILE | grep -v "^#" | awk -F' ' -- '{s+=$2}END{print s}')" "Uncategorized"
+printf "%.1f€\t\t%s\n\n" $real_total "TOTAL"
 
 echo -e "Ultimo aggiornamento: $(ls -al $FILE | cut -d" " -f6-8)\n"

@@ -28,7 +28,7 @@ fi
 
 # Fzf
 [[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
-[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle'
+[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle --multi'
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # Ultime cose
@@ -187,7 +187,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -237,9 +237,20 @@ ps1_hostname() {
     user=$(whoami)
     [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
 }
-# }}}
 
-# Tmux
-# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM =~ screen* ]] && tmux new-session -A -s $(hostname)
+colorkitty(){
+    KITTY_CONF_DIR=~/.config/kitty
+    KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
+
+    theme=$(cd $KITTY_THEME_DIR && find -type f | sort | fzf | sed "s,\./,,")
+    if [[ ! -z $theme ]]; then
+        ln -sf $KITTY_THEME_DIR/$theme $KITTY_CONF_DIR/colorscheme.conf
+        kitty @ set-colors --all --configured  $KITTY_CONF_DIR/colorscheme.conf
+        [[ $theme =~ ^d- ]] && export BG=dark || export BG=light
+        echo "Current theme: $theme"
+    fi
+}
+
+# }}}
 
 # vim: fdm=marker

@@ -22,7 +22,7 @@ function todos() {
 function muuuuusic() {
     if [[ $(ps aux | grep "spotify" | wc -l) -gt 2 && $(playerctl status) == "Playing" ]]; then
         color=colour10
-        printf "%s %.25s %s"  "#[bg=$color fg=colour0]" "$(playerctl metadata -f "{{title}} - {{artist}}")" "#[default]"
+        printf "%s %.25s %s"  "#[bg=$color fg=colour0]" "$(playerctl -p spotify metadata -f "{{title}} - {{artist}}")" "#[default]"
     else
         print "$DELIM"
     fi

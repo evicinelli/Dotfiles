@@ -1,6 +1,9 @@
 #! /usr/bin/env bash
 # Simple pomodoro timer. Default: 25 minutes work, 5 minute break
 
+DEFAULT_WORK_MIN=25
+DEFAULT_BREAK_MIN=5
+
 ding(){
     file=$P/Res/ping.opus
     mpv $file &>/dev/null &
@@ -20,24 +23,42 @@ _break () {
     sleep $(( 60*$1 ))
 }
 
+_print_help () {
+    cat <<EOH
+
+gtd - Get Things Done with 🍅
+
+USAGE
+    gtd [option] [working time] [break time]
+
+OPTIONS
+    -p : start with break
+
+CONFIGURATION
+    Default work: $DEFAULT_WORK_MIN min
+    Default break: $DEFAULT_BREAK_MIN min
+
+EOH
+}
+
+i=0;
+pomodoro (){
     i=0;
-
-
-main(){
-    getopts ":p" opt
-
-    case ${opt} in 
-        p) _break $2 ;;
-    esac
-
     while :
     do
         _work $1
         i=$(( $i+1 ))
         _break $2
     done;
+    echo $i
 }
 
-i=0;
-trap 'echo -e "\nBrev, hai lavorato per $i cicli ($(( $i*${1:-25} )) minuti)" && exit' 2 3 9 15
-main ${1:-25} ${2:-5}
+trap 'echo -e "\nBrev, hai lavorato per $cycle_done cicli ($(( $cycle_done*${1:-25} )) minuti)" && exit' 2 3 9 15
+while getopt ":p:h" opt:
+do
+    case ${opt} in 
+        p) _break $2 ;;
+        h) _print_help;;
+    esac
+done;
+cycle_done=$(pomodoro ${1:-25} ${2:-5})

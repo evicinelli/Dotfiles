@@ -20,7 +20,7 @@ if [[ $ARGOS_MENU_OPEN == "true" ]]; then
     # bluetooth_id=$(rfkill list | grep Bluetooth | grep hci0 | cut -d: -f1)
 
     for device in ${devices[*]}; do
-        echo "$device | bash=\"bluetoothctl power on && bluetoothctl connect $(bluetoothctl paired-devices | grep $device | cut -d' ' -f2)\" refresh=true"
+        echo "$device | bash=\"bluetoothctl power on && bluetoothctl connect $(bluetoothctl paired-devices | grep $device | cut -d' ' -f2)\" terminal=false refresh=true"
     done
 
     echo "--"

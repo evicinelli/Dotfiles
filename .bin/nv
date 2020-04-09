@@ -7,7 +7,7 @@ base_dir="${1:-.}"
 
 shift
 cd $base_dir
-note=`find -type f -regex ".*\.\(txt\|md\)" -not -wholename "*Archivio*" | fzf --exact --height=100% --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
+note=`find -type f -regex ".*\.\(txt\|md\)" -not -wholename "*Archivio*" | sort | fzf --exact --height=100% --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*"`
 
 if [[ $? -eq 0 ]]; then         # If the note exists
     # edit note

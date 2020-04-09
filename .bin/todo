@@ -130,6 +130,11 @@ COMMANDS
     s   someday     list tasks which do not have a due date
     t   tags        list tasks grouped by +tags
     u   urgent      list highly prioritized todos (A-E)
+
+CONFIGURATION
+    Todo file: $TD
+    Done file: $DN
+
 EOH
 }
 
@@ -145,6 +150,6 @@ case $1 in
     "someday"|"s") shift; todo-someday $*;;
     "tags"|"t") shift; todo-ls-tags $*;;
     "urgent"|"u") shift; todo-urgent $*;;
-    "h"|"-h") usage ;;
+    "h"|"help"|"-h"|"--help") usage ;;
     *) todo-ls $* ;;
 esac
