@@ -70,7 +70,7 @@ function todo-agenda(){
     [[ $end -gt 0 ]] && days=$(seq 0 $end) || days=$(seq $end 0)
     for i in $days; do
         t=$(todo-ls $i days)
-        day_title="- $(date +%a\ %x -d "$i days") ($i days) --\n"
+        day_title="- $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) --\n"
         if tty -s; then
             [[ ! -z "$t" ]] && echo -e "\e[1;31m${day_title}\e[0;37m${t}\n"
         else

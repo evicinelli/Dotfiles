@@ -15,8 +15,7 @@
 # }}}
 
 # Collezioni {{{
-
-# user="brutus"
+COLLECTION_NUMBER="1778533" # Collezione mia
 # COLLECTION_NUMBER="1007074"
 # COLLECTION_NUMBER="1186428"
 # COLLECTION_NUMBER="142376"
@@ -53,6 +52,7 @@
 # COLLECTION_NUMBER="1520527"
 # COLLECTION_NUMBER="909298"
 # COLLECTION_NUMBER="438041"  # Christmas
+COLLECTION_NUMBER="1971015" # Simplicity - curated
 # user=stbuccia
 # }}}
 
@@ -63,7 +63,6 @@ post-process () {
     echo
 }
 
-COLLECTION_NUMBER="1778533" # Collezione mia
 
 # wget -O $HOME/img "https://source.unsplash.com/user/$user/"
 # wget -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"

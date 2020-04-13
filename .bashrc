@@ -115,7 +115,7 @@ bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-a": " fj"'
-bind '"\C-f": " fo"'
+bind '"\C-k": "change_terminal_colorscheme"'
 # }}}
 
 # Shell options {{{
@@ -238,7 +238,7 @@ ps1_hostname() {
     [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
 }
 
-colorkitty(){
+change_terminal_colorscheme(){
     KITTY_CONF_DIR=~/.config/kitty
     KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
 

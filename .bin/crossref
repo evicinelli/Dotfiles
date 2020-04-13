@@ -1,0 +1,52 @@
+#! /bin/bash
+
+# Based on doi2bib script
+## Original author: Conner McDaniel
+## https://github.com/connermcd/bin
+## MIT license
+
+DEFAULT_BIB_FILE=/home/vic/pCloudDrive/Libreria/default.bib
+
+doi2bib() {
+    wget -qO- "http://api.crossref.org/works/$1/transform/application/x-bibtex"
+}
+
+isbn2bib(){
+    # Get the entire html code of the page
+    htmlBlob=$(wget -qO- "https://www.ottobib.com/isbn/$1/bibtex")
+    # The actual bibtex entry is stored inside a textarea, so we grep from the @ of the bibtex entry until the end of the textarea
+    echo $htmlBlob | grep -o "@.*</textarea" | sed "s,</textarea,," | sed "s/}, /},\n/g" | sed "s/, author/,\nauthor/g" | sed "s,} },}\n},"
+}
+
+pubmed2bib(){
+    echo "Not implemented yet"
+}
+
+usage(){
+cat<<HEREDOC
+$(basename $0) - get Bibtex information
+USAGE
+    $(basename $0) [options] [-d DOI] [-i ISBN]
+OPTION
+    -A  Append bibtex entry to $DEFAULT_BIB_FILE
+    -d  Get bibtex entry from doi number
+    -i  Get bibtex entry from ISBN
+    -p  Get bibtex entry from PMid
+
+HEREDOC
+}
+
+
+while getopts "Ad:i:p:" opt; do
+    case $opt in
+        "A") APPEND_ENTRY=true;;
+        "d") doi2bib ${OPTARG};;
+        "i") isbn2bib ${OPTARG};;
+        "p") pubmed2bib ${OPTARG};;
+        *) usage;;
+    esac
+done
+
+if [[ $APPEND_ENTRY == "true" ]]; then
+    echo "Not implemented yet"
+fi

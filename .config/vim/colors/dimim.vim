@@ -49,7 +49,7 @@ highlight Question      ctermfg=2
 highlight Search        ctermfg=0           ctermbg=11
 highlight Special       ctermfg=5
 highlight SpecialKey    ctermfg=4
-highlight SpellBad      ctermfg=9           ctermbg=none    cterm=underline
+highlight SpellBad      ctermfg=9           ctermbg=none    cterm=bold
 highlight SpellCap      ctermfg=none        ctermbg=none    cterm=italic
 highlight SpellLocal                        ctermbg=14
 highlight SpellRare     ctermfg=5
@@ -57,7 +57,7 @@ highlight Statement     ctermfg=3
 highlight StatusLine                                        cterm=bold
 highlight StatusLineNC                                      cterm=none
 highlight TabLine                                           cterm=none
-highlight TabLineSel                                        cterm=bold cterm=underline
+highlight TabLineSel    ctermfg=4                           cterm=bold
 highlight TermCursor                                        cterm=reverse
 highlight Title         ctermfg=5
 highlight Todo          ctermfg=0           ctermbg=11
@@ -109,3 +109,4 @@ else
   highlight WildMenu     ctermfg=0
   highlight TodoDueToday ctermfg=0
 endif
+

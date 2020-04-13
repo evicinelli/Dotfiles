@@ -1,21 +1,26 @@
 ﻿"Vim-plug {{{
 call plug#begin()
+
 if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default
 endif
-Plug 'chrisbra/csv.vim'                                              " Csv file made right
-Plug 'fretep/todo.txt-vim'                                           " Todo.txt support
+
+" Plug 'honza/vim-snippets'                                            " Ultisnip sinppets
+" Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
+Plug 'SirVer/ultisnips'                                              " Ultisnip server
+Plug 'chrisbra/Colorizer', {'on':'ColorToggle'}                      " Higlight #COLORS
+Plug 'chrisbra/csv.vim', {'for':'csv'}                               " Csv file made right
+Plug 'fretep/todo.txt-vim', {'for':'todo'}                           " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
 Plug 'mbbill/undotree'                                               " Visualize history tree
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
-Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 Plug 'tpope/vim-commentary'                                          " Comment done right
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
-Plug 'vim-pandoc/vim-pandoc-syntax'                                  " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc-syntax', {'for':'markdown'}              " Pandoc syntax
 
 call plug#end()
 " }}}
@@ -39,7 +44,7 @@ set hidden                " Allow to switch buffer without saving it
 set hlsearch              " Highlight all search results
 set ignorecase            " Mah
 set incsearch             " Incremental search
-set laststatus=1          " Statusbar only if > 2 windows
+set laststatus=2          " Statusbar only if > 2 windows
 set lazyredraw            " Redraw screen only when necessary
 set linebreak             " Break long lines at spaces, not in the middle of a word
 set modeline              " Vim executes vimL commands if they are found in the current file
@@ -78,9 +83,12 @@ let g:netwr_altv = 1            " split to the right
 let g:netwr_browse_split = 4    " open in prior window
 let g:netwr_list_hide = netrw_gitignore#Hide()
 
+let g:pandoc#biblio#bibs = ["$P/Libreria/default.bib"]
 let g:pandoc#biblio#use_bibtool = 1
-let g:pandoc#filetypes#handled = ["pandoc", "markdown", "textile", "extra"]
-let g:pandoc#syntax#conceal#blacklist = ['titleblock', 'image', 'subscript', 'superscript', 'strikeout', 'atx', 'codeblock_start', 'codeblock_delim', 'footnote', 'definition', 'list', 'newline', 'quotes', 'inlinecode', 'ellipses']
+let g:pandoc#completion#bib#mode = 'citeproc'
+let g:pandoc#filetypes#handled = ['extra','markdown','pandoc']
+let g:pandoc#folding#fdc = 0
+let g:pandoc#folding#level = 4
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position = "left"
@@ -120,6 +128,7 @@ noremap 'h :FZF ~ <CR>
 noremap 'm :MRU <CR>
 noremap 'p :FZF<CR>
 noremap 'so :!mimeopen "%" <CR>
+noremap 'u :FZF $UNI<CR>
 noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
 noremap <C-p> :cp<CR>
@@ -172,7 +181,7 @@ endfor
 
  " Autogroups and Autocmds {{{
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
-autocmd BufNew *term:\/\/* set nospell
+autocmd BufNew term://* set nospell
 autocmd! BufWritePost *vimrc* source %
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
@@ -180,24 +189,18 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
 
-augroup text
-     au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc | inoremap ![ ![](img/)<Left>
-     au bufnewfile,bufread,bufwrite todo.txt setl ft=todo | set nospell | se nowrap
-     au bufnewfile,bufread,bufwrite done.txt setl ft=todo | set nospell | se nowrap
-augroup end
+" augroup text
+"      au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
+" augroup end
 
 augroup nonvim
     au!
     au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.docx,*.odt,*.ppt,*.pptx,*.odp,*.xlsx,*.xls,*.ods,*.{mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
 
-augroup pyFiles
-    au BufNewFile,BufRead,BufWrite *.py noremap <leader>p :!python "%" &<CR>
-augroup end
-
 augroup todotxt
-    au BufNewFile,BufRead,BufWrite *.todo.txt setl ft=todo | set nospell
-    au BufNewFile,BufRead,BufWrite *.done.txt setl ft=todo | set nospell
+     au bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell | se nowrap
+     au bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell | se nowrap
 augroup end
 " }}}
 
@@ -270,7 +273,6 @@ set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printab
 set fillchars=vert:\ ,fold:\ 
 let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
-set notermguicolors
 colorscheme dimim
 
 set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
