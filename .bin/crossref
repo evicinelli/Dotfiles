@@ -6,6 +6,7 @@
 ## MIT license
 
 DEFAULT_BIB_FILE=/home/vic/pCloudDrive/Libreria/default.bib
+DEFAULT_LIBRARY_LOCATION=$P/Libreria
 
 doi2bib() {
     wget -qO- "http://api.crossref.org/works/$1/transform/application/x-bibtex"
@@ -28,25 +29,36 @@ $(basename $0) - get Bibtex information
 USAGE
     $(basename $0) [options] [-d DOI] [-i ISBN]
 OPTION
-    -A  Append bibtex entry to $DEFAULT_BIB_FILE
+    -A  Append bibtex entry to a bib file stored in the default library. See CONFIGURATION
     -d  Get bibtex entry from doi number
     -i  Get bibtex entry from ISBN
     -p  Get bibtex entry from PMid
+
+CURRENT CONFIGURATION
+    Library location: $DEFAULT_LIBRARY_LOCATION
+    Default bibtex file: $DEFAULT_BIB_FILE
+    Accepted bibtex files: $(find $DEFAULT_LIBRARY_LOCATION  -maxdepth 1 -type f | grep bib | sed "s,$DEFAULT_LIBRARY_LOCATION/,,g" | tr '\n' ' ')
 
 HEREDOC
 }
 
 
-while getopts "Ad:i:p:" opt; do
-    case $opt in
-        "A") APPEND_ENTRY=true;;
-        "d") doi2bib ${OPTARG};;
-        "i") isbn2bib ${OPTARG};;
-        "p") pubmed2bib ${OPTARG};;
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        "-A") APPEND_ENTRY=true; APPEND_TO=$2 shift;;
+        "-d") doi2bib $2 ;;
+        "-i") isbn2bib $2;;
+        "-p") pubmed2bib $2;;
+        "-h") usage;;
         *) usage;;
     esac
+    shift; shift;
 done
 
 if [[ $APPEND_ENTRY == "true" ]]; then
     echo "Not implemented yet"
+    # Scegliere il file corretto al quale appendere
+    # Controllare che la chiave non ci sia già
+        # Chiave non c'è => appendo
+        # Chiave c'è => errore + stampo chiave
 fi

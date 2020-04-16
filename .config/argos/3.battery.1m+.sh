@@ -8,7 +8,7 @@ IFS=$'\n'
 
 if [[ $POWER_SUPPLY_CAPACITY -gt 50 ]]; then 
     COLOR=lightgreen
-elif [[ $POWER_SUPPLY_CAPACITY -gt 30 ]]; then
+elif [[ $POWER_SUPPLY_CAPACITY -gt 20 ]]; then
     COLOR=yellow
 else
     COLOR=red

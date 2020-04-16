@@ -23,7 +23,7 @@ if exists("syntax_on")
 endif
 let colors_name = "dimim"
 
-highlight Comment       ctermfg=7                           cterm=italic
+highlight Comment       ctermfg=7                           cterm=none
 highlight Conceal       ctermfg=7           ctermbg=7
 highlight Constant      ctermfg=1
 highlight CursorLineNr  ctermfg=11          ctermbg=none
@@ -49,7 +49,7 @@ highlight Question      ctermfg=2
 highlight Search        ctermfg=0           ctermbg=11
 highlight Special       ctermfg=5
 highlight SpecialKey    ctermfg=4
-highlight SpellBad      ctermfg=9           ctermbg=none    cterm=bold
+highlight SpellBad      ctermfg=9           ctermbg=none    cterm=none
 highlight SpellCap      ctermfg=none        ctermbg=none    cterm=italic
 highlight SpellLocal                        ctermbg=14
 highlight SpellRare     ctermfg=5

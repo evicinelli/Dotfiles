@@ -2,26 +2,25 @@
 call plug#begin()
 
 if !has("nvim")
-    Plug 'tpope/vim-sensible'                                        " Sensible default
+    Plug 'tpope/vim-sensible'                                        " Sensible default if vim
 endif
 
 " Plug 'honza/vim-snippets'                                            " Ultisnip sinppets
 " Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
-Plug 'SirVer/ultisnips'                                              " Ultisnip server
-Plug 'chrisbra/Colorizer', {'on':'ColorToggle'}                      " Higlight #COLORS
-Plug 'chrisbra/csv.vim', {'for':'csv'}                               " Csv file made right
-Plug 'fretep/todo.txt-vim', {'for':'todo'}                           " Todo.txt support
+Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Higlight #COLORS
+Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file made right
+Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
 Plug 'mbbill/undotree'                                               " Visualize history tree
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
+Plug 'SirVer/ultisnips'                                              " Ultisnip server
 Plug 'tpope/vim-commentary'                                          " Comment done right
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
-Plug 'vim-pandoc/vim-pandoc'                                         " Pandoc integration
-Plug 'vim-pandoc/vim-pandoc-syntax', {'for':'markdown'}              " Pandoc syntax
-
+Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
 call plug#end()
 " }}}
 
@@ -77,21 +76,19 @@ endif
 "}}}
 
 " Plugin settings {{{
+let g:netrw_altv = 1            " split to the right
 let g:netrw_banner = 1          " banner (with help)
 let g:netrw_liststyle = 0       " buffer view
-let g:netwr_altv = 1            " split to the right
 let g:netwr_browse_split = 4    " open in prior window
 let g:netwr_list_hide = netrw_gitignore#Hide()
 
-let g:pandoc#biblio#bibs = ["$P/Libreria/default.bib"]
-let g:pandoc#biblio#use_bibtool = 1
-let g:pandoc#completion#bib#mode = 'citeproc'
-let g:pandoc#filetypes#handled = ['extra','markdown','pandoc']
+let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
-let g:pandoc#folding#level = 4
+let g:pandoc#folding#level = 6
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position = "left"
+let g:pandoc#toc#shift = 4
 
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
@@ -104,6 +101,7 @@ let g:autocd#markers = { '**/Medicina/**/*.txt': ['Makefile'] }
 let g:goyo_width = "90%"
 
 let g:csv_highlight_column = 'y'
+
 " }}}
 
 " Mappings {{{
@@ -135,8 +133,6 @@ noremap <C-p> :cp<CR>
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
-noremap <leader>1 :set laststatus=1 \| set showmode <CR>
-noremap <leader>2 :set laststatus=2 \| set noshowmode <CR>
 noremap Y y$
 noremap Z zMzv
 noremap j gj
@@ -151,16 +147,16 @@ endif
 " }}}
 
 " Abbreviations and digraphs {{{
-cabbrev f find
-iabbrev perchè perché
 iabbrev Perchè Perché
-iabbrev sg sg.
+iabbrev ab ab.
+iabbrev perchè perché
 iabbrev pz pz.
+iabbrev sg sg.
 iabbrev tp tp.
-dig lt 0060
-dig gt 0062
-dig ra 8594
-dig Ra 8658
+dig lt 0060 " Digraph <
+dig gt 0062 " Digraph >
+dig ra 8594 " Digraph →
+dig Ra 8658 " Digraph ⇒
  " }}}
 
 " Extended text Objects and matchpairs {{{
@@ -181,26 +177,26 @@ endfor
 
  " Autogroups and Autocmds {{{
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
-autocmd BufNew term://* set nospell
+autocmd  FileType fzf setl laststatus=0 noshowmode noruler nonumber norelativenumber
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+
 autocmd! BufWritePost *vimrc* source %
+
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
-
-" augroup text
-"      au BufNewFile,BufRead,BufWrite *.txt,*.md,*.mkd,*.markdown,*.mdwn setl ft=pandoc
-" augroup end
-
-augroup nonvim
-    au!
-    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.docx,*.odt,*.ppt,*.pptx,*.odp,*.xlsx,*.xls,*.ods,*.{mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
+augroup pandoc
+     au BufNewFile,BufRead,BufWrite *.txt,*.md set ft=pandoc
 augroup end
 
 augroup todotxt
      au bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell | se nowrap
      au bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell | se nowrap
+augroup end
+
+augroup nonvim
+    au!
+    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.docx,*.odt,*.ppt,*.pptx,*.odp,*.xlsx,*.xls,*.ods,*.{mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
 " }}}
 
@@ -269,7 +265,7 @@ nnoremap <leader>n :Nack
 " }}}
 
 " Appearance and statusline {{{
-set list listchars=tab:·\ ,trail:·,eol:¬,extends:»,precedes:« " Non printable chars
+set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
 set fillchars=vert:\ ,fold:\ 
 let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
