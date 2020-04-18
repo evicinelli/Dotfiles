@@ -38,24 +38,22 @@ export EDITOR=vim
 
 # Variables {{{
 export OPEN=mimeopen
-
 export P="/home/vic/pCloudDrive"
-export p="/home/vic/pCloudDrive"
+
 export DN="$P/Documenti/Todo/done.txt"
 export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"
 export GVS="$P/Gvs"
+export LIB="$P/Libreria"
 export MEDIA="$P/Media"
 export NOTES="$P/Notes"
-export PW="$P/Documenti/Password-store"
 export TD="$P/Documenti/Todo/todo.txt"
 export UNI="$P/Uni/"
-export _uni="$P/Uni/_/"
 
 # Uni
-export MED="$P/Uni/Med-Notes/"
-export MED1="$MED/Med1/"
-export MED2="$MED/Med2/"
+export MED="$UNI/Med-Notes"
+export MED1="$MED/Med1"
+export MED2="$MED/Med2"
 
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -68,7 +66,6 @@ alias la="ls -a"
 alias ll="ls -l"
 alias lla="ls -la"
 alias ls='ls -h --color=auto --group-directories-first'
-alias pandoc="pandoc --pdf-engine=xelatex"
 alias rm="rm -I"
 alias sl='ls'
 alias sort="sort -n"
@@ -222,14 +219,14 @@ prompt() {
     # suspended jobs
     [[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
-    # end="🍺" end=":" end="💰" #end="▶" end=">"
-    end="⚕"
+    # end="🍺" end=":" end="💰" #end="▶" end="⚕"
+    end=">"
 
-    if [[ $TERM = "dumb" ]]; then
-        export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
-    else
-        export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, [$toDoUrgent!]]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
-    fi
+if [[ $TERM = "dumb" ]]; then
+    export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
+else
+    export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, [$toDoUrgent!]]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
+fi
 }
 
 ps1_hostname() {
@@ -239,15 +236,19 @@ ps1_hostname() {
 }
 
 change_terminal_colorscheme(){
-    KITTY_CONF_DIR=~/.config/kitty
-    KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
+    if [[ $TERM == "xterm-kitty" ]]; then
+        KITTY_CONF_DIR=~/.config/kitty
+        KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
 
-    theme=$(cd $KITTY_THEME_DIR && find -type f | sort | fzf | sed "s,\./,,")
-    if [[ ! -z $theme ]]; then
-        ln -sf $KITTY_THEME_DIR/$theme $KITTY_CONF_DIR/colorscheme.conf
-        kitty @ set-colors --all --configured  $KITTY_CONF_DIR/colorscheme.conf
-        [[ $theme =~ ^d- ]] && export BG=dark || export BG=light
-        echo "Current theme: $theme"
+        theme=$(cd $KITTY_THEME_DIR && find -type f | sort | fzf | sed "s,\./,,")
+        if [[ ! -z $theme ]]; then
+            ln -sf $KITTY_THEME_DIR/$theme $KITTY_CONF_DIR/colorscheme.conf
+            kitty @ set-colors --all --configured  $KITTY_CONF_DIR/colorscheme.conf
+            [[ $theme =~ ^d- ]] && export BG=dark || export BG=light
+            echo "Current theme: $theme"
+        fi
+    else
+        echo "\$TERM not supported"
     fi
 }
 

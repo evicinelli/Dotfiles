@@ -21,6 +21,7 @@ Plug 'tpope/vim-commentary'                                          " Comment d
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
+Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
 call plug#end()
 " }}}
 
@@ -50,6 +51,7 @@ set modeline              " Vim executes vimL commands if they are found in the 
 set mouse=a               " Disable mouse in terminal vim, :set mouse=a to enable
 set noautochdir           " Do not change folder
 set number relativenumber " Line numbers are relative to current line
+set omnifunc=syntaxcomplete#Complete " Omni-completion
 set path^=**              " Recursive file search starting from current dir
 set secure                " No shell command on autocmd
 set shiftwidth=4          " When indenting with '>', use 4 spaces width
@@ -82,6 +84,8 @@ let g:netrw_liststyle = 0       " buffer view
 let g:netwr_browse_split = 4    " open in prior window
 let g:netwr_list_hide = netrw_gitignore#Hide()
 
+let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Libreria/med.bib", "/home/vic/pCloudDrive/Libreria/default.bib"]
+let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 6
@@ -271,7 +275,7 @@ let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
 colorscheme dimim
 
-set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %l,%v\ (%p%%\ di\ %L)\ \|\ %{strftime('%H:%M')}\ 
+set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %v:%l/%L\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
 " }}}
 
 " vim: fdm=marker

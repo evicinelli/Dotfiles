@@ -44,6 +44,7 @@ highlight MoreMsg       ctermfg=2
 highlight NonText       ctermfg=12
 highlight PmenuSbar                         ctermbg=8
 highlight PmenuThumb                        ctermbg=0
+highlight PmenuSel                          ctermbg=6
 highlight PreProc       ctermfg=5
 highlight Question      ctermfg=2
 highlight Search        ctermfg=0           ctermbg=11
@@ -80,7 +81,7 @@ if &bg == "light"
   highlight Folded       ctermfg=8    ctermbg=15
   highlight LineNr       ctermfg=7    ctermbg=15
   highlight Pmenu        ctermfg=0    ctermbg=15
-  highlight PmenuSel     ctermfg=7    ctermbg=0
+  highlight PmenuSel     ctermfg=115
   highlight SignColumn   ctermfg=8    ctermbg=15
   highlight SpellCap     ctermfg=8    ctermbg=7
   highlight StatusLine   ctermfg=8    ctermbg=15
@@ -98,7 +99,7 @@ else
   highlight Folded       ctermfg=8    ctermbg=0
   highlight LineNr       ctermfg=8    ctermbg=0
   highlight Pmenu        ctermfg=15   ctermbg=0
-  highlight PmenuSel     ctermfg=8    ctermbg=15
+  highlight PmenuSel     ctermfg=0
   highlight SignColumn   ctermfg=8    ctermbg=0
   highlight SpellCap     ctermfg=7    ctermbg=8
   highlight StatusLine   ctermfg=7    ctermbg=0

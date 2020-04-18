@@ -30,7 +30,7 @@ function muuuuusic() {
 
 battery() {
     # acpi -V | head -n1 | cut -d"," -f2,3
-    [[ $(cat /sys/class/power_supply/BAT0/status) == "Charging " ]] && bat_status="▲" || bat_status="▼"
+    [[ $(cat /sys/class/power_supply/BAT0/status) == "Charging " ]] && bat_status="↑" || bat_status="↓"
     echo "$(cat /sys/class/power_supply/BAT0/capacity)% $bat_status"
 }
 

@@ -8,8 +8,8 @@ p(){
         edit_key=ctrl-v
         view_key=ctrl-c
 
-        FILTER="s:${PW}/::;s:.gpg::"
-        readarray PWS < <(/usr/bin/find $PW -type f | sed -e $FILTER)
+        FILTER="s:${HOME}/.password-store/::;s:.gpg::"
+        readarray PWS < <(/usr/bin/find ~/.password-store/ -type f | sed -e $FILTER)
 
         fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" |\
                 fzf --no-exact \
