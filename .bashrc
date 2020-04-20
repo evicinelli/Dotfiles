@@ -184,7 +184,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -244,7 +244,9 @@ change_terminal_colorscheme(){
         if [[ ! -z $theme ]]; then
             ln -sf $KITTY_THEME_DIR/$theme $KITTY_CONF_DIR/colorscheme.conf
             kitty @ set-colors --all --configured  $KITTY_CONF_DIR/colorscheme.conf
-            [[ $theme =~ ^d- ]] && export BG=dark || export BG=light
+            [[ $theme =~ ^d- ]] && bg_to_substitute=dark || bg_to_substitute=light
+            sed --in-place "s/export BG=\(dark\|light\)/export BG=$bg_to_substitute/" ~/.bashrc
+            export BG=$bg_to_substitute
             echo "Current theme: $theme"
         fi
     else

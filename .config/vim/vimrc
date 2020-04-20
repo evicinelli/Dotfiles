@@ -128,9 +128,9 @@ noremap 'b :Buffers<CR>
 noremap 'f :FZF --no-exact 
 noremap 'h :FZF ~ <CR>
 noremap 'm :MRU <CR>
-noremap 'p :FZF<CR>
 noremap 'so :!mimeopen "%" <CR>
 noremap 'u :FZF $UNI<CR>
+noremap 'z :FZF<CR>
 noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
 noremap <C-p> :cp<CR>
