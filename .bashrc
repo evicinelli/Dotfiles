@@ -37,7 +37,6 @@ export EDITOR=vim
 # }}}
 
 # Variables {{{
-export OPEN=mimeopen
 export P="/home/vic/pCloudDrive"
 
 export DN="$P/Documenti/Todo/done.txt"
@@ -90,8 +89,7 @@ alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
 alias n="nv $NOTES"
 alias netoff="nmcli networking off"
 alias neton="nmcli networking on &"
-alias o="$OPEN"
-alias open="$OPEN"
+alias o=open
 alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt "
 alias py="python"
 alias qr="qrencode --type=UTF8 -o -"
@@ -129,6 +127,23 @@ shopt -s histappend
 # }}}
 
 # Functions {{{
+
+# Wrapper to declare a standard function to open file
+open () {
+    [[ $1 =~ -a|-d ]] && mimeopen ${*} || xdg-open "$*"
+}
+
+# Foreground a job searching the process name
+fj () {
+    job=$(jobs -ls | fzf -1 -0 --exact --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+    [[ ! -z $job ]] && fg $job
+
+    # TODO
+    # C-B: background selected jobs
+    # C-K: kill selected job
+    # C-D: disown selected job
+}
+
 cswp () {
     [[ $(ls ~/.local/share/nvim/swap/ | wc -l) -gt 0 ]] && rm -r ~/.local/share/nvim/swap/*
 }
@@ -158,17 +173,6 @@ wifi () {
     nmcli -a device wifi connect "$( nmcli --color no device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
 }
 
-# Foreground a job searching the process name
-fj () {
-    job=$(jobs -ls | fzf -1 -0 --exact --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
-    [[ ! -z $job ]] && fg $job
-
-    # TODO
-    # C-B: background selected jobs
-    # C-K: kill selected job
-    # C-D: disown selected job
-}
-
 wttr () {
     CITY=`sed "s/ /+/g" <<< "$*"`
     wget -qO - "https://wttr.in/~$CITY"
@@ -184,7 +188,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
