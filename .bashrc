@@ -188,7 +188,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular

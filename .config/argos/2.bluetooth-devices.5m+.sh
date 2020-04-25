@@ -4,7 +4,7 @@ IFS=$'\n'
 
 printmono(){
     for line in $*; do
-        echo "$line | font=Monospace"
+        echo "$line | font=Monospace color=gray"
     done
 }
 
@@ -16,11 +16,11 @@ echo "$label | color=$color refresh=true"
 if [[ $ARGOS_MENU_OPEN == "true" ]]; then
     echo "---"
 
-    devices=($(bluetoothctl paired-devices | cut -d' ' -f3-))
+    # devices=($(bluetoothctl paired-devices | cut -d' ' -f3-))
     # bluetooth_id=$(rfkill list | grep Bluetooth | grep hci0 | cut -d: -f1)
 
-    for device in ${devices[*]}; do
-        echo "$device | bash=\"bluetoothctl power on && bluetoothctl connect $(bluetoothctl paired-devices | grep $device | cut -d' ' -f2 | sleep 10)\" terminal=false refresh=true"
+    for device in $(bluetoothctl paired-devices | cut -d' ' -f3-); do
+        echo "$device | bash=\"bluetoothctl power on && (bluetoothctl connect $(bluetoothctl paired-devices | grep $device | cut -d' ' -f2)  && notify-send 'Connected to $device' || notify-send 'Connection to $device failed') \" refresh=true terminal=false"
     done
 
     echo "--"
