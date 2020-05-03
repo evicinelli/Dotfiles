@@ -22,10 +22,29 @@
 \usepackage{longtable,booktabs}
 \usepackage{newunicodechar}     % Unicode where it's needed
 \usepackage{tcolorbox}          % Boxes
-\usepackage{titlesec}           % Customize titles
+%\usepackage{titlesec}           % Customize titles
 \usepackage{xcolor}             % Colors!
 \usepackage{marvosym}
+\usepackage{pgfpages}
 \usepackage{qrcode}
+%}}}
+
+% Language (must always be specified) {{{
+$if(lang)$
+    \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+        \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+        $if(babel-newcommands)$
+        $babel-newcommands$
+        $endif$
+    \else % if ! pdftex
+        \usepackage{polyglossia}
+        \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
+        $for(polyglossia-otherlangs)$
+        \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
+        $endfor$
+    \fi
+$endif$
+\usepackage{polyglossia}
 % }}}
 
 % pdfTEX {{{
@@ -51,12 +70,12 @@
 
 % XeTEX {{{
 \ifxetex
-    \usepackage[MnSymbol]{mathspec}
-    \usepackage[]{microtype} % At least we have protrusion
-    \setmainfont[Numbers=OldStyle]{Minion Pro}
-    \setsansfont{Myriad Pro}
-    \setmonofont{Source Code Pro}
-    \setmathfont(Digits,Latin,Greek)[]{Minion Pro}
+    %\usepackage[MnSymbol]{mathspec}
+    %\usepackage[]{microtype} % At least we have protrusion
+    %\setmainfont[Numbers=OldStyle]{Minion Pro}
+    %\setsansfont{Gill Sans Std}
+    %\setmonofont{Inconsolata LGC}
+    %\setmathfont(Digits,Latin,Greek)[]{Minion Pro}
 \fi
 % }}}
 
@@ -76,20 +95,22 @@
     linkcolor=Maroon,
     citecolor=BlueViolet,
     urlcolor=Blue,
-    breaklinks=true}
-\urlstyle{mono}  % don't use monospace font for urls
+    breaklinks=true
+}
+%\urlstyle{mono}
+%\setcounter{secnumdepth}{0}
 % }}}
 
 % Titlesec {{{
-% \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
-\titleformat{\part}{\flushright\huge\normalfont\itshape}{\thepart}{1em}{}[\vspace{8em}]  % \part
-\titleformat{\chapter}{\huge\normalfont\scshape\lowercase}\thechapter{}{0em}{}           % Book class
-\titleformat{\section}{\huge\normalfont\scshape\lowercase}{\thesection}{1em}{}           % # Header #
-\titleformat{\subsection}{\LARGE\bfseries}{}{0em}{}                                      % ## Header ##
-\titleformat{\subsubsection}{\Large\bfseries}{}{0em}{}                                   % ### Header ###
-\titleformat{\paragraph}{\large\bfseries}{}{0em}{}                                       % #### Header ####
-\titleformat{\subparagraph}{\normalfont\bfseries}{}{0em}{}                               % ##### Header #####
-\titleformat{\subsubparagraph}{\itshape}{}{0em}{}
+%% \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
+%\titleformat{\part}{\flushright\huge\normalfont\itshape}{\thepart}{1em}{}[\vspace{8em}]  % \part
+%\titleformat{\chapter}{\huge\normalfont\scshape\lowercase}\thechapter{}{0em}{}           % Book class
+%\titleformat{\section}{\huge\normalfont\scshape\lowercase}{\thesection}{1em}{}           % # Header #
+%\titleformat{\subsection}{\LARGE\bfseries}{}{0em}{}                                      % ## Header ##
+%\titleformat{\subsubsection}{\Large\bfseries}{}{0em}{}                                   % ### Header ###
+%\titleformat{\paragraph}{\large\bfseries}{}{0em}{}                                       % #### Header ####
+%\titleformat{\subparagraph}{\normalfont\bfseries}{}{0em}{}                               % ##### Header #####
+%\titleformat{\subsubparagraph}{\itshape}{}{0em}{}
 % }}}
 
 % Footnotes {{{
@@ -104,29 +125,9 @@
 
 % Margin notes 1{{{
 \newcommand{\marginfig}[1]{\marginpar{{\textsf{Vedi \textbf{Figura \ref{#1}}}}}}
-\newcommand{\marginnote}[1]{\marginpar{← \textsf{#1}}}
-\newcommand{\asidefigure}[2]{\marginpar{\textsf{\includegraphics{#1}\\ \emph{#2}}}}
+\newcommand{\marginnote}[1]{\marginpar{\footnotesize← \emph{#1}}}
+\newcommand{\asidefigure}[2]{\marginpar{\includegraphics{#1}\\ \footnotesize \emph{#2}}}
 % }}}1
-
-% Language {{{
-$if(lang)$
-    \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-        \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
-        $if(babel-newcommands)$
-        $babel-newcommands$
-        $endif$
-    \else % if ! pdftex
-        % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
-        \usepackage{polyglossia}
-        \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
-        $for(polyglossia-otherlangs)$
-        \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
-        $endfor$
-        \fi
-$else$
-    \usepackage[italian]{babel}
-$endif$
-% }}}
 
 % Biblatex and citations {{{
 $if(biblatex)$

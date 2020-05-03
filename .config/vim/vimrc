@@ -114,7 +114,7 @@ cnoremap <C-e> <End>
 cnoremap Q q
 cnoremap W w
 cnoremap X x
-inoremap  =system("date")<CR>kJ
+inoremap  =system("date")<CR><Esc>kJ$x
 inoremap " ""<Left>
 inoremap ( ()<Left>
 inoremap <C-z> <C-o><C-z>

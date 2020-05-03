@@ -79,7 +79,6 @@ alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
 alias g="git"
 alias gcal="gcalcli --calendar=\"Personale\""
-alias gogh='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
@@ -130,7 +129,7 @@ shopt -s histappend
 
 # Wrapper to declare a standard function to open file
 open () {
-    [[ $1 =~ -a|-d ]] && mimeopen ${*} || xdg-open "$*"
+    [[ $1 =~ ^-a|^-d ]] && mimeopen ${*} || xdg-open "$*"
 }
 
 # Foreground a job searching the process name
@@ -188,7 +187,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
