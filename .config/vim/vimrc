@@ -7,6 +7,7 @@ endif
 
 " Plug 'honza/vim-snippets'                                            " Ultisnip sinppets
 " Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
+Plug 'SirVer/ultisnips'                                              " Ultisnip server
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Higlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file made right
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
@@ -16,12 +17,14 @@ Plug 'junegunn/goyo.vim'                                             " Distracti
 Plug 'mbbill/undotree'                                               " Visualize history tree
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
-Plug 'SirVer/ultisnips'                                              " Ultisnip server
+Plug 'sheerun/vim-polyglot'                                          " Collection of language packs
 Plug 'tpope/vim-commentary'                                          " Comment done right
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
 Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
+Plug 'vim-voom/VOoM'                                                 " Outliner for markup languages
+
 call plug#end()
 " }}}
 
@@ -270,7 +273,7 @@ nnoremap <leader>n :Nack
 
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set fillchars=vert:\ ,fold:\ 
+set fillchars=vert:\|,fold:\ 
 let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
 colorscheme dimim

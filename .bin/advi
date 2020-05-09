@@ -4,7 +4,7 @@
 
 file=$(mktemp -t XXXX -p /tmp/advi)
 
-nvim ${file}
+kitty nvim ${file}
 
 # Copia sia su Wayland che su X11
 cat ${file} | xclip -selection primary -f | xclip -selection clipboar

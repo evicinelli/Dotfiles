@@ -88,7 +88,7 @@ if &bg == "light"
   highlight StatusLineNC ctermfg=7    ctermbg=15
   highlight TabLine      ctermfg=7    ctermbg=15
   highlight TabLineFill  ctermfg=15
-  highlight VertSplit    ctermfg=8    ctermbg=7
+  highlight VertSplit    ctermfg=8    ctermbg=NONE
   highlight WildMenu     ctermfg=15
   highlight TodoDueToday ctermfg=15
 else
@@ -106,7 +106,7 @@ else
   highlight StatusLineNC ctermfg=8    ctermbg=0
   highlight TabLine      ctermfg=8    ctermbg=0
   highlight TabLineFill  ctermfg=0
-  highlight VertSplit    ctermfg=7    ctermbg=8
+  highlight VertSplit    ctermfg=7    ctermbg=0
   highlight WildMenu     ctermfg=0
   highlight TodoDueToday ctermfg=0
 endif

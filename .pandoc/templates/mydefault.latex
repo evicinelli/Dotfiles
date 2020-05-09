@@ -1,6 +1,6 @@
 % vim: fdm=marker
 
-\documentclass[10pt, headings=standardclasses]{scrartcl}
+\documentclass[10pt, headings=standardclasses]{article}
 
 % PassOptions {{{
 \PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
@@ -22,7 +22,7 @@
 \usepackage{longtable,booktabs}
 \usepackage{newunicodechar}     % Unicode where it's needed
 \usepackage{tcolorbox}          % Boxes
-%\usepackage{titlesec}           % Customize titles
+\usepackage{titlesec}           % Customize titles
 \usepackage{xcolor}             % Colors!
 \usepackage{marvosym}
 \usepackage{pgfpages}
@@ -44,7 +44,6 @@ $if(lang)$
         $endfor$
     \fi
 $endif$
-\usepackage{polyglossia}
 % }}}
 
 % pdfTEX {{{
@@ -70,17 +69,17 @@ $endif$
 
 % XeTEX {{{
 \ifxetex
-    %\usepackage[MnSymbol]{mathspec}
-    %\usepackage[]{microtype} % At least we have protrusion
-    %\setmainfont[Numbers=OldStyle]{Minion Pro}
-    %\setsansfont{Gill Sans Std}
-    %\setmonofont{Inconsolata LGC}
-    %\setmathfont(Digits,Latin,Greek)[]{Minion Pro}
+    \usepackage[MnSymbol]{mathspec}
+    \usepackage[]{microtype} % At least we have protrusion
+    \setmainfont[Numbers=OldStyle]{Minion Pro}
+    \setsansfont{Gill Sans Std}
+    \setmonofont{Inconsolata LGC}
+    \setmathfont(Digits,Latin,Greek)[]{Minion Pro}
 \fi
 % }}}
 
 % Hyperref {{{
-\usepackage{hyperref}
+\usepackage{bookmark}
 \hypersetup{
     $if(title-meta)$
     pdftitle={$title-meta$},
@@ -102,15 +101,15 @@ $endif$
 % }}}
 
 % Titlesec {{{
-%% \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
-%\titleformat{\part}{\flushright\huge\normalfont\itshape}{\thepart}{1em}{}[\vspace{8em}]  % \part
-%\titleformat{\chapter}{\huge\normalfont\scshape\lowercase}\thechapter{}{0em}{}           % Book class
-%\titleformat{\section}{\huge\normalfont\scshape\lowercase}{\thesection}{1em}{}           % # Header #
-%\titleformat{\subsection}{\LARGE\bfseries}{}{0em}{}                                      % ## Header ##
-%\titleformat{\subsubsection}{\Large\bfseries}{}{0em}{}                                   % ### Header ###
-%\titleformat{\paragraph}{\large\bfseries}{}{0em}{}                                       % #### Header ####
-%\titleformat{\subparagraph}{\normalfont\bfseries}{}{0em}{}                               % ##### Header #####
-%\titleformat{\subsubparagraph}{\itshape}{}{0em}{}
+% \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
+\titleformat{\part}{\flushright\huge\normalfont\itshape}{\thepart}{1em}{\phantomsection}[\vspace{8em}]  % \part
+\titleformat{\chapter}{\huge\normalfont\scshape\lowercase}\thechapter{}{0em}{\phantomsection}           % Book class
+\titleformat{\section}{\huge\normalfont\scshape\lowercase}{\thesection}{1em}{\phantomsection}           % # Header #
+\titleformat{\subsection}{\LARGE\bfseries}{}{0em}{\phantomsection}                                      % ## Header ##
+\titleformat{\subsubsection}{\Large\bfseries}{}{0em}{\phantomsection}                                   % ### Header ###
+\titleformat{\paragraph}{\large\bfseries}{}{0em}{\phantomsection}                                       % #### Header ####
+\titleformat{\subparagraph}{\normalfont\bfseries}{}{0em}{\phantomsection}                               % ##### Header #####
+\titleformat{\subsubparagraph}{\itshape}{}{0em}{\phantomsection}
 % }}}
 
 % Footnotes {{{

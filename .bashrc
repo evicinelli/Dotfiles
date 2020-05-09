@@ -58,10 +58,13 @@ export MED2="$MED/Med2"
 # }}}
 
 # Alias {{{
+
+# Useful options
 alias dir='dir --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias la="ls -a"
+alias less='less -R'
 alias ll="ls -l"
 alias lla="ls -la"
 alias ls='ls -h --color=auto --group-directories-first'
@@ -71,6 +74,7 @@ alias sort="sort -n"
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
 alias amn="nv $MED"
+alias ascii="man ascii | tail -n 42 | head -n 20"
 alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="$EDITOR $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
@@ -187,7 +191,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
