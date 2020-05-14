@@ -112,18 +112,18 @@ let g:csv_highlight_column = 'y'
 " }}}
 
 " Mappings {{{
+" inoremap " ""<Left>
+" inoremap ( ()<Left>
+" inoremap [ []<Left>
+" inoremap ` ``<Left>
+" inoremap { {}<Left>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap Q q
 cnoremap W w
 cnoremap X x
 inoremap  =system("date")<CR><Esc>kJ$x
-inoremap " ""<Left>
-inoremap ( ()<Left>
 inoremap <C-z> <C-o><C-z>
-inoremap [ []<Left>
-inoremap ` ``<Left>
-inoremap { {}<Left>
 noremap '' :b#<CR>
 noremap '. :FZF %:h <CR>
 noremap 'a :Ack -i 

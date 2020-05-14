@@ -71,6 +71,7 @@ highlight WildMenu                          ctermbg=13
 "
 " Personal hi group
 highlight TodoDueToday                      ctermbg=11     cterm=bold
+highlight TodoPriorityA  ctermfg=9
 
 " Highlight groups that depends on background
 if &bg == "light"

@@ -1,6 +1,18 @@
 #! /bin/bash
 
 DELIM="|"
+
+if [[ $BG == "dark" ]]; then
+    bg=colour8
+    fg=colour15
+else
+    fg=colour7
+    bg=colour15
+fi
+tmux set -g status-fg $fg
+tmux set -g status-bg $bg
+tmux set -g window-status-format "#[fg=$fg] #I #W "
+
 function todos() {
     # [[ BG == "dark" ]] && color_fg=colour0 || color_fg=colour15
     color="colour10"
@@ -16,7 +28,7 @@ function todos() {
         symbol=" $todos "
     fi
 
-    echo -ne "#[default]#[bg=$color, fg=colour15]$symbol#[default]"
+    echo -ne "#[default]#[bg=$color, fg=$bg]$symbol#[default]"
 }
 
 function muuuuusic() {
@@ -34,4 +46,5 @@ battery() {
     echo "$(cat /sys/class/power_supply/BAT0/capacity)% $bat_status"
 }
 
+update_colors
 echo "$(muuuuusic) $(battery) $DELIM $(date +%H:%M\ %a\ %d) $(todos)"
