@@ -1,4 +1,5 @@
-# Setup  {{{
+# Initial setup  {{{
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -6,10 +7,10 @@ case $- in
 esac
 
 # History
-HISTCONTROL="ignoredups:erasedups:ignoreboth" # Avioid duplicates
+HISTCONTROL="ignoredups:erasedups:ignoreboth" # Avoid duplicates
 HISTSIZE= HISTFILESIZE= # Infinite history
 HISTTIMEFORMAT='%F %T '
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo:unsplash" # Do not append this to history
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo:unsplash" # Do not append to history
 
 # Colors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -17,7 +18,19 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# Bash completion
+# Fzf <3
+[[ -d $HOME/.fzf ]]     || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
+[[ -d $HOME/.fzf ]]     && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle --multi'
+[[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I"
+[[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
+
+# Ultime cose
+export PATH=${PATH}:$HOME/.local/bin:$HOME/.bin
+export EDITOR=vim
+# }}}
+
+# Completions {{{
+# Bash default completion
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
         . /usr/share/bash-completion/bash_completion
@@ -26,14 +39,9 @@ if ! shopt -oq posix; then
     fi
 fi
 
-# Fzf
-[[ -d $HOME/.fzf ]] || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
-[[ -d $HOME/.fzf ]] && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle --multi'
-[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
-
-# Ultime cose
-export PATH=${PATH}:$HOME/.local/bin:$HOME/.bin
-export EDITOR=vim
+complete -o bashdefault -o default -F _fzf_path_completion o
+complete -o bashdefault -o default -F _fzf_path_completion open
+[ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
 # }}}
 
 # Variables {{{
@@ -100,12 +108,6 @@ alias scp="rsync --archive --checksum --compress --human-readable --itemize-chan
 alias te="todo edit"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
 alias vimrc="vim $HOME/.config/vim/vimrc"
-# }}}
-
-# Completions {{{
-complete -o bashdefault -o default -F _fzf_path_completion o
-complete -o bashdefault -o default -F _fzf_path_completion open
-[ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
 # }}}
 
 # Keybindings {{{
@@ -193,7 +195,7 @@ daysuntil () {
 export PROMPT_COMMAND="history -a;history -n;prompt"
 export BG=light
 
-# Tomnomnom dotfiles {{{
+# Tomnomnom dotfiles {{{1
 txtblk='\[\e[0;30m\]' # Black - Regular
 txtred='\[\e[0;31m\]' # Red
 txtgrn='\[\e[0;32m\]' # Green
@@ -211,7 +213,8 @@ bldpur='\[\e[1;35m\]' # Purple
 bldcyn='\[\e[1;36m\]' # Cyan
 bldwht='\[\e[1;37m\]' # White
 txtrst='\[\e[0m\]'    # Text Reset
-# }}}
+# 1}}}
+
 prompt() {
     jobColor=${bldblu}
     todoColor=${bldgrn}

@@ -203,7 +203,7 @@ augroup end
 
 augroup nonvim
     au!
-    au BufRead *.png,*.jpg,*.pdf,*.gif,*.scpt,*.doc,*.docx,*.odt,*.ppt,*.pptx,*.odp,*.xlsx,*.xls,*.ods,*.{mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
+    au BufRead *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv} sil exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
 " }}}
 
