@@ -115,8 +115,7 @@ bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-a": " fj"'
-bind '"\C-k": "change_terminal_colorscheme"'
-bind '"\C-i": "change_terminal_colorscheme -i"'
+bind '"\C-k": "change_terminal_colorscheme -i"'
 # }}}
 
 # Shell options {{{
@@ -251,6 +250,7 @@ change_terminal_colorscheme(){
         KITTY_CONF_DIR=~/.config/kitty
         KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
 
+        # Invert colorscheme if $1 == -i
         if [[ $1 == "-i" ]]; then
              current_theme=$(basename $(ll ~/.config/kitty/colorscheme.conf | cut -d ">" -f2))
              [[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
