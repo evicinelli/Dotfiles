@@ -21,7 +21,7 @@ fi
 # Fzf <3
 [[ -d $HOME/.fzf ]]     || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 [[ -d $HOME/.fzf ]]     && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle --multi'
-[[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I"
+[[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never"
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 
 # Ultime cose
@@ -116,6 +116,7 @@ bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-a": " fj"'
 bind '"\C-k": "change_terminal_colorscheme"'
+bind '"\C-i": "change_terminal_colorscheme -i"'
 # }}}
 
 # Shell options {{{
@@ -193,9 +194,9 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
-# Tomnomnom dotfiles {{{1
+# Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
 txtred='\[\e[0;31m\]' # Red
 txtgrn='\[\e[0;32m\]' # Green
@@ -213,7 +214,7 @@ bldpur='\[\e[1;35m\]' # Purple
 bldcyn='\[\e[1;36m\]' # Cyan
 bldwht='\[\e[1;37m\]' # White
 txtrst='\[\e[0m\]'    # Text Reset
-# 1}}}
+# }}}
 
 prompt() {
     jobColor=${bldblu}
@@ -250,7 +251,13 @@ change_terminal_colorscheme(){
         KITTY_CONF_DIR=~/.config/kitty
         KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
 
-        theme=$(cd $KITTY_THEME_DIR && find -type f | sort | fzf | sed "s,\./,,")
+        if [[ $1 == "-i" ]]; then
+             current_theme=$(basename $(ll ~/.config/kitty/colorscheme.conf | cut -d ">" -f2))
+             [[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
+        else
+            theme=$(cd $KITTY_THEME_DIR && find -type f | sort | fzf | sed "s,\./,,")
+        fi
+
         if [[ ! -z $theme ]]; then
             ln -sf $KITTY_THEME_DIR/$theme $KITTY_CONF_DIR/colorscheme.conf
             kitty @ set-colors --all --configured  $KITTY_CONF_DIR/colorscheme.conf

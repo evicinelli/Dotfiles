@@ -92,6 +92,7 @@ let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 6
+let g:pandoc#modules#disabled = [""]
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position = "left"
@@ -184,11 +185,12 @@ endfor
 
  " Autogroups and Autocmds {{{
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
-autocmd  FileType fzf setl laststatus=0 noshowmode noruler nonumber norelativenumber
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
-
 autocmd! BufWritePost *vimrc* source %
-
+if has('nvim') && !exists('g:fzf_layout')
+  autocmd! FileType fzf
+  autocmd  FileType fzf setlocal laststatus=0 noshowmode noruler norelativenumber
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber
+endif
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
