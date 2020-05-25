@@ -27,6 +27,7 @@ fi
 # Ultime cose
 export PATH=${PATH}:$HOME/.local/bin:$HOME/.bin
 export EDITOR=vim
+export TERMINAL=kitty
 # }}}
 
 # Completions {{{
@@ -115,7 +116,7 @@ bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
 bind '"\C-a": " fj"'
-bind '"\C-k": "change_terminal_colorscheme -i"'
+bind '"\C-k": "change_terminal_colorscheme "'
 # }}}
 
 # Shell options {{{
@@ -171,7 +172,7 @@ share-home-network () {
 }
 
 tny () {
-    [[ $# -gt 0 ]] && ( wget -q -O - http://tny.im/yourls-api.php?action=shorturl\&format=simple\&url=$1; echo;) || echo "tny https://url.com"
+    [[ $# -gt 0 ]] && curl -F "shorten=$*" 0x0.st
 }
 
 wifi () {
@@ -184,7 +185,7 @@ wttr () {
 }
 
 daysuntil () {
-    echo $(( ($(date "+%s" -d "$*") - $(date "+%s" -d "today")) / (60*60*24) ))
+    echo "Giorni _interi_ rimanenti al $1: $(( ($(date "+%s" -d "$*") - $(date "+%s" -d "today")) / (60*60*24) ))"
 }
 
 # }}}
@@ -193,7 +194,7 @@ daysuntil () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular

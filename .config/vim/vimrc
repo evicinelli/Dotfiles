@@ -127,12 +127,10 @@ inoremap  =system("date")<CR><Esc>kJ$x
 inoremap <C-z> <C-o><C-z>
 noremap '' :b#<CR>
 noremap '. :FZF %:h <CR>
-noremap 'a :Ack -i 
+noremap 'B :ls<CR>:b<space>
 noremap 'b :Buffers<CR>
 noremap 'f :FZF --no-exact 
-noremap 'h :FZF ~ <CR>
 noremap 'm :MRU <CR>
-noremap 'so :!mimeopen "%" <CR>
 noremap 'u :FZF $UNI<CR>
 noremap 'z :FZF<CR>
 noremap <C-l> :noh<CR>
@@ -141,6 +139,7 @@ noremap <C-p> :cp<CR>
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
+noremap <leader>so :!mimeopen "%" <CR>
 noremap Y y$
 noremap Z zMzv
 noremap j gj

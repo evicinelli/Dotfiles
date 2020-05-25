@@ -1,18 +1,36 @@
 #! /usr/bin/env bash
-# https://transfer.sh
+# vim: fdm=marker
+# https://github.com/mia-0/0x0
+# https://0x0.st
+# FILE RETENTION PERIOD
+# ---------------------
+#
+# retention = min_age + (-max_age + min_age) * pow((file_size / max_size - 1), 3)
+# 
+#    days
+#     365 |  \
+#         |   \
+#         |    \
+#         |     \
+#         |      \
+#         |       \
+#         |        ..
+#         |          \
+#   197.5 | ----------..-------------------------------------------
+#         |             ..
+#         |               \
+#         |                ..
+#         |                  ...
+#         |                     ..
+#         |                       ...
+#         |                          ....
+#         |                              ......
+#      30 |                                    ....................
+#           0                        256                        512
+#                                                               MiB
 
-if [ $# -eq 0 ]; then
-    echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
-    return 1;
-fi
+curl --silent 0x0.st | grep "FILE RETENTION" -A 25
 
 tmpfile=$( mktemp -t transferXXX );
-if tty -s; then
-    basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g');
-    curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else
-    curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile;
-fi
-
+curl --silent --progress-bar -F "file=@$1" https://0x0.st >> $tmpfile
 cat $tmpfile | xclip -f -selection primary | xclip -f -selection clipboard
-rm -f $tmpfile
-echo

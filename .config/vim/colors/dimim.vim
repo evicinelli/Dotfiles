@@ -26,6 +26,7 @@ let colors_name = "dimim"
 highlight Comment       ctermfg=7                           cterm=none
 highlight Conceal       ctermfg=7           ctermbg=7
 highlight Constant      ctermfg=1
+highlight CursorLine                                        cterm=bold
 highlight CursorLineNr  ctermfg=11          ctermbg=none
 highlight DiffAdd       ctermfg=0           ctermbg=2
 highlight DiffChange    ctermfg=0           ctermbg=3
@@ -77,7 +78,7 @@ highlight TodoPriorityA  ctermfg=9
 if &bg == "light"
   highlight ColorColumn  ctermfg=none ctermbg=15
   highlight CursorColumn              ctermbg=15   cterm=none
-  highlight CursorLine                ctermbg=15   cterm=none
+  " highlight CursorLine                ctermbg=15   cterm=none
   highlight FoldColumn   ctermfg=7    ctermbg=15
   highlight Folded       ctermfg=8    ctermbg=15
   highlight LineNr       ctermfg=7    ctermbg=15
@@ -95,7 +96,7 @@ if &bg == "light"
 else
   highlight ColorColumn  ctermfg=none ctermbg=0
   highlight CursorColumn              ctermbg=0    cterm=none
-  highlight CursorLine                ctermbg=0    cterm=none
+  " highlight CursorLine                ctermbg=0    cterm=none
   highlight FoldColumn   ctermfg=8    ctermbg=0
   highlight Folded       ctermfg=8    ctermbg=0
   highlight LineNr       ctermfg=8    ctermbg=0
