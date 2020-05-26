@@ -279,7 +279,12 @@ let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
 colorscheme dimim
 
-set stl=\ %{toupper(mode())}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ %v:%l/%L\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
+function! CurrentMode()
+    return toupper(mode())
+endfunction
+
+set stl=\ %{CurrentMode()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
+
 " }}}
 
 " vim: fdm=marker

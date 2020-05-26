@@ -69,7 +69,7 @@ highlight VertSplit                                         cterm=none
 highlight Visual        ctermfg=none        ctermbg=none    cterm =inverse
 highlight WarningMsg    ctermfg=1
 highlight WildMenu                          ctermbg=13
-"
+
 " Personal hi group
 highlight TodoDueToday                      ctermbg=11     cterm=bold
 highlight TodoPriorityA  ctermfg=9
