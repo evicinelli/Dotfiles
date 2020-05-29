@@ -58,7 +58,7 @@ todo-done () {
         [[ $ENTRIES_NO -gt 1 ]] && ENTRY=$(echo -e "$ENTRY" | fzf)
 
         echo -e "Marco come completato: $ENTRY"
-        sed -i "s/$ENTRY/x $(date +%F)\ &/" $TD
+        sed -i "s|$ENTRY|x $(date +%F)\ &|" $TD
     else
         # ENTRY=$(cat $TD | fzf)
         todo-ls "^x $(date -I)"

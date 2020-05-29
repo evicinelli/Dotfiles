@@ -23,7 +23,7 @@ if exists("syntax_on")
 endif
 let colors_name = "dimim"
 
-highlight Comment       ctermfg=7                           cterm=none
+highlight Comment       ctermfg=14                           cterm=italic
 highlight Conceal       ctermfg=7           ctermbg=7
 highlight Constant      ctermfg=1
 highlight CursorLine                                        cterm=bold
@@ -81,7 +81,7 @@ if &bg == "light"
   " highlight CursorLine                ctermbg=15   cterm=none
   highlight FoldColumn   ctermfg=7    ctermbg=15
   highlight Folded       ctermfg=8    ctermbg=15
-  highlight LineNr       ctermfg=7    ctermbg=15
+  highlight LineNr       ctermfg=8    ctermbg=15
   highlight Pmenu        ctermfg=0    ctermbg=15
   highlight PmenuSel     ctermfg=115
   highlight SignColumn   ctermfg=8    ctermbg=15
@@ -99,7 +99,7 @@ else
   " highlight CursorLine                ctermbg=0    cterm=none
   highlight FoldColumn   ctermfg=8    ctermbg=0
   highlight Folded       ctermfg=8    ctermbg=0
-  highlight LineNr       ctermfg=8    ctermbg=0
+  highlight LineNr       ctermfg=7    ctermbg=0
   highlight Pmenu        ctermfg=15   ctermbg=0
   highlight PmenuSel     ctermfg=0
   highlight SignColumn   ctermfg=8    ctermbg=0
