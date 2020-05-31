@@ -31,6 +31,8 @@
 
 curl --silent 0x0.st | grep "FILE RETENTION" -A 25
 
-tmpfile=$( mktemp -t transferXXX );
-curl --silent --progress-bar -F "file=@$1" https://0x0.st >> $tmpfile
-cat $tmpfile | xclip -f -selection primary | xclip -f -selection clipboard
+if [[ $# -gt 0 ]]; then
+    tmpfile=$( mktemp -t transferXXX );
+    curl --silent --progress-bar -F "file=@$1" https://0x0.st >> $tmpfile
+fi
+    cat $tmpfile | xclip -f -selection primary | xclip -f -selection clipboard

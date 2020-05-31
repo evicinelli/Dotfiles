@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 IFS=$'\n'
-FILE=$P/Notes/spese.txt
+FILE=$P/Notes/spese-2020.txt
 
 
 getTags(){
