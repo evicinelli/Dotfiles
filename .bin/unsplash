@@ -69,5 +69,5 @@ post-process () {
 # wget -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 # wget -O $HOME/img "https://source.unsplash.com/featured/"
 
-wget -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/"
+wget --no-check-certificate -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/"
 post-process img.png
