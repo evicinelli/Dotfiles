@@ -21,7 +21,7 @@ fi
 # Fzf <3
 [[ -d $HOME/.fzf ]]     || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 [[ -d $HOME/.fzf ]]     && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle --multi'
-[[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never"
+[[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 
 # Ultime cose
@@ -43,6 +43,17 @@ fi
 complete -o bashdefault -o default -F _fzf_path_completion o
 complete -o bashdefault -o default -F _fzf_path_completion open
 [ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
+# }}}
+
+# Keybindings {{{
+bind TAB:menu-complete
+bind C-e:complete
+bind Control-l:clear-screen
+bind '"\C-k": "change_terminal_colorscheme "'
+
+# https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
+stty susp undef # Terminal magic
+bind '"\C-z": " fj"'
 # }}}
 
 # Variables {{{
@@ -110,14 +121,6 @@ alias scp="rsync --archive --checksum --compress --human-readable --itemize-chan
 alias te="todo edit"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
 alias vimrc="vim $HOME/.config/vim/vimrc"
-# }}}
-
-# Keybindings {{{
-bind TAB:menu-complete
-bind C-e:complete
-bind Control-l:clear-screen
-bind '"\C-a": " fj"'
-bind '"\C-k": "change_terminal_colorscheme "'
 # }}}
 
 # Shell options {{{
@@ -257,7 +260,7 @@ change_terminal_colorscheme(){
              current_theme=$(basename $(ll ~/.config/kitty/colorscheme.conf | cut -d ">" -f2))
              [[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
         else
-            theme=$(cd $KITTY_THEME_DIR && find -type f | sort | fzf | sed "s,\./,,")
+            theme=$(cd $KITTY_THEME_DIR && find -type f -name "*.conf" | sort | fzf | sed "s,\./,,")
         fi
 
         if [[ ! -z $theme ]]; then
