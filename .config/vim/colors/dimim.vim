@@ -112,4 +112,3 @@ else
   highlight WildMenu     ctermfg=0
   highlight TodoDueToday ctermfg=0
 endif
-

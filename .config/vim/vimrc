@@ -58,7 +58,7 @@ set path^=**                             " Recursive file search starting from c
 set secure                               " No shell command on autocmd
 set shiftwidth=4                         " When indenting with '>', use 4 spaces width
 set showcmd                              " Show partially typed commands
-set showmode                             " Show when in insert mode
+set noshowmode                           " Not show when in insert mode
 set smartcase                            " Smart-case search
 set smartindent                          " Smart indent
 set spell                                " Spelling on
@@ -128,6 +128,7 @@ noremap '' :b#<CR>
 noremap '. :FZF %:h <CR>
 noremap 'B :ls<CR>:b<space>
 noremap 'b :Buffers<CR>
+noremap 'h :FZF ~<CR>
 noremap 'f :FZF --no-exact 
 noremap 'm :MRU <CR>
 noremap 'u :FZF $UNI<CR>
@@ -284,12 +285,51 @@ let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
 colorscheme dimim
 
+" Statusline
 function! CurrentMode()
-    return toupper(mode())
+    " Current mode
+    let currentMode = mode()
+    " Mode names
+    let modes = {
+        \ 'c'  : 'COMMAND',
+        \ 'i'  : 'INSERT',
+        \ 'n'  : 'NORMAL',
+        \ 'R'  : 'REPLACE',
+        \ 't'  : 'TERM',
+        \ 'v'  : 'VISUAL',
+        \ 'V'  : 'V-LINE',
+        \ '' : 'V-BLOCK',
+        \ }
+
+    " Dark or light bg?
+    if (&bg == "dark")
+        let bgcolor = 0
+    else
+        let bgcolor = 15
+    endif
+
+    " Mode color
+    if (currentMode =~# 'n' )
+        let color = "2"
+    elseif (currentMode =~# 'i')
+        let color = "1"
+    elseif (currentMode =~# 'v\|V\|\')
+        let color = "4"
+    elseif (currentMode =~# 't')
+        let color = "3"
+    elseif (currentMode =~# 's\|R')
+        let color = "6"
+    elseif (currentMode =~# 'c')
+        let color = "5"
+    else
+        let color="7"
+    endif
+
+    exe "hi! User1 ctermbg=".bgcolor." ctermfg=".color." cterm=bold"
+    redrawstatus
+    return modes[currentMode]
 endfunction
 
-set stl=\ %{CurrentMode()}\ \|\ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
-
-" }}}
+set stl=%1*\ %{CurrentMode()}\ %0*\|\ \ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
 
 " vim: fdm=marker
