@@ -6,5 +6,5 @@ if [[ $# -gt 0 ]]; then
 else
     completate=$(ls *pdf | grep ^x | wc -l)
     da_fare=$(ls *pdf | wc -l)
-    echo "Completate $completate/$da_fare sbobine ($(python -c "print float($completate)/$da_fare*100")%)"
+    echo "Completate $completate/$da_fare sbobine ($(python -c "print float($completate)/$da_fare*100")%). Ne mancano $(python -c "print $da_fare - $completate")"
 fi

@@ -140,7 +140,7 @@ shopt -s histappend
 
 # Wrapper to declare a standard function to open file
 open () {
-    [[ $1 =~ ^-a|^-d ]] && mimeopen ${*} || xdg-open "$*"
+    [[ $1 =~ ^-a|^-d ]] && (shift && mimeopen -a \"$*\") || xdg-open "$*"
 }
 
 # Foreground a job searching the process name

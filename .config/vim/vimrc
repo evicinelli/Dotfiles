@@ -39,6 +39,7 @@ set backupdir=/tmp//                     " Backup file in /tmp//
 set breakindent                          " Indent word wrapped line as much as parent line
 set colorcolumn=+1                       " Highlight column where the 81/th char lives
 set cursorline                           " Highlight the line in which the cursor is
+set dir=~/.local/share/nvim/swap//       " Where to save swp file
 set expandtab                            " On pressing tab, insert 4 spaces
 set foldmethod=syntax                    " Fold according to syntax
 set guicursor=a:blinkon1                 " Cursor blinks every second
@@ -90,7 +91,7 @@ let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Libreria/med.bib", "/home/vic
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
-let g:pandoc#folding#level = 6
+let g:pandoc#folding#level = 0
 let g:pandoc#modules#disabled = [""]
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#toc#close_after_navigating = 0
@@ -112,11 +113,6 @@ let g:csv_highlight_column = 'y'
 " }}}
 
 " Mappings {{{
-" inoremap " ""<Left>
-" inoremap ( ()<Left>
-" inoremap [ []<Left>
-" inoremap ` ``<Left>
-" inoremap { {}<Left>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap Q q
@@ -128,7 +124,7 @@ noremap '' :b#<CR>
 noremap '. :FZF %:h <CR>
 noremap 'B :ls<CR>:b<space>
 noremap 'b :Buffers<CR>
-noremap 'h :FZF ~<CR>
+noremap 'p :FZF $P<CR>
 noremap 'f :FZF --no-exact 
 noremap 'm :MRU <CR>
 noremap 'u :FZF $UNI<CR>
@@ -326,10 +322,11 @@ function! CurrentMode()
     endif
 
     exe "hi! User1 ctermbg=".bgcolor." ctermfg=".color." cterm=bold"
+    exe "hi! User2 ctermfg=".bgcolor." ctermbg=".color." cterm=bold"
     redrawstatus
     return modes[currentMode]
 endfunction
 
-set stl=%1*\ %{CurrentMode()}\ %0*\|\ \ %t\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
+set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
 
 " vim: fdm=marker
