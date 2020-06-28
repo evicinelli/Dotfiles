@@ -123,11 +123,8 @@ inoremap <C-z> <C-o><C-z>
 noremap '' :b#<CR>
 noremap '. :FZF %:h <CR>
 noremap 'B :ls<CR>:b<space>
-noremap 'b :Buffers<CR>
-noremap 'p :FZF $P<CR>
 noremap 'f :FZF --no-exact 
-noremap 'm :MRU <CR>
-noremap 'u :FZF $UNI<CR>
+noremap 'l :Buffers<CR>
 noremap 'z :FZF<CR>
 noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
@@ -186,8 +183,8 @@ autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetim
 autocmd! BufWritePost *vimrc* source %
 if has('nvim') && !exists('g:fzf_layout')
   autocmd! FileType fzf
-  autocmd  FileType fzf setlocal laststatus=0 noshowmode noruler norelativenumber
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler relativenumber
+  autocmd  FileType fzf setlocal laststatus=0 noruler norelativenumber
+    \| autocmd BufLeave <buffer> set laststatus=2 ruler relativenumber
 endif
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
@@ -223,11 +220,14 @@ function! s:goyo_enter()
     hi Whitespace ctermfg=NONE ctermbg=NONE
     hi EndOfBuffer ctermfg=NONE ctermfg=NONE
 
+    set stl=%2*\ %{CurrentMode()}\ %0*
+
 endfunction
 
 function! s:goyo_leave()
      silent! source ~/.config/nvim/init.vim
      set scrolloff=0
+     set noshowmode
      let &bg=&bg
 endfunction
 
@@ -270,13 +270,13 @@ command! -bang MRU call fzf#run(fzf#wrap({
 " }}}
 
 " Notes {{{
-command! -nargs=1 Nack vimgrep "<args>" $MED/**/*.txt
+command! -nargs=1 Nack vimgrep "<args>" $MED_CURRENT/**/*.txt
 nnoremap <leader>n :Nack 
 " }}}
 
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
-set fillchars=vert:\|,fold:\ 
+set fillchars=vert:\ ,fold:\ 
 let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
 
 colorscheme dimim

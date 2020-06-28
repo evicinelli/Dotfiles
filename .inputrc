@@ -6,6 +6,7 @@ set editing-mode vi
 set mark-symlinked-directories on
 # set menu-complete-display-prefix on
 set show-all-if-ambiguous on
+set show-all-if-unmodified on
 
 # Bindings
 "\e[Z": menu-complete-backward

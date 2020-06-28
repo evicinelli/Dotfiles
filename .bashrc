@@ -74,6 +74,9 @@ export MED="$UNI/Med-Notes"
 export MED1="$MED/Med1"
 export MED2="$MED/Med2"
 
+# Current course
+export MED_CURRENT=$MED2/Immunologia/
+
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
 
@@ -102,6 +105,7 @@ alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias calc="python -ic 'import math as m'"
 alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
+alias enit="trans en:it"
 alias g="git"
 alias gcal="gcalcli --calendar=\"Personale\""
 alias httpserver="python -m SimpleHTTPServer 8000"
@@ -115,6 +119,7 @@ alias netoff="nmcli networking off"
 alias neton="nmcli networking on &"
 alias o=open
 alias pandoc-gvs="pandoc --standalone --reference-doc=$GVS/res/reference-doc.odt "
+alias pdfgrep="pdfgrep -i --color=always"
 alias py="python"
 alias qr="qrencode --type=UTF8 -o -"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
@@ -140,7 +145,7 @@ shopt -s histappend
 
 # Wrapper to declare a standard function to open file
 open () {
-    [[ $1 =~ ^-a|^-d ]] && (shift && mimeopen -a \"$*\") || xdg-open "$*"
+    [[ $1 =~ ^-a ]] && (shift; mimeopen -a "$*") || xdg-open "$*"
 }
 
 # Foreground a job searching the process name
@@ -192,13 +197,18 @@ daysuntil () {
     echo "Giorni _interi_ rimanenti al $1: $(( ($(date "+%s" -d "$*") - $(date "+%s" -d "today")) / (60*60*24) ))"
 }
 
+# https://www.reddit.com/r/commandline/comments/hgayn8/stumbled_across_a_recipe_scraping_website_and/
+plainoldrecipe () {
+    curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc -f html -t markdown
+}
+
 # }}}
 
 # Prompt, colors and appearance {{{
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
