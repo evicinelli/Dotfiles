@@ -49,9 +49,9 @@ complete -o bashdefault -o default -F _fzf_path_completion open
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-k": "change_terminal_colorscheme "'
+bind '"\C-k": " change_terminal_colorscheme -i"'
 
-# https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
+# Make C-z work -- https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
 stty susp undef # Terminal magic
 bind '"\C-z": " fj"'
 # }}}
