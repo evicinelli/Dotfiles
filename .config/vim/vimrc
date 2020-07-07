@@ -306,22 +306,21 @@ function! CurrentMode()
 
     " Mode color
     if (currentMode =~# 'n' )
-        let color = "2"
+        let color = "10"
     elseif (currentMode =~# 'i')
-        let color = "1"
+        let color = "9"
     elseif (currentMode =~# 'v\|V\|\')
-        let color = "4"
+        let color = "12"
     elseif (currentMode =~# 't')
-        let color = "3"
+        let color = "11"
     elseif (currentMode =~# 's\|R')
-        let color = "6"
+        let color = "14"
     elseif (currentMode =~# 'c')
-        let color = "5"
+        let color = "13"
     else
         let color="7"
     endif
 
-    exe "hi! User1 ctermbg=".bgcolor." ctermfg=".color." cterm=bold"
     exe "hi! User2 ctermfg=".bgcolor." ctermbg=".color." cterm=bold"
     redrawstatus
     return modes[currentMode]

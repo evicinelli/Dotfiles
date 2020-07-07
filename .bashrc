@@ -49,7 +49,7 @@ complete -o bashdefault -o default -F _fzf_path_completion open
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-k": " change_terminal_colorscheme -i"'
+bind '"\C-k": " change-terminal-colorscheme -i"'
 
 # Make C-z work -- https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
 stty susp undef # Terminal magic
@@ -111,6 +111,7 @@ alias gcal="gcalcli --calendar=\"Personale\""
 alias httpserver="python -m SimpleHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
+alias mdview="grip -b --quiet"
 alias mkdir="mkdir -pv"
 alias mn="nv $MED2"
 alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
@@ -208,7 +209,7 @@ plainoldrecipe () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -260,7 +261,7 @@ ps1_hostname() {
     [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
 }
 
-change_terminal_colorscheme(){
+change-terminal-colorscheme(){
     if [[ $TERM == "xterm-kitty" ]]; then
         KITTY_CONF_DIR=~/.config/kitty
         KITTY_THEME_DIR=$KITTY_CONF_DIR/themes

@@ -2,11 +2,16 @@
 
 LC_ALL=C
 IFS=$'\n'
-BALANCE_FILE=$P/spese.txt
+BALANCE_FILE=$NOTES/spese.txt
 
 
 getTags(){
     grep -o "@.[[:alnum:]]*" $BALANCE_FILE | sort | uniq
+}
+
+debts () {
+    echo "---"
+    grep "@debiti" $BALANCE_FILE
 }
 
 # Shamefully inefficient
@@ -23,3 +28,5 @@ printf "%.1f€\t\t%s\n" "$(grep -v '@.[[:alnum:]]*' $BALANCE_FILE | grep -v "^#
 printf "%.1f€\t\t%s\n\n" $real_total "TOTAL"
 
 echo -e "Ultimo aggiornamento: $(ls -al $BALANCE_FILE | cut -d" " -f6-8)\n"
+
+# echo -e "$(debts)"
