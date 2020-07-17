@@ -6,7 +6,7 @@ if !has("nvim")
 endif
 
 " Plug 'honza/vim-snippets'                                            " Ultisnip sinppets
-" Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
+Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 Plug 'SirVer/ultisnips'                                              " Ultisnip server
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Higlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file made right
@@ -126,6 +126,7 @@ noremap 'B :ls<CR>:b<space>
 noremap 'f :FZF --no-exact 
 noremap 'l :Buffers<CR>
 noremap 'z :FZF<CR>
+noremap <BS> -
 noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
 noremap <C-p> :cp<CR>

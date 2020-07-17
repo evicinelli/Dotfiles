@@ -2,11 +2,11 @@
 
 LC_ALL=C
 IFS=$'\n'
-BALANCE_FILE=$NOTES/spese.txt
+BALANCE_FILE=${BALANCE_FILE:-$NOTES/spese.txt}
 
 
 getTags(){
-    grep -o "@.[[:alnum:]]*" $BALANCE_FILE | sort | uniq
+    grep -o "@.[[:alnum:]]*" $BALANCE_FILE | grep -v "@debiti" | sort | uniq
 }
 
 debts () {
@@ -23,8 +23,11 @@ for tag in $(getTags); do
     # printf "%-20s %.1f€\n" "$tag" "$total"
     printf "%.1f€\t\t%s\n" "$total" "$tag"
 done
+uncategorized_total=$(grep -v '@.[[:alnum:]]*' $BALANCE_FILE | grep -v "^#" | awk -F' ' -- '{s+=$2}END{print s}')
+real_total=$(bc <<< "$real_total + $uncategorized_total")
+
 printf "%s\t\t%s\n" "----" "====================" 
-printf "%.1f€\t\t%s\n" "$(grep -v '@.[[:alnum:]]*' $BALANCE_FILE | grep -v "^#" | awk -F' ' -- '{s+=$2}END{print s}')" "Uncategorized"
+printf "%.1f€\t\t%s\n" "$uncategorized_total" "Uncategorized"
 printf "%.1f€\t\t%s\n\n" $real_total "TOTAL"
 
 echo -e "Ultimo aggiornamento: $(ls -al $BALANCE_FILE | cut -d" " -f6-8)\n"
