@@ -46,7 +46,7 @@ todo-ls() {
         fi
     else
         cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
-    fi
+    fi | sort -n
 }
 
 todo-done () {

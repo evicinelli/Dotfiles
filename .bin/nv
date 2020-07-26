@@ -18,7 +18,7 @@ elif [[ $? -eq 1 ]]; then       # If the note doesn't exist
         file=$(basename "$note")
         [[ ! $folder == "." ]] && mkdir "$folder" # If $note contains a directory which is not the pwd, then create it
 
-        date  >> "$note.$ext" # Create note and write date
+        echo "<!-- $(date) -->"  >> "$note.$ext" # Create note and write date
         ${EDITOR:-vim} "$note.$ext"
     else
         exit 1

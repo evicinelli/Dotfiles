@@ -27,7 +27,7 @@ fi
 # Ultime cose
 export PATH=${PATH}:$HOME/.local/bin:$HOME/.bin
 export EDITOR=vim
-export TERMINAL=kitty
+# export TERMINAL=kitty
 # }}}
 
 # Completions {{{
@@ -210,7 +210,7 @@ plainoldrecipe () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -247,7 +247,7 @@ prompt() {
     [[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
     # end="🍺" end=":" end="💰" end="⚕" end=">"
-    end="▶"
+    end="▶" 
 
 if [[ $TERM = "dumb" ]]; then
     export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
