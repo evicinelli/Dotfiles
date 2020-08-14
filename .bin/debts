@@ -1,1 +1,3 @@
 BALANCE_FILE=/home/vic/pCloudDrive/Notes/debiti.md balance
+
+echo -e "LEGENDA:\n\t+: devo\n\t-: mi deve"
