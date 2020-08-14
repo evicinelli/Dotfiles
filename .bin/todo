@@ -108,7 +108,7 @@ function todo-ls-tags(){
 }
 
 todo-urgent (){
-    todo-ls $* | grep -e "^([A-E])"
+    todo-ls $* | grep -e "^([A-A])"
 }
 
 usage (){

@@ -75,7 +75,7 @@ export MED1="$MED/Med1"
 export MED2="$MED/Med2"
 
 # Current course
-export MED_CURRENT=$MED2/Immunologia/
+export MED_CURRENT=$MED2/Anatomia/
 
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -103,6 +103,7 @@ alias audio-rec="ffmpeg -f alsa -ac 2 -i hw:0"
 alias bashrc="$EDITOR $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
 alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
+alias brownnoise="play -t sl -r48000 -c2 -n synth -1 brownnoise .1 60"
 alias calc="python -ic 'import math as m'"
 alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
@@ -167,6 +168,12 @@ cswp () {
 
 nack () {
     $EDITOR +Nack\ "$*"
+}
+
+isbn2bib () {
+    echo
+    BLOB="$(wget -qO- http://www.ottobib.com/isbn/$1/bibtex)"
+    echo $BLOB | grep -o "@.*{.*}</textarea" | sed "s/<\/textarea//"| sed "s/}, /},\n\t/g" | sed "s/} }/}\n}/" | sed "s/, author/,\n\tauthor/"
 }
 
 ding () {

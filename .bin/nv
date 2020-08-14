@@ -2,7 +2,7 @@
 # Notational velocity clone (notational.net) using fzf and vim
 
 (
-ext="txt"
+ext="md"
 base_dir="${1:-.}"
 
 shift

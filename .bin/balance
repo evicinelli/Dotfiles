@@ -2,7 +2,7 @@
 
 LC_ALL=C
 IFS=$'\n'
-BALANCE_FILE=${BALANCE_FILE:-$NOTES/spese.txt}
+BALANCE_FILE=${BALANCE_FILE:-$NOTES/spese.md}
 
 
 getTags(){
@@ -16,17 +16,19 @@ debts () {
 
 # Shamefully inefficient
 
+uncategorized_total=0
 real_total=0
+
 for tag in $(getTags); do
-    total=$(awk -F' ' -- "/$tag/{s+=\$2}END{print s}" $BALANCE_FILE)
+    total=$(awk -F' ' -- "BEGIN{s=0};/^- .*$tag/{s+=\$2}END{print s}" $BALANCE_FILE)
     real_total=$(bc <<< "$real_total + $total")
     # printf "%-20s %.1f€\n" "$tag" "$total"
     printf "%.1f€\t\t%s\n" "$total" "$tag"
 done
-uncategorized_total=$(grep -v '@.[[:alnum:]]*' $BALANCE_FILE | grep -v "^#" | awk -F' ' -- '{s+=$2}END{print s}')
+uncategorized_total=$(grep -v '@.[[:alnum:]]*' $BALANCE_FILE | grep "^- " | awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{print s}')
 real_total=$(bc <<< "$real_total + $uncategorized_total")
 
-printf "%s\t\t%s\n" "----" "====================" 
+printf "%s\t\t%s\n" "----" "===================="
 printf "%.1f€\t\t%s\n" "$uncategorized_total" "Uncategorized"
 printf "%.1f€\t\t%s\n\n" $real_total "TOTAL"
 
