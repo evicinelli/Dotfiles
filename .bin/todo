@@ -121,9 +121,9 @@ USAGE
 COMMANDS
 
     a   add         add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
-    g   agenda      list tasks for the next 6 days
+    g   agenda      list tasks for the next ±[argument] days (default: 6)
     d   done        set task containing [argument] as done
-    e   edit        edit $TD
+    e   edit        edit $TD with $EDITOR
     l   ls          list today's tasks or list task matching [argument], if supplied
     p   past        list overdue tasks
     j   proj        list tasks grouped by @project

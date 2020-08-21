@@ -3,7 +3,7 @@
 # Compute the balance summing all the entries in $BALANCE_FILE
 # Each entry should follow the markdown syntax for the list,
 # being in the form:
-# - ±22.34 description @tag
+# - ±€€.€€ description @tag
 # For each tag the script sums the first digit after "- ",
 # giving the final total as the sum of the total for each tag
 

@@ -59,10 +59,15 @@ COLLECTION_NUMBER="1778533" # Collezione mia
 # COLLECTION_NUMBER="994" # Sea
 # COLLECTION_NUMBER="1930316" # Hipster
 # COLLECTION_NUMBER=1118894 # Superior interior
-# user=stbuccia
+
+user=evicinelli
+user=stbuccia
 # }}}
 
 # Settings
+# UNSPLASH_URL="https://source.unsplash.com/user/$user/"
+# UNSPLASH_URL="https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes"
 
 post-process () {
     # convert $1 -type grayscale $1
@@ -70,9 +75,5 @@ post-process () {
 }
 
 
-# wget -O $HOME/img "https://source.unsplash.com/user/$user/"
-# wget -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
-# wget -O $HOME/img "https://source.unsplash.com/featured/"
-
-wget --no-check-certificate -O $HOME/img "https://source.unsplash.com/collection/$COLLECTION_NUMBER/"
+wget --no-check-certificate -O $HOME/img $UNSPLASH_URL
 post-process img.png
