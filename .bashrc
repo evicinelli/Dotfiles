@@ -26,7 +26,7 @@ fi
 
 # Ultime cose
 export PATH=${PATH}:$HOME/.local/bin:$HOME/.bin
-export EDITOR=vim
+export EDITOR=nvim
 # export TERMINAL=kitty
 # }}}
 
