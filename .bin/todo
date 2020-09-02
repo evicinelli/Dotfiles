@@ -132,6 +132,7 @@ COMMANDS
     u   urgent      list highly prioritized todos (A-E) matching [argument], if supplied
 
 CONFIGURATION
+
     Todo file: $TD
     Done file: $DN
 

@@ -16,10 +16,14 @@ echo "---"
 
 if [[ $ARGOS_MENU_OPEN == "true" ]]; then
     for t in ${todos[*]}; do
-        if [[ $t =~ ^\( ]]; then
-            color="Crimson"
-        elif [[ $t =~ .*@gvs.* ]]; then
+        if [[ $t =~ .*@gvs.* ]]; then
             color="RoyalBlue"
+        elif [[ $t =~ ^\(A ]]; then
+            color="Crimson"
+        elif [[ $t =~ ^\(B ]]; then
+            color="Orange"
+        elif [[ $t =~ ^\(C ]]; then
+            color="Gold"
 	elif [[ $t =~ .*@med.* ]]; then
 	    color="Tomato"
         else
