@@ -1,9 +1,9 @@
 " Default improved improved
-" Fork of https://github.com/jeffkreeftmeijer/vim-dim (awesome)
+" Fork of the awesome https://github.com/jeffkreeftmeijer/vim-dim
 "
-" Purpose of this colorscheme is to use only cterm color, allowing you to have
-" the same colorscheme across all terminal applications. To achieve this, 
-" the color must be set in your terminal emulator settings
+" This colorscheme uses only 16 ANSI color: vim follows the colors
+" defined by your terminal emulator, making it consistent with all the other
+" terminal applications
 "
 " Cterm color   Name
 " ------------- -------

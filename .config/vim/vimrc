@@ -1,13 +1,12 @@
-﻿"Vim-plug {{{
+﻿" vim: fdm=marker
+
+"Vim-plug {{{
 call plug#begin()
 
 if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default if vim
 endif
 
-" Plug 'honza/vim-snippets'                                            " Ultisnip sinppets
-Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
-Plug 'SirVer/ultisnips'                                              " Ultisnip server
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Higlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file made right
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
@@ -17,13 +16,13 @@ Plug 'junegunn/goyo.vim'                                             " Distracti
 Plug 'mbbill/undotree'                                               " Visualize history tree
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
+Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 Plug 'sheerun/vim-polyglot'                                          " Collection of language packs
 Plug 'tpope/vim-commentary'                                          " Comment done right
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
 Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
-Plug 'vim-voom/VOoM'                                                 " Outliner for markup languages
 
 call plug#end()
 " }}}
@@ -91,7 +90,7 @@ let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Uni/Med-Notes/bib.bib"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
-let g:pandoc#folding#level = 1
+let g:pandoc#folding#level = 0
 let g:pandoc#modules#disabled = [""]
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#toc#close_after_navigating = 0
@@ -217,9 +216,9 @@ function! s:goyo_enter()
     set scrolloff=999
     if &bg == "light"
         hi NonText ctermfg=15 ctermbg=NONE
+        hi Whitespace ctermfg=NONE ctermbg=NONE
+        hi EndOfBuffer ctermfg=15 ctermfg=NONE
     endif
-    hi Whitespace ctermfg=NONE ctermbg=NONE
-    hi EndOfBuffer ctermfg=NONE ctermfg=NONE
 
     " Status line
     " set stl=%2*\ %{CurrentMode()}\ %0*
@@ -279,7 +278,7 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-let &bg=$BG  " Light|dark, exported in .bashrc, so that's global
+let &bg=$BG  " Light|dark, exported in .bashrc
 
 colorscheme dimim
 
@@ -287,7 +286,8 @@ colorscheme dimim
 function! CurrentMode()
     " Current mode
     let currentMode = mode()
-    " Mode names
+
+    " Custom names
     let modes = {
         \ 'c'  : 'COMMAND',
         \ 'i'  : 'INSERT',
@@ -310,7 +310,7 @@ function! CurrentMode()
     if (currentMode =~# 'n' )
         let color = "10"
     elseif (currentMode =~# 'i')
-        let color = "9"
+        let color = "1"
     elseif (currentMode =~# 'v\|V\|\')
         let color = "12"
     elseif (currentMode =~# 't')
@@ -322,12 +322,12 @@ function! CurrentMode()
     else
         let color="7"
     endif
-
     exe "hi! User2 ctermfg=".bgcolor." ctermbg=".color." cterm=bold"
+
     redrawstatus
     return modes[currentMode]
 endfunction
 
 set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
 
-" vim: fdm=marker
+" }}}

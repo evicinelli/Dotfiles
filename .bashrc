@@ -93,7 +93,6 @@ alias lla="ls -la"
 alias ls='ls -h --color=auto --group-directories-first'
 alias rm="rm -I"
 alias sl='ls'
-alias sort="sort -n"
 alias bat="bat --theme=base16"
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
@@ -217,7 +216,7 @@ plainoldrecipe () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -254,7 +253,7 @@ prompt() {
     [[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
     # end="🍺" end=":" end="💰" end="⚕" end=">"
-    end="▶" 
+    end="▶"
 
 if [[ $TERM = "dumb" ]]; then
     export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
