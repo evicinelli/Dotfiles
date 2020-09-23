@@ -1,7 +1,8 @@
 #! /usr/bin/env bash
+# vim: fdm=indent
 
-# A very simple yet super effective (at least, for me) cli todo manager
-# Depends on: vim, date, standard bash utilities, todo.txt format
+# A very simple yet super effective (at least, for me) cli todo.txt manager
+# Depends on: vim, date, standard bash utilities
 
 TD=${TD:-"$HOME/todo.txt"}
 DN=${DN:-"$HOME/done.txt"}
@@ -15,8 +16,7 @@ todo-edit() {
 }
 
 todo-add(){
-priority_or_done_pattern="^(\([A-Z]\))|^x "
-if [[ $# -gt 0 ]]; then
+    priority_or_done_pattern="^(\([A-Z]\))|^x "
     pri=""
     arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
     d=$(date +%F -d "$arg")
@@ -31,9 +31,6 @@ if [[ $# -gt 0 ]]; then
             echo $toAdd | sed "s/^ //" >> $TD
         fi
     fi
-else
-    echo "todo-add (A) task +project @context due:<date in \`date -d\` compatible format>"
-fi
 }
 
 todo-ls() {
@@ -112,7 +109,7 @@ todo-urgent (){
 }
 
 usage (){
-cat <<HEREDOC
+cat <<HELP
 
 USAGE
 
@@ -122,7 +119,7 @@ COMMANDS
 
     a   add         add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
     g   agenda      list tasks for the next ±[argument] days (default: 6)
-    d   done        set task containing [argument] as done
+    d   done        set task matching [argument] as done
     e   edit        edit $TD with $EDITOR
     l   ls          list today's tasks or list task matching [argument], if supplied
     p   past        list overdue tasks
@@ -136,7 +133,7 @@ CONFIGURATION
     Todo file: $TD
     Done file: $DN
 
-HEREDOC
+HELP
 }
 
 # Main

@@ -310,7 +310,7 @@ function! CurrentMode()
     if (currentMode =~# 'n' )
         let color = "10"
     elseif (currentMode =~# 'i')
-        let color = "1"
+        let color = "9"
     elseif (currentMode =~# 'v\|V\|\')
         let color = "12"
     elseif (currentMode =~# 't')
@@ -328,6 +328,21 @@ function! CurrentMode()
     return modes[currentMode]
 endfunction
 
-set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ 
+" Draw a small rectangle indicating if there are pending task in my
+" todo manager
+function! TaskIndicator()
+    let color = 2     " Green if everything is done
+    let urgentTask = system("todo urgent | wc -l")
+    let todayTask = system("todo ls | wc -l")
+    if (urgentTask > 0)
+        let color = 1 " Red if urgent task is pending
+    elseif (todayTask > 0)
+        let color = 3 " Yellow if normal task is pending
+    endif
+    exe "hi! User3 ctermfg=0 ctermbg=".color
+    return " "
+endfunction
+
+set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ %3*%{TaskIndicator()}
 
 " }}}
