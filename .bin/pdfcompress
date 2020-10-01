@@ -1,0 +1,31 @@
+#! /usr/bin/env bash
+
+help () {
+    cat <<HELP
+Compress pdf
+
+USAGE: $0 input.pdf output.pdf
+HELP
+}
+
+pdfcompress () {
+    gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS="$1" -sOutputFile="$3" "$2"
+}
+
+if [[ $# -ne 2 ]]; then
+    help
+else
+    cat<<EOF
+0) 72 dpi
+1) 150 dpi
+2) 300 dpi (Prepress Optimized)
+3) 300 dpi (Print Optimized)
+4) Default
+EOF
+    read answer
+    qualities=("/screen" "/ebook" "/prepress" "/printer" "/default")
+    input=$1
+    output=$2
+    quality=${qualities[$answer]}
+    pdfcompress $quality $input $output
+fi

@@ -7,7 +7,7 @@ if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default if vim
 endif
 
-Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Higlight #COLORS
+Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file made right
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
@@ -15,7 +15,7 @@ Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
 Plug 'mbbill/undotree'                                               " Visualize history tree
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
-Plug 'rickhowe/diffchar.vim'                                         " Better highighting in diff mode
+Plug 'rickhowe/diffchar.vim'                                         " Better highlighting in diff mode
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 Plug 'sheerun/vim-polyglot'                                          " Collection of language packs
 Plug 'tpope/vim-commentary'                                          " Comment done right
@@ -28,15 +28,14 @@ call plug#end()
 " }}}
 
 " Options {{{
-syntax enable                            " Enable syntax Highighting
-filetype plugin on                       " Filetype plugin
-filetype plugin indent on                " Specific indentation rules depending on file type
 " set clipboard=unnamed,unnamedplus      " Integrate with system clipboard
+filetype plugin indent on                " Specific indentation rules depending on file type
+filetype plugin on                       " Filetype plugin
 set autoindent                           " Auto-indent
 set autoread                             " Auto reload file if modified from external command
 set backupdir=/tmp//                     " Backup file in /tmp//
 set breakindent                          " Indent word wrapped line as much as parent line
-set colorcolumn=+1                       " Highlight column where the 81/th char lives
+set colorcolumn=+1                       " Highlight 81/th column
 set cursorline                           " Highlight the line in which the cursor is
 set dir=~/.local/share/nvim/swap//       " Where to save swp file
 set expandtab                            " On pressing tab, insert 4 spaces
@@ -52,13 +51,13 @@ set linebreak                            " Break long lines at spaces, not in th
 set modeline                             " Vim executes vimL commands if they are found in the current file
 set mouse=a                              " Enable mouse in all (=a) modes
 set noautochdir                          " Do not change folder
+set noshowmode                           " Not show when in insert mode
 set number relativenumber                " Line numbers are relative to current line
 set omnifunc=syntaxcomplete#Complete     " Omni-completion
 set path^=**                             " Recursive file search starting from current dir
 set secure                               " No shell command on autocmd
 set shiftwidth=4                         " When indenting with '>', use 4 spaces width
 set showcmd                              " Show partially typed commands
-set noshowmode                           " Not show when in insert mode
 set smartcase                            " Smart-case search
 set smartindent                          " Smart indent
 set spell                                " Spelling on
@@ -72,6 +71,7 @@ set undolevels=5000                      " How many edit are saved in undofile
 set updatetime=2000                      " Consider vim inactive after x sec of no activity in normal mode
 set wildignorecase                       " Ignore case when autocomplete
 set wildmenu                             " Tab autocompletion in menu
+syntax enable                            " Enable syntax Highlighting
 let mapleader = " "
 let maplocalleader = " "
 if has("nvim")
@@ -80,12 +80,15 @@ endif
 "}}}
 
 " Plugin settings {{{
+
+" Netrw
 let g:netrw_altv = 1            " split to the right
 let g:netrw_banner = 1          " banner (with help)
+let g:netrw_browse_split = 4    " open in prior window
+let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_liststyle = 0       " buffer view
-let g:netwr_browse_split = 4    " open in prior window
-let g:netwr_list_hide = netrw_gitignore#Hide()
 
+" Pandoc
 let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Uni/Med-Notes/bib.bib"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
@@ -97,18 +100,18 @@ let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position = "left"
 let g:pandoc#toc#shift = 4
 
+" Fzf
 let g:fzf_action = {
     \ 'ctrl-t': 'tab split',
     \ 'ctrl-h': 'split',
     \ 'ctrl-v': 'vsplit' }
 
+" Autocd
 let g:autocd#autocmd_enable = 1
 let g:autocd#markers = { '**/Medicina/**/*.txt': ['Makefile'] }
 
-"let g:goyo_width = "90%"
-
+" Csv
 let g:csv_highlight_column = 'y'
-
 " }}}
 
 " Mappings {{{
@@ -124,7 +127,8 @@ noremap '. :FZF %:h <CR>
 noremap 'B :ls<CR>:b<space>
 noremap 'f :FZF --no-exact 
 noremap 'l :Buffers<CR>
-noremap 'z :FZF<CR>
+noremap 'p :FZF<CR>
+noremap 'u :FZF $UNI<CR>
 noremap <BS> -
 noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
@@ -200,7 +204,7 @@ augroup end
 
 augroup nonvim
     au!
-    " BufReadCmd is used because is triggered _before_ the file is read into
+    " BufReadCmd is used because is triggered _before_ the file is red into
     " the buffer, so if the file size is very large it won't freeze vim until
     " the file is loaded into the buffer -- which we'll not use anyway
     au BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv} sil! exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
@@ -219,10 +223,6 @@ function! s:goyo_enter()
         hi Whitespace ctermfg=NONE ctermbg=NONE
         hi EndOfBuffer ctermfg=15 ctermfg=NONE
     endif
-
-    " Status line
-    " set stl=%2*\ %{CurrentMode()}\ %0*
-
 endfunction
 
 function! s:goyo_leave()
@@ -324,7 +324,6 @@ function! CurrentMode()
     endif
     exe "hi! User2 ctermfg=".bgcolor." ctermbg=".color." cterm=bold"
 
-    redrawstatus
     return modes[currentMode]
 endfunction
 
@@ -340,6 +339,7 @@ function! TaskIndicator()
         let color = 3 " Yellow if normal task is pending
     endif
     exe "hi! User3 ctermfg=0 ctermbg=".color
+    redrawstatus
     return " "
 endfunction
 
