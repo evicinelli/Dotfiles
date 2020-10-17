@@ -49,7 +49,7 @@ complete -o bashdefault -o default -F _fzf_path_completion open
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-k": " change-terminal-colorscheme -i"'
+bind '"\C-k": " change-terminal-colorscheme "'
 
 # Make C-z work -- https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
 stty susp undef # Terminal magic
@@ -73,9 +73,10 @@ export UNI="$P/Uni/"
 export MED="$UNI/Med-Notes"
 export MED1="$MED/Med1"
 export MED2="$MED/Med2"
+export MED3="$MED/Med3"
 
 # Current course
-export MED_CURRENT=$MED2/Anatomia/
+    export MED_CURRENT=$MED2/Microbiologia/
 
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -256,9 +257,9 @@ prompt() {
     end="▶"
 
 if [[ $TERM = "dumb" ]]; then
-    export PS1="[$toDo, [$toDoUrgent!]] $(ps1_hostname)\W $end " # Dumb terminal
+    export PS1="[$toDo, $toDoUrgent!] $(ps1_hostname)\W $end " # Dumb terminal
 else
-    export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, [$toDoUrgent!]]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
+    export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, $toDoUrgent!]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
 fi
 }
 
