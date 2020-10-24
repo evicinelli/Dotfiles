@@ -12,7 +12,7 @@ p(){
         readarray PWS < <(/usr/bin/find ~/.password-store/ -type f | sed -e $FILTER)
 
         fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" |\
-                fzf --no-exact \
+                fzf --no-exact -1 \
                 --expect=$edit_key,$view_key,$pipe_key\
                 --query="$@"\
                 --header="enter to copy, $edit_key to edit, $view_key to cat")
