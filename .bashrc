@@ -49,7 +49,7 @@ complete -o bashdefault -o default -F _fzf_path_completion open
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-k": " change-terminal-colorscheme "'
+bind '"\C-k": " change-terminal-colorscheme --invert "'
 
 # Make C-z work -- https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
 stty susp undef # Terminal magic
@@ -76,7 +76,7 @@ export MED2="$MED/Med2"
 export MED3="$MED/Med3"
 
 # Current course
-    export MED_CURRENT=$MED2/Microbiologia/
+    export MED_CURRENT=$MED3
 
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -115,7 +115,8 @@ alias l='ls'
 alias ll="ls -l"
 alias mdview="grip -b --quiet"
 alias mkdir="mkdir -pv"
-alias mn="nv $MED2"
+alias mn2="nv $MED2"
+alias mn="nv $MED_CURRENT"
 alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
 alias n="nv $NOTES"
 alias netoff="nmcli networking off"
@@ -128,6 +129,7 @@ alias qr="qrencode --type=UTF8 -o -"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 alias te="todo edit"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
+alias uni-todo="TD=$UNI/todo.txt todo"
 alias vimrc="vim $HOME/.config/vim/vimrc"
 # }}}
 
@@ -275,7 +277,7 @@ change-terminal-colorscheme(){
         KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
 
         # Invert colorscheme if $1 == -i
-        if [[ $1 == "-i" ]]; then
+        if [[ $1 == "--invert" ]]; then
              current_theme=$(basename $(ll ~/.config/kitty/colorscheme.conf | cut -d ">" -f2))
              [[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
         else

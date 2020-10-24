@@ -4,25 +4,24 @@
 call plug#begin()
 
 if !has("nvim")
-    Plug 'tpope/vim-sensible'                                        " Sensible default if vim
+    Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
-Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file made right
+Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file support
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
-Plug 'mbbill/undotree'                                               " Visualize history tree
+Plug 'mbbill/undotree'                                               " Visualize undo tree
 Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
 Plug 'rickhowe/diffchar.vim'                                         " Better highlighting in diff mode
 Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
-Plug 'sheerun/vim-polyglot'                                          " Collection of language packs
 Plug 'tpope/vim-commentary'                                          " Comment done right
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
-Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
+" Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
 
 call plug#end()
 " }}}
@@ -84,7 +83,7 @@ endif
 " Netrw
 let g:netrw_altv = 1            " split to the right
 let g:netrw_banner = 1          " banner (with help)
-let g:netrw_browse_split = 4    " open in prior window
+let g:netrw_browse_split = 0    " open buffer in current window
 let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_liststyle = 0       " buffer view
 
@@ -96,7 +95,7 @@ let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 0
 let g:pandoc#modules#disabled = [""]
 let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#toc#close_after_navigating = 0
+let g:pandoc#toc#close_after_navigating = 1
 let g:pandoc#toc#position = "left"
 let g:pandoc#toc#shift = 4
 
@@ -128,7 +127,7 @@ noremap 'B :ls<CR>:b<space>
 noremap 'f :FZF --no-exact 
 noremap 'l :Buffers<CR>
 noremap 'p :FZF<CR>
-noremap 'u :FZF $UNI<CR>
+noremap 'u :FZF<CR>
 noremap <BS> -
 noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
@@ -161,7 +160,8 @@ dig lt 0060 " Digraph <
 dig gt 0062 " Digraph >
 dig ra 8594 " Digraph →
 dig Ra 8658 " Digraph ⇒
- " }}}
+dig Ba 8656 " Digraph ⇐
+" }}}
 
 " Extended text Objects and matchpairs {{{
 " Thanks to Conner McDaniel
