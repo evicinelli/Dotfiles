@@ -25,9 +25,8 @@ fi
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 
 # Ultime cose
-export PATH=${PATH}:$HOME/.local/bin:$HOME/.bin
+export PATH=${PATH}:$HOME/.bin:$HOME/.local/bin
 export EDITOR=nvim
-# export TERMINAL=kitty
 # }}}
 
 # Completions {{{
@@ -219,7 +218,7 @@ plainoldrecipe () {
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -266,9 +265,10 @@ fi
 }
 
 ps1_hostname() {
-    host=$(hostname)
-    user=$(whoami)
-    [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
+    # host=$(hostname)
+    # user=$(whoami)
+    # [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
+    echo ' '
 }
 
 change-terminal-colorscheme(){

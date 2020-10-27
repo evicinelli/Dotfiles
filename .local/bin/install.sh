@@ -1,10 +1,10 @@
 #! /bin/bash
 
 ESSENTIALS="git neovim make at pass coreutils moreutils curl apt-transport-https fd-find"
-PANDOC="pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin"
+PANDOC="pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra"
 UTIlS="kitty mpv meld imagemagick ffmpeg ruby-notify"
 APPS="youtube-dl qutebrowser qbittorrent brave-browser obs-studio typora"
-FLATPAK="spotify telegram teams parlatype anki"
+FLATPAK="spotify telegram teams parlatype anki com.gigitux.gtkwhats"
 SNAPS="spotify telegram teams"
 
 # Dotfiles
