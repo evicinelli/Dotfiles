@@ -1,0 +1,26 @@
+#! /usr/bin/env bash
+
+if [[ $TERM == "xterm-kitty" ]]; then
+    KITTY_CONF_DIR=~/.config/kitty
+    KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
+
+        # Invert colorscheme if $1 == -i
+        if [[ $1 == "--invert" ]]; then
+            current_theme=$(basename $(ll ~/.config/kitty/colorscheme.conf | cut -d ">" -f2))
+            [[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
+        else
+            theme=$(cd $KITTY_THEME_DIR && find -type f -name "*.conf" | sort | fzf | sed "s,\./,,")
+        fi
+
+        if [[ ! -z $theme ]]; then
+            ln -sf $KITTY_THEME_DIR/$theme $KITTY_CONF_DIR/colorscheme.conf
+            kitty @ set-colors --all --configured  $KITTY_CONF_DIR/colorscheme.conf
+            [[ $theme =~ ^d- ]] && bg_to_substitute=dark || bg_to_substitute=light
+            sed --in-place "s/export BG=\(dark\|light\)/export BG=$bg_to_substitute/" ~/.bashrc
+            export BG=$bg_to_substitute
+            echo "Current theme: $theme"
+        fi
+    else
+        echo "\$TERM not supported"
+fi
+

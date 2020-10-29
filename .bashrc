@@ -48,7 +48,6 @@ complete -o bashdefault -o default -F _fzf_path_completion open
 bind TAB:menu-complete
 bind C-e:complete
 bind Control-l:clear-screen
-bind '"\C-k": " change-terminal-colorscheme --invert "'
 
 # Make C-z work -- https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
 stty susp undef # Terminal magic
@@ -214,7 +213,7 @@ plainoldrecipe () {
 
 # }}}
 
-# Prompt, colors and appearance {{{
+# Prompt {{{
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
@@ -270,33 +269,6 @@ ps1_hostname() {
     # [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
     echo ' '
 }
-
-change-terminal-colorscheme(){
-    if [[ $TERM == "xterm-kitty" ]]; then
-        KITTY_CONF_DIR=~/.config/kitty
-        KITTY_THEME_DIR=$KITTY_CONF_DIR/themes
-
-        # Invert colorscheme if $1 == -i
-        if [[ $1 == "--invert" ]]; then
-             current_theme=$(basename $(ll ~/.config/kitty/colorscheme.conf | cut -d ">" -f2))
-             [[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
-        else
-            theme=$(cd $KITTY_THEME_DIR && find -type f -name "*.conf" | sort | fzf | sed "s,\./,,")
-        fi
-
-        if [[ ! -z $theme ]]; then
-            ln -sf $KITTY_THEME_DIR/$theme $KITTY_CONF_DIR/colorscheme.conf
-            kitty @ set-colors --all --configured  $KITTY_CONF_DIR/colorscheme.conf
-            [[ $theme =~ ^d- ]] && bg_to_substitute=dark || bg_to_substitute=light
-            sed --in-place "s/export BG=\(dark\|light\)/export BG=$bg_to_substitute/" ~/.bashrc
-            export BG=$bg_to_substitute
-            echo "Current theme: $theme"
-        fi
-    else
-        echo "\$TERM not supported"
-    fi
-}
-
 # }}}
 
 # vim: fdm=marker
