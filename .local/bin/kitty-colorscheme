@@ -6,10 +6,10 @@ if [[ $TERM == "xterm-kitty" ]]; then
 
         # Invert colorscheme if $1 == -i
         if [[ $1 == "--invert" ]]; then
-            current_theme=$(basename $(ll ~/.config/kitty/colorscheme.conf | cut -d ">" -f2))
+            current_theme=$(basename $(ls -l $HOME/.config/kitty/colorscheme.conf | cut -d ">" -f2))
             [[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
         else
-            theme=$(cd $KITTY_THEME_DIR && find -type f -name "*.conf" | sort | fzf | sed "s,\./,,")
+            theme=$(cd $KITTY_THEME_DIR && find -type f -name "*.conf" | sort | $HOME/.fzf/bin/fzf --color=16 --reverse | sed "s,\./,,")
         fi
 
         if [[ ! -z $theme ]]; then

@@ -1,22 +1,14 @@
+# vim: fdm=marker
 #! /bin/bash
 
 ESSENTIALS="git neovim make at pass coreutils moreutils curl apt-transport-https fd-find"
 PANDOC="pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra"
-UTIlS="kitty mpv meld imagemagick ffmpeg ruby-notify playerctl"
+UTIlS="kitty mpv meld imagemagick-6.q16hdri ffmpeg ruby-notify playerctl gnome-sushi"
 APPS="youtube-dl qutebrowser qbittorrent brave-browser obs-studio typora"
-FLATPAK="spotify telegram teams parlatype anki com.gigitux.gtkwhats"
+FLATPAK="spotify telegram teams-for-linux parlatype anki com.gigitux.gtkwhats us.zoom.Zoom"
 SNAPS="spotify telegram teams"
 
-# Dotfiles
-cd
-git init
-git remote add origin https://github.com/evicinelli/Dotfiles
-source ~/.bashrc
-
-# Vim plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# Repositories
+# Repositories {{{
 
 ## Brave
 curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
@@ -28,7 +20,9 @@ sudo add-apt-repository 'deb https://typora.io/linux ./'
 
 sudo apt update
 
-# Apt
+# }}}
+
+# Install packages/flatpak/snap {{{
 for package in $ESSENTIALS; do
     sudo apt install -y $package
 done
@@ -45,10 +39,6 @@ for package in $APPS; do
     sudo apt install -y $package
 done
 
-# Small bits
-sudo ln -s /bin/fdfind /bin/fd
-
-# Snaps
 if [[ $(which snap) ]]; then
     for snap in $SNAP; do
         snap install $snap
@@ -61,4 +51,14 @@ elif [[ $(which flatpak) ]]; then
 else
     echo "!! NO SNAP/FLATPAK INSTALLED"
 fi
+# }}}
 
+# Vim plug {{{
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim +PlugInstall +PlugUpdate +qa!
+# }}}
+
+# Small bits {{{
+sudo ln -s /bin/fdfind /bin/fd
+xdg-mime default nvim.desktop text/*
+# }}}

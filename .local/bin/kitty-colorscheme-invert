@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+
+bash $HOME/.local/bin/kitty-colorscheme --invert
