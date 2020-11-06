@@ -253,8 +253,8 @@ prompt() {
     # suspended jobs
     [[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
-    # end="🍺" end=":" end="💰" end="⚕" end=">"
-    end="▶"
+    # end="🍺" end=":" end="💰" end="⚕" end="▶"
+    end=">"
 
 if [[ $TERM = "dumb" ]]; then
     export PS1="[$toDo, $toDoUrgent!] $(ps1_hostname)\W $end " # Dumb terminal
@@ -267,7 +267,7 @@ ps1_hostname() {
     # host=$(hostname)
     # user=$(whoami)
     # [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
-    echo ' '
+    echo ''
 }
 # }}}
 

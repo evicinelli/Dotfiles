@@ -44,7 +44,7 @@ set hidden                               " Allow to switch buffer without saving
 set hlsearch                             " Highlight all search results
 set ignorecase                           " Mah
 set incsearch                            " Incremental search
-set laststatus=2                         " Statusbar only if > 2 windows
+set laststatus=2                         " 1 ⇒ statusbar only if > 2 windows; 2 ⇒ always
 set lazyredraw                           " Redraw screen only when necessary
 set linebreak                            " Break long lines at spaces, not in the middle of a word
 set modeline                             " Vim executes vimL commands if they are found in the current file
@@ -340,7 +340,7 @@ function! TaskIndicator()
     endif
     exe "hi! User3 ctermfg=0 ctermbg=".color
     redrawstatus
-    return " "
+    return "  "
 endfunction
 
 set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ %3*%{TaskIndicator()}
