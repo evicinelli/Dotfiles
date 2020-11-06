@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+PW="/home/vic/pCloudDrive/Documenti/Password-store/"
+FILTER="s:/home/vic/pCloudDrive/Documenti/Password-store/::;s:.gpg::"
+pass -c $(/usr/bin/find $PW -type f | sed -e $FILTER | dmenu -i -p "Pass ")
