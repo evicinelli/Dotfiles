@@ -4,7 +4,7 @@
 # Each entry should follow the markdown syntax for the list,
 # being in the form:
 # - ±€€.€€ description @tag
-# For each tag the script sums the first digit after "- ",
+# For each tag the script sums the first signed digit after "- ",
 # giving the final total as the sum of the total for each tag
 
 # Configuration
@@ -21,7 +21,7 @@ getTags(){
 }
 
 
-# For each tag, sum all the entries
+# For each tag, sum all the entries (i know it's bad)
 for tag in $(getTags); do
     total=$(awk -F' ' -- "BEGIN{s=0};/^- .*$tag/{s+=\$2}END{print s}" $BALANCE_FILE)
     real_total=$(bc <<< "$real_total + $total")

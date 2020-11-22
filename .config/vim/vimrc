@@ -7,6 +7,7 @@ if !has("nvim")
     Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
+" Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file support
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
@@ -21,7 +22,6 @@ Plug 'tpope/vim-commentary'                                          " Comment d
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
-" Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
 
 call plug#end()
 " }}}
@@ -127,7 +127,7 @@ noremap 'B :ls<CR>:b<space>
 noremap 'f :FZF --no-exact 
 noremap 'l :Buffers<CR>
 noremap 'p :FZF<CR>
-noremap 'u :FZF<CR>
+noremap 'u :FZF $UNI<CR>
 noremap <BS> -
 noremap <C-l> :noh<CR>
 noremap <C-n> :cn<CR>
@@ -161,6 +161,9 @@ dig gt 0062 " Digraph >
 dig ra 8594 " Digraph →
 dig Ra 8658 " Digraph ⇒
 dig Ba 8656 " Digraph ⇐
+dig le 8804 " Digraph ࣘࣘࣘ≤
+dig ge 8805 " Digraph ≥
+
 " }}}
 
 " Extended text Objects and matchpairs {{{

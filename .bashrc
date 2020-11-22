@@ -21,11 +21,9 @@ fi
 # Fzf <3
 [[ -d $HOME/.fzf ]]     || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 [[ -d $HOME/.fzf ]]     && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle --multi'
-[[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
+[[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 
-# Ultime cose
-export PATH=${PATH}:$HOME/.bin:$HOME/.local/bin
 export EDITOR=nvim
 # }}}
 
@@ -39,9 +37,12 @@ if ! shopt -oq posix; then
     fi
 fi
 
+# Fzf completion
 complete -o bashdefault -o default -F _fzf_path_completion o
 complete -o bashdefault -o default -F _fzf_path_completion open
-[ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass
+
+# Pass completion
+[ -f /usr/share/bash-completion/completions/pass ] && source /usr/share/bash-completion/completions/pass && complete -o filenames -F _pass p
 # }}}
 
 # Keybindings {{{
@@ -102,13 +103,12 @@ alias bashrc="$EDITOR $HOME/.bashrc && source $HOME/.bashrc"
 alias bc="bc -l"
 alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias brownnoise="play -t sl -r48000 -c2 -n synth -1 brownnoise .1 60"
-alias calc="python -ic 'import math as m'"
 alias clipboard="xclip -selection PRIMARY"
 alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
 alias enit="trans en:it"
 alias g="git"
 alias gcal="gcalcli --calendar=\"Personale\""
-alias httpserver="python -m SimpleHTTPServer 8000"
+alias httpserver="python -m ComplexHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
 alias mdview="grip -b --quiet"
@@ -162,54 +162,8 @@ fj () {
     # C-D: disown selected job
 }
 
-cswp () {
-    [[ $(ls ~/.local/share/nvim/swap/ | wc -l) -gt 0 ]] && rm -r ~/.local/share/nvim/swap/*
-}
-
-nack () {
-    $EDITOR +Nack\ "$*"
-}
-
-isbn2bib () {
-    echo
-    BLOB="$(wget -qO- http://www.ottobib.com/isbn/$1/bibtex)"
-    echo $BLOB | grep -o "@.*{.*}</textarea" | sed "s/<\/textarea//"| sed "s/}, /},\n\t/g" | sed "s/} }/}\n}/" | sed "s/, author/,\n\tauthor/"
-}
-
-ding () {
-    file=$P/Res/ping.opus
-    mpv $file &>/dev/null &
-}
-
-share-home-network () {
-    echo "Home Network"
-    qrencode --type=UTF8 -o - "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
-    echo -e "\n\n Rete ospiti"
-    echo "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi-ospiti | head -n 1);;" | qrencode --type=UTF8 -o -
-
-}
-
-tny () {
-    [[ $# -gt 0 ]] && curl -F "shorten=$*" 0x0.st
-}
-
-wifi () {
-    nmcli -a device wifi connect "$( nmcli --color no device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
-}
-
-wttr () {
-    CITY=`sed "s/ /+/g" <<< "$*"`
-    wget -qO - "https://wttr.in/~$CITY"
-}
-
-daysuntil () {
-    echo "Giorni _interi_ rimanenti al $1: $(( ($(date "+%s" -d "$*") - $(date "+%s" -d "today")) / (60*60*24) ))"
-}
-
-# https://www.reddit.com/r/commandline/comments/hgayn8/stumbled_across_a_recipe_scraping_website_and/
-plainoldrecipe () {
-    curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc -f html -t markdown
-}
+# Other functions
+source ~/.bash_functions
 
 # }}}
 
@@ -270,5 +224,8 @@ ps1_hostname() {
     echo ''
 }
 # }}}
+
+# Tmux
+# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker

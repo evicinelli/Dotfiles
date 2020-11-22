@@ -4,8 +4,11 @@
 # A very simple yet super effective (at least, for me) cli todo.txt manager
 # Depends on: vim, date, standard bash utilities
 
+# Configuration
 TD=${TD:-"$HOME/todo.txt"}
 DN=${DN:-"$HOME/done.txt"}
+EDITOR=${EDITOR:-vim}
+URGENT_RANGE="A-C"
 
 todo-edit() {
     if tty -s; then
@@ -105,7 +108,7 @@ function todo-ls-tags(){
 }
 
 todo-urgent (){
-    todo-ls $* | grep -e "^([A-A])"
+    todo-ls $* | grep -e "^([$URGENT_RANGE])"
 }
 
 usage (){
@@ -126,7 +129,7 @@ COMMANDS
     j   proj        list tasks grouped by @project
     s   someday     list tasks which do not have a due date
     t   tags        list tasks grouped by +tags
-    u   urgent      list highly prioritized todos (A-E) matching [argument], if supplied
+    u   urgent      list highly prioritized todos ($URGENT_RANGE) matching [argument], if supplied
 
 CONFIGURATION
 
