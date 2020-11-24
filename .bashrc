@@ -24,6 +24,7 @@ fi
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 [[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 
+export PATH=${PATH}:$HOME/.bin/
 export EDITOR=nvim
 # }}}
 

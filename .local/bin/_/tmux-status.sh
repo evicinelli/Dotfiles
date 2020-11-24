@@ -3,18 +3,18 @@
 DELIM="|"
 
 if [[ $BG == "dark" ]]; then
-    bg=colour8
+    bg=colour0
     fg=colour15
 else
-    fg=colour7
     bg=colour15
+    fg=colour8
 fi
+
 tmux set -g status-fg $fg
 tmux set -g status-bg $bg
 tmux set -g window-status-format "#[fg=$fg] #I #W "
 
 function todos() {
-    # [[ BG == "dark" ]] && color_fg=colour0 || color_fg=colour15
     color="colour10"
     symbol="   "
     todos=$(todo ls | wc -l)
