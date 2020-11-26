@@ -8,7 +8,7 @@
 TD=${TD:-"$HOME/todo.txt"}
 DN=${DN:-"$HOME/done.txt"}
 EDITOR=${EDITOR:-vim}
-URGENT_RANGE="A-C"
+URGENT_RANGE="A-B"
 
 todo-edit() {
     if tty -s; then
@@ -122,7 +122,7 @@ COMMANDS
 
     a   add         add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
     g   agenda      list tasks for the next ±[argument] days (default: 6)
-    d   done        set task matching [argument] as done
+    d   done        mark task matching [argument] as done
     e   edit        edit $TD with $EDITOR
     l   ls          list today's tasks or list task matching [argument], if supplied
     p   past        list overdue tasks
