@@ -53,11 +53,12 @@ bind Control-l:clear-screen
 
 # Make C-z work -- https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
 stty susp undef # Terminal magic
-bind '"\C-z": " fj"'
+bind '"\C-z": " fj
+"'
 # }}}
 
 # Variables {{{
-export P="/home/vic/pCloudDrive"
+export P="$HOME/pCloudDrive"
 
 export DN="$P/Documenti/Todo/done.txt"
 export DOC="$P/Documenti"
@@ -172,7 +173,7 @@ source ~/.bash_functions
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular

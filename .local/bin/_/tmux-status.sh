@@ -3,11 +3,11 @@
 DELIM="|"
 
 if [[ $BG == "dark" ]]; then
-	bg=colour0
-	fg=colour15
-else
 	bg=colour15
 	fg=colour8
+else
+	bg=colour0
+	fg=colour15
 fi
 
 tmux set -g status-fg $fg
