@@ -2,8 +2,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-    *) return;;
+	*i*) ;;
+	*) return;;
 esac
 
 # History
@@ -15,7 +15,7 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:fj:fo:unsplash" # Do not append 
 # Colors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 # Fzf <3
@@ -31,11 +31,11 @@ export EDITOR=nvim
 # Completions {{{
 # Bash default completion
 if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        . /etc/bash_completion
-    fi
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
 fi
 
 # Fzf completion
@@ -76,7 +76,7 @@ export MED2="$MED/Med2"
 export MED3="$MED/Med3"
 
 # Current course
-    export MED_CURRENT=$MED3
+export MED_CURRENT=$MED3
 
 [[ -r ~/.bashrc_local ]] && source ~/.bashrc_local
 # }}}
@@ -149,18 +149,18 @@ shopt -s histappend
 
 # Wrapper to declare a standard function to open file
 open () {
-    [[ $1 =~ ^-a ]] && (shift; mimeopen -a "$*") || xdg-open "$*"
+	[[ $1 =~ ^-a ]] && (shift; mimeopen -a "$*") || xdg-open "$*"
 }
 
 # Foreground a job searching the process name
 fj () {
-    job=$(jobs -ls | fzf -1 -0 --exact --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
-    [[ ! -z $job ]] && fg $job
+	job=$(jobs -ls | fzf -1 -0 --exact --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+	[[ ! -z $job ]] && fg $job
 
-    # TODO
-    # C-B: background selected jobs
-    # C-K: kill selected job
-    # C-D: disown selected job
+	# TODO
+	# C-B: background selected jobs
+	# C-K: kill selected job
+	# C-D: disown selected job
 }
 
 # Other functions
@@ -195,34 +195,34 @@ txtrst='\[\e[0m\]'    # Text Reset
 # }}}
 
 prompt() {
-    jobColor=${bldblu}
-    todoColor=${bldgrn}
-    dirColor=${bldpur}
+	jobColor=${bldblu}
+	todoColor=${bldgrn}
+	dirColor=${bldpur}
 
-    # Today's todos
-    [[ -e $TD ]] && toDo=$(todo ls | wc -l) || toDo="x"
-    [[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l) || toDoUrgent="x"
-    [[ $toDo -gt 0 ]] && todoColor=${bldylw}
-    [[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
+	# Today's todos
+	[[ -e $TD ]] && toDo=$(todo ls | wc -l) || toDo="x"
+	[[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l) || toDoUrgent="x"
+	[[ $toDo -gt 0 ]] && todoColor=${bldylw}
+	[[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
 
-    # suspended jobs
-    [[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
+	# suspended jobs
+	[[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
-    # end="🍺" end=":" end="💰" end="⚕" end="▶"
-    end=">"
+	# end="🍺" end=":" end="💰" end="⚕" end="▶"
+end=">"
 
 if [[ $TERM = "dumb" ]]; then
-    export PS1="[$toDo, $toDoUrgent!] $(ps1_hostname)\W $end " # Dumb terminal
+	export PS1="[$toDo, $toDoUrgent!] $(ps1_hostname)\W $end " # Dumb terminal
 else
-    export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, $toDoUrgent!]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
+	export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, $toDoUrgent!]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
 fi
 }
 
 ps1_hostname() {
-    # host=$(hostname)
-    # user=$(whoami)
-    # [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
-    echo ''
+	# host=$(hostname)
+	# user=$(whoami)
+	# [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
+	echo ''
 }
 # }}}
 

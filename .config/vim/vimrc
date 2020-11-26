@@ -4,7 +4,7 @@
 call plug#begin()
 
 if !has("nvim")
-    Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
+	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
 " Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
@@ -37,7 +37,7 @@ set breakindent                          " Indent word wrapped line as much as p
 set colorcolumn=+1                       " Highlight 81/th column
 set cursorline                           " Highlight the line in which the cursor is
 set dir=~/.local/share/nvim/swap//       " Where to save swp file
-set expandtab                            " On pressing tab, insert 4 spaces
+set noexpandtab                          " On pressing tab, insert \t. If set, convert tab in tabstop spaces
 set foldmethod=syntax                    " Fold according to syntax
 set guicursor=a:blinkon1                 " Cursor blinks every second
 set hidden                               " Allow to switch buffer without saving it
@@ -55,7 +55,7 @@ set number relativenumber                " Line numbers are relative to current 
 set omnifunc=syntaxcomplete#Complete     " Omni-completion
 set path^=**                             " Recursive file search starting from current dir
 set secure                               " No shell command on autocmd
-set shiftwidth=4                         " When indenting with '>', use 4 spaces width
+set shiftwidth=0                         " Indent following tabstop
 set showcmd                              " Show partially typed commands
 set smartcase                            " Smart-case search
 set smartindent                          " Smart indent
@@ -63,7 +63,7 @@ set spell                                " Spelling on
 set spelllang=it,en                      " Spell dictionaries
 set splitbelow                           " HSplit below
 set splitright                           " Vsplit on the right
-set tabstop=4                            " Show existing tab with 4 spaces width
+set tabstop=4                            " Tab is up to this much  |	|
 set undodir=~/.local/share/nvim/undo//   " Where to save persistent undo history
 set undofile                             " Persistent history
 set undolevels=5000                      " How many edit are saved in undofile
@@ -74,7 +74,7 @@ syntax enable                            " Enable syntax Highlighting
 let mapleader = " "
 let maplocalleader = " "
 if has("nvim")
-    set inccommand=nosplit
+	set inccommand=nosplit
 endif
 "}}}
 
@@ -101,9 +101,9 @@ let g:pandoc#toc#shift = 4
 
 " Fzf
 let g:fzf_action = {
-    \ 'ctrl-t': 'tab split',
-    \ 'ctrl-h': 'split',
-    \ 'ctrl-v': 'vsplit' }
+	\ 'ctrl-t': 'tab split',
+	\ 'ctrl-h': 'split',
+	\ 'ctrl-v': 'vsplit' }
 
 " Autocd
 let g:autocd#autocmd_enable = 1
@@ -145,7 +145,7 @@ vnoremap K gk
 vnoremap az [zo]z
 vnoremap iz [zjo]zk
 if has("nvim")
-     tnoremap <C-\> <C-\><C-n>
+	tnoremap <C-\> <C-\><C-n>
 endif
 " }}}
 
@@ -171,46 +171,46 @@ dig ge 8805 " Digraph ≥
 set matchpairs+=<:>
 let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\", "^", "~"]
 for item in s:items
-    " exe "noremap yi".item." T".item."yt".item
-    " exe "noremap ya".item." F".item."yf".item
-    " exe "noremap ci".item." T".item."ct".item
-    " exe "noremap ca".item." F".item."cf".item
-    " exe "noremap di".item." T".item."dt".item
-    " exe "noremap da".item." F".item."df".item
-    " exe "vnoremap vi".item." T".item."vt".item
-    " exe "vnoremap va".item." F".item."vf".item
-    " Same thing
-    exe "omap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
-    exe "omap a".item ":<C-U>normal!vF".item."of".item."<CR>"
+	" exe "noremap yi".item." T".item."yt".item
+	" exe "noremap ya".item." F".item."yf".item
+	" exe "noremap ci".item." T".item."ct".item
+	" exe "noremap ca".item." F".item."cf".item
+	" exe "noremap di".item." T".item."dt".item
+	" exe "noremap da".item." F".item."df".item
+	" exe "vnoremap vi".item." T".item."vt".item
+	" exe "vnoremap va".item." F".item."vf".item
+	" Same thing
+	exe "omap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
+	exe "omap a".item ":<C-U>normal!vF".item."of".item."<CR>"
 endfor
 " }}}
 
- " Autogroups and Autocmds {{{
+" Autogroups and Autocmds {{{
 autocmd CursorHold * silent! update " Autosave the buffer if on hold > updatetime ms (normal mode only)
 autocmd! BufWritePost *vimrc* source %
 if has('nvim') && !exists('g:fzf_layout')
-  autocmd! FileType fzf
-  autocmd  FileType fzf setlocal laststatus=0 noruler norelativenumber
-    \| autocmd BufLeave <buffer> set laststatus=2 ruler relativenumber
+	autocmd! FileType fzf
+	autocmd  FileType fzf setlocal laststatus=0 noruler norelativenumber
+		\| autocmd BufLeave <buffer> set laststatus=2 ruler relativenumber
 endif
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 augroup pandoc
-     au BufNewFile,BufRead,BufWrite *.txt,*.md set ft=pandoc
+	au BufNewFile,BufRead,BufWrite *.txt,*.md set ft=pandoc
 augroup end
 
 augroup todotxt
-     au bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell | se nowrap
-     au bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell | se nowrap
+	au bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell | se nowrap
+	au bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell | se nowrap
 augroup end
 
 augroup nonvim
-    au!
-    " BufReadCmd is used because is triggered _before_ the file is red into
-    " the buffer, so if the file size is very large it won't freeze vim until
-    " the file is loaded into the buffer -- which we'll not use anyway
-    au BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv} sil! exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
+	au!
+	" BufReadCmd is used because is triggered _before_ the file is red into
+	" the buffer, so if the file size is very large it won't freeze vim until
+	" the file is loaded into the buffer -- which we'll not use anyway
+	au BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv} sil! exe "!xdg-open " . shellescape(expand("%:p")) . " &" | bd | let &ft=&ft | redraw!
 augroup end
 " }}}
 
@@ -218,30 +218,30 @@ augroup end
 
 " Goyo
 function! s:goyo_enter()
-    " vertical resize
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    set scrolloff=999
-    if &bg == "light"
-        hi NonText ctermfg=15 ctermbg=NONE
-        hi Whitespace ctermfg=NONE ctermbg=NONE
-        hi EndOfBuffer ctermfg=15 ctermfg=NONE
-    endif
+	" vertical resize
+	silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+	set scrolloff=999
+	if &bg == "light"
+		hi NonText ctermfg=15 ctermbg=NONE
+		hi Whitespace ctermfg=NONE ctermbg=NONE
+		hi EndOfBuffer ctermfg=15 ctermfg=NONE
+	endif
 endfunction
 
 function! s:goyo_leave()
-     silent! source ~/.config/nvim/init.vim
-     set scrolloff=0
-     set noshowmode
-     let &bg=&bg
+	silent! source ~/.config/nvim/init.vim
+	set scrolloff=0
+	set noshowmode
+	let &bg=&bg
 endfunction
 
 " Diff from current buffer against saved file
 function! s:DiffWithSaved()
-    let filetype=&ft
-    diffthis
-    vnew | r # | normal! 1Gdd
-    diffthis
-    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+	let filetype=&ft
+	diffthis
+	vnew | r # | normal! 1Gdd
+	diffthis
+	exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
@@ -249,28 +249,28 @@ command! -nargs=? Files FZF --query=<args>\
 
 " Now :ls <3 fzf
 function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
+	redir => ls
+	silent ls
+	redir END
+	return split(ls, '\n')
 endfunction
 
 function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+	execute 'buffer' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
 command! -nargs=* Buffers call fzf#run(fzf#wrap({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '--no-exact +m --query="<f-args>"',
-\   'down':    len(<sid>buflist()) + 4
-\ }))
+	\   'source':  reverse(<sid>buflist()),
+	\   'sink':    function('<sid>bufopen'),
+	\   'options': '--no-exact +m --query="<f-args>"',
+	\   'down':    len(<sid>buflist()) + 4
+	\ }))
 
 
 " fzf search :oldfiles
 command! -bang MRU call fzf#run(fzf#wrap({
-\   "source": v:oldfiles,
-\}, <bang>0))
+	\   "source": v:oldfiles,
+	\}, <bang>0))
 " }}}
 
 " Notes {{{
@@ -281,74 +281,77 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-let &bg=$BG  " Light|dark, exported in .bashrc
+if (&bg)
+	let &bg=$BG    " Light|dark, exported in .bashrc
+else
+	set bg=light   " I prefer light colors
+endif
 
 colorscheme dimim
 
 " Statusline
 function! CurrentMode()
-    " Current mode
-    let currentMode = mode()
+	" Current mode
+	let currentMode = mode()
 
-    " Custom names
-    let modes = {
-        \ 'c'  : 'COMMAND',
-        \ 'i'  : 'INSERT',
-        \ 'n'  : 'NORMAL',
-        \ 'R'  : 'REPLACE',
-        \ 't'  : 'TERM',
-        \ 'v'  : 'VISUAL',
-        \ 'V'  : 'V-LINE',
-        \ '' : 'V-BLOCK',
-        \ }
+	" Custom names
+	let modes = {
+		\ 'c'  : 'COMMAND',
+		\ 'i'  : 'INSERT',
+		\ 'n'  : 'NORMAL',
+		\ 'R'  : 'REPLACE',
+		\ 't'  : 'TERM',
+		\ 'v'  : 'VISUAL',
+		\ 'V'  : 'V-LINE',
+		\ '' : 'V-BLOCK',
+		\ }
 
-    " Dark or light bg?
-    if (&bg == "dark")
-        let bgcolor = 0
-    else
-        let bgcolor = 15
-    endif
+	" Dark or light bg?
+	if (&bg == "dark")
+		let bgcolor = 0
+	else
+		let bgcolor = 15
+	endif
 
-    " Mode color
-    if (currentMode =~# 'n' )
-        let color = "10"
-    elseif (currentMode =~# 'i')
-        let color = "9"
-    elseif (currentMode =~# 'v\|V\|\')
-        let color = "12"
-    elseif (currentMode =~# 't')
-        let color = "11"
-    elseif (currentMode =~# 's\|R')
-        let color = "14"
-    elseif (currentMode =~# 'c')
-        let color = "13"
-    else
-        let color="7"
-    endif
-    exe "hi! User2 ctermfg=".bgcolor." ctermbg=".color." cterm=bold"
-
-    return modes[currentMode]
+	" Mode color
+	if (currentMode =~# 'n' )
+		let color = "10"
+	elseif (currentMode =~# 'i')
+		let color = "9"
+	elseif (currentMode =~# 'v\|V\|\')
+		let color = "12"
+	elseif (currentMode =~# 't')
+		let color = "11"
+	elseif (currentMode =~# 's\|R')
+		let color = "14"
+	elseif (currentMode =~# 'c')
+		let color = "13"
+	else
+		let color="7"
+	endif
+	exe "hi! User2 ctermfg=".bgcolor." ctermbg=".color." cterm=bold"
+	return modes[currentMode]
 endfunction
 
 " Draw a small rectangle indicating if there are pending task in my
 " todo manager
 function! TaskIndicator()
-    if ($TMUX == "")
-        let color = 2     " Green if everything is done
-        let urgentTask = system("todo urgent | wc -l")
-        let todayTask = system("todo ls | wc -l")
-        if (urgentTask > 0)
-            let color = 1 " Red if urgent task is pending
-        elseif (todayTask > 0)
-            let color = 3 " Yellow if normal task is pending
-        endif
-        exe "hi! User3 ctermfg=0 ctermbg=".color
-        redrawstatus
-        return "  "
-    else
-        redrawstatus
-        return ""
-    endif
+	if ($TMUX == "")
+		let color = 2     " Green if everything is done
+		let urgentTask = system("todo urgent | wc -l")
+		let todayTask = system("todo ls | wc -l")
+		if (urgentTask > 0)
+			let color = 1 " Red if urgent task is pending
+		elseif (todayTask > 0)
+			let color = 3 " Yellow if normal task is pending
+		endif
+		exe "hi! User3 ctermfg=0 ctermbg=".color
+		redrawstatus
+		return "  "
+	else
+		redrawstatus
+		return ""
+	endif
 endfunction
 
 set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ %3*%{TaskIndicator()}
