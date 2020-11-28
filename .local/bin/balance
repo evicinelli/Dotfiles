@@ -12,30 +12,33 @@ LC_ALL=C
 IFS=$'\n'
 BALANCE_FILE=${BALANCE_FILE:-$NOTES/spese.md}
 uncategorized_total=0
-real_total=0
+grand_total=0
 
 
 # Get all the tags from $BALANCE_FILE
 getTags(){
-    grep -o " @.[[:alnum:]]*" $BALANCE_FILE | sort | uniq
+	grep -o " @.[[:alnum:]]*" $BALANCE_FILE | sort | uniq
 }
 
 
 # For each tag, sum all the entries (i know it's bad)
 for tag in $(getTags); do
-    total=$(awk -F' ' -- "BEGIN{s=0};/^- .*$tag/{s+=\$2}END{print s}" $BALANCE_FILE)
-    real_total=$(bc <<< "$real_total + $total")
-    printf "%.1f€\t\t%s\n" "$total" "$tag"
+	#grand_total=$(bc <<< "$grand_total + $total")
+	# total=$(awk -F' ' -- "BEGIN{s=0};/^- .*$tag/{s+=\$2}END{print s}" $BALANCE_FILE)
+	total=$(grep $tag $BALANCE_FILE | grep "^- " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{printf "%.2f\n", s}')
+	grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $total}")
+	printf "%.1f€\t\t%s\n" "$total" "$tag"
 done
 
 # Sum entries with no tag
-uncategorized_total=$(grep -v ' @.[[:alnum:]]*' $BALANCE_FILE | grep "^- " | awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{print s}')
+uncategorized_total=$(grep -v ' @.[[:alnum:]]*' $BALANCE_FILE | grep "^- " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{printf "%.2f\n", s}')
 
 # Total
-real_total=$(bc <<< "$real_total + $uncategorized_total")
+#grand_total=$(bc <<< "$grand_total + $uncategorized_total")
+grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $uncategorized_total}")
 
 # Print
 printf "%s\t\t%s\n" "----" "===================="
-printf "%.1f€\t\t%s\n" "$uncategorized_total" "Uncategorized"
-printf "%.1f€\t\t%s\n\n" $real_total "TOTAL"
+printf "%.2f€\t\t%s\n" "$uncategorized_total" "Uncategorized"
+printf "%.2f€\t\t%s\n\n" $grand_total "TOTAL"
 echo -e "Ultimo aggiornamento: $(ls -al $BALANCE_FILE | cut -d" " -f6-8)\n"

@@ -1,3 +1,3 @@
-BALANCE_FILE=/home/vic/pCloudDrive/Notes/debiti.md balance
+BALANCE_FILE=$P/Notes/debiti.md balance
 
-echo -e "LEGENDA:\n\t+: devo\n\t-: mi deve"
+echo -e "LEGENDA:\n\t+: mi deve\n\t-: devo"
