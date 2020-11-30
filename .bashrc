@@ -173,7 +173,7 @@ source ~/.bash_functions
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=dark
+export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -200,6 +200,10 @@ prompt() {
 	todoColor=${bldgrn}
 	dirColor=${bldpur}
 
+	# Exit code
+	code=$?
+	[[ $code != 0 ]] && echo -e "${bldred}✗ ${code}${txtrst}"
+
 	# Today's todos
 	[[ -e $TD ]] && toDo=$(todo ls | wc -l) || toDo="x"
 	[[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l) || toDoUrgent="x"
@@ -210,7 +214,7 @@ prompt() {
 	[[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
 	# end="🍺" end=":" end="💰" end="⚕" end="▶"
-end=">"
+	end=">"
 
 if [[ $TERM = "dumb" ]]; then
 	export PS1="[$toDo, $toDoUrgent!] $(ps1_hostname)\W $end " # Dumb terminal

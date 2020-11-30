@@ -3,7 +3,7 @@
 # Compute the balance summing all the entries in $BALANCE_FILE
 # Each entry should follow the markdown syntax for the list,
 # being in the form:
-# - ±€€.€€ description @tag
+# - ±€€.€ description @tag
 # For each tag the script sums the first signed digit after "- ",
 # giving the final total as the sum of the total for each tag
 
@@ -23,8 +23,6 @@ getTags(){
 
 # For each tag, sum all the entries (i know it's bad)
 for tag in $(getTags); do
-	#grand_total=$(bc <<< "$grand_total + $total")
-	# total=$(awk -F' ' -- "BEGIN{s=0};/^- .*$tag/{s+=\$2}END{print s}" $BALANCE_FILE)
 	total=$(grep $tag $BALANCE_FILE | grep "^- " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{printf "%.2f\n", s}')
 	grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $total}")
 	printf "%.1f€\t\t%s\n" "$total" "$tag"
@@ -33,8 +31,7 @@ done
 # Sum entries with no tag
 uncategorized_total=$(grep -v ' @.[[:alnum:]]*' $BALANCE_FILE | grep "^- " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{printf "%.2f\n", s}')
 
-# Total
-#grand_total=$(bc <<< "$grand_total + $uncategorized_total")
+# Grand Total
 grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $uncategorized_total}")
 
 # Print
