@@ -24,8 +24,11 @@ fi
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 [[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 
-export PATH=${PATH}:$HOME/.bin/
+export PATH=${PATH}:$HOME/.local/bin/:$HOME/.bin/
 export EDITOR=nvim
+export VISUAL=nvim
+export TERMINAL=kitty
+[[ nvim ]] && export MANPAGER='nvim +Man!'
 # }}}
 
 # Completions {{{
@@ -173,7 +176,7 @@ source ~/.bash_functions
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-export BG=light
+export BG=dark
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular

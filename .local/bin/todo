@@ -11,104 +11,104 @@ EDITOR=${EDITOR:-vim}
 URGENT_RANGE="A-B"
 
 todo-edit() {
-    if tty -s; then
-        [[ $# -gt 0 ]] && $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
-    else
-        echo "No terminal connected to stdout"
-    fi
+	if tty -s; then
+		[[ $# -gt 0 ]] && $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
+	else
+		echo "No terminal connected to stdout"
+	fi
 }
 
 todo-add(){
-    priority_or_done_pattern="^(\([A-Z]\))|^x "
-    pri=""
-    arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
-    d=$(date +%F -d "$arg")
-    date_exit_status=$?
-    preTask=$(echo "$*" | sed "s/due:.*$/due:$d/") # Date in correct format
-    pri=$(echo "$*" | egrep -o "$priority_or_done_pattern") # Get priority or done state
-    task=$(echo "$preTask" | sed -E "s/$priority_or_done_pattern//") # remove everything that matched
-    if [[ $# -gt 0 ]]; then
-        if [[ $date_exit_status -eq 0 ]]; then
-            toAdd="$pri $(date -I) $task"
-            echo "Aggiungo: $toAdd"
-            echo $toAdd | sed "s/^ //" >> $TD
-        fi
-    fi
+	priority_or_done_pattern="^(\([A-Z]\))|^x "
+	pri=""
+	arg=$(echo $* | grep -o "due:.*$" | sed "s/due://")
+	d=$(date +%F -d "$arg")
+	date_exit_status=$?
+	preTask=$(echo "$*" | sed "s/due:.*$/due:$d/") # Date in correct format
+	pri=$(echo "$*" | egrep -o "$priority_or_done_pattern") # Get priority or done state
+	task=$(echo "$preTask" | sed -E "s/$priority_or_done_pattern//") # remove everything that matched
+	if [[ $# -gt 0 ]]; then
+		if [[ $date_exit_status -eq 0 ]]; then
+			toAdd="$pri $(date -I) $task"
+			echo "Aggiungo: $toAdd"
+			echo $toAdd | sed "s/^ //" >> $TD
+		fi
+	fi
 }
 
 todo-ls() {
-    if [[ $# -gt 0 ]]; then
-        if date -d "$*" > /dev/null 2>&1; then
-            cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
-        else
-            args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
-            cat $TD | grep -v "^x" | grep -Gi "$args" $TD
-        fi
-    else
-        cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
-    fi | sort -n
+	if [[ $# -gt 0 ]]; then
+		if date -d "$*" > /dev/null 2>&1; then
+			cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
+		else
+			args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
+			cat $TD | grep -v "^x" | grep -Gi "$args" $TD
+		fi
+	else
+		cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
+	fi | sort -n
 }
 
 todo-done () {
-    if [[ $# -gt 0 ]]; then
-        QUERY=$(echo $* | sed -e "s/\ /.*/g")
-        ENTRY=$(grep -i "$QUERY" $TD | grep -v "^x .*")
-        ENTRIES_NO=$(echo -e "$ENTRY" | grep -v "^$"| wc -l)
-        [[ $ENTRIES_NO -gt 0 ]] || (echo "Nada de nada, mi sa che hai scritto male" && exit)
-        [[ $ENTRIES_NO -gt 1 ]] && ENTRY=$(echo -e "$ENTRY" | fzf)
+	if [[ $# -gt 0 ]]; then
+		QUERY=$(echo $* | sed -e "s/\ /.*/g")
+		ENTRY=$(grep -i "$QUERY" $TD | grep -v "^x .*")
+		ENTRIES_NO=$(echo -e "$ENTRY" | grep -v "^$"| wc -l)
+		[[ $ENTRIES_NO -gt 0 ]] || (echo "Nada de nada, mi sa che hai scritto male" && exit)
+		[[ $ENTRIES_NO -gt 1 ]] && ENTRY=$(echo -e "$ENTRY" | fzf)
 
-        echo -e "Marco come completato: $ENTRY"
-        sed -i "s|$ENTRY|x $(date +%F)\ &|" $TD
-    else
-        # ENTRY=$(cat $TD | fzf)
-        todo-ls "^x $(date -I)"
-    fi
+		echo -e "Marco come completato: $ENTRY"
+		sed -i "s|$ENTRY|x $(date +%F)\ &|" $TD
+	else
+		# ENTRY=$(cat $TD | fzf)
+		todo-ls "^x $(date -I)"
+	fi
 }
 
 function todo-agenda(){
-    end=${1:-6} # if not $2, by default print todos for next 6 days
-    [[ $end -gt 0 ]] && days=$(seq 0 $end) || days=$(seq $end 0)
-    for i in $days; do
-        t=$(todo-ls $i days)
-        day_title="- $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) --\n"
-        if tty -s; then
-            [[ ! -z "$t" ]] && echo -e "\e[1;31m${day_title}\e[0m${t}\n"
-        else
-            [[ ! -z "$t" ]] && echo -e "${day_title}${t}\n"
-        fi
-    done;
-    echo
+	end=${1:-6} # if not $2, by default print todos for next 6 days
+	[[ $end -gt 0 ]] && days=$(seq 0 $end) || days=$(seq $end 0)
+	for i in $days; do
+		t=$(todo-ls $i days)
+		day_title="- $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) --\n"
+		if tty -s; then
+			[[ ! -z "$t" ]] && echo -e "\e[1;31m${day_title}\e[0m${t}\n"
+		else
+			[[ ! -z "$t" ]] && echo -e "${day_title}${t}\n"
+		fi
+	done;
+	echo
 }
 
 function todo-past(){
-    for i in $(seq ${1:--100} 0); do
-        t=$(todo-ls "${i}days")
-        [[ ! -z "$t" ]] && echo $t
-    done
+	for i in $(seq ${1:--100} 0); do
+		t=$(todo-ls "${i}days")
+		[[ ! -z "$t" ]] && echo $t
+	done
 }
 
 function todo-someday(){
-    cat $TD | grep -v "due:.*$"
+	cat $TD | grep -v "due:.*$"
 }
 
 function todo-ls-proj(){
-    readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
-    for tag in ${tags[*]}; do
-        echo -ne "\n- $tag --\n"
-        cat $TD | grep -v "^x" | grep "$tag"
-    done
+	readarray tags < <(grep -o "@.[a-z]*" $TD | sort | uniq)
+	for tag in ${tags[*]}; do
+		echo -ne "\n- $tag --\n"
+		cat $TD | grep -v "^x" | grep "$tag"
+	done
 }
 
 function todo-ls-tags(){
-    readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
-    for tag in ${tags[*]}; do
-        echo -ne "\n- $tag --- \n"
-        cat $TD | grep -v "^x" | grep "$tag"
-    done
+	readarray tags < <(grep -o "\+.\w*" $TD | sort | uniq)
+	for tag in ${tags[*]}; do
+		echo -ne "\n- $tag --- \n"
+		cat $TD | grep -v "^x" | grep "$tag"
+	done
 }
 
 todo-urgent (){
-    todo-ls $* | grep -e "^([$URGENT_RANGE])"
+	todo-ls $* | grep -e "^([$URGENT_RANGE])"
 }
 
 usage (){
@@ -116,41 +116,41 @@ cat <<HELP
 
 USAGE
 
-    todo <command> [argument]
+	todo <command> [argument]
 
 COMMANDS
 
-    a   add         add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
-    g   agenda      list tasks for the next ±[argument] days (default: 6)
-    d   done        mark task matching [argument] as done
-    e   edit        edit $TD with $EDITOR
-    l   ls          list today's tasks or list task matching [argument], if supplied
-    p   past        list overdue tasks
-    j   proj        list tasks grouped by @project
-    s   someday     list tasks which do not have a due date
-    t   tags        list tasks grouped by +tags
-    u   urgent      list highly prioritized todos ($URGENT_RANGE) matching [argument], if supplied
+	a	add     	 add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
+	g	agenda  	 list tasks for the next ±[argument] days (default: 6)
+	d	done    	 mark task matching [argument] as done
+	e	edit    	 edit $TD with $EDITOR
+	l	ls      	 list today's tasks or list task matching [argument], if supplied
+	p	past    	 list overdue tasks
+	j	proj    	 list tasks grouped by @project
+	s	someday 	 list tasks which do not have a due date
+	t	tags    	 list tasks grouped by +tags
+	u	urgent  	 list highly prioritized todos ($URGENT_RANGE) matching [argument], if supplied
 
 CONFIGURATION
 
-    Todo file: $TD
-    Done file: $DN
+	Todo file: $TD
+	Done file: $DN
 
 HELP
 }
 
 # Main
 case $1 in
-    "add"|"a") shift; todo-add $*;;
-    "agenda"|"g") shift; todo-agenda $*;;
-    "done"|"d") shift; todo-done $*;;
-    "edit"|"e") shift; todo-edit $*;;
-    "ls"|"l") shift; todo-ls $*;;
-    "past"|"p") shift; todo-past $*;;
-    "proj"|"j") shift; todo-ls-proj $*;;
-    "someday"|"s") shift; todo-someday $*;;
-    "tags"|"t") shift; todo-ls-tags $*;;
-    "urgent"|"u") shift; todo-urgent $*;;
-    "h"|"help"|"-h"|"--help") usage ;;
-    *) todo-ls $* ;;
+	"add"|"a") shift; todo-add $*;;
+	"agenda"|"g") shift; todo-agenda $*;;
+	"done"|"d") shift; todo-done $*;;
+	"edit"|"e") shift; todo-edit $*;;
+	"ls"|"l") shift; todo-ls $*;;
+	"past"|"p") shift; todo-past $*;;
+	"proj"|"j") shift; todo-ls-proj $*;;
+	"someday"|"s") shift; todo-someday $*;;
+	"tags"|"t") shift; todo-ls-tags $*;;
+	"urgent"|"u") shift; todo-urgent $*;;
+	"h"|"help"|"-h"|"--help") usage ;;
+	*) todo-ls $* ;;
 esac

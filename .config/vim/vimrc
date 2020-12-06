@@ -281,11 +281,7 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-if (&bg)
-	let &bg=$BG    " Light|dark, exported in .bashrc
-else
-	set bg=light   " I prefer light colors
-endif
+let &bg=$BG    " Light|dark, exported in .bashrc
 
 colorscheme dimim
 

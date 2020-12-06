@@ -6,7 +6,7 @@ IFS=$' '
 ESSENTIALS="git neovim tmux make at pass coreutils moreutils curl apt-transport-https fd-find flatpak python"
 PANDOC="pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra"
 UTILS="kitty mpv meld imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl gnome-sushi"
-APPS="youtube-dl qutebrowser qbittorrent brave-browser obs-studio typora"
+APPS="youtube-dl qutebrowser qbittorrent brave-browser obs-studio"
 FLATPAK="telegram spotify com.microsoft.Teams parlatype anki com.gigitux.gtkwhats us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket"
 PIP3="subliminal ComplexHTTPServer"
 # SNAPS="spotify telegram teams"
@@ -26,26 +26,6 @@ sudo apt update
 # }}}
 
 # Install packages/flatpak/snap {{{
-# for package in $ESSENTIALS; do
-# 	sudo apt install -y $package
-# done
-# 
-# for package in $PANDOC; do
-# 	sudo apt install -y $package
-# done
-# 
-# for package in $UTILS; do
-# 	sudo apt install -y $package
-# done
-# 
-# for package in $APPS; do
-# 	sudo apt install -y $package
-# done
-# 
-# for package in $PIP3; do
-# 	sudo pip3 install $package
-# done
-
 sudo apt install -y $ESSENTIALS $PANDOC $UTILS $APPS
 sudo pip3 install $PIP3
 

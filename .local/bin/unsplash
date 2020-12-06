@@ -59,6 +59,7 @@ COLLECTION_NUMBER="1778533" # Collezione mia
 # COLLECTION_NUMBER="994" # Sea
 # COLLECTION_NUMBER="1930316" # Hipster
 # COLLECTION_NUMBER=1118894 # Superior interior
+COLLECTION_NUMBER=1028668 # Outdoor
 
 user=evicinelli
 user=stbuccia
@@ -67,13 +68,13 @@ user=stbuccia
 # Settings
 UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes"
 # UNSPLASH_URL="https://source.unsplash.com/user/$user/"
-# UNSPLASH_URL="https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+UNSPLASH_URL="https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
 
+# Post process img?
 post-process () {
     # convert $1 -type grayscale $1
     echo
 }
-
 
 wget --no-check-certificate -O $HOME/img $UNSPLASH_URL
 post-process img.png
