@@ -325,7 +325,7 @@ function! CurrentMode()
 	else
 		let color="7"
 	endif
-	exe "hi! User2 ctermfg=".bgcolor." ctermbg=".color." cterm=bold"
+	exe "hi! User2 ctermfg=0 ctermbg=".color." cterm=bold"
 	return modes[currentMode]
 endfunction
 

@@ -14,35 +14,27 @@ function todos() {
 		symbol=" $todos "
 	fi
 
-	echo -ne "#[default]#[bg=$color, fg=$bg]$symbol#[default]"
+	echo -ne "#[default]#[bg=$color, fg=colour0]$symbol#[default]"
 }
 
 function muuuuusic() {
-	if [[ $(ps aux | grep "spotify" | wc -l) -gt 2 && $(playerctl status) == "Playing" ]]; then
+	if [[ $(ps aux | grep "spotify" | wc -l) -gt 2 ]]; then
 		color=colour10
-		printf "%s %s %.25s %s %s" "#[fg=$color]" $DELIM "▶  $(playerctl -p spotify metadata -f \"{{title}} - {{artist}}\")" $DELIM "#[default]"
+		printf "%s %.25s %s" "#[bg=$color fg="colour7" ]" "▶  $(playerctl -p spotify metadata -f \"{{title}} - {{artist}}\")" "#[default]"
 	else
-		print "$DELIM"
+		echo "$DELIM"
 	fi
 }
 
 function battery() {
-	colorBg=$bg
 	colorFg=$fg
 	batteryTreshold=30
-	[[ $(cat /sys/class/power_supply/BAT0/status) == "Charging" ]] && bat_status="↑" && colorBg="colour6" colorFg="$bg" || bat_status="↓"
-	[[ $(cat /sys/class/power_supply/BAT0/capacity) -le $batteryTreshold ]] && colorBg="colour9" && colorFg="$bg"
+	[[ $(cat /sys/class/power_supply/BAT0/status) == "Charging" ]] && bat_status="↑" && colorBg="colour6" colorFg="colour7" || bat_status="↓"
+	[[ $(cat /sys/class/power_supply/BAT0/capacity) -le $batteryTreshold ]] && colorBg="colour9" && colorFg="colour7"
 	echo "#[bg=$colorBg, fg=$colorFg] $(cat /sys/class/power_supply/BAT0/capacity)% $bat_status #[default]"
 }
-DELIM="|"
-if [[ $BG == "dark" ]]; then
-	bg="colour0"
-	fg="colour7"
-else
-	bg="colour15"
-	fg="colour8"
-fi
+
 tmux set -g window-status-format "#[fg=$fg] #I #W "
-tmux set -g status-bg "$bg"
-tmux set -g status-fg "$fg"
+tmux set -g status-bg "colour0"
+tmux set -g status-fg "colour7"
 echo "$(muuuuusic) $(battery) $DELIM $(date +%H:%M\ %a\ %d) $(todos)"
