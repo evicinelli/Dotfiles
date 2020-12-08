@@ -20,17 +20,16 @@ function todos() {
 function muuuuusic() {
 	if [[ $(ps aux | grep "spotify" | wc -l) -gt 2 ]]; then
 		color=colour10
-		printf "%s %.25s %s" "#[bg=$color fg="colour7" ]" "▶  $(playerctl -p spotify metadata -f \"{{title}} - {{artist}}\")" "#[default]"
+		printf "%s %.25s %s" "#[bg=$color fg="colour0" ]" "▶  $(playerctl -p spotify metadata -f \"{{title}} - {{artist}}\")" "#[default]"
 	else
 		echo "$DELIM"
 	fi
 }
 
 function battery() {
-	colorFg=$fg
 	batteryTreshold=30
-	[[ $(cat /sys/class/power_supply/BAT0/status) == "Charging" ]] && bat_status="↑" && colorBg="colour6" colorFg="colour7" || bat_status="↓"
-	[[ $(cat /sys/class/power_supply/BAT0/capacity) -le $batteryTreshold ]] && colorBg="colour9" && colorFg="colour7"
+	[[ $(cat /sys/class/power_supply/BAT0/status) == "Charging" ]] && bat_status="↑" && colorBg="colour6" colorFg="colour0" || bat_status="↓"
+	[[ $(cat /sys/class/power_supply/BAT0/capacity) -le $batteryTreshold ]] && colorBg="colour9" && colorFg="colour0"
 	echo "#[bg=$colorBg, fg=$colorFg] $(cat /sys/class/power_supply/BAT0/capacity)% $bat_status #[default]"
 }
 

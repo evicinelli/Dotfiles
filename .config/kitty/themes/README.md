@@ -1,23 +1,18 @@
-To make dark and light theme completely interchangeable, without any issue and with any TUI:
-
-- Dark themes
-	- Color  0: dark black
-	- Color  7: dark white
-	- Color  8: bright black
-	- Color 15: bright white
-	- Color 1..6 and 9..14: standard ANSI
-- Light themes
-	- Color  0: bright white
-	- Color  7: bright black
-	- Color  8: dark white
-	- Color 15: dark black
-	- Color 1..6 and 9..14: standard ANSI
-
-So, for light themes:
-
-| Old color | New color |
-|---|---|
-|Color 0 | Color 15 |
-|Color 7 | Color 8 |
-|Color 8 | Color 7 |
-|Color 15 | Color 0 |
+| Color    | ANSI (dark)                   | Ansi (light)                  |
+| ---      | ---                           | ---                           |
+| Color 0  | Dark black (TUI background)   | Bright white (TUI background) |
+| Color 1  | Red                           | Red                           |
+| Color 2  | Green                         | Green                         |
+| Color 3  | Yellow                        | Yellow                        |
+| Color 4  | Blue                          | Blue                          |
+| Color 5  | Magenta                       | Magenta                       |
+| Color 6  | Cyan                          | Cyan                          |
+| Color 7  | Dark White                    | Bright Black                  |
+| Color 8  | Bright Black                  | Dark White                    |
+| Color 9  | Bright Red                    | Bright Red                    |
+| Color 10 | Bright Green                  | Bright Green                  |
+| Color 11 | Bright Yellow                 | Bright Yellow                 |
+| Color 12 | Bright Blue                   | Bright Blue                   |
+| Color 13 | Bright Magenta                | Bright Magenta                |
+| Color 14 | Bright Cyan                   | Bright Cyan                   |
+| Color 15 | Bright White (TUI foreground) | Dark black (TUI foreground)   |

@@ -7,19 +7,19 @@
 "
 " Cterm color   Name
 " ------------- -------
-"      0 8      Black
+"      0 8      Dark/bright Background
 "      1 9      Red
 "      2 10     Green
 "      3 11     Yellow
 "      4 12     Blue
 "      5 13     Purple
 "      6 14     Cyan
-"      7 15     White
+"      7 15     Dark/bright foreground
 
 highlight clear
 
 if exists("syntax_on")
-  syntax reset
+	syntax reset
 endif
 let colors_name = "dimim"
 
@@ -33,11 +33,11 @@ highlight DiffChange    ctermfg=0           ctermbg=3
 highlight DiffDelete    ctermfg=0           ctermbg=1
 highlight DiffText      ctermfg=0           ctermbg=11      cterm=bold
 highlight Directory     ctermfg=4
-highlight Error         ctermfg=15          ctermbg=9
-highlight ErrorMsg      ctermfg=15          ctermbg=1
+highlight Error         ctermfg=0          ctermbg=9
+highlight ErrorMsg      ctermfg=0          ctermbg=1
 highlight Folded                                            cterm=bold
 highlight Identifier    ctermfg=6                           cterm=none
-highlight Ignore        ctermfg=15
+highlight Ignore        ctermfg=0
 highlight IncSearch                                         cterm=reverse
 highlight MatchParen                        ctermbg=14
 highlight ModeMsg                                           cterm=bold
@@ -71,44 +71,24 @@ highlight WarningMsg    ctermfg=1
 highlight WildMenu                          ctermbg=13
 
 " Personal hi group
+highlight TodoOverDueDate   ctermfg=0          ctermbg=9      cterm=bold
 highlight TodoDueToday                      ctermbg=11     cterm=bold
 highlight TodoPriorityA  ctermfg=9
 
-" Highlight groups that depends on background
-if &bg == "light"
-  highlight ColorColumn  ctermfg=none ctermbg=15
-  highlight CursorColumn              ctermbg=15   cterm=none
-  " highlight CursorLine                ctermbg=15   cterm=none
-  highlight FoldColumn   ctermfg=7    ctermbg=15
-  highlight Folded       ctermfg=8    ctermbg=15
-  highlight LineNr       ctermfg=8    ctermbg=15
-  highlight Pmenu        ctermfg=0    ctermbg=15
-  highlight PmenuSel     ctermfg=115
-  highlight SignColumn   ctermfg=8    ctermbg=15
-  highlight SpellCap     ctermfg=8    ctermbg=7
-  highlight StatusLine   ctermfg=8    ctermbg=15
-  highlight StatusLineNC ctermfg=7    ctermbg=15
-  highlight TabLine      ctermfg=7    ctermbg=15
-  highlight TabLineFill  ctermfg=15
-  highlight VertSplit    ctermfg=8    ctermbg=NONE
-  highlight WildMenu     ctermfg=15
-  highlight TodoDueToday ctermfg=15
-else
-  highlight ColorColumn  ctermfg=none ctermbg=0
-  highlight CursorColumn              ctermbg=0    cterm=none
-  " highlight CursorLine                ctermbg=0    cterm=none
-  highlight FoldColumn   ctermfg=8    ctermbg=0
-  highlight Folded       ctermfg=8    ctermbg=0
-  highlight LineNr       ctermfg=7    ctermbg=0
-  highlight Pmenu        ctermfg=15   ctermbg=0
-  highlight PmenuSel     ctermfg=0
-  highlight SignColumn   ctermfg=8    ctermbg=0
-  highlight SpellCap     ctermfg=7    ctermbg=8
-  highlight StatusLine   ctermfg=7    ctermbg=0
-  highlight StatusLineNC ctermfg=8    ctermbg=0
-  highlight TabLine      ctermfg=8    ctermbg=0
-  highlight TabLineFill  ctermfg=0
-  highlight VertSplit    ctermfg=7    ctermbg=0
-  highlight WildMenu     ctermfg=0
-  highlight TodoDueToday ctermfg=0
-endif
+" TUI elements
+highlight ColorColumn  ctermfg=none ctermbg=0
+highlight CursorColumn              ctermbg=0    cterm=none
+highlight FoldColumn   ctermfg=8    ctermbg=0
+highlight Folded       ctermfg=8    ctermbg=0
+highlight LineNr       ctermfg=7    ctermbg=0
+highlight Pmenu        ctermfg=7    ctermbg=0
+highlight PmenuSel     ctermfg=0
+highlight SignColumn   ctermfg=8    ctermbg=0
+highlight SpellCap     ctermfg=7    ctermbg=8
+highlight StatusLine   ctermfg=7    ctermbg=0
+highlight StatusLineNC ctermfg=8    ctermbg=0
+highlight TabLine      ctermfg=8    ctermbg=0
+highlight TabLineFill  ctermfg=0
+highlight VertSplit    ctermfg=7    ctermbg=0
+highlight WildMenu     ctermfg=8    ctermbg=0
+highlight TodoDueToday ctermfg=0
