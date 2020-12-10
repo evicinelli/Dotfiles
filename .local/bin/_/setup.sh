@@ -5,7 +5,7 @@ IFS=$' '
 
 ESSENTIALS="git neovim tmux make at pass coreutils moreutils curl apt-transport-https fd-find flatpak python"
 PANDOC="pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra"
-UTILS="kitty mpv meld imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl gnome-sushi"
+UTILS="kitty mpv meld imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl gnome-sushi translate-shell"
 APPS="youtube-dl qutebrowser qbittorrent brave-browser obs-studio"
 FLATPAK="telegram spotify com.microsoft.Teams parlatype anki com.gigitux.gtkwhats us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket"
 PIP3="subliminal ComplexHTTPServer"

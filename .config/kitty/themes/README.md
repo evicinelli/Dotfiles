@@ -1,4 +1,4 @@
-| Color    | ANSI (dark)                   | Ansi (light)                  |
+| Color    | ANSI (dark)                   | ANSI (light)                  |
 | ---      | ---                           | ---                           |
 | Color 0  | Dark black (TUI background)   | Bright white (TUI background) |
 | Color 1  | Red                           | Red                           |
