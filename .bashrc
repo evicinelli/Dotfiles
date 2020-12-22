@@ -88,6 +88,7 @@ export MED_CURRENT=$MED3
 # Alias {{{
 
 # Useful options
+alias ls='ls -h --color=auto --group-directories-first --sort=version'
 alias dir='dir --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
@@ -95,7 +96,6 @@ alias la="ls -a"
 alias less='less -R'
 alias ll="ls -l"
 alias lla="ls -la"
-alias ls='ls -h --color=auto --group-directories-first'
 alias rm="rm -I"
 alias sl='ls'
 alias bat="bat --theme=base16"
@@ -132,8 +132,12 @@ alias qr="qrencode --type=UTF8 -o -"
 alias scp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 alias te="todo edit"
 alias unicode='echo "✓   ™   ♪   ♫   ☃   °   Ɵ   ∫   ❤   ☤   ⚕   ‘  ’   “  ”   ‚  „   ′  ″  ‹›   «  »   -  –  (  /  )  [  |  ]  {  \  }   *   †  ‡  §  ¶  |  ‖   @   №   $  £  ¥  €  ₹  ₺  ₽  ¢  ƒ   %  ‰   ¼  ½  ¾  ⅓  ⅔  ⅛  ⅜  ⅝   +  −  ×  ÷  ∙  =  <  >  ≤  ≥  ±  ^  ≠  ~  ≈  ¬   #  π  ∞  µ  ∂  ∫  √   •  ◦  ▪  ▫  ▴  ▸  ▾  ◂  ▵  ▹  ▿  ◃   ●  ○  ■  □  ▲  ▶  ▼  ◀  △  ▷  ▽  ◁  ❒  ◆  ►  ◄  ◙  ◉  ◘   ←  ↖  ↑  ↗  →  ↘  ↓  ↙   ⇐  ⇑  ⇒  ⇓   ↔  ↕  ↨   ♀  ♂   ☼  ⌂   ☑   ✓   ☻   ☕   💩   🤖   🔒  🍺  🚑  👍  👌  💪                 "'
-alias uni-todo="TD=$UNI/todo.txt todo"
 alias vimrc="vim $HOME/.config/vim/vimrc"
+
+# Special Todo.txt files
+alias unitodo="TD=$P/Documenti/Todo/_uni.todo.txt todo"
+alias mambutodo="TD=$P/Documenti/Todo/_mambu.todo.txt todo"
+
 # }}}
 
 # Shell options {{{
@@ -158,7 +162,7 @@ open () {
 
 # Foreground a job searching the process name
 fj () {
-	job=$(jobs -ls | fzf -1 -0 --exact --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
+	job=$(jobs -ls | fzf -1 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
 	[[ ! -z $job ]] && fg $job
 
 	# TODO
@@ -235,6 +239,6 @@ ps1_hostname() {
 # }}}
 
 # Tmux
-# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
+[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker
