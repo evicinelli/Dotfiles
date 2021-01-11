@@ -56,6 +56,7 @@ set omnifunc=syntaxcomplete#Complete     " Omni-completion
 set path^=**                             " Recursive file search starting from current dir
 set secure                               " No shell command on autocmd
 set shiftwidth=0                         " Indent following tabstop
+set scrolloff=8                          " Lines to keep above and below while scrolling
 set showcmd                              " Show partially typed commands
 set smartcase                            " Smart-case search
 set smartindent                          " Smart indent
@@ -289,7 +290,7 @@ nnoremap <leader>n :Nack
 " Appearance and statusline {{{
 set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
 set fillchars=vert:\ ,fold:\ 
-set guicursor=a:blinkon1                 " Cursor blinks every second
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50    " Different cursor shape in different mode
 let &bg=$BG    " Light|dark, exported in .bashrc
 
 colorscheme dimim
