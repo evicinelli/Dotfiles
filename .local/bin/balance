@@ -7,9 +7,12 @@
 # For each tag the script sums the first signed digit after "- ",
 # giving the final total as the sum of the total for each tag
 
-# Configuration
+# env
+set -e
 LC_ALL=C
 IFS=$'\n'
+
+# Configuration
 BALANCE_FILE=${BALANCE_FILE:-$NOTES/spese.md}
 uncategorized_total=0
 grand_total=0

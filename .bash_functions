@@ -21,10 +21,10 @@ ding () {
 }
 
 share-home-network () {
-echo "Home Network"
-qrencode --type=UTF8 -o - "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
-echo -e "\n\n Rete ospiti"
-echo "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi-ospiti | head -n 1);;" | qrencode --type=UTF8 -o -
+	echo "Home Network"
+	qrencode --type=UTF8 -o - "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi | head -n 1);;"
+	echo -e "\n\n Rete ospiti"
+	echo "WIFI:S:Network Casa Vicinelli;T:WPA;P:$(pass Casa/wifi-ospiti | head -n 1);;" | qrencode --type=UTF8 -o -
 
 }
 
@@ -60,4 +60,8 @@ calc () {
 	else
 		awk "BEGIN{ print $*};"
 	fi
+}
+
+dimbright () {
+	sudo su -c "echo ${1:-50} > /sys/class/backlight/intel_backlight/brightness"
 }

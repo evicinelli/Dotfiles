@@ -1,6 +1,6 @@
 #! /bin/bash
 
-add-repo () {
+add-repos () {
 	curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 	echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 
@@ -41,19 +41,25 @@ install-flatpak () {
 }
 
 install-setup-nvim() {
-	sudo apt instlal neovim tmux
+	sudo apt install neovim tmux
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	nvim +PlugInstall +PlugUpdate +qa!
 	xdg-mime default nvim.desktop text/*
+}
+
+install-npm() {
+	NPM_MODULES="@mermaid-js/mermaid-cli"
+	sudo apt install -y npm
+	npm install "$NPM_MODULES"
 }
 
 bits-and-pieces () {
 	sudo ln -s /bin/fdfind /bin/fd
 }
 
-add-repo
+add-repos
 install-apt
+install-setup-nvim
 install-python
 install-flatpack
-install-setup-nvim
 bits-and-pieces

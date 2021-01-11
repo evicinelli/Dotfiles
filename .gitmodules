@@ -1,0 +1,3 @@
+[submodule ".local/bin/_/gtd-connermcd"]
+	path = .local/bin/_/gtd-connermcd
+	url = https://github.com/connermcd/gtd.git

@@ -1,7 +1,10 @@
 #! /bin/bash
+# vim: fdm=indent
+
+DELIM="|"
 
 function todos() {
-	color="colour10"
+	color="colour2"
 	symbol='  '
 	todos=$(todo ls | wc -l)
 	urgent=$(todo urgent | wc -l)
@@ -21,8 +24,6 @@ function muuuuusic() {
 	if [[ $(ps aux | grep "spotify" | wc -l) -gt 2 ]]; then
 		color=colour10
 		printf '%s %.25s %s' "#[bg=$color fg=colour0]" "▶  $(playerctl -p spotify metadata -f '{{title}} - {{artist}}')" "#[default]"
-	else
-		echo "$DELIM"
 	fi
 }
 
@@ -33,7 +34,7 @@ function battery() {
 		[[ $(cat /sys/class/power_supply/BAT0/capacity) -le $batteryTreshold ]] && colorBg="colour9" && colorFg="colour0"
 		echo "#[bg=$colorBg, fg=$colorFg] $(cat /sys/class/power_supply/BAT0/capacity)% $bat_status #[default]"
 	else
-		echo "#[fg=colour1]BAT offline#[default]"
+		echo "#[bg=colour1, fg=colour0]BAT offline#[default]"
 	fi
 }
 
@@ -43,16 +44,15 @@ function online() {
 	[[ $status == 0 ]]  && echo "ONLINE" || echo "OFFLINE"
 }
 
-DELIM="|"
+function gtd() {
+	[[ -f /tmp/gtd-tmux ]] && cat /tmp/gtd-tmux
+}
 
-tmux set -g window-status-format "#[fg=$fg] #I #W "
-tmux set -g status-bg "colour0"
-tmux set -g status-fg "colour7"
-
-status="${status}$(muuuuusic)"
-status="${status} $(battery) $DELIM"
-status="${status} $(online) $DELIM"
+status=""
+status="${status}$(gtd)"
+status="${status}$(muuuuusic) $DELIM"
+status="${status}$(battery)$DELIM"
+# status="${status} $(online) $DELIM"
 status="${status} $(date +%H:%M\ %a\ %d) "
 status="${status}$(todos)"
-
 echo "$status"

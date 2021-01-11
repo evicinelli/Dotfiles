@@ -147,9 +147,9 @@ case $1 in
 	"edit"|"e") shift; todo-edit $*;;
 	"ls"|"l") shift; todo-ls $*;;
 	"past"|"p") shift; todo-past $*;;
-	"proj"|"j") shift; todo-ls-proj $*;;
+	"proj"|"j"|"@") shift; todo-ls-proj $*;;
 	"someday"|"s") shift; todo-someday $*;;
-	"tags"|"t") shift; todo-ls-tags $*;;
+	"tags"|"t"|"+") shift; todo-ls-tags $*;;
 	"urgent"|"u") shift; todo-urgent $*;;
 	"h"|"help"|"-h"|"--help") usage ;;
 	*) todo-ls $* ;;

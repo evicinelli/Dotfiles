@@ -89,16 +89,18 @@ export MED_CURRENT=$MED3
 
 # Useful options
 alias ls='ls -h --color=auto --group-directories-first --sort=version'
+alias bat="bat --theme=base16"
 alias dir='dir --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
+alias gtd="gtd -t"
 alias la="ls -a"
 alias less='less -R'
 alias ll="ls -l"
 alias lla="ls -la"
+alias mkdir="mkdir -pv"
 alias rm="rm -I"
 alias sl='ls'
-alias bat="bat --theme=base16"
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
 alias amn="nv $MED"
@@ -116,8 +118,6 @@ alias gcal="gcalcli --calendar=\"Personale\""
 alias httpserver="python -m ComplexHTTPServer 8000"
 alias l='ls'
 alias ll="ls -l"
-alias mdview="grip -b --quiet"
-alias mkdir="mkdir -pv"
 alias mn2="nv $MED2"
 alias mn="nv $MED_CURRENT"
 alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
@@ -157,7 +157,7 @@ shopt -s histappend
 
 # Wrapper to declare a standard function to open file
 open () {
-	[[ $1 =~ ^-a ]] && (shift; mimeopen -a "$*") || xdg-open "$*"
+	[[ $1 =~ ^-a ]] || [[ $1 =~ ^--ask ]] && (shift; mimeopen -a "$*") || xdg-open "$*"
 }
 
 # Foreground a job searching the process name
@@ -180,7 +180,7 @@ source ~/.bash_functions
 
 # http://unix.stackexchange.com/a/18443/27433
 export PROMPT_COMMAND="history -a;history -n;prompt"
-# export BG=dark
+# export BG=light
 
 # Tomnomnom dotfiles {{{
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -199,6 +199,22 @@ bldblu='\[\e[1;34m\]' # Blue
 bldpur='\[\e[1;35m\]' # Purple
 bldcyn='\[\e[1;36m\]' # Cyan
 bldwht='\[\e[1;37m\]' # White
+txtbriblk='\[\e[0;90m\]' # Black - Regular - Bright
+txtbrired='\[\e[0;91m\]' # Red
+txtbrigrn='\[\e[0;92m\]' # Green
+txtbriylw='\[\e[0;93m\]' # Yellow
+txtbriblu='\[\e[0;94m\]' # Blue
+txtbripur='\[\e[0;95m\]' # Purple
+txtbricyn='\[\e[0;96m\]' # Cyan
+txtbriwht='\[\e[0;97m\]' # White
+bldbriblk='\[\e[1;90m\]' # Black - Bold - Bright
+bldbrired='\[\e[1;91m\]' # Red
+bldbrigrn='\[\e[1;92m\]' # Green
+bldbriylw='\[\e[1;93m\]' # Yellow
+bldbriblu='\[\e[1;94m\]' # Blue
+bldbripur='\[\e[1;95m\]' # Purple
+bldbricyn='\[\e[1;96m\]' # Cyan
+bldbriwht='\[\e[1;97m\]' # White
 txtrst='\[\e[0m\]'    # Text Reset
 # }}}
 
@@ -214,8 +230,8 @@ prompt() {
 	# Today's todos
 	[[ -e $TD ]] && toDo=$(todo ls | wc -l) || toDo="x"
 	[[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l) || toDoUrgent="x"
-	[[ $toDo -gt 0 ]] && todoColor=${bldylw}
-	[[ $toDoUrgent -gt 0 ]] && todoColor=${bldred}
+	[[ $toDo -gt 0 ]] && todoColor=${bldbriylw}
+	[[ $toDoUrgent -gt 0 ]] && todoColor=${bldbrired}
 
 	# suspended jobs
 	[[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
@@ -239,6 +255,6 @@ ps1_hostname() {
 # }}}
 
 # Tmux
-[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
+# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
 
 # vim: fdm=marker
