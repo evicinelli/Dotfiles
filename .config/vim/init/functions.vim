@@ -1,5 +1,5 @@
 " Goyo enter and leave
-function! s:goyo_enter()
+function! Goyo_enter()
 	" vertical resize
 	silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
 	set scrolloff=999
@@ -10,7 +10,7 @@ function! s:goyo_enter()
 	endif
 endfunction
 
-function! s:goyo_leave()
+function! Goyo_leave()
 	silent! source ~/.config/nvim/init.vim
 	set scrolloff=0
 	set noshowmode
@@ -53,4 +53,3 @@ command! -nargs=* Buffers call fzf#run(fzf#wrap({
 command! -bang MRU call fzf#run(fzf#wrap({
 	\   "source": v:oldfiles,
 	\}, <bang>0))
-" }}}

@@ -1,12 +1,14 @@
 " Appearance
-set list listchars=tab:·\ ,trail:·,eol:¬,extends:→,precedes:← " Non printable chars
+set list listchars=tab:·\ ,trail:·,eol:¬,precedes:← ",extends:→
 set fillchars=vert:\ ,fold:\ 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50    " Different cursor shape in different mode
-let &bg=$BG    " Light|dark, exported in .bashrc
 
+" Colorscheme
 colorscheme dimim
 
 " Statusline
+set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ %3*%{TaskIndicator()}
+
 function! CurrentMode()
 	" Current mode
 	let currentMode = mode()
@@ -57,14 +59,10 @@ function! TaskIndicator()
 			let color = 3 " Yellow if normal task is pending
 		endif
 		exe "hi! User3 ctermfg=0 ctermbg=".color
-		redrawstatus
+		redrawstatus!
 		return "  "
 	else
-		redrawstatus
+		redrawstatus!
 		return ""
 	endif
 endfunction
-
-" Statusline
-set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ %3*%{TaskIndicator()}
-
