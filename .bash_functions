@@ -65,3 +65,8 @@ calc () {
 dimbright () {
 	sudo su -c "echo ${1:-50} > /sys/class/backlight/intel_backlight/brightness"
 }
+
+vimrc () {
+	[[ $# -eq 0 ]] && vi ~/.config/vim/vimrc || vi ~/.config/vim/init/$1.vim
+}
+complete -W "$(ls ~/.config/vim/init/ | sed 's/\.vim//')" vimrc
