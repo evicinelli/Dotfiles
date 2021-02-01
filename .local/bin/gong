@@ -5,27 +5,30 @@ GONG="/home/vic/pCloudDrive/Res/ping.opus"
 function gong () {
     case $1 in
         "-g")
-            time=$2
             shift
+            time=$1
             shift
             mess=$*
-            at $time <<<"notify-send --urgency=critical \"DING!\" \"$mess\" && mpv $GONG ";;# --volume=60";;
+            at $time <<<"notify-send --urgency=critical \"GONG!\" \"$mess\" && mpv $GONG ";;# --volume=60";;
         *)
             time=$1
             shift
             mess=$*
-            at $time <<<"notify-send --urgency=critical \"DING!\" \"$mess\"";;
+            at $time <<<"notify-send --urgency=critical \"GONG!\" \"$mess\"";;
     esac
 }
 
 usage() {
 cat <<-EOH
-USAGE:
-    gong [-g] <time_at_witch_to_gong> <message>
+	USAGE:
+		gong [-g] <time_at_witch_to_gong> <message>
 
-OPTIONS:
-    -g : actually gong
-EOH
+	OPTIONS:
+		-g : actually gong
+
+	CONFIG:
+		Gong file: $GONG
+	EOH
 }
 
 [[ $# -gt 0 ]] && gong $* || usage

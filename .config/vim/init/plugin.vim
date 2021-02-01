@@ -8,8 +8,10 @@ endif
 " Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file support
+" Plug 'christoomey/vim-tmux-navigator'                                " Vim <3 tmu'                                " Vim <3 tmux
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
 Plug 'godlygeek/tabular'                                             " Tabularize
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 Plug 'junegunn/goyo.vim'                                             " Distraction free writing
 Plug 'mbbill/undotree'                                               " Visualize undo tree
@@ -31,14 +33,30 @@ let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_liststyle = 0       " buffer view
 
 " Pandoc options
-let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Uni/Med-Notes/bib.bib"]
+let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Uni/Med-Notes/bib.bib", "/home/vic/pCloudDrive/Libreria/zotero.bib"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 0
 let g:pandoc#modules#disabled = [""]
-let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#toc#close_after_navigating = 1
+let g:pandoc#syntax#conceal#use = 1
+let g:pandoc#syntax#conceal#blacklist = [
+	\ "titleblock",
+	\ "image",
+	\ "atx",
+	\ "codeblock_start",
+	\ "codeblock_delim",
+	\ "footnote",
+	\ "ellipses",
+	\ "emdashes",
+	\ "endashes",
+	\ "subscript",
+	\ "superscript",
+	\ "definition",
+	\ "list",
+	\ "quotes",
+	\ "inlinecode" ]
+let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position = "left"
 let g:pandoc#toc#shift = 4
 

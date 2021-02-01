@@ -1,7 +1,8 @@
 #! /bin/bash 
 # vim: fdm=marker
 
-# Api --  https://source.unsplash.com  {{{
+# Api Reference {{{
+# https://source.unsplash.com
 # https://source.unsplash.com/random/{SIZE}
 # https://source.unsplash.com/user/{USERNAME}/{SIZE}
 # https://source.unsplash.com/user/{USERNAME}/likes/{SIZE}
@@ -13,6 +14,9 @@
 # https://source.unsplash.com/1600x900/{?SEARCH,TERM}
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # }}}
+
+# Settings
+RES="1920x1080"
 
 # Collezioni {{{
 # COLLECTION_NUMBER="1778533" # Collezione mia
@@ -59,17 +63,16 @@
 # COLLECTION_NUMBER="994" # Sea
 # COLLECTION_NUMBER="1930316" # Hipster
 # COLLECTION_NUMBER=1118894 # Superior interior
-# COLLECTION_NUMBER=1028668 # Outdoor
+COLLECTION_NUMBER=1028668 # Outdoor
 # COLLECTION_NUMBER="397770"
 
 user=evicinelli
 user=stbuccia
 # }}}
 
-# Settings
-UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes"
 # UNSPLASH_URL="https://source.unsplash.com/user/$user/"
-# UNSPLASH_URL="https://source.unsplash.com/collection/$COLLECTION_NUMBER/1600x900"
+# UNSPLASH_URL="https://source.unsplash.com/collection/$COLLECTION_NUMBER/$RES"
+UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes/$RES"
 
 # Post process img?
 post-process () {

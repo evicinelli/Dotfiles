@@ -21,10 +21,19 @@ function todos() {
 }
 
 function muuuuusic() {
-	if [[ $(ps aux | grep "spotify" | wc -l) -gt 2 ]]; then
-		color=colour10
-		printf '%s %.25s %s' "#[bg=$color fg=colour0]" "▶  $(playerctl -p spotify metadata -f '{{title}} - {{artist}}')" "#[default]"
-	fi
+	playing=false
+	player=$(playerctl -l | head -n1)
+	case $player in
+		*spotify*)
+			color=colour10;
+			playing=true;;
+		*chromium*)
+			color=colour9;
+			playing=true;;
+		*) ;;
+	esac
+	icon="▶"
+	[[ $playing = "true" ]] && printf '%s %.27s %s' "#[bg=$color fg=colour0]" "$icon  $(playerctl -p "$player" metadata -f '{{title}} - {{artist}}')" "#[default]"
 }
 
 function battery() {
@@ -34,7 +43,7 @@ function battery() {
 		[[ $(cat /sys/class/power_supply/BAT0/capacity) -le $batteryTreshold ]] && colorBg="colour9" && colorFg="colour0"
 		echo "#[bg=$colorBg, fg=$colorFg] $(cat /sys/class/power_supply/BAT0/capacity)% $bat_status #[default]"
 	else
-		echo "#[bg=colour1, fg=colour0]BAT offline#[default]"
+		echo "#[fg=colour1, bg=colour0]BAT offline#[default]"
 	fi
 }
 
@@ -52,7 +61,7 @@ status=""
 status="${status}$(gtd)"
 status="${status}$(muuuuusic) $DELIM"
 status="${status}$(battery)$DELIM"
-# status="${status} $(online) $DELIM"
+status="${status} $(online) $DELIM"
 status="${status} $(date +%H:%M\ %a\ %d) "
 status="${status}$(todos)"
 echo "$status"

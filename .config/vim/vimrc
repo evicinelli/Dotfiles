@@ -4,14 +4,14 @@ filetype plugin on                       " Filetype plugin
 syntax enable                            " Enable syntax Highlighting
 
 " Source settings
-source <sfile>:h/init/plugin.vim
-source <sfile>:h/init/mappings.vim
-source <sfile>:h/init/options.vim
-source <sfile>:h/init/abbrev.vim
-source <sfile>:h/init/appearance.vim
-source <sfile>:h/init/functions.vim
-source <sfile>:h/init/auto.vim
-source <sfile>:h/init/uni.vim
+source <sfile>:h/init/plugin.vim         " Plugin
+source <sfile>:h/init/options.vim        " Vim options
+source <sfile>:h/init/appearance.vim     " Appearance settings
+source <sfile>:h/init/functions.vim      " Custom functions
+source <sfile>:h/init/mappings.vim       " Custom mappings
+source <sfile>:h/init/auto.vim           " Autocommands and autogroups
+source <sfile>:h/init/abbrev.vim         " Abbreviations and digraphs
+source <sfile>:h/init/uni.vim            " Uni settings
 
 " If nvim
 if has ("nvim")

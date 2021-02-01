@@ -56,8 +56,12 @@ for item in s:items
 	" exe "noremap da".item." F".item."df".item
 	" exe "vnoremap vi".item." T".item."vt".item
 	" exe "vnoremap va".item." F".item."vf".item
-	" Same thing
+
+	" Same thing:
+	" Operator-pending mode
 	exe "omap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
 	exe "omap a".item ":<C-U>normal!vF".item."of".item."<CR>"
+	" Visual mode only
+	exe "xmap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
+	exe "xmap a".item ":<C-U>normal!vF".item."of".item."<CR>"
 endfor
-

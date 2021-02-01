@@ -1,10 +1,14 @@
 " Abbreviations
 iabbrev Perchè Perché
+iabbrev Pz Pz.
+iabbrev Sg Sg.
+iabbrev Tp Tp.
 iabbrev ab ab.
 iabbrev perchè perché
 iabbrev pz pz.
 iabbrev sg sg.
 iabbrev tp tp.
+
 
 " Digraphs
 dig lt 0060 " Digraph <

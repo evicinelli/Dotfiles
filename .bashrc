@@ -52,7 +52,7 @@ complete -o bashdefault -o default -F _fzf_path_completion open
 # Keybindings {{{
 bind TAB:menu-complete
 bind C-e:complete
-bind Control-l:clear-screen
+bind C-l:clear-screen
 
 # Make C-z work -- https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb?utm_source=share&utm_medium=web2x
 stty susp undef # Terminal magic
@@ -93,7 +93,7 @@ alias bat="bat --theme=base16"
 alias dir='dir --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
-alias gtd="gtd -t"
+alias gtd="gtd -t -n"
 alias la="ls -a"
 alias less='less -R'
 alias ll="ls -l"
@@ -154,12 +154,7 @@ shopt -s histappend
 
 # Functions {{{
 
-# Wrapper to declare a standard function to open file
-open () {
-	[[ $1 =~ ^-a ]] || [[ $1 =~ ^--ask ]] && (shift; mimeopen -a "$*") || xdg-open "$*"
-}
-
-# Foreground a job searching the process name
+# Job control
 fj () {
 	job=$(jobs -ls | fzf -1 --query="$*" | cut -d" " -f1 | grep -Eo "[0-9]+")
 	[[ ! -z $job ]] && fg $job
@@ -222,10 +217,6 @@ prompt() {
 	todoColor=${bldgrn}
 	dirColor=${bldpur}
 
-	# Exit code
-	code=$?
-	[[ $code != 0 ]] && echo -e "${bldred}✗ ${code}${txtrst}"
-
 	# Today's todos
 	[[ -e $TD ]] && toDo=$(todo ls | wc -l) || toDo="x"
 	[[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l) || toDoUrgent="x"
@@ -235,14 +226,10 @@ prompt() {
 	# suspended jobs
 	[[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
-	# end="🍺" end=":" end="💰" end="⚕" end="▶"
+	# end="🍺" end=":" end="💰" end="⚕" end="▶" end=">" end="🩺"
 	end=">"
 
-if [[ $TERM = "dumb" ]]; then
-	export PS1="[$toDo, $toDoUrgent!] $(ps1_hostname)\W $end " # Dumb terminal
-else
 	export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, $toDoUrgent!]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
-fi
 }
 
 ps1_hostname() {

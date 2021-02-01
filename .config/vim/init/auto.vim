@@ -27,6 +27,4 @@ augroup todotxt
 	autocmd bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell | se nowrap
 augroup end
 
-augroup man
-	autocmd BufNewFile,BufRead,BufReadCmd man://* set laststatus=0
-augroup end
+autocmd FileType man setlocal laststatus=0 norelativenumber ft=man nospell

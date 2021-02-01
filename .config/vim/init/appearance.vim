@@ -28,21 +28,28 @@ function! CurrentMode()
 	" Mode color
 	if (currentMode =~# 'n' )
 		let color = "10"
+		let guicolor = "LightGreen"
 	elseif (currentMode =~# 'i')
 		let color = "9"
+		let guicolor = "LightRed"
 	elseif (currentMode =~# 'v\|V\|\')
 		let color = "12"
+		let guicolor = "LightBlue"
 	elseif (currentMode =~# 't')
 		let color = "11"
+		let guicolor = "LightYellow"
 	elseif (currentMode =~# 's\|R')
 		let color = "14"
+		let guicolor = "LightCyan"
 	elseif (currentMode =~# 'c')
 		let color = "13"
+		let guicolor = "LightMagenta"
 	else
 		let color="7"
+		let guicolor = "White"
 	endif
 
-	exe "hi! User2 ctermfg=0 ctermbg=".color." cterm=bold"
+	exe "hi! User2 ctermfg=0 ctermbg=".color." cterm=bold guifg=black guibg=".guicolor
 	return modes[currentMode]
 endfunction
 

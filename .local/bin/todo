@@ -94,16 +94,18 @@ function todo-someday(){
 function todo-ls-proj(){
 	readarray tags < <(grep -o " @.[[:alnum:]]*" $TD | sort | uniq)
 	for tag in ${tags[*]}; do
-		echo -ne "\n- $tag --\n"
-		cat $TD | grep -v "^x" | grep "$tag"
+		t=$(grep -v "^x" $TD | grep "$tag")
+		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"
+		echo -e "$t"
 	done
 }
 
 function todo-ls-tags(){
 	readarray tags < <(grep -Eo " \+\w* " $TD | grep -Ev "^ \+ $" | sort | uniq)
 	for tag in ${tags[*]}; do
-		echo -ne "\n- $tag --- \n"
-		cat $TD | grep -v "^x" | grep "$tag"
+		t=$(grep -v "^x" $TD | grep "$tag")
+		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"
+		echo -e "$t"
 	done
 }
 
@@ -112,31 +114,30 @@ todo-urgent (){
 }
 
 usage (){
-cat <<HELP
+cat <<-HELP
+	USAGE
 
-USAGE
+		todo <command> [argument]
 
-	todo <command> [argument]
+	COMMANDS
 
-COMMANDS
+		a	add     	 add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
+		d	done    	 mark task matching [argument] as done
+		e	edit    	 edit $TD with $EDITOR
+		g	agenda  	 list tasks for the next ±[argument] days (default: 6)
+		l	ls      	 list today's tasks or list task matching [argument], if supplied
+		p	past    	 list overdue tasks
+		s	someday 	 list tasks which do not have a due date
+		u	urgent  	 list highly prioritized todos ($URGENT_RANGE) matching [argument], if supplied
+		+	tags    	 list tasks grouped by +tags
+		@	proj    	 list tasks grouped by @project
 
-	a	add     	 add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
-	d	done    	 mark task matching [argument] as done
-	e	edit    	 edit $TD with $EDITOR
-	g	agenda  	 list tasks for the next ±[argument] days (default: 6)
-	l	ls      	 list today's tasks or list task matching [argument], if supplied
-	p	past    	 list overdue tasks
-	s	someday 	 list tasks which do not have a due date
-	u	urgent  	 list highly prioritized todos ($URGENT_RANGE) matching [argument], if supplied
-	+	tags    	 list tasks grouped by +tags
-	@	proj    	 list tasks grouped by @project
+	CONFIGURATION
 
-CONFIGURATION
+		Todo file: $TD
+		Done file: $DN
 
-	Todo file: $TD
-	Done file: $DN
-
-HELP
+	HELP
 }
 
 # Main

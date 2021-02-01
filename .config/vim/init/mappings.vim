@@ -4,9 +4,11 @@ cnoremap <C-e> <End>
 cnoremap Q q
 cnoremap W w
 cnoremap X x
+
 inoremap  =system("date")<CR><Esc>kJ$x
 inoremap <C-z> <C-o><C-z>
 inoremap <F1> <Esc>
+
 noremap '' :b#<CR>
 noremap '. :FZF<CR>
 noremap 'b :Buffers<CR>
@@ -26,6 +28,7 @@ noremap Y y$
 noremap Z zMzv
 noremap j gj
 noremap k gk
+
 vnoremap J gj
 vnoremap K gk
 vnoremap az [zo]z
