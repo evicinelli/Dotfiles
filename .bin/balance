@@ -1,12 +1,5 @@
 #! /usr/bin/env bash
 
-# Compute the balance summing all the entries in $BALANCE_FILE
-# Each entry should follow the markdown syntax for the list,
-# being in the form:
-# - ±€€.€ description @tag
-# For each tag the script sums the first signed digit after "- ",
-# giving the final total as the sum of the total for each tag
-
 # env
 set -e
 LC_ALL=C
@@ -18,27 +11,56 @@ uncategorized_total=0
 grand_total=0
 
 
+help () {
+	cat <<-EOH
+
+	        Compute the balance summing all the entries in $BALANCE_FILE
+	        according to their category
+
+	    CONFIGURATION
+
+	        BALANCE FILE = $BALANCE_FILE
+	        LANGUAGE SETTINGS = $LC_ALL
+
+	    SYNTAX
+	        Each entry should follow the markdown syntax for the unordered list,
+	        being in the form:
+
+	        - 12.3 expence description @category
+	        + 45.6 income description @category
+
+	        Using pandoc you can then export the file to have a pdf report of all your
+	        expenses
+
+	EOH
+}
+
 # Get all the tags from $BALANCE_FILE
 getTags(){
 	grep -o " @.[[:alnum:]]*" $BALANCE_FILE | sort | uniq
 }
 
 
-# For each tag, sum all the entries (i know it's bad)
-for tag in $(getTags); do
-	total=$(grep $tag $BALANCE_FILE | grep "^- " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{printf "%.2f\n", s}')
-	grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $total}")
-	printf "%.1f€\t\t%s\n" "$total" "$tag"
-done
+# Main
+if [[ "$@" =~ -h|h|--help|help ]]; then
+	help
+else
+	# For each tag, sum all the entries (i know it's bad)
+	for tag in $(getTags); do
+		total=$(grep $tag $BALANCE_FILE | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
+		grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $total}")
+		printf "%.1f€\t\t%s\n" "$total" "$tag"
+	done
 
-# Sum entries with no tag
-uncategorized_total=$(grep -v ' @.[[:alnum:]]*' $BALANCE_FILE | grep "^- " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$2}END{printf "%.2f\n", s}')
+	# Sum entries with no tag
+	uncategorized_total=$(grep -v ' @.[[:alnum:]]*' $BALANCE_FILE | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
 
-# Grand Total
-grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $uncategorized_total}")
+	# Grand Total
+	grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $uncategorized_total}")
 
-# Print
-printf "%s\t\t%s\n" "----" "===================="
-printf "%.2f€\t\t%s\n" "$uncategorized_total" "Uncategorized"
-printf "%.2f€\t\t%s\n\n" $grand_total "TOTAL"
-echo -e "Ultimo aggiornamento: $(ls -al $BALANCE_FILE | cut -d" " -f6-8)\n"
+	# Print
+	printf "%s\t\t%s\n" "----" "===================="
+	printf "%.2f€\t\t%s\n" "$uncategorized_total" "Uncategorized"
+	printf "%.2f€\t\t%s\n\n" $grand_total "TOTAL"
+	echo -e "Ultimo aggiornamento: $(ls -al $BALANCE_FILE | cut -d" " -f6-9)\n"
+fi
