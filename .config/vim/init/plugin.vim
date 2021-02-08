@@ -22,6 +22,7 @@ Plug 'tpope/vim-commentary'                                          " Comment d
 Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
+Plug 'editorconfig/editorconfig-vim'                                 " Support .editorconfig standard
 call plug#end()
 
 
