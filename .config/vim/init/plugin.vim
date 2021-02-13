@@ -5,24 +5,24 @@ if !has("nvim")
 	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
-" Plug 'vim-pandoc/vim-rmarkdown'                                      " Pandoc + rmarkdown
-Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
-Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file support
-" Plug 'christoomey/vim-tmux-navigator'                                " Vim <3 tmu'                                " Vim <3 tmux
-Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
-Plug 'godlygeek/tabular'                                             " Tabularize
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
-Plug 'junegunn/goyo.vim'                                             " Distraction free writing
-Plug 'mbbill/undotree'                                               " Visualize undo tree
-Plug 'paroxayte/autocd.vim'                                          " Autocd in folder rule-based
-Plug 'rickhowe/diffchar.vim'                                         " Better highlighting in diff mode
-Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
-Plug 'tpope/vim-commentary'                                          " Comment done right
-Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
-Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                       " Pandoc integration
-Plug 'vim-pandoc/vim-pandoc-syntax',                                 " Pandoc syntax
-Plug 'editorconfig/editorconfig-vim'                                 " Support .editorconfig standard
+                                                                                                          " Plug 'christoomey/vim-tmux-navigator' " Vim <3 tmux
+                                                                                                          " Plug 'vim-pandoc/vim-rmarkdown'       " Pandoc + rmarkdown
+Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}                                                " Highlight #COLORS
+Plug 'chrisbra/csv.vim',              {'for':'csv'}                                                       " Csv file support
+Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
+Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
+Plug 'godlygeek/tabular'                                                                                  " Tabularize
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Live preview in md files
+Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
+Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
+Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
+Plug 'paroxayte/autocd.vim'                                                                               " Autocd in folder rule-based
+Plug 'rickhowe/diffchar.vim'                                                                              " Better highlighting in diff mode
+Plug 'sheerun/vim-polyglot'                                                                               " A collection of language pack
+Plug 'tpope/vim-commentary'                                                                               " Comment done right
+Plug 'tpope/vim-surround'                                                                                 " Surrounding motions on steroid
+Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                                                            " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc-syntax',                                                                      " Pandoc syntax
 call plug#end()
 
 

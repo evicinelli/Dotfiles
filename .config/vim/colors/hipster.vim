@@ -1,3 +1,6 @@
+" Hipster Colorscheme
+" Made by Conner McDaniel (https://github.com/connermcd/)
+
 if version > 580
     hi clear
     if exists("syntax_on")

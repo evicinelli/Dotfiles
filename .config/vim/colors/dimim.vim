@@ -1,9 +1,10 @@
 " Default improved improved
 " Fork of the awesome https://github.com/jeffkreeftmeijer/vim-dim
+" see: https://jeffkreeftmeijer.com/vim-16-color/
 "
-" This colorscheme uses only 16 ANSI color: vim follows the colors
-" defined by your terminal emulator, making it consistent with all the other
-" terminal applications
+" This colorscheme, as vim-dim does, uses only 16 ANSI color: vim follows the
+" colors defined by your terminal emulator, making it consistent with all the
+" other terminal applications
 "
 " Cterm color   Name
 " ------------- -------
@@ -15,6 +16,13 @@
 "      5 13     Purple
 "      6 14     Cyan
 "      7 15     Dark/bright foreground
+"
+" Make sure to configure your terminal emulator properly, setting the
+" appropriate color 0, 8, 7, 15 values to make light and dark colorscheme
+" interchangeable (i.e: for light colorscheme, make sure color 0 and 8 are
+" light and color 7 and 15 are dark; the opposite is true if you use a dark
+" colorscheme). If you don't do that, dark colorscheme will work as intended,
+" while with light colorscheme TUI elements will have dark background
 
 highlight clear
 
