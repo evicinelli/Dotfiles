@@ -72,3 +72,7 @@ vimrc () {
 	[[ $# -eq 0 ]] && vi ~/.config/vim/vimrc || vi ~/.config/vim/init/$1.vim
 }
 complete -W "$(ls ~/.config/vim/init/ | sed 's/\.vim//')" vimrc
+
+fix-audio(){
+	pkill pulseaudio && echo "PulseAudio killed" && pulseaudio --start && echo "PulseAudio restarted"
+}
