@@ -28,8 +28,8 @@ augroup end
 
 " Please, no spell in my todo list
 augroup todotxt
-	autocmd bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell | se nowrap
-	autocmd bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell | se nowrap
+	autocmd bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell
+	autocmd bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell
 augroup end
 
 " Man page in vim

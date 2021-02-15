@@ -60,7 +60,7 @@ highlight Search        ctermfg=0           ctermbg=11
 highlight Special       ctermfg=5
 highlight SpecialKey    ctermfg=4
 highlight SpellBad      ctermfg=9           ctermbg=none    cterm=none
-highlight SpellCap      ctermfg=none        ctermbg=none    cterm=italic
+highlight SpellCap                          ctermbg=0
 highlight SpellLocal                        ctermbg=14
 highlight SpellRare     ctermfg=5
 highlight Statement     ctermfg=3

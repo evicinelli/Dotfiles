@@ -12,7 +12,7 @@ flatpak:
 	# Install flatpak applications
 	sudo apt install -y flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install telegram spotify com.microsoft.Teams parlatype anki com.gigitux.gtkwhats us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket org.flameshot.Flameshot org.zotero.Zotero
+	flatpak install telegram spotify com.microsoft.Teams parlatype anki com.gigitux.gtkwhats us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket org.zotero.Zotero
 
 essentials:
 	# Install essential cmd utilities
@@ -41,12 +41,12 @@ pandoc: python
 
 app: repos
 	# Install gui apps i use
-	sudo apt install -y youtube-dl qutebrowser qbittorrent brave-browser obs-studio meld gnome-sushi
+	sudo apt install -y youtube-dl qutebrowser qbittorrent brave-browser obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro
 
 repos:
 	# Add external repos
 	curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-	sudo echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
+	echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 	# wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
 	# add-apt-repository 'deb https://typora.io/linux ./'
 	sudo apt update
