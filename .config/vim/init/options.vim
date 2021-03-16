@@ -24,6 +24,7 @@ set path^=**                               " Recursive file search starting from
 set scrolloff=8                            " Lines to keep above and below while scrolling
 set secure                                 " No shell command on autocmd
 set shiftwidth=0                           " Tab settings: Indent following tabstop
+set shortmess=filnxtToOF
 set showcmd                                " Show partially typed commands
 set smartcase                              " Smart-case search
 set smartindent                            " Smart indent

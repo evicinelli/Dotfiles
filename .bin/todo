@@ -5,10 +5,10 @@
 # Depends on: vim, date, standard bash utilities, fzf
 
 # Configuration
-TD=${TD:-"$HOME/todo.txt"}
-DN=${DN:-"$HOME/done.txt"}
+TD=${TD:-"$HOME/.todo.txt"}
+DN=${DN:-"$HOME/.done.txt"}
 EDITOR=${EDITOR:-vim}
-URGENT_RANGE="A-B"
+URGENT_RANGE="A-C"
 
 todo-edit() {
 	if tty -s; then

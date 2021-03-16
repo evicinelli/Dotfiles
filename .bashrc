@@ -24,7 +24,7 @@ fi
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 [[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 
-export PATH=${PATH}:$HOME/.bin/:$HOME/.local/bin/
+# export PATH=${PATH}:$HOME/.bin/:$HOME/.local/bin/
 export EDITOR=nvim
 export VISUAL=nvim
 export TERMINAL=kitty
@@ -88,8 +88,6 @@ export MED_CURRENT=$MED3
 # Alias {{{
 
 # Useful options
-alias ls='ls -h --color=auto --group-directories-first --sort=version'
-alias bat="bat --theme=base16"
 alias dir='dir --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
@@ -98,7 +96,9 @@ alias la="ls -a"
 alias less='less -R'
 alias ll="ls -l"
 alias lla="ls -la"
+alias ls='ls -h --color=auto --group-directories-first --sort=version'
 alias mkdir="mkdir -pv"
+alias pandoc="pandoc --filter=pandoc-citeproc -V subparagraph"
 alias rm="rm -I"
 alias sl='ls'
 

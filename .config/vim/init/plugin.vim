@@ -5,8 +5,8 @@ if !has("nvim")
 	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
-                                                                                                          " Plug 'christoomey/vim-tmux-navigator' " Vim <3 tmux
-                                                                                                          " Plug 'vim-pandoc/vim-rmarkdown'       " Pandoc + rmarkdown
+" Plug 'christoomey/vim-tmux-navigator'                                                                    " Vim <3 tmux
+" Plug 'vim-pandoc/vim-rmarkdown'                                                                          " Pandoc + rmarkdown
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}                                                " Highlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                                                       " Csv file support
 Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
@@ -42,21 +42,25 @@ let g:pandoc#folding#level = 0
 let g:pandoc#modules#disabled = [""]
 let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#syntax#conceal#blacklist = [
-	\ "titleblock",
-	\ "image",
 	\ "atx",
-	\ "codeblock_start",
 	\ "codeblock_delim",
-	\ "footnote",
+	\ "codeblock_start",
+	\ "comments",
+	\ "html_c_s",
+	\ "html_c_e",
+	\ "dashes",
+	\ "definition",
 	\ "ellipses",
 	\ "emdashes",
 	\ "endashes",
-	\ "subscript",
-	\ "superscript",
-	\ "definition",
+	\ "footnote",
+	\ "image",
+	\ "inlinecode",
 	\ "list",
 	\ "quotes",
-	\ "inlinecode" ]
+	\ "subscript",
+	\ "superscript",
+	\ "titleblock"]
 let g:pandoc#toc#close_after_navigating = 0
 let g:pandoc#toc#position = "left"
 let g:pandoc#toc#shift = 4

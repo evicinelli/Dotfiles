@@ -7,7 +7,16 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50    " Different cursor
 colorscheme dimim
 
 " Statusline
-set stl=%2*\ %{CurrentMode()}\ %0*\ \ %t%<\ %=\ %m%r%h%w\ \|\ %Y\ \|\ Ln\ %l/%L,\ Col\ %v\ (%p%%)\ \|\ %{strftime('%H:%M')}\ %3*%{TaskIndicator()}
+set stl=
+set stl+=%2*\ %{CurrentMode()}\ %0* " Custom mode indicator
+set stl+=\ \ %t%<\                  " File name
+set stl+=%=                         " Statusline separator
+set stl+=\ %m%r%h%w\ \|\            " Flags (modifiable, read only, help file, not saved)
+set stl+=%Y\ \|\                    " File type
+set stl+=Ln\ %l/%L,\ Col\ %v        " Cursor line/Total lines, Cursor column
+set stl+=\ (%p%%)\ \|\              " Percentage through file
+set stl+=%{strftime('%H:%M')}\      " Current time
+set stl+=%3*%{TaskIndicator()}      " Todo indicator
 
 function! CurrentMode()
 	" Current mode

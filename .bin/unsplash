@@ -80,6 +80,26 @@ post-process () {
 #	wal -c
 #	wal -i ~/img
     echo
+	dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
+	var Desktops = desktops();
+	for (i=0;i<Desktops.length;i++) {
+			d = Desktops[i];
+			d.wallpaperPlugin = "org.kde.image";
+			d.currentConfigGroup = Array("Wallpaper",
+										"org.kde.image",
+										"General");
+			d.writeConfig("Image", "file:///none");
+	}'
+	dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
+	var Desktops = desktops();
+	for (i=0;i<Desktops.length;i++) {
+			d = Desktops[i];
+			d.wallpaperPlugin = "org.kde.image";
+			d.currentConfigGroup = Array("Wallpaper",
+										"org.kde.image",
+										"General");
+			d.writeConfig("Image", "file:///home/vic/img");
+	}'
 }
 
 wget --no-check-certificate -O $HOME/img $UNSPLASH_URL

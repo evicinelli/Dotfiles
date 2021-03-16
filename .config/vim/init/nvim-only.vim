@@ -2,8 +2,8 @@
 
 set inccommand=nosplit
 
-" tnoremap <C-\> <C-\><C-n>
-tnoremap <Esc> <C-\><C-n>
+tnoremap <C-\> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
 
 augroup fzf
 	autocmd! FileType fzf

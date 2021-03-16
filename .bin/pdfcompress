@@ -24,8 +24,8 @@ else
 EOF
     read answer
     qualities=("/screen" "/ebook" "/prepress" "/printer" "/default")
-    input=$1
-    output=$2
-    quality=${qualities[$answer]}
-    pdfcompress $quality $input $output
+    input="$1"
+    output="$2"
+    quality="${qualities[$answer]}"
+    pdfcompress "$quality" "$input" "$output"
 fi

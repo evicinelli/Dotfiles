@@ -49,7 +49,7 @@ daysuntil () {
 
 # https://www.reddit.com/r/commandline/comments/hgayn8/stumbled_across_a_recipe_scraping_website_and/
 plainoldrecipe () {
-	curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc -f html -t markdown
+	curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc --atx-headers -f html -t markdown
 }
 
 randint () {
@@ -74,5 +74,5 @@ vimrc () {
 complete -W "$(ls ~/.config/vim/init/ | sed 's/\.vim//')" vimrc
 
 fix-audio(){
-	pkill pulseaudio && echo "PulseAudio killed" && pulseaudio --start && echo "PulseAudio restarted"
+	sudo pkill pulseaudio && echo "PulseAudio killed" && pulseaudio --start && echo "PulseAudio restarted"
 }
