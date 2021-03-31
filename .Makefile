@@ -17,7 +17,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find
+	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen
 
 nvim:
 	# Install nvim
@@ -42,7 +42,7 @@ pandoc: python
 
 gui-app: repos
 	# Install gui apps i use
-	pkexec $(INSTALL) youtube-dl qutebrowser qbittorrent brave-browser obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro
+	pkexec $(INSTALL) youtube-dl qutebrowser qbittorrent brave-browser obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol
 
 repos:
 	# Add external repos
@@ -60,7 +60,7 @@ flatpak:
 
 python:
 	pkexec $(INSTALL) python3 python3-pip python-is-python3
-	pip3 install pandocfilters subliminal ComplexHTTPServer
+	pip3 install pandocfilters subliminal ComplexHTTPServer doi2bib
 
 npm:
 	pkexec npm install -g @marp-team/marp-cli

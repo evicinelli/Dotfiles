@@ -1,7 +1,6 @@
 #! /usr/bin/env bash
 # Notational velocity clone (www.notational.net) using bash, fzf and vim
 
-(
 ext="md"
 base_dir="${1:-.}"
 
@@ -25,4 +24,4 @@ elif [[ $? -eq 1 ]]; then       # If the note doesn't exist
         exit 1
     fi
 fi
-)
+cd -

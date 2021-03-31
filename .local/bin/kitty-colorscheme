@@ -12,7 +12,7 @@ if [[ $TERM == "xterm-kitty" ]]; then
 		current_theme=$(basename $(ls -l $HOME/.config/kitty/colorscheme.conf | cut -d ">" -f2))
 		[[ $current_theme =~ ^d ]] && theme=$(echo $current_theme | sed "s,d-,l-,") || theme=$(echo $current_theme | sed "s,l-,d-,")
 	else
-		theme=$(cd $KITTY_THEME_DIR && find -type f -name "*.conf" | sort | $HOME/.fzf/bin/fzf --color=16 --reverse | sed "s,\./,,")
+		theme=$(cd $KITTY_THEME_DIR && find -type f -name "*.conf" | sort | $HOME/.fzf/bin/fzf --cycle --color=16 --reverse | sed "s,\./,,")
 	fi
 
 	# Choose new colorscheme from fzf menu

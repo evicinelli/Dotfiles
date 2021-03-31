@@ -29,7 +29,7 @@ if [[ $ARGOS_MENU_OPEN == "true" ]]; then
         else
             color="white"
         fi
-        echo "<span color=\"$color\">$t </span> | bash='TD=~/pCloudDrive/Documenti/Todo/todo.txt ~/.local/bin/todo done \"$t\"' refresh=true terminal=false"
+        echo "<span color=\"$color\">$t </span> | bash='TD=~/pCloudDrive/Documenti/Todo/todo.txt todo done \"$t\"' refresh=true terminal=false"
     done
 
     for t in $(TD=~/pCloudDrive/Documenti/Todo/todo.txt todo done); do
@@ -38,5 +38,5 @@ if [[ $ARGOS_MENU_OPEN == "true" ]]; then
 
     echo "--"
 
-    echo "Edit todo file | bash='${EDITOR:-vim} /home/vic/pCloudDrive/Documenti/Todo/todo.txt'"
+    echo "Edit todo file | bash='TD=~/pCloudDrive/Documenti/Todo/todo.txt todo edit'"
 fi
