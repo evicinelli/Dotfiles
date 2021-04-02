@@ -71,9 +71,9 @@ function todo-agenda(){
 	for i in $days; do
 		t=$(todo-ls $i days)
 		day_title="- $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) [$(echo -e "$t" | wc -l)] --\n"
-		if tty -s; then
+		if $(tty -s) && [[ -z $TODO_DUMMY ]]; then
 			[[ ! -z "$t" ]] && echo -e "\e[1;31m${day_title}\e[0m${t}\n"
-		else
+		else # Dummy terminal
 			[[ ! -z "$t" ]] && echo -e "${day_title}${t}\n"
 		fi
 	done;
