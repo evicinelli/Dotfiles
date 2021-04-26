@@ -18,3 +18,5 @@ dig Ra 8658 " Digraph ⇒
 dig Ba 8656 " Digraph ⇐
 dig le 8804 " Digraph ࣘࣘࣘ≤
 dig ge 8805 " Digraph ≥
+dig sh  601 " Digraph ə
+dig SH  399 " Digraph Ə

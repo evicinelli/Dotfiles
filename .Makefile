@@ -1,10 +1,10 @@
 # vim: fdm=indent foldignore=
 
 SHELL=/bin/bash
-INSTALL = "sudo apt install -y"
+INSTALL=apt install -y
 
 all: apps config
-apps: update base applications
+apps: base applications
 
 base: essentials nvim
 applications: utils pandoc gui-app flatpak modules
@@ -25,9 +25,9 @@ nvim:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	nvim +PlugInstall +PlugUpdate +qa!
 	xdg-mime default nvim.desktop text/*
-	mkdir ~/.local/share/nvim/backup
-	mkdir ~/.local/share/nvim/swap
-	mkdir ~/.local/share/nvim/undo
+	mkdir -p ~/.local/share/nvim/backup
+	mkdir -p ~/.local/share/nvim/swap
+	mkdir -p ~/.local/share/nvim/undo
 
 utils:
 	# Install various utilities
@@ -60,20 +60,27 @@ flatpak:
 
 python:
 	pkexec $(INSTALL) python3 python3-pip python-is-python3
-	pip3 install pandocfilters subliminal ComplexHTTPServer doi2bib
+	pip3 install pandocfilters subliminal ComplexHTTPServer doi2bib pandoc-mermaid-filter
 
 npm:
+	pkexec apt install npm
 	pkexec npm install -g @marp-team/marp-cli
 	mkdir -p ~/.local/bin/_ && cd ~/.local/bin/_/ && npm install @mermaid-js/mermaid-cli && ln -s ~/.local/bin/_/node_modules/.bin/mmdc ~/.local/bin/mermaid
 
 config: pcloud
 	# Personal configurations here and there
 	pkexec ln -sf /bin/fdfind /bin/fd
-	pkexec update-alternatives --config x-terminal-emulator
 	pkexec flatpak override org.zotero.Zotero --filesystem=$(HOME)
 	[[ -d $(DOC)/Password-store ]] && ln -sf $(DOC)/Password-store $(HOME)/.password-store
 	[[ -d $(P)/Desktop ]] && rm -r $(HOME)/Scrivania && ln -sf $(P)/Desktop $(HOME)/Scrivania
 	[[ -d $(P)/Libreria/Zotero ]] && ln -s $(P)/Libreria/Zotero $(HOME)/
+	pkexec update-alternatives --config x-terminal-emulator
+	pkexec update-alternatives --config x-www-browser
+	pkexec update-alternatives --config vi
+	pkexec update-alternatives --config vim
+	pkexec update-alternatives --config view
+	pkexec update-alternatives --config vimdiff
+	xdg-mime default nvim.desktop text/plain
 
 pcloud:
 	# Open pcloud download page

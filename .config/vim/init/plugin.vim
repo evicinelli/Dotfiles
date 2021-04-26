@@ -12,7 +12,7 @@ Plug 'chrisbra/csv.vim',              {'for':'csv'}                             
 Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
 Plug 'godlygeek/tabular'                                                                                  " Tabularize
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Live preview in md files
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug', 'pandoc']} " Live preview in md files
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
@@ -77,3 +77,7 @@ let g:autocd#markers = { '**/Medicina/**/*.txt': ['Makefile'] }
 
 " Csv options
 let g:csv_highlight_column = 'y'
+
+" Markdown-preview options
+let g:mkdp_command_for_global = 1
+let g:mkdp_browser = 'x-www-browser'

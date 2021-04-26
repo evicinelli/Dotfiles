@@ -15,13 +15,13 @@ pdfcompress () {
 if [[ $# -ne 2 ]]; then
     help
 else
-    cat<<EOF
-0) 72 dpi
-1) 150 dpi
-2) 300 dpi (Prepress Optimized)
-3) 300 dpi (Print Optimized)
-4) Default
-EOF
+    cat<<-EOF
+	0) 72 dpi
+	1) 150 dpi
+	2) 300 dpi (Prepress Optimized)
+	3) 300 dpi (Print Optimized)
+	4) Default
+	EOF
     read answer
     qualities=("/screen" "/ebook" "/prepress" "/printer" "/default")
     input="$1"

@@ -20,7 +20,7 @@ fi
 
 # Fzf <3
 [[ -d $HOME/.fzf ]]     || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
-[[ -d $HOME/.fzf ]]     && export FZF_DEFAULT_OPTS='--tiebreak=end,length,index --color=16 --height 33% --reverse --border --cycle --multi'
+[[ -d $HOME/.fzf ]]     && export FZF_DEFAULT_OPTS='--color=16 --height 33% --reverse --border --cycle --multi'
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 [[ fd ]]                && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 

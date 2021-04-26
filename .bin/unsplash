@@ -77,29 +77,9 @@ UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes/$RES"
 # Post process img?
 post-process () {
     # convert $1 -type grayscale $1
-#	wal -c
-#	wal -i ~/img
-    echo
-	dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
-	var Desktops = desktops();
-	for (i=0;i<Desktops.length;i++) {
-			d = Desktops[i];
-			d.wallpaperPlugin = "org.kde.image";
-			d.currentConfigGroup = Array("Wallpaper",
-										"org.kde.image",
-										"General");
-			d.writeConfig("Image", "file:///none");
-	}'
-	dbus-send --session --dest=org.kde.plasmashell --type=method_call /PlasmaShell org.kde.PlasmaShell.evaluateScript 'string:
-	var Desktops = desktops();
-	for (i=0;i<Desktops.length;i++) {
-			d = Desktops[i];
-			d.wallpaperPlugin = "org.kde.image";
-			d.currentConfigGroup = Array("Wallpaper",
-										"org.kde.image",
-										"General");
-			d.writeConfig("Image", "file:///home/vic/img");
-	}'
+	feh --bg-scale ~/img
+	wal -c
+	wal -i ~/img
 }
 
 wget --no-check-certificate -O $HOME/img $UNSPLASH_URL

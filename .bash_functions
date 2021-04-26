@@ -35,7 +35,8 @@ tny () {
 }
 
 wifi () {
-	nmcli -a device wifi connect "$( nmcli --color no device wifi | grep -v ".*--.*" | fzf --query="$*" -1 --ansi --header-lines=1 | sed -r 's/^\s*\*?\s*//; s/\s*(Ad-Hoc|Infra).*//')"
+	#nmcli -a device wifi connect 
+	echo "$(nmcli --terse device wifi | cut -d: -f1,8- | sed "s/:/	/g" | fzf --query="$*" -1 --ansi --header-lines=1 | cut -f2)"
 }
 
 wttr () {

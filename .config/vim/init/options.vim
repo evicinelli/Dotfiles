@@ -32,13 +32,13 @@ set spell                                  " Spelling on
 set spelllang=it,en                        " Spell dictionaries
 set splitbelow                             " HSplit below
 set splitright                             " Vsplit to the right
-set swapfile                               " Always create swp file
+set swapfile                               " _Always_ create swp file. Never too sure
 set tabstop=4                              " Tab settings: How many space \t get
 set title                                  " Set the title of the window NVIM is run into to "filename (path) - NVIM"
 set undodir=~/.local/share/nvim/undo//     " Where to save persistent undo history
 set undofile                               " Persistent history
 set undolevels=5000                        " How many edit are saved in undofile
-set updatetime=2000                        " Consider vim inactive after x sec of no activity in normal mode
+set updatetime=2000                        " Fire CursorHold hooks after x sec of no activity in normal mode & how often write to disk swp file
 set wildignorecase                         " Ignore case when autocomplete
 set wildmenu                               " Tab autocompletion in menu
 set writebackup                            " Write backup file before saving buffer to disk, delete after success
