@@ -76,10 +76,11 @@ UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes/$RES"
 
 # Post process img?
 post-process () {
+	echo
     # convert $1 -type grayscale $1
-	feh --bg-scale ~/img
-	wal -c
-	wal -i ~/img
+	# feh --bg-scale ~/img
+	# wal -c
+	# wal -i ~/img
 }
 
 wget --no-check-certificate -O $HOME/img $UNSPLASH_URL
