@@ -3,7 +3,7 @@
 SHELL=/bin/bash
 INSTALL=apt install -y
 
-all: apps config
+all: apps pcloud config
 apps: base applications
 
 base: essentials nvim
@@ -67,7 +67,7 @@ npm:
 	pkexec npm install -g @marp-team/marp-cli
 	mkdir -p ~/.local/bin/_ && cd ~/.local/bin/_/ && npm install @mermaid-js/mermaid-cli && ln -s ~/.local/bin/_/node_modules/.bin/mmdc ~/.local/bin/mermaid
 
-config: pcloud
+config:
 	# Personal configurations here and there
 	pkexec ln -sf /bin/fdfind /bin/fd
 	pkexec flatpak override org.zotero.Zotero --filesystem=$(HOME)
@@ -83,7 +83,7 @@ config: pcloud
 	xdg-mime default nvim.desktop text/plain
 
 pcloud:
-	# Open pcloud download page
+	# Download pcloud client
 	echo "Download pcloud and save it to ~/.pcloud..."
 	read _
 	x-www-browser https://www.pcloud.com/it/how-to-install-pcloud-drive-linux.html?download=electron-64
