@@ -25,6 +25,9 @@ export MED3="$MED/Med3"
 
 # Current course
 export MED_CURRENT=$MED3
+
+# Fzf
+export FZF_DEFAULT_OPTS='--color=16'
 # }}}
 
 # Bashrc {{{
