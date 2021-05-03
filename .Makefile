@@ -83,7 +83,7 @@ config:
 	xdg-mime default nvim.desktop text/plain
 
 pcloud:
-	# Open pcloud download page
+	# Download pcloud client
 	echo "Download pcloud and save it to ~/.pcloud..."
 	read _
 	x-www-browser https://www.pcloud.com/it/how-to-install-pcloud-drive-linux.html?download=electron-64
