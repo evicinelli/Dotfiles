@@ -27,8 +27,8 @@ noremap <leader>so :!mimeopen "%" <CR>
 noremap <leader>m :MarkdownPreviewToggle<CR>
 noremap Y y$
 noremap Z zMzv
-noremap j gj
-noremap k gk
+" noremap j gj
+" noremap k gk
 
 vnoremap J gj
 vnoremap K gk
