@@ -42,7 +42,7 @@ pandoc: python
 
 gui-app: repos
 	# Install gui apps i use
-	pkexec $(INSTALL) youtube-dl qutebrowser qbittorrent brave-browser obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol
+	pkexec $(INSTALL) youtube-dl qutebrowser qbittorrent brave-browser obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol gnome-tweak-tool
 
 repos:
 	# Add external repos
@@ -73,7 +73,7 @@ config:
 	pkexec flatpak override org.zotero.Zotero --filesystem=$(HOME)
 	[[ -d $(DOC)/Password-store ]] && ln -sf $(DOC)/Password-store $(HOME)/.password-store
 	[[ -d $(P)/Desktop ]] && rm -r $(HOME)/Scrivania && ln -sf $(P)/Desktop $(HOME)/Scrivania
-	[[ -d $(P)/Libreria/Zotero ]] && ln -s $(P)/Libreria/Zotero $(HOME)/
+	[[ -d $(P)/Libreria/Zotero ]] && ln -sf $(P)/Libreria/Zotero $(HOME)/
 	pkexec update-alternatives --config x-terminal-emulator
 	pkexec update-alternatives --config x-www-browser
 	pkexec update-alternatives --config vi
@@ -81,6 +81,20 @@ config:
 	pkexec update-alternatives --config view
 	pkexec update-alternatives --config vimdiff
 	xdg-mime default nvim.desktop text/plain
+	xdg-mime default nvim.desktop text/markdown
+	[[ $(XDG_CURRENT_DESKTOP) =~ .*GNOME.* || $(XDG_CURRENT_DESKTOP) =~ .*gnome.* ]] && (\
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]";\
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]";\
+	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']";\
+	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']";\
+	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0;\
+	gsettings set org.gnome.desktop.interface document-font-name 'Sans 11';\
+	gsettings set org.gnome.desktop.interface font-name 'Sans 11';\
+	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13';\
+	gsettings set org.gnome.desktop.interface clock-show-date true;\
+	gsettings set org.gnome.desktop.interface clock-show-weekday true;\
+	gsettings set org.gnome.desktop.interface show-battery-percentage true;\
+	gsettings set org.gnome.desktop.interface text-scaling-factor 0.89999999999999991)
 
 pcloud:
 	# Download pcloud client

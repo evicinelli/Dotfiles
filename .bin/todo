@@ -8,7 +8,7 @@
 TD=${TD:-"$HOME/todo.txt"}
 DN=${DN:-"$HOME/done.txt"}
 EDITOR=${EDITOR:-vim}
-URGENT_RANGE="A-C"
+URGENT_RANGE="A-A"
 
 todo-edit() {
 	if tty -s; then
@@ -66,7 +66,7 @@ todo-done () {
 }
 
 function todo-agenda(){
-	end=${1:-6} # if not $2, by default print todos for next 6 days
+	end=${1:-6} # if not $1, by default print todos for next 6 days
 	[[ $end -gt 0 ]] && days=$(seq 0 $end) || days=$(seq $end 0)
 	for i in $days; do
 		t=$(todo-ls $i days)
