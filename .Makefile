@@ -82,19 +82,27 @@ config:
 	pkexec update-alternatives --config vimdiff
 	xdg-mime default nvim.desktop text/plain
 	xdg-mime default nvim.desktop text/markdown
+
+gnome:
 	[[ $(XDG_CURRENT_DESKTOP) =~ .*GNOME.* || $(XDG_CURRENT_DESKTOP) =~ .*gnome.* ]] && (\
-	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]";\
-	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]";\
-	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']";\
-	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']";\
-	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0;\
+	gsettings set org.gnome.desktop.interface clock-show-date true;\
+	gsettings set org.gnome.desktop.interface clock-show-weekday true;\
 	gsettings set org.gnome.desktop.interface document-font-name 'Sans 11';\
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11';\
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13';\
-	gsettings set org.gnome.desktop.interface clock-show-date true;\
-	gsettings set org.gnome.desktop.interface clock-show-weekday true;\
 	gsettings set org.gnome.desktop.interface show-battery-percentage true;\
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.89999999999999991)
+	gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true;\
+	gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true;\
+	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true;\
+	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']";\
+	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']";\
+	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']";\
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]";\
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]";\
+	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']";\
+	gsettings set org.gnome.desktop.wm.preferences button-layout ':close';\
+	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0;\
 
 pcloud:
 	# Download pcloud client

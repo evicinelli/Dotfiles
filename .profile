@@ -27,7 +27,8 @@ export MED3="$MED/Med3"
 export MED_CURRENT=$MED3
 
 # Fzf
-export FZF_DEFAULT_OPTS='--color=16'
+export FZF_DEFAULT_OPTS='--color=16 --height 33% --reverse --border --cycle --multi'
+[[ fd ]] && export FZF_DEFAULT_COMMAND="fd -I --color never" && export FZF_ALT_C_COMMAND="fd -I -t d --color never" && export FZF_CTRL_T_COMMAND="fd -I --color never"
 # }}}
 
 # Bashrc {{{

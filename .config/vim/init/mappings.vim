@@ -6,6 +6,7 @@ cnoremap W w
 cnoremap X x
 
 inoremap  =system("date")<CR><Esc>kJ$x
+inoremap  =system("date -I")<CR><Esc>kJ$x
 inoremap <C-z> <C-o><C-z>
 inoremap <F1> <Esc>
 
