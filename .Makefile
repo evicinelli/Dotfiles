@@ -3,7 +3,7 @@
 SHELL=/bin/bash
 INSTALL=apt install -y
 
-all: apps pcloud config
+all: apps config
 apps: base applications
 
 base: essentials nvim
@@ -65,7 +65,7 @@ python:
 npm:
 	pkexec apt install npm
 	pkexec npm install -g @marp-team/marp-cli
-	mkdir -p ~/.local/bin/_ && cd ~/.local/bin/_/ && npm install @mermaid-js/mermaid-cli && ln -s ~/.local/bin/_/node_modules/.bin/mmdc ~/.local/bin/mermaid
+	mkdir -p ~/.local/bin/_ && cd ~/.local/bin/_/ && npm install @mermaid-js/mermaid-cli && ln -sf ~/.local/bin/_/node_modules/.bin/mmdc ~/.local/bin/mermaid
 
 config:
 	# Personal configurations here and there
@@ -103,6 +103,7 @@ gnome:
 	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']";\
 	gsettings set org.gnome.desktop.wm.preferences button-layout ':close';\
 	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0;\
+	)
 
 pcloud:
 	# Download pcloud client

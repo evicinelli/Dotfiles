@@ -146,7 +146,8 @@ prompt() {
 	[[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
 
 	# end="🍺" end=":" end="💰" end="⚕" end="▶" end=">" end="🩺"
-	end=">"
+	# end=">"
+	end="\$"
 
 	export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, $toDoUrgent!]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
 }
