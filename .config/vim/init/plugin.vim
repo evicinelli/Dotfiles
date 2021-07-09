@@ -5,6 +5,11 @@ if !has("nvim")
 	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
+if exists('g:GtkGuiLoaded')
+	Plug 'lifepillar/vim-solarized8'
+endif
+
+
 " Plug 'christoomey/vim-tmux-navigator'                                                                    " Vim <3 tmux
 " Plug 'vim-pandoc/vim-rmarkdown'                                                                          " Pandoc + rmarkdown
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}                                                " Highlight #COLORS
