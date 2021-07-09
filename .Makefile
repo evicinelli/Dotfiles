@@ -31,11 +31,11 @@ nvim:
 
 utils:
 	# Install various utilities
-	pkexec $(INSTALL) kitty mpv imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell
+	pkexec $(INSTALL) kitty mpv imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
 
 pandoc: python
 	# Install pandoc and latex + latex italian language settings
-	pkexec $(INSTALL) pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex graphviz
+	pkexec $(INSTALL) pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex graphviz ttf-mscorefonts-installer
 	mkdir -p .local/share/filters/
 	curl https://raw.githubusercontent.com/kuba-orlik/pandoc-dot2tex-filter/master/dot2tex-filter.py >> .local/share/filters/dot2tex
 	chmod +x .local/share/filters/dot2tex
@@ -84,26 +84,36 @@ config:
 	xdg-mime default nvim.desktop text/markdown
 
 gnome:
-	[[ $(XDG_CURRENT_DESKTOP) =~ .*GNOME.* || $(XDG_CURRENT_DESKTOP) =~ .*gnome.* ]] && (\
-	gsettings set org.gnome.desktop.interface clock-show-date true;\
-	gsettings set org.gnome.desktop.interface clock-show-weekday true;\
-	gsettings set org.gnome.desktop.interface document-font-name 'Sans 11';\
-	gsettings set org.gnome.desktop.interface font-name 'Sans 11';\
-	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13';\
-	gsettings set org.gnome.desktop.interface show-battery-percentage true;\
-	gsettings set org.gnome.desktop.interface text-scaling-factor 0.89999999999999991)
-	gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true;\
-	gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true;\
-	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true;\
-	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']";\
-	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']";\
-	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']";\
-	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]";\
-	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]";\
-	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']";\
-	gsettings set org.gnome.desktop.wm.preferences button-layout ':close';\
-	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0;\
-	)
+	gsettings set org.gnome.desktop.background picture-uri 'file:///home/vic/img'
+	gsettings set org.gnome.desktop.interface clock-show-date true
+	gsettings set org.gnome.desktop.interface clock-show-weekday true
+	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
+	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
+	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
+	gsettings set org.gnome.desktop.interface show-battery-percentage true
+	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
+	gsettings set org.gnome.desktop.media-handling automount true
+	gsettings set org.gnome.desktop.media-handling automount-open true
+	gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
+	gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+	gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/vic/img'
+	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]"
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]"
+	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']"
+	gsettings set org.gnome.desktop.wm.preferences button-layout ':close'
+	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+	gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Sans Bold 11'
+	gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'detailed_type', 'date_modified', 'permissions']"
+	gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
+	gsettings set org.gnome.nautilus.list-view use-tree-view true
+	gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
+	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 
 pcloud:
 	# Download pcloud client

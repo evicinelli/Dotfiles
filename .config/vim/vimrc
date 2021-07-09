@@ -12,6 +12,7 @@ source <sfile>:h/init/mappings.vim       " Custom mappings
 source <sfile>:h/init/auto.vim           " Autocommands and autogroups
 source <sfile>:h/init/abbrev.vim         " Abbreviations and digraphs
 source <sfile>:h/init/uni.vim            " Uni settings
+source <sfile>:h/init/gui.vim            " Gui-only settings
 
 " If nvim
 if has ("nvim")
