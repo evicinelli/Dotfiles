@@ -1,12 +1,24 @@
 # vim: fdm=marker
 
+# Fzf <3
+[[ -d $HOME/.fzf ]]     || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
+[[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
+
+# MacOs {{{
+for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
+# }}}
+
 # Personal bin {{{
 [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
 [[ -d "$HOME/.bin" ]] && export PATH="$HOME/.bin:$PATH"
 # }}}
 
 # Env {{{
-export P="$HOME/pCloudDrive"
+export EDITOR=nvim
+# export VISUAL=vimr
+[[ nvim ]] && export MANPAGER='nvim +Man!'
+
+export P="$HOME/pCloud Drive"
 export DN="$P/Documenti/Todo/done.txt"
 export DOC="$P/Documenti"
 export DOWN="$HOME/Scaricati"

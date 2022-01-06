@@ -1,32 +1,32 @@
 #! /usr/bin/env bash
-# Simple and effective pass wrapper (https://www.passwordstore.org/)
+# Simple and effective pass wrapper (https://www.passwordstore.org/) which uses fzf as menu
+
+IFS=$'\n'
+FILTER="s:${HOME}/.password-store/::;s:.gpg::"
+edit_key=ctrl-v
+view_key=ctrl-c
 
 p(){
-    if [[ $1 =~ ls|find|grep|add|generate|show|insert|edit|rm|mv|cp|git|help|version ]]; then
-        pass $*
-    else
-        edit_key=ctrl-v
-        view_key=ctrl-c
+	if [[ $1 =~ ls|find|grep|add|generate|show|insert|edit|rm|mv|cp|git|help|version ]]; then
+		pass $*
+	else
+		PWS=($(/usr/bin/find ~/.password-store/ -type f | sed -e $FILTER))
+		fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" |\
+			fzf --no-exact -1 \
+			--expect=$edit_key,$view_key,$pipe_key\
+			--query="$@"\
+			--header="enter to copy, $edit_key to edit with $EDITOR, $view_key to cat")
+		first=$(echo $fzfOut | cut -d" " -f1)
+		second=$(echo $fzfOut | cut -d" " -f2)
 
-        FILTER="s:${HOME}/.password-store/::;s:.gpg::"
-        readarray PWS < <(/usr/bin/find ~/.password-store/ -type f | sed -e $FILTER)
-
-        fzfOut=$(echo ${PWS[*]} | sed "s/ /\\n/g" |\
-                fzf --no-exact -1 \
-                --expect=$edit_key,$view_key,$pipe_key\
-                --query="$@"\
-                --header="enter to copy, $edit_key to edit, $view_key to cat")
-        first=$(echo $fzfOut | cut -d" " -f1)
-        second=$(echo $fzfOut | cut -d" " -f2)
-
-        if [[ ! -z $second ]]; then
-            case "$first" in
-                $edit_key) pass edit "$second";;
-                $view_key) pass "$second";;
-                *) pass -c "$second";;
-            esac
-        fi
-    fi
+		if [[ ! -z $second ]]; then
+			case "$first" in
+				$edit_key) pass edit "$second";;
+				$view_key) pass "$second";;
+				*) pass -c "$second";;
+			esac
+		fi
+	fi
 }
 
 p "$*"

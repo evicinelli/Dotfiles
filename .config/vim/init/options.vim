@@ -47,19 +47,18 @@ let maplocalleader = " "
 
 " Extended text Objects and matchpairs
 " Thanks to Conner McDaniel: https://youtu.be/0F4FgiVWvB8
-set matchpairs+=<:>
-let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\", "^", "~"]
-for item in s:items
-	" exe "noremap yi".item." T".item."yt".item
-	" exe "noremap ya".item." F".item."yf".item
-	" exe "noremap ci".item." T".item."ct".item
-	" exe "noremap ca".item." F".item."cf".item
-	" exe "noremap di".item." T".item."dt".item
-	" exe "noremap da".item." F".item."df".item
-	" exe "vnoremap vi".item." T".item."vt".item
-	" exe "vnoremap va".item." F".item."vf".item
+" exe "noremap yi".item." T".item."yt".item
+" exe "noremap ya".item." F".item."yf".item
+" exe "noremap ci".item." T".item."ct".item
+" exe "noremap ca".item." F".item."cf".item
+" exe "noremap di".item." T".item."dt".item
+" exe "noremap da".item." F".item."df".item
+" exe "vnoremap vi".item." T".item."vt".item
+" exe "vnoremap va".item." F".item."vf".item
 
-	" Same thing:
+set matchpairs+=<:>
+let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\", "^", "~", "`"]
+for item in s:items
 	" Operator-pending mode
 	exe "omap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
 	exe "omap a".item ":<C-U>normal!vF".item."of".item."<CR>"

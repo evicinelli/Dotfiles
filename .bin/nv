@@ -1,12 +1,18 @@
 #! /usr/bin/env bash
 # Notational velocity clone (www.notational.net) using bash, fzf and vim
 
-ext="md"
+
+list_text_files(){
+	[[ $(which fd) ]] && fd -e txt -e md || find -type f -regex ".*\.\(txt\|md\)"
+
+}
+
+ext="txt"
 base_dir="${1:-.}"
 
 shift
-cd $base_dir
-note=$(find -type f -regex ".*\.\(txt\|md\)" -not -wholename "*Archivio*" -not -wholename "*/_/*" | sort | fzf -1 --height=100% --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*")
+cd "$base_dir"
+note=$(list_text_files | sort | fzf --height=100% --header="$base_dir" --preview='head -$LINES {}' --print-query --query="$*")
 
 if [[ $? -eq 0 ]]; then         # If the note exists
     # edit note
@@ -16,7 +22,7 @@ elif [[ $? -eq 1 ]]; then       # If the note doesn't exist
     if [[ $note != "" ]]; then
         folder=$(dirname "$note")
         file=$(basename "$note")
-        [[ ! $folder == "." ]] && mkdir "$folder" # If $note contains a directory which is not the pwd, then create it
+        [[ ! $folder == "." ]] && mkdir -p "$folder" # If $note contains a directory which is not the pwd, then create it
 
         echo "<!-- $(date) -->"  >> "$note.$ext" # Create note and write date
         ${EDITOR:-vim} "$note.$ext"

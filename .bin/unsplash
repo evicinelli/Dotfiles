@@ -15,9 +15,6 @@
 # https://source.unsplash.com/{PHOTO ID}/1600x900
 # }}}
 
-# Settings
-RES="1920x1080"
-
 # Collezioni {{{
 # COLLECTION_NUMBER="1778533" # Collezione mia
 # COLLECTION_NUMBER="1007074"
@@ -52,7 +49,7 @@ RES="1920x1080"
 # COLLECTION_NUMBER="452289"
 # COLLECTION_NUMBER="1971015"
 # COLLECTION_NUMBER="215418"
-# COLLECTION_NUMBER="162468"
+COLLECTION_NUMBER="162468" # Earth from above
 # COLLECTION_NUMBER="1520527"
 # COLLECTION_NUMBER="909298"
 # COLLECTION_NUMBER="438041"  # Christmas
@@ -63,16 +60,21 @@ RES="1920x1080"
 # COLLECTION_NUMBER="994" # Sea
 # COLLECTION_NUMBER="1930316" # Hipster
 # COLLECTION_NUMBER=1118894 # Superior interior
-COLLECTION_NUMBER=1028668 # Outdoor
+# COLLECTION_NUMBER=1028668 # Outdoor
 # COLLECTION_NUMBER="397770"
+# COLLECTION_NUMBER="21106240" # Lofi
 
 user=evicinelli
 user=stbuccia
 # }}}
 
+# Settings
+# RES="1920x1080"
+RES="1440x900"
+
+UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes/$RES"
 # UNSPLASH_URL="https://source.unsplash.com/user/$user/"
 # UNSPLASH_URL="https://source.unsplash.com/collection/$COLLECTION_NUMBER/$RES"
-UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes/$RES"
 
 # Post process img?
 post-process () {
@@ -81,7 +83,9 @@ post-process () {
 	# feh --bg-scale ~/img
 	# wal -c
 	# wal -i ~/img
+
+	[[ $(uname) == "Darwin" ]] && killall Dock
 }
 
-wget --no-check-certificate -O $HOME/img $UNSPLASH_URL
+curl -k -L $UNSPLASH_URL -o $HOME/img.jpeg
 post-process img.png

@@ -9,14 +9,14 @@ colorscheme dimim
 " Statusline
 set stl=
 set stl+=%2*\ %{CurrentMode()}\ %0* " Custom mode indicator
+set stl+=%m%r%h%w                   " Flags (modifiable, read only, help file, not saved)
 set stl+=\ \ %t%<\                  " File name
 set stl+=%=                         " Statusline separator
-set stl+=\ %m%r%h%w\ \|\            " Flags (modifiable, read only, help file, not saved)
-set stl+=%Y\ \|\                    " File type
+set stl+=\|\ %Y\ \|\                    " File type
 set stl+=Ln\ %l/%L,\ Col\ %v        " Cursor line/Total lines, Cursor column
 set stl+=\ (%p%%)\ \|\              " Percentage through file
 set stl+=%{strftime('%H:%M')}\      " Current time
-set stl+=%3*%{TaskIndicator()}      " Todo indicator
+"set stl+=%3*%{TaskIndicator()}      " Todo indicator
 
 function! CurrentMode()
 	" Current mode
@@ -24,41 +24,45 @@ function! CurrentMode()
 
 	" Custom names
 	let modes = {
-		\ 'c'  : 'COMMAND',
-		\ 'i'  : 'INSERT',
-		\ 'n'  : 'NORMAL',
-		\ 'R'  : 'REPLACE',
-		\ 't'  : 'TERM',
-		\ 'v'  : 'VISUAL',
-		\ 'V'  : 'V-LINE',
-		\ '' : 'V-BLOCK',
+		\ 'c'  : 'C',
+		\ 'i'  : 'I',
+		\ 'n'  : 'N',
+		\ 'R'  : 'R',
+		\ 't'  : 'T',
+		\ 'v'  : 'V',
+		\ 'V'  : 'VL',
+		\ '' : 'VB',
 		\ }
 
 	" Mode color
-	if (currentMode =~# 'n' )
-		let color = "10"
-		let guicolor = "LightGreen"
-	elseif (currentMode =~# 'i')
-		let color = "9"
-		let guicolor = "LightRed"
-	elseif (currentMode =~# 'v\|V\|\')
-		let color = "12"
-		let guicolor = "LightBlue"
-	elseif (currentMode =~# 't')
-		let color = "11"
-		let guicolor = "LightYellow"
-	elseif (currentMode =~# 's\|R')
-		let color = "14"
-		let guicolor = "LightCyan"
-	elseif (currentMode =~# 'c')
-		let color = "13"
-		let guicolor = "LightMagenta"
-	else
-		let color="7"
-		let guicolor = "White"
-	endif
+	let imAGui = &termguicolors
+	if (! imAGui)
+		if (currentMode =~# 'n' )
+			let color = "10"
+			let guicolor = "LightGreen"
+		elseif (currentMode =~# 'i')
+			let color = "9"
+			let guicolor = "LightRed"
+		elseif (currentMode =~# 'v\|V\|\')
+			let color = "12"
+			let guicolor = "LightBlue"
+		elseif (currentMode =~# 't')
+			let color = "11"
+			let guicolor = "LightYellow"
+		elseif (currentMode =~# 's\|R')
+			let color = "14"
+			let guicolor = "LightCyan"
+		elseif (currentMode =~# 'c')
+			let color = "13"
+			let guicolor = "LightMagenta"
+		else
+			let color="7"
+			let guicolor = "White"
+		endif
 
-	exe "hi! User2 ctermfg=0 ctermbg=".color." cterm=bold guifg=black guibg=".guicolor
+		exe "hi! User2 ctermfg=0 ctermbg=".color." cterm=bold guifg=black guibg=".guicolor
+		redrawstatus
+	endif
 	return modes[currentMode]
 endfunction
 
