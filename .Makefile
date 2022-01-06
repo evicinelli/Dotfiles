@@ -126,7 +126,6 @@ pcloud:
 	read _
 
 macos:
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	# brew formulae
-	# brew casks
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+	brew bundle --file="./.Brewfile"
 	defaults write com.apple.finder QLEnableTextSelection -bool TRUE; killall Finder
