@@ -2,7 +2,7 @@
 # vim: fdm=indent
 
 # A very simple yet super effective (at least, for me) cli todo.txt manager
-# Depends on: vim, date, standard bash utilities, fzf
+# Depends on: a text editor, standard gnu utilities, fzf
 
 # Configuration
 TD=${TD:-"$HOME/todo.txt"}
@@ -12,7 +12,7 @@ URGENT_RANGE="A-A"
 
 todo-edit() {
 	if tty -s; then
-		[[ $# -gt 0 ]] && $EDITOR $TD +/$(echo ${*} | sed "s/ /.*/") || $EDITOR $TD
+		[[ $# -gt 0 ]] && $EDITOR "$TD" +/$(echo ${*} | sed "s/ /.*/") || $EDITOR "$TD"
 	else
 		echo "No terminal connected to stdout"
 	fi
@@ -31,7 +31,7 @@ todo-add(){
 		if [[ $date_exit_status -eq 0 ]]; then
 			toAdd="$pri $(date -I) $task"
 			echo "Aggiungo: $toAdd"
-			echo $toAdd | sed "s/^ //" >> $TD
+			echo $toAdd | sed "s/^ //" >> "$TD"
 		fi
 	fi
 }
@@ -39,28 +39,28 @@ todo-add(){
 todo-ls() {
 	if [[ $# -gt 0 ]]; then
 		if date -d "$*" > /dev/null 2>&1; then
-			cat $TD | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
+			cat "$TD" | grep -v "^x .*" | grep -Gi "due:$(date +%F --date="$*")"
 		else
 			args="$(echo $* | sed -e "s/\ /.*/g")" # space -> .*
-			cat $TD | grep -v "^x" | grep -Gi "$args" $TD
+			cat "$TD" | grep -v "^x" | grep -Gi "$args" "$TD"
 		fi
 	else
-		cat $TD  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
+		cat "$TD"  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
 	fi | sort -n
 }
 
 todo-done () {
 	if [[ $# -gt 0 ]]; then
 		QUERY=$(echo $* | sed -e "s/\ /.*/g")
-		ENTRY=$(grep -i "$QUERY" $TD | grep -v "^x .*")
+		ENTRY=$(grep -i "$QUERY" "$TD" | grep -v "^x .*")
 		ENTRIES_NO=$(echo -e "$ENTRY" | grep -v "^$"| wc -l)
 		[[ $ENTRIES_NO -gt 0 ]] || (echo "Nada de nada, mi sa che hai scritto male" && exit)
 		[[ $ENTRIES_NO -gt 1 ]] && ENTRY=$(echo -e "$ENTRY" | fzf)
 
+		sed -i "s|$ENTRY|x $(date +%F) &|" "$TD"
 		echo -e "Marco come completato: $ENTRY"
-		sed -i "s|$ENTRY|x $(date +%F)\ &|" $TD
 	else
-		# ENTRY=$(cat $TD | fzf)
+		# ENTRY=$(cat "$TD" | fzf)
 		todo-ls "^x $(date -I)"
 	fi
 }
@@ -72,7 +72,7 @@ function todo-agenda(){
 		t=$(todo-ls $i days)
 		day_title="- $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) [$(echo -e "$t" | wc -l)] --\n"
 		if $(tty -s) && [[ -z $TODO_DUMMY ]]; then
-			[[ ! -z "$t" ]] && echo -e "\e[1;31m${day_title}\e[0m${t}\n"
+			[[ ! -z "$t" ]] && echo -e "\033[1;31m${day_title}\033[0m${t}\n"
 		else # Dummy terminal
 			[[ ! -z "$t" ]] && echo -e "${day_title}${t}\n"
 		fi
@@ -88,22 +88,22 @@ function todo-past(){
 }
 
 function todo-someday(){
-	cat $TD | grep -v "due:.*$"
+	cat "$TD" | grep -v "due:.*$"
 }
 
 function todo-ls-proj(){
-	readarray tags < <(grep -o " @.[[:alnum:]]*" $TD | sort | uniq)
+	tags=($(grep -Eo " @\w* " "$TD" | sort | uniq))
 	for tag in ${tags[*]}; do
-		t=$(grep -v "^x" $TD | grep "$tag")
+		t=$(grep -v "^x" "$TD" | grep "$tag")
 		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"
 		echo -e "$t"
 	done
 }
 
 function todo-ls-tags(){
-	readarray tags < <(grep -Eo " \+\w* " $TD | grep -Ev "^ \+ $" | sort | uniq)
+	tags=($(grep -Eo " \+\w* " "$TD" | grep -Ev "^ \+ $" | sort | uniq))
 	for tag in ${tags[*]}; do
-		t=$(grep -v "^x" $TD | grep "$tag")
+		t=$(grep -v "^x" "$TD" | grep "$tag")
 		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"
 		echo -e "$t"
 	done
@@ -121,7 +121,7 @@ cat <<-HELP
 
 	COMMANDS
 
-		a	add     	 add [argument] as a new task. If a due date is set, it must be specified in a \`date\` compatible format
+		a	add     	 add [argument] as a new task. If a due date is set, it must be specified in a gnu \`date\` compatible format
 		d	done    	 mark task matching [argument] as done
 		e	edit    	 edit $TD with $EDITOR
 		g	agenda  	 list tasks for the next ±[argument] days (default: 6)

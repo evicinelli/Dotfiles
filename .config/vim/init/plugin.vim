@@ -5,10 +5,12 @@ if !has("nvim")
 	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
-if exists('g:GtkGuiLoaded')
+if has('gui_vimr')
 	Plug 'lifepillar/vim-solarized8'
+	" Plug 'dracula/vim'
+	Plug 'cormacrelf/dark-notify'
+	Plug 'NLKNguyen/papercolor-theme'
 endif
-
 
 " Plug 'christoomey/vim-tmux-navigator'                                                                    " Vim <3 tmux
 " Plug 'vim-pandoc/vim-rmarkdown'                                                                          " Pandoc + rmarkdown
@@ -17,7 +19,6 @@ Plug 'chrisbra/csv.vim',              {'for':'csv'}                             
 Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
 Plug 'godlygeek/tabular'                                                                                  " Tabularize
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug', 'pandoc']} " Live preview in md files
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
@@ -28,6 +29,7 @@ Plug 'tpope/vim-commentary'                                                     
 Plug 'tpope/vim-surround'                                                                                 " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                                                            " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                                                      " Pandoc syntax
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
 call plug#end()
 
 
@@ -39,7 +41,8 @@ let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_liststyle = 0       " buffer view
 
 " Pandoc options
-let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Uni/Med-Notes/bib.bib", "/home/vic/pCloudDrive/Libreria/zotero.bib"]
+" let g:pandoc#biblio#bibs = ["/home/vic/pCloud\ Drive/Uni/Med-Notes/bib.bib", "/home/vic/pCloud\ Drive/Libreria/zotero.bib"]
+let g:pandoc#biblio#bibs = ["/Users/vic/pCloud Drive/Libreria/zotero.bib"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0

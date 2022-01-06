@@ -41,7 +41,8 @@ wifi () {
 
 wttr () {
 	CITY=$(echo '$*' | sed "s/ /+/g")
-	wget -qO - "https://wttr.in/~$CITY"
+	#wget -qO - "https://wttr.in/~$CITY"
+	curl "https://wttr.in/$*"
 }
 
 daysuntil () {
@@ -59,7 +60,7 @@ randint () {
 
 calc () {
 	if [[ $1 = "-a" ]] || [[ $1 = "--advanced" ]]; then
-		python -ic 'import math as m'
+		python -ic 'import math'
 	else
 		awk "BEGIN{ print $*};"
 	fi
@@ -70,7 +71,7 @@ dimbright () {
 }
 
 vimrc () {
-	[[ $# -eq 0 ]] && vi ~/.config/vim/vimrc || vi ~/.config/vim/init/$1.vim
+	[[ $# -eq 0 ]] && $EDITOR ~/.config/vim/vimrc || $EDITOR ~/.config/vim/init/$1.vim
 }
 complete -W "$(ls ~/.config/vim/init/ | sed 's/\.vim//')" vimrc
 

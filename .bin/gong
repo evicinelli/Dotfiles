@@ -2,32 +2,44 @@
 
 GONG="/home/vic/pCloudDrive/Res/ping.opus"
 
+notify() {
+	[[ $(uname) == "Darwin" ]] && echo "osascript -e 'display alert \"GONG! 🚨\" message \"$@\"'" || echo "notify-send --urgency=critical \"GONG!\" \"$mess\" && mpv $GONG"
+
+}
+
 function gong () {
     case $1 in
-        "-g")
-            shift
-            time=$1
-            shift
-            mess=$*
-            at $time <<<"notify-send --urgency=critical \"GONG!\" \"$mess\" && mpv $GONG ";;# --volume=60";;
+        # "-g")
+        #     shift
+        #     time=$1
+        #     shift
+        #     mess=$*
+        #     echo at $time <<<"notify-send --urgency=critical \"GONG!\" \"$mess\"";;
         *)
             time=$1
             shift
             mess=$*
-            at $time <<<"notify-send --urgency=critical \"GONG!\" \"$mess\"";;
+			at $time <<< $(notify $mess);;
     esac
 }
 
 usage() {
-cat <<-EOH
-	USAGE:
-		gong [-g] <time_at_witch_to_gong> <message>
+# cat <<-EOH
+# 	USAGE:
+# 		gong [-g] <time_at_witch_to_gong> <message>
 
-	OPTIONS:
-		-g : actually gong
+# 	OPTIONS:
+# 		-g : actually gong
 
-	CONFIG:
-		Gong file: $GONG
+# 	CONFIG:
+# 		Gong file: $GONG
+# 	EOH
+
+	cat <<-EOH
+	receive reminder at specified time
+
+	USAGE
+		gong <time> <message>
 	EOH
 }
 

@@ -3,17 +3,17 @@
 # Wrapper to declare a standard function to open file
 IFS=$' '
 
-if [[ $(uname -s) -eq "Linux" ]]; then
-	ask=false;
-	if [[ $1 =~ ^-a ]] || [[ $1 =~ ^--ask ]]; then
-		ask=true;
-		shift;
-	fi
+case "$(uname)" in
+	"Linux")
+		ask=false;
+		if [[ $1 =~ ^-a ]] || [[ $1 =~ ^--ask ]]; then
+			ask=true;
+			shift;
+		fi
 
-	# "$@" correctly parse spaces
-	for arg in "$@"; do
-		[[ $ask == "true" ]] && mimeopen -a "$arg" || xdg-open "$arg"
-	done
-else
-	echo "NIY"
-fi
+		# "$@" correctly parse spaces
+		for arg in "$@"; do
+			[[ $ask == "true" ]] && mimeopen -a "$arg" || xdg-open "$arg"
+		done;;
+	*) /usr/bin/open "$@";;
+esac
