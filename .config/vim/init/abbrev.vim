@@ -20,3 +20,5 @@ dig le 8804 " Digraph ࣘࣘࣘ≤
 dig ge 8805 " Digraph ≥
 dig sh  601 " Digraph ə
 dig SH  399 " Digraph Ə
+dig sw  601 " Digraph ə
+dig SW  399 " Digraph Ə
