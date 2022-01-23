@@ -63,6 +63,7 @@ COLLECTION_NUMBER="162468" # Earth from above
 # COLLECTION_NUMBER=1028668 # Outdoor
 # COLLECTION_NUMBER="397770"
 # COLLECTION_NUMBER="21106240" # Lofi
+# COLLECTION_NUMBER="3805071" #Northern Lights
 
 user=evicinelli
 user=stbuccia
@@ -73,7 +74,7 @@ user=stbuccia
 RES="1440x900"
 
 UNSPLASH_URL="https://source.unsplash.com/user/evicinelli/likes/$RES"
-# UNSPLASH_URL="https://source.unsplash.com/user/$user/"
+# UNSPLASH_URL="https://source.unsplash.com/user/$user/$RES"
 # UNSPLASH_URL="https://source.unsplash.com/collection/$COLLECTION_NUMBER/$RES"
 
 # Post process img?

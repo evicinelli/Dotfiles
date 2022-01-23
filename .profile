@@ -4,7 +4,9 @@
 [[ -d $HOME/.fzf ]]     || (echo "Installing fzf... " && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install)
 [[ -f ~/.fzf.bash ]]    && source ~/.fzf.bash
 
-# MacOs {{{
+# MacOs wtf {{{
+# Fuck MacOs that has BSD coreutils and fuck hombrew that will not install GNU coreutils with their default name
+
 for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
 # }}}
 

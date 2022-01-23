@@ -92,7 +92,7 @@ function todo-someday(){
 }
 
 function todo-ls-proj(){
-	tags=($(grep -Eo " @\w* " "$TD" | sort | uniq))
+	tags=($(grep -Eo " @\w+" "$TD" | sort | uniq))
 	for tag in ${tags[*]}; do
 		t=$(grep -v "^x" "$TD" | grep "$tag")
 		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"
@@ -101,7 +101,7 @@ function todo-ls-proj(){
 }
 
 function todo-ls-tags(){
-	tags=($(grep -Eo " \+\w* " "$TD" | grep -Ev "^ \+ $" | sort | uniq))
+	tags=($(grep -Eo " \+\w+" "$TD" | grep -Ev "^ \+ $" | sort | uniq))
 	for tag in ${tags[*]}; do
 		t=$(grep -v "^x" "$TD" | grep "$tag")
 		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"

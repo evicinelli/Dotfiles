@@ -88,4 +88,5 @@ let g:csv_highlight_column = 'y'
 
 " Markdown-preview options
 let g:mkdp_command_for_global = 1
-let g:mkdp_browser = 'x-www-browser'
+" let g:mkdp_browser = 'x-www-browser'
+let g:mkdp_browser = '/Applications/Firefox.app/'
