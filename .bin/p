@@ -7,7 +7,7 @@ edit_key=ctrl-v
 view_key=ctrl-c
 
 p(){
-	if [[ $1 =~ ls|find|grep|add|generate|show|insert|edit|rm|mv|cp|git|help|version ]]; then
+	if [[ $1 =~ ls|find|grep|add|generate|show|insert|edit|rm|mv|cp|help|version ]]; then
 		pass $*
 	else
 		PWS=($(/usr/bin/find ~/.password-store/ -type f | sed -e $FILTER))

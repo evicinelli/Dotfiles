@@ -1,0 +1,19 @@
+colors:
+  body: none
+  date: none
+  tags: none
+  title: none
+default_hour: 9
+default_minute: 0
+editor: nvim
+encrypt: false
+highlight: true
+indent_character: '|'
+journals:
+  default: "/Users/vic/pCloud\ Drive/Documenti/jrnl/journal.txt"
+  ambulanza: "/Users/vic/pCloud\ Drive/Documenti/jrnl/ambulanza.txt"
+linewrap: 79
+tagsymbols: '@'
+template: false
+timeformat: '%Y-%m-%d %H:%M'
+version: v2.8.3
