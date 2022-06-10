@@ -5,9 +5,9 @@ if !has("nvim")
 	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
-if has('gui_vimr')
+if has('gui_vimr') || has ('gui_macvim')
 	Plug 'lifepillar/vim-solarized8'
-	" Plug 'dracula/vim'
+	Plug 'dracula/vim'
 	Plug 'cormacrelf/dark-notify'
 	Plug 'NLKNguyen/papercolor-theme'
 endif

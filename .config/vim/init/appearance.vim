@@ -24,19 +24,18 @@ function! CurrentMode()
 
 	" Custom names
 	let modes = {
-		\ 'c'  : 'C',
-		\ 'i'  : 'I',
-		\ 'n'  : 'N',
-		\ 'R'  : 'R',
-		\ 't'  : 'T',
-		\ 'v'  : 'V',
-		\ 'V'  : 'VL',
-		\ '' : 'VB',
+		\ 'c'  : '🤖',
+		\ 'i'  : '✏️ ',
+		\ 'n'  : '😊',
+		\ 'R'  : '☝️',
+		\ 't'  : '💻',
+		\ 'v'  : '👀',
+		\ 'V'  : '🐠',
+		\ '' : '🐳',
 		\ }
 
 	" Mode color
-	let imAGui = &termguicolors
-	if (! imAGui)
+	if (&termguicolors)
 		if (currentMode =~# 'n' )
 			let color = "10"
 			let guicolor = "LightGreen"
@@ -59,7 +58,6 @@ function! CurrentMode()
 			let color="7"
 			let guicolor = "White"
 		endif
-
 		exe "hi! User2 ctermfg=0 ctermbg=".color." cterm=bold guifg=black guibg=".guicolor
 		redrawstatus
 	endif
