@@ -8,7 +8,8 @@ colorscheme dimim
 
 " Statusline
 set stl=
-set stl+=%2*\ %{CurrentMode()}\ %0* " Custom mode indicator
+set stl=%2*
+set stl+=\ %{CurrentMode()}\ %0* " Custom mode indicator
 set stl+=%m%r%h%w                   " Flags (modifiable, read only, help file, not saved)
 set stl+=\ \ %t%<\                  " File name
 set stl+=%=                         " Statusline separator
