@@ -8,61 +8,70 @@ colorscheme dimim
 
 " Statusline
 set stl=
-set stl=%2*
-set stl+=\ %{CurrentMode()}\ %0* " Custom mode indicator
-set stl+=%m%r%h%w                   " Flags (modifiable, read only, help file, not saved)
-set stl+=\ \ %t%<\                  " File name
-set stl+=%=                         " Statusline separator
-set stl+=\|\ %Y\ \|\                    " File type
-set stl+=Ln\ %l/%L,\ Col\ %v        " Cursor line/Total lines, Cursor column
-set stl+=\ (%p%%)\ \|\              " Percentage through file
-set stl+=%{strftime('%H:%M')}\      " Current time
-"set stl+=%3*%{TaskIndicator()}      " Todo indicator
+" set stl=%2*
+set stl+=%0*						" Default background
+set stl+=%m%r%h%w					" Flags (modifiable, read only, help file, not saved)
+set stl+=\ \ %t%<\ 					" File name
+set stl+=%=							" Statusline separator
+set stl+=\|\ %Y\ \|\ 				" File type
+set stl+=Ln\ %l/%L,\ Col\ %v		" Cursor line/Total lines, Cursor column
+set stl+=\ (%p%%)\ \|\ 				" Percentage through file
+set stl+=%{strftime('%H:%M')}\ 		" Current time
+set stl+=\|\ %{CurrentMode()}\ 		" Custom mode indicator
+"set stl+=%3*%{TaskIndicator()}	 " Todo indicator
 
 function! CurrentMode()
-	" Current mode
-	let currentMode = mode()
-
-	" Custom names
 	let modes = {
-		\ 'c'  : '🤖',
-		\ 'i'  : '✏️ ',
-		\ 'n'  : '😊',
-		\ 'R'  : '☝️',
-		\ 't'  : '💻',
-		\ 'v'  : '👀',
-		\ 'V'  : '🐠',
-		\ '' : '🐳',
-		\ }
+		\ '!'    : ' #️⃣ ',
+		\ ''   : ' 🧱',
+		\ ''   : 'V-BLK',
+		\ 's'  : ' 🐳',
+		\ 'R'    : ' ⚡️',
+		\ 'Rc'   : ' ⚡️',
+		\ 'Rv'   : ' ⚡️',
+		\ 'Rvc'  : ' ⚡️',
+		\ 'Rvx'  : ' ⚡️',
+		\ 'Rx'   : ' ⚡️',
+		\ 'S'    : ' 🐠',
+		\ 'V'    : 'VLN',
+		\ 'Vs'   : ' 🐡',
+		\ 'c'    : 'CMD',
+		\ 'cv'   : ' ↩️' ,
+		\ 'i'    : 'INS',
+		\ 'ic'   : ' 🔥',
+		\ 'ix'   : ' 🔥',
+		\ 'n'    : 'NRM',
+		\ 'niI'  : ' 🧡',
+		\ 'niR'  : ' 💚',
+		\ 'niV'  : ' 💙',
+		\ 'no'   : ' 💜',
+		\ 'no' : ' 🖤',
+		\ 'noV'  : ' 🤍',
+		\ 'nov'  : ' 🤎',
+		\ 'nt'   : ' 💛',
+		\ 'r'    : 'REP',
+		\ 'r?'   : ' 👉',
+		\ 'rm'   : ' 👉',
+		\ 's'    : 'SUB',
+		\ 't'    : 'TRM',
+		\ 'v'    : 'VIS',
+		\ 'vs'   : ' 🦐',
+		\}
 
-	" Mode color
-	if (&termguicolors)
-		if (currentMode =~# 'n' )
-			let color = "10"
-			let guicolor = "LightGreen"
-		elseif (currentMode =~# 'i')
-			let color = "9"
-			let guicolor = "LightRed"
-		elseif (currentMode =~# 'v\|V\|\')
-			let color = "12"
-			let guicolor = "LightBlue"
-		elseif (currentMode =~# 't')
-			let color = "11"
-			let guicolor = "LightYellow"
-		elseif (currentMode =~# 's\|R')
-			let color = "14"
-			let guicolor = "LightCyan"
-		elseif (currentMode =~# 'c')
-			let color = "13"
-			let guicolor = "LightMagenta"
-		else
-			let color="7"
-			let guicolor = "White"
-		endif
-		exe "hi! User2 ctermfg=0 ctermbg=".color." cterm=bold guifg=black guibg=".guicolor
-		redrawstatus
-	endif
-	return modes[currentMode]
+	" let colors = {
+	" 	\ 'c'  : 'magenta',
+	" 	\ 'i'  : 'red',
+	" 	\ 'n'  : 'green',
+	" 	\ 'R'  : 'darkcyan',
+	" 	\ 't'  : 'yellow',
+	" 	\ 'v'  : 'lightgray',
+	" 	\ 'V'  : 'blue',
+	" 	\ '' : 'darkblue',
+	" 	\ }
+
+	" exe "hi! User2 ctermfg=".colors[mode()]." cterm=bold guifg=".colors[mode()]
+	" redrawstatus!
+	return modes[mode()]
 endfunction
 
 " Draw a small rectangle indicating if there are pending task in my

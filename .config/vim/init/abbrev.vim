@@ -11,14 +11,17 @@ iabbrev tp tp.
 
 
 " Digraphs
-dig lt 0060 " Digraph <
-dig gt 0062 " Digraph >
-dig ra 8594 " Digraph →
-dig Ra 8658 " Digraph ⇒
+dig BA 8656 " Digraph ⇐
 dig Ba 8656 " Digraph ⇐
-dig le 8804 " Digraph ࣘࣘࣘ≤
-dig ge 8805 " Digraph ≥
-dig sh  601 " Digraph ə
+dig RA 8658 " Digraph ⇒
+dig Ra 8658 " Digraph ⇒
 dig SH  399 " Digraph Ə
-dig sw  601 " Digraph ə
 dig SW  399 " Digraph Ə
+dig ge 8805 " Digraph ≥
+dig gt 0062 " Digraph >
+dig le 8804 " Digraph ࣘࣘࣘ≤
+dig lt 0060 " Digraph <
+dig ra 8594 " Digraph →
+dig sh  601 " Digraph ə
+dig sw  601 " Digraph ə
+

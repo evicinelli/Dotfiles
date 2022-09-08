@@ -19,17 +19,18 @@ Plug 'chrisbra/csv.vim',              {'for':'csv'}                             
 Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
 Plug 'godlygeek/tabular'                                                                                  " Tabularize
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
 Plug 'paroxayte/autocd.vim'                                                                               " Autocd in folder rule-based
 Plug 'rickhowe/diffchar.vim'                                                                              " Better highlighting in diff mode
+Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'sheerun/vim-polyglot'                                                                               " A collection of language pack
 Plug 'tpope/vim-commentary'                                                                               " Comment done right
 Plug 'tpope/vim-surround'                                                                                 " Surrounding motions on steroid
 Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                                                            " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                                                      " Pandoc syntax
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
 call plug#end()
 
 
