@@ -19,7 +19,7 @@ Plug 'chrisbra/csv.vim',              {'for':'csv'}                             
 Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
 Plug 'godlygeek/tabular'                                                                                  " Tabularize
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree

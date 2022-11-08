@@ -1,3 +1,6 @@
 [submodule ".local/bin/gtd-connermcd"]
 	path = .local/bin/gtd-connermcd
 	url = https://github.com/connermcd/gtd.git
+[submodule ".config/mpv/scripts/simple-mpv-webui"]
+	path = .config/mpv/scripts/simple-mpv-webui
+	url = https://github.com/open-dynaMIX/simple-mpv-webui.git

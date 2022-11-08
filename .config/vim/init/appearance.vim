@@ -10,6 +10,7 @@ colorscheme dimim
 set stl=
 " set stl=%2*
 set stl+=%0*						" Default background
+set stl+=\ %{CurrentMode()}\ \|\ 	" Custom mode indicator
 set stl+=%m%r%h%w					" Flags (modifiable, read only, help file, not saved)
 set stl+=\ \ %t%<\ 					" File name
 set stl+=%=							" Statusline separator
@@ -17,45 +18,44 @@ set stl+=\|\ %Y\ \|\ 				" File type
 set stl+=Ln\ %l/%L,\ Col\ %v		" Cursor line/Total lines, Cursor column
 set stl+=\ (%p%%)\ \|\ 				" Percentage through file
 set stl+=%{strftime('%H:%M')}\ 		" Current time
-set stl+=\|\ %{CurrentMode()}\ 		" Custom mode indicator
 "set stl+=%3*%{TaskIndicator()}	 " Todo indicator
 
 function! CurrentMode()
 	let modes = {
-		\ '!'    : ' #️⃣ ',
-		\ ''   : ' 🧱',
+		\ '!'    : ' * ',
+		\ ''   : ' * ',
 		\ ''   : 'V-BLK',
-		\ 's'  : ' 🐳',
-		\ 'R'    : ' ⚡️',
-		\ 'Rc'   : ' ⚡️',
-		\ 'Rv'   : ' ⚡️',
-		\ 'Rvc'  : ' ⚡️',
-		\ 'Rvx'  : ' ⚡️',
-		\ 'Rx'   : ' ⚡️',
-		\ 'S'    : ' 🐠',
+		\ 's'  : ' * ',
+		\ 'R'    : 'RPL',
+		\ 'Rc'   : 'RPL-c ',
+		\ 'Rv'   : 'RPL-v',
+		\ 'Rvc'  : ' * ',
+		\ 'Rvx'  : ' * ',
+		\ 'Rx'   : ' * ',
+		\ 'S'    : ' * ',
 		\ 'V'    : 'VLN',
-		\ 'Vs'   : ' 🐡',
+		\ 'Vs'   : ' * ',
 		\ 'c'    : 'CMD',
-		\ 'cv'   : ' ↩️' ,
+		\ 'cv'   : ' * ' ,
 		\ 'i'    : 'INS',
-		\ 'ic'   : ' 🔥',
-		\ 'ix'   : ' 🔥',
+		\ 'ic'   : ' * ',
+		\ 'ix'   : ' * ',
 		\ 'n'    : 'NRM',
-		\ 'niI'  : ' 🧡',
-		\ 'niR'  : ' 💚',
-		\ 'niV'  : ' 💙',
-		\ 'no'   : ' 💜',
-		\ 'no' : ' 🖤',
-		\ 'noV'  : ' 🤍',
-		\ 'nov'  : ' 🤎',
-		\ 'nt'   : ' 💛',
-		\ 'r'    : 'REP',
-		\ 'r?'   : ' 👉',
-		\ 'rm'   : ' 👉',
+		\ 'niI'  : ' * ',
+		\ 'niR'  : ' * ',
+		\ 'niV'  : ' * ',
+		\ 'no'   : ' * ',
+		\ 'no' : ' * ',
+		\ 'noV'  : ' * ',
+		\ 'nov'  : ' * ',
+		\ 'nt'   : ' * ',
+		\ 'r'    : 'RPL',
+		\ 'r?'   : ' * ',
+		\ 'rm'   : ' * ',
 		\ 's'    : 'SUB',
 		\ 't'    : 'TRM',
 		\ 'v'    : 'VIS',
-		\ 'vs'   : ' 🦐',
+		\ 'vs'   : ' * ',
 		\}
 
 	" let colors = {

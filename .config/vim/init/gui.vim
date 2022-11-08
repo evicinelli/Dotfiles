@@ -1,11 +1,11 @@
 if exists('g:GtkGuiLoaded')
 	set termguicolors
 	se bg=light
-	colorscheme solarized8
+	colorscheme solarized8_flat
 endif
 
 if has("gui_vimr")
-	colorscheme solarized8_flat
+	colorscheme PaperColor
 	se bg=light
 	lua require('dark_notify').run()
 endif
