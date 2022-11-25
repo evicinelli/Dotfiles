@@ -10,7 +10,8 @@ function Mednotes()
 endfunction
 
 " Control mpv with --ipc-socket, vital while transcribing lectures
-nnoremap <leader>mm :!echo seek -2 \| socat - /tmp/mpvsocket && echo cycle pause \| socat - /tmp/mpvsocket<CR><CR>
+nnoremap <leader>mm :!echo seek -1 \| socat - /tmp/mpvsocket && echo cycle pause \| socat - /tmp/mpvsocket<CR><CR>
+nnoremap <leader>,, :!echo seek -1 \| socat - /tmp/mpvsocket && echo cycle pause \| socat - /tmp/mpvsocket<CR><CR>
 
 nnoremap <leader>n5 :!echo seek +5 \| socat - /tmp/mpvsocket<CR><CR>
 nnoremap <leader>nn :!echo seek +10 \| socat - /tmp/mpvsocket<CR><CR>
