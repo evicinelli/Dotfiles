@@ -3,7 +3,9 @@
 GONG="/home/vic/pCloudDrive/Res/ping.opus"
 
 notify() {
-	[[ $(uname) == "Darwin" ]] && echo "osascript -e 'display alert \"GONG! 🚨\" message \"$@\"'" || echo "notify-send --urgency=critical \"GONG!\" \"$mess\" && mpv $GONG"
+	# [[ $(uname) == "Darwin" ]] && echo "osascript -e 'display alert \"GONG! 🚨\" message \"$@\"'" ||
+
+	echo "notify-send --urgency=critical \"PING!\" \"$mess\" && play -nq -t alsa synth 0.07 sine 2000"
 
 }
 
@@ -25,21 +27,11 @@ function gong () {
 
 usage() {
 # cat <<-EOH
-# 	USAGE:
-# 		gong [-g] <time_at_witch_to_gong> <message>
-
-# 	OPTIONS:
-# 		-g : actually gong
-
-# 	CONFIG:
-# 		Gong file: $GONG
-# 	EOH
-
 	cat <<-EOH
 	receive reminder at specified time
 
 	USAGE
-		gong <time> <message>
+		$(basename $0) <time> <message>
 	EOH
 }
 

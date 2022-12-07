@@ -88,5 +88,5 @@ post-process () {
 	[[ $(uname) == "Darwin" ]] && killall Dock
 }
 
-curl -k -L $UNSPLASH_URL -o $HOME/img.jpeg
+curl -k -L $UNSPLASH_URL -o $HOME/.img.jpeg
 post-process img.png

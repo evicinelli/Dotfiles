@@ -10,6 +10,7 @@ set hidden                                 " Allow to switch buffer without savi
 set hlsearch                               " Highlight all search results
 set ignorecase                             " Ignore case when search
 set incsearch                              " Incremental search
+set isfname-=\=                            " How to recognize filenames after an = sign
 set laststatus=2                           " 1 ⇒ statusbar only if > 2 windows; 2 ⇒ always; 0 ⇒ never
 set lazyredraw                             " Redraw screen only when really necessary
 set linebreak                              " Break long lines at spaces, not in the middle of a word

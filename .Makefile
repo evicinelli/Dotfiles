@@ -17,7 +17,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen
+	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox
 
 nvim:
 	# Install nvim
@@ -84,7 +84,8 @@ config:
 	xdg-mime default nvim.desktop text/markdown
 
 gnome:
-	gsettings set org.gnome.desktop.background picture-uri 'file:///home/vic/img'
+	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
+	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
 	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
@@ -94,15 +95,18 @@ gnome:
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
 	gsettings set org.gnome.desktop.media-handling automount true
 	gsettings set org.gnome.desktop.media-handling automount-open true
+	gsettings set org.gnome.desktop.notifications show-banners true
+	gsettings set org.gnome.desktop.notifications show-in-lock-screen true
 	gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 	gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
-	gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/vic/img'
+	gsettings set org.gnome.desktop.screensaver picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu ['<Primary><Alt>space']
 	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
-	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]"
-	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]"
+	gsettings set org.gnome.desktop.wm.keybindings switch-group ['<Super>Above_Tab', '<Alt>Above_Tab']
+	gsettings set org.gnome.desktop.wm.keybindings switch-group-backward ['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']
 	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']"
 	gsettings set org.gnome.desktop.wm.preferences button-layout ':close'
 	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true

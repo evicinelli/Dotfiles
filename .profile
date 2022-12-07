@@ -7,7 +7,7 @@
 # MacOs wtf {{{
 # Fuck MacOs that has BSD coreutils and fuck hombrew that will not install GNU coreutils with their default name
 
-for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
+$(which brew) && for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
 # }}}
 
 # Personal bin {{{
@@ -20,7 +20,7 @@ export EDITOR=nvim
 # export VISUAL=vimr
 [[ nvim ]] && export MANPAGER='nvim +Man!'
 
-export P="$HOME/pCloud Drive"
+export P="$HOME/pCloudDrive"
 export DN="${P}/Documenti/Todo/done.txt"
 export DOC="${P}/Documenti"
 export DOWN="$HOME/Scaricati"
