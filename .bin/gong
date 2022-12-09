@@ -26,7 +26,6 @@ function gong () {
 }
 
 usage() {
-# cat <<-EOH
 	cat <<-EOH
 	receive reminder at specified time
 

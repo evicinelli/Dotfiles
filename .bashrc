@@ -50,15 +50,15 @@ bind C-l:clear-screen
 # }}}
 
 # Shell options {{{
-# shopt -s autocd
+shopt -s autocd
 shopt -s cdable_vars
 shopt -s cdspell
-# shopt -s checkjobs
+shopt -s checkjobs
 shopt -s checkwinsize
-# shopt -s direxpand
-# shopt -s dirspell
+shopt -s direxpand
+shopt -s dirspell
 shopt -s extglob
-# shopt -s globstar
+shopt -s globstar
 shopt -s histappend
 # }}}
 

@@ -16,10 +16,8 @@ isbn2bib () {
 }
 
 ding () {
-	file=$P/Res/ping.opus
-	mpv --no-terminal $file & #&>/dev/null &
 	echo -e "\a"
-	[[ ! -z $XDG_CURRENT_DESKTOP ]] && notify-send --urgency=critical "🔔" "Ding!"
+	[[ ! -z $XDG_CURRENT_DESKTOP ]] && notify-send --urgency=critical "🔔  " "Ding!"
 }
 
 share-home-network () {

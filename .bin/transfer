@@ -1,38 +1,40 @@
 #! /usr/bin/env bash
 # vim: fdm=marker
-# https://github.com/mia-0/0x0
-# https://0x0.st
-# FILE RETENTION PERIOD
-# ---------------------
-#
-# retention = min_age + (-max_age + min_age) * pow((file_size / max_size - 1), 3)
-# 
-#    days
-#     365 |  \
-#         |   \
-#         |    \
-#         |     \
-#         |      \
-#         |       \
-#         |        ..
-#         |          \
-#   197.5 | ----------..-------------------------------------------
-#         |             ..
-#         |               \
-#         |                ..
-#         |                  ...
-#         |                     ..
-#         |                       ...
-#         |                          ....
-#         |                              ......
-#      30 |                                    ....................
-#           0                        256                        512
-#                                                               MiB
-
-curl --silent 0x0.st | grep "FILE RETENTION" -A 25
 
 if [[ $# -gt 0 ]]; then
     tmpfile=$( mktemp -t transferXXX );
     curl --silent --progress-bar -F "file=@$1" https://0x0.st >> $tmpfile
+	cat $tmpfile | tee | xclip -f -selection primary | xclip -f -selection clipboard
+else
+	cat <<-EOF
+	  https://github.com/mia-0/0x0
+	  https://0x0.st
+
+	  FILE RETENTION PERIOD
+	  ---------------------
+
+	  retention = min_age + (-max_age + min_age) * pow((file_size / max_size - 1), 3)
+
+	     days
+	      365 |  \
+	          |   \
+	          |    \
+	          |     \
+	          |      \
+	          |       \
+	          |        ..
+	          |          \
+	    197.5 | ----------..-------------------------------------------
+	          |             ..
+	          |               \
+	          |                ..
+	          |                  ...
+	          |                     ..
+	          |                       ...
+	          |                          ....
+	          |                              ......
+	       30 |                                    ....................
+	            0                        256                        512
+
+	EOF
 fi
-    cat $tmpfile | xclip -f -selection primary | xclip -f -selection clipboard

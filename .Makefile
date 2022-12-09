@@ -89,10 +89,12 @@ gnome:
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
 	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
+	gsettings set org.gnome.desktop.interface enable-hot-corners true
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
 	gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
+	gsettings set org.gnome.desktop.interface text-scaling-factor 0.90
 	gsettings set org.gnome.desktop.media-handling automount true
 	gsettings set org.gnome.desktop.media-handling automount-open true
 	gsettings set org.gnome.desktop.notifications show-banners true
@@ -103,6 +105,8 @@ gnome:
 	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu ['<Primary><Alt>space']
 	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
+	gsettings set org.gnome.desktop.wm.keybindings cycle-windows ['<Super>Escape','<Alt>Escape']
+	gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward ['<Shift><Super>Escape','<Shift><Alt>Escape']
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-group ['<Super>Above_Tab', '<Alt>Above_Tab']
@@ -111,13 +115,24 @@ gnome:
 	gsettings set org.gnome.desktop.wm.preferences button-layout ':close'
 	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 	gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Sans Bold 11'
+	gsettings set org.gnome.desktop.wm.preferences titlebar-uses-system-font true
 	gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'detailed_type', 'date_modified', 'permissions']"
 	gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
 	gsettings set org.gnome.nautilus.list-view use-tree-view true
 	gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
+	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
 	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
+	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver ['<Super><Shift>l']
+	gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'blank'
+	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'blank'
+	gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
 	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
+	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
+	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
+	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
+	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
 
 pcloud:
 	# Download pcloud client
