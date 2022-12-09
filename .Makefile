@@ -35,14 +35,14 @@ utils:
 
 pandoc: python
 	# Install pandoc and latex + latex italian language settings
-	pkexec $(INSTALL) pandoc texlive-lang-italian pandoc-citeproc poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex graphviz ttf-mscorefonts-installer
+	pkexec $(INSTALL) pandoc texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex graphviz ttf-mscorefonts-installer
 	mkdir -p .local/share/filters/
 	curl https://raw.githubusercontent.com/kuba-orlik/pandoc-dot2tex-filter/master/dot2tex-filter.py >> .local/share/filters/dot2tex
 	chmod +x .local/share/filters/dot2tex
 
-gui-app: repos
+gui-app:
 	# Install gui apps i use
-	pkexec $(INSTALL) youtube-dl qutebrowser qbittorrent brave-browser obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol gnome-tweak-tool
+	pkexec $(INSTALL) youtube-dl qutebrowser qbittorrent obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol
 
 repos:
 	# Add external repos
@@ -56,7 +56,7 @@ flatpak:
 	# Install flatpak applications
 	pkexec $(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket org.zotero.Zotero
+	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket org.zotero.Zotero com.github.johnfactotum.Foliate
 
 python:
 	pkexec $(INSTALL) python3 python3-pip python-is-python3
@@ -71,17 +71,14 @@ config:
 	# Personal configurations here and there
 	pkexec ln -sf /bin/fdfind /bin/fd
 	pkexec flatpak override org.zotero.Zotero --filesystem=$(HOME)
-	[[ -d $(DOC)/Password-store ]] && ln -sf $(DOC)/Password-store $(HOME)/.password-store
-	[[ -d $(P)/Desktop ]] && rm -r $(HOME)/Scrivania && ln -sf $(P)/Desktop $(HOME)/Scrivania
-	[[ -d $(P)/Libreria/Zotero ]] && ln -sf $(P)/Libreria/Zotero $(HOME)/
 	pkexec update-alternatives --config x-terminal-emulator
 	pkexec update-alternatives --config x-www-browser
 	pkexec update-alternatives --config vi
 	pkexec update-alternatives --config vim
 	pkexec update-alternatives --config view
 	pkexec update-alternatives --config vimdiff
-	xdg-mime default nvim.desktop text/plain
-	xdg-mime default nvim.desktop text/markdown
+	xdg-mime default nvim.desktop text/*
+	xdg-mime default mpv.desktop video/*
 
 gnome:
 	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
@@ -92,7 +89,7 @@ gnome:
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
-	gsettings set org.gnome.desktop.interface show-battery-percentage true
+	# gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.90
 	gsettings set org.gnome.desktop.media-handling automount true
@@ -123,16 +120,16 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
-	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
+	# gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'blank'
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'blank'
-	gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
+	# gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
 	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
-	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
+	# gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
 
 pcloud:
 	# Download pcloud client
