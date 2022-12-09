@@ -103,14 +103,14 @@ gnome:
 	gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
 	gsettings set org.gnome.desktop.screensaver picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
-	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu ['<Primary><Alt>space']
+	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "['<Primary><Alt>space']"
 	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
-	gsettings set org.gnome.desktop.wm.keybindings cycle-windows ['<Super>Escape','<Alt>Escape']
-	gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward ['<Shift><Super>Escape','<Shift><Alt>Escape']
+	gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>Escape','<Alt>Escape']"
+	gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Shift><Super>Escape','<Shift><Alt>Escape']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
-	gsettings set org.gnome.desktop.wm.keybindings switch-group ['<Super>Above_Tab', '<Alt>Above_Tab']
-	gsettings set org.gnome.desktop.wm.keybindings switch-group-backward ['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']
+	gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Super>Above_Tab', '<Alt>Above_Tab']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']"
 	gsettings set org.gnome.desktop.wm.preferences button-layout ':close'
 	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
@@ -124,7 +124,7 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
 	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
-	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver ['<Super><Shift>l']
+	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'blank'
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'blank'
 	gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
