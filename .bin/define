@@ -1,18 +1,19 @@
 #! /usr/bin/env bash
 # Define a word using treccani vocabulary
 
-VOCAB_PROVIDER_URL="https://www.treccani.it/vocabolario"
-PANDOC_CUSTOM_WRITER="$HOME/.pandoc/terminal.lua"
-PANDOC_WRITER=plain
+set -e
+
+VOCAB_PROVIDER_URL="https://www.treccani.it/vocabolario" 	# Vocab provider
+PANDOC_CUSTOM_WRITER="$HOME/.pandoc/terminal.lua"			# Pandoc custom writer to format output text
+PANDOC_WRITER=plain											# Pandoc fallback writer
+GREP_RULE="tc-title.*DEBUG"									# Rule for scraping definition from webpage
 
 if $(tty -s) && [[ -f ${PANDOC_CUSTOM_WRITER} ]]; then
 	PANDOC_WRITER="$PANDOC_CUSTOM_WRITER"
 fi
 
-set -e
-
 if [[ $# -gt 0 ]]; then
-	curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "tc-title.*DEBUG" | pandoc -f html -t $PANDOC_WRITER | grep -v "tc-title\">"
+	curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "$GREP_RULE" | pandoc -f html -t $PANDOC_WRITER | grep -v "tc-title\">"
 else
 	echo "Usage: $(basename $0) <word>"
 fi
