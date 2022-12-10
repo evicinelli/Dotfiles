@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+# Define a word using treccani vocabulary
+
+VOCAB_PROVIDER_URL="https://www.treccani.it/vocabolario"
+PANDOC_CUSTOM_WRITER="$HOME/.pandoc/terminal.lua"
+PANDOC_WRITER=plain
+
+if $(tty -s) && [[ -f ${PANDOC_CUSTOM_WRITER} ]]; then
+	PANDOC_WRITER="$PANDOC_CUSTOM_WRITER"
+fi
+
+set -e
+
+if [[ $# -gt 0 ]]; then
+	curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "tc-title.*DEBUG" | pandoc -f html -t $PANDOC_WRITER | grep -v "tc-title\">"
+else
+	echo "Usage: $(basename $0) <word>"
+fi
