@@ -21,10 +21,10 @@ local options = {
     overlay_id = 42,
 
     -- Spawn thumbnailer on file load for faster initial thumbnails
-    spawn_first = false,
+    spawn_first = true,
 
     -- Enable on network playback
-    network = false,
+    network = true,
 
     -- Enable on audio playback
     audio = false,

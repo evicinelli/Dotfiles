@@ -1,0 +1,1 @@
+-S "+vcodec:avc" # When download yt videos for streaming pls use h264, i have a tiny laptop and i could reeeally use video decoding with vaapi -- h264 only :(

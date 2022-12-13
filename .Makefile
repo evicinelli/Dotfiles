@@ -17,7 +17,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox
+	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat
 
 nvim:
 	# Install nvim
@@ -35,14 +35,14 @@ utils:
 
 pandoc: python
 	# Install pandoc and latex + latex italian language settings
-	pkexec $(INSTALL) pandoc texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-luatex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex graphviz ttf-mscorefonts-installer
+	pkexec $(INSTALL) pandoc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer
 	mkdir -p .local/share/filters/
 	curl https://raw.githubusercontent.com/kuba-orlik/pandoc-dot2tex-filter/master/dot2tex-filter.py >> .local/share/filters/dot2tex
 	chmod +x .local/share/filters/dot2tex
 
 gui-app:
 	# Install gui apps i use
-	pkexec $(INSTALL) youtube-dl qutebrowser qbittorrent obs-studio meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol
+	pkexec $(INSTALL) youtube-dl qutebrowser meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol
 
 repos:
 	# Add external repos
@@ -56,7 +56,7 @@ flatpak:
 	# Install flatpak applications
 	pkexec $(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket org.zotero.Zotero com.github.johnfactotum.Foliate
+	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket org.zotero.Zotero com.github.johnfactotum.Foliate stremio
 
 python:
 	pkexec $(INSTALL) python3 python3-pip python-is-python3

@@ -29,9 +29,9 @@ export LIB="${P}/Libreria"
 export MEDIA="${P}/Media"
 export NOTES="${P}/Notes"
 export TD="${P}/Documenti/Todo/todo.txt"
-export UNI="${P}/Uni/"
 
 # Uni
+export UNI="${P}/Uni/"
 export MED="${UNI}/Med-Notes"
 export MED1="${MED}/Med1"
 export MED2="${MED}/Med2"
