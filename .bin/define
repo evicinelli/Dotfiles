@@ -8,12 +8,18 @@ PANDOC_CUSTOM_WRITER="$HOME/.pandoc/terminal.lua"			# Pandoc custom writer to fo
 PANDOC_WRITER=plain											# Pandoc fallback writer
 GREP_RULE="tc-title.*DEBUG"									# Rule for scraping definition from webpage
 
-if $(tty -s) && [[ -f ${PANDOC_CUSTOM_WRITER} ]]; then
-	PANDOC_WRITER="$PANDOC_CUSTOM_WRITER"
-fi
-
+$(tty -s) && [[ -f $PANDOC_CUSTOM_WRITER ]] && PANDOC_WRITER="$PANDOC_CUSTOM_WRITER"
 if [[ $# -gt 0 ]]; then
-	curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "$GREP_RULE" | pandoc -f html -t $PANDOC_WRITER | grep -v "tc-title\">"
+
+	[[ $1 == "-e" ]] && (shift; curl https://www.treccani.it/enciclopedia/$1 | tr -d '\n' | grep -o "text spiega.*class=\"sinottico" | pandoc -f html -t $PANDOC_WRITER | grep -v "text spiega" ) 2>/dev/null && exit 0
+
+	(curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "$GREP_RULE" | pandoc -f html -t $PANDOC_WRITER | grep -v "tc-title\">") 2>/dev/null
+
 else
-	echo "Usage: $(basename $0) <word>"
+	echo <<-EOH
+	Usage:
+		$(basename $0) <word>
+		$(basename $0) -e <word>
+	EOH
+
 fi

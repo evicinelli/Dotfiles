@@ -24,6 +24,7 @@ noremap <C-p> :cp<CR>
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
+noremap <leader>dw :!define <cword><CR>
 noremap <leader>so :!mimeopen "%" <CR>
 noremap <leader>m :MarkdownPreviewToggle<CR>
 noremap Y y$

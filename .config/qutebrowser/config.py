@@ -11,7 +11,9 @@ c.url.searchengines = {'DEFAULT': 'https://ecosia.com/search?q={}', 'ddg': 'http
 c.url.start_pages = 'https://ecosia.com'
 
 config.bind('E', 'edit-text')
-config.bind('<Ctrl-y>', 'hint links spawn --detach mpv --force-window yes {hint-url}')
+
+config.bind('<Ctrl-m>', 'hint links spawn --detach mpv --force-window yes {hint-url}')
+config.bind('<Ctrl-Shift-m>', 'spawn --detach mpv --force-window yes {url}')
 
 config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 config.set('content.cookies.accept', 'all', 'devtools://*')
