@@ -1,4 +1,4 @@
-if exists('g:GtkGuiLoaded')
+if has('gui_running')
 	set termguicolors
 	se bg=light
 	colorscheme solarized8_flat

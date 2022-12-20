@@ -1,23 +1,27 @@
 # vim: fdm=indent foldignore=
 
 SHELL=/bin/bash
-INSTALL=apt install -y
+PKGMGR=apt
+INSTALL=$(PKGMGR) install -y
 
-all: update apps config
-apps: base applications
-
-base: essentials dotfiles nvim
-applications: utils pandoc gui-app flatpak modules
-modules: npm python
+all          : update apps config
+apps         : base applications
+base         : essentials dotfiles nvim
+applications : utils pandoc gui-app flatpak
+modules      : npm python
 
 update:
+	# Warning
+	echo "WARNING! Launch make with sudo -E to preserve your home! Enter to continue"
+	read _
+
 	# Update the system
-	pkexec apt update
-	pkexec apt upgrade
+	$(PKGMGR) update
+	$(PKGMGR) upgrade
 
 essentials:
 	# Install essential cmd utilities
-	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat
+	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2
 
 dotfiles:
 	cd
@@ -28,7 +32,7 @@ dotfiles:
 
 nvim:
 	# Install nvim
-	pkexec $(INSTALL) neovim
+	$(INSTALL) neovim
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	nvim +PlugInstall +PlugUpdate +qa!
 	xdg-mime default nvim.desktop text/*
@@ -42,56 +46,58 @@ nvim:
 
 utils:
 	# Install various utilities
-	pkexec $(INSTALL) kitty mpv imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
+	$(INSTALL) kitty mpv imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
 
 pandoc: python npm
 	# Install pandoc and latex + latex italian language settings
-	pkexec $(INSTALL) pandoc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer
+	$(INSTALL) pandoc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer
 	mkdir -p .local/share/filters/
 	curl https://raw.githubusercontent.com/kuba-orlik/pandoc-dot2tex-filter/master/dot2tex-filter.py >> .local/share/filters/dot2tex
 	chmod +x .local/share/filters/dot2tex
 
 gui-app:
-	# Install gui apps i use
-	pkexec $(INSTALL) youtube-dl qutebrowser meld gnome-sushi flameshot drawing gnome-shell-pomodoro pavucontrol
+	# Install gui apps
+	$(INSTALL) youtube-dl qutebrowser meld gnome-sushi flameshot drawing gnome-shell-pomodoro
 
 repos:
-	# Add external repos
-	curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | pkexec apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-	echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | pkexec tee /etc/apt/sources.list.d/brave-browser-release.list
-	# wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
-	# add-apt-repository 'deb https://typora.io/linux ./'
-	pkexec apt update
+	# External repos
+	# curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+	# echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
+	# # wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
+	# # add-apt-repository 'deb https://typora.io/linux ./'
+	# apt update
 
 flatpak:
 	# Install flatpak applications
-	pkexec $(INSTALL) flatpak
+	$(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.anydesk.Anydesk com.skype.Client com.rafaelmardojai.Blanket org.zotero.Zotero com.github.johnfactotum.Foliate stremio
+	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate stremio
 
 python:
-	pkexec $(INSTALL) python3 python3-pip python-is-python3
+	$(INSTALL) python3 python3-pip python-is-python3
 	pip3 install pandocfilters subliminal ComplexHTTPServer doi2bib pandoc-mermaid-filter
 
 npm:
-	pkexec apt install npm
-	pkexec npm install -g @marp-team/marp-cli
-	mkdir -p ~/.local/bin/_ && cd ~/.local/bin/_/ && npm install @mermaid-js/mermaid-cli && ln -sf ~/.local/bin/_/node_modules/.bin/mmdc ~/.local/bin/mermaid
+	$(INSTALL) npm
+	npm install -g @marp-team/marp-cli
+	npm install -g @mermaid-js/mermaid-cli
+	# mkdir -p ~/.local/bin/_ && cd ~/.local/bin/_/ && npm install @mermaid-js/mermaid-cli && ln -sf ~/.local/bin/_/node_modules/.bin/mmdc ~/.local/bin/mermaid
 
 config:
 	# Personal configurations here and there
-	pkexec ln -sf /bin/fdfind /bin/fd
-	pkexec flatpak override org.zotero.Zotero --filesystem=$(HOME)
-	pkexec update-alternatives --config x-terminal-emulator
-	pkexec update-alternatives --config x-www-browser
-	pkexec update-alternatives --config vi
-	pkexec update-alternatives --config vim
-	pkexec update-alternatives --config view
-	pkexec update-alternatives --config vimdiff
+	ln -sf /bin/fdfind /bin/fd
+	# flatpak override org.zotero.Zotero --filesystem=$(HOME)
+	update-alternatives --config x-terminal-emulator
+	update-alternatives --config x-www-browser
+	update-alternatives --config vi
+	update-alternatives --config vim
+	update-alternatives --config view
+	update-alternatives --config vimdiff
 	xdg-mime default nvim.desktop text/*
 	xdg-mime default mpv.desktop video/*
 
 gnome:
+	# GNOME dconf settins
 	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
@@ -153,6 +159,7 @@ pcloud:
 	read _
 
 macos:
+	# Homebrew and MacOs specific settings
 	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
 	brew bundle --file="./.Brewfile"
 	defaults write com.apple.finder QLEnableTextSelection -bool TRUE; killall Finder
