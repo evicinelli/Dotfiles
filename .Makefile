@@ -3,10 +3,10 @@
 SHELL=/bin/bash
 INSTALL=apt install -y
 
-all: apps config
+all: update apps config
 apps: base applications
 
-base: essentials nvim
+base: essentials dotfiles nvim
 applications: utils pandoc gui-app flatpak modules
 modules: npm python
 
@@ -19,6 +19,13 @@ essentials:
 	# Install essential cmd utilities
 	pkexec $(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat
 
+dotfiles:
+	cd
+	git init
+	git remote add origin https://github.com/evicinelli/Dotfiles
+	git fetch
+	git reset --hard origin/master
+
 nvim:
 	# Install nvim
 	pkexec $(INSTALL) neovim
@@ -28,12 +35,16 @@ nvim:
 	mkdir -p ~/.local/share/nvim/backup
 	mkdir -p ~/.local/share/nvim/swap
 	mkdir -p ~/.local/share/nvim/undo
+	update-alternatives --config vi
+	update-alternatives --config view
+	update-alternatives --config vim
+	update-alternatives --config vimdiff
 
 utils:
 	# Install various utilities
 	pkexec $(INSTALL) kitty mpv imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
 
-pandoc: python
+pandoc: python npm
 	# Install pandoc and latex + latex italian language settings
 	pkexec $(INSTALL) pandoc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer
 	mkdir -p .local/share/filters/
