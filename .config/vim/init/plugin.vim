@@ -5,10 +5,9 @@ if !has("nvim")
 	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
-if has('gui_vimr') || has ('gui_macvim')
+if has('gui_vimr') || has ('gui_macvim') || exists('g:GuiLoaded')
 	Plug 'lifepillar/vim-solarized8'
 	Plug 'dracula/vim'
-	Plug 'cormacrelf/dark-notify'
 	Plug 'NLKNguyen/papercolor-theme'
 endif
 
@@ -16,14 +15,14 @@ endif
 " Plug 'vim-pandoc/vim-rmarkdown'                                                                          " Pandoc + rmarkdown
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}                                                " Highlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                                                       " Csv file support
-Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
+" Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
 Plug 'godlygeek/tabular'                                                                                  " Tabularize
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
-Plug 'paroxayte/autocd.vim'                                                                               " Autocd in folder rule-based
+" Plug 'paroxayte/autocd.vim'                                                                               " Autocd in folder rule-based
 Plug 'rickhowe/diffchar.vim'                                                                              " Better highlighting in diff mode
 Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'sheerun/vim-polyglot'                                                                               " A collection of language pack
@@ -88,6 +87,6 @@ let g:autocd#markers = { '**/Medicina/**/*.txt': ['Makefile'] }
 let g:csv_highlight_column = 'y'
 
 " Markdown-preview options
-let g:mkdp_command_for_global = 1
+" let g:mkdp_command_for_global = 1
 " let g:mkdp_browser = 'x-www-browser'
-let g:mkdp_browser = '/Applications/Firefox.app/'
+" let g:mkdp_browser = '/Applications/Firefox.app/'

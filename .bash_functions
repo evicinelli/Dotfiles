@@ -74,5 +74,10 @@ vimrc () {
 complete -W "$(ls ~/.config/vim/init/ | sed 's/\.vim//')" vimrc
 
 fix-audio(){
-	sudo pkill pulseaudio && echo "PulseAudio killed" && pulseaudio --start && echo "PulseAudio restarted"
+	# sudo pkill pulseaudio && echo "PulseAudio killed" && pulseaudio --start && echo "PulseAudio restarted"
+	pkill -9 pipewire && (pipewire; pipewire-alsa)
+}
+
+rtext(){
+	t=$(mktemp); $EDITOR $t; pandoc $t -f markdown -t html | wl-copy
 }

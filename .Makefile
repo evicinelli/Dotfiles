@@ -21,7 +21,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2
+	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
 
 dotfiles:
 	cd
@@ -57,7 +57,7 @@ pandoc: python npm
 
 gui-app:
 	# Install gui apps
-	$(INSTALL) youtube-dl qutebrowser meld gnome-sushi flameshot drawing gnome-shell-pomodoro
+	$(INSTALL) dmenu youtube-dl qutebrowser meld gnome-sushi flameshot drawing gnome-shell-pomodoro
 
 repos:
 	# External repos
@@ -79,6 +79,7 @@ python:
 
 npm:
 	$(INSTALL) npm
+	apt install chromium-browser # marp-cli needs chromium to convert slide
 	npm install -g @marp-team/marp-cli
 	npm install -g @mermaid-js/mermaid-cli
 	# mkdir -p ~/.local/bin/_ && cd ~/.local/bin/_/ && npm install @mermaid-js/mermaid-cli && ln -sf ~/.local/bin/_/node_modules/.bin/mmdc ~/.local/bin/mermaid
