@@ -1,3 +1,5 @@
+# vim: fdm=marker
+
 # Initial setup  {{{
 
 # If not running interactively, don't do anything
@@ -203,9 +205,8 @@ alias mambutodo="TD=$P/Documenti/Todo/_mambu.todo.txt todo"
 
 # }}}
 
-# Tmux
-# [[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
-
-# vim: fdm=marker
-
+# Misc {{{
+[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# }}}
+

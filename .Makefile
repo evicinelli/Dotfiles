@@ -21,7 +21,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
+	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard tracker
 
 dotfiles:
 	cd
@@ -57,7 +57,7 @@ pandoc: python npm
 
 gui-app:
 	# Install gui apps
-	$(INSTALL) dmenu youtube-dl qutebrowser meld gnome-sushi flameshot drawing gnome-shell-pomodoro
+	$(INSTALL) dmenu youtube-dl qutebrowser meld gnome-sushi drawing gnome-shell-pomodoro
 
 repos:
 	# External repos
@@ -72,6 +72,7 @@ flatpak:
 	$(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate stremio
+	flatpak override --filesystem xdg-config/fontconfig:ro --system
 
 python:
 	$(INSTALL) python3 python3-pip python-is-python3
@@ -99,6 +100,10 @@ config:
 
 gnome:
 	# GNOME dconf settins
+	# gsettings set org.gnome.desktop.interface show-battery-percentage true
+	# gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
+	# gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
+	# gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
 	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
@@ -107,7 +112,6 @@ gnome:
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
-	# gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.90
 	gsettings set org.gnome.desktop.media-handling automount true
@@ -131,6 +135,7 @@ gnome:
 	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 	gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Sans Bold 11'
 	gsettings set org.gnome.desktop.wm.preferences titlebar-uses-system-font true
+	gsettings set org.gnome.mutter.keybindings rotate-monitor ['<Super>o']
 	gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'detailed_type', 'date_modified', 'permissions']"
 	gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
 	gsettings set org.gnome.nautilus.list-view use-tree-view true
@@ -138,17 +143,14 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
-	# gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
+	gsettings set org.gnome.settings-daemon.plugins.media-keys rotate-video-lock-static ['<Super><Shift>o', 'XF86RotationLockToggle']
 	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'blank'
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'blank'
-	# gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
 	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
-	# gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
-
 pcloud:
 	# Download pcloud client
 	echo "Download pcloud and save it to ~/.pcloud..."

@@ -64,4 +64,5 @@ status="${status}$(battery)$DELIM"
 status="${status} $(online) $DELIM"
 status="${status} $(date +%H:%M\ %a\ %d) "
 status="${status}$(todos)"
+
 echo "$status"

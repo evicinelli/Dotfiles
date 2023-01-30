@@ -1,26 +1,30 @@
+# vim: nowrap
+
 config.load_autoconfig(False)
-
 c.editor.command = ['x-terminal-emulator', '-e', 'nvim', '{file}']
-
 c.fonts.web.family.fixed = 'Monospace'
 c.fonts.web.family.sans_serif = 'Sans Serif'
 c.fonts.web.family.serif = 'Serif'
-
 c.url.default_page = 'https://ecosia.com/'
-c.url.searchengines = {'DEFAULT': 'https://ecosia.com/search?q={}',
-                       'ddg': 'https://duckduckgo.com/?q={}',
-                       'msd':'https://www.msdmanuals.com/it/professionale/SearchResults?query={}',
-                       'msden':'https://www.msdmanuals.com/en/professionale/SearchResults?query={}',
-                       'wit':'https://it.m.wikipedia.org/w/index.php?go=Go&search={}',
-                       'wen':'https://en.m.wikipedia.org/w/index.php?go=Go&search={}',
-                       'utd':'https://www.uptodate.com/contents/search?search={}',
+c.url.searchengines = {'DEFAULT' : 'https:/ecosia.com/search?q={}',
+                       'ddg'     : 'https:/duckduckgo.com/?q={}',
+                       'msd'     : 'https:/www.msdmanuals.com/it/professionale/SearchResults?query={}',
+                       'msden'   : 'https:/www.msdmanuals.com/en/professionale/SearchResults?query={}',
+                       'utd'     : 'https:/www.uptodate.com/contents/search?search={}',
+                       'farm'    : 'https:/mediately.co/it/drugs?q={}',
+                       'wit'     : 'https:/it.m.wikipedia.org/w/index.php?go=Go&search={}',
+                       'wen'     : 'https:/en.m.wikipedia.org/w/index.php?go=Go&search={}',
                        }
 c.url.start_pages = 'https://ecosia.com'
 
-
-config.bind('<Ctrl-m>', 'hint links spawn --detach mpv --force-window yes {hint-url}')
-config.bind('<Ctrl-Shift-m>', 'spawn --detach mpv --force-window yes {url}')
-config.bind('<Ctrl-p>','spawn sh -c "pass -c $(fd --type f .gpg .password-store | sed s,\.password-store/,, | sed s,.gpg,, | dmenu)"', mode='insert')
+config.bind(',m', 'hint links spawn --detach mpv --force-window yes {hint-url}')
+config.bind(',M', 'spawn --detach mpv --force-window yes {url}')
+config.bind (',EZ','hint links fill :open https://www.ezproxy.unibo.it/login?url={hint-url}')
+config.bind (',ez','open https://www.ezproxy.unibo.it/login?url={url}')
+config.bind('<Ctrl-p>','spawn sh -c "pass -c $(fd --type f .gpg .password-store | sed s,\.password-store/,, | sed s,.gpg,, | dmenu -i)" ;; fake-key <Ctrl-v>', mode='insert')
+config.bind('<Ctrl-u>','fake-key <Shift+Home> ;; fake-key <Delete>', mode = 'insert')
+config.bind('<Ctrl-a>','fake-key <Home>', mode = 'insert')
+config.bind('<Ctrl-e>','fake-key <End>', mode = 'insert')
 
 config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 config.set('content.cookies.accept', 'all', 'devtools://*')

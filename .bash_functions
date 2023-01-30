@@ -9,11 +9,12 @@ nack () {
 	$EDITOR +Nack\ "$*"
 }
 
-isbn2bib () {
-	echo
-	BLOB="$(wget -qO- http://www.ottobib.com/isbn/$1/bibtex)"
-	echo $BLOB | grep -o "@.*{.*}</textarea" | sed "s/<\/textarea//"| sed "s/}, /},\n\t/g" | sed "s/} }/}\n}/" | sed "s/, author/,\n\tauthor/"
-}
+# Ottobib not operational anymore as of 2022 :(
+# isbn2bib () {
+# 	echo
+# 	BLOB="$(wget -qO- http://www.ottobib.com/isbn/$1/bibtex)"
+# 	echo $BLOB | grep -o "@.*{.*}</textarea" | sed "s/<\/textarea//"| sed "s/}, /},\n\t/g" | sed "s/} }/}\n}/" | sed "s/, author/,\n\tauthor/"
+# }
 
 ding () {
 	echo -e "\a"
