@@ -39,10 +39,6 @@ nvim:
 	mkdir -p ~/.local/share/nvim/backup
 	mkdir -p ~/.local/share/nvim/swap
 	mkdir -p ~/.local/share/nvim/undo
-	update-alternatives --config vi
-	update-alternatives --config view
-	update-alternatives --config vim
-	update-alternatives --config vimdiff
 
 utils:
 	# Install various utilities
@@ -71,8 +67,9 @@ flatpak:
 	# Install flatpak applications
 	$(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install telegram spotify com.microsoft.Teams parlatype anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate stremio
+	flatpak install telegram com.spotify.Client com.microsoft.Teams anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate stremio
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
+	flatpak override org.zotero.Zotero --filesystem=$(HOME)
 
 python:
 	$(INSTALL) python3 python3-pip python-is-python3
@@ -88,7 +85,6 @@ npm:
 config:
 	# Personal configurations here and there
 	ln -sf /bin/fdfind /bin/fd
-	# flatpak override org.zotero.Zotero --filesystem=$(HOME)
 	update-alternatives --config x-terminal-emulator
 	update-alternatives --config x-www-browser
 	update-alternatives --config vi
@@ -111,10 +107,10 @@ gnome:
 	gsettings set org.gnome.desktop.interface enable-animations false
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
+	gsettings set org.gnome.desktop.interface locate-pointer true
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
 	gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
-	gsettings set org.gnome.desktop.interface text-scaling-factor 0.90
 	gsettings set org.gnome.desktop.media-handling automount true
 	gsettings set org.gnome.desktop.media-handling automount-open true
 	gsettings set org.gnome.desktop.notifications show-banners true
