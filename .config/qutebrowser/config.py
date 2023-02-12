@@ -1,7 +1,7 @@
 # vim: nowrap
 
 config.load_autoconfig(False)
-c.editor.command = ['x-terminal-emulator', '-e', 'nvim', '{file}']
+c.editor.command = ['x-terminal-emulator', '-e', '$EDITOR', '{file}']
 c.fonts.web.family.fixed = 'Monospace'
 c.fonts.web.family.sans_serif = 'Sans Serif'
 c.fonts.web.family.serif = 'Serif'
@@ -12,6 +12,7 @@ c.url.searchengines = {'DEFAULT' : 'https:/ecosia.com/search?q={}',
                        'msden'   : 'https:/www.msdmanuals.com/en/professionale/SearchResults?query={}',
                        'utd'     : 'https:/www.uptodate.com/contents/search?search={}',
                        'farm'    : 'https:/mediately.co/it/drugs?q={}',
+                       'trec'    : 'https://www.treccani.it/enciclopedia/ricerca/{}',
                        'wit'     : 'https:/it.m.wikipedia.org/w/index.php?go=Go&search={}',
                        'wen'     : 'https:/en.m.wikipedia.org/w/index.php?go=Go&search={}',
                        }

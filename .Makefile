@@ -50,7 +50,7 @@ utils:
 
 pandoc: python npm
 	# Install pandoc and latex + latex italian language settings
-	$(INSTALL) pandoc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer
+	$(INSTALL) pandoc pandoc-citeproc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer
 	mkdir -p .local/share/filters/
 	curl https://raw.githubusercontent.com/kuba-orlik/pandoc-dot2tex-filter/master/dot2tex-filter.py >> .local/share/filters/dot2tex
 	chmod +x .local/share/filters/dot2tex
@@ -100,18 +100,19 @@ config:
 
 gnome:
 	# GNOME dconf settins
-	# gsettings set org.gnome.desktop.interface show-battery-percentage true
-	# gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
-	# gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
-	# gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
+	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories ['$HOME/pCloudDrive/']
+	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories ['$HOME', '&DOWNLOAD']
+	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
 	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
 	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
+	gsettings set org.gnome.desktop.interface enable-animations false
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
+	gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.90
 	gsettings set org.gnome.desktop.media-handling automount true
@@ -135,7 +136,6 @@ gnome:
 	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 	gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Sans Bold 11'
 	gsettings set org.gnome.desktop.wm.preferences titlebar-uses-system-font true
-	gsettings set org.gnome.mutter.keybindings rotate-monitor ['<Super>o']
 	gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'detailed_type', 'date_modified', 'permissions']"
 	gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
 	gsettings set org.gnome.nautilus.list-view use-tree-view true
@@ -143,14 +143,17 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
-	gsettings set org.gnome.settings-daemon.plugins.media-keys rotate-video-lock-static ['<Super><Shift>o', 'XF86RotationLockToggle']
+	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'blank'
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'blank'
+	gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
 	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
+	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
+
 pcloud:
 	# Download pcloud client
 	echo "Download pcloud and save it to ~/.pcloud..."

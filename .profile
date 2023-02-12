@@ -16,9 +16,8 @@ $(which brew) && for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PAT
 # }}}
 
 # Env {{{
-export EDITOR=nvim
 # export VISUAL=vimr
-[[ nvim ]] && export MANPAGER='nvim +Man!'
+[[ $(which nvim) ]] && export MANPAGER='nvim +Man!' && export EDITOR=nvim
 
 export P="$HOME/pCloudDrive"
 export DN="${P}/Documenti/Todo/done.txt"
