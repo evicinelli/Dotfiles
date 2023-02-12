@@ -65,9 +65,9 @@ repos:
 
 flatpak:
 	# Install flatpak applications
-	$(INSTALL) flatpak
+	#$(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install telegram com.spotify.Client com.microsoft.Teams anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate stremio
+	flatpak install -y org.telegram.desktop com.spotify.Client com.microsoft.Teams net.ankiweb.anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate stremio
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
 	flatpak override org.zotero.Zotero --filesystem=$(HOME)
 
@@ -96,8 +96,8 @@ config:
 
 gnome:
 	# GNOME dconf settins
-	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories ['$HOME/pCloudDrive/']
-	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories ['$HOME', '&DOWNLOAD']
+	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['$HOME/pCloudDrive/']"
+	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['$HOME', '&DOWNLOAD']"
 	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
 	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.interface clock-format '24h'
