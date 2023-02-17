@@ -1,8 +1,9 @@
 " Gvim
 if has('gui_running')
-	se guioptions-=T " Remove Toolbar
+	se guioptions-=T " Remove Toolbar, Menubar, Scrollbars
 	se guioptions-=m " Remove menubar
 	se guioptions-=r " Remove scrollbar
+	se guioptions-=L " Remove scrollbar
 	se guifont=Monospace\ Regular\ 13
 endif
 

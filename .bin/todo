@@ -61,7 +61,8 @@ todo-done () {
 		echo -e "Marco come completato: $ENTRY"
 	else
 		# ENTRY=$(cat "$TD" | fzf)
-		todo-ls "^x $(date -I)"
+		# todo-ls "^x $(date -I)"
+		grep "^x $(date -I)" $TD
 	fi
 }
 
@@ -136,7 +137,6 @@ cat <<-HELP
 
 		Todo file: $TD
 		Done file: $DN
-		Editor:    $EDITOR
 
 	HELP
 }

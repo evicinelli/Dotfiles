@@ -96,8 +96,8 @@ config:
 
 gnome:
 	# GNOME dconf settins
-	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['$HOME/pCloudDrive/']"
-	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['$HOME', '&DOWNLOAD']"
+	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/']"
+	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}', '&DOWNLOAD']"
 	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
 	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.interface clock-format '24h'

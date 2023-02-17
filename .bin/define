@@ -9,11 +9,12 @@ PANDOC_WRITER=plain											# Pandoc fallback writer
 GREP_RULE="tc-title.*DEBUG"									# Rule for scraping definition from webpage
 
 $(tty -s) && [[ -f $PANDOC_CUSTOM_WRITER ]] && PANDOC_WRITER="$PANDOC_CUSTOM_WRITER"
+
 if [[ $# -gt 0 ]]; then
 
-	[[ $1 == "-e" ]] && (shift; curl https://www.treccani.it/enciclopedia/$1 | tr -d '\n' | grep -o "text spiega.*class=\"sinottico" | pandoc -f html -t $PANDOC_WRITER | grep -v "text spiega" ) 2>/dev/null && exit 0
+	(curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "$GREP_RULE" | pandoc -f html -t $PANDOC_WRITER --wrap=preserve | grep -v "tc-title\">") 2>/dev/null
 
-	(curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "$GREP_RULE" | pandoc -f html -t $PANDOC_WRITER | grep -v "tc-title\">") 2>/dev/null
+	[[ $1 == "-e" ]] && (shift; curl https://www.treccani.it/enciclopedia/$1 | tr -d '\n' | grep -o "text spiega.*class=\"sinottico" | pandoc -f html -t $PANDOC_WRITER --wrap=preserve | grep -v "text spiega" ) 2>/dev/null && exit 0
 
 else
 	echo <<-EOH

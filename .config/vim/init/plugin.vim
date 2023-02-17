@@ -5,31 +5,28 @@ if !has("nvim")
 	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 endif
 
-if has('gui_vimr') || has ('gui_macvim') || exists('g:GuiLoaded')
-	Plug 'lifepillar/vim-solarized8'
-	Plug 'dracula/vim'
-	Plug 'NLKNguyen/papercolor-theme'
-endif
-
 " Plug 'christoomey/vim-tmux-navigator'                                                                    " Vim <3 tmux
+" Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
+" Plug 'paroxayte/autocd.vim'                                                                               " Autocd in folder rule-based
 " Plug 'vim-pandoc/vim-rmarkdown'                                                                          " Pandoc + rmarkdown
+
 Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}                                                " Highlight #COLORS
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                                                       " Csv file support
-" Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
 Plug 'godlygeek/tabular'                                                                                  " Tabularize
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
-" Plug 'paroxayte/autocd.vim'                                                                               " Autocd in folder rule-based
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'rickhowe/diffchar.vim'                                                                              " Better highlighting in diff mode
 Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'sheerun/vim-polyglot'                                                                               " A collection of language pack
 Plug 'tpope/vim-commentary'                                                                               " Comment done right
 Plug 'tpope/vim-surround'                                                                                 " Surrounding motions on steroid
-Plug 'vim-pandoc/vim-pandoc', {'for':'pandoc'}                                                            " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc',                                                                             " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                                                      " Pandoc syntax
+
 call plug#end()
 
 

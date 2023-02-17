@@ -22,9 +22,9 @@ endif
 " system vimrc.
 function! s:MaySet(option) abort
   redir => out
-  silent verbose execute 'setglobal' a:option . '?'
+  silent verbose execute 'setglobal all' a:option . '?'
   redir END
-  return out !~# ' \~[\/]'
+  return out !~# " \\~[\\/][^\n]*$"
 endfunction
 
 if s:MaySet('backspace')
@@ -69,8 +69,9 @@ endif
 if s:MaySet('scrolloff')
   set scrolloff=1
 endif
-if s:MaySet('sidescrolloff')
-  set sidescrolloff=5
+if s:MaySet('sidescroll') && s:MaySet('sidescrolloff')
+  set sidescroll=1
+  set sidescrolloff=2
 endif
 set display+=lastline
 if has('patch-7.4.2109')
@@ -138,6 +139,11 @@ endif
 if exists(":DiffOrig") != 2
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
         \ | diffthis | wincmd p | diffthis
+endif
+
+" Correctly highlight $() and other modern affordances in filetype=sh.
+if !exists('g:is_posix') && !exists('g:is_bash') && !exists('g:is_kornshell') && !exists('g:is_dash')
+  let g:is_posix = 1
 endif
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
