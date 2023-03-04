@@ -65,9 +65,9 @@ repos:
 
 flatpak:
 	# Install flatpak applications
-	#$(INSTALL) flatpak
+	$(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y org.telegram.desktop com.spotify.Client com.microsoft.Teams net.ankiweb.anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate stremio
+	flatpak install -y org.telegram.desktop com.spotify.Client com.microsoft.Teams net.ankiweb.anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
 	flatpak override org.zotero.Zotero --filesystem=$(HOME)
 
@@ -149,6 +149,7 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
+	gsettings reset org.gnome.shell app-picker-layout
 
 pcloud:
 	# Download pcloud client
