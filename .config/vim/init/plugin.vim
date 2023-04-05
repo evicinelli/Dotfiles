@@ -15,6 +15,7 @@ Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}                      
 Plug 'chrisbra/csv.vim',              {'for':'csv'}                                                       " Csv file support
 Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
 Plug 'godlygeek/tabular'                                                                                  " Tabularize
+Plug 'habamax/vim-asciidoctor'
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
@@ -24,11 +25,13 @@ Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'sheerun/vim-polyglot'                                                                               " A collection of language pack
 Plug 'tpope/vim-commentary'                                                                               " Comment done right
 Plug 'tpope/vim-surround'                                                                                 " Surrounding motions on steroid
-Plug 'vim-pandoc/vim-pandoc',                                                                             " Pandoc integration
+"Plug 'vim-pandoc/vim-pandoc',                                                                             " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                                                      " Pandoc syntax
-
 call plug#end()
 
+" Asciidoctor
+let g:asciidoctor_folding = 1
+let g:asciidoctor_fold_options = 1
 
 " Netrw options
 let g:netrw_altv = 1            " split to the right

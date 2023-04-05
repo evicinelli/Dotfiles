@@ -5,6 +5,7 @@ if has('gui_running')
 	se guioptions-=r " Remove scrollbar
 	se guioptions-=L " Remove scrollbar
 	se guifont=Monospace\ Regular\ 13
+	se belloff=esc
 endif
 
 if has("gui_vimr")

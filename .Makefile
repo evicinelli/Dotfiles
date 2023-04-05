@@ -1,4 +1,4 @@
-# vim: fdm=indent foldignore=
+# vim: fdm=indent foldignore= nowrap
 
 SHELL=/bin/bash
 PKGMGR=apt
@@ -21,7 +21,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard tracker
+	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard tracker powertop
 
 dotfiles:
 	cd
@@ -95,11 +95,14 @@ config:
 	xdg-mime default mpv.desktop video/*
 
 gnome:
-	# GNOME dconf settins
+	# GNOME settings
+	# gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
+	# #469785' '#1BBE6F' '#b2052e' '#d64761' '#0d5676' '#82D0F4' '#502379' '#FDC220'
 	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/']"
 	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}', '&DOWNLOAD']"
 	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
-	gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
+	gsettings set org.gnome.desktop.background color-shading-type 'solid'
+	gsettings set org.gnome.desktop.background primary-color '#d64761'
 	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -115,6 +118,7 @@ gnome:
 	gsettings set org.gnome.desktop.media-handling automount-open true
 	gsettings set org.gnome.desktop.notifications show-banners true
 	gsettings set org.gnome.desktop.notifications show-in-lock-screen true
+	gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
 	gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 	gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
 	gsettings set org.gnome.desktop.screensaver picture-uri 'file:///${HOME}/.img.jpeg'
@@ -136,20 +140,19 @@ gnome:
 	gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
 	gsettings set org.gnome.nautilus.list-view use-tree-view true
 	gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+	gsettings set org.gnome.nautilus.preferences show-create-link true
+	gsettings set org.gnome.nautilus.preferences show-delete-permanently true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
 	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
-	gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'blank'
-	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'blank'
+	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
-	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
-	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
+	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
-	gsettings reset org.gnome.shell app-picker-layout
 
 pcloud:
 	# Download pcloud client

@@ -1,5 +1,5 @@
 " Appearance
-set list listchars=tab:·\ ,trail:·,eol:¬,precedes:← ",extends:→
+set list listchars=tab:࠰\ ,trail:࠰,eol:¬,precedes:←,extends:→
 set fillchars=vert:\ ,fold:\ 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50    " Different cursor shape in different mode
 

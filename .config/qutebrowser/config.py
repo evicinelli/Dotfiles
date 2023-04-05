@@ -1,7 +1,7 @@
 # vim: nowrap
 
 config.load_autoconfig(False)
-c.editor.command = ['x-terminal-emulator', '-e', '$EDITOR', '{file}']
+c.editor.command = ['x-terminal-emulator', '-e', 'vim', '{file}']
 c.fonts.web.family.fixed = 'Monospace'
 c.fonts.web.family.sans_serif = 'Sans Serif'
 c.fonts.web.family.serif = 'Serif'
