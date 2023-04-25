@@ -27,6 +27,7 @@ export GVS="${P}/Gvs"
 export LIB="${P}/Libreria"
 export MEDIA="${P}/Media"
 export NOTES="${P}/Notes"
+export S="${P}/Backups/Google Photos - Emanuele Vicinelli/Screenshot"
 export TD="${P}/Documenti/Todo/todo.txt"
 
 # Uni

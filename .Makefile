@@ -6,7 +6,7 @@ INSTALL=$(PKGMGR) install -y
 
 all          : update apps config
 apps         : base applications
-base         : essentials dotfiles nvim
+base         : essentials nvim #dotfiles
 applications : utils pandoc gui-app flatpak
 modules      : npm python
 
@@ -44,13 +44,6 @@ utils:
 	# Install various utilities
 	$(INSTALL) kitty mpv imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
 
-pandoc: python npm
-	# Install pandoc and latex + latex italian language settings
-	$(INSTALL) pandoc pandoc-citeproc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer
-	mkdir -p .local/share/filters/
-	curl https://raw.githubusercontent.com/kuba-orlik/pandoc-dot2tex-filter/master/dot2tex-filter.py >> .local/share/filters/dot2tex
-	chmod +x .local/share/filters/dot2tex
-
 gui-app:
 	# Install gui apps
 	$(INSTALL) dmenu youtube-dl qutebrowser meld gnome-sushi drawing gnome-shell-pomodoro
@@ -65,9 +58,9 @@ repos:
 
 flatpak:
 	# Install flatpak applications
-	$(INSTALL) flatpak
+	$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y org.telegram.desktop com.spotify.Client com.microsoft.Teams net.ankiweb.anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker
+	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
 	flatpak override org.zotero.Zotero --filesystem=$(HOME)
 
@@ -107,7 +100,7 @@ gnome:
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
 	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
-	gsettings set org.gnome.desktop.interface enable-animations false
+	gsettings set org.gnome.desktop.interface enable-animations true
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	gsettings set org.gnome.desktop.interface locate-pointer true
@@ -169,3 +162,14 @@ macos:
 	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
 	brew bundle --file="./.Brewfile"
 	defaults write com.apple.finder QLEnableTextSelection -bool TRUE; killall Finder
+
+pandoc: python npm
+	# Install pandoc and latex + latex italian language settings
+	$(INSTALL) pandoc wkhtmltopdf texlive-lang-italian poppler-utils pdfgrep texlive-latex-recommended texlive-xetex texlive-latex-extra librsvg2-bin texlive-fonts-extra dot2tex ttf-mscorefonts-installer #pandoc-citeproc
+	mkdir -p .local/share/filters/
+	curl https://raw.githubusercontent.com/kuba-orlik/pandoc-dot2tex-filter/master/dot2tex-filter.py >> .local/share/filters/dot2tex
+	chmod +x .local/share/filters/dot2tex
+
+asciidoctor:
+	$(INSTALL) -y asciidoctor
+	gem install asciidoctor-{mathematical,diagram,revealjs,epub3,pdf}

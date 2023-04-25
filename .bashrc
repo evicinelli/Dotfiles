@@ -206,7 +206,7 @@ alias mambutodo="TD=$P/Documenti/Todo/_mambu.todo.txt todo"
 # }}}
 
 # Misc {{{
-[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
+#[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # }}}
 
