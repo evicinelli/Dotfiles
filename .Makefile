@@ -7,7 +7,7 @@ INSTALL=$(PKGMGR) install -y
 all          : update apps config
 apps         : base applications
 base         : essentials nvim #dotfiles
-applications : utils pandoc gui-app flatpak
+applications : utils gui-app flatpak
 modules      : npm python
 
 update:
@@ -21,7 +21,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard tracker powertop
+	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
 
 dotfiles:
 	cd
@@ -60,12 +60,12 @@ flatpak:
 	# Install flatpak applications
 	$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker
+	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker org.gnome.gitlab.somas.Apostrophe
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
 	flatpak override org.zotero.Zotero --filesystem=$(HOME)
 
 python:
-	$(INSTALL) python3 python3-pip python-is-python3
+	$(INSTALL) python3 python3-pip python-is-python3 pipx
 	pip3 install pandocfilters subliminal ComplexHTTPServer doi2bib pandoc-mermaid-filter
 
 npm:
@@ -106,7 +106,7 @@ gnome:
 	gsettings set org.gnome.desktop.interface locate-pointer true
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
 	gsettings set org.gnome.desktop.interface show-battery-percentage true
-	gsettings set org.gnome.desktop.interface text-scaling-factor 0.9
+	gsettings set org.gnome.desktop.interface text-scaling-factor 0.85
 	gsettings set org.gnome.desktop.media-handling automount true
 	gsettings set org.gnome.desktop.media-handling automount-open true
 	gsettings set org.gnome.desktop.notifications show-banners true
@@ -173,3 +173,8 @@ pandoc: python npm
 asciidoctor:
 	$(INSTALL) -y asciidoctor
 	gem install asciidoctor-{mathematical,diagram,revealjs,epub3,pdf}
+
+laptop:
+	$(INSTALL) -y tlp powertop
+	systemctl enable tlp.service
+	powertop --auto-tune

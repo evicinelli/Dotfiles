@@ -19,13 +19,15 @@ Plug 'habamax/vim-asciidoctor'
 Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
 Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
 Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
+Plug 'nightsense/cosmic_latte'
+Plug 'quarto-dev/quarto-vim'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'rickhowe/diffchar.vim'                                                                              " Better highlighting in diff mode
 Plug 'sakshamgupta05/vim-todo-highlight'
 Plug 'sheerun/vim-polyglot'                                                                               " A collection of language pack
 Plug 'tpope/vim-commentary'                                                                               " Comment done right
 Plug 'tpope/vim-surround'                                                                                 " Surrounding motions on steroid
-"Plug 'vim-pandoc/vim-pandoc',                                                                             " Pandoc integration
+Plug 'vim-pandoc/vim-pandoc',                                                                             " Pandoc integration
 Plug 'vim-pandoc/vim-pandoc-syntax',                                                                      " Pandoc syntax
 call plug#end()
 
@@ -41,8 +43,7 @@ let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_liststyle = 0       " buffer view
 
 " Pandoc options
-" let g:pandoc#biblio#bibs = ["/home/vic/pCloud\ Drive/Uni/Med-Notes/bib.bib", "/home/vic/pCloud\ Drive/Libreria/zotero.bib"]
-let g:pandoc#biblio#bibs = ["/Users/vic/pCloud Drive/Libreria/zotero.bib"]
+let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Uni/Med-Notes/bib.bib, /home/vic/pCloudDrive/Libreria/zotero.bib"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0

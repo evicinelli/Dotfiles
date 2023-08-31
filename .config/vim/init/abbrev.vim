@@ -17,6 +17,7 @@ dig RA 8658 " Digraph ⇒
 dig Ra 8658 " Digraph ⇒
 dig SH  399 " Digraph Ə
 dig SW  399 " Digraph Ə
+dig WA 9888 " Digrap ⚠
 dig ge 8805 " Digraph ≥
 dig gt 0062 " Digraph >
 dig le 8804 " Digraph ࣘࣘࣘ≤
