@@ -1,3 +1,4 @@
+" vim: fdm=indent
 " Goyo enter and leave
 function! Goyo_enter()
 	" vertical resize
@@ -21,7 +22,6 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
-command! -nargs=? Files FZF --query=<args>\ 
 
 " Now :ls <3 fzf
 function! s:buflist()
@@ -35,6 +35,8 @@ function! s:bufopen(e)
 	execute 'buffer' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
+" Coconut oil
+command! -nargs=? Files FZF --query=<args>\ 
 command! -nargs=* Buffers call fzf#run(fzf#wrap({
 	\   'source':  reverse(<sid>buflist()),
 	\   'sink':    function('<sid>bufopen'),

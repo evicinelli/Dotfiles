@@ -1,34 +1,49 @@
-"Vim-plug
+" vim: fdm=marker
+
+" Vim-plug
 call plug#begin('~/.config/vim/plugged/')
 
-if !has("nvim")
-	Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
-endif
+	if !has("nvim")
+		Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
+	endif
 
-" Plug 'christoomey/vim-tmux-navigator'                                                                    " Vim <3 tmux
-" Plug 'editorconfig/editorconfig-vim'                                                                      " Support .editorconfig standard
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'vim-plug',]}
-" Plug 'paroxayte/autocd.vim'                                                                               " Autocd in folder rule-based
-" Plug 'vim-pandoc/vim-rmarkdown'                                                                          " Pandoc + rmarkdown
+	" Not used anymore {{{
+	" Plug 'christoomey/vim-tmux-navigator'                              " Vim <3 tmux
+	" Plug 'editorconfig/editorconfig-vim'                               " Support .editorconfig standard
+	" Plug 'paroxayte/autocd.vim'                                        " Autocd in folder rule-based
+	" }}}
 
-Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}                                                " Highlight #COLORS
-Plug 'chrisbra/csv.vim',              {'for':'csv'}                                                       " Csv file support
-Plug 'fretep/todo.txt-vim',           {'for':'todo'}                                                      " Todo.txt support
-Plug 'godlygeek/tabular'                                                                                  " Tabularize
-Plug 'habamax/vim-asciidoctor'
-Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' }                                      " Fzf <3
-Plug 'junegunn/goyo.vim'                                                                                  " Distraction free writing
-Plug 'mbbill/undotree'                                                                                    " Visualize undo tree
-Plug 'nightsense/cosmic_latte'
-Plug 'quarto-dev/quarto-vim'
-Plug 'rafi/awesome-vim-colorschemes'
-Plug 'rickhowe/diffchar.vim'                                                                              " Better highlighting in diff mode
-Plug 'sakshamgupta05/vim-todo-highlight'
-Plug 'sheerun/vim-polyglot'                                                                               " A collection of language pack
-Plug 'tpope/vim-commentary'                                                                               " Comment done right
-Plug 'tpope/vim-surround'                                                                                 " Surrounding motions on steroid
-Plug 'vim-pandoc/vim-pandoc',                                                                             " Pandoc integration
-Plug 'vim-pandoc/vim-pandoc-syntax',                                                                      " Pandoc syntax
+	" General use {{{
+	Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
+	Plug 'junegunn/goyo.vim'                                             " Distraction free writing
+	Plug 'mbbill/undotree'                                               " Visualize undo tree
+	Plug 'rickhowe/diffchar.vim'                                         " Better highlighting in diff mode
+	Plug 'sakshamgupta05/vim-todo-highlight'                             " Highlight TODO
+	Plug 'tpope/vim-commentary'                                          " Commenting done right
+	Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
+	Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
+	Plug 'godlygeek/tabular'                                             " Tabularize
+	" }}}
+
+	" Filetype {{{
+	Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
+	Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file support
+	Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
+	Plug 'vim-pandoc/vim-pandoc-syntax',
+	Plug 'habamax/vim-asciidoctor'
+	" }}}
+
+	" Pandoc and quarto integration {{{
+	Plug 'vim-pandoc/vim-pandoc',
+	Plug 'quarto-dev/quarto-vim'
+	" }}}
+
+	" Colors {{{
+	Plug 'nightsense/cosmic_latte'
+	Plug 'lunacookies/vim-colors-xcode'
+	Plug 'rafi/awesome-vim-colorschemes'
+	" }}}
+	"
 call plug#end()
 
 " Asciidoctor
@@ -43,7 +58,7 @@ let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_liststyle = 0       " buffer view
 
 " Pandoc options
-let g:pandoc#biblio#bibs = ["/home/vic/pCloudDrive/Uni/Med-Notes/bib.bib, /home/vic/pCloudDrive/Libreria/zotero.bib"]
+let g:pandoc#biblio#bibs = ["$MED/bib.bib, $P/Libreria/zotero.bib"]
 let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
@@ -79,10 +94,6 @@ let g:fzf_action = {
 	\ 'ctrl-t': 'tab split',
 	\ 'ctrl-h': 'split',
 	\ 'ctrl-v': 'vsplit' }
-
-" Autocd options
-let g:autocd#autocmd_enable = 1
-let g:autocd#markers = { '**/Medicina/**/*.txt': ['Makefile'] }
 
 " Csv options
 let g:csv_highlight_column = 'y'

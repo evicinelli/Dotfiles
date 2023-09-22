@@ -34,7 +34,9 @@ augroup end
 " Man page in vim
 autocmd FileType man setlocal laststatus=0 norelativenumber ft=man nospell
 
-command Marked :silent !open -a Marked\ 2.app '%:p'
+" View markdown file in external renderer
+command Marked :silent !flatpak run org.gnome.gitlab.somas.Apostrophe "%"
+"command Marked :silent !open -a Marked\ 2.app '%:p'
 
 " Copy in clipboard qutebrowser buffers, `edit-text` not always works
 autocmd ExitPre /tmp/qutebrowser-editor* !cat "%" | wl-copy

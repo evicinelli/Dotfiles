@@ -89,8 +89,7 @@ config:
 
 gnome:
 	# GNOME settings
-	# gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg'
-	# #469785' '#1BBE6F' '#b2052e' '#d64761' '#0d5676' '#82D0F4' '#502379' '#FDC220'
+	# gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg' #469785' '#1BBE6F' '#b2052e' '#d64761' '#0d5676' '#82D0F4' '#502379' '#FDC220'
 	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/']"
 	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}', '&DOWNLOAD']"
 	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
@@ -104,7 +103,7 @@ gnome:
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
 	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	gsettings set org.gnome.desktop.interface locate-pointer true
-	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 13'
+	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 15'
 	gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 0.85
 	gsettings set org.gnome.desktop.media-handling automount true
@@ -118,12 +117,14 @@ gnome:
 	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "['<Primary><Alt>space']"
 	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
-	gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Super>Escape','<Alt>Escape']"
-	gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Shift><Super>Escape','<Shift><Alt>Escape']"
+	gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Alt>Escape']"
+	gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>Escape']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Super>Above_Tab', '<Alt>Above_Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]"
+	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]"
 	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f']"
 	gsettings set org.gnome.desktop.wm.preferences button-layout ':close'
 	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
@@ -146,6 +147,9 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
+	gsettings set org.gnome.shell.keybindings screenshot "['<Shift><Super>4']"
+	gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Super>5']"
+	gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Super>3']"
 
 pcloud:
 	# Download pcloud client

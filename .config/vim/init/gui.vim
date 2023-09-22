@@ -4,7 +4,7 @@ if has('gui_running')
 	se guioptions-=m " Remove menubar
 	se guioptions-=r " Remove scrollbar
 	se guioptions-=L " Remove scrollbar
-	se guifont=Monospace\ Regular\ 13
+	se guifont=Monospace\ Regular\ 15
 	se belloff=esc
 	se bg=light
 	colorscheme solarized8_flat

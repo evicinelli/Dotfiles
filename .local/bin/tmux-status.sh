@@ -22,7 +22,8 @@ function todos() {
 
 function muuuuusic() {
 	playing=false
-	player=$(playerctl -l | head -n1)
+	# player=$(playerctl -l | head -n1)
+	player=$(playerctl -l | grep "spotify")
 	case $player in
 		*spotify*)
 			color=colour10;
