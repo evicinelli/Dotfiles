@@ -1,0 +1,14 @@
+{
+  "_generated": "By me",
+  "description": "Increase number of search provider results",
+  "name": "More search results",
+  "open-blacklist": [
+  ],
+  "settings-schema": "",
+  "shell-version": [
+    "44"
+  ],
+  "url": "",
+  "uuid": "searchnumber@selfmade",
+  "version": 1
+}

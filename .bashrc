@@ -177,6 +177,7 @@ alias bc="bc -l"
 alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias brownnoise="play -t sl -r48000 -c2 -n synth -1 brownnoise .1 60"
 alias clipboard="xclip -selection PRIMARY"
+alias composetbl='less "/usr/share/X11/locale/$(grep --max-count=1 "${LANG%.*}.UTF-8\$" /usr/share/X11/locale/locale.dir | cut --delimiter=/ --fields 1)/Compose"'
 alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
 alias enit="trans en:it"
 alias g="git"

@@ -90,6 +90,8 @@ config:
 gnome:
 	# GNOME settings
 	# gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg' #469785' '#1BBE6F' '#b2052e' '#d64761' '#0d5676' '#82D0F4' '#502379' '#FDC220'
+	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories ['po', 'CVS', 'core-dumps', 'lost+found', '.git']
+	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories-with-content ['.trackerignore', '.hg', '.nomedia']
 	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/']"
 	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}', '&DOWNLOAD']"
 	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
@@ -139,6 +141,7 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
+	gsettings set org.gnome.settings-daemon.plugins.media-keys battery-status ['<Super><Shift>b']
 	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'suspend'
@@ -147,8 +150,6 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
-	gsettings set org.gnome.shell.keybindings screenshot "['<Shift><Super>4']"
-	gsettings set org.gnome.shell.keybindings screenshot-window "['<Shift><Super>5']"
 	gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Super>3']"
 
 pcloud:
