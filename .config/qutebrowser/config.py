@@ -20,6 +20,7 @@ c.url.searchengines = {'DEFAULT' : 'https:/ecosia.com/search?q={}',
                        'trec'    : 'https://www.treccani.it/enciclopedia/ricerca/{}',
                        'wit'     : 'https:/it.m.wikipedia.org/w/index.php?go=Go&search={}',
                        'wen'     : 'https:/en.m.wikipedia.org/w/index.php?go=Go&search={}',
+                       'meteo'   : 'https://www.meteoam.it/it/meteo-citta/{}',
                        }
 c.url.start_pages = 'https://ecosia.com'
 

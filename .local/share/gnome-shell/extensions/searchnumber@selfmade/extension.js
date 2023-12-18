@@ -2,6 +2,6 @@
 
 function init() {}
 
-function enable() { imports.ui.search.MAX_LIST_SEARCH_RESULTS_ROWS=10; }
+function enable() { imports.ui.search.MAX_LIST_SEARCH_RESULTS_ROWS=100; }
 
 function disable() { imports.ui.search.MAX_LIST_SEARCH_RESULTS_ROWS=5; }

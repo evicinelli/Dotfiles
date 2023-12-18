@@ -6,7 +6,7 @@ nnoremap <leader>n :Nack
 command! Mednotes call Mednotes()
 function Mednotes()
 	FZF $UNI/Med-Notes/
-	lcd %:p:h/../
+	cd %:p:h
 endfunction
 
 " Control mpv with --ipc-socket, vital while transcribing lectures

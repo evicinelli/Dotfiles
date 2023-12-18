@@ -60,9 +60,10 @@ let g:netrw_liststyle = 0       " buffer view
 " Pandoc options
 let g:pandoc#biblio#bibs = ["$MED/bib.bib, $P/Libreria/zotero.bib"]
 let g:pandoc#biblio#use_bibtool = 1
+let g:pandoc#folding#mode = 'relative'
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
-let g:pandoc#folding#level = 0
+let g:pandoc#folding#level = 1
 let g:pandoc#modules#disabled = [""]
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#conceal#blacklist = [
@@ -85,9 +86,9 @@ let g:pandoc#syntax#conceal#blacklist = [
 	\ "subscript",
 	\ "superscript",
 	\ "titleblock"]
-let g:pandoc#toc#close_after_navigating = 0
+let g:pandoc#toc#close_after_navigating = 1
 let g:pandoc#toc#position = "left"
-let g:pandoc#toc#shift = 4
+let g:pandoc#toc#shift = 1
 
 " Fzf options
 let g:fzf_action = {

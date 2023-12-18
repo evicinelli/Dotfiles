@@ -4,10 +4,7 @@ SHELL=/bin/bash
 PKGMGR=apt
 INSTALL=$(PKGMGR) install -y
 
-all          : update apps config
-apps         : base applications
-base         : essentials nvim #dotfiles
-applications : utils gui-app flatpak
+all          : update essentials nvim utils gui-app flatpak
 modules      : npm python
 
 update:
@@ -42,7 +39,7 @@ nvim:
 
 utils:
 	# Install various utilities
-	$(INSTALL) kitty mpv imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
+	$(INSTALL) kitty mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
 
 gui-app:
 	# Install gui apps
@@ -90,8 +87,8 @@ config:
 gnome:
 	# GNOME settings
 	# gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg' #469785' '#1BBE6F' '#b2052e' '#d64761' '#0d5676' '#82D0F4' '#502379' '#FDC220'
-	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories ['po', 'CVS', 'core-dumps', 'lost+found', '.git']
-	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories-with-content ['.trackerignore', '.hg', '.nomedia']
+	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
+	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories-with-content "['.trackerignore', '.hg', '.nomedia']"
 	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/']"
 	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}', '&DOWNLOAD']"
 	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
