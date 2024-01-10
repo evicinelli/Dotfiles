@@ -24,16 +24,13 @@ noremap <C-p> :cp<CR>
 noremap <F1> <Esc>
 noremap <F8> :se spell!<CR>
 noremap <F9> :se nowrap!<CR>
+noremap <F10> :execute 'set laststatus='.(&laststatus + 1)%3<CR>
 noremap <leader>dw :!define <cword><CR>
 noremap <leader>so :!mimeopen "%" <CR>
 noremap <leader>m :MarkdownPreviewToggle<CR>
 noremap Y y$
 noremap Z zMzv
 noremap z _\|\|
-" noremap j gj
-" noremap k gk
-
-vnoremap J gj
 vnoremap K gk
 vnoremap az [zo]z
 vnoremap iz [zjo]zk

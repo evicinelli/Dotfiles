@@ -7,6 +7,7 @@ VOCAB_PROVIDER_URL="https://www.treccani.it/vocabolario" 	# Vocab provider
 PANDOC_CUSTOM_WRITER="$HOME/.pandoc/terminal.lua"			# Pandoc custom writer to format output text
 PANDOC_WRITER=plain											# Pandoc fallback writer
 GREP_RULE="tc-title.*DEBUG"									# Rule for scraping definition from webpage
+GREP_RULE="css-1rmcmsc.*</p>"									# Rule for scraping definition from webpage
 
 $(tty -s) && [[ -f $PANDOC_CUSTOM_WRITER ]] && PANDOC_WRITER="$PANDOC_CUSTOM_WRITER"
 
