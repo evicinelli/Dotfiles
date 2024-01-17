@@ -1,27 +1,31 @@
-#! /usr/bin/env bash
-# Define a word using treccani vocabulary
+#!/bin/env bash
+# Written using Ecosia AI Chat (OpenAi) and modified by hand multiple times -- 'cause AI is dumb sometimes
 
-set -e
+# Default language is Italian
+language="it"
 
-VOCAB_PROVIDER_URL="https://www.treccani.it/vocabolario" 	# Vocab provider
-PANDOC_CUSTOM_WRITER="$HOME/.pandoc/terminal.lua"			# Pandoc custom writer to format output text
-PANDOC_WRITER=plain											# Pandoc fallback writer
-GREP_RULE="tc-title.*DEBUG"									# Rule for scraping definition from webpage
-GREP_RULE="css-1rmcmsc.*</p>"									# Rule for scraping definition from webpage
+# Check if the "-e" option is provided to search the English Wikipedia
+if [ "$1" == "-e" ]; then
+  language="en"
+  shift
+fi
 
-$(tty -s) && [[ -f $PANDOC_CUSTOM_WRITER ]] && PANDOC_WRITER="$PANDOC_CUSTOM_WRITER"
+# Check if an argument is provided
+if [ $# -eq 0 ]; then
+  echo "Please provide a search term as an argument."
+  exit 1
+fi
 
-if [[ $# -gt 0 ]]; then
+# URL encode the search term
+search_term=$(echo "$*" | sed 's/ /%20/g')
 
-	(curl -s "$VOCAB_PROVIDER_URL/$1" | tr -d "\n" | grep -o "$GREP_RULE" | pandoc -f html -t $PANDOC_WRITER --wrap=preserve | grep -v "tc-title\">") 2>/dev/null
+# Fetch the Wikipedia page content
+page_content=$(curl -sL "https://$language.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro&explaintext&titles=$search_term")
+extract=$(echo "$page_content" | grep -o '"extract":".*' | sed 's/"extract":"//' | sed 's/"}}}}//')
 
-	[[ $1 == "-e" ]] && (shift; curl https://www.treccani.it/enciclopedia/$1 | tr -d '\n' | grep -o "text spiega.*class=\"sinottico" | pandoc -f html -t $PANDOC_WRITER --wrap=preserve | grep -v "text spiega" ) 2>/dev/null && exit 0
-
+# Check if the extract is empty
+if [ -z "$extract" ]; then
+  echo "No information found for '$1' on Wikipedia."
 else
-	echo <<-EOH
-	Usage:
-		$(basename $0) <word>
-		$(basename $0) -e <word>
-	EOH
-
+  echo -e "$extract"
 fi
