@@ -9,16 +9,16 @@ colorscheme dimim
 " Statusline
 set stl=
 " set stl=%2*
-set stl+=%0*						" Default background
-set stl+=\ %{CurrentMode()}\ \|\ 	" Custom mode indicator
-set stl+=%m%r%h%w					" Flags (modifiable, read only, help file, not saved)
-set stl+=\ \ %t%<\ 					" File name
-set stl+=%=							" Statusline separator
-set stl+=\|\ %Y\ \|\ 				" File type
-set stl+=Ln\ %l/%L,\ Col\ %v		" Cursor line/Total lines, Cursor column
-set stl+=\ (%p%%)\ \|\ 				" Percentage through file
-set stl+=%{strftime('%H:%M')}\ 		" Current time
-"set stl+=%3*%{TaskIndicator()}	 " Todo indicator
+set stl+=%0*                     " Default background
+set stl+=\ %{CurrentMode()}\ \|\ " Custom mode indicator
+set stl+=%m%r%h%w\               " Flags (modifiable, read only, help file, not saved)
+set stl+=%t%<\                   " File name
+set stl+=%=                      " Statusline separator
+set stl+=\|\ %Y\ \|\             " File type
+set stl+=Ln\ %l:%v/%L            " Cursor line:column/Total lines
+set stl+=\ (%p%%)\ \|\           " Percentage through file
+set stl+=%{strftime('%H:%M')}\   " Current time
+" set stl+=%3*%{TaskIndicator()} " Todo indicator
 
 function! CurrentMode()
 	let modes = {

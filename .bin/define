@@ -20,12 +20,12 @@ fi
 search_term=$(echo "$*" | sed 's/ /%20/g')
 
 # Fetch the Wikipedia page content
-page_content=$(curl -sL "https://$language.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro&explaintext&titles=$search_term")
+page_content=$(curl -sL "https://$language.wikipedia.org/w/api.php?&action=query&format=json&prop=extracts&exintro&explaintext&titles=$search_term&redirects")
 extract=$(echo "$page_content" | grep -o '"extract":".*' | sed 's/"extract":"//' | sed 's/"}}}}//')
 
 # Check if the extract is empty
 if [ -z "$extract" ]; then
-  echo "No information found for '$1' on Wikipedia."
+  echo "No information found for '$search_term' on Wikipedia."
 else
   echo -e "$extract"
 fi
