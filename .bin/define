@@ -6,26 +6,40 @@ language="it"
 
 # Check if the "-e" option is provided to search the English Wikipedia
 if [ "$1" == "-e" ]; then
-  language="en"
-  shift
+	language="en"
+	shift
+fi
+
+# Check if "-w" option provided, search wikitionary
+if [ "$1" == "-d" ]; then
+	dict=true
+	shift
 fi
 
 # Check if an argument is provided
 if [ $# -eq 0 ]; then
-  echo "Please provide a search term as an argument."
-  exit 1
+	echo "Please provide a search term as an argument."
+	exit 1
 fi
 
 # URL encode the search term
 search_term=$(echo "$*" | sed 's/ /%20/g')
 
-# Fetch the Wikipedia page content
-page_content=$(curl -sL "https://$language.wikipedia.org/w/api.php?&action=query&format=json&prop=extracts&exintro&explaintext&titles=$search_term&redirects")
-extract=$(echo "$page_content" | grep -o '"extract":".*' | sed 's/"extract":"//' | sed 's/"}}}}//')
+# Fetch the Wikipedia/wikitionary page content
+if [ "$dict" == "true" ]; then
+	echo niy
+	exit 2
+else
+	page_content=$(curl -sL "https://$language.wikipedia.org/w/api.php?&action=query&format=json&prop=extracts&exintro&explaintext&titles=$search_term&redirects")
+	extract=$(echo "$page_content" | grep -o '"extract":".*' | sed 's/"extract":"//' | sed 's/"}}}}//')
+	pageid=$(echo "$page_content" | grep -o 'pageid.*,' | sed 's/,.*$//' | sed 's/pageid"://')
+fi
+
 
 # Check if the extract is empty
 if [ -z "$extract" ]; then
-  echo "No information found for '$search_term' on Wikipedia."
+	echo "No information found for '$search_term' on Wikipedia."
 else
-  echo -e "$extract"
+	echo -e "$extract"
+	echo -e "\nhttps://$language.wikipedia.org/wiki/?curid=$pageid"
 fi

@@ -114,7 +114,7 @@ gnome:
 	gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
 	gsettings set org.gnome.desktop.screensaver picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
-	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "['<Primary><Alt>space']"
+	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "['<Super><Alt>space']"
 	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']"
 	gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Alt>Escape']"
 	gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>Escape']"
