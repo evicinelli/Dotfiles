@@ -40,6 +40,6 @@ fi
 if [ -z "$extract" ]; then
 	echo "No information found for '$search_term' on Wikipedia."
 else
-	echo -e "$extract"
-	echo -e "\nhttps://$language.wikipedia.org/wiki/?curid=$pageid"
+	echo -e "$extract \n" | sed 's/\\//'
+	echo -e "https://$language.wikipedia.org/wiki/?curid=$pageid \n"
 fi

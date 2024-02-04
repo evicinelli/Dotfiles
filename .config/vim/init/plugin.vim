@@ -60,7 +60,7 @@ let g:netrw_liststyle = 0       " buffer view
 " Pandoc options
 let g:pandoc#biblio#bibs = ["$MED/bib.bib, $P/Libreria/zotero.bib"]
 let g:pandoc#biblio#use_bibtool = 1
-let g:pandoc#folding#mode = 'relative'
+let g:pandoc#folding#mode = 'syntax'
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 1

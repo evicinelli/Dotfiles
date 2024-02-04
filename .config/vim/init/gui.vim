@@ -4,10 +4,11 @@ if has('gui_running')
 	se guioptions-=m " Remove menubar
 	se guioptions-=r " Remove scrollbar
 	se guioptions-=L " Remove scrollbar
-	se guifont=Monospace\ Regular\ 15
+	se guifont=Monospace\ Regular\ 14
 	se belloff=esc
 	se bg=light
-	colorscheme xcode
+	colorscheme carbonized-light
+	se laststatus=0
 	" Change Font Size in Gvim
 	" https://vi.stackexchange.com/questions/5804/how-to-zoom-to-text-in-vim-via-shortcut
 	let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
