@@ -1,9 +1,6 @@
 " Mappings
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap Q q
-cnoremap W w
-cnoremap X x
 
 inoremap  =system("date")<CR><Esc>kJ
 inoremap  =system("date -I")<CR><Esc>kJ$
@@ -31,6 +28,20 @@ noremap <leader>m :MarkdownPreviewToggle<CR>
 noremap Y y$
 noremap Z zMzv
 noremap z _\|\|
+
 vnoremap K gk
 vnoremap az [zo]z
 vnoremap iz [zjo]zk
+
+" Extended text Objects and matchpairs
+" Thanks to Conner McDaniel: https://youtu.be/0F4FgiVWvB8
+set matchpairs+=<:>
+let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\", "^", "~", "`", "$", "%"]
+for item in s:items
+	" Operator-pending mode
+	exe "omap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
+	exe "omap a".item ":<C-U>normal!vF".item."of".item."<CR>"
+	" Visual mode only
+	exe "xmap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
+	exe "xmap a".item ":<C-U>normal!vF".item."of".item."<CR>"
+endfor

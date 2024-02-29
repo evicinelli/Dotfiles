@@ -17,7 +17,7 @@ set linebreak                              " Break long lines at spaces, not in 
 set modeline                               " Vim executes vimL commands if they are found in the current file
 set mouse=a                                " Enable mouse in all (=a) modes
 set noautochdir                            " Do not change folder
-set noexpandtab                            " Tab settings: on pressing Tab, insert \t
+set noexpandtab                            " Tab settings: on pressing Tab, insert a literal \t
 set noshowmode                             " Not show when in insert mode
 set number relativenumber                  " Line numbers are relative to current line
 set omnifunc=syntaxcomplete#Complete       " Omni-completion
@@ -36,25 +36,12 @@ set splitright                             " Vsplit to the right
 set swapfile                               " _Always_ create swp file. Never too sure
 set tabstop=4                              " Tab settings: How many space \t get
 set title                                  " Set the title of the window NVIM is run into to "filename (path) - NVIM"
-set undodir=~/.local/share/nvim/undo//     " Where to save persistent undo history
+set undodir=~/.local/share/nvim/undo//     " Where to save persistent undo history (undofiles)
 set undofile                               " Persistent history
-set undolevels=5000                        " How many edit are saved in undofile
-set updatetime=2000                        " Fire CursorHold hooks after x sec of no activity in normal mode & how often write to disk swp file
+set undolevels=5000                        " How many edits are saved in undofile
+set updatetime=2000                        " After how long to fire CursorHold hooks & how often write to disk swp file
 set wildignorecase                         " Ignore case when autocomplete
 set wildmenu                               " Tab autocompletion in menu
 set writebackup                            " Write backup file before saving buffer to disk, delete after success
 let mapleader = " "
 let maplocalleader = " "
-
-" Extended text Objects and matchpairs
-" Thanks to Conner McDaniel: https://youtu.be/0F4FgiVWvB8
-set matchpairs+=<:>
-let s:items = [ ",", "." , "-" , "_" , "*" , ":" , "/" , "<bar>", "+", "\\", "^", "~", "`", "$", "%"]
-for item in s:items
-	" Operator-pending mode
-	exe "omap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
-	exe "omap a".item ":<C-U>normal!vF".item."of".item."<CR>"
-	" Visual mode only
-	exe "xmap i".item ":<C-U>normal!vT".item."ot".item."<CR>"
-	exe "xmap a".item ":<C-U>normal!vF".item."of".item."<CR>"
-endfor

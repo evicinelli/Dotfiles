@@ -18,3 +18,13 @@ nnoremap <leader>nn :!echo seek +10 \| socat - /tmp/mpvsocket<CR><CR>
 
 nnoremap <leader>p5 :!echo seek -5 \| socat - /tmp/mpvsocket<CR><CR>
 nnoremap <leader>pp :!echo seek -10 \| socat - /tmp/mpvsocket<CR><CR>
+
+" Like Rstudio
+function! ExecuteInR(string)
+    let escaped_string = shellescape(a:string, 1)
+    let r_command = 'Rscript -e "' . escaped_string . '"'
+    :echo system(r_command)
+endfunction
+
+nnoremap <Leader>R :call ExecuteInR(getline('.'))<CR>
+" vnoremap <Leader>R :<C-U>call ExecuteInR(@")<CR>

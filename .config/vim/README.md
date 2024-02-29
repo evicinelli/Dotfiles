@@ -1,5 +1,5 @@
-# My (n)vim config
-- This configuration is suitable both for vim8 and nvim
+# My (n|g|Mac)vim config
+- This configuration is suitable for vim8, nvim, GVim and MacVim
 - All settings are split in different files, located under `./init`
 - Everything under `./init` is sourced in `.vimrc` accordingly
 

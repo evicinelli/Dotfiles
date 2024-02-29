@@ -4,7 +4,7 @@ SHELL=/bin/bash
 PKGMGR=apt
 INSTALL=$(PKGMGR) install -y
 
-all          : update essentials nvim utils gui-app flatpak
+system       : essentials nvim utils gui-app flatpak
 modules      : npm python
 
 update:
@@ -57,9 +57,8 @@ flatpak:
 	# Install flatpak applications
 	$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki us.zoom.Zoom com.skype.Client org.zotero.Zotero com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker org.gnome.gitlab.somas.Apostrophe
+	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki us.zoom.Zoom com.skype.Client org.jabref.jabref com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker org.gnome.gitlab.somas.Apostrophe
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
-	flatpak override org.zotero.Zotero --filesystem=$(HOME)
 
 python:
 	$(INSTALL) python3 python3-pip python-is-python3 pipx

@@ -7,7 +7,7 @@ if has('gui_running')
 	se guifont=Monospace\ Regular\ 14
 	se belloff=esc
 	se bg=light
-	colorscheme carbonized-light
+	colorscheme xcode
 	se laststatus=0
 	" Change Font Size in Gvim
 	" https://vi.stackexchange.com/questions/5804/how-to-zoom-to-text-in-vim-via-shortcut

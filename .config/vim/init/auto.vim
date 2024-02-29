@@ -12,8 +12,8 @@ augroup nonvim
 	" BufReadCmd is used because is triggered _before_ the file is red into
 	" the buffer, so if the file size is very large it won't freeze vim until
 	" the file is loaded into the buffer -- which we'll not use anyway
-	autocmd BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv,avi} sil! exe "!open ".shellescape(expand("%:p"))." &" 
-"| bd! | let &ft=&ft | redraw!
+	" Gvim doesn't play nice with this sadly
+	autocmd BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv,avi} sil! exe "!xdg-open \"%:p\" &" | bd
 augroup end
 
 " Goyo hooks
