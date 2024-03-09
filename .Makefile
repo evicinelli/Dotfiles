@@ -39,11 +39,11 @@ nvim:
 
 utils:
 	# Install various utilities
-	$(INSTALL) kitty mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors
+	$(INSTALL) mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp
 
 gui-app:
 	# Install gui apps
-	$(INSTALL) dmenu youtube-dl qutebrowser meld gnome-sushi drawing gnome-shell-pomodoro
+	$(INSTALL) qutebrowser meld gnome-sushi drawing gwenview okular okular-extra-backend
 
 repos:
 	# External repos
