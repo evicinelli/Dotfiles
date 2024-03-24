@@ -7,18 +7,11 @@ call plug#begin('~/.config/vim/plugged/')
 		Plug 'tpope/vim-sensible'                                        " Sensible default if not nvim
 	endif
 
-	" Not used anymore {{{
-	" Plug 'christoomey/vim-tmux-navigator'                              " Vim <3 tmux
-	" Plug 'editorconfig/editorconfig-vim'                               " Support .editorconfig standard
-	" Plug 'paroxayte/autocd.vim'                                        " Autocd in folder rule-based
-	" }}}
-
 	" General use {{{
 	Plug 'junegunn/fzf',	{ 'dir': '~/.fzf', 'do': './install --all' } " Fzf <3
 	Plug 'junegunn/goyo.vim'                                             " Distraction free writing
 	Plug 'mbbill/undotree'                                               " Visualize undo tree
 	Plug 'rickhowe/diffchar.vim'                                         " Better highlighting in diff mode
-	Plug 'sakshamgupta05/vim-todo-highlight'                             " Highlight TODO
 	Plug 'tpope/vim-commentary'                                          " Commenting done right
 	Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 	Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
@@ -38,7 +31,7 @@ call plug#begin('~/.config/vim/plugged/')
 	Plug 'quarto-dev/quarto-vim'
 	" }}}
 
-	" Colors {{{
+	" Colorschemes {{{
 	Plug 'nightsense/cosmic_latte'
 	Plug 'lunacookies/vim-colors-xcode'
 	Plug 'rafi/awesome-vim-colorschemes'
@@ -98,8 +91,3 @@ let g:fzf_action = {
 
 " Csv options
 let g:csv_highlight_column = 'y'
-
-" Markdown-preview options
-" let g:mkdp_command_for_global = 1
-" let g:mkdp_browser = 'x-www-browser'
-" let g:mkdp_browser = '/Applications/Firefox.app/'

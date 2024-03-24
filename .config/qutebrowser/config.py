@@ -12,6 +12,8 @@ c.fonts.default_size = "14pt"
 
 c.url.default_page = 'https://ecosia.com/'
 c.url.searchengines = {'DEFAULT' : 'https:/ecosia.com/search?q={}',
+                       'chat'    : 'https:/ecosia.com/chat?q={}',
+                       'ai'      : 'https:/ecosia.com/chat?q={}',
                        'ddg'     : 'https:/duckduckgo.com/?q={}',
                        'msd'     : 'https:/www.msdmanuals.com/it/professionale/SearchResults?query={}',
                        'msden'   : 'https:/www.msdmanuals.com/en/professionale/SearchResults?query={}',

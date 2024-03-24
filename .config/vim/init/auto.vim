@@ -40,3 +40,8 @@ command Marked :silent !flatpak run org.gnome.gitlab.somas.Apostrophe "%"
 
 " Copy in clipboard qutebrowser buffers, `edit-text` not always works
 autocmd ExitPre /tmp/qutebrowser-editor* !cat "%" | wl-copy
+
+augroup HiglightTODO
+    autocmd!
+    autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO\|FIXME\|REVIEW\|NOTE', -1)
+augroup END
