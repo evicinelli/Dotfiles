@@ -25,3 +25,5 @@ dig lt 0060 " Digraph <
 dig ra 8594 " Digraph →
 dig sh  601 " Digraph ə
 dig sw  601 " Digraph ə
+dig /> 8599 " Digraph ↗
+dig /< 8600 " Digraph ↘

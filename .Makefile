@@ -43,7 +43,7 @@ utils:
 
 gui-app:
 	# Install gui apps
-	$(INSTALL) qutebrowser meld gnome-sushi drawing gwenview okular okular-extra-backend
+	$(INSTALL) vim-gtk3 qutebrowser meld gnome-sushi drawing gwenview okular okular-extra-backends
 
 repos:
 	# External repos
@@ -57,7 +57,7 @@ flatpak:
 	# Install flatpak applications
 	$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki us.zoom.Zoom com.skype.Client org.jabref.jabref com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker org.gnome.gitlab.somas.Apostrophe
+	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki org.jitsi.jitsi-meet us.zoom.Zoom com.skype.Client org.jabref.jabref com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker org.gnome.gitlab.somas.Apostrophe
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
 
 python:
@@ -84,8 +84,9 @@ config:
 	xdg-mime default mpv.desktop video/*
 
 gnome:
+	pkexec $(INSTALL) gnome-tweaks gnome-shell-extensions gnome-sushi
+
 	# GNOME settings
-	# gsettings set org.gnome.desktop.background picture-uri 'file:///${HOME}/.img.jpeg' #469785' '#1BBE6F' '#b2052e' '#d64761' '#0d5676' '#82D0F4' '#502379' '#FDC220'
 	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
 	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories-with-content "['.trackerignore', '.hg', '.nomedia']"
 	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/']"

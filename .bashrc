@@ -211,3 +211,4 @@ alias mambutodo="TD=$P/Documenti/Todo/_mambu.todo.txt todo"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # }}}
 
+
