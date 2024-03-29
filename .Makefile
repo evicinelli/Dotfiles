@@ -89,9 +89,9 @@ gnome:
 	# GNOME settings
 	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
 	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories-with-content "['.trackerignore', '.hg', '.nomedia']"
-	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/']"
-	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}', '&DOWNLOAD']"
-	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 30
+	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/', '&DOWNLOAD']"
+	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}']"
+	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 300
 	gsettings set org.gnome.desktop.background color-shading-type 'solid'
 	gsettings set org.gnome.desktop.background primary-color '#d64761'
 	gsettings set org.gnome.desktop.interface clock-format '24h'

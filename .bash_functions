@@ -50,7 +50,7 @@ daysuntil () {
 
 # https://www.reddit.com/r/commandline/comments/hgayn8/stumbled_across_a_recipe_scraping_website_and/
 plainoldrecipe () {
-	curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | pandoc --atx-headers -f html -t markdown
+	curl -sG "https://plainoldrecipe.com/recipe" -d "url=${1}" | quarto pandoc -f html -t markdown
 }
 
 randint () {
