@@ -15,7 +15,7 @@ utils = require 'mp.utils'
 excerpt_begin = 0.0
 excerpt_end   = mp.get_property_native("length")
 if excerpt_end == nil or excerpt_end == "none" then
- excerpt_end = 0.0
+	excerpt_end = 0.0
 end
 
 mp.set_property("hr-seek-framedrop","no")
@@ -37,14 +37,14 @@ function excerpt_mark_begin_handler()
 		pt = 0.0
 	end
 
-    local all_chapters = mp.get_property_native("chapter-list")
+	local all_chapters = mp.get_property_native("chapter-list")
 	table.remove(all_chapters,2)
 	all_chapters[1] = {
 		title = "in",
 		time = pt
 	}
 	mp.set_property_native("chapter-list", all_chapters)
- 
+
 	excerpt_begin = pt
 	if excerpt_begin > excerpt_end then
 		excerpt_end = excerpt_begin
@@ -58,7 +58,7 @@ function excerpt_mark_begin_handler()
 	-- to be specified on the command line of mpv, instead:
 	mp.set_property("options/script-opts","osc-layout=bottombar,osc-hidetimeout=120000")
 
- end
+end
 
 function excerpt_mark_end_handler() 
 	pt = mp.get_property_native("playback-time")
@@ -66,13 +66,13 @@ function excerpt_mark_end_handler()
 		pt = 0.0
 	end
 
-    local all_chapters = mp.get_property_native("chapter-list")
+	local all_chapters = mp.get_property_native("chapter-list")
 	all_chapters[2] = {
 		title = "out",
 		time = pt
 	}
 	mp.set_property_native("chapter-list", all_chapters)
-	
+
 	excerpt_end = pt
 	if excerpt_end < excerpt_begin then
 		excerpt_begin = excerpt_end
@@ -113,7 +113,7 @@ function excerpt_write_handler()
 		mp.osd_message(message, 3)
 		return
 	end
- 	
+
 	dstname = get_destination_filename()
 	duration = excerpt_end - excerpt_begin
 
@@ -175,7 +175,7 @@ function excerpt_write_handler()
 	end 
 
 	local res = utils.subprocess(cmd)
-	
+
 	if (res["status"] ~= 0) then
 		message = message .. "failed!\nfailed to run excerpt - status = " .. res["status"]
 		if (res["error"] ~= nil) then
@@ -188,7 +188,7 @@ function excerpt_write_handler()
 		message = message .. "\n DONE!"
 		mp.osd_message(message, 10)
 	end
- 
+
 end
 
 -- things to do whenever a new file was loaded:

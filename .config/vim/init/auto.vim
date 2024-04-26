@@ -23,7 +23,7 @@ augroup Goyo
 augroup end
 
 " Every txt file is a quarto markdown file
-" autocmd BufNewFile,BufRead,BufWrite *.{txt,md} set ft=quarto
+autocmd BufNewFile,BufRead,BufWrite *.{txt,md} set ft=pandoc | set keywordprg=define
 
 " Please, no spell in my todo list
 augroup todotxt
