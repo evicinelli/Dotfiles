@@ -9,6 +9,8 @@ iabbrev pz pz.
 iabbrev sg sg.
 iabbrev tp tp.
 
+iabbrev !! ⚠
+
 
 " Digraphs
 dig BA 8656 " Digraph ⇐

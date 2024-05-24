@@ -34,7 +34,7 @@ set spelllang=it,en                        " Spell dictionaries
 set splitbelow                             " HSplit below
 set splitright                             " Vsplit to the right
 set swapfile                               " _Always_ create swp file. Never too sure
-set tabstop=4                              " Tab settings: How many space \t get
+set tabstop=4                              " Tab settings: How many space \t is represented as
 set title                                  " Set the title of the window NVIM is run into to "filename (path) - NVIM"
 set undodir=~/.local/share/nvim/undo//     " Where to save persistent undo history (undofiles)
 set undofile                               " Persistent history

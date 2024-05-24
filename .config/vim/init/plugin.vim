@@ -58,27 +58,29 @@ let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 1
 let g:pandoc#modules#disabled = [""]
-let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#syntax#conceal#use = 1
 let g:pandoc#syntax#conceal#blacklist = [
-	\ "atx",
-	\ "codeblock_delim",
-	\ "codeblock_start",
-	\ "comments",
-	\ "html_c_s",
-	\ "html_c_e",
-	\ "dashes",
-	\ "definition",
-	\ "ellipses",
-	\ "emdashes",
-	\ "endashes",
-	\ "footnote",
-	\ "image",
-	\ "inlinecode",
-	\ "list",
-	\ "quotes",
-	\ "subscript",
-	\ "superscript",
-	\ "titleblock"]
+ 	\ "atx",
+ 	\ "dashes",
+ 	\ "ellipses",
+ 	\ "emdashes",
+ 	\ "endashes",
+ 	\ "footnote",
+ 	\ "image",
+ 	\ "list",
+ 	\ "quotes",
+ 	\ "subscript",
+ 	\ "superscript",
+	\ "titleblock" ]
+
+ 	" \ "codeblock_delim",
+ 	" \ "codeblock_start",
+ 	" \ "comments",
+ 	" \ "definition",
+ 	" \ "html_c_e",
+ 	" \ "html_c_s",
+ 	" \ "inlinecode",
+
 let g:pandoc#toc#close_after_navigating = 1
 let g:pandoc#toc#position = "left"
 let g:pandoc#toc#shift = 1
