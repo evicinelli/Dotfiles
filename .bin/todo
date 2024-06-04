@@ -46,7 +46,9 @@ todo-ls() {
 		fi
 	else
 		cat "$TD"  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
-	fi | sort -n
+	fi | sort -n | sed "s/$/  /"
+
+	# Last `sed` so that output can be rapidly viewed as md
 }
 
 todo-done () {
@@ -71,8 +73,8 @@ function todo-agenda(){
 	[[ $end -gt 0 ]] && days=$(seq 0 $end) || days=$(seq $end 0)
 	for i in $days; do
 		t=$(todo-ls $i days)
-		day_title="- $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) [$(echo -e "$t" | wc -l)] --\n"
-		if $(tty -s) && [[ -z $TODO_DUMMY ]]; then
+		day_title="## $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) [$(echo -e "$t" | wc -l)] ##\n"
+		if $(tty -s) && [[ -z $TODO_NOCOLOR ]]; then
 			[[ ! -z "$t" ]] && echo -e "\033[1;31m${day_title}\033[0m${t}\n"
 		else # Dummy terminal
 			[[ ! -z "$t" ]] && echo -e "${day_title}${t}\n"
@@ -96,8 +98,8 @@ function todo-ls-proj(){
 	tags=($(grep -Eo " @\w+" "$TD" | sort | uniq))
 	for tag in ${tags[*]}; do
 		t=$(grep -v "^x" "$TD" | grep "$tag")
-		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"
-		echo -e "$t"
+		echo -ne "\n## $tag [$(echo "$t" | wc -l)] ##\n"
+		echo -e "$t" | sed "s/$/  /"
 	done
 }
 
@@ -105,8 +107,8 @@ function todo-ls-tags(){
 	tags=($(grep -Eo " \+\w+" "$TD" | grep -Ev "^ \+ $" | sort | uniq))
 	for tag in ${tags[*]}; do
 		t=$(grep -v "^x" "$TD" | grep "$tag")
-		echo -ne "\n- $tag --- [$(echo "$t" | wc -l)]\n"
-		echo -e "$t"
+		echo -ne "\n## $tag [$(echo "$t" | wc -l)] ##\n"
+		echo -e "$t" | sed "s/$/  /"
 	done
 }
 
