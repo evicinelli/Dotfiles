@@ -10,6 +10,14 @@ DN=${DN:-"$HOME/done.txt"}
 EDITOR=${EDITOR:-vim}
 URGENT_RANGE="A-A"
 
+_pretty_print () {
+if $(tty -s) && [[ -z $TODO_NOCOLOR ]]; then
+	[[ ! -z "$t" ]] && echo -e "\033[1;31m$*\033[0m"
+else # Dummy terminal
+	[[ ! -z "$t" ]] && echo -e "\r$*"
+fi
+}
+
 todo-edit() {
 	if tty -s; then
 		[[ $# -gt 0 ]] && $EDITOR "$TD" +/$(echo ${*} | sed "s/ /.*/") || $EDITOR "$TD"
@@ -30,7 +38,7 @@ todo-add(){
 	if [[ $# -gt 0 ]]; then
 		if [[ $date_exit_status -eq 0 ]]; then
 			toAdd="$pri $(date -I) $task"
-			echo "Aggiungo: $toAdd"
+			# echo "DBG Adding: $toAdd"
 			echo $toAdd | sed "s/^ //" >> "$TD"
 		fi
 	fi
@@ -46,9 +54,7 @@ todo-ls() {
 		fi
 	else
 		cat "$TD"  | grep -v "^x .*" | grep "due:$(date +%F --date="today")"
-	fi | sort -n | sed "s/$/  /"
-
-	# Last `sed` so that output can be rapidly viewed as md
+	fi | sort -n
 }
 
 todo-done () {
@@ -56,11 +62,11 @@ todo-done () {
 		QUERY=$(echo $* | sed -e "s/\ /.*/g")
 		ENTRY=$(grep -i "$QUERY" "$TD" | grep -v "^x .*")
 		ENTRIES_NO=$(echo -e "$ENTRY" | grep -v "^$"| wc -l)
-		[[ $ENTRIES_NO -gt 0 ]] || (echo "Nada de nada, mi sa che hai scritto male" && exit)
+		[[ $ENTRIES_NO -gt 0 ]] || (echo "No match" && exit 1)
 		[[ $ENTRIES_NO -gt 1 ]] && ENTRY=$(echo -e "$ENTRY" | fzf)
 
 		sed -i "s|$ENTRY|x $(date +%F) &|" "$TD"
-		echo -e "Marco come completato: $ENTRY"
+		# echo -e "DBG Mark as done: $ENTRY"
 	else
 		# ENTRY=$(cat "$TD" | fzf)
 		# todo-ls "^x $(date -I)"
@@ -69,16 +75,11 @@ todo-done () {
 }
 
 function todo-agenda(){
-	end=${1:-6} # if not $1, by default print todos for next 6 days
+	end=${1:-7} # if not $1, by default print todos for next 7 days
 	[[ $end -gt 0 ]] && days=$(seq 0 $end) || days=$(seq $end 0)
 	for i in $days; do
 		t=$(todo-ls $i days)
-		day_title="## $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) [$(echo -e "$t" | wc -l)] ##\n"
-		if $(tty -s) && [[ -z $TODO_NOCOLOR ]]; then
-			[[ ! -z "$t" ]] && echo -e "\033[1;31m${day_title}\033[0m${t}\n"
-		else # Dummy terminal
-			[[ ! -z "$t" ]] && echo -e "${day_title}${t}\n"
-		fi
+		[[ ! -z "$t" ]] && _pretty_print "## $(date +%a\ %d\/%m\/%Y -d "$i days") ($i days) [$(echo -e "$t" | wc -l)] ##" && echo -e "$t\n"
 	done;
 	echo
 }
@@ -98,8 +99,7 @@ function todo-ls-proj(){
 	tags=($(grep -Eo " @\w+" "$TD" | sort | uniq))
 	for tag in ${tags[*]}; do
 		t=$(grep -v "^x" "$TD" | grep "$tag")
-		echo -ne "\n## $tag [$(echo "$t" | wc -l)] ##\n"
-		echo -e "$t" | sed "s/$/  /"
+		[[ ! -z "$t" ]] && _pretty_print "## $tag [$(echo "$t" | wc -l)] ##" && echo -e "$t \n"
 	done
 }
 
@@ -107,8 +107,7 @@ function todo-ls-tags(){
 	tags=($(grep -Eo " \+\w+" "$TD" | grep -Ev "^ \+ $" | sort | uniq))
 	for tag in ${tags[*]}; do
 		t=$(grep -v "^x" "$TD" | grep "$tag")
-		echo -ne "\n## $tag [$(echo "$t" | wc -l)] ##\n"
-		echo -e "$t" | sed "s/$/  /"
+		[[ ! -z "$t" ]] && _pretty_print "## $tag [$(echo "$t" | wc -l)] ##" && echo -e "$t \n"
 	done
 }
 
@@ -117,29 +116,33 @@ todo-urgent (){
 }
 
 usage (){
-cat <<-HELP
+	cat <<-HELP
 	USAGE
 
-		todo <command> [argument]
+	todo <command> [argument]
 
 	COMMANDS
 
-		a	add     	 add [argument] as a new task. If a due date is set, it must be specified in a gnu \`date\` compatible format
-		d	done    	 mark task matching [argument] as done
-		e	edit    	 edit $TD with $EDITOR
-		g	agenda  	 list tasks for the next ±[argument] days (default: 6)
-		l	ls      	 list today's tasks or list task matching [argument], if supplied
-		p	past    	 list overdue tasks
-		s	someday 	 list tasks which do not have a due date
-		u	urgent  	 list highly prioritized todos ($URGENT_RANGE) matching [argument], if supplied
-		 +	tags    	 list tasks grouped by +tags
-		@	proj    	 list tasks grouped by @project
+		  a	add      add [argument] as a new task. If a due date is set, it must be specified in a gnu \`date\` compatible format
+		  d	done     mark task matching [argument] as done
+		  e	edit     edit $TD with $EDITOR
+		  g	agenda   list tasks for the next ±[argument] days (default: 6)
+		  l	ls       list today's tasks or list task matching [argument], if supplied. Markdown friendly :)
+		  p	past     list overdue tasks
+		  s	someday  list tasks which do not have a due date
+		  u	urgent   list highly prioritized todos ($URGENT_RANGE) matching [argument], if supplied
+		  t	tags     list tasks grouped by +tags
+		  j	proj     list tasks grouped by @project
 
 	CONFIGURATION
 
-		Todo file: $TD
-		Done file: $DN
+		  Default todo file: $TD
+		  Default done file: $DN
 
+	OPTIONS
+
+		  TODO_NOCOLOR	 set to suppress tui color output
+		  URGENT_RANGE	 regex to set priorities considered as urgent (now: $URGENT_RANGE)
 	HELP
 }
 
@@ -157,4 +160,4 @@ case $1 in
 	"urgent"|"u") shift; todo-urgent $*;;
 	"h"|"help"|"-h"|"--help") usage ;;
 	*) todo-ls $* ;;
-esac
+esac | sed "s/$/  /"
