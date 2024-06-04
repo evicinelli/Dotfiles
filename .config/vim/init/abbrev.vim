@@ -8,8 +8,11 @@ iabbrev perchè perché
 iabbrev pz pz.
 iabbrev sg sg.
 iabbrev tp tp.
-
 iabbrev !! ⚠
+iabbrev -> →
+iabbrev -^ ↑
+iabbrev <- ←
+iabbrev -v ↓
 
 
 " Digraphs

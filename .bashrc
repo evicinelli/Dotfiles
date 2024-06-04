@@ -167,6 +167,7 @@ alias lla="ls -la"
 # alias pandoc="pandoc --filter=pandoc-citeproc -V subparagraph"
 # alias rm="rm -I"
 alias sl='ls'
+alias gvim='flatpak run org.vim.Vim -g'
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
 alias amn="nv \"$MED\""

@@ -43,7 +43,7 @@ utils:
 
 gui-app:
 	# Install gui apps
-	$(INSTALL) vim-gtk3 qutebrowser meld gnome-sushi drawing gwenview okular okular-extra-backends
+	$(INSTALL) vim-gtk3 qutebrowser meld gnome-sushi drawing gwenview okular okular-extra-backends pavucontrol
 
 repos:
 	# External repos
@@ -84,7 +84,7 @@ config:
 	xdg-mime default mpv.desktop video/*
 
 gnome:
-	pkexec $(INSTALL) gnome-tweaks gnome-shell-extensions gnome-sushi
+	pkexec $(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi
 
 	# GNOME settings
 	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
@@ -129,6 +129,7 @@ gnome:
 	gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 	gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Sans Bold 11'
 	gsettings set org.gnome.desktop.wm.preferences titlebar-uses-system-font true
+	gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"
 	gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'detailed_type', 'date_modified', 'permissions']"
 	gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
 	gsettings set org.gnome.nautilus.list-view use-tree-view true
@@ -138,12 +139,12 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2000
-	gsettings set org.gnome.settings-daemon.plugins.media-keys battery-status ['<Super><Shift>b']
+	gsettings set org.gnome.settings-daemon.plugins.media-keys battery-status "['<Super><Shift>b']"
 	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'suspend'
 	gsettings set org.gnome.settings-daemon.plugins.power percentage-low 20
-	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'hibernate'
+	gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
