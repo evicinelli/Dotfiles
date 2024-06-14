@@ -40,20 +40,16 @@ getTags(){
 	grep -o " @.[[:alnum:]]*" "$BALANCE_FILE" | sort | uniq
 }
 
-
-# Main
-if [[ "$@" =~ -h|h|--help|help ]]; then
-	help
-else
+printCurrentBalance () {
 	# For each tag, sum all the entries (i know it's bad)
 	for tag in $(getTags); do
-		total=$(grep $tag "$BALANCE_FILE" | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
+		total=$(grep $tag "$1" | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
 		grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $total}")
 		printf "%.1f€\t\t%s\n" "$total" "$tag"
 	done
 
 	# Sum entries with no tag
-	uncategorized_total=$(grep -v ' @.[[:alnum:]]*' "$BALANCE_FILE" | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
+	uncategorized_total=$(grep -v ' @.[[:alnum:]]*' "$*" | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
 
 	# Grand Total
 	grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $uncategorized_total}")
@@ -62,5 +58,13 @@ else
 	printf "%s\t\t%s\n" "----" "===================="
 	printf "%.1f€\t\t%s\n" "$uncategorized_total" "Uncategorized"
 	printf "%.1f€\t\t%s\n\n" $grand_total "TOTAL"
-	echo -e "Ultimo aggiornamento: $(ls -al "$BALANCE_FILE" | cut -d" " -f6-9)\n"
-fi
+	echo -e "Ultimo aggiornamento: $(ls -al "$*" | cut -d" " -f6-9)\n"
+}
+
+
+# Main
+case "$@" in
+	"-h"|"h"|"--help"|"help") help;;
+	"-e"|"e"|"--edit"|"edit") $EDITOR $BALANCE_FILE;;
+	*) printCurrentBalance $BALANCE_FILE
+esac

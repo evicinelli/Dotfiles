@@ -7,15 +7,15 @@
 # Configuration
 TD=${TD:-"$HOME/todo.txt"}
 DN=${DN:-"$HOME/done.txt"}
-EDITOR=${EDITOR:-vim}
+EDITOR=${EDITOR:-vi}
 URGENT_RANGE="A-A"
 
 _pretty_print () {
-if $(tty -s) && [[ -z $TODO_NOCOLOR ]]; then
-	[[ ! -z "$t" ]] && echo -e "\033[1;31m$*\033[0m"
-else # Dummy terminal
-	[[ ! -z "$t" ]] && echo -e "\r$*"
-fi
+	if $(tty -s) && [[ -z $TODO_NOCOLOR ]]; then
+		[[ ! -z "$t" ]] && echo -e "\033[1;31m$*\033[0m"
+	else # Dummy terminal
+		[[ ! -z "$t" ]] && echo -e "\r$*"
+	fi
 }
 
 todo-edit() {
@@ -147,17 +147,21 @@ usage (){
 }
 
 # Main
-case $1 in
-	"add"|"a") shift; todo-add $*;;
-	"agenda"|"g") shift; todo-agenda $*;;
-	"done"|"d") shift; todo-done $*;;
-	"edit"|"e") shift; todo-edit $*;;
-	"ls"|"l") shift; todo-ls $*;;
-	"past"|"p") shift; todo-past $*;;
-	"proj"|"j"|"@") shift; todo-ls-proj $*;;
-	"someday"|"s") shift; todo-someday $*;;
-	"tags"|"t"|"+") shift; todo-ls-tags $*;;
-	"urgent"|"u") shift; todo-urgent $*;;
-	"h"|"help"|"-h"|"--help") usage ;;
-	*) todo-ls $* ;;
-esac | sed "s/$/  /"
+if [[ $1 == "edit" ]] || [[ $1 == "e" ]]; then
+	shift; todo-edit $*
+else 
+	case $1 in
+		"add"|"a") shift; todo-add $*;;
+		"agenda"|"g") shift; todo-agenda $*;;
+		"done"|"d") shift; todo-done $*;;
+		"ls"|"l") shift; todo-ls $*;;
+		"past"|"p") shift; todo-past $*;;
+		"proj"|"j"|"@") shift; todo-ls-proj $*;;
+		"someday"|"s") shift; todo-someday $*;;
+		"tags"|"t"|"+") shift; todo-ls-tags $*;;
+		"urgent"|"u") shift; todo-urgent $*;;
+		"h"|"help"|"-h"|"--help") usage ;;
+		*) todo-ls $* ;;
+	esac | sed "s/$/  /"
+fi
+exit 0

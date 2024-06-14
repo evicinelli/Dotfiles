@@ -1,14 +1,16 @@
 " Gvim
 if has('gui_running')
+	se guioptions-=L " Remove scrollbar
 	se guioptions-=T " Remove Toolbar, Menubar, Scrollbars
+	se guioptions-=e " Remove gtk tabs, too bulky
 	se guioptions-=m " Remove menubar
 	se guioptions-=r " Remove scrollbar
-	se guioptions-=L " Remove scrollbar
 	se guifont=Monospace\ Regular\ 14
 	se belloff=esc
 	se bg=light
 	colorscheme xcode
 	se laststatus=0
+
 	" Change Font Size in Gvim
 	" https://vi.stackexchange.com/questions/5804/how-to-zoom-to-text-in-vim-via-shortcut
 	let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
@@ -53,7 +55,6 @@ if has("gui_macvim")
 	colorscheme solarized8_flat
 	set guifont=Inconsolata:h16
 endif
-
 
 " Generic nVim GUI
 if exists('g:GuiLoaded')

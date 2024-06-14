@@ -11,9 +11,9 @@ augroup end
 augroup nonvim
 	" BufReadCmd is used because is triggered _before_ the file is red into
 	" the buffer, so if the file size is very large it won't freeze vim until
-	" the file is loaded into the buffer -- which we'll not use anyway
-	" Gvim doesn't play nice with this sadly
-	autocmd BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv,avi} sil! exe "!xdg-open \"%:p\" &" | bd
+	" the file is loaded -- which we'll not use anyway
+	" Gvim doesn't play nice with this sadly AND FOR THE LIFE OF ME I CAN'T FIGURE OUT FUCKING WHY
+	autocmd BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv,avi} sil! exe "!mimeopen '%:p' &" | bd
 augroup end
 
 " Goyo hooks
@@ -27,8 +27,8 @@ autocmd BufNewFile,BufRead,BufWrite *.{txt,md} set ft=pandoc | set keywordprg=de
 
 " Please, no spell in my todo list
 augroup todotxt
-	autocmd bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell
-	autocmd bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell
+	autocmd bufNewfile,bufRead,bufWrite *todo.txt setl ft=todo | set nospell | set nowrap
+	autocmd bufNewfile,bufRead,bufWrite *done.txt setl ft=todo | set nospell | set nowrap
 augroup end
 
 " Man page in vim
