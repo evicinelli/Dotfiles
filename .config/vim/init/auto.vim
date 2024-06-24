@@ -43,5 +43,5 @@ autocmd ExitPre /tmp/qutebrowser-editor* !cat "%" | wl-copy
 
 augroup HiglightTODO
     autocmd!
-    autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO:\|FIXME:\|REVIEW:\|NOTE:\|IDEA:', -1)
+    autocmd WinEnter,VimEnter * :silent! call matchadd('Todo', 'TODO:\|FIXME:\|REVIEW:\|NOTE:\|IDEA:\|WARNING:', -1)
 augroup END

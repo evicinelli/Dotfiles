@@ -4,14 +4,12 @@ SHELL=/bin/bash
 PKGMGR=apt
 INSTALL=$(PKGMGR) install -y
 
-system       : essentials nvim utils gui-app flatpak
+system       : update essentials nvim app flatpak
 modules      : npm python
 
 update:
-	# Warning
-	echo "WARNING! Launch make with sudo -E to preserve your home! Enter to continue"
+	# Warning echo "WARNING! Launch make with sudo -E to preserve your home! Enter to continue"
 	read _
-
 	# Update the system
 	$(PKGMGR) update
 	$(PKGMGR) upgrade
@@ -19,9 +17,6 @@ update:
 essentials:
 	# Install essential cmd utilities
 	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
-	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
-	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
-	sudo apt update && sudo apt install glow
 
 dotfiles:
 	cd
@@ -40,21 +35,18 @@ nvim:
 	mkdir -p ~/.local/share/nvim/swap
 	mkdir -p ~/.local/share/nvim/undo
 
-utils:
-	# Install various utilities
-	$(INSTALL) mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp
-
-gui-app:
-	# Install gui apps
-	$(INSTALL) vim-gtk3 qutebrowser meld gnome-sushi drawing gwenview okular okular-extra-backends pavucontrol
+app: repos
+	$(INSTALL) mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld gnome-sushi drawing gwenview okular okular-extra-backends glow typora
 
 repos:
 	# External repos
 	# curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 	# echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
-	# # wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
-	# # add-apt-repository 'deb https://typora.io/linux ./'
-	# apt update
+	wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
+	add-apt-repository 'deb https://typora.io/linux ./'
+	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+	apt update
 
 flatpak:
 	# Install flatpak applications
