@@ -14,7 +14,6 @@ iabbrev -^ ↑
 iabbrev <- ←
 iabbrev -v ↓
 
-
 " Digraphs
 dig BA 8656 " Digraph ⇐
 dig Ba 8656 " Digraph ⇐
@@ -32,3 +31,13 @@ dig sh  601 " Digraph ə
 dig sw  601 " Digraph ə
 dig /> 8599 " Digraph ↗
 dig /< 8600 " Digraph ↘
+
+iabbrev _RD 🔴
+iabbrev _OD 🟠
+iabbrev _YD 🟡
+iabbrev _GD 🟢
+iabbrev _BD 🔵
+iabbrev _PD 🟣
+iabbrev _WD 🟤
+iabbrev _KD ⚫
+iabbrev _WD ⚪

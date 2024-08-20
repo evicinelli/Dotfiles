@@ -8,7 +8,7 @@ c.fonts.web.family.fixed = 'Monospace'
 c.fonts.web.family.sans_serif = 'Sans Serif'
 c.fonts.web.family.serif = 'Serif'
 c.fonts.web.family.standard = 'Sans Serif'
-c.fonts.default_size = "14pt"
+c.fonts.default_size = "12pt"
 
 c.url.default_page = 'https://ecosia.com/'
 c.url.searchengines = {'DEFAULT' : 'https:/ecosia.com/search?q={}',

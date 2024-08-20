@@ -4,6 +4,7 @@
 set -e
 LC_ALL=C
 IFS=$'\n'
+EDITOR="/usr/bin/gvim" #${EDITOR}
 
 # Configuration
 BALANCE_FILE=${BALANCE_FILE:-"$NOTES/spese.txt"}

@@ -5,7 +5,7 @@ if has('gui_running')
 	se guioptions-=e " Remove gtk tabs, too bulky
 	se guioptions-=m " Remove menubar
 	se guioptions-=r " Remove scrollbar
-	se guifont=Monospace\ Regular\ 14
+	se guifont=Monospace\ Regular\ 13
 	se belloff=esc
 	se bg=light
 	colorscheme xcode
