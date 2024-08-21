@@ -8,6 +8,11 @@ function Mednotes()
 	cd %:p:h
 endfunction
 
+command! Medres call Medres()
+function Medres()
+	FZF $UNI/_/
+endfunction
+
 " Like Rstudio
 function! ExecuteInR(string)
     let escaped_string = shellescape(a:string, 1)

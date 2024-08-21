@@ -13,7 +13,7 @@ augroup nonvim
 	" the buffer, so if the file size is very large it won't freeze vim until
 	" the file is loaded -- which we'll not use anyway
 	" Gvim doesn't play nice with this sadly AND FOR THE LIFE OF ME I CAN'T FIGURE OUT FUCKING WHY
-	autocmd BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv,avi} sil! exe "!xdg-open '%:p' \&" | bd
+	autocmd BufReadCmd *.{png,jpg,pdf,gif,scpt,doc,docx,odt,ppt,pptx,odp,xlsx,xls,ods,mp3,mp4,mov,mkv,avi} sil! exe "!xdg-open '%:p' &" | bd
 augroup end
 
 " Goyo hooks
