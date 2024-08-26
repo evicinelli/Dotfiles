@@ -16,7 +16,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	$(INSTALL) git tmux make at pass coreutils moreutils wget curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
+	$(INSTALL) git gh tmux make at pass coreutils moreutils wget curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
 
 dotfiles:
 	cd
