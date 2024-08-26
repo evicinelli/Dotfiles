@@ -16,7 +16,7 @@ update:
 
 essentials:
 	# Install essential cmd utilities
-	$(INSTALL) git tmux make at pass coreutils moreutils curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
+	$(INSTALL) git tmux make at pass coreutils moreutils wget curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
 
 dotfiles:
 	cd
@@ -144,6 +144,7 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
 	gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Super>3']"
+	# mkdir ~/.fonts/ && cp $P/Res/Font/* ~/.fonts/
 
 pcloud:
 	# Download pcloud client
