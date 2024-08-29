@@ -52,7 +52,7 @@ flatpak:
 	# Install flatpak applications
 	$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki org.jitsi.jitsi-meet us.zoom.Zoom com.skype.Client org.jabref.jabref com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker org.gnome.gitlab.somas.Apostrophe
+	flatpak install -y org.telegram.desktop com.spotify.Client net.ankiweb.Anki org.jitsi.jitsi-meet us.zoom.Zoom com.skype.Client org.jabref.jabref com.github.johnfactotum.Foliate com.stremio.Stremio com.github.fabiocolacio.marker org.gnome.gitlab.somas.Apostrophe com.github.tchx84.Flatseal
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
 
 python:

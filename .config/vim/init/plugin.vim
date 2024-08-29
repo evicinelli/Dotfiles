@@ -53,7 +53,7 @@ let g:netrw_liststyle = 0       " buffer view
 " Pandoc options
 let g:pandoc#biblio#bibs = ["$MED/bib.bib, $P/Libreria/zotero.bib"]
 let g:pandoc#biblio#use_bibtool = 1
-let g:pandoc#folding#mode = 'stacked'
+let g:pandoc#folding#mode = 'syntax'
 let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 1
@@ -93,3 +93,15 @@ let g:fzf_action = {
 
 " Csv options
 let g:csv_highlight_column = 'y'
+
+" Goyo
+function! s:goyo_enter()
+	set nolist
+endfunction
+
+function! s:goyo_leave()
+	set list
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
