@@ -3,7 +3,7 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
 inoremap  =system("date")<CR><Esc>kJ
-inoremap  =system("date -I")<CR><Esc>kJ$
+inoremap  =system("date -I")<CR><Esc>kJ$
 inoremap <C-z> <C-o><C-z>
 inoremap <F1> <Esc>
 

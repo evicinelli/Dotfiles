@@ -45,7 +45,7 @@ wttr () {
 }
 
 daysuntil () {
-	echo "Giorni _interi_ rimanenti al $1: $(( ($(date "+%s" -d "$*") - $(date "+%s" -d "today")) / (60*60*24) ))"
+	echo "Da oggi al $1 mancano: $(( ($(date "+%s" -d "$*") - $(date "+%s" -d "today")) / (60*60*24) )) giorni"
 }
 
 # https://www.reddit.com/r/commandline/comments/hgayn8/stumbled_across_a_recipe_scraping_website_and/

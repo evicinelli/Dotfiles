@@ -21,7 +21,7 @@ call plug#begin('~/.config/vim/plugged/')
 	" Filetype {{{
 	Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 	Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file support
-	Plug 'fretep/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
+	Plug 'freitass/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
 	Plug 'vim-pandoc/vim-pandoc-syntax',
 	Plug 'habamax/vim-asciidoctor'
 	" }}}
@@ -58,7 +58,7 @@ let g:pandoc#folding#fastfolds = 1
 let g:pandoc#folding#fdc = 0
 let g:pandoc#folding#level = 1
 let g:pandoc#modules#disabled = [""]
-let g:pandoc#syntax#conceal#use = 1
+let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#conceal#blacklist = [
  	\ "atx",
  	\ "dashes",

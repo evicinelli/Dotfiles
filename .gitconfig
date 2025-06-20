@@ -25,3 +25,5 @@
 [cola]
 	startupmode = folder
 	spellcheck = false
+[add]
+	safedirectory = .

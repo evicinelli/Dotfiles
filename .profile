@@ -20,7 +20,7 @@ $(which brew) && for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PAT
 [[ $(which nvim) ]] && export MANPAGER='nvim +Man!' && export EDITOR=nvim
 
 export P="$HOME/pCloudDrive"
-export DN="${P}/Documenti/Todo/done.txt"
+export DN="${P}/Notes/done.txt"
 export DOC="${P}/Documenti"
 export DOWN="$HOME/Scaricati"
 export GVS="${P}/Gvs"
@@ -28,7 +28,7 @@ export LIB="${P}/Libreria"
 export MEDIA="${P}/Media"
 export NOTES="${P}/Notes"
 export S="${P}/Backups/Google Photos - Emanuele Vicinelli/Screenshot"
-export TD="${P}/Documenti/Todo/todo.txt"
+export TD="${P}/Notes/todo.txt"
 
 # Uni
 export UNI="${P}/Uni/"

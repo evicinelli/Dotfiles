@@ -7,7 +7,7 @@ IFS=$'\n'
 EDITOR="/usr/bin/gvim" #${EDITOR}
 
 # Configuration
-BALANCE_FILE=${BALANCE_FILE:-"$NOTES/spese.txt"}
+BALANCE_FILE=${BALANCE_FILE:-"$NOTES/_spese.md"}
 uncategorized_total=0
 grand_total=0
 
@@ -27,8 +27,8 @@ help () {
 	        Each entry should follow the markdown syntax for the unordered list,
 	        being in the form:
 
-	        - 12.3 expence description @category
-	        + 45.6 income description @category
+	        - 12.3 expence description #category
+	        + 45.6 income description #category
 
 	        Using pandoc you can then export the file to have a pdf report of all your
 	        expenses
@@ -38,7 +38,7 @@ help () {
 
 # Get all the tags from $BALANCE_FILE
 getTags(){
-	grep -o " @.[[:alnum:]]*" "$BALANCE_FILE" | sort | uniq
+	grep -o " #.[[:alnum:]]*" "$BALANCE_FILE" | sort | uniq
 }
 
 printCurrentBalance () {
@@ -50,7 +50,7 @@ printCurrentBalance () {
 	done
 
 	# Sum entries with no tag
-	uncategorized_total=$(grep -v ' @.[[:alnum:]]*' "$*" | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
+	uncategorized_total=$(grep -v ' #.[[:alnum:]]*' "$*" | grep -E "^(\+|-) " | LC_ALL=C awk -F' ' -- 'BEGIN{s=0};{s+=$1$2}END{printf "%.2f\n", s}')
 
 	# Grand Total
 	grand_total=$(LC_ALL=C awk "BEGIN{printf \"%.2f\n\", $grand_total + $uncategorized_total}")
