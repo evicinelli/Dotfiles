@@ -7,7 +7,7 @@ IFS=$'\n'
 EDITOR="/usr/bin/gvim" #${EDITOR}
 
 # Configuration
-BALANCE_FILE=${BALANCE_FILE:-"$NOTES/_spese.md"}
+BALANCE_FILE=${BALANCE_FILE:-"/home/vic/pCloudDrive/Notes/Pers/🔴 SPESE.md"}
 uncategorized_total=0
 grand_total=0
 
