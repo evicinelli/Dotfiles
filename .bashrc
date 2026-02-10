@@ -84,7 +84,7 @@ source ~/.bash_functions
 # Prompt {{{
 
 # http://unix.stackexchange.com/a/18443/27433
-export PROMPT_COMMAND="history -a;history -n;prompt"
+# export PROMPT_COMMAND="history -a;history -n;prompt"
 # export BG=light
 
 # Tomnomnom dotfiles {{{

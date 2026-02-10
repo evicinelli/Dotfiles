@@ -45,7 +45,7 @@ export MED_CURRENT=$MED4
 
 # Fzf
 export FZF_DEFAULT_OPTS='--color=16 --height 33% --reverse --border --cycle --multi'
-[[ fd ]] && export FZF_DEFAULT_COMMAND="fd --color never" && export FZF_ALT_C_COMMAND="fd -t d --color never" && export FZF_CTRL_T_COMMAND="fd --color never"
+[[ fdfind ]] && export FZF_DEFAULT_COMMAND="fdfind --color never" && export FZF_ALT_C_COMMAND="fdfind -t d --color never" && export FZF_CTRL_T_COMMAND="fdfind --color never"
 # }}}
 
 # Bashrc {{{

@@ -35,6 +35,7 @@ call plug#begin('~/.config/vim/plugged/')
 	Plug 'nightsense/cosmic_latte'
 	Plug 'lunacookies/vim-colors-xcode'
 	Plug 'rafi/awesome-vim-colorschemes'
+	Plug 'f-person/auto-dark-mode.nvim'
 	" }}}
 	"
 call plug#end()

@@ -50,7 +50,7 @@ app: repos
 
 flatpak:
 	# Install flatpak applications
-	$(INSTALL) flatpak gnome-software-plugin-flatpak
+	pkexec $(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom org.jabref.jabref com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
@@ -80,10 +80,13 @@ config:
 	xdg-mime default mpv.desktop video/*
 
 gnome:
-	#pkexec $(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi
+	pkexec $(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi
 
 	# GNOME settings
 
+	# gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
+	# gsettings set org.gnome.desktop.interface font-name 'Sans 11'
+	# gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 15'
 	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
 	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories-with-content "['.trackerignore', '.hg', '.nomedia']"
 	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/', '&DOWNLOAD']"
@@ -91,15 +94,13 @@ gnome:
 	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 300
 	gsettings set org.gnome.desktop.background color-shading-type 'solid'
 	gsettings set org.gnome.desktop.background primary-color '#d64761'
+	gsettings set org.gnome.desktop.input-sources xkb-options ['compose:rctrl']
 	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
-	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
 	gsettings set org.gnome.desktop.interface enable-animations true
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
-	gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	gsettings set org.gnome.desktop.interface locate-pointer true
-	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 15'
 	gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 1
 	gsettings set org.gnome.desktop.media-handling automount true
@@ -138,7 +139,7 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
 	gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2500
-	gsettings set org.gnome.settings-daemon.plugins.media-keys battery-status "['<Super><Shift>b']"
+	gsettings set org.gnome.settings-daemon.plugins.media-keys battery-status "['<Super>b']"
 	gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 	gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Super><Shift>l']"
 	gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'suspend'
@@ -147,8 +148,8 @@ gnome:
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 1200
 	gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'hibernate'
 	gsettings set org.gnome.settings-daemon.plugins.power time-low 1800
-	gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Super>5','<Shift><Super>s']"
 	gsettings set org.gnome.shell.keybindings show-screen-recording-ui "['<Shift><Super>r','<Ctrl><Shift><Alt>R']"
+	gsettings set org.gnome.shell.keybindings show-screenshot-ui "['<Shift><Super>5','<Shift><Super>s']"
 
 pcloud:
 	# Download pcloud client
