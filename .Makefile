@@ -184,5 +184,4 @@ laptop:
 	powertop --auto-tune
 
 quarto:
-	wget "$(shell wget https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest -qO- | grep amd64.deb | grep browser_download_url | uniq | cut -d\" -f4)" -o quarto-latest.deb
-	pkexec dpkg -i quarto-latest.deb --post-invoke="rm quarto-latest.deb"
+	wget "$(shell wget -qO- https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest | grep amd64.deb | grep browser_download_url | grep -o https://.*deb)" -O quarto-latest.deb && pkexec dpkg -i quarto-latest.deb --post-invoke="rm quarto-latest.deb"

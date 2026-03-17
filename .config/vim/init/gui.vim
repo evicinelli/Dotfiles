@@ -6,10 +6,10 @@ if has('gui_running')
 	se guioptions-=m " Remove menubar
 	se guioptions-=r " Remove scrollbar
 	se guioptions+=k " Properly resize gui window
-	se guifont=Ubuntu\ Mono\ 14
+	se guifont=Adwaita\ Mono\ 14
 	se belloff=esc
 	se bg=light
-	colorscheme solarized8_flat
+	colorscheme PaperColor
 	se laststatus=0
 endif
 
