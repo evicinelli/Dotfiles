@@ -52,7 +52,7 @@ flatpak:
 	# Install flatpak applications
 	pkexec $(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom org.jabref.jabref com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi
+	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom org.jabref.jabref com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi io.github.diegopvlk.Cine
 	flatpak override --filesystem xdg-config/fontconfig:ro --system
 
 python:
