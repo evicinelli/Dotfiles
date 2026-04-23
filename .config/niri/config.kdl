@@ -1,34 +1,30 @@
-// This config is in the KDL format: https://kdl.dev
+// vim: fdm=indent
 // https://yalter.github.io/niri/Configuration:-Introduction
 
 spawn-at-startup "qs" "-c" "noctalia-shell"
 prefer-no-csd
-debug { // Allows notification actions and window activation from Noctalia.
-	honor-xdg-activation-with-invalid-serial
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+debug {
+	honor-xdg-activation-with-invalid-serial // Allows notification actions and window activation from Noctalia.
 }
 
 input {
-	keyboard {
-		xkb {
-			// You can set rules, model, layout, variant and options.
-			// For more information, see xkeyboard-config(7).
+	// warp-mouse-to-focus
+	//max-scroll-amount="0%"
 
-			// For example:
+	focus-follows-mouse
+	keyboard {
+
+		xkb {
+			// For more information, see xkeyboard-config(7).
 			// layout "us,ru"
 			// options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-
-			// If this section is empty, niri will fetch xkb settings
-			// from org.freedesktop.locale1. You can control these using
 			// localectl set-x11-keymap.
 		}
-
-		// Enable numlock on startup, omitting this setting disables it.
 		// numlock
 	}
 
-	// Next sections include libinput settings.
-	// Omitting settings disables them, or leaves them at their default values.
-	// All commented-out settings here are examples, not defaults.
 	touchpad {
 		// off
 		tap
@@ -61,41 +57,156 @@ input {
 		// scroll-button-lock
 		// middle-emulation
 	}
+}
 
-	// warp-mouse-to-focus
-	// focus-follows-mouse max-scroll-amount="0%"
+binds {
+	// Niri specials
+	Mod+O repeat=false { toggle-overview; }
+	Mod+Return repeat=false { toggle-overview; }
+	Mod+Q repeat=false { close-window; }
+	Mod+Shift+E { quit; }
+	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; } // Inhibit kbd shortcut
+	Mod+Shift+P { power-off-monitors; } // Poweroff monitor, to turn back on do any input
+	// App
+	Mod+T hotkey-overlay-title="Open a Terminal" { spawn "alacritty"; }
+	Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+	Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "vicinae toggle"; }
+	Alt+Space hotkey-overlay-title="Run an Application" { spawn-sh "vicinae toggle"; }
+	Ctrl+Space hotkey-overlay-title="Run an Application" { spawn-sh "vicinae toggle"; }
+	Super+Alt+l hotkey-overlay-title="Lock the Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+
+
+	// Focus
+	Mod+Left  { focus-column-or-monitor-left; }
+	Mod+Down  { focus-window-or-workspace-down; }
+	Mod+Up    { focus-window-or-workspace-up; }
+	Mod+Right { focus-column-or-monitor-right; }
+	Mod+H     { focus-column-or-monitor-left; }
+	Mod+J     { focus-window-or-workspace-down; }
+	Mod+K     { focus-window-or-workspace-up; }
+	Mod+L     { focus-column-or-monitor-right; }
+	Mod+Home { focus-column-first; }
+	Mod+End  { focus-column-last; }
+
+	// Move windows
+	Mod+Shift+Left  { move-column-left-or-to-monitor-left; }
+	Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+	Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+	Mod+Shift+Right { move-column-right-or-to-monitor-right; }
+	Mod+Shift+H     { move-column-left-or-to-monitor-left; }
+	Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+	Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+	Mod+Shift+L     { move-column-right-or-to-monitor-right; }
+	Mod+Shift+Home { move-column-to-first; }
+	Mod+Shift+End  { move-column-to-last; }
+	Mod+Comma  { consume-window-into-column; }
+	Mod+Period { expel-window-from-column; }
+
+
+	// Montior
+	Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+	Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+	Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+	Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+	Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+	Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+	Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+	Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+	// Mod+Shift+Left  { focus-monitor-left; }
+	// Mod+Shift+Down  { focus-monitor-down; }
+	// Mod+Shift+Up    { focus-monitor-up; }
+	// Mod+Shift+Right { focus-monitor-right; }
+	// Mod+Shift+H     { focus-monitor-left; }
+	// Mod+Shift+J     { focus-monitor-down; }
+	// Mod+Shift+K     { focus-monitor-up; }
+	// Mod+Shift+L     { focus-monitor-right; }
+
+	// Workspace
+	Mod+1 { focus-workspace 1; }
+	Mod+2 { focus-workspace 2; }
+	Mod+3 { focus-workspace 3; }
+	Mod+4 { focus-workspace 4; }
+	Mod+5 { focus-workspace 5; }
+	Mod+6 { focus-workspace 6; }
+	Mod+7 { focus-workspace 7; }
+	Mod+8 { focus-workspace 8; }
+	Mod+9 { focus-workspace 9; }
+	Mod+Shift+1 { move-column-to-workspace 1; }
+	Mod+Shift+2 { move-column-to-workspace 2; }
+	Mod+Shift+3 { move-column-to-workspace 3; }
+	Mod+Shift+4 { move-column-to-workspace 4; }
+	Mod+Shift+5 { move-column-to-workspace 5; }
+	Mod+Shift+6 { move-column-to-workspace 6; }
+	Mod+Shift+7 { move-column-to-workspace 7; }
+	Mod+Shift+8 { move-column-to-workspace 8; }
+	Mod+Shift+9 { move-column-to-workspace 9; }
+
+	// Resize
+	Mod+R { switch-preset-column-width; }
+	Mod+Shift+R { switch-preset-window-height; }
+	Mod+Ctrl+R { reset-window-height; }
+
+	// Fullscreen
+	Mod+F { maximize-column; }
+	Mod+Shift+F { fullscreen-window; }
+	Mod+Ctrl+F { expand-column-to-available-width; }
+
+	// Centering
+	Mod+C { center-column; }
+	Mod+Ctrl+C { center-visible-columns; }
+
+	// Floating
+	Mod+V       { toggle-window-floating; }
+	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+	// Tab
+	Mod+W { toggle-column-tabbed-display; }
+
+	// Screenshot
+	Mod+Shift+s { screenshot; }
+	Ctrl+Print { screenshot-screen; }
+	Alt+Print { screenshot-window; }
+
+	// Media
+	XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+	XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+	XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+	XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+	XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+	XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+	XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+	XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+	XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+	// Mouse
+	Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+	Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+	Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+	Mod+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+	Mod+WheelScrollRight      { focus-column-right; }
+	Mod+WheelScrollLeft       { focus-column-left; }
+	Mod+Ctrl+WheelScrollDown      { focus-column-right; }
+	Mod+Ctrl+WheelScrollUp        { focus-column-left; }
+	Mod+Ctrl+WheelScrollRight { move-column-right; }
+	Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+	Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+	Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 }
 
 output "eDP-1" {
-	// You can configure outputs by their name, which you can find by running `niri msg outputs` while inside a niri instance.
-	// Uncomment this line to disable this output.
+	//`niri msg outputs`
 	// off
-
-	// Resolution and, optionally, refresh rate of the output.
 	mode "1920x1080@120.030"
-
-	//Integer or fractional scale, for example use 1.5 for 150% scale.
-	scale 1
-
-	transform "normal"
-	// normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-
-	// Position of the output in the global coordinate space.
-	// This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-	// The cursor can only move between directly adjacent outputs.
-	// Output scale and rotation has to be taken into account for positioning:
-	// outputs are sized in logical, or scaled, pixels.
-	// For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-	// so to put another output directly adjacent to it on the right, set its x to 1920.
-	// If the position is unset or results in an overlap, the output is instead placed
-	// automatically.
+	scale 1 //Integer or fractional scale, for example use 1.5 for 150% scale.
+	transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
 	position x=1280 y=0
 }
 
 layout {
-	// Set gaps around windows in logical pixels.
-	gaps 10
+	gaps 20
 	center-focused-column "never" //always on-overflow
+	default-column-width { } // Bracket empty <=> window decide its proportions
 
 	preset-column-widths {
 		proportion 0.33333
@@ -111,40 +222,19 @@ layout {
 		proportion 0.99
 	}
 
-	default-column-width { proportion 0.5; }
-	// If you leave the brackets empty, the windows themselves will decide their initial width.
-	// default-column-width {}
-
-	// By default focus ring and border are rendered as a solid background rectangle
-	// behind windows. That is, they will show up through semitransparent windows.
-	// This is because windows using client-side decorations can have an arbitrary shape.
-	//
-	// If you don't like that, you should uncomment `prefer-no-csd` below.
-	// Niri will draw focus ring and border *around* windows that agree to omit their
-	// client-side decorations.
-	//
-	// Alternatively, you can override it with a window rule called
-	// `draw-border-with-background`.
-
-	// You can change how the focus ring looks.
 	focus-ring {
 		on
-		width 4
+		width 3
 		active-color "#7fc8ff"
 		inactive-color "#505050"
-
 	}
 
-	// You can also add a border. It's similar to the focus ring, but always visible.
 	border {
-		off
-		width 4
-		active-color "#ffc87f"
-		inactive-color "#505050"
+		on
+		width 1
 		urgent-color "#9b0000"
 	}
 
-	// You can enable drop shadows for windows.
 	shadow {
 		on
 		draw-behind-window true
@@ -153,14 +243,17 @@ layout {
 		offset x=0 y=5
 		color "#0007"
 	}
-}
 
-hotkey-overlay {
-	// Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-	// skip-at-startup
-}
+	tab-indicator {
+		width 8
+		gaps-between-tabs 2
+		length total-proportion=0.9
+	}
 
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+	insert-hint {
+		on
+	}
+}
 
 animations {
 	// Uncomment to turn off all animations.
@@ -171,175 +264,19 @@ animations {
 }
 
 window-rule {
-	// This regular expression is intentionally made as specific as possible,
-	// since this is the default config, and we want no false positives.
-	// You can get away with just app-id="wezterm" if you want.
-	match app-id=r#"^org\.wezfurlong\.wezterm$"#
-	default-column-width {}
-}
-window-rule {
 	geometry-corner-radius 20
 	clip-to-geometry true
 }
-window-rule { // Open the Firefox picture-in-picture player as floating by default.
+window-rule {
 	match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+	match app-id="org.gnome.NautilusPreviewer"
+	match app-id="app.zen_browser.zen" title=".*Bitwarden.*"
 	open-floating true
 }
 
-binds {
-	Mod+Shift+Slash { show-hotkey-overlay; }
-
-	// Suggested binds for running programs: terminal, app launcher, screen locker.
-	Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-	Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-	Super+Alt+l hotkey-overlay-title="Lock the Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-	XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-	XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-	XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-	XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-	XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-	XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-	XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-	XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
-	XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-
-	Mod+O repeat=false { toggle-overview; }
-	Mod+Q repeat=false { close-window; }
-
-	Mod+Left  { focus-column-left; }
-	Mod+Down  { focus-window-down; }
-	Mod+Up    { focus-window-up; }
-	Mod+Right { focus-column-right; }
-	Mod+H     { focus-column-left; }
-	Mod+J     { focus-window-or-workspace-down; }
-	Mod+K     { focus-window-or-workspace-up; }
-	Mod+L     { focus-column-right; }
-
-	Mod+Ctrl+Left  { move-column-left; }
-	Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
-	Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
-	Mod+Ctrl+Right { move-column-right; }
-	Mod+Ctrl+H     { move-column-left; }
-	Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
-	Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
-	Mod+Ctrl+L     { move-column-right; }
-
-	Mod+Home { focus-column-first; }
-	Mod+End  { focus-column-last; }
-	Mod+Ctrl+Home { move-column-to-first; }
-	Mod+Ctrl+End  { move-column-to-last; }
-
-	Mod+Shift+Left  { focus-monitor-left; }
-	Mod+Shift+Down  { focus-monitor-down; }
-	Mod+Shift+Up    { focus-monitor-up; }
-	Mod+Shift+Right { focus-monitor-right; }
-	Mod+Shift+H     { focus-monitor-left; }
-	Mod+Shift+J     { focus-monitor-down; }
-	Mod+Shift+K     { focus-monitor-up; }
-	Mod+Shift+L     { focus-monitor-right; }
-
-	Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-	Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-	Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-	Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-	Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
-	Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
-	Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
-	Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
-
-	Mod+Page_Down      { focus-workspace-down; }
-	Mod+Page_Up        { focus-workspace-up; }
-	Mod+U              { focus-workspace-down; }
-	Mod+I              { focus-workspace-up; }
-
-	Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-	Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-	Mod+Ctrl+U         { move-column-to-workspace-down; }
-	Mod+Ctrl+I         { move-column-to-workspace-up; }
-
-	Mod+Shift+Page_Down { move-workspace-down; }
-	Mod+Shift+Page_Up   { move-workspace-up; }
-	Mod+Shift+U         { move-workspace-down; }
-	Mod+Shift+I         { move-workspace-up; }
-
-	Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-	Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-	Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-	Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-	Mod+WheelScrollRight      { focus-column-right; }
-	Mod+WheelScrollLeft       { focus-column-left; }
-	Mod+Shift+WheelScrollDown      { focus-column-right; }
-	Mod+Shift+WheelScrollUp        { focus-column-left; }
-
-	Mod+Ctrl+WheelScrollRight { move-column-right; }
-	Mod+Ctrl+WheelScrollLeft  { move-column-left; }
-	Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-	Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-
-	Mod+1 { focus-workspace 1; }
-	Mod+2 { focus-workspace 2; }
-	Mod+3 { focus-workspace 3; }
-	Mod+4 { focus-workspace 4; }
-	Mod+5 { focus-workspace 5; }
-	Mod+6 { focus-workspace 6; }
-	Mod+7 { focus-workspace 7; }
-	Mod+8 { focus-workspace 8; }
-	Mod+9 { focus-workspace 9; }
-	Mod+Ctrl+1 { move-column-to-workspace 1; }
-	Mod+Ctrl+2 { move-column-to-workspace 2; }
-	Mod+Ctrl+3 { move-column-to-workspace 3; }
-	Mod+Ctrl+4 { move-column-to-workspace 4; }
-	Mod+Ctrl+5 { move-column-to-workspace 5; }
-	Mod+Ctrl+6 { move-column-to-workspace 6; }
-	Mod+Ctrl+7 { move-column-to-workspace 7; }
-	Mod+Ctrl+8 { move-column-to-workspace 8; }
-	Mod+Ctrl+9 { move-column-to-workspace 9; }
-
-	//Mod+Tab { focus-workspace-previous; }
-
-	Mod+BracketLeft  { consume-or-expel-window-left; }
-	Mod+BracketRight { consume-or-expel-window-right; }
-	Mod+Comma  { consume-window-into-column; }
-	Mod+Period { expel-window-from-column; }
-
-	Mod+R { switch-preset-column-width; }
-	Mod+Shift+R { switch-preset-window-height; }
-	Mod+Ctrl+R { reset-window-height; }
-	Mod+F { maximize-column; }
-	Mod+Shift+F { fullscreen-window; }
-	Mod+Ctrl+F { expand-column-to-available-width; }
-
-	Mod+C { center-column; }
-	Mod+Ctrl+C { center-visible-columns; }
-
-	Mod+V       { toggle-window-floating; }
-	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-
-	Mod+W { toggle-column-tabbed-display; }
-
-	Print { screenshot; }
-	Ctrl+Print { screenshot-screen; }
-	Alt+Print { screenshot-window; }
-
-	// Applications such as remote-desktop clients and software KVM switches may
-	// request that niri stops processing the keyboard shortcuts defined here
-	// so they may, for example, forward the key presses as-is to a remote machine.
-	// It's a good idea to bind an escape hatch to toggle the inhibitor,
-	// so a buggy application can't hold your session hostage.
-	//
-	// The allow-inhibiting=false property can be applied to other binds as well,
-	// which ensures niri always processes them, even when an inhibitor is active.
-	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-	// The quit action will show a confirmation dialog to avoid accidental exits.
-	Mod+Shift+E { quit; }
-	Ctrl+Alt+Delete { quit; }
-
-	// Powers off the monitors. To turn them back on, do any input like
-	// moving the mouse or pressing any other key.
-	Mod+Shift+P { power-off-monitors; }
+layer-rule {
+	match namespace="^noctalia-overview*"
+	place-within-backdrop true
 }
 
 include "./noctalia.kdl"

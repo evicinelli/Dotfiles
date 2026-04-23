@@ -1,0 +1,72 @@
+// This configuration is merged with the default vicinae configuration file, which you can obtain by running the `vicinae config default` command.
+// Every item defined in this file takes precedence over the values defined in the default config or any other imported file.
+//
+// You can make manual edits to this file, however you should keep in mind that this file may be written to by vicinae when a configuration change is made through the GUI.
+// When that happens, any custom comments or formatting will be lost.
+//
+// If you want to maintain a configuration file with your own comments and formatting, you should create a separate file and add it to the 'imports' array.
+//
+// Learn more about configuration at https://docs.vicinae.com/config
+
+{
+   "$schema": "https://vicinae.com/schemas/config.json",
+   "close_on_focus_loss": true,
+   "pop_to_root_on_close": true,
+   "font": {
+      "normal": {
+         "family": "Adwaita Sans",
+         "size": 10.7
+      }
+   },
+   "theme": {
+      "dark": {
+         "name": "noctalia",
+         "icon_theme": "Tela"
+      }
+   },
+   "launcher_window": {
+      "opacity": 1
+   },
+   "fallbacks": [],
+   "providers": {
+      "clipboard": {
+         "enabled": false,
+         "preferences": {
+            "encryption": false,
+            "eraseOnStartup": false,
+            "ignorePasswords": true,
+            "monitoring": false
+         }
+      },
+      "files": {
+         "preferences": {
+            "autoIndexing": true,
+            "excludedPaths": "",
+            "paths": "/home/vic/pCloudDrive;/home/vic/Scaricati",
+            "watcherPaths": ""
+         },
+         "entrypoints": {
+            "search": {
+               "alias": "% '"
+            }
+         }
+      },
+      "shortcuts": {
+         "enabled": false
+      },
+      "system": {
+         "entrypoints": {
+            "run": {
+               "alias": ">"
+            }
+         }
+      },
+      "wm": {
+         "entrypoints": {
+            "switch-windows": {
+               "alias": "!"
+            }
+         }
+      }
+   }
+}

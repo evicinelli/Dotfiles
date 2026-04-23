@@ -1,6 +1,7 @@
 " Nvim-only settings
 
 set inccommand=nosplit
+set notermguicolors
 
 tnoremap <C-\> <C-\><C-n>
 " tnoremap <Esc> <C-\><C-n>
