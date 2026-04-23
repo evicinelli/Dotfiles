@@ -28,12 +28,12 @@ if has("gui_macvim")
 endif
 
 " Generic nVim GUI
-if exists('g:GuiLoaded')
-	set termguicolors
-	se bg=light
-	color PaperColor
-	Guifont! Monospace:h12.5
-endif
+"if exists('g:GuiLoaded')
+"	set termguicolors
+"	se bg=light
+"	color PaperColor
+"	Guifont! Monospace:h12.5
+"endif
 
 " Change Font Size
 " https://vi.stackexchange.com/questions/5804/how-to-zoom-to-text-in-vim-via-shortcut
