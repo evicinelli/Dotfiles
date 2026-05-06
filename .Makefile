@@ -46,7 +46,7 @@ repos:
 	apt update
 
 app: repos
-	$(INSTALL) mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld gnome-sushi okular-extra-backends glow typora chromium-browser
+	$(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld okular-extra-backends glow typora chromium-browser
 
 flatpak:
 	# Install flatpak applications
@@ -80,21 +80,17 @@ config:
 	xdg-mime default mpv.desktop video/*
 
 gnome:
-	pkexec $(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi
-
-	# GNOME settings
-
 	# gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
 	# gsettings set org.gnome.desktop.interface font-name 'Sans 11'
 	# gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 15'
-	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
-	gsettings set org.freedesktop.Tracker.Miner.Files ignored-directories-with-content "['.trackerignore', '.hg', '.nomedia']"
-	gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/', '&DOWNLOAD']"
-	gsettings set org.freedesktop.Tracker.Miner.Files index-single-directories "['${HOME}']"
-	gsettings set org.freedesktop.Tracker.Miner.Files initial-sleep 300
+	gsettings set org.freedesktop.Tracker3.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
+	gsettings set org.freedesktop.Tracker3.Miner.Files ignored-directories-with-content "['.trackerignore', '.hg', '.nomedia']"
+	gsettings set org.freedesktop.Tracker3.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/', '&DOWNLOAD']"
+	gsettings set org.freedesktop.Tracker3.Miner.Files index-single-directories "['${HOME}']"
+	gsettings set org.freedesktop.Tracker3.Miner.Files initial-sleep 300
 	gsettings set org.gnome.desktop.background color-shading-type 'solid'
 	gsettings set org.gnome.desktop.background primary-color '#d64761'
-	gsettings set org.gnome.desktop.input-sources xkb-options ['compose:rctrl']
+	gsettings set org.gnome.desktop.input-sources xkb-options "['compose:capslock']"
 	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -113,15 +109,15 @@ gnome:
 	gsettings set org.gnome.desktop.screensaver picture-uri 'file:///${HOME}/.img.jpeg'
 	gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 	gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "['<Super><Alt>space']"
-	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>Q', '<Alt>q']"
+	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>Q', '<Alt>q', '<Super>W']"
 	gsettings set org.gnome.desktop.wm.keybindings cycle-windows "['<Alt>Escape']"
 	gsettings set org.gnome.desktop.wm.keybindings cycle-windows-backward "['<Super>Escape']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Alt>Tab', '<Super>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward  "['<Alt><Shift>Tab', '<Super><Shift>Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-group "['<Super>Above_Tab', '<Alt>Above_Tab']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-group-backward "['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']"
-	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left ['<Super>Page_Up', '<Super><Alt>Left', '<Control><Alt>Left', '<Control><Super>Left']
-	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right ['<Super>Page_Down', '<Super><Alt>Right', '<Control><Alt>Right', '<Control><Super>Right']
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>BackSpace', '<Super>Page_Up', '<Super><Alt>Left', '<Control><Alt>Left', '<Control><Super>Left']"
+	gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Return', '<Super>Page_Down', '<Super><Alt>Right', '<Control><Alt>Right', '<Control><Super>Right']"
 	gsettings set org.gnome.desktop.wm.keybindings switch-windows "[]"
 	gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "[]"
 	gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Super>f', '<Alt>f']"
@@ -185,3 +181,9 @@ laptop:
 
 quarto:
 	wget "$(shell wget -qO- https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest | grep amd64.deb | grep browser_download_url | grep -o https://.*deb)" -O quarto-latest.deb && pkexec dpkg -i quarto-latest.deb --post-invoke="rm quarto-latest.deb"
+
+tiling:
+	// Vicinae
+
+	// Noctalia-shell
+	// Niri WM
