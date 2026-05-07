@@ -183,7 +183,10 @@ quarto:
 	wget "$(shell wget -qO- https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest | grep amd64.deb | grep browser_download_url | grep -o https://.*deb)" -O quarto-latest.deb && pkexec dpkg -i quarto-latest.deb --post-invoke="rm quarto-latest.deb"
 
 tiling:
-	// Vicinae
-
-	// Noctalia-shell
-	// Niri WM
+	add-apt-repository ppa:avengemedia/danklinux
+	add-apt-repository ppa:avengemedia/dms
+	curl -fsSL https://pkg.noctalia.dev/gpg.key | gpg --dearmor -o /etc/apt/keyrings/noctalia.gpg
+	echo "deb [signed-by=/etc/apt/keyrings/noctalia.gpg] https://pkg.noctalia.dev/apt sid main" | tee /etc/apt/sources.list.d/noctalia.list
+	apt update
+	apt upgrade
+	apt install niri noctalia-shell
