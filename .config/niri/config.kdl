@@ -10,12 +10,11 @@ debug {
 }
 
 input {
-	// warp-mouse-to-focus
 	//max-scroll-amount="0%"
-
 	focus-follows-mouse
-	keyboard {
+	warp-mouse-to-focus
 
+	keyboard {
 		xkb {
 			// For more information, see xkeyboard-config(7).
 			// layout "us,ru"
@@ -59,6 +58,88 @@ input {
 	}
 }
 
+output "eDP-1" {
+	//`niri msg outputs`
+	// off
+	mode "1920x1080@120.030"
+	scale 1 //Integer or fractional scale, for example use 1.5 for 150% scale.
+	transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+	position x=1280 y=0
+}
+
+animations {
+	// Uncomment to turn off all animations.
+	// off
+
+	// Slow down all animations by this factor. Values below 1 speed them up instead.
+	// slowdown 3.0
+}
+
+window-rule {
+	geometry-corner-radius 20
+	clip-to-geometry true
+}
+window-rule {
+	match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+	match app-id="org.gnome.NautilusPreviewer"
+	match app-id="app.zen_browser.zen" title=".*Bitwarden.*"
+
+	open-floating true
+}
+
+layer-rule {
+	match namespace="^noctalia-overview*"
+	place-within-backdrop true
+}
+
+layout {
+	gaps 20
+	center-focused-column "never" //always on-overflow
+	default-column-width {} // Bracket empty <=> window decide its proportions
+
+	preset-column-widths {
+		proportion 0.33333
+		proportion 0.5
+		proportion 0.66667
+		proportion 0.99
+	}
+
+	preset-window-heights {
+		proportion 0.33333
+		proportion 0.5
+		proportion 0.66667
+		proportion 0.99
+	}
+
+	focus-ring {
+		on
+		width 3
+	}
+
+	border {
+		on
+		width 2
+	}
+
+	shadow {
+		on
+		draw-behind-window true
+		softness 30
+		spread 5
+		offset x=0 y=5
+	}
+
+	tab-indicator {
+		width 8
+		gaps-between-tabs 2
+		length total-proportion=0.9
+	}
+
+	insert-hint {
+		on
+	}
+}
+
 binds {
 	// Niri specials
 	Mod+O repeat=false { toggle-overview; }
@@ -67,13 +148,14 @@ binds {
 	Mod+Shift+E { quit; }
 	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; } // Inhibit kbd shortcut
 	Mod+Shift+P { power-off-monitors; } // Poweroff monitor, to turn back on do any input
-	// App
-	Mod+T hotkey-overlay-title="Open a Terminal" { spawn "alacritty"; }
-	Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-	Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "vicinae toggle"; }
-	Alt+Space hotkey-overlay-title="Run an Application" { spawn-sh "vicinae toggle"; }
-	Ctrl+Space hotkey-overlay-title="Run an Application" { spawn-sh "vicinae toggle"; }
 	Super+Alt+l hotkey-overlay-title="Lock the Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+
+	// Launch
+	Mod+T hotkey-overlay-title="Open a Terminal" { spawn "alacritty"; }
+	Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel --show-actions"; }
+	Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel --show-actions"; }
+	Alt+Space hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel --show-actions"; }
+	Ctrl+Space hotkey-overlay-title="Run an Application" { spawn-sh "xdg-open \"$(fd --color=never . ~/Scaricati ~/pCloudDrive | fuzzel --dmenu --width 50)\""; }
 
 
 	// Focus
@@ -192,91 +274,6 @@ binds {
 	Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 	Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
 	Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
-}
-
-output "eDP-1" {
-	//`niri msg outputs`
-	// off
-	mode "1920x1080@120.030"
-	scale 1 //Integer or fractional scale, for example use 1.5 for 150% scale.
-	transform "normal" // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
-	position x=1280 y=0
-}
-
-layout {
-	gaps 20
-	center-focused-column "never" //always on-overflow
-	default-column-width { } // Bracket empty <=> window decide its proportions
-
-	preset-column-widths {
-		proportion 0.33333
-		proportion 0.5
-		proportion 0.66667
-		proportion 0.99
-	}
-
-	preset-window-heights {
-		proportion 0.33333
-		proportion 0.5
-		proportion 0.66667
-		proportion 0.99
-	}
-
-	focus-ring {
-		on
-		width 3
-		active-color "#7fc8ff"
-		inactive-color "#505050"
-	}
-
-	border {
-		on
-		width 1
-		urgent-color "#9b0000"
-	}
-
-	shadow {
-		on
-		draw-behind-window true
-		softness 30
-		spread 5
-		offset x=0 y=5
-		color "#0007"
-	}
-
-	tab-indicator {
-		width 8
-		gaps-between-tabs 2
-		length total-proportion=0.9
-	}
-
-	insert-hint {
-		on
-	}
-}
-
-animations {
-	// Uncomment to turn off all animations.
-	// off
-
-	// Slow down all animations by this factor. Values below 1 speed them up instead.
-	// slowdown 3.0
-}
-
-window-rule {
-	geometry-corner-radius 20
-	clip-to-geometry true
-}
-window-rule {
-	match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-	match app-id="org.gnome.NautilusPreviewer"
-	match app-id="app.zen_browser.zen" title=".*Bitwarden.*"
-	open-floating true
-}
-
-layer-rule {
-	match namespace="^noctalia-overview*"
-	place-within-backdrop true
 }
 
 include "./noctalia.kdl"

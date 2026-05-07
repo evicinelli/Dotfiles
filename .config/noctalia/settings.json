@@ -34,7 +34,7 @@
             "com.todoist.Todoist",
             "nvim"
         ],
-        "position": "follow_bar",
+        "position": "top_left",
         "screenshotAnnotationTool": "",
         "showCategories": true,
         "showIconBackground": false,
@@ -57,7 +57,7 @@
     "bar": {
         "autoHideDelay": 500,
         "autoShowDelay": 150,
-        "backgroundOpacity": 0.93,
+        "backgroundOpacity": 0.9,
         "barType": "simple",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
@@ -78,7 +78,7 @@
         ],
         "mouseWheelAction": "workspace",
         "mouseWheelWrap": true,
-        "outerCorners": false,
+        "outerCorners": true,
         "position": "top",
         "reverseScroll": false,
         "rightClickAction": "settings",
@@ -86,7 +86,7 @@
         "rightClickFollowMouse": true,
         "screenOverrides": [
         ],
-        "showCapsule": false,
+        "showCapsule": true,
         "showOnWorkspaceSwitch": true,
         "showOutline": false,
         "useSeparateOpacity": true,
@@ -133,10 +133,10 @@
             ],
             "left": [
                 {
-                    "colorizeSystemIcon": "none",
+                    "colorizeSystemIcon": "primary",
                     "colorizeSystemText": "none",
                     "customIconPath": "",
-                    "enableColorization": false,
+                    "enableColorization": true,
                     "icon": "rocket",
                     "iconColor": "none",
                     "id": "Launcher",
@@ -150,7 +150,7 @@
                     "scrollingMode": "hover",
                     "showIcon": false,
                     "showText": true,
-                    "textColor": "primary",
+                    "textColor": "none",
                     "useFixedWidth": false
                 }
             ],
@@ -168,6 +168,15 @@
                 },
                 {
                     "defaultSettings": {
+                        "backend": "auto",
+                        "disableHoverIcon": false,
+                        "hideWhenUnavailable": false,
+                        "wvkbdBin": "wvkbd-mobintl"
+                    },
+                    "id": "plugin:osk-toggle"
+                },
+                {
+                    "defaultSettings": {
                     },
                     "id": "plugin:kde-connect"
                 },
@@ -181,11 +190,11 @@
                 },
                 {
                     "deviceNativePath": "__default__",
-                    "displayMode": "icon-hover",
+                    "displayMode": "graphic",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
-                    "showNoctaliaPerformance": false,
+                    "showNoctaliaPerformance": true,
                     "showPowerProfiles": true
                 },
                 {
@@ -265,7 +274,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Gruvbox",
+        "predefinedScheme": "Ayu",
         "schedulingMode": "location",
         "syncGsettings": true,
         "useWallpaperColors": true
@@ -544,7 +553,7 @@
         "weatherTaliaMascotAlways": false
     },
     "network": {
-        "bluetoothAutoConnect": false,
+        "bluetoothAutoConnect": true,
         "bluetoothDetailsViewMode": "list",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 60000,
@@ -614,7 +623,7 @@
         "overlayLayer": true
     },
     "plugins": {
-        "autoUpdate": false,
+        "autoUpdate": true,
         "notifyUpdates": true
     },
     "sessionMenu": {
@@ -690,7 +699,7 @@
         "batteryWarningThreshold": 20,
         "cpuCriticalThreshold": 90,
         "cpuWarningThreshold": 80,
-        "criticalColor": "",
+        "criticalColor": "#ba1a1a",
         "diskAvailCriticalThreshold": 10,
         "diskAvailWarningThreshold": 20,
         "diskCriticalThreshold": 90,
@@ -705,15 +714,11 @@
         "swapWarningThreshold": 80,
         "tempCriticalThreshold": 90,
         "tempWarningThreshold": 80,
-        "useCustomColors": false,
-        "warningColor": ""
+        "useCustomColors": true,
+        "warningColor": "#5e6135"
     },
     "templates": {
         "activeTemplates": [
-            {
-                "enabled": true,
-                "id": "gtk"
-            },
             {
                 "enabled": true,
                 "id": "qt"
@@ -777,7 +782,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/vic/Scaricati/.wallpapers",
+        "directory": "/home/vic/pCloudDrive/Media/Wallpaper",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
@@ -826,7 +831,7 @@
         ],
         "fillColor": "#000000",
         "fillMode": "crop",
-        "hideWallpaperFilenames": false,
+        "hideWallpaperFilenames": true,
         "linkLightAndDarkWallpapers": true,
         "monitorDirectories": [
         ],
@@ -838,15 +843,16 @@
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": false,
         "skipStartupTransition": false,
-        "solidColor": "#800000",
+        "solidColor": "#502978",
         "sortOrder": "date_asc",
-        "transitionDuration": 1500,
+        "transitionDuration": 2700,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": [
             "disc",
             "stripes",
             "pixelate",
-            "honeycomb"
+            "honeycomb",
+            "wipe"
         ],
         "useOriginalImages": false,
         "useSolidColor": false,
@@ -856,7 +862,7 @@
         "wallhavenCategories": "100",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",
-        "wallhavenQuery": "ghibli",
+        "wallhavenQuery": "",
         "wallhavenRatios": "",
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",

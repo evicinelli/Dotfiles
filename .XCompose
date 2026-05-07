@@ -4,3 +4,5 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 
 <Multi_key>     <l><l> : "|"  U2191    # Pipe
 <Multi_key>     </></> : "\"  U2191    # Pipe
+<Multi_key>     <-><v> : "↓"  U2191    # Pipe
+<Multi_key>     <-><^> : "↑"  U2191    # Pipe

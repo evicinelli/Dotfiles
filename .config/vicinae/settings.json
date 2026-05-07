@@ -14,8 +14,8 @@
    "pop_to_root_on_close": true,
    "font": {
       "normal": {
-         "family": "Adwaita Sans",
-         "size": 10.7
+         "family": "Sans Serif",
+         "size": 11
       }
    },
    "theme": {
