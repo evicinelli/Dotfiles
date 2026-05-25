@@ -2,17 +2,10 @@
 
 SHELL=/bin/bash
 PKGMGR=apt
-INSTALL=$(PKGMGR) install -y
+INSTALL=pkexec $(PKGMGR) install -y
 
-system       : update essentials nvim app flatpak
+all          : update essentials nvim app flatpak
 modules      : npm python
-
-update:
-	# Warning echo "WARNING! Launch make with sudo -E to preserve your home! Enter to continue"
-	read _
-	# Update the system
-	$(PKGMGR) update
-	$(PKGMGR) upgrade
 
 essentials:
 	# Install essential cmd utilities
@@ -37,22 +30,19 @@ nvim:
 
 repos:
 	# External repos
-	# curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-	# echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
-	wget -qO - https://typora.io/linux/public-key.asc | apt-key add -
-	add-apt-repository 'deb https://typora.io/linux ./'
-	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
-	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
+	# Glow
+	curl -fsSL https://repo.charm.sh/apt/gpg.key | pkexec gpg --dearmor -o /etc/apt/keyrings/charm.gpg
+	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | pkexec tee /etc/apt/sources.list.d/charm.list
 	apt update
 
 app: repos
-	$(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi mpv mpv-mpris imagemagick-6.q16hdri potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld okular-extra-backends glow typora chromium-browser
+	$(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi mpv mpv-mpris potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld okular-extra-backends glow chromium-browser
 
 flatpak:
 	# Install flatpak applications
-	pkexec $(INSTALL) flatpak gnome-software-plugin-flatpak
+	$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom org.jabref.jabref com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi io.github.diegopvlk.Cine
+	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi io.github.diegopvlk.Cine io.typora.Typora
 	flatpak override --user --filesystem=xdg-config/fontconfig:ro
 
 python:
@@ -68,7 +58,7 @@ npm:
 
 config:
 	# Personal configurations here and there
-	# cp $P/Res/Font/* /usr/share/fonts/ && fc-cache -v
+	# cp $P/Res/Font/* ~/.fonts && fc-cache -v
 	ln -sf /bin/fdfind /bin/fd
 	update-alternatives --config x-terminal-emulator
 	update-alternatives --config x-www-browser

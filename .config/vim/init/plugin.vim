@@ -23,12 +23,11 @@ call plug#begin('~/.config/vim/plugged/')
 	Plug 'sheerun/vim-polyglot'                                          " A collection of language pack
 	Plug 'chrisbra/csv.vim',              {'for':'csv'}                  " Csv file support
 	Plug 'freitass/todo.txt-vim',           {'for':'todo'}                 " Todo.txt support
-	Plug 'vim-pandoc/vim-pandoc-syntax',
-	Plug 'habamax/vim-asciidoctor'
 	" }}}
 
 	" Pandoc and quarto integration {{{
 	Plug 'vim-pandoc/vim-pandoc',
+	Plug 'vim-pandoc/vim-pandoc-syntax',
 	Plug 'quarto-dev/quarto-vim'
 	" }}}
 

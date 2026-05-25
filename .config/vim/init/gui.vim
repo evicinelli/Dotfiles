@@ -9,7 +9,7 @@ if has('gui_running')
 	se guifont=Monospace\ 14
 	se belloff=esc
 	se bg=light
-	colorscheme PaperColor
+	colorscheme cosmic_latte
 	se laststatus=0
 endif
 
