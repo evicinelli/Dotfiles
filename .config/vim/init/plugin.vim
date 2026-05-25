@@ -16,6 +16,7 @@ call plug#begin('~/.config/vim/plugged/')
 	Plug 'tpope/vim-surround'                                            " Surrounding motions on steroid
 	Plug 'chrisbra/Colorizer',            {'on':'ColorToggle'}           " Highlight #COLORS
 	Plug 'godlygeek/tabular'                                             " Tabularize
+	Plug 'vimwiki/vimwiki'
 	" }}}
 
 	" Filetype {{{
@@ -39,6 +40,10 @@ call plug#begin('~/.config/vim/plugged/')
 	" }}}
 	"
 call plug#end()
+
+"Vimwiki
+let g:vimwiki_list = [{'path': '~/pCloudDrive/Notes/Pers/', 'syntax': 'markdown', 'ext': 'md'}]
+let g:vimwiki_global_ext = 0
 
 " Asciidoctor
 let g:asciidoctor_folding = 1

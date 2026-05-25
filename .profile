@@ -6,7 +6,6 @@
 
 # MacOs wtf {{{
 # Fuck MacOs that has BSD coreutils and fuck hombrew that will not install GNU coreutils with their default name
-
 $(which brew) && for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
 # }}}
 
@@ -17,31 +16,30 @@ $(which brew) && for d in "$(brew --prefix)"/opt/*/libexec/gnubin; do export PAT
 
 # Env {{{
 # export VISUAL=vimr
-[[ $(which nvim) ]] && export MANPAGER='nvim +Man!' && export EDITOR=nvim
+[[ $(which nvim) ]] && export EDITOR=nvim #&& export MANPAGER='nvim +Man!' 
 
 export P="$HOME/pCloudDrive"
 export DN="${P}/Notes/done.txt"
-export DOC="${P}/Documenti"
+export DOC="${P}/Docs"
 export DOWN="$HOME/Scaricati"
-export GVS="${P}/Gvs"
-export LIB="${P}/Libreria"
+export LIB="${P}/Lib"
 export MEDIA="${P}/Media"
 export NOTES="${P}/Notes"
 export S="${P}/Backups/Google Photos - Emanuele Vicinelli/Screenshot"
 export TD="${P}/Notes/todo.txt"
 
 # Uni
-export UNI="${P}/Uni/"
-export MED="${UNI}/Med-Notes"
-export MED1="${MED}/Med1"
-export MED2="${MED}/Med2"
-export MED3="${MED}/Med3"
-export MED4="${MED}/Med4"
-export MED5="${MED}/Med5"
-export MED6="${MED}/Med6"
+#export UNI="${P}/Uni/"
+#export MED="${UNI}/Med-Notes"
+#export MED1="${MED}/Med1"
+#export MED2="${MED}/Med2"
+#export MED3="${MED}/Med3"
+#export MED4="${MED}/Med4"
+#export MED5="${MED}/Med5"
+#export MED6="${MED}/Med6"
 
 # Current course
-export MED_CURRENT=$MED4
+#export MED_CURRENT=$MED4
 
 # Fzf
 export FZF_DEFAULT_OPTS='--color=16 --height 33% --reverse --border --cycle --multi'
@@ -51,9 +49,9 @@ export FZF_DEFAULT_OPTS='--color=16 --height 33% --reverse --border --cycle --mu
 # Bashrc {{{
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
+	# include .bashrc if it exists
+	if [ -f "$HOME/.bashrc" ]; then
+		. "$HOME/.bashrc"
+	fi
 fi
 # }}}

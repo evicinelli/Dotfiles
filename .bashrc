@@ -167,7 +167,8 @@ alias lla="ls -la"
 # alias pandoc="pandoc --filter=pandoc-citeproc -V subparagraph"
 # alias rm="rm -I"
 alias sl='ls'
-alias gvim='flatpak run org.vim.Vim -g'
+alias marp="npx @marp-team/marp-cli@latest"
+
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
 alias amn="nv \"$MED\""
@@ -208,7 +209,7 @@ alias mambutodo="TD=$P/Documenti/Todo/_mambu.todo.txt todo"
 # }}}
 
 # Misc {{{
-#[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
+[[ -z $NVIM_LISTEN_ADDRESS && ! $TERM == "screen-256color" && $(which tmux) ]] && tmux new-session -A -s $(hostname)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # }}}
 
