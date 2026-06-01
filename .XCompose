@@ -1,8 +1,0 @@
-# <Multi_key>     <1st key><2nd key><3rd key> : "Compose result"
-
-include "/usr/share/X11/locale/en_US.UTF-8/Compose"
-
-<Multi_key>     <l><l> : "|"
-<Multi_key>     </></> : "\"
-<Multi_key>     <-><v> : "↓"
-<Multi_key>     <-><^> : "↑"

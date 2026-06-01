@@ -762,10 +762,6 @@
             {
                 "enabled": true,
                 "id": "zathura"
-            },
-            {
-                "enabled": true,
-                "id": "gtk"
             }
         ],
         "enableUserTheming": false
