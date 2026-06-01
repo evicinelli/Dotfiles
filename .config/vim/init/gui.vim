@@ -1,3 +1,7 @@
+function! GetSysMode()
+	return trim(system('dconf read /org/gnome/desktop/interface/color-scheme'))
+endfunction
+
 " Gvim
 if has('gui_running')
 	se guioptions-=L " Remove scrollbar
@@ -8,9 +12,14 @@ if has('gui_running')
 	se guioptions+=k " Properly resize gui window
 	se guifont=Monospace\ 14
 	se belloff=esc
-	se bg=light
-	colorscheme cosmic_latte
 	se laststatus=0
+	colorscheme cosmic_latte
+	let g:sysTheme = GetSysMode()
+	if g:sysTheme ==? "'prefer-dark'"
+		set bg=dark
+	else
+		set bg=light
+	endif
 endif
 
 " Vimr
@@ -27,14 +36,6 @@ if has("gui_macvim")
 	set guifont=Inconsolata:h16
 endif
 
-" Generic nVim GUI
-"if exists('g:GuiLoaded')
-"	set termguicolors
-"	se bg=light
-"	color PaperColor
-"	Guifont! Monospace:h12.5
-"endif
-
 " Change Font Size
 " https://vi.stackexchange.com/questions/5804/how-to-zoom-to-text-in-vim-via-shortcut
 let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
@@ -45,19 +46,19 @@ function! AdjustFontSize(amount)
 	let cursize = substitute(&guifont, s:pattern, '\2', '')
 	let newsize = cursize + a:amount
 	if (newsize >= s:minfontsize) && (newsize <= s:maxfontsize)
-	  let newfont = fontname . newsize
-	  let &guifont = newfont
+		let newfont = fontname . newsize
+		let &guifont = newfont
 	endif
 	redraw
 endfunction
 
 function! LargerFont()
-  call AdjustFontSize(1)
+	call AdjustFontSize(1)
 endfunction
 command! LargerFont call LargerFont()
 
 function! SmallerFont()
-  call AdjustFontSize(-1)
+	call AdjustFontSize(-1)
 endfunction
 command! SmallerFont call SmallerFont()
 

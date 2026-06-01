@@ -52,7 +52,6 @@ let g:asciidoctor_fold_options = 1
 let g:netrw_altv = 1            " split to the right
 let g:netrw_banner = 1          " banner (with help)
 let g:netrw_browse_split = 0    " open buffer in current window
-let g:netrw_list_hide = netrw_gitignore#Hide()
 let g:netrw_liststyle = 0       " buffer view
 
 " Pandoc options
