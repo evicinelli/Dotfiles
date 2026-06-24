@@ -13,7 +13,11 @@
    "close_on_focus_loss": true,
    "pop_to_root_on_close": true,
    "search_files_in_root": true,
+   "input_server": {
+      "enabled": false
+   },
    "font": {
+      "rendering": "native",
       "normal": {
          "family": "Sans Serif",
          "size": 11
@@ -21,12 +25,15 @@
    },
    "theme": {
       "dark": {
-         "name": "noctalia",
-         "icon_theme": "Tela"
+         "name": "vicinae-dark",
+         "icon_theme": "Yaru"
       }
    },
    "launcher_window": {
-      "opacity": 1
+      "opacity": 1,
+      "client_side_decorations": {
+         "enabled": true
+      }
    },
    "fallbacks": [],
    "providers": {

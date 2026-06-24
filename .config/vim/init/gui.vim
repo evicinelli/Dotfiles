@@ -1,6 +1,33 @@
+" Return system colorscheme (dark vs light, gnome-only)
 function! GetSysMode()
 	return trim(system('dconf read /org/gnome/desktop/interface/color-scheme'))
 endfunction
+
+" Change Font Size
+" https://vi.stackexchange.com/questions/5804/how-to-zoom-to-text-in-vim-via-shortcut
+let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
+let s:minfontsize = 6
+let s:maxfontsize = 30
+function! AdjustFontSize(amount)
+	let fontname = substitute(&guifont, s:pattern, '\1', '')
+	let cursize = substitute(&guifont, s:pattern, '\2', '')
+	let newsize = cursize + a:amount
+	if (newsize >= s:minfontsize) && (newsize <= s:maxfontsize)
+		let newfont = fontname . newsize
+		let &guifont = newfont
+	endif
+	redraw
+endfunction
+
+function! LargerFont()
+	call AdjustFontSize(1)
+endfunction
+command! LargerFont call LargerFont()
+
+function! SmallerFont()
+	call AdjustFontSize(-1)
+endfunction
+command! SmallerFont call SmallerFont()
 
 " Gvim
 if has('gui_running')
@@ -35,32 +62,6 @@ if has("gui_macvim")
 	colorscheme solarized8_flat
 	set guifont=Inconsolata:h16
 endif
-
-" Change Font Size
-" https://vi.stackexchange.com/questions/5804/how-to-zoom-to-text-in-vim-via-shortcut
-let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
-let s:minfontsize = 6
-let s:maxfontsize = 30
-function! AdjustFontSize(amount)
-	let fontname = substitute(&guifont, s:pattern, '\1', '')
-	let cursize = substitute(&guifont, s:pattern, '\2', '')
-	let newsize = cursize + a:amount
-	if (newsize >= s:minfontsize) && (newsize <= s:maxfontsize)
-		let newfont = fontname . newsize
-		let &guifont = newfont
-	endif
-	redraw
-endfunction
-
-function! LargerFont()
-	call AdjustFontSize(1)
-endfunction
-command! LargerFont call LargerFont()
-
-function! SmallerFont()
-	call AdjustFontSize(-1)
-endfunction
-command! SmallerFont call SmallerFont()
 
 nnoremap <C-+> :LargerFont<CR>
 nnoremap  :SmallerFont<CR>

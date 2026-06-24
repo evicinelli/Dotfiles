@@ -83,6 +83,12 @@ source ~/.bash_functions
 
 # Prompt {{{
 
+if [[ ${EUID} == 0 ]] ; then
+	    PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
+	else
+		    PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
+fi
+
 # http://unix.stackexchange.com/a/18443/27433
 # export PROMPT_COMMAND="history -a;history -n;prompt"
 # export BG=light
@@ -123,52 +129,51 @@ bldbriwht='\[\033[1;97m\]' # White
 txtrst='\[\033[0m\]'    # Text Reset
 # }}}
 
-prompt() {
-	jobColor=${bldblu}
-	todoColor=${bldgrn}
-	dirColor=${bldpur}
-
-	# Today's todos
-	[[ -e $TD ]] && toDo=$(todo ls | wc -l | sed "s/ //g") || toDo="x"
-	[[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l | sed "s/ //g") || toDoUrgent="x"
-	[[ $toDo -gt 0 ]] && todoColor=${bldbriylw}
-	[[ $toDoUrgent -gt 0 ]] && todoColor=${bldbrired}
-
-	# suspended jobs
-	[[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
-
-	# end="🍺" end=":" end="💰" end="⚕" end="▶" end=">" end="🩺"
-	# end=">"
-	end="\$"
-
-	export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, $toDoUrgent!]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
-}
-
-ps1_hostname() {
-	# host=$(hostname)
-	# user=$(whoami)
-	# [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
-	echo ''
-}
-# }}}
+#prompt() {
+#	jobColor=${bldblu}
+#	todoColor=${bldgrn}
+#	dirColor=${bldpur}
+#
+#	# Today's todos
+#	[[ -e $TD ]] && toDo=$(todo ls | wc -l | sed "s/ //g") || toDo="x"
+#	[[ -e $TD ]] && toDoUrgent=$(todo urgent | wc -l | sed "s/ //g") || toDoUrgent="x"
+#	[[ $toDo -gt 0 ]] && todoColor=${bldbriylw}
+#	[[ $toDoUrgent -gt 0 ]] && todoColor=${bldbrired}
+#
+#	# suspended jobs
+#	[[ $(jobs | wc -l ) -gt 0 ]] && bg_jobs="(\j) " || bg_jobs=""
+#
+#	# end="🍺" end=":" end="💰" end="⚕" end="▶" end=">" end="🩺"
+#	# end=">"
+#	end="\$"
+#
+#	export PS1="${jobColor}$bg_jobs${todoColor}[$toDo, $toDoUrgent!]${dirColor} $(ps1_hostname)\W ${todoColor}$end ${txtrst}"
+#}
+#
+#ps1_hostname() {
+#	# host=$(hostname)
+#	# user=$(whoami)
+#	# [[ ! "$host" =~ pelican|lenovino || "$user" != "vic" ]] && echo "$user@$host "
+#	echo ''
+#}
+## }}}
 
 # Alias {{{
 # Useful options
+# alias mkdir="mkdir -pv"
+# alias pandoc="pandoc --filter=pandoc-citeproc -V subparagraph"
 alias dir='dir --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias gtd="gtd -t -n"
+alias ls='ls -h --color=auto --group-directories-first --sort=version'
 alias la="ls -a"
 alias less='less -R'
 alias ll="ls -l"
 alias lla="ls -la"
-# alias ls='ls -h --color=auto --group-directories-first --sort=version'
-# alias mkdir="mkdir -pv"
-# alias pandoc="pandoc --filter=pandoc-citeproc -V subparagraph"
-# alias rm="rm -I"
+alias less="less -i"
+alias rm="rm -I"
 alias sl='ls'
-alias marp="npx @marp-team/marp-cli@latest"
-
 
 # Troppo lunghi da scrivere (o li sbaglio sempre)
 alias amn="nv \"$MED\""
@@ -179,21 +184,16 @@ alias bc="bc -l"
 alias beamer="pandoc -t beamer -H $P/Modelli/beamer.tex"
 alias brownnoise="play -t sl -r48000 -c2 -n synth -1 brownnoise .1 60"
 alias clipboard="xclip -selection PRIMARY"
-alias composetbl='less "/usr/share/X11/locale/$(grep --max-count=1 "${LANG%.*}.UTF-8\$" /usr/share/X11/locale/locale.dir | cut --delimiter=/ --fields 1)/Compose"'
+alias composelist='less "/usr/share/X11/locale/$(grep --max-count=1 "${LANG%.*}.UTF-8\$" /usr/share/X11/locale/locale.dir | cut --delimiter=/ --fields 1)/Compose"'
 alias cp="rsync --archive --verbose --human-readable --progress --whole-file"
 alias enit="trans en:it"
 alias g="git"
 alias httpserver="python -m ComplexHTTPServer 8000"
-alias l='ls'
-alias ll="ls -l"
-alias mn2="nv \"$MED2\""
-alias mn="nv \"$MED_CURRENT\""
 alias myip="wget -qO - http://myip.dnsomatic.com && echo ''"
-alias n="nv \"$NOTES\""
 alias netoff="nmcli networking off"
 alias neton="nmcli networking on &"
 alias o=open
-alias pandoc-gvs="pandoc --standalone --reference-doc=\"$GVS\"/res/reference-doc.odt "
+alias marp="npx @marp-team/marp-cli@latest"
 alias pdfgrep="pdfgrep -i --color=always"
 alias py="python"
 alias qr="qrencode --type=UTF8 -o -"

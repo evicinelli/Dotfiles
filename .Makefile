@@ -9,7 +9,7 @@ modules      : npm python
 
 essentials:
 	# Install essential cmd utilities
-	$(INSTALL) git gh tmux make at pass coreutils moreutils wget curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard
+	$(INSTALL) git gh tmux make at pass coreutils moreutils wget curl apt-transport-https fd-find pwgen sox socat libfuse2 wl-clipboard suckless-tools
 
 dotfiles:
 	cd
