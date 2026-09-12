@@ -40,7 +40,7 @@ app: repos
 
 flatpak:
 	# Install flatpak applications
-	$(INSTALL) flatpak gnome-software-plugin-flatpak
+	#$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi io.github.diegopvlk.Cine io.typora.Typora
 	flatpak override --user --filesystem=xdg-config/fontconfig:ro
