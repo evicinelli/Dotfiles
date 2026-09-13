@@ -37,15 +37,17 @@ if has('gui_running')
 	se guioptions-=m " Remove menubar
 	se guioptions-=r " Remove scrollbar
 	se guioptions+=k " Properly resize gui window
-	se guifont=Monospace\ 14
+	se guifont=Monospace\ 13
 	se belloff=esc
 	se laststatus=0
-	colorscheme cosmic_latte
+	"colorscheme PaperColor
 	let g:sysTheme = GetSysMode()
 	if g:sysTheme ==? "'prefer-dark'"
-		set bg=dark
+		"set bg=dark
+		color Tomorrow-Night
 	else
 		set bg=light
+		color Tomorrow
 	endif
 endif
 
@@ -65,4 +67,4 @@ endif
 
 nnoremap <C-+> :LargerFont<CR>
 nnoremap  :SmallerFont<CR>
-nnoremap <C-0> :se guifont=Monospace\ Regular\ 13<CR>
+nnoremap <C-0> :se guifont=Monospace\ 13<CR>

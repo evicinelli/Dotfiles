@@ -36,14 +36,18 @@ repos:
 	apt update
 
 app: repos
-	$(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi mpv mpv-mpris potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld okular-extra-backends glow chromium-browser
+	$(INSTALL) mpv mpv-mpris potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld okular-extra-backends glow chromium-browser
 
 flatpak:
 	# Install flatpak applications
-	#$(INSTALL) flatpak gnome-software-plugin-flatpak
+	$(INSTALL) flatpak gnome-software-plugin-flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi io.github.diegopvlk.Cine io.typora.Typora
 	flatpak override --user --filesystem=xdg-config/fontconfig:ro
+	flatpak override --user --filesystem=~/.local/share/fonts
+	flatpak override --user --filesystem=~/.fonts
+	flatpak override --user --filesystem=/usr/share/fonts
+	flatpak override --user --env=FONTCONFIG_PATH=/etc/fonts
 
 python:
 	$(INSTALL) python3 python3-pip python-is-python3 pipx
@@ -70,6 +74,7 @@ config:
 	xdg-mime default mpv.desktop video/*
 
 gnome:
+	$(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi
 	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
 	gsettings set org.gnome.desktop.interface font-name 'Sans 12'
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 12'
