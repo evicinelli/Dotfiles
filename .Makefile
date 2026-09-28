@@ -39,10 +39,9 @@ app: repos
 	$(INSTALL) mpv mpv-mpris potrace ffmpeg ruby-notify playerctl translate-shell lm-sensors yt-dlp vim-gtk3 qutebrowser meld okular-extra-backends glow chromium-browser
 
 flatpak:
-	# Install flatpak applications
-	$(INSTALL) flatpak gnome-software-plugin-flatpak
+	$(INSTALL) flatpak
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi io.github.diegopvlk.Cine io.typora.Typora
+	flatpak install -y com.bitwarden.desktop org.telegram.desktop org.localsend.localsend_app com.spotify.Client md.obsidian.Obsidian app.zen_browser.zen org.jitsi.jitsi-meet us.zoom.Zoom com.stremio.Stremio com.protonvpn.www me.proton.Mail io.ente.photos com.mastermindzh.tidal-hifi io.github.diegopvlk.Cine io.typora.Typora org.pvermeer.WebAppHub
 	flatpak override --user --filesystem=xdg-config/fontconfig:ro
 	flatpak override --user --filesystem=~/.local/share/fonts
 	flatpak override --user --filesystem=~/.fonts
@@ -74,10 +73,7 @@ config:
 	xdg-mime default mpv.desktop video/*
 
 gnome:
-	$(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi
-	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
-	gsettings set org.gnome.desktop.interface font-name 'Sans 12'
-	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 12'
+	$(INSTALL) gnome-tweaks gnome-shell-extension-manager gnome-sushi gnome-software-plugin-flatpak
 	gsettings set org.freedesktop.Tracker3.Miner.Files ignored-directories "['po', 'CVS', 'core-dumps', 'lost+found', '.git']"
 	gsettings set org.freedesktop.Tracker3.Miner.Files ignored-directories-with-content "['.trackerignore', '.hg', '.nomedia']"
 	gsettings set org.freedesktop.Tracker3.Miner.Files index-recursive-directories "['${HOME}/pCloudDrive/', '&DOWNLOAD']"
@@ -85,13 +81,17 @@ gnome:
 	gsettings set org.freedesktop.Tracker3.Miner.Files initial-sleep 300
 	gsettings set org.gnome.desktop.background color-shading-type 'solid'
 	gsettings set org.gnome.desktop.background primary-color '#d64761'
+	gsettings set org.gnome.desktop.calendar week-start-day "'monday'"
 	gsettings set org.gnome.desktop.input-sources xkb-options "['compose:capslock']"
 	gsettings set org.gnome.desktop.interface clock-format '24h'
 	gsettings set org.gnome.desktop.interface clock-show-date true
 	gsettings set org.gnome.desktop.interface clock-show-weekday true
+	gsettings set org.gnome.desktop.interface document-font-name 'Serif 12'
 	gsettings set org.gnome.desktop.interface enable-animations true
 	gsettings set org.gnome.desktop.interface enable-hot-corners true
+	gsettings set org.gnome.desktop.interface font-name 'Sans 12'
 	gsettings set org.gnome.desktop.interface locate-pointer true
+	gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 12'
 	gsettings set org.gnome.desktop.interface show-battery-percentage true
 	gsettings set org.gnome.desktop.interface text-scaling-factor 1
 	gsettings set org.gnome.desktop.media-handling automount true
@@ -180,8 +180,8 @@ quarto:
 tiling:
 	add-apt-repository ppa:avengemedia/danklinux
 	add-apt-repository ppa:avengemedia/dms
-	curl -fsSL https://pkg.noctalia.dev/gpg.key | gpg --dearmor -o /etc/apt/keyrings/noctalia.gpg
-	echo "deb [signed-by=/etc/apt/keyrings/noctalia.gpg] https://pkg.noctalia.dev/apt sid main" | tee /etc/apt/sources.list.d/noctalia.list
+	wget https://pkg.noctalia.dev/deb/nickh-archive-keyring.deb && sudo dpkg -i nickh-archive-keyring.deb
+	wget -O /etc/apt/sources.list.d/noctalia-resolute.sources https://pkg.noctalia.dev/deb/noctalia-resolute.sources
 	apt update
 	apt upgrade
-	apt install niri noctalia-shell
+	apt install niri noctalia

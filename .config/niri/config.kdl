@@ -1,7 +1,7 @@
 // vim: fdm=indent
 // https://yalter.github.io/niri/Configuration:-Introduction
 
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "qs" "-c" "noctalia"
 prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
@@ -152,10 +152,8 @@ binds {
 
 	// Launch
 	Mod+T hotkey-overlay-title="Open a Terminal" { spawn "alacritty"; }
-	Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel --show-actions"; }
-	Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel --show-actions"; }
-	Alt+Space hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel --show-actions"; }
-	Ctrl+Space hotkey-overlay-title="Run an Application" { spawn-sh "xdg-open \"$(fd --color=never . ~/Scaricati ~/pCloudDrive | fuzzel --dmenu --width 50)\""; }
+	Mod+Space hotkey-overlay-title="Run an Application" { spawn-sh "noctalia msg panel-toggle launcher"; }
+	Ctrl+Space hotkey-overlay-title="Run an Application" { spawn-sh "noctalia msg panel-toggle nightwatch75/file-search:panel"; }
 
 
 	// Focus
